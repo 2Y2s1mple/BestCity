@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="messageActivityCell" rowHeight="134" id="KGk-i7-Jjw" customClass="CZMessageActivityCell">
+            <rect key="frame" x="0.0" y="0.0" width="483" height="134"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="483" height="133.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage1" translatesAutoresizingMaskIntoConstraints="NO" id="L9x-2d-kmg">
+                        <rect key="frame" x="10" y="10" width="140" height="113.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="3Py-eB-zxG"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="来自天猫飞利浦畅卓专卖店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbn-oh-WBK">
+                        <rect key="frame" x="160" y="58.5" width="313" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018.08.18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zM7-wc-8Hf">
+                        <rect key="frame" x="160" y="106.5" width="71" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有了这些变美神器 做永远的元气美少女" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-4S-zP0">
+                        <rect key="frame" x="160" y="10" width="313" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="L9x-2d-kmg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="1Xb-vw-J5N"/>
+                    <constraint firstAttribute="trailing" secondItem="xbn-oh-WBK" secondAttribute="trailing" constant="10" id="4KQ-MQ-jD9"/>
+                    <constraint firstItem="zM7-wc-8Hf" firstAttribute="bottom" secondItem="L9x-2d-kmg" secondAttribute="bottom" id="9ZX-HN-ud7"/>
+                    <constraint firstItem="zM7-wc-8Hf" firstAttribute="leading" secondItem="L9x-2d-kmg" secondAttribute="trailing" constant="10" id="Aw5-Yv-Ro1"/>
+                    <constraint firstItem="xbn-oh-WBK" firstAttribute="leading" secondItem="L9x-2d-kmg" secondAttribute="trailing" constant="10" id="Od2-c2-Q81"/>
+                    <constraint firstItem="H2U-4S-zP0" firstAttribute="top" secondItem="L9x-2d-kmg" secondAttribute="top" id="Pyu-MS-prk"/>
+                    <constraint firstItem="xbn-oh-WBK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VgF-OZ-bB9"/>
+                    <constraint firstAttribute="trailing" secondItem="H2U-4S-zP0" secondAttribute="trailing" constant="10" id="coJ-t9-EiS"/>
+                    <constraint firstItem="L9x-2d-kmg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dCk-Aj-AGA"/>
+                    <constraint firstItem="H2U-4S-zP0" firstAttribute="leading" secondItem="L9x-2d-kmg" secondAttribute="trailing" constant="10" id="v8l-g7-9ND"/>
+                    <constraint firstAttribute="bottom" secondItem="L9x-2d-kmg" secondAttribute="bottom" constant="10" id="vkH-w0-Iab"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-150.5" y="36"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="testImage1" width="391" height="393"/>
+    </resources>
+</document>

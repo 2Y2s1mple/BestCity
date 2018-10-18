@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CZCommodityView">
+            <rect key="frame" x="0.0" y="0.0" width="333" height="153"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MI 小米 米家电水壶 1.5L大容量 304不锈钢 快速沸腾 携带方便" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPF-SL-8uW">
+                    <rect key="frame" x="10" y="15" width="313" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="券后价：¥599.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQs-gk-Fby">
+                    <rect key="frame" x="10" y="68" width="127.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="京东：¥699.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLq-C7-qyt">
+                    <rect key="frame" x="147.5" y="68" width="111.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chn-az-MmS">
+                    <rect key="frame" x="10" y="107.5" width="40" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="6CQ-uZ-uYG"/>
+                        <constraint firstAttribute="width" constant="40" id="FQv-zm-3Bg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="优惠券" backgroundImage="coupon1">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100元独家优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0E-vJ-eSR">
+                    <rect key="frame" x="60" y="101" width="94.5" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每人限领一张 抢完即止" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxE-BT-riR">
+                    <rect key="frame" x="60" y="125" width="126" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dPF-SL-8uW" secondAttribute="trailing" constant="10" id="4Bf-og-1SB"/>
+                <constraint firstItem="dPF-SL-8uW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="8qV-8j-EgN"/>
+                <constraint firstItem="Chn-az-MmS" firstAttribute="top" secondItem="rQs-gk-Fby" secondAttribute="bottom" constant="20" id="Hem-30-wtg"/>
+                <constraint firstItem="q0E-vJ-eSR" firstAttribute="leading" secondItem="Chn-az-MmS" secondAttribute="trailing" constant="10" id="J46-Is-Era"/>
+                <constraint firstItem="q0E-vJ-eSR" firstAttribute="centerY" secondItem="Chn-az-MmS" secondAttribute="centerY" constant="-12" id="LeS-AO-QPf"/>
+                <constraint firstItem="HLq-C7-qyt" firstAttribute="centerY" secondItem="rQs-gk-Fby" secondAttribute="centerY" id="OLa-Rm-3tO"/>
+                <constraint firstItem="zxE-BT-riR" firstAttribute="centerY" secondItem="Chn-az-MmS" secondAttribute="centerY" constant="12" id="RXI-Nw-9F1"/>
+                <constraint firstItem="rQs-gk-Fby" firstAttribute="top" secondItem="dPF-SL-8uW" secondAttribute="bottom" constant="12" id="ZIQ-36-DTY"/>
+                <constraint firstItem="Chn-az-MmS" firstAttribute="leading" secondItem="dPF-SL-8uW" secondAttribute="leading" id="d0p-8O-X07"/>
+                <constraint firstItem="rQs-gk-Fby" firstAttribute="leading" secondItem="dPF-SL-8uW" secondAttribute="leading" id="d5A-ku-HRs"/>
+                <constraint firstItem="dPF-SL-8uW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="icz-SK-xCd"/>
+                <constraint firstItem="HLq-C7-qyt" firstAttribute="leading" secondItem="rQs-gk-Fby" secondAttribute="trailing" constant="10" id="pLQ-cG-D5m"/>
+                <constraint firstItem="zxE-BT-riR" firstAttribute="leading" secondItem="q0E-vJ-eSR" secondAttribute="leading" id="qNV-1P-ZNG"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bottomLabel" destination="zxE-BT-riR" id="0ie-Jf-bk4"/>
+            </connections>
+            <point key="canvasLocation" x="-29" y="-433"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="coupon1" width="36" height="20"/>
+    </resources>
+</document>

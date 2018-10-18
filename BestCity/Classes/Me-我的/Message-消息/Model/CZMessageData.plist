@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>icon</key>
+		<string>news-activity</string>
+		<key>title</key>
+		<string>系统消息</string>
+		<key>subTitle</key>
+		<string>京东返利申请</string>
+		<key>time</key>
+		<string>2018.08.18</string>
+	</dict>
+    <dict>
+        <key>icon</key>
+        <string>news-evaluating</string>
+        <key>title</key>
+        <string>极品城活动</string>
+        <key>subTitle</key>
+        <string>双11年终大促，抢先购</string>
+        <key>time</key>
+        <string>2018.08.18</string>
+    </dict>
+    <dict>
+        <key>icon</key>
+        <string>news-system</string>
+        <key>title</key>
+        <string>评测赢大奖</string>
+        <key>subTitle</key>
+        <string>加入评测团队，新产品免费领取</string>
+        <key>time</key>
+        <string>2018.08.18</string>
+    </dict>
+</array>
+</plist>

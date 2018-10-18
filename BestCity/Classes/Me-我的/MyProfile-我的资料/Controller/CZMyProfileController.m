@@ -1,0 +1,211 @@
+//
+//  CZMyProfileController.m
+//  BestCity
+//
+//  Created by JasonBourne on 2018/8/1.
+//  Copyright © 2018年 JasonBourne. All rights reserved.
+//
+
+#import "CZMyProfileController.h"
+#import "CZNavigationView.h"
+#import "CZMyProfileCell.h"
+#import "UIButton+CZExtension.h"
+#import "CZChangeNicknameController.h"
+#import "CZMembershipController.h"
+#import "CZDatePickView.h"
+#import "CZBindingMobileController.h"
+#import "GXNetTool.h"
+#import "CZProgressHUD.h"
+
+@interface CZMyProfileController () <UITableViewDelegate, UITableViewDataSource, CZDatePickViewDelegate, CZChangeNicknameControllerDelegate>
+/** tableView */
+@property (nonatomic, strong) UITableView *tableView;
+/** 左侧标题的数组 */
+@property (nonatomic, strong) NSArray *leftTitles;
+/** 右侧的副标题 */
+@property (nonatomic, strong) NSMutableArray *rightTitles;
+
+@end
+
+@implementation CZMyProfileController
+
+- (NSArray *)leftTitles
+{
+    if (_leftTitles == nil) {
+        _leftTitles = @[@"头像", @"昵称", @"会员等级", @"性别", @"生日", @"绑定手机"];
+    }
+    return _leftTitles;
+}
+
+- (NSMutableArray *)rightTitles
+{
+    if (_rightTitles == nil) {
+        // 用户信息
+        NSDictionary *userInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
+        if ([userInfo[@"userBirthday"] length] >= 10) {
+            NSString *dataStr = [userInfo[@"userBirthday"] substringToIndex:10];
+            _rightTitles = [NSMutableArray arrayWithArray:@[@"", userInfo[@"userNickName"], userInfo[@"userMemberGrade"], userInfo[@"userGender"], dataStr, userInfo[@"userPhone"]]];
+        }
+    }
+    return _rightTitles;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = CZGlobalBg;
+    //导航条
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"我的资料" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    [self.view addSubview:navigationView];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 68, SCR_WIDTH, SCR_HEIGHT - 68) style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    //底部退出按钮
+    UIButton *loginOut = [UIButton buttonWithType:UIButtonTypeCustom];
+    loginOut.frame = CGRectMake(0, SCR_HEIGHT - 50, SCR_WIDTH, 50);
+    [self.view addSubview:loginOut];
+    [loginOut setTitle:@"退出登录" forState:UIControlStateNormal];
+    loginOut.titleLabel.font = [UIFont systemFontOfSize:16];
+    [loginOut setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    loginOut.backgroundColor = CZRGBColor(227, 20, 54);
+    [loginOut addTarget:self action:@selector(loginOutAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+/** 退出登录 */
+- (void)loginOutAction
+{
+    NSLog(@"-------");
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认退出" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        // 全部删除
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"user"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"point"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"Account"];
+        // 返回上一页
+        [self.navigationController popViewControllerAnimated:YES];
+    }]];
+    [self presentViewController:alert animated:NO completion:nil];
+}
+
+#pragma  mark - <UITableViewDataSource>
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.leftTitles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        // 头像
+        CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:CZMyProfileCellTypeDefault];
+        return cell;
+    } else {
+        CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:CZMyProfileCellTypeSubTitle];
+        cell.title = self.leftTitles[indexPath.row];
+        cell.subTitle = self.rightTitles[indexPath.row];
+        return cell;
+    }
+}
+
+#pragma mark - <UITableViewDelegate>
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.leftTitles[indexPath.row] isEqualToString:@"昵称"]) {
+        //跳转到修改昵称
+        CZChangeNicknameController *vc = [[CZChangeNicknameController alloc] init];
+        CZMyProfileCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        vc.name = cell.subTitle;
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES]; 
+    } else if ([self.leftTitles[indexPath.row] isEqualToString:@"会员等级"]) {
+        //跳转到会员等级
+        CZMembershipController *vc = [[CZMembershipController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([self.leftTitles[indexPath.row] isEqualToString:@"生日"]) {
+        NSString *dataStr = [self.rightTitles[indexPath.row] substringToIndex:10];
+        CZDatePickView *backView = [CZDatePickView datePickWithCurrentDate:dataStr type:CZDatePickViewTypeDate];
+        backView.delegate = self;
+        [self.view addSubview:backView];
+    } else if ([self.leftTitles[indexPath.row] isEqualToString:@"性别"]) {
+        CZDatePickView *backView = [CZDatePickView datePickWithCurrentDate:self.rightTitles[indexPath.row] type:CZDatePickViewTypeOther];
+        backView.delegate = self;
+        [self.view addSubview:backView];
+    } else if ([self.leftTitles[indexPath.row] isEqualToString:@"绑定手机"]) {
+        CZBindingMobileController *vc = [[CZBindingMobileController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark - <CZDatePickViewDelegate>
+- (void)datePickView:(CZDatePickView *)pickView selectedDate:(NSString *)dateString
+{
+    if (dateString.length > 0 && pickView.type == CZDatePickViewTypeDate) {
+        // 修改生日
+        [self changeUserInfo:@{@"userBirthday" : dateString}];
+    } else if (dateString.length > 0) {
+        // 修改性别
+        [self changeUserInfo:@{@"userGender" : dateString}];
+        
+    }
+}
+
+#pragma mark - <CZChangeNicknameControllerDelegate>
+- (void)updateUserInfo
+{
+    [self getUserInfo];
+}
+
+#pragma mark - 获取用户信息
+- (void)getUserInfo
+{
+    NSString *url = [SERVER_URL stringByAppendingFormat:@"/qualityshop-api/api/modelUser?userId=%@", USERINFO[@"userId"]];
+    [GXNetTool GetNetWithUrl:url body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSLog(@"%@", result);
+            [[NSUserDefaults standardUserDefaults] setObject:[result[@"list"] firstObject] forKey:@"user"];
+            self.rightTitles = nil;
+            [self.tableView reloadData];
+        }
+        [CZProgressHUD hideAfterDelay:2];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark - 修改用户信息
+- (void)changeUserInfo:(NSDictionary *)info
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param addEntriesFromDictionary:@{@"userId" : USERINFO[@"userId"]}];
+    [param addEntriesFromDictionary:info];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/ModelUserUpdate"];
+    
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        
+        NSLog(@"result ----- %@", result);
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            [CZProgressHUD showProgressHUDWithText:@"修改成功"];
+            // 获取用户信息
+            [self getUserInfo];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"修改失败"];
+        }
+        [CZProgressHUD hideAfterDelay:2];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+
+
+
+
+
+
+
+@end

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZfeedbackController">
+            <connections>
+                <outlet property="label" destination="cwS-Z3-zLU" id="M21-1R-UA2"/>
+                <outlet property="textView" destination="zrb-PL-Fbd" id="CHJ-cT-L5K"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="反馈意见" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGk-W1-cMn">
+                    <rect key="frame" x="20" y="88" width="335" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还可以输入200个字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwS-Z3-zLU">
+                    <rect key="frame" x="215" y="337.5" width="140" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zrb-PL-Fbd">
+                    <rect key="frame" x="20" y="127.5" width="335" height="200"/>
+                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="ZWa-sd-fqp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="EfU-dy-Ghg"/>
+                    </connections>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="qGk-W1-cMn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="88" id="04k-Nd-6dr"/>
+                <constraint firstAttribute="trailing" secondItem="cwS-Z3-zLU" secondAttribute="trailing" constant="20" id="1ii-YE-Viu"/>
+                <constraint firstItem="zrb-PL-Fbd" firstAttribute="top" secondItem="qGk-W1-cMn" secondAttribute="bottom" constant="20" id="64x-dm-aaO"/>
+                <constraint firstItem="qGk-W1-cMn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="ErD-jZ-EpD"/>
+                <constraint firstItem="cwS-Z3-zLU" firstAttribute="top" secondItem="zrb-PL-Fbd" secondAttribute="bottom" constant="10" id="L6W-uR-7U2"/>
+                <constraint firstAttribute="trailing" secondItem="qGk-W1-cMn" secondAttribute="trailing" constant="20" id="QhS-Hn-TME"/>
+                <constraint firstItem="zrb-PL-Fbd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="RUn-JD-DTT"/>
+                <constraint firstAttribute="trailing" secondItem="zrb-PL-Fbd" secondAttribute="trailing" constant="20" id="aPO-UF-aor"/>
+            </constraints>
+            <point key="canvasLocation" x="-70" y="53"/>
+        </view>
+    </objects>
+</document>

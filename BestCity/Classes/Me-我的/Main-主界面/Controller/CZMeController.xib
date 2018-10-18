@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZMeController">
+            <connections>
+                <outlet property="headImage" destination="XOO-5G-ru1" id="YCq-Mf-Z7d"/>
+                <outlet property="loginBtn" destination="Q9Y-z1-cIv" id="Apx-Ev-5n5"/>
+                <outlet property="pointBtn" destination="zmP-Tv-2ba" id="0Ds-Cd-0VD"/>
+                <outlet property="scrollerView" destination="D8s-nW-E3e" id="DVG-4N-h2V"/>
+                <outlet property="tableView" destination="zJo-aO-yIP" id="27T-nf-eoD"/>
+                <outlet property="view" destination="iN0-l3-epB" id="txH-4S-A6Q"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8s-nW-E3e">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="fc7-il-25H">
+                            <rect key="frame" x="0.0" y="-20" width="375" height="210"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="210" id="eCs-Eh-M7M"/>
+                            </constraints>
+                        </imageView>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headDefault" translatesAutoresizingMaskIntoConstraints="NO" id="XOO-5G-ru1">
+                            <rect key="frame" x="20" y="40" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="8Cf-Z5-qze"/>
+                                <constraint firstAttribute="height" constant="60" id="ttq-bf-LaM"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="30"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psb-Ya-3TW">
+                            <rect key="frame" x="255" y="20" width="100" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="c2r-Eh-fgc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="7" maxY="0.0"/>
+                            <state key="normal" title="签到送好礼" image="gift">
+                                <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="pushLuckyDraw:" destination="-1" eventType="touchUpInside" id="dFd-EX-gRM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmP-Tv-2ba" customClass="CZMutContentButton">
+                            <rect key="frame" x="99" y="82" width="80" height="18"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="8RD-sW-jzP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="积分0" image="right-white">
+                                <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="chO-RR-YYN" appends="YES" id="IsV-aJ-mUO"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Y-z1-cIv" customClass="CZMutContentButton">
+                            <rect key="frame" x="99" y="40" width="80" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="立即登录" image="right-white">
+                                <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="highlighted" image="right-white"/>
+                            <connections>
+                                <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="iNE-aB-Eyi"/>
+                            </connections>
+                        </button>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
+                            <rect key="frame" x="20" y="140" width="335" height="600"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="600" id="nbk-yn-gRV"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="iG4-fn-ILy"/>
+                                <outlet property="delegate" destination="-1" id="fm1-kZ-DyM"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="Q9Y-z1-cIv" firstAttribute="leading" secondItem="XOO-5G-ru1" secondAttribute="trailing" constant="19" id="4ra-DT-xL1"/>
+                        <constraint firstAttribute="trailing" secondItem="zJo-aO-yIP" secondAttribute="trailing" constant="20" id="6w2-LS-IRA"/>
+                        <constraint firstItem="zJo-aO-yIP" firstAttribute="leading" secondItem="D8s-nW-E3e" secondAttribute="leading" constant="20" id="AXq-8L-zdW"/>
+                        <constraint firstItem="zJo-aO-yIP" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="bottom" constant="40" id="DR1-Dz-eon"/>
+                        <constraint firstItem="zmP-Tv-2ba" firstAttribute="leading" secondItem="Q9Y-z1-cIv" secondAttribute="leading" id="LKe-ha-vIQ"/>
+                        <constraint firstItem="psb-Ya-3TW" firstAttribute="top" secondItem="fc7-il-25H" secondAttribute="top" constant="40" id="QFg-1j-TAr"/>
+                        <constraint firstItem="fc7-il-25H" firstAttribute="centerX" secondItem="D8s-nW-E3e" secondAttribute="centerX" id="RIR-JQ-9ax"/>
+                        <constraint firstAttribute="trailing" secondItem="fc7-il-25H" secondAttribute="trailing" id="Xyh-yp-zLY"/>
+                        <constraint firstItem="zmP-Tv-2ba" firstAttribute="bottom" secondItem="XOO-5G-ru1" secondAttribute="bottom" id="cjU-P1-3xR"/>
+                        <constraint firstItem="XOO-5G-ru1" firstAttribute="top" secondItem="fc7-il-25H" secondAttribute="top" constant="60" id="dyj-t3-0S4"/>
+                        <constraint firstAttribute="bottom" secondItem="zJo-aO-yIP" secondAttribute="bottom" constant="49" id="j3s-7l-YZi"/>
+                        <constraint firstItem="XOO-5G-ru1" firstAttribute="leading" secondItem="D8s-nW-E3e" secondAttribute="leading" constant="20" id="lOK-vn-W2g"/>
+                        <constraint firstItem="Q9Y-z1-cIv" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="top" id="oN4-ac-ntz"/>
+                        <constraint firstItem="fc7-il-25H" firstAttribute="leading" secondItem="D8s-nW-E3e" secondAttribute="leading" id="oQ2-nc-aqQ"/>
+                        <constraint firstAttribute="trailing" secondItem="psb-Ya-3TW" secondAttribute="trailing" constant="20" id="ovs-KD-ail"/>
+                        <constraint firstItem="fc7-il-25H" firstAttribute="top" secondItem="D8s-nW-E3e" secondAttribute="top" constant="-20" id="x9t-Ta-ndi"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="XmW-7V-FDW"/>
+                    </connections>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="D8s-nW-E3e" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1z8-cK-4w9"/>
+                <constraint firstAttribute="trailing" secondItem="D8s-nW-E3e" secondAttribute="trailing" id="X1H-lc-rmt"/>
+                <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
+                <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
+            </constraints>
+            <point key="canvasLocation" x="-3364" y="-1562"/>
+        </view>
+        <tapGestureRecognizer id="chO-RR-YYN">
+            <connections>
+                <action selector="pushMyPointsController:" destination="-1" id="sjB-SX-yne"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="background" width="1242" height="630"/>
+        <image name="gift" width="16" height="15"/>
+        <image name="headDefault" width="180" height="180"/>
+        <image name="right-white" width="6" height="13"/>
+    </resources>
+</document>
