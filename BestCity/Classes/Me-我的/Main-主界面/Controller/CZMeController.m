@@ -15,6 +15,7 @@
 #import "CZLoginController.h"
 #import "GXLuckyDrawController.h"
 #import "CZMutContentButton.h"
+#import "UIImageView+WebCache.h"
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CZLoginControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
@@ -205,6 +206,9 @@
     // 账户信息
     _account = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"];
     [self.tableView reloadData];
+    
+    // 头像
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:USERINFO[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     
     // 用户名字
     if ([USERINFO[@"userNickName"] length] != 0) {

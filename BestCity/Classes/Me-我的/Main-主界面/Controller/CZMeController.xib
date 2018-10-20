@@ -128,7 +128,7 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-3364" y="-1562"/>
+            <point key="canvasLocation" x="-3460" y="-1615"/>
         </view>
         <tapGestureRecognizer id="chO-RR-YYN">
             <connections>

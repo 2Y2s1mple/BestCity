@@ -50,6 +50,7 @@
 		97572A852119862C00FB42DE /* CZSystemMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97572A842119862C00FB42DE /* CZSystemMessageDetailController.m */; };
 		97572A8C21198F7F00FB42DE /* CZLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97572A8A21198F7F00FB42DE /* CZLoginController.m */; };
 		97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97572A8B21198F7F00FB42DE /* CZLoginController.xib */; };
+		975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DB211217AFF1100A062AB /* CZAlertViewTool.m */; };
 		97705C122107068E00485D64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C102107068E00485D64 /* Main.storyboard */; };
 		97705C142107068F00485D64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97705C132107068F00485D64 /* Assets.xcassets */; };
 		97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C152107068F00485D64 /* LaunchScreen.storyboard */; };
@@ -334,6 +335,8 @@
 		97572A8921198F7F00FB42DE /* CZLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZLoginController.h; sourceTree = "<group>"; };
 		97572A8A21198F7F00FB42DE /* CZLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZLoginController.m; sourceTree = "<group>"; };
 		97572A8B21198F7F00FB42DE /* CZLoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZLoginController.xib; sourceTree = "<group>"; };
+		975DB210217AFF1100A062AB /* CZAlertViewTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAlertViewTool.h; sourceTree = "<group>"; };
+		975DB211217AFF1100A062AB /* CZAlertViewTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAlertViewTool.m; sourceTree = "<group>"; };
 		97705C072107068E00485D64 /* BestCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97705C112107068E00485D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97705C132107068F00485D64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -2030,6 +2033,8 @@
 				97F0EC382125692B000FE1DC /* CZGuideTool.m */,
 				97F0EC3A212569C4000FE1DC /* CZSaveTool.h */,
 				97F0EC3B212569C4000FE1DC /* CZSaveTool.m */,
+				975DB210217AFF1100A062AB /* CZAlertViewTool.h */,
+				975DB211217AFF1100A062AB /* CZAlertViewTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2356,6 +2361,7 @@
 				97705C77210729BA00485D64 /* CZTextField.m in Sources */,
 				97C7FF07216DDDAB0091DC07 /* NSString+MJExtension.m in Sources */,
 				97705C53210716A300485D64 /* CZTabBarController.m in Sources */,
+				975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */,
 				97705C6D2107172A00485D64 /* AFURLRequestSerialization.m in Sources */,
 				97C85134211C07EA005540D8 /* MBProgressHUD.m in Sources */,
 				977864A0211A7AD6001B41F1 /* MASConstraint.m in Sources */,

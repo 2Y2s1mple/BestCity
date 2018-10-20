@@ -39,6 +39,8 @@ typedef NS_ENUM(NSUInteger, GXRequsetStyle) {
               success:(blockOfSuccess)success
               failure:(blockOfFailure)failure;
 
++ (void)uploadNetWithUrl:(NSString *)url fileSource:(id)fileSource success:(blockOfSuccess)success failure:(blockOfFailure)failure;
+
 - (GXNetTool *(^)(NSString *))url;
 - (GXNetTool *(^)(NSDictionary *))header;
 - (GXNetTool *(^)(id))body;

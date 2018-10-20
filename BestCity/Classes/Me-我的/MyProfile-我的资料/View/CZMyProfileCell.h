@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, CZMyProfileCellType) {
 /** 右侧的副标题 */
 @property (nonatomic, strong) NSString *subTitle;
 /** 头像URL */
-@property (nonatomic, strong) UIImage *headerImage;
+@property (nonatomic, strong) NSString *headerImage;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView cellType:(CZMyProfileCellType)type;
 @end

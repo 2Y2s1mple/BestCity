@@ -11,10 +11,14 @@
 #import "CZSettingCell.h"
 #import "CZfeedbackController.h"
 #import "TSLWebViewController.h"
+#import "SDImageCache.h"
+#import "CZAlertViewTool.h"
 
 @interface CZSettingController ()<UITableViewDelegate, UITableViewDataSource>
 /** 标题数组 */
 @property (nonatomic, strong) NSArray *contentTitles;
+/** 表格 */
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation CZSettingController
@@ -29,15 +33,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalBg;
+    // 初始化界面内容
+    [self setupView];
+}
+
+#pragma mark - 设置界面
+- (void)setupView
+{
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"设置" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
-
+    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 68, SCR_WIDTH, SCR_HEIGHT - 68) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
+    self.tableView = tableView;
     
     //底部退出按钮
     UIButton *loginOut = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -49,6 +61,7 @@
     loginOut.backgroundColor = CZRGBColor(227, 20, 54);
     [loginOut addTarget:self action:@selector(loginOutAction) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 /** 退出登录 */
 - (void)loginOutAction
@@ -87,20 +100,21 @@
             break;
         case 1:
         {
-            /** 清除缓存 */
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
-                                                                           message:nil
-                                                                    preferredStyle:UIAlertControllerStyleActionSheet];
-            
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
-                                                                      //响应事件
-                                                                      
-                                                                  }];
-            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
-            
-            [alert addAction:defaultAction];
-            [alert addAction:cancelAction];
-            [self presentViewController:alert animated:YES completion:nil];
+            [CZAlertViewTool showSheetAlertAction:^{
+                //响应事件
+                [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+                    [CZProgressHUD showProgressHUDWithText:@"清理成功"];
+                    [CZProgressHUD hideAfterDelay:0.25];
+                    [self.tableView reloadData];;
+                }];
+            }];
+        }
+            break;
+        case 2:
+        {
+            /** 打电话 */
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"0571-88120907"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
             break;
         case 4:

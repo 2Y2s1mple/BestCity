@@ -9,6 +9,8 @@
 #import "GXLuckyDrawController.h"
 #import "CZNavigationView.h"
 #import "GXNetTool.h"
+#import "UIButton+WebCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface GXLuckyDrawController ()
 @property (weak, nonatomic) IBOutlet UIView *luckyView;
@@ -58,9 +60,21 @@
 /** 判断能不能抽奖 */
 @property (nonatomic, assign) BOOL isLuckyDraw;
 
+/** 抽奖图片 */
+@property (nonatomic, strong) NSMutableArray *imagesArr;
+
 @end
 
 @implementation GXLuckyDrawController
+
+/** 抽奖图片的数组 */
+- (NSMutableArray *)imagesArr
+{
+    if (_imagesArr == nil) {
+        _imagesArr = [NSMutableArray array];
+    }
+    return _imagesArr;
+}
 
 #pragma mark - 签到
 - (IBAction)signInAction
@@ -124,8 +138,42 @@
     // 设置抽奖界面
     [self setupluckyView];
     
+    
+    // 获取抽奖信息
+    [self getLucklyImage];
+    
  
 }
+
+#pragma mark - 获取抽奖的图片
+- (void)getLucklyImage
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/luckselects"];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        NSLog(@"result ----- %@", result);
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            for (NSDictionary *dic in result[@"list"]) {
+                [self.imagesArr addObject:dic[@"code_img"]];
+                NSLog(@"%@", self.imagesArr);
+            }
+            for (int i = 0; i < self.imagesArr.count; i++) {
+                NSInteger index = [self.allPrizes[i] integerValue];
+                UIButton *btn = (UIButton *)[self.luckyBackImage viewWithTag:index];
+                [btn sd_setBackgroundImageWithURL:[NSURL URLWithString:self.imagesArr[i]] forState:UIControlStateNormal];
+            }
+            
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+
 
 #pragma mark - 设置抽奖界面
 - (void)setupluckyView
@@ -140,7 +188,8 @@
     centerBtn.center = CGPointMake(bkW / 2, (bkW - 4) / 2);
     [self.luckyBackImage addSubview:centerBtn];
     [centerBtn addTarget:self action:@selector(loadRequestLucy:) forControlEvents:UIControlEventTouchUpInside];
-    
+//     [centerBtn addTarget:self action:@selector(luckyAction:) forControlEvents:UIControlEventTouchUpInside];
+
     UIImageView *btnWord = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"word-lucky"]];
     btnWord.center = CGPointMake(centerBtn.width / 2, centerBtn.height / 2);
     [centerBtn addSubview:btnWord];
@@ -200,7 +249,7 @@
 - (void)loadRequestLucy:(UIButton *)sender
 {
     // 判断能不能抽奖
-    if (self.isLuckyDraw) {
+    if (!self.isLuckyDraw) {
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"userId"] = USERINFO[@"userId"];
         NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/luckselect"];
@@ -209,12 +258,13 @@
             
             NSLog(@"result ----- %@", result);
             if ([result[@"msg"] isEqualToString:@"success"]) {
-                
-                self.luckIndex = [result[@"list"][0][@"code"] integerValue];
+                // 减 1
+                self.luckIndex = [result[@"list"][0][@"code"] integerValue] - 1;
                 // 抽奖
                 [self luckyAction:sender];
             } else {
                 [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+                [CZProgressHUD hideAfterDelay:2];
             }
             
             
@@ -252,7 +302,7 @@
     }];
     
     // 控制的角标
-    NSInteger test = self.luckIndex;
+    NSInteger test = arc4random() % 8;// self.luckIndex;
     
     NSLog(@"---%ld", (long)test);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -267,13 +317,15 @@
             if (index == test) {
                 self.selectedID = test;
                 [self.timer invalidate];
-                // 激活按钮
-                sender.enabled = YES;
-                //开启奖励界面
-                [self setupCongratulationsWithImage:[UIImage imageNamed:@"kettle"] param:nil];
-                
-                // 关闭蒙版
-                [backView removeFromSuperview];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    // 激活按钮
+                    sender.enabled = YES;
+                    //开启奖励界面
+                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"kettle"] param:@{@"image" : self.imagesArr[test]}];
+                    
+                    // 关闭蒙版
+                    [backView removeFromSuperview];
+                });
             }
             
             //设置选中项
@@ -330,6 +382,13 @@
         
         [_congratulationImage addSubview:imageLabel1];
         [_congratulationImage addSubview:imageLabel2];
+    }
+    
+    if (param[@"image"]) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 86, 74)];
+        imageView.center = CGPointMake(_congratulationImage.width / 2, _congratulationImage.height / 2 - 10);
+        [imageView sd_setImageWithURL:[NSURL URLWithString:param[@"image"]]];
+        [_congratulationImage addSubview:imageView];
     }
     
     //取消按钮

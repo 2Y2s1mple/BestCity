@@ -7,6 +7,7 @@
 //
 
 #import "CZMyProfileCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface  CZMyProfileCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -60,11 +61,10 @@
     self.subTitleLabel.text = subTitle;
 }
 
-- (void)setHeaderImage:(UIImage *)headerImage
+- (void)setHeaderImage:(NSString *)headerImage
 {
     _headerImage = headerImage;
-    
-    
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:headerImage] placeholderImage:[UIImage imageNamed:@"headDefault"]];
 }
 
 

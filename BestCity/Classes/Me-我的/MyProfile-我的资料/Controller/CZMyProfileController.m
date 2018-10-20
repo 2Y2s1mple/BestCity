@@ -17,7 +17,7 @@
 #import "GXNetTool.h"
 #import "CZProgressHUD.h"
 
-@interface CZMyProfileController () <UITableViewDelegate, UITableViewDataSource, CZDatePickViewDelegate, CZChangeNicknameControllerDelegate>
+@interface CZMyProfileController () <UITableViewDelegate, UITableViewDataSource, CZDatePickViewDelegate, CZChangeNicknameControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 /** tableView */
 @property (nonatomic, strong) UITableView *tableView;
 /** 左侧标题的数组 */
@@ -44,7 +44,7 @@
         NSDictionary *userInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
         if ([userInfo[@"userBirthday"] length] >= 10) {
             NSString *dataStr = [userInfo[@"userBirthday"] substringToIndex:10];
-            _rightTitles = [NSMutableArray arrayWithArray:@[@"", userInfo[@"userNickName"], userInfo[@"userMemberGrade"], userInfo[@"userGender"], dataStr, userInfo[@"userPhone"]]];
+            _rightTitles = [NSMutableArray arrayWithArray:@[userInfo[@"userNickImg"], userInfo[@"userNickName"], userInfo[@"userMemberGrade"], userInfo[@"userGender"], dataStr, userInfo[@"userPhone"]]];
         }
     }
     return _rightTitles;
@@ -102,6 +102,7 @@
     if (indexPath.row == 0) {
         // 头像
         CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:CZMyProfileCellTypeDefault];
+        cell.headerImage = self.rightTitles[indexPath.row];;
         return cell;
     } else {
         CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:CZMyProfileCellTypeSubTitle];
@@ -137,6 +138,9 @@
     } else if ([self.leftTitles[indexPath.row] isEqualToString:@"绑定手机"]) {
         CZBindingMobileController *vc = [[CZBindingMobileController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    } else{
+        //
+        [self openPhoto];
     }
 }
 
@@ -162,8 +166,10 @@
 #pragma mark - 获取用户信息
 - (void)getUserInfo
 {
-    NSString *url = [SERVER_URL stringByAppendingFormat:@"/qualityshop-api/api/modelUser?userId=%@", USERINFO[@"userId"]];
-    [GXNetTool GetNetWithUrl:url body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/modelUser"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"userId"] = USERINFO[@"userId"];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSLog(@"%@", result);
             [[NSUserDefaults standardUserDefaults] setObject:[result[@"list"] firstObject] forKey:@"user"];
@@ -201,10 +207,66 @@
     }];
 }
 
+#pragma mark - 调用相机
+- (void)openPhoto
+{
+    // 创建弹窗
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+       
+        //判断是否可以打开照相机
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            // 创建相机类
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES; //可编辑
+            //摄像头
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:picker animated:YES completion:nil];
+        } else {
+            NSLog(@"没有摄像头");
+        }
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            // 创建相机类
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            picker.delegate = self;
+             NSLog(@"打开相册");
+            [self presentViewController:picker animated:YES
+                             completion:nil];
+        } else {
+            NSLog(@"不能打开相册");
+        }
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    
+    
+}
 
-
-
-
+#pragma mark -<UIImagePickerControllerDelegate> 拍照完成回调
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey, id> *)editingInfo
+{
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera || picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+        //上传图片
+        NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/importCustomer"];
+        [GXNetTool uploadNetWithUrl:url fileSource:image success:^(id result) {
+            if ([result[@"msg"] isEqualToString:@"success"]) {
+               [self changeUserInfo:@{@"userNickImg" : result[@"userNickImg"]}];
+            } else {
+                [CZProgressHUD showProgressHUDWithText:@"修改失败"];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 

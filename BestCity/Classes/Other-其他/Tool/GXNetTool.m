@@ -143,6 +143,30 @@
     }];
 }
 
+#pragma mark - 上传文件
++ (void)uploadNetWithUrl:(NSString *)url fileSource:(id)fileSource success:(blockOfSuccess)success failure:(blockOfFailure)failure
+{
+    // 获取管理者
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //IOS9--UTF-8转码
+    url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        if ([fileSource isKindOfClass:[UIImage class]]) {
+            NSData *imageData = [UIImagePNGRepresentation(fileSource) length] > 102400 ?UIImageJPEGRepresentation(fileSource, 0.7) : UIImagePNGRepresentation(fileSource);
+            [formData appendPartWithFileData:imageData name:@"importFile" fileName:@"imageFile.png" mimeType:@"image/png"];
+        }
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
+}
+
+
+
+
+
 - (AFHTTPSessionManager *)manager
 {
     if (_manager == nil) {

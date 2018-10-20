@@ -9,6 +9,7 @@
 #import "CZfeedbackController.h"
 #import "CZNavigationView.h"
 #import "GXNetTool.h"
+#import "DLIDEKeyboardView.h"
 
 @interface CZfeedbackController () <UITextViewDelegate>
 /** 反馈输入框 */
@@ -28,6 +29,9 @@
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"我要反馈" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
+    
+    // 添加回收键盘按钮
+    [DLIDEKeyboardView attachToTextView:self.textView];
     
     // 文字个数
     self.label.text = [NSString stringWithFormat:@"您还可以输入%ld个字", (self.textCount - self.textView.text.length)];
@@ -78,5 +82,7 @@
     }
     self.label.text = [NSString stringWithFormat:@"您还可以输入%ld个字", (self.textCount - textView.text.length)];
 }
+
+
 
 @end
