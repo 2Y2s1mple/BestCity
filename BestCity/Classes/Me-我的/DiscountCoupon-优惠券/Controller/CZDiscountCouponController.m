@@ -30,6 +30,8 @@
     return _mainTitles;
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalBg;

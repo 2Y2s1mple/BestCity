@@ -32,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet CZMutContentButton *pointBtn;
 /** 账户信息 */
 @property (nonatomic, strong) NSDictionary *account;
+/** 会员级别 */
+@property (nonatomic, weak) IBOutlet UILabel *levelLabel;
 
 @end
 
@@ -112,21 +114,8 @@
         return cell;
     } else {
        NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
-        CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView];
+        CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
         cell.dataSource = dic;
-        if (indexPath.row == 0) {
-            UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
-            CAShapeLayer *maskLayer = [[CAShapeLayer  alloc]  init];
-            maskLayer.frame = cell.bounds;
-            maskLayer.path = maskPath.CGPath;
-            cell.layer.mask = maskLayer;
-        } else if (indexPath.row == 5) {
-            UIBezierPath *bezierPath = [UIBezierPath  bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
-            CAShapeLayer *mask = [[CAShapeLayer alloc] init];
-            mask.frame = cell.bounds;
-            mask.path = bezierPath.CGPath;
-            cell.layer.mask = mask;
-        }
         return cell;
     }
 }
@@ -200,15 +189,15 @@
 
 - (void)isUserLogin
 {
-    // 积分
-    NSString *point = [[NSUserDefaults standardUserDefaults] objectForKey:@"point"];
-    
     // 账户信息
     _account = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"];
     [self.tableView reloadData];
     
     // 头像
     [self.headImage sd_setImageWithURL:[NSURL URLWithString:USERINFO[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    
+    // 会员等级
+    self.levelLabel.text = [@"V" stringByAppendingFormat:@"%@", USERINFO[@"userMemberGrade"] ? USERINFO[@"userMemberGrade"] : @"0"];
     
     // 用户名字
     if ([USERINFO[@"userNickName"] length] != 0) {
@@ -224,6 +213,7 @@
     }
     
     // 积分
+    NSString *point = [[NSUserDefaults standardUserDefaults] objectForKey:@"point"];
     if (point) {
         [self.pointBtn setTitle:[NSString stringWithFormat:@"积分 %@", point] forState:UIControlStateNormal];
     }

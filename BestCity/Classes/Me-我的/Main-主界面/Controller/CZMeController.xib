@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZMeController">
             <connections>
                 <outlet property="headImage" destination="XOO-5G-ru1" id="YCq-Mf-Z7d"/>
+                <outlet property="levelLabel" destination="mtK-Xl-8bn" id="ndu-IY-ZIw"/>
                 <outlet property="loginBtn" destination="Q9Y-z1-cIv" id="Apx-Ev-5n5"/>
                 <outlet property="pointBtn" destination="zmP-Tv-2ba" id="0Ds-Cd-0VD"/>
                 <outlet property="scrollerView" destination="D8s-nW-E3e" id="DVG-4N-h2V"/>
@@ -96,14 +97,27 @@
                                 <outlet property="delegate" destination="-1" id="fm1-kZ-DyM"/>
                             </connections>
                         </tableView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="change-small" translatesAutoresizingMaskIntoConstraints="NO" id="GHO-ED-CX1">
+                            <rect key="frame" x="67" y="83" width="26" height="17"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vxx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtK-Xl-8bn">
+                            <rect key="frame" x="67" y="83" width="26" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="mtK-Xl-8bn" firstAttribute="leading" secondItem="GHO-ED-CX1" secondAttribute="leading" id="13D-61-B9p"/>
+                        <constraint firstItem="mtK-Xl-8bn" firstAttribute="top" secondItem="GHO-ED-CX1" secondAttribute="top" id="2Iu-fj-OoC"/>
                         <constraint firstItem="Q9Y-z1-cIv" firstAttribute="leading" secondItem="XOO-5G-ru1" secondAttribute="trailing" constant="19" id="4ra-DT-xL1"/>
                         <constraint firstAttribute="trailing" secondItem="zJo-aO-yIP" secondAttribute="trailing" constant="20" id="6w2-LS-IRA"/>
                         <constraint firstItem="zJo-aO-yIP" firstAttribute="leading" secondItem="D8s-nW-E3e" secondAttribute="leading" constant="20" id="AXq-8L-zdW"/>
                         <constraint firstItem="zJo-aO-yIP" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="bottom" constant="40" id="DR1-Dz-eon"/>
+                        <constraint firstItem="GHO-ED-CX1" firstAttribute="centerX" secondItem="XOO-5G-ru1" secondAttribute="trailing" id="DVk-KL-DC0"/>
                         <constraint firstItem="zmP-Tv-2ba" firstAttribute="leading" secondItem="Q9Y-z1-cIv" secondAttribute="leading" id="LKe-ha-vIQ"/>
+                        <constraint firstItem="mtK-Xl-8bn" firstAttribute="trailing" secondItem="GHO-ED-CX1" secondAttribute="trailing" id="Leb-GP-16v"/>
                         <constraint firstItem="psb-Ya-3TW" firstAttribute="top" secondItem="fc7-il-25H" secondAttribute="top" constant="40" id="QFg-1j-TAr"/>
                         <constraint firstItem="fc7-il-25H" firstAttribute="centerX" secondItem="D8s-nW-E3e" secondAttribute="centerX" id="RIR-JQ-9ax"/>
                         <constraint firstAttribute="trailing" secondItem="fc7-il-25H" secondAttribute="trailing" id="Xyh-yp-zLY"/>
@@ -114,6 +128,8 @@
                         <constraint firstItem="Q9Y-z1-cIv" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="top" id="oN4-ac-ntz"/>
                         <constraint firstItem="fc7-il-25H" firstAttribute="leading" secondItem="D8s-nW-E3e" secondAttribute="leading" id="oQ2-nc-aqQ"/>
                         <constraint firstAttribute="trailing" secondItem="psb-Ya-3TW" secondAttribute="trailing" constant="20" id="ovs-KD-ail"/>
+                        <constraint firstItem="mtK-Xl-8bn" firstAttribute="bottom" secondItem="GHO-ED-CX1" secondAttribute="bottom" id="s1X-3I-Ghd"/>
+                        <constraint firstItem="GHO-ED-CX1" firstAttribute="bottom" secondItem="XOO-5G-ru1" secondAttribute="bottom" id="wlk-sF-pfT"/>
                         <constraint firstItem="fc7-il-25H" firstAttribute="top" secondItem="D8s-nW-E3e" secondAttribute="top" constant="-20" id="x9t-Ta-ndi"/>
                     </constraints>
                     <connections>
@@ -128,7 +144,7 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-3460" y="-1615"/>
+            <point key="canvasLocation" x="-3604" y="-1661"/>
         </view>
         <tapGestureRecognizer id="chO-RR-YYN">
             <connections>
@@ -138,6 +154,7 @@
     </objects>
     <resources>
         <image name="background" width="1242" height="630"/>
+        <image name="change-small" width="26" height="17"/>
         <image name="gift" width="16" height="15"/>
         <image name="headDefault" width="180" height="180"/>
         <image name="right-white" width="6" height="13"/>

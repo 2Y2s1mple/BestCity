@@ -12,6 +12,7 @@
 #import "DLIDEKeyboardView.h"
 #import "GXNetTool.h"
 #import "CZProgressHUD.h"
+#import "CZUserInfoTool.h"
 
 @interface CZChangeNicknameController ()
 /** 输入框 */
@@ -46,31 +47,13 @@
 
 - (void)saveUserInfo
 {
-    // 保存
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
-    param[@"userNickName"] = self.textfield.text;
-    
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/ModelUserUpdate"];
-    
-    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+    NSDictionary *param = @{@"userNickName" : self.textfield.text};
+    [CZUserInfoTool changeUserInfo:param callbackAction:^(NSDictionary *param) {
+        // 代理方法更新上一页的用户信息
+        [self.delegate updateUserInfo];
         
-        NSLog(@"result ----- %@", result);
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            [CZProgressHUD showProgressHUDWithText:@"修改成功"];
-            
-            // 代理方法更新上一页的用户信息
-            [self.delegate updateUserInfo];
-            
-            // 返回上一页
-            [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"修改失败"];
-        }
-        [CZProgressHUD hideAfterDelay:2];
-        
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
+        // 返回上一页
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

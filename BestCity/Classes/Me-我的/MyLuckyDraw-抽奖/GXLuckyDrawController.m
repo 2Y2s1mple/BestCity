@@ -11,6 +11,7 @@
 #import "GXNetTool.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
+#import "CZUserInfoTool.h"
 
 @interface GXLuckyDrawController ()
 @property (weak, nonatomic) IBOutlet UIView *luckyView;
@@ -90,6 +91,7 @@
            
             // 获取签到数据
             [self setupSignIn:GXLuckyShowCongratulationSignIn];
+            
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -277,7 +279,6 @@
     }
     
 }
-
 
 #pragma mark - 抽奖按钮
 - (void)luckyAction:(UIButton *)sender

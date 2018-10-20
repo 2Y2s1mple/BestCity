@@ -16,6 +16,8 @@
 #import "CZBindingMobileController.h"
 #import "GXNetTool.h"
 #import "CZProgressHUD.h"
+#import "CZUserInfoTool.h"
+#import "CZAlertViewTool.h"
 
 @interface CZMyProfileController () <UITableViewDelegate, UITableViewDataSource, CZDatePickViewDelegate, CZChangeNicknameControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 /** tableView */
@@ -78,17 +80,16 @@
 - (void)loginOutAction
 {
     NSLog(@"-------");
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认退出" preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        // 全部删除
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"user"];
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"point"];
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"Account"];
+    [CZAlertViewTool showAlertWithTitle:@"确认退出" action:^{
+        // 删除用户信息
+        [[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"user"];
+        // 删除积分
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"point"];
+        // 删除账户余额信息
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"Account"];
         // 返回上一页
         [self.navigationController popViewControllerAnimated:YES];
-    }]];
-    [self presentViewController:alert animated:NO completion:nil];
+    }];
 }
 
 #pragma  mark - <UITableViewDataSource>
@@ -166,44 +167,18 @@
 #pragma mark - 获取用户信息
 - (void)getUserInfo
 {
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/modelUser"];
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
-    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
-            [[NSUserDefaults standardUserDefaults] setObject:[result[@"list"] firstObject] forKey:@"user"];
-            self.rightTitles = nil;
-            [self.tableView reloadData];
-        }
-        [CZProgressHUD hideAfterDelay:2];
-    } failure:^(NSError *error) {
-        
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+        self.rightTitles = nil;
+        [self.tableView reloadData];
     }];
 }
 
 #pragma mark - 修改用户信息
 - (void)changeUserInfo:(NSDictionary *)info
 {
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param addEntriesFromDictionary:@{@"userId" : USERINFO[@"userId"]}];
-    [param addEntriesFromDictionary:info];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/ModelUserUpdate"];
-    
-    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        
-        NSLog(@"result ----- %@", result);
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            [CZProgressHUD showProgressHUDWithText:@"修改成功"];
-            // 获取用户信息
-            [self getUserInfo];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"修改失败"];
-        }
-        [CZProgressHUD hideAfterDelay:2];
-        
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
+    [CZUserInfoTool changeUserInfo:info callbackAction:^(NSDictionary *param) {
+        // 获取用户信息
+        [self getUserInfo];
     }];
 }
 

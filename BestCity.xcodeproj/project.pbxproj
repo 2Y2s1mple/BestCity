@@ -51,6 +51,7 @@
 		97572A8C21198F7F00FB42DE /* CZLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97572A8A21198F7F00FB42DE /* CZLoginController.m */; };
 		97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97572A8B21198F7F00FB42DE /* CZLoginController.xib */; };
 		975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DB211217AFF1100A062AB /* CZAlertViewTool.m */; };
+		975DB215217B14FA00A062AB /* CZUserInfoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DB214217B14FA00A062AB /* CZUserInfoTool.m */; };
 		97705C122107068E00485D64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C102107068E00485D64 /* Main.storyboard */; };
 		97705C142107068F00485D64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97705C132107068F00485D64 /* Assets.xcassets */; };
 		97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C152107068F00485D64 /* LaunchScreen.storyboard */; };
@@ -337,6 +338,8 @@
 		97572A8B21198F7F00FB42DE /* CZLoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZLoginController.xib; sourceTree = "<group>"; };
 		975DB210217AFF1100A062AB /* CZAlertViewTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAlertViewTool.h; sourceTree = "<group>"; };
 		975DB211217AFF1100A062AB /* CZAlertViewTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAlertViewTool.m; sourceTree = "<group>"; };
+		975DB213217B14FA00A062AB /* CZUserInfoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUserInfoTool.h; sourceTree = "<group>"; };
+		975DB214217B14FA00A062AB /* CZUserInfoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZUserInfoTool.m; sourceTree = "<group>"; };
 		97705C072107068E00485D64 /* BestCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97705C112107068E00485D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97705C132107068F00485D64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -2035,6 +2038,8 @@
 				97F0EC3B212569C4000FE1DC /* CZSaveTool.m */,
 				975DB210217AFF1100A062AB /* CZAlertViewTool.h */,
 				975DB211217AFF1100A062AB /* CZAlertViewTool.m */,
+				975DB213217B14FA00A062AB /* CZUserInfoTool.h */,
+				975DB214217B14FA00A062AB /* CZUserInfoTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2374,6 +2379,7 @@
 				97705C56210716A300485D64 /* CZMeController.m in Sources */,
 				979B05D6210F0D270023292D /* CZAllCriticalController.m in Sources */,
 				979B05D0210EF3260023292D /* CZUserEvaluationView.m in Sources */,
+				975DB215217B14FA00A062AB /* CZUserInfoTool.m in Sources */,
 				972E41D721147CAE00BC751C /* CZCollectController.m in Sources */,
 				9778649B211A7AD6001B41F1 /* MASCompositeConstraint.m in Sources */,
 				97798CC2212D0FC90052CE94 /* SDWebImageCodersManager.m in Sources */,

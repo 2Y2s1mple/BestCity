@@ -13,5 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 /** shuju */
 @property (nonatomic, strong) NSDictionary *dataSource;
-+ (instancetype)cellWithTabelView:(UITableView *)tableView;
++ (instancetype)cellWithTabelView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 @end

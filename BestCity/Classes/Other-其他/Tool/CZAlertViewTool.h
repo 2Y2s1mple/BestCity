@@ -12,6 +12,7 @@ typedef void(^CZActionBlock)(void);
 
 @interface CZAlertViewTool : NSObject
 + (void)showSheetAlertAction:(CZActionBlock)block;
++ (void)showAlertWithTitle:(NSString *)title action:(CZActionBlock)block;
 @end
 
 

@@ -24,12 +24,25 @@
 
     // Configure the view for the selected state
 }
-+ (instancetype)cellWithTabelView:(UITableView *)tableView
++ (instancetype)cellWithTabelView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
     static NSString *ID = @"meArrowCell";
     CZMeArrowCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeArrowCell class]) owner:nil options:nil] lastObject];
+    }
+    if (indexPath.row == 0) {
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
+        CAShapeLayer *maskLayer = [[CAShapeLayer  alloc]  init];
+        maskLayer.frame = cell.bounds;
+        maskLayer.path = maskPath.CGPath;
+        cell.layer.mask = maskLayer;
+    } else if (indexPath.row == 5) {
+        UIBezierPath *bezierPath = [UIBezierPath  bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
+        CAShapeLayer *mask = [[CAShapeLayer alloc] init];
+        mask.frame = cell.bounds;
+        mask.path = bezierPath.CGPath;
+        cell.layer.mask = mask;
     }
     return cell;
 }
