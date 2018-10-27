@@ -127,14 +127,12 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    NSLog(@"textFieldDidEndEditing");
+
 }
 
 //监听文本框的编辑
 - (void)textFieldAction:(UITextField *)textField
 {
-    NSLog(@"%@", textField.text);
-    
     if (textField.text.length == 0) {
         [self.tableView removeFromSuperview];
     } else {

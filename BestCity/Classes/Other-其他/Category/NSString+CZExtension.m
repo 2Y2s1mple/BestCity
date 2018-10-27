@@ -28,4 +28,18 @@
     return attrStr;
 }
 
+// 设置文字间距
+- (NSString *)setupTextRowSpace
+{
+    NSString *string;
+    if (self.length == 3) {
+        string = [NSString stringWithFormat:@"%@  %@  %@", [self substringWithRange:NSMakeRange(0, 1)], [self substringWithRange:NSMakeRange(1, 1)], [self substringWithRange:NSMakeRange(2, 1)] ];
+    } else if (self.length == 2) {
+        string = [NSString stringWithFormat:@"%@        %@", [self substringWithRange:NSMakeRange(0, 1)], [self substringWithRange:NSMakeRange(1, 1)]];
+    } else {
+        string = self;
+    }
+    return string;
+}
+
 @end

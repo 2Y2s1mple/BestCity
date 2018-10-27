@@ -175,7 +175,7 @@
 #pragma mark - <CZLoginControllerDelegate> 给当前用户信息赋值
 - (void)setUpUserInfo
 {
-    NSLog(@"---------");
+//    NSLog(@"---------");
     // 给用户信息赋值
     [self isUserLogin];
 }

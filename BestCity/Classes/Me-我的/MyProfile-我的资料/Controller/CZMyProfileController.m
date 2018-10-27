@@ -79,7 +79,6 @@
 /** 退出登录 */
 - (void)loginOutAction
 {
-    NSLog(@"-------");
     [CZAlertViewTool showAlertWithTitle:@"确认退出" action:^{
         // 删除用户信息
         [[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"user"];

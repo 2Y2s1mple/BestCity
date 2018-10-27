@@ -82,7 +82,7 @@
         
         self.isClicked = !self.isClicked;
     } else {
-        NSLog(@"");
+        
     }
     
 }

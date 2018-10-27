@@ -9,21 +9,50 @@
 #import "CZOneController.h"
 #import "CZHotSaleCell.h"
 #import "CZOneDetailController.h"
-
-//测试
-#import "TSLWebViewController.h"
+#import "GXNetTool.h"
 #import "UIImageView+WebCache.h"
+#import "CZRecommendListModel.h"
+#import "MJExtension.h"
 
 @interface CZOneController ()<UITableViewDelegate, UITableViewDataSource>
-
+/** 当前数据 */
+@property (nonatomic, strong) NSArray *dataSource;
+/** 表单 */
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation CZOneController
+
+- (void)getDataSource
+{
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
+            [self.tableView reloadData];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //line
     CZTOPLINE;
+    
+    [CZRecommendListModel setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"goodsScopeList" : @"CZHotScoreModel"
+                 };
+    }];
+    
+    // 获取数据
+    [self getDataSource];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - HOTContentY - 49 - 10) style:UITableViewStylePlain];
      if (@available(iOS 11.0, *)) {
@@ -33,17 +62,16 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
+    self.tableView = tableView;
     
     tableView.tableHeaderView = [self setupHeaderView];
-    
-    NSLog(@"%@", self.dataDic);
 }
 
 - (UIView *)setupHeaderView
 {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, FSS(180))];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.dataDic[@"logoimg"]] placeholderImage:[UIImage imageNamed:@"banner"]];
+    [imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"banner"]];
     imageView.frame = CGRectMake(10, 10, SCR_WIDTH - 20, backView.height - 10);
     [backView addSubview:imageView];
     
@@ -52,13 +80,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return FSS(515);
+    return [self.dataSource[indexPath.row] cellHeight];
 }
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,6 +96,10 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZHotSaleCell class]) owner:nil options:nil] lastObject];
     }
+    
+    CZRecommendListModel *model = self.dataSource[indexPath.row];
+    model.indexNumber = [NSString stringWithFormat:@"%ld", indexPath.row];
+    cell.model = model;
     return cell;
 }
 
@@ -86,10 +118,12 @@
     vc.progressColor = [UIColor redColor];
     [self.navigationController pushViewController:vc animated:YES];
     
-//    TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://192.168.5.186:8080/ea_cs_tmall_app/showhistory"]];
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 500;
+}
 
 
 @end

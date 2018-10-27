@@ -57,7 +57,6 @@
     CGFloat space = (SCR_WIDTH - 20 - 5 * wh) / 4;
     NSArray *imageArr = @[@"wechat", @"pyq", @"weibo", @"qq-friend", @"qq-space"];
     [imageArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSLog(@"%ld", idx);
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:obj]];
         imageView.tag = idx + PLACEHOLDERTAG;
         imageView.userInteractionEnabled = YES;
@@ -80,8 +79,6 @@
 
 - (void)action:(UITapGestureRecognizer *)tap
 {
-    
-    NSLog(@"%ld", tap.view.tag);
     UMSocialPlatformType type = UMSocialPlatformType_UnKnown;//未知的
     switch (tap.view.tag - PLACEHOLDERTAG) {
         case 0:

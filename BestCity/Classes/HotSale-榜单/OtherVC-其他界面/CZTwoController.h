@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class CZHotSubTilteModel;
 @interface CZTwoController : UIViewController
-
+/** 附标题 */
+@property (nonatomic, strong) NSArray<CZHotSubTilteModel *> *subTitles;
 @end

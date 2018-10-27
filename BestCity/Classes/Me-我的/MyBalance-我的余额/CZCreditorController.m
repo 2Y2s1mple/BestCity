@@ -78,7 +78,7 @@
     
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         
-        NSLog(@"result ----- %@", result);
+//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 保存支付宝信息
             [[NSUserDefaults standardUserDefaults] setObject:self.alipaynName.text forKey:@"alipayPhone"];

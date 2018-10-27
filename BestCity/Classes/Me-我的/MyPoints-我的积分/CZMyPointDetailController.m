@@ -49,7 +49,7 @@
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
+//            NSLog(@"%@", result);
             // 赋值
             self.detailsArr = [CZPointDetailModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];

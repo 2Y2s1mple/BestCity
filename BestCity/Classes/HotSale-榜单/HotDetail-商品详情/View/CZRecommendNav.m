@@ -104,8 +104,6 @@
 
 - (void)titleBtnAction:(UIButton *)sender
 {
-    NSLog(@"%s", __func__);
-    
     self.recordBtn.selected = NO;
     sender.selected = YES;
     

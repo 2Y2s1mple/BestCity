@@ -85,14 +85,14 @@
 
 - (void)clearBtnaction
 {
-    NSLog(@"clearBtnaction");
+//    NSLog(@"clearBtnaction");
     [self.delegate HotsaleSearchDetailController:self isClear:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    NSLog(@"textFieldShouldBeginEditing");
+//    NSLog(@"textFieldShouldBeginEditing");
     [self.delegate HotsaleSearchDetailController:self isClear:NO];
     [self.navigationController popViewControllerAnimated:YES];
     return NO;

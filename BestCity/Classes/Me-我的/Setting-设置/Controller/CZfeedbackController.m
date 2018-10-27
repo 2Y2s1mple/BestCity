@@ -58,7 +58,7 @@
     // 请求
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
+//            NSLog(@"%@", result);
             [CZProgressHUD showProgressHUDWithText:@"提交成功"];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
@@ -75,7 +75,6 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    NSLog(@"%@", textView.text);
     if (textView.text.length >= self.textCount) {
         NSString *text = [textView.text substringToIndex:self.textCount ];
         self.textView.text = text;

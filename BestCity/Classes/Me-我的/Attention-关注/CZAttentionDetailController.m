@@ -126,14 +126,13 @@
 {
     CZAttentionDetailCell *cell = [CZAttentionDetailCell cellWithTabelView:tableView];
     self.heights[@(indexPath.row)] = @(cell.cellHeight);
-    NSLog(@"%f", cell.cellHeight);
+//    NSLog(@"%f", cell.cellHeight);
     return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%lf-------height", [self.heights[@(indexPath.row)] doubleValue]);
     return [self.heights[@(indexPath.row)] doubleValue];
 }
 

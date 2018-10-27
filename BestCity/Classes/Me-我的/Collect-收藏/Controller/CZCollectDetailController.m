@@ -96,7 +96,7 @@
     param[@"page"] = @(self.page);
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        NSLog(@"%@", result);
+//        NSLog(@"%@", result);      
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSArray *collections = [CZCollectionModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.collectdsData addObjectsFromArray:collections];

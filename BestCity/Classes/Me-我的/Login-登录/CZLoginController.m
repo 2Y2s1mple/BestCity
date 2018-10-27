@@ -36,7 +36,7 @@
 }
 #pragma mark - 登录
 - (IBAction)loginAction:(id)sender {
-    NSLog(@"%s", __func__);
+//    NSLog(@"%s", __func__);
     
     // 短信登录接口
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -47,10 +47,10 @@
     
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyJSON header:nil response:GXResponseStyleJSON success:^(id result) {
     
-        NSLog(@"result ----- %@", result);
+//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"])
         {
-            NSLog(@"result ----- %@", result[@"msg"]);
+//            NSLog(@"result ----- %@", result[@"msg"]);
             [CZProgressHUD showProgressHUDWithText:@"登录成功"];
             [CZProgressHUD hideAfterDelay:2];
             // 存储user, 都TM存储上了
@@ -76,7 +76,7 @@
 }
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
-    NSLog(@"getVerificationCode==");
+//    NSLog(@"getVerificationCode==");
     [self disabledAndGrayColor:self.verificationCodeBtn];
     //将用户text失效
     self.userTextField.enabled = NO;
@@ -90,7 +90,7 @@
     
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/pushMessage"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyJSON header:nil response:GXResponseStyleJSON success:^(id result) {
-        NSLog(@"%@", result);
+//        NSLog(@"%@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"验证码发送成功"];
         } else {

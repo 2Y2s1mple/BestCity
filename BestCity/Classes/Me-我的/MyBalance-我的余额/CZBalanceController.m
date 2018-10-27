@@ -95,7 +95,6 @@
     [super viewDidLoad];
     // 导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"我的佣金" rightBtnTitle:@"提现记录" rightBtnAction:^{
-        NSLog(@"%@", @"提现记录");
         CZMyPointDetailController *vc = [[CZMyPointDetailController alloc] init];
         vc.titleName = @"提现记录";
         [self.navigationController pushViewController:vc animated:YES];
@@ -135,7 +134,7 @@
 #pragma mark - 全部提现
 - (void)allWithdrawAction
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
     self.amountTextFiled.text = self.withdraw.text;
 }
 
@@ -149,7 +148,7 @@
     // 请求
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
+//            NSLog(@"%@", result);
             // 赋值
             [self setupMoney:[result[@"list"] firstObject]];
         } else {

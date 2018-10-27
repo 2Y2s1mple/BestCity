@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZRecommendListModel.h"
 
 @interface CZHotSaleCell : UITableViewCell
-
+/** 模型 */
+@property (nonatomic, strong) CZRecommendListModel *model;
 @end

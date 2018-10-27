@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CZOneController : UIViewController
-/** 首页的数据 */
-@property (nonatomic, strong) NSDictionary *dataDic;
+
 @end

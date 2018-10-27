@@ -12,4 +12,6 @@
 - (NSMutableAttributedString *)addStrikethroughWithRange:(NSRange)range;
 
 - (NSMutableAttributedString *)addAttributeColor:(UIColor *)color Range:(NSRange)range;
+
+- (NSString *)setupTextRowSpace;
 @end

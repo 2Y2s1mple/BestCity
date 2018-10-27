@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "CZUserInfoTool.h"
 
+
 @interface GXLuckyDrawController ()
 @property (weak, nonatomic) IBOutlet UIView *luckyView;
 @property (weak, nonatomic) IBOutlet UIImageView *luckyBackImage;
@@ -86,7 +87,7 @@
     
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         
-        NSLog(@"result ----- %@", result);
+//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
            
             // 获取签到数据
@@ -98,7 +99,7 @@
         [CZProgressHUD hideAfterDelay:2];
         
     } failure:^(NSError *error) {
-        NSLog(@"%@", error);
+//        NSLog(@"%@", error);
     }];
 }
 
@@ -112,7 +113,7 @@
     
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         
-        NSLog(@"result ----- %@", result);
+//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"补签成功"]) {
             self.signedPoint = [result[@"point"] integerValue];
             // 获取签到数据
@@ -123,7 +124,7 @@
         [CZProgressHUD hideAfterDelay:2];
         
     } failure:^(NSError *error) {
-        NSLog(@"%@", error);
+//        NSLog(@"%@", error);
     }];
 }
 
@@ -153,11 +154,11 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/luckselects"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        NSLog(@"result ----- %@", result);
+//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
             for (NSDictionary *dic in result[@"list"]) {
                 [self.imagesArr addObject:dic[@"code_img"]];
-                NSLog(@"%@", self.imagesArr);
+//                NSLog(@"%@", self.imagesArr);
             }
             for (int i = 0; i < self.imagesArr.count; i++) {
                 NSInteger index = [self.allPrizes[i] integerValue];
@@ -168,10 +169,8 @@
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
-        
-        
     } failure:^(NSError *error) {
-        NSLog(@"%@", error);
+//        NSLog(@"%@", error);
     }];
 }
 
@@ -258,7 +257,7 @@
         
         [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
             
-            NSLog(@"result ----- %@", result);
+//            NSLog(@"result ----- %@", result);
             if ([result[@"msg"] isEqualToString:@"success"]) {
                 // 减 1
                 self.luckIndex = [result[@"list"][0][@"code"] integerValue] - 1;
@@ -305,7 +304,7 @@
     // 控制的角标
     NSInteger test = arc4random() % 8;// self.luckIndex;
     
-    NSLog(@"---%ld", (long)test);
+//    NSLog(@"---%ld", (long)test);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self. timer invalidate];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -450,7 +449,7 @@
     // 请求
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
+//            NSLog(@"%@", result);
             NSArray *data =  result[@"list"];
             for (NSDictionary *dic in data) {
                 [self.signArr addObject:dic[@"arrays_time"]];

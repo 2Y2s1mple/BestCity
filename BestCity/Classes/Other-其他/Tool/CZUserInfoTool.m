@@ -19,7 +19,7 @@
     param[@"userId"] = USERINFO[@"userId"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
+//            NSLog(@"%@", result);
             [[NSUserDefaults standardUserDefaults] setObject:[result[@"list"] firstObject] forKey:@"user"];
             // 积分
             [[NSUserDefaults standardUserDefaults] setObject:result[@"points"] forKey:@"point"];
@@ -40,7 +40,7 @@
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/ModelUserUpdate"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         
-        NSLog(@"result ----- %@", result);
+//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"修改成功"];
             

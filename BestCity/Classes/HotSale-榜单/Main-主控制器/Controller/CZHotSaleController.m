@@ -12,11 +12,8 @@
 #import "CZOneController.h"
 #import "CZTwoController.h"
 #import "CZHotsaleSearchController.h"
-//暂时没用上
-#import "CZThreeController.h"
-#import "CZFourController.h"
-#import "CZFiveController.h"
-
+#import "MJExtension.h"
+#import "CZHotTitleModel.h"
 #import "GXNetTool.h"
 #import "CZProgressHUD.h"
 
@@ -30,37 +27,34 @@
 
 @implementation CZHotSaleController
 
-- (NSArray *)mainTitles
-{
-    if (_mainTitles == nil) {
-        _mainTitles = @[@"推荐榜", @"个护健康", @"厨卫电器", @"生活家电", @"家用大电"];
-    }
-    return _mainTitles;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalBg;
+    [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"subtilte" : @"CZHotSubTilteModel"
+                 };
+    }];
+    
     //设置搜索栏
     [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, FSS(34))];
     
-//    //加载菊花
-//    [CZProgressHUD showProgressHUDWithText:nil];
-//    //获取数据
-//    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"ea_cs_tmall_app/ranklist"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-//        self.dataDic = result;
-//        //标题的数据
-//        self.mainTitles = self.dataDic[@"goodstypes"];
-    
-//        //刷新WMPage控件
-//        [self reloadData];
-//
-//        //隐藏菊花
-//        [CZProgressHUD hideAfterDelay:0];
-//    } failure:^(NSError *error) {
-//        //隐藏菊花
-//        [CZProgressHUD hideAfterDelay:0];
-//    }];
+    //获取数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsCategory"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        self.dataDic = result;
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            //标题的数据
+            self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:result[@"list"]];
+            
+            //刷新WMPage控件
+            [self reloadData];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
     
 }
 
@@ -96,7 +90,7 @@
 
 - (void)messageAction
 {
-    NSLog(@"%s", __func__);
+//    NSLog(@"%s", __func__);
 }
 
 #pragma mark - Datasource & Delegate
@@ -107,22 +101,37 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     switch (index) {
-        case 0:
-        {
+        case 0: {
             CZOneController *vc = [[CZOneController alloc] init];
-            vc.dataDic = self.dataDic;
             return vc;
         }
-        case 1: return [[CZTwoController alloc] init];
-        case 2: return [[CZOneController alloc] init];
-        case 3: return [[CZOneController alloc] init];
-        case 4: return [[CZOneController alloc] init];
+        case 1: {
+            CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.subTitles = [self.mainTitles[index] subtilte];
+            return vc;
+        }
+        case 2: {
+            CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.subTitles = [self.mainTitles[index] subtilte];
+            return vc;
+        }
+        case 3: {
+            CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.subTitles = [self.mainTitles[index] subtilte];
+            return vc;
+        }
+        case 4: {
+            CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.subTitles = [self.mainTitles[index] subtilte];
+            return vc;
+        }
     }
     return [[UIViewController alloc] init];
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    return self.mainTitles[index];
+    CZHotTitleModel *model = self.mainTitles[index];
+    return model.tilte.categoryname;
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
