@@ -10,6 +10,7 @@
 		97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFC2182F46B0008E416 /* CZHotTitleModel.m */; };
 		97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */; };
 		971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C19EC21706B1400E6D864 /* CZPointDetailModel.m */; };
+		971E562421870CE400C1A03D /* File.html in Resources */ = {isa = PBXBuildFile; fileRef = 971E562321870CE400C1A03D /* File.html */; };
 		97224E8B216E1927001601F6 /* CZCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97224E8A216E1927001601F6 /* CZCollectionModel.m */; };
 		972E41532113102B00BC751C /* CZBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41512113102B00BC751C /* CZBalanceController.m */; };
 		972E41542113102B00BC751C /* CZBalanceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972E41522113102B00BC751C /* CZBalanceController.xib */; };
@@ -277,6 +278,7 @@
 		97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSubTilteModel.m; sourceTree = "<group>"; };
 		971C19EB21706B1400E6D864 /* CZPointDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointDetailModel.h; sourceTree = "<group>"; };
 		971C19EC21706B1400E6D864 /* CZPointDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZPointDetailModel.m; sourceTree = "<group>"; };
+		971E562321870CE400C1A03D /* File.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = File.html; sourceTree = "<group>"; };
 		97224E89216E1927001601F6 /* CZCollectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectionModel.h; sourceTree = "<group>"; };
 		97224E8A216E1927001601F6 /* CZCollectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectionModel.m; sourceTree = "<group>"; };
 		972E41502113102B00BC751C /* CZBalanceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZBalanceController.h; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 			children = (
 				97BDB8542110609D00966FF0 /* TSLWebViewController.h */,
 				97BDB8532110609C00966FF0 /* TSLWebViewController.m */,
+				971E562321870CE400C1A03D /* File.html */,
 				97ECD7732121276800D07ABE /* CZHotsaleSearchController.h */,
 				97ECD7742121276800D07ABE /* CZHotsaleSearchController.m */,
 				97ECD776212190C900D07ABE /* CZHotsaleSearchDetailController.h */,
@@ -2277,6 +2280,7 @@
 				97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */,
 				97C78FC621196C6F00374CCD /* CZSystemMessageCell.xib in Resources */,
 				97705C142107068F00485D64 /* Assets.xcassets in Resources */,
+				971E562421870CE400C1A03D /* File.html in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,

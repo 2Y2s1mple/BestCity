@@ -120,6 +120,8 @@
         self.pointView.hidden = YES;
         model.cellHeight = CGRectGetMaxY(self.recommendReasonLabel.frame);
     }
+    
+    
 }
 
 @end

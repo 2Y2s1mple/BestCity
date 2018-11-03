@@ -14,6 +14,7 @@
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "CZSubTitleButton.h"
+#import "TSLWebViewController.h"
 
 @interface CZTwoController ()<UITableViewDelegate, UITableViewDataSource>
 /** 记录高度 */
@@ -179,14 +180,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //push到详情
-    CZOneDetailController *vc = [[CZOneDetailController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    CZOneDetailController *vc = [[CZOneDetailController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
     
     CZRecommendListModel *model = self.dataSource[indexPath.row];
     
-    //    TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://192.168.5.186:8080/ea_cs_tmall_app/showhistory"]];
-    //    [self.navigationController pushViewController:vc animated:YES];
-}
+    [GXNetTool GetNetWithUrl:@"http://192.168.5.165:8080/qualityshop-admin/goodsEvalway/selectJ/1" body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        NSLog(@"%@", result[@"goodsRanklist"][@"content"]);
+        TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://192.168.5.186:8080/ea_cs_tmall_app/showhistory"]];
+        vc.stringHtml = result[@"goodsRanklist"][@"content"];
+        [self.navigationController pushViewController:vc animated:YES];
 
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
 
 @end

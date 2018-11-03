@@ -19,4 +19,6 @@
 
 - (instancetype)initWithURL:(NSURL *)url;
 
+/** html */
+@property (nonatomic, strong) NSString *stringHtml;
 @end
