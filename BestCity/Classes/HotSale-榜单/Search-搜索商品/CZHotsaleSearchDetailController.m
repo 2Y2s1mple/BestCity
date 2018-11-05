@@ -43,6 +43,7 @@
     
     
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBtn.backgroundColor = [UIColor redColor];
     [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
     leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -56,10 +57,6 @@
 
     CZTextField *textField = [[CZTextField alloc] init];
     [topView addSubview:textField];
-    textField.font = [UIFont systemFontOfSize:14];
-    textField.layer.cornerRadius = 17;
-    textField.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor ;
-    textField.layer.borderWidth = 0.5;
     textField.delegate = self;
     textField.text = self.textTitle;
     [textField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,23 +82,19 @@
 
 - (void)clearBtnaction
 {
-//    NSLog(@"clearBtnaction");
     [self.delegate HotsaleSearchDetailController:self isClear:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-//    NSLog(@"textFieldShouldBeginEditing");
     [self.delegate HotsaleSearchDetailController:self isClear:NO];
     [self.navigationController popViewControllerAnimated:YES];
     return NO;
 }
 
-
 - (void)cancleAction
 {
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

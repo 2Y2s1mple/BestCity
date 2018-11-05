@@ -7,8 +7,7 @@
 //
 
 #import "CZHotSaleController.h"
-#import "CZTextField.h"
-#import "UIButton+CZExtension.h"
+#import "CZHotSearchView.h"
 #import "CZOneController.h"
 #import "CZTwoController.h"
 #import "CZHotsaleSearchController.h"
@@ -27,18 +26,13 @@
 
 @implementation CZHotSaleController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+- (void)obtainTtitles
+{
     [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
         return @{
                  @"subtilte" : @"CZHotSubTilteModel"
                  };
     }];
-    
-    //设置搜索栏
-    [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, FSS(34))];
-    
     //获取数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsCategory"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
         self.dataDic = result;
@@ -58,39 +52,31 @@
     
 }
 
-- (void)setupTopViewWithFrame:(CGRect)frame
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //设置搜索栏
+    [self setupTopView];
+    
+    // 获取标题
+    [self obtainTtitles];
+}
+
+- (void)setupTopView
 {
-    UIView *topView = [[UIView alloc] initWithFrame:frame];
-    [self.view addSubview:topView];
+    CZHotSearchView *search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, FSS(34)) msgAction:^{
+        NSLog(@"消息");
+    }];
+    search.textFieldActive = NO;
+    
+    [self.view addSubview:search];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchController)];
-    [topView addGestureRecognizer:tap];
-    
-    
-    UIButton *messageBtn = [UIButton buttonWithFrame:CGRectMake(topView.width - 21 - 14, 7, FSS(21), FSS(21)) backImage:@"nav-message" target:self action:@selector(messageAction)];
-    [topView addSubview:messageBtn];
-    messageBtn.center = CGPointMake(messageBtn.center.x, topView.height / 2);
-    
-    CZTextField *textField = [[CZTextField alloc] initWithFrame:CGRectMake(14, 0, CGRectGetMinX(messageBtn.frame) - 24, topView.height)];
-    textField.enabled = NO;
-    textField.backgroundColor = CZGlobalLightGray;
-    textField.font = [UIFont systemFontOfSize:14];
-    textField.layer.cornerRadius = 17;
-    textField.placeholder = @"搜索商品榜";
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
-    textField.leftView = image;
-    textField.leftViewMode = UITextFieldViewModeAlways;
-    [topView addSubview:textField];
+    [search addGestureRecognizer:tap];
 }
 
 - (void)pushSearchController
 {
     CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)messageAction
-{
-//    NSLog(@"%s", __func__);
 }
 
 #pragma mark - Datasource & Delegate

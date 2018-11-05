@@ -17,7 +17,6 @@
     self.frame = rect;
 }
 
-
 - (void)setWidth:(CGFloat)width
 {
     CGRect rect = self.frame;
@@ -70,6 +69,31 @@
 {
     return self.frame.origin.x;
 }
+
+- (void)setCenterX:(CGFloat)centerX
+{
+    CGPoint point = self.center;
+    point.x = centerX;
+    self.center = point;
+}
+
+- (CGFloat)centerX
+{
+    return self.center.x;
+}
+
+- (void)setCenterY:(CGFloat)centerY
+{
+    CGPoint point = self.center;
+    point.y = centerY;
+    self.center = point;
+}
+
+- (CGFloat)centerY
+{
+    return self.center.y;
+}
+
 
 - (void)setRounderCorners:(UIRectCorner)corners withRadii:(CGSize)radii viewRect:(CGRect)rect
 {

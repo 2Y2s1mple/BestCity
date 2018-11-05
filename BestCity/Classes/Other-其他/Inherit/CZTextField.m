@@ -10,6 +10,30 @@
 
 @implementation CZTextField
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = CZGlobalLightGray;
+        self.font = [UIFont systemFontOfSize:14];
+        self.layer.cornerRadius = 17;
+//        self.layer.borderWidth = 0.5;
+//        self.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor ;
+        self.placeholder = @"搜索商品榜";
+        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
+        self.leftView = image;
+        self.leftViewMode = UITextFieldViewModeAlways;
+        self.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.returnKeyType = UIReturnKeySearch;
+    }
+    return self;
+}
+
+
+
+/**
+ * 控制左侧视图位置
+ */
 - (CGRect)leftViewRectForBounds:(CGRect)bounds
 {
     CGRect rect = [super leftViewRectForBounds:bounds];
@@ -17,16 +41,26 @@
     return rect;
 }
 
+/**
+ * 提示文字的位置
+ */
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
     return CGRectInset(bounds, 40, 0);
 }
 
+/**
+ * 编辑文字的位置
+ */
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
+    
     return CGRectInset(bounds, 40, 0);
 }
 
+/**
+ * 控制右侧视图位置,这里也就是删除按钮
+ */
 - (CGRect)rightViewRectForBounds:(CGRect)bounds
 {
     CGRect rect = [super rightViewRectForBounds:bounds];

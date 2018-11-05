@@ -66,17 +66,11 @@
     return _tableView;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     
     //设置搜索栏
     [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, FSS(34))];
-    
-   
     
     self.hisView = [self createRecordViewWithFrame:CGRectMake(0, 100, SCR_WIDTH, 300) title:@"历史搜索"];
     [self.view addSubview:_hisView];
@@ -87,9 +81,9 @@
 
 - (void)setupTopViewWithFrame:(CGRect)frame
 {
+    self.view.backgroundColor = [UIColor whiteColor];
     UIView *topView = [[UIView alloc] initWithFrame:frame];
     [self.view addSubview:topView];
-    
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelBtn.frame = CGRectMake(topView.width - 40 - 14, 7, FSS(40), FSS(21));
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
@@ -100,34 +94,11 @@
     [topView addSubview:cancelBtn];
     cancelBtn.center = CGPointMake(cancelBtn.center.x, topView.height / 2);
     
-    CZTextField *textField = [[CZTextField alloc] initWithFrame:CGRectMake(14, 0, CGRectGetMinX(cancelBtn.frame) - 24, topView.height)];
-    self.textField = textField;
-    textField.font = [UIFont systemFontOfSize:14];
-    textField.layer.cornerRadius = 17;
-    textField.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor ;
-    textField.layer.borderWidth = 0.5;
-    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    textField.returnKeyType = UIReturnKeySearch;
-    textField.delegate = self;
-    textField.placeholder = @"搜索商品榜";
-    
+    self.textField = [[CZTextField alloc] initWithFrame:CGRectMake(14, 0, CGRectGetMinX(cancelBtn.frame) - 24, topView.height)];
+    self.textField.delegate = self;
     //代理方法监听时候都会慢一步
-    [textField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
-    textField.leftView = image;
-    textField.leftViewMode = UITextFieldViewModeAlways;
-    [topView addSubview:textField];
-}
-
-#pragma mark - <UITextFieldDelegate>
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-
+    [self.textField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
+    [topView addSubview:self.textField];
 }
 
 //监听文本框的编辑

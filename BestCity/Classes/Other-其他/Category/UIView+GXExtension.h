@@ -14,7 +14,8 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;
-
+@property (nonatomic, assign) CGFloat centerY;
+@property (nonatomic, assign) CGFloat centerX;
 /** 给view添加单边的圆角 */
 - (void)setRounderCorners:(UIRectCorner)corners withRadii:(CGSize)radii viewRect:(CGRect)rect;
 @end
