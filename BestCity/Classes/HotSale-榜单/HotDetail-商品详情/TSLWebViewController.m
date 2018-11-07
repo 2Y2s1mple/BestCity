@@ -30,14 +30,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:self.titleName rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
     
     _webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 67, SCR_WIDTH, SCR_HEIGHT - 67)];
     _webview.delegate = self;
-    _webview.backgroundColor = [UIColor whiteColor];
+    _webview.backgroundColor = CZGlobalWhiteBg;
     [self.view addSubview:_webview];
     
 //    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:@"/Users/lgx/Desktop/BestCityProduct/BestCity/Classes/HotSale-榜单/other-其他/File.html"]];

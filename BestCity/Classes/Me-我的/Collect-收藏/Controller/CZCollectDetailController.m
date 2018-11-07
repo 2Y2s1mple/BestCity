@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 68 - 50) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;

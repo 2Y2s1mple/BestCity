@@ -63,11 +63,10 @@
 
 - (void)setupTopView
 {
-    CZHotSearchView *search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, FSS(34)) msgAction:^{
+    CZHotSearchView *search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
         NSLog(@"消息");
     }];
     search.textFieldActive = NO;
-    
     [self.view addSubview:search];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchController)];
     [search addGestureRecognizer:tap];
@@ -121,11 +120,11 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, 30 + FSS(34), SCR_WIDTH, 50);
+    return CGRectMake(0, 30 + 34, SCR_WIDTH, 50);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, 30 + FSS(34) + 50, SCR_WIDTH, SCR_HEIGHT - (30 + FSS(34) + 50 + 49));
+    return CGRectMake(0, 30 + 34 + 50, SCR_WIDTH, SCR_HEIGHT - (30 + 34 + 50 + 49));
 }
 
 

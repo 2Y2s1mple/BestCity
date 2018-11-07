@@ -36,8 +36,11 @@
 /** RGB颜色 */
 #define CZRGBColor(r, g, b) [UIColor colorWithRed: (r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:1.0]
 
-#define CZGlobalBg CZRGBColor(255, 255, 255)
+/** 255满色为纯白*/
+#define CZGlobalWhiteBg CZRGBColor(255, 255, 255)
+/** 全局深灰色*/
 #define CZGlobalLightGray CZRGBColor(245, 245, 245)
+/** 全局浅灰色*/
 #define CZGlobalGray CZRGBColor(172, 172, 172)
 /** 红色 */
 #define CZREDCOLOR CZRGBColor(227, 20, 54)

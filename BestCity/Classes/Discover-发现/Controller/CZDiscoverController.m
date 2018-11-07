@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
 }
 
 #pragma mark - Datasource & Delegate

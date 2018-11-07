@@ -10,6 +10,7 @@
 		97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFC2182F46B0008E416 /* CZHotTitleModel.m */; };
 		97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */; };
 		971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C19EC21706B1400E6D864 /* CZPointDetailModel.m */; };
+		971CBEC821917B6300E4590B /* CZHotTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 971CBEC721917B6300E4590B /* CZHotTagsView.m */; };
 		971E562421870CE400C1A03D /* File.html in Resources */ = {isa = PBXBuildFile; fileRef = 971E562321870CE400C1A03D /* File.html */; };
 		97224E8B216E1927001601F6 /* CZCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97224E8A216E1927001601F6 /* CZCollectionModel.m */; };
 		972E41532113102B00BC751C /* CZBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41512113102B00BC751C /* CZBalanceController.m */; };
@@ -214,6 +215,7 @@
 		97CAE7C321194DF900858749 /* CZMessageData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97CAE7C221194DF900858749 /* CZMessageData.plist */; };
 		97CDCB32211D625700521ED5 /* UILabel+CZAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB31211D625700521ED5 /* UILabel+CZAdapter.m */; };
 		97CDCB35211D76CC00521ED5 /* UIFont+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */; };
+		97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D68C67219054E000802B30 /* CZHotTagLabel.m */; };
 		97D8FCBC2111504000D8ED8F /* CZMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCBB2111504000D8ED8F /* CZMeCell.m */; };
 		97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D8FCBD2111505000D8ED8F /* CZMeCell.xib */; };
 		97D8FCC22111612200D8ED8F /* CZMeArrowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCC02111612200D8ED8F /* CZMeArrowCell.m */; };
@@ -276,6 +278,8 @@
 		97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSubTilteModel.m; sourceTree = "<group>"; };
 		971C19EB21706B1400E6D864 /* CZPointDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointDetailModel.h; sourceTree = "<group>"; };
 		971C19EC21706B1400E6D864 /* CZPointDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZPointDetailModel.m; sourceTree = "<group>"; };
+		971CBEC621917B6300E4590B /* CZHotTagsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTagsView.h; sourceTree = "<group>"; };
+		971CBEC721917B6300E4590B /* CZHotTagsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotTagsView.m; sourceTree = "<group>"; };
 		971E562321870CE400C1A03D /* File.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = File.html; sourceTree = "<group>"; };
 		97224E89216E1927001601F6 /* CZCollectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectionModel.h; sourceTree = "<group>"; };
 		97224E8A216E1927001601F6 /* CZCollectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectionModel.m; sourceTree = "<group>"; };
@@ -655,6 +659,8 @@
 		97CDCB31211D625700521ED5 /* UILabel+CZAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CZAdapter.m"; sourceTree = "<group>"; };
 		97CDCB33211D76CC00521ED5 /* UIFont+CZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CZExtension.h"; sourceTree = "<group>"; };
 		97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CZExtension.m"; sourceTree = "<group>"; };
+		97D68C66219054E000802B30 /* CZHotTagLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTagLabel.h; sourceTree = "<group>"; };
+		97D68C67219054E000802B30 /* CZHotTagLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotTagLabel.m; sourceTree = "<group>"; };
 		97D8FCBA2111504000D8ED8F /* CZMeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeCell.h; sourceTree = "<group>"; };
 		97D8FCBB2111504000D8ED8F /* CZMeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMeCell.m; sourceTree = "<group>"; };
 		97D8FCBD2111505000D8ED8F /* CZMeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMeCell.xib; sourceTree = "<group>"; };
@@ -787,10 +793,11 @@
 		97054BFA2182F26F0008E416 /* Search-搜索商品 */ = {
 			isa = PBXGroup;
 			children = (
-				97ECD7732121276800D07ABE /* CZHotsaleSearchController.h */,
-				97ECD7742121276800D07ABE /* CZHotsaleSearchController.m */,
 				97ECD776212190C900D07ABE /* CZHotsaleSearchDetailController.h */,
 				97ECD777212190C900D07ABE /* CZHotsaleSearchDetailController.m */,
+				97ECD7732121276800D07ABE /* CZHotsaleSearchController.h */,
+				97ECD7742121276800D07ABE /* CZHotsaleSearchController.m */,
+				971CBEC92191B43300E4590B /* View */,
 			);
 			path = "Search-搜索商品";
 			sourceTree = "<group>";
@@ -875,6 +882,17 @@
 				971C19EC21706B1400E6D864 /* CZPointDetailModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		971CBEC92191B43300E4590B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				971CBEC621917B6300E4590B /* CZHotTagsView.h */,
+				971CBEC721917B6300E4590B /* CZHotTagsView.m */,
+				97D68C66219054E000802B30 /* CZHotTagLabel.h */,
+				97D68C67219054E000802B30 /* CZHotTagLabel.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		97224E88216E1912001601F6 /* Model */ = {
@@ -2338,6 +2356,7 @@
 				97FF6DDF21182FF900376435 /* CZDiscountCouponCell.m in Sources */,
 				97FCA0542184433F003006D0 /* CZSubTitleButton.m in Sources */,
 				974C58772122AA7D008B3E6A /* CZJPushHandler.m in Sources */,
+				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
 				979B05D3210F07EF0023292D /* CZShareAndlikeView.m in Sources */,
 				97D8FCCB2111A67700D8ED8F /* CZMyProfileController.m in Sources */,
 				97BC05DA2112B122001ED65A /* DLIDEKeyboardView.m in Sources */,
@@ -2483,6 +2502,7 @@
 				97705C55210716A300485D64 /* AppDelegate.m in Sources */,
 				97798CC5212D0FC90052CE94 /* UIImage+GIF.m in Sources */,
 				97FF6DEC211849A300376435 /* CZCollectCell.m in Sources */,
+				971CBEC821917B6300E4590B /* CZHotTagsView.m in Sources */,
 				97C7FF45216DDDB50091DC07 /* MJRefreshStateHeader.m in Sources */,
 				97C7FF48216DDDB50091DC07 /* MJRefreshHeader.m in Sources */,
 				97F0EC32212529F5000FE1DC /* CZUMConfigure.m in Sources */,

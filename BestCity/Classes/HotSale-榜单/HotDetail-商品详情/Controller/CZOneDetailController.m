@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     
     //自定义的导航栏
 //    CZRecommendNav *nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];

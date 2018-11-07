@@ -44,7 +44,7 @@
     loginOut.titleLabel.font = [UIFont systemFontOfSize:16];
     [loginOut setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginOut addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchUpInside];
-    loginOut.backgroundColor = CZRGBColor(227, 20, 54);
+    loginOut.backgroundColor = CZREDCOLOR;
 }
 
 #pragma mark - 提交反馈

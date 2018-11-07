@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     // 初始化界面内容
     [self setupView];
 }
@@ -58,7 +58,7 @@
     [loginOut setTitle:@"退出登录" forState:UIControlStateNormal];
     loginOut.titleLabel.font = [UIFont systemFontOfSize:16];
     [loginOut setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    loginOut.backgroundColor = CZRGBColor(227, 20, 54);
+    loginOut.backgroundColor = CZREDCOLOR;
     [loginOut addTarget:self action:@selector(loginOutAction) forControlEvents:UIControlEventTouchUpInside];
 }
 

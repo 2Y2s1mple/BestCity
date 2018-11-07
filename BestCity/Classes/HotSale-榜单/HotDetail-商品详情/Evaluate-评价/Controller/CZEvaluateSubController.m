@@ -21,7 +21,7 @@
 {
     if (_scrollerView == nil) {
         UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 70 - 55)];
-        scrollerView.backgroundColor = CZGlobalBg;
+        scrollerView.backgroundColor = CZGlobalWhiteBg;
         self.scrollerView = scrollerView;
     }
     return _scrollerView;
@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     
     //设置scrollerView
     [self.view addSubview:self.scrollerView];

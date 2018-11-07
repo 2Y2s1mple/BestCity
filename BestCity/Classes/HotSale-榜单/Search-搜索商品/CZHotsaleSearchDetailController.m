@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     //设置搜索栏
     [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, FSS(34))];
     

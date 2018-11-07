@@ -54,7 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"我的资料" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
@@ -72,7 +72,7 @@
     [loginOut setTitle:@"退出登录" forState:UIControlStateNormal];
     loginOut.titleLabel.font = [UIFont systemFontOfSize:16];
     [loginOut setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    loginOut.backgroundColor = CZRGBColor(227, 20, 54);
+    loginOut.backgroundColor = CZREDCOLOR;
     [loginOut addTarget:self action:@selector(loginOutAction) forControlEvents:UIControlEventTouchUpInside];
 }
 

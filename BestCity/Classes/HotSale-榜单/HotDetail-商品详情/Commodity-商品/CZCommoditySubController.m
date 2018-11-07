@@ -25,7 +25,7 @@
 {
     if (_scrollerView == nil) {
         UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 70 - 55)];
-        scrollerView.backgroundColor = CZGlobalBg;
+        scrollerView.backgroundColor = CZGlobalWhiteBg;
         self.scrollerView = scrollerView;
     }
     return _scrollerView;
@@ -38,7 +38,7 @@
         // 轮播图
         _Topic_JC = [[JCTopic alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, FSS(410))];
         _Topic_JC.rect = CGRectMake(0, 0, SCR_WIDTH, 410);
-        _Topic_JC.backgroundColor = [UIColor whiteColor];
+        _Topic_JC.backgroundColor = CZGlobalWhiteBg;
         _Topic_JC.totalNum = 3;
         _Topic_JC.type = JCTopicMiddle;
         _Topic_JC.scrollView = self.scrollerView;
@@ -48,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalBg;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     
     //设置scrollerView
     [self.view addSubview:self.scrollerView];

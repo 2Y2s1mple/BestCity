@@ -7,14 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
-NS_ASSUME_NONNULL_BEGIN
+#import "CZTextField.h"
+@class CZHotSearchView;
 
-@interface CZHotSearchView : UIView
-/** 右边消息 */
-@property (nonatomic, copy) void (^msgBlock)(void);
-/** 必须设置文本框是否允许输入 */
-@property (nonatomic, assign, getter=isTextFieldActive) BOOL textFieldActive;
-- (instancetype)initWithFrame:(CGRect)frame msgAction:(void (^)(void))block;
+@protocol CZHotSearchViewDelegate <NSObject>
+@optional
+- (void)hotView:(CZHotSearchView *)hotView didTextFieldChange:(CZTextField *)textField;
 @end
 
-NS_ASSUME_NONNULL_END
+@interface CZHotSearchView : UIView
+/** 代理 */
+@property (nonatomic, assign) id<CZHotSearchViewDelegate> delegate;
+/** 右边按钮事件 */
+@property (nonatomic, copy) void (^msgBlock)(NSString *title);
+/** 右边文字 */
+@property (nonatomic, strong) NSString *msgTitle;
+/** 文本框是否允许输入 */
+@property (nonatomic, assign, getter=isTextFieldActive) BOOL textFieldActive;
+/** 文本框颜色 */
+@property (nonatomic, strong) UIColor *textFieldBorderColor;
+/** 文本框文字 */
+@property (nonatomic, strong) NSString *searchText;
+
+- (instancetype)initWithFrame:(CGRect)frame msgAction:(void (^)(NSString *))block;
+@end
+
+
