@@ -26,6 +26,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 /** 省多钱 */
 @property (nonatomic, weak) IBOutlet UILabel *cutPriceLabel;
+/** 访问量 */
+@property (nonatomic, weak) IBOutlet UILabel *visitLabel;
 /** 推荐理由 */
 @property (nonatomic, weak) IBOutlet UILabel *recommendReasonLabel;
 /** 评分view */
@@ -54,9 +56,7 @@
 @implementation CZHotSaleCell
 
 - (void)awakeFromNib {    
-    [super awakeFromNib];
-//    self.contentView.backgroundColor = RANDOMCOLOR;
-}
+    [super awakeFromNib];}
 
 - (void)setModel:(CZRecommendListModel *)model
 {
@@ -95,6 +95,15 @@
         status = [status stringByAppendingFormat:@"    ¥%@", model.otherPrice];
         self.tmPrice.attributedText = [status addStrikethroughWithRange:[status rangeOfString:[NSString stringWithFormat:@"    ¥%@", model.otherPrice]]];
     }
+    
+    
+    NSInteger visiterCount = [model.visitCount integerValue];
+    if (visiterCount > 1000) {
+        self.visitLabel.text = [NSString stringWithFormat:@"%0.1f万", visiterCount / 10000.0];
+    } else {
+        self.visitLabel.text = [NSString stringWithFormat:@"%@", model.visitCount];
+    }
+    
     
     NSString *text = [NSString stringWithFormat:@"推荐理由: %@", model.recommendReason];
     self.recommendReasonLabel.attributedText = [text addAttributeColor:CZREDCOLOR Range:[text rangeOfString:@"推荐理由"]];

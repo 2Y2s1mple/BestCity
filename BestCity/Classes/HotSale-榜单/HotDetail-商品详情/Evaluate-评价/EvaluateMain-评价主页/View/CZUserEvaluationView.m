@@ -30,33 +30,19 @@
     titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:17];
     [self addSubview:titleLabel];
     
-    //评分小星星
-    for (int i = 0; i < 5; i++) {
-        UIImageView *starNor = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"score-nor"]];
-        starNor.frame = CGRectMake(space + (17 + space) * i, CZGetY(titleLabel) + 2 * space, 17, 17);
-        [self addSubview:starNor];
-        if (i > 3) continue;
-        UIImageView *starSel = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"score-sel"]];
-        starSel.frame = CGRectMake(space + (17 + space) * i, CZGetY(titleLabel) + 2 * space, 17, 17);
-        [self addSubview:starSel];
-    }
+//    CZMutContentButton *userEvaluBtn = [CZMutContentButton buttonWithType:UIButtonTypeCustom];
+//    [userEvaluBtn setTitle:@"5800人参与评分" forState:UIControlStateNormal];
+//    [userEvaluBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
+//    userEvaluBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+//    [userEvaluBtn setImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
+//    [self addSubview:userEvaluBtn];
+//    userEvaluBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    userEvaluBtn.frame = CGRectMake(self.width - 150 - 10, CZGetY(titleLabel) + 2 * space, 150, 25);
+//    [userEvaluBtn addTarget:self action:@selector(didClickallCritical) forControlEvents:UIControlEventTouchUpInside];
+
+    CGFloat height = [self userEvaluationContentWithSuperView:self originY:CZGetY(titleLabel)];
     
-    CZMutContentButton *userEvaluBtn = [CZMutContentButton buttonWithType:UIButtonTypeCustom];
-    [userEvaluBtn setTitle:@"5800人参与评分" forState:UIControlStateNormal];
-    [userEvaluBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
-    userEvaluBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [userEvaluBtn setImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
-    [self addSubview:userEvaluBtn];
-    userEvaluBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    userEvaluBtn.frame = CGRectMake(self.width - 150 - 10, CZGetY(titleLabel) + 2 * space, 150, 25);
-    [userEvaluBtn addTarget:self action:@selector(didClickallCritical) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, CZGetY(userEvaluBtn) + 20, SCR_WIDTH - 20, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self addSubview:line];
-    CGFloat height = [self userEvaluationContentWithSuperView:self originY:CZGetY(line)];
-    
-    self.height = height + CZGetY(line);
+    self.height = height + CZGetY(titleLabel);
     return self.height + 10;
 }
 

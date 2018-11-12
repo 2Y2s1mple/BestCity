@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CZEvaluateSubController : UIViewController
-
+/** 滚动视图 */
+@property (nonatomic, strong) UIScrollView *scrollerView;
 @end

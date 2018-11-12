@@ -6,7 +6,7 @@
 //  Copyright © 2018年 JasonBourne. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CZBaseRecommendController.h"
 
 @protocol hotsaleSearchDetailControllerDelegate <NSObject>
 @optional
@@ -14,7 +14,7 @@
 
 @end
 
-@interface CZHotsaleSearchDetailController : UIViewController
+@interface CZHotsaleSearchDetailController : CZBaseRecommendController
 /** 保存的标题 */
 @property (nonatomic, strong) NSString *textTitle;
 /** 代理 */

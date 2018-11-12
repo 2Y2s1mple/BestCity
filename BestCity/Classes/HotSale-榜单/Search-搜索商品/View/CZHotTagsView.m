@@ -102,7 +102,6 @@
 #pragma mark - <CZHotTagLabelDelegate>
 - (void)hotTagLabel:(CZHotTagLabel *)label longPressAccessoryEvent:(UIButton *)sender
 {
-   
     [self.hisArray removeObjectAtIndex:[self.tagsView.subviews indexOfObject:label]];
     [[NSUserDefaults standardUserDefaults] setObject:self.hisArray forKey:@"hisSearchKey"];
     [self reloadSubViews];

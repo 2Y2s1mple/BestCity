@@ -6,8 +6,8 @@
 //  Copyright © 2018年 JasonBourne. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CZBaseRecommendController.h"
 
-@interface CZOneController : UIViewController
+@interface CZOneController : CZBaseRecommendController
 
 @end

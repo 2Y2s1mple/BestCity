@@ -43,9 +43,6 @@
 //    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:@"/Users/lgx/Desktop/BestCityProduct/BestCity/Classes/HotSale-榜单/other-其他/File.html"]];
 //    [_webview loadRequest:request];
     [_webview loadHTMLString:self.stringHtml baseURL:nil];
-    
-    
-   
 }
 
 - (void)viewDidLayoutSubviews {

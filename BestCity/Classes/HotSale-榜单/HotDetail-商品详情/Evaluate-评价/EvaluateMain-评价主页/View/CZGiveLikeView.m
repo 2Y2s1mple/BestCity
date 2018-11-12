@@ -32,7 +32,7 @@
     UIView *imageBackView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 76, 76)];
     imageBackView.center = CGPointMake(self.width / 2, self.height / 2);
     imageBackView.layer.borderWidth = 1;
-    imageBackView.layer.borderColor = [CZRGBColor(227,20,54) CGColor];
+    imageBackView.layer.borderColor = [CZREDCOLOR CGColor];
     imageBackView.layer.cornerRadius = imageBackView.height / 2;
     imageBackView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action)];

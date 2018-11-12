@@ -30,24 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    //设置搜索栏
+    // 创建搜索栏
     [self setupSearchView];
-    
-    self.hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, 100, SCR_WIDTH, 300)];
-    self.hisView.type = CZHotTagLabelTypeLongPressGesture;
-    self.hisView.delegate = self;
-    self.hisView.title = @"历史搜索";
-    [self.view addSubview:_hisView];
-    
-    self.hotView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, CZGetY(_hisView) + 20, SCR_WIDTH, 300)];
-    self.hotView.type = CZHotTagLabelTypeTapGesture;
-    self.hotView.title = @"热门搜索";
-    self.hotView.delegate = self;
-    self.hotView.hisArray = [NSMutableArray arrayWithArray:@[@"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|"]];
-    [self.view addSubview:_hotView];
+    // 创建历史搜索
+    [self createHistorySearchModule];
+    // 创建热门搜索
+    [self createHotSearchModule];
 }
 
-#pragma mark - 搜索框创建
+#pragma mark - 创建搜索及代理方法
 - (void)setupSearchView
 {
     __weak typeof(self) weakSelf = self;
@@ -68,8 +59,7 @@
     self.searchView.delegate = self;
     [self.view addSubview:self.searchView];
 }
-
-#pragma mark - 监听文本框的编辑<CZHotSearchViewDelegate>
+// <CZHotSearchViewDelegate>
 - (void)hotView:(CZHotSearchView *)hotView didTextFieldChange:(CZTextField *)textField
 {
     if (textField.text.length == 0) {
@@ -79,45 +69,36 @@
     }
 }
 
-#pragma mark - 跳转
-- (void)pushSearchDetail
-{
-    CZHotsaleSearchDetailController *vc = [[CZHotsaleSearchDetailController alloc] init];
-    vc.textTitle = self.searchView.searchText;
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-
-- (void)HotsaleSearchDetailController:(UIViewController *)vc isClear:(BOOL)clear
-{
-    if (clear) {
-        //详情页面点击了清除
-        self.searchView.searchText = nil;
-    } else {
-        
-    }
-}
-
-#pragma mark - 创建历史搜索
+#pragma mark - 创建历史, 热门搜索及代理方法
+// 历史
 - (void)createHistorySearchModule
 {
     self.hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, 100, SCR_WIDTH, 300)];
-    self.hisView.type = CZHotTagLabelTypeLongPressGesture;
+    self.hisView.type = CZHotTagLabelTypeDefault;
     self.hisView.delegate = self;
     self.hisView.title = @"历史搜索";
     [self.view addSubview:_hisView];
 }
 
-#pragma mark - <CZHotTagsViewDelegate>
-// 点击事件
+// 热门
+- (void)createHotSearchModule
+{
+    self.hotView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, CZGetY(_hisView) + 20, SCR_WIDTH, 300)];
+    self.hotView.type = CZHotTagLabelTypeTapGesture;
+    self.hotView.title = @"热门搜索";
+    self.hotView.delegate = self;
+    self.hotView.hisArray = [NSMutableArray arrayWithArray:@[@"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|"]];
+    [self.view addSubview:_hotView];
+}
+
+// 点击事件 <CZHotTagsViewDelegate>
 - (void)hotTagsView:(CZHotTagsView *)tagsView didSelectedTag:(CZHotTagLabel *)tagLabel
 {
     self.searchView.searchText = tagLabel.text;
     [self pushSearchDetail];
 }
 
-// 长按事件
+// 长按事件 <CZHotTagsViewDelegate>
 - (void)hotTagsViewLongPressAccessoryEvent
 {
     // 更新热门的尺寸
@@ -128,6 +109,31 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
+}
+
+#pragma mark - <>详情页面的代理方法
+- (void)HotsaleSearchDetailController:(UIViewController *)vc isClear:(BOOL)clear
+{
+    if (clear) {
+        //详情页面点击了清除
+        self.searchView.searchText = nil;
+    } else {
+        
+    }
+    
+    if (self.searchView.searchText) {
+        self.searchView.msgTitle = @"搜索";
+    } else {
+        self.searchView.msgTitle = @"取消";
+    }
+}
+#pragma mark - 跳转
+- (void)pushSearchDetail
+{
+    CZHotsaleSearchDetailController *vc = [[CZHotsaleSearchDetailController alloc] init];
+    vc.textTitle = self.searchView.searchText;
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

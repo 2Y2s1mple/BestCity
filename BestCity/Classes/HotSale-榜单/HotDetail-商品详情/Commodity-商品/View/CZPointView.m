@@ -61,7 +61,7 @@
         finallyH = CGRectGetMaxY(titleAffirm.frame) + 10;
     }
     backView.frame = CGRectMake(0, frame.origin.y, frame.size.width, finallyH);
-    return finallyH;
+    return finallyH ? finallyH : 22;
 }
 
 + (CGFloat)pointFormViewWithFrame:(CGRect)frame tilte:(NSString *)mainTitle titleImage:(NSString *)imageName formTitles:(NSArray *)formTitles subformTitles:(NSArray *)subformTitles superView:(UIView *)superView
@@ -111,7 +111,6 @@
         subTitleLabel.font = [UIFont systemFontOfSize:15];
         subTitleLabel.text = subformTitles[i];
         [formView addSubview:subTitleLabel];
-        
     }
     return CGRectGetMaxY(formView.frame);
 }

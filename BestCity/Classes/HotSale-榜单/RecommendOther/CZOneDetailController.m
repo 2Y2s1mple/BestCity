@@ -36,9 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor = CZGlobalWhiteBg;
-    
     //自定义的导航栏
 //    CZRecommendNav *nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];
 //    nav.delegate = self;
@@ -109,18 +107,4 @@
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     return CGRectMake(0, 70, SCR_WIDTH, SCR_HEIGHT - 70 - 55);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @end

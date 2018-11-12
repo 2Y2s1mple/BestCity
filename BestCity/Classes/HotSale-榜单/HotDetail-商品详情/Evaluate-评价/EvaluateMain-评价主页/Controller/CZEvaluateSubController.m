@@ -12,15 +12,13 @@
 #import "CZGiveLikeView.h"
 
 @interface CZEvaluateSubController ()<CZUserEvaluationViewDelegate>
-/** 滚动视图 */
-@property (nonatomic, strong) UIScrollView *scrollerView;
 @end
 
 @implementation CZEvaluateSubController
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 70 - 55)];
+        UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
         scrollerView.backgroundColor = CZGlobalWhiteBg;
         self.scrollerView = scrollerView;
     }
@@ -50,12 +48,14 @@
     originY += 7;
     
     //加载点赞小手
-    CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, originY, SCR_WIDTH, 200)];\
+    CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, originY, SCR_WIDTH, 200)];
     [self.scrollerView addSubview:likeView];
     originY += 200;
     
     
     self.scrollerView.contentSize = CGSizeMake(0, originY);
+    self.scrollerView.height = originY;
+    self.view.height = self.scrollerView.height;
 }
 
 #pragma mark - <CZUserEvaluationViewDelegate>

@@ -10,14 +10,13 @@
 #import "JCTopic.h"
 #import "CZCommodityView.h"
 #import "CZPointView.h"
-#import "CZGiveLikeView.h"
+#import "CZRecommendDetailModel.h"
 
 @interface CZCommoditySubController ()
 /** 轮播图 */
 @property(nonatomic,strong)JCTopic *Topic_JC;
 
-/** 滚动视图 */
-@property (nonatomic, strong) UIScrollView *scrollerView;
+
 @end
 
 @implementation CZCommoditySubController
@@ -30,7 +29,10 @@
     }
     return _scrollerView;
 }
-
+//    self.Topic_JC.pics = @[
+//                           @{@"pic":IMAGE_NAMED(@"testImage1.png"), @"isLoc":@YES},
+//                           @{@"pic":IMAGE_NAMED(@"testImage2.png"), @"isLoc":@YES},
+//                           @{@"pic":IMAGE_NAMED(@"testImage3.png"), @"isLoc":@YES}];
 -(JCTopic *)Topic_JC
 {
     if(!_Topic_JC)
@@ -42,25 +44,37 @@
         _Topic_JC.totalNum = 3;
         _Topic_JC.type = JCTopicMiddle;
         _Topic_JC.scrollView = self.scrollerView;
+        _Topic_JC.pics = @[
+                            @{@"pic" : self.model.imgList[0][@"imgPath"],
+                                 @"isLoc" : @NO},
+                            @{@"pic" : self.model.imgList[1][@"imgPath"],
+                                 @"isLoc" : @NO},
+                            @{@"pic" : self.model.imgList[2][@"imgPath"],
+                                 @"isLoc" : @NO}
+                          ];
+        [self.Topic_JC upDate];
     }
     return _Topic_JC;
+}
+
+- (void)setModel:(CZRecommendDetailModel *)model
+{
+    _model = model;
+    [self setupView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
-    
     //设置scrollerView
     [self.view addSubview:self.scrollerView];
-    
+}
+
+- (void)setupView
+{
     /**加载商品*/
     //记载轮播图
     [self.scrollerView addSubview:self.Topic_JC];
-    self.Topic_JC.pics = @[
-                           @{@"pic":IMAGE_NAMED(@"testImage1.png"), @"isLoc":@YES},
-                           @{@"pic":IMAGE_NAMED(@"testImage2.png"), @"isLoc":@YES},
-                           @{@"pic":IMAGE_NAMED(@"testImage3.png"), @"isLoc":@YES}];
-    [self.Topic_JC upDate];
     
     //设置商品的标题
     CZCommodityView *commodity = [[CZCommodityView alloc] init];
@@ -68,14 +82,29 @@
     [self.scrollerView addSubview:commodity];
     CGFloat originY = FSS(410) + commodity.commodityH;
     
-    CGFloat Height = [CZPointView pointViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"正品保证" titleImage:@"quality" pointTitles:@[@"平安保险承保", @"官方授权", @"正品保证", @"3C认证"] superView:self.scrollerView];
+    NSMutableArray *qualityList = [NSMutableArray array];
+    for (CZRecommendDetailPointModel *model in self.model.qualityList) {
+        [qualityList addObject:model.name];
+    }
+    CGFloat Height = [CZPointView pointViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"正品保证" titleImage:@"quality" pointTitles:qualityList superView:self.scrollerView];
     originY += Height + 10;
     
-    CGFloat Height1 = [CZPointView pointViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"售后服务" titleImage:@"service" pointTitles:@[@"极速退款", @"七天无理由退货", @"电器延保", @"赠送运费险"] superView:self.scrollerView];
+    NSMutableArray *serviceList = [NSMutableArray array];
+    for (NSDictionary *dic in self.model.serviceList) {
+        [serviceList addObject:dic[@"name"]];
+    }
+    CGFloat Height1 = [CZPointView pointViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"售后服务" titleImage:@"service" pointTitles:serviceList superView:self.scrollerView];
     originY += Height1 + 10;
     
-    
-    CGFloat Height2 = [CZPointView pointFormViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"产品参数" titleImage:@"parameter" formTitles:@[@"容量", @"功能", @"产品材质", @"售后服务", @"型号", @"品名"] subformTitles:@[@"1.2-1.5升", @"全国联保", @"全国联保", @"全国联保", @"全国联保", @"全国联保"] superView:self.scrollerView];
+    NSMutableArray *parametersList1 = [NSMutableArray array];
+    for (NSDictionary *dic in self.model.parametersList) {
+        [parametersList1 addObject:dic[@"name"]];
+    }
+    NSMutableArray *parametersList2 = [NSMutableArray array];
+    for (NSDictionary *dic in self.model.parametersList) {
+        [parametersList2 addObject:dic[@"value"]];
+    }
+    CGFloat Height2 = [CZPointView pointFormViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"产品参数" titleImage:@"parameter" formTitles:parametersList1 subformTitles:parametersList2 superView:self.scrollerView];
     originY += Height2 + 40;
     
     /**点赞*/
@@ -85,14 +114,9 @@
     [self.scrollerView addSubview:lineView2];
     originY += 7;
     
-    //加载点赞小手
-    CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, originY, SCR_WIDTH, 200)];
-    [self.scrollerView addSubview:likeView];
-    originY += 200;
-    
-    
     self.scrollerView.contentSize = CGSizeMake(0, originY);
+    self.scrollerView.height = originY;
+    self.view.height = self.scrollerView.height;
 }
-
 
 @end

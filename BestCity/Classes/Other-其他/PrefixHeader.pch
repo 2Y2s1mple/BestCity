@@ -80,6 +80,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "UIImage+CZExtension.h"
 #import "MBProgressHUD.h"
 #import "CZProgressHUD.h"
+#import "CZConst.h"
 
 /************************************************************/
 #endif 

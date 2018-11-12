@@ -79,7 +79,8 @@
 }
 
 #pragma mark - Datasource & Delegate
-- (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
+- (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController
+{
 //    return self.mainTitles.count;
     return 5;
 }

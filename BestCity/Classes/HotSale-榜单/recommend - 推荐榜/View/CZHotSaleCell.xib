@@ -381,6 +381,7 @@
                 <outlet property="tmPrice" destination="ili-Pz-7ys" id="5Ae-Fa-iHx"/>
                 <outlet property="topLabel" destination="Uha-OR-Yhx" id="2PK-XU-8Kg"/>
                 <outlet property="topNumber" destination="94f-3d-xn3" id="aoy-IQ-W5T"/>
+                <outlet property="visitLabel" destination="7zT-pP-UUI" id="mgC-Fw-Rmv"/>
             </connections>
             <point key="canvasLocation" x="-559" y="-3177"/>
         </tableViewCell>

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class CZRecommendDetailModel;
 @interface CZCommoditySubController : UIViewController
-
+/** 滚动视图 */
+@property (nonatomic, strong) UIScrollView *scrollerView;
+/** 详情数据模型 */
+@property (nonatomic, strong) CZRecommendDetailModel *model;
 @end

@@ -11,36 +11,54 @@
 #import "CZHotSaleCell.h"
 #import "CZOneDetailController.h"
 #import "Masonry.h"
-#import "TSLWebViewController.h"
+#import "GXNetTool.h"
+#import "MJExtension.h"
+#import "CZRecommendListModel.h"
 
-@interface CZHotsaleSearchDetailController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-
+@interface CZHotsaleSearchDetailController ()<UITextFieldDelegate>
 @end
 
 @implementation CZHotsaleSearchDetailController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalWhiteBg;
+    // 获取数据
+    [self getSourceData];
     //设置搜索栏
-    [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, FSS(34))];
+    UIView *searchView = [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, 34)];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, FSS(35) + 40, SCR_WIDTH, SCR_HEIGHT - 49 - FSS(35) - 40) style:UITableViewStylePlain];
-    if (@available(iOS 11.0, *)) {
-        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [self.view addSubview:tableView];
-    
+    self.tableView.frame = CGRectMake(0, FSS(35) + 40, SCR_WIDTH, SCR_HEIGHT - CGRectGetMaxY(searchView.frame) - 10);
 }
 
-- (void)setupTopViewWithFrame:(CGRect)frame
+- (void)getSourceData
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"goodsName"] = self.textTitle;
+    
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSLog(@"%@", result);
+            self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
+            [self.tableView reloadData];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+
+#pragma mark - 创建搜索框以及方法
+- (UIView *)setupTopViewWithFrame:(CGRect)frame
 {
     UIView *topView = [[UIView alloc] initWithFrame:frame];
+    topView.backgroundColor = [UIColor redColor];
     [self.view addSubview:topView];
-    
     
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     leftBtn.backgroundColor = [UIColor redColor];
@@ -74,10 +92,9 @@
     button.frame = CGRectMake(0, 0, 20, 20);
     [button setImage:[UIImage imageNamed:@"search-close"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(clearBtnaction) forControlEvents:UIControlEventTouchUpInside];
-//    textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.rightView = button;
     textField.rightViewMode = UITextFieldViewModeAlways;
-    
+    return topView;
 }
 
 - (void)clearBtnaction
@@ -98,35 +115,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return FSS(515);
-}
-
-#pragma mark - UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 5;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *ID = @"hotSaleCell";
-    CZHotSaleCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZHotSaleCell class]) owner:nil options:nil] lastObject];
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
     //push到详情
 //    CZOneDetailController *vc = [[CZOneDetailController alloc] init];
 //    [self.navigationController pushViewController:vc animated:YES];
     
-        TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://192.168.5.178:8080/ueditor/goodDetail/goodId_197382787/top-info/info-tab.html"]];
-        [self.navigationController pushViewController:vc animated:YES];
-}
+//        TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://192.168.5.178:8080/ueditor/goodDetail/goodId_197382787/top-info/info-tab.html"]];
+//        [self.navigationController pushViewController:vc animated:YES];
 
 @end
