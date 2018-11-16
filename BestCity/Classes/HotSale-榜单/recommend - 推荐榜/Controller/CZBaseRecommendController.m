@@ -71,8 +71,12 @@
 //    vc.titleSizeSelected = vc.titleSizeNormal;
 //    vc.progressColor = [UIColor redColor];
 //    [self.navigationController pushViewController:vc animated:YES];
+    
+    CZRecommendListModel *model = self.dataSource[indexPath.row];
     CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
+    vc.detailId = model.goodsId;
     [self.navigationController pushViewController:vc animated:YES];
+
     
 }
 

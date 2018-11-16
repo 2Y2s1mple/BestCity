@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZRecommendDetailModel : NSObject
+/** 详情的一些参数 */
+@property (nonatomic, strong) NSString *goodsId;
 /** 轮播图 */
 @property (nonatomic, strong) NSArray *imgList;
 /** 品质保证 */

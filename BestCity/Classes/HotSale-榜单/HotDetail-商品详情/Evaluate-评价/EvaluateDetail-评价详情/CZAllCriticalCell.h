@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZAllCriticalModel.h"
+#import "CZEvaluateModel.h"
 
 @interface CZAllCriticalCell : UITableViewCell
-/** <#注释#> */
-@property (nonatomic, assign) CGFloat height;
-/** <#注释#> */
-@property (nonatomic, strong) CZAllCriticalModel *model;
-/** <#注释#> */
-@property (nonatomic, assign) CGFloat textHeight;
+@property (nonatomic, strong) CZEvaluateModel *model;
 @end

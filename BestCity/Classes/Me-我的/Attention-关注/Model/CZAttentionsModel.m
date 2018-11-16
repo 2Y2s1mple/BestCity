@@ -9,5 +9,11 @@
 #import "CZAttentionsModel.h"
 
 @implementation CZAttentionsModel
-
+- (CZAttentionBtnType)attentionType
+{
+    if (!_attentionType) {
+        _attentionType = CZAttentionBtnTypeFollowed;
+    }
+    return _attentionType;
+}
 @end

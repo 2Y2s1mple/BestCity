@@ -17,7 +17,7 @@
 #import "CZShareAndlikeView.h"
 #import "CZShareView.h"
 
-@interface CZRecommendDetailController ()<CZRecommendNavDelegate>
+@interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
 /** 详情数据 */
@@ -37,9 +37,17 @@ static CGFloat const likeAndShareHeight = 49;
 {
     if (_scrollerView == nil) {
         _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, SCR_WIDTH, SCR_HEIGHT - 60 - likeAndShareHeight)];
+        self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }
     return _scrollerView;
+}
+
+#pragma mark - <UIScrollViewDelegate>
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"%s", __func__);
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
 - (void)getSourceData
@@ -50,7 +58,8 @@ static CGFloat const likeAndShareHeight = 49;
                  };
     }];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"goodsId"] = @"545363931984";
+//    param[@"goodsId"] = @"545363931984";
+    param[@"goodsId"] = self.detailId;
     
     [CZProgressHUD showProgressHUDWithText:nil];
     //获取详情数据
@@ -92,8 +101,11 @@ static CGFloat const likeAndShareHeight = 49;
     evaluate.view.y = commendVC.scrollerView.height + testVc.scrollerView.height;
     [self.scrollerView addSubview:evaluate.view];
     [self addChildViewController:evaluate];
+    evaluate.model = self.recommendDetailModel;
     
-    self.scrollerView.contentSize = CGSizeMake(0, commendVC.scrollerView.height + testVc.scrollerView.height + evaluate.scrollerView.height);
+    self.scrollerView.contentSize = CGSizeMake(0, commendVC.scrollerView.height + testVc.scrollerView.height +self.evaluate.scrollerView.height);
+    
+//    self.scrollerView.contentSize = CGSizeMake(0, commendVC.scrollerView.height + testVc.scrollerView.height);
 }
 
 
@@ -107,6 +119,7 @@ static CGFloat const likeAndShareHeight = 49;
     
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
+    
     
     // 加载数据框
     CZShareAndlikeView *likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
@@ -129,7 +142,6 @@ static CGFloat const likeAndShareHeight = 49;
 {
     self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
     self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
-    NSLog(@"openBoxInspectWebViewHeightChange - %@", notfi.userInfo);
 }
 
 #pragma mark - <CZRecommendNavDelegate>

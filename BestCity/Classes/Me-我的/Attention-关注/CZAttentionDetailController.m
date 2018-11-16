@@ -107,7 +107,7 @@
     }];
     
     [titleView layoutIfNeeded];
-    CZAttentionBtn *btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) didClickedAction:^{
+    CZAttentionBtn *btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) CommentType:CZAttentionBtnTypeFollowed didClickedAction:^{
         NSLog(@"点击了按钮");
     }];
     [titleView addSubview:btn];

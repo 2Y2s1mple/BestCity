@@ -8,6 +8,9 @@
 
 #import "CZEvaluationController.h"
 #import "CZEvaluationChoicenessController.h"
+#import "GXNetTool.h"
+#import "CZEvaluationTitleModel.h"
+#import "MJExtension.h"
 
 @interface CZEvaluationController ()
 
@@ -16,20 +19,50 @@
 
 @implementation CZEvaluationController
 
+- (void)obtainTtitles
+{
+    //获取数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/evalWay/selectCategory"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            //标题的数据
+            self.mainTitles = [CZEvaluationTitleModel objectArrayWithKeyValuesArray:result[@"list"]];
+            
+            //刷新WMPage控件
+            [self reloadData];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+- (void)reloadData
+{
+    [super reloadData];
+    !self.evalutionDelegate ? : [self.evalutionDelegate reloadChildControlerData];
+}
+
+
+
 /**
  主标题数组
  */
-- (NSArray *)mainTitles
-{
-    if (_mainTitles == nil) {
-        _mainTitles = @[@"精选榜", @"个护健康", @"厨卫电器", @"生活家电", @"家用大电"];
-    }
-    return _mainTitles;
-}
+//- (NSArray *)mainTitles
+//{
+//    if (_mainTitles == nil) {
+//        _mainTitles = @[@"精选榜", @"个护健康", @"厨卫电器", @"生活家电", @"家用大电"];
+//    }
+//    return _mainTitles;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
+    // 获取数据
+    [self obtainTtitles];
+    
 }
 
 #pragma mark - Datasource & Delegate
@@ -39,7 +72,13 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     switch (index) {
-        case 0: return [[CZEvaluationChoicenessController alloc] init];
+        case 0:
+        {
+            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
+            self.evalutionDelegate = vc;
+            vc.titleModel = self.mainTitles[index];
+            return vc;
+        }
         case 1: return [[CZEvaluationChoicenessController alloc] init];
         case 2: return [[CZEvaluationChoicenessController alloc] init];
         case 3: return [[CZEvaluationChoicenessController alloc] init];
@@ -49,7 +88,8 @@
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    return self.mainTitles[index];
+    CZEvaluationTitleModel *model = self.mainTitles[index];
+    return model.categoryName;
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {

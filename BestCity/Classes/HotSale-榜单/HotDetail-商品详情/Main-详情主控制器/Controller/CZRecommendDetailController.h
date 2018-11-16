@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZRecommendDetailController : UIViewController
-
+/** 商品ID */
+@property (nonatomic, strong) NSString *detailId;
 @end
 
 NS_ASSUME_NONNULL_END

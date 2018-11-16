@@ -9,6 +9,8 @@
 #import "CZDChoiceDetailController.h"
 #import "JCTopic.h"
 #import "UIButton+CZExtension.h"
+#import "UIImageView+WebCache.h"
+#import "GXNetTool.h"
 
 @interface CZDChoiceDetailController ()
 /** 轮播图 */
@@ -20,6 +22,22 @@
 @end
 
 @implementation CZDChoiceDetailController
+- (void)obtainDetailData
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"evalWayId"] = self.detailID;//self.titleModel.categoryId;
+    [CZProgressHUD showProgressHUDWithText:nil];
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/evalWay/selectById"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+           
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
 -(JCTopic *)Topic_JC
 {
     if(!_Topic_JC)
@@ -56,6 +74,17 @@
     [self setupTopView];
     
     self.scrollerView.contentSize = CGSizeMake(0, _recordY);
+}
+
+- (UIView *)setupHeaderView
+{
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, FSS(180))];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"evaluating-banner"]];
+    imageView.frame = CGRectMake(0, 0, SCR_WIDTH, backView.height);
+    [backView addSubview:imageView];
+    
+    return backView;
 }
 
 

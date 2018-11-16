@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CZDChoiceDetailController : UIViewController
-
+/** Id */
+@property (nonatomic, strong) NSString *detailID;
 @end

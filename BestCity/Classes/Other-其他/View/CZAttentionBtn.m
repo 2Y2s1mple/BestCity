@@ -15,11 +15,11 @@
 
 @implementation CZAttentionBtn
 
-+ (instancetype)attentionBtnWithframe:(CGRect)frame didClickedAction:(AttentionAction)action
++ (instancetype)attentionBtnWithframe:(CGRect)frame CommentType:(CZAttentionBtnType)type didClickedAction:(AttentionAction)action
 {
-    
     CZAttentionBtn *backView = [[self alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 60, 24)];
     backView.block = action;
+    
     //关注按钮
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:@"+关注" forState:UIControlStateNormal];
@@ -33,6 +33,21 @@
     btn.layer.borderColor = [UIColor redColor].CGColor;
     [btn addTarget:backView action:@selector(didClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:btn];
+    switch (type) {
+        case CZAttentionBtnTypeFollowed:
+            btn.backgroundColor = CZGlobalLightGray;
+            btn.layer.borderColor = CZGlobalLightGray.CGColor;
+            btn.selected = YES;
+            break;
+        case CZAttentionBtnTypeAttention:
+            btn.backgroundColor = [UIColor whiteColor];
+            btn.layer.borderColor = [UIColor redColor].CGColor;
+            btn.selected = NO;
+            break;
+        default:
+            break;
+    }
+    
     return backView;
 }
 
@@ -47,5 +62,25 @@
         sender.layer.borderColor = [UIColor redColor].CGColor;
     }
     self.block();
+}
+
+- (void)setType:(CZAttentionBtnType)type
+{
+    _type = type;
+    UIButton *btn = [self.subviews lastObject];
+    switch (type) {
+        case CZAttentionBtnTypeFollowed:
+            btn.backgroundColor = CZGlobalLightGray;
+            btn.layer.borderColor = CZGlobalLightGray.CGColor;
+            btn.selected = YES;
+            break;
+        case CZAttentionBtnTypeAttention:
+            btn.backgroundColor = [UIColor whiteColor];
+            btn.layer.borderColor = [UIColor redColor].CGColor;
+            btn.selected = NO;
+            break;
+        default:
+            break;
+    }
 }
 @end

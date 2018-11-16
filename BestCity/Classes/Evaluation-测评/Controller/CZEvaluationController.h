@@ -8,6 +8,11 @@
 
 #import "WMPageController.h"
 
-@interface CZEvaluationController : WMPageController
+@protocol CZEvaluationControllerDelegate <NSObject>
+@optional
+- (void)reloadChildControlerData;
+@end
 
+@interface CZEvaluationController : WMPageController
+@property (nonatomic, weak) id<CZEvaluationControllerDelegate> evalutionDelegate;
 @end

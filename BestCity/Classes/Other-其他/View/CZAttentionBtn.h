@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^AttentionAction)(void);
+typedef NS_ENUM(NSUInteger, CZAttentionBtnType) {
+    CZAttentionBtnTypeFollowed,
+    CZAttentionBtnTypeAttention,
+};
 
 @interface CZAttentionBtn : UIView
-+ (instancetype)attentionBtnWithframe:(CGRect)frame didClickedAction:(AttentionAction)action;
++ (instancetype)attentionBtnWithframe:(CGRect)frame CommentType:(CZAttentionBtnType)type didClickedAction:(AttentionAction)action;
+/** x类型 */
+@property (nonatomic, assign) CZAttentionBtnType type;
 @end

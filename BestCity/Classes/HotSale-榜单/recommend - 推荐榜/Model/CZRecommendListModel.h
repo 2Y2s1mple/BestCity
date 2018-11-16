@@ -10,6 +10,8 @@
 @class CZHotScoreModel;
 
 @interface CZRecommendListModel : NSObject
+/** 商品ID */
+@property (nonatomic, strong) NSString *goodsId;
 /** 标题 */
 @property (nonatomic, strong) NSString *goodsName;
 /** 标签 */

@@ -9,6 +9,7 @@
 #import "CZAttentionCell.h"
 #import "CZAttentionBtn.h"
 #import "UIImageView+WebCache.h"
+#import "GXNetTool.h"
 
 @interface CZAttentionCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleName;
@@ -16,6 +17,11 @@
 @property (nonatomic, weak) IBOutlet UIImageView *headerImage;
 /** 关注名字*/
 @property (weak, nonatomic) IBOutlet UILabel *attentionNameLabel;
+@end
+
+@interface CZAttentionCell ()
+
+@property (nonatomic, strong) CZAttentionBtn *btn;
 @end
 
 @implementation CZAttentionCell
@@ -30,23 +36,46 @@
     return cell;
 }
 
+// 取消关注
+- (void)deleteAttention
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    // 要关注对象ID
+    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernDelete"];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
+            // 刷新tableView
+            !self.delegate ? : [self.delegate reloadAttentionTableView];
+            self.model.attentionType = CZAttentionBtnTypeAttention;
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self layoutIfNeeded];
     //添加关注按钮
-    CZAttentionBtn *btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(SCR_WIDTH - 70, (60 - 24) / 2.0, 60, 24) didClickedAction:^{
-        NSLog(@"点击了%@按钮", self.title);
+    self.btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(SCR_WIDTH - 70, (60 - 24) / 2.0, 60, 24) CommentType:self.model.attentionType didClickedAction:^{
+        NSLog(@"点击了%@按钮", self.model.userShopmember[@"userNickName"]);
+        [self deleteAttention];
+        
     }];
-    [self.contentView addSubview:btn];
-    
+    [self.contentView addSubview:self.btn];
 }
 
 - (void)setModel:(CZAttentionsModel *)model
 {
     _model = model;
-    self.attentionNameLabel.text = model.from_nickname;
-    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:model.from_thumb_img] placeholderImage:[UIImage imageNamed:@"headDefault"]];
-    
+    self.btn.type = model.attentionType;
+    self.attentionNameLabel.text = model.userShopmember[@"userNickName"];
+    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:model.userShopmember[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

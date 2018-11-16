@@ -42,4 +42,10 @@
     return string;
 }
 
+- (CGFloat)getTextHeightWithRectSize:(CGSize)size andFont:(UIFont *)font
+{
+    CGFloat contentlabelHeight = [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : font} context:nil].size.height;
+    return contentlabelHeight;
+}
+
 @end

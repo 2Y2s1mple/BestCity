@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZEvaluationTitleModel.h"
+#import "CZEvaluationController.h"
 
-@interface CZEvaluationChoicenessController : UIViewController
-
+@interface CZEvaluationChoicenessController : UIViewController <CZEvaluationControllerDelegate>
+/** 标题的ID */
+@property (nonatomic, strong) CZEvaluationTitleModel *titleModel;
 @end

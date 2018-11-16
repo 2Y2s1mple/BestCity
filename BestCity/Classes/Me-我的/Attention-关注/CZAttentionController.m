@@ -16,7 +16,7 @@
 #import "CZAttentionsModel.h"
 #import "MJRefresh.h"
 
-@interface CZAttentionController ()<UITableViewDelegate, UITableViewDataSource>
+@interface CZAttentionController ()<UITableViewDelegate, UITableViewDataSource, CZAttentionCellDelegate>
 /** 关注列表 */
 @property (nonatomic, strong) NSMutableArray *attentionsData;
 @property (nonatomic, strong) UITableView *tableView;
@@ -78,12 +78,13 @@
     
     // 加载数据
     self.page = 0;
+    
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"userId"] = USERINFO[@"userId"];
     param[@"page"] = @(self.page);
     
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concer"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/selectAll"];
     
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"])
@@ -149,6 +150,7 @@
 {
     CZAttentionsModel *model = self.attentionsData[indexPath.row];
     CZAttentionCell *cell = [CZAttentionCell cellWithTabelView:tableView];
+    cell.delegate = self;
     cell.title = [NSString stringWithFormat:@"第%ld个", indexPath.row];
     cell.model = model;
     return cell;
@@ -166,4 +168,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - <CZAttentionCellDelegate>刷新
+- (void)reloadAttentionTableView
+{
+    NSLog(@"reloadAttentionTableView");
+    [self.tableView reloadData];
+}
 @end

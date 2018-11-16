@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CZAttentionBtn.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZAttentionsModel : NSObject
-/** 头像 */
-@property (nonatomic, strong) NSString *from_thumb_img;
-/** 关注用户名字 */
-@property (nonatomic, strong) NSString *from_nickname;
+/** 用户信息 */
+@property (nonatomic, strong) NSDictionary *userShopmember;
+/** 记录关注按钮 */
+@property (nonatomic, assign) CZAttentionBtnType attentionType;
 @end
 
 NS_ASSUME_NONNULL_END
