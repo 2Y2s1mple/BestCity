@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^AttentionAction)(void);
+typedef void(^AttentionAction)(BOOL);
 typedef NS_ENUM(NSUInteger, CZAttentionBtnType) {
     CZAttentionBtnTypeFollowed,
     CZAttentionBtnTypeAttention,
+    CZAttentionBtnTypeDisable,
 };
 
 @interface CZAttentionBtn : UIView

@@ -51,7 +51,8 @@
     
     //(6)发送请求
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
-    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1"; //USERINFO[@"userId"];
+//    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1";
+    param[@"userId"] = USERINFO[@"userId"];
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -128,7 +129,8 @@
     //(6)发送请求
     
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
-    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1"; //USERINFO[@"userId"];
+    //    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1";
+    param[@"userId"] = USERINFO[@"userId"];
     
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
        
@@ -148,10 +150,13 @@
 {
     // 获取管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //(3)设置返回数据的类型
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        
     //IOS9--UTF-8转码
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    
-    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSString *oldIconPath = [[NSUserDefaults standardUserDefaults] objectForKey:@"userNickImg"];
+    [manager POST:url parameters:@{@"url" : oldIconPath} constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if ([fileSource isKindOfClass:[UIImage class]]) {
             NSData *imageData = [UIImagePNGRepresentation(fileSource) length] > 102400 ?UIImageJPEGRepresentation(fileSource, 0.7) : UIImagePNGRepresentation(fileSource);
             [formData appendPartWithFileData:imageData name:@"importFile" fileName:@"imageFile.png" mimeType:@"image/png"];
@@ -162,10 +167,6 @@
         failure(error);
     }];
 }
-
-
-
-
 
 - (AFHTTPSessionManager *)manager
 {

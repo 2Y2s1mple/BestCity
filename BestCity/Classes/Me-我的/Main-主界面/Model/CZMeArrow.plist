@@ -10,52 +10,36 @@
 	</array>
 	<array>
 		<dict>
-			<key>icon</key>
-			<string>order</string>
-			<key>title</key>
-			<string>订单</string>
-            <key>destinationVC</key>
-            <string>CZOrderController</string>
-		</dict>
-		<dict>
 			<key>title</key>
 			<string>关注</string>
 			<key>icon</key>
 			<string>follow</string>
-            <key>destinationVC</key>
-            <string>CZAttentionController</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>优惠券</string>
-			<key>icon</key>
-			<string>coupon</string>
-            <key>destinationVC</key>
-            <string>CZDiscountCouponController</string>
+			<key>destinationVC</key>
+			<string>CZAttentionController</string>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>收藏</string>
 			<key>icon</key>
 			<string>favor</string>
-            <key>destinationVC</key>
-            <string>CZCollectController</string>
+			<key>destinationVC</key>
+			<string>CZCollectOneController</string>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>消息</string>
 			<key>icon</key>
 			<string>message</string>
-            <key>destinationVC</key>
-            <string>CZMessageController</string>
+			<key>destinationVC</key>
+			<string>CZSystemMessageController</string>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>设置</string>
 			<key>icon</key>
 			<string>setting</string>
-            <key>destinationVC</key>
-            <string>CZSettingController</string>
+			<key>destinationVC</key>
+			<string>CZSettingController</string>
 		</dict>
 	</array>
 </array>

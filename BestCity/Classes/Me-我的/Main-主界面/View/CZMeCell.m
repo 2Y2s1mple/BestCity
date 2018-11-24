@@ -54,13 +54,13 @@
 //    self.withdraw.text = [NSString stringWithFormat:@"%@", data[@"use_account"] == nil ? @"0" : data[@"use_account"]];
 //    self.afterSettleAccount.text = [NSString stringWithFormat:@"%@", data[@"unuse_account"] == nil ? @"0" : data[@"unuse_account"]];
     
-    [self setupMoney:data];
+//    [self setupMoney:data];
 }
 
 - (void)setupMoney:(NSDictionary *)result
 {
     // 总金额
-    NSString *total = [self changeStr:result[@"total_account"]];
+    NSString *total = [self changeStr:result[@"total_account"] ? result[@"total_account"] : @""];
     // 已体现
     NSString *afterAccount = [self changeStr:result[@"use_account"]];
     

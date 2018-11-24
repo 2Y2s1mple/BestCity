@@ -28,6 +28,8 @@
 @property (nonatomic, strong) CZTestSubController *testVc;
 /** 评价 */
 @property (nonatomic, strong) CZEvaluateSubController *evaluate;
+/** 导航栏 */
+@property (nonatomic, strong) CZRecommendNav *nav;
 @end
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
@@ -43,13 +45,7 @@ static CGFloat const likeAndShareHeight = 49;
     return _scrollerView;
 }
 
-#pragma mark - <UIScrollViewDelegate>
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    NSLog(@"%s", __func__);
-    [[UIApplication sharedApplication].keyWindow endEditing:YES];
-}
-
+#pragma mark - 获取数据
 - (void)getSourceData
 {
     [CZRecommendDetailModel setupObjectClassInArray:^NSDictionary *{
@@ -58,9 +54,7 @@ static CGFloat const likeAndShareHeight = 49;
                  };
     }];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//    param[@"goodsId"] = @"545363931984";
-    param[@"goodsId"] = self.detailId;
-    
+    param[@"goodsId"] = self.model.goodsId;
     [CZProgressHUD showProgressHUDWithText:nil];
     //获取详情数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankDetailList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -68,9 +62,81 @@ static CGFloat const likeAndShareHeight = 49;
             NSLog(@"%@", result);
             self.recommendDetailModel = [CZRecommendDetailModel objectWithKeyValues:result[@"GoodsRankdetailEntity"]];
             [self createSubViews];
+            // 判断是否收藏了
+            [self isCollectDetail];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+#pragma mark - 判断是否收藏了此文章
+- (void)isCollectDetail
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"projectId"] = self.recommendDetailModel.goodsId;
+    
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已收藏"]) {
+            NSLog(@"%@", result);
+            self.nav.isCollect = YES;
+        } else {
+            self.nav.isCollect = NO;
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+#pragma mark - 取消收藏
+- (void)collectDelete
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"projectId"] = self.recommendDetailModel.goodsId;
+    
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已删除"]) {
+            NSLog(@"%@", result);
+            [CZProgressHUD showProgressHUDWithText:@"取消收藏"];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"取消收藏失败"];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+#pragma mark - 收藏
+- (void)collectInsert
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"projectId"] = self.recommendDetailModel.goodsId;
+    
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已添加"]) {
+            NSLog(@"%@", result);
+            [CZProgressHUD showProgressHUDWithText:@"收藏成功"];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"收藏失败"];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
         
     } failure:^(NSError *error) {
         //隐藏菊花
@@ -85,6 +151,31 @@ static CGFloat const likeAndShareHeight = 49;
     self.commendVC = commendVC;
     [self.scrollerView addSubview:commendVC.view];
     [self addChildViewController:commendVC];
+    // 标题
+    self.recommendDetailModel.mainTitle = self.model.goodsName;
+    // 券后价
+    self.recommendDetailModel.actualPrice = self.model.cutPrice;
+    // 平台
+    NSString *status;
+    switch (self.model.sourceStatus) {
+        case 1:
+            status = @"京东:";
+            break;
+        case 2:
+            status = @"淘宝:";
+            break;
+        case 3:
+            status = @"天猫:";
+            break;
+        default:
+            status = @"";
+            break;
+    }
+    self.recommendDetailModel.sourcePlatform = status;
+    // 平台价格
+    self.recommendDetailModel.sourcePlatformPrice = self.model.otherPrice;
+    // 优惠券
+    self.recommendDetailModel.discountCoupon = self.model.cutPrice;
     commendVC.model = self.recommendDetailModel;
     
     // 测评
@@ -114,12 +205,21 @@ static CGFloat const likeAndShareHeight = 49;
     self.view.backgroundColor = CZGlobalWhiteBg;
     // 创建导航栏
     CZRecommendNav *nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];
+    self.nav = nav;
     nav.delegate = self;
+    nav.rightClickedBlock = ^(BOOL isSelected){
+        if (isSelected) {
+            NSLog(@"收藏");
+            [self collectInsert];
+        } else {
+            NSLog(@"取消收藏");
+            [self collectDelete];
+        }
+    };
     [self.view addSubview:nav];
     
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
-    
     
     // 加载数据框
     CZShareAndlikeView *likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
@@ -138,6 +238,7 @@ static CGFloat const likeAndShareHeight = 49;
     
 }
 
+#pragma mark - 监听子控件的frame的变化
 - (void)openBoxInspectWebViewHeightChange:(NSNotification *)notfi
 {
     self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
@@ -148,6 +249,45 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)recommendNavWithPop:(UIView *)view
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)didClickedTitleWithIndex:(NSInteger)index
+{
+    NSLog(@"%ld", index);
+    CGPoint point;
+    switch (index) {
+        case 0:
+            point = CGPointMake(0, 0);
+            break;
+        case 1:
+            point = CGPointMake(0, CGRectGetMinY(self.testVc.view.frame));
+            break;
+        case 2:
+            point = CGPointMake(0, CGRectGetMinY(self.evaluate.view.frame));
+            break;
+        default:
+            point = CGPointMake(0, 0);
+            break;
+    }
+    [self.scrollerView setContentOffset:point animated:YES];
+}
+
+#pragma mark - <UIScrollViewDelegate>
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"%s", __func__);
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.scrollerView.contentOffset.y >= -20 && self.scrollerView.contentOffset.y < CGRectGetMinY(self.testVc.view.frame)) {
+        self.nav.monitorIndex = 0;
+    } else if (self.scrollerView.contentOffset.y >= CGRectGetMinY(self.testVc.view.frame) && self.scrollerView.contentOffset.y < CGRectGetMinY(self.evaluate.view.frame)) {
+        self.nav.monitorIndex = 1;
+    } else if (self.scrollerView.contentOffset.y >= CGRectGetMinY(self.evaluate.view.frame)) {
+        self.nav.monitorIndex = 2;
+    }
 }
 
 - (void)dealloc

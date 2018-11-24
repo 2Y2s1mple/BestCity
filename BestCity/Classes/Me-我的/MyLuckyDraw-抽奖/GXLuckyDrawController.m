@@ -83,13 +83,13 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"userId"] = USERINFO[@"userId"];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/signInsert"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/signin"];
     
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         
 //        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
-           
+            self.signedPoint = [result[@"addPoint"] integerValue];
             // 获取签到数据
             [self setupSignIn:GXLuckyShowCongratulationSignIn];
             
@@ -107,14 +107,9 @@
 - (IBAction)compensationSignIn
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    //USERINFO[@"userId"]
-    param[@"userId"] = USERINFO[@"userId"];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/Supplement"];
-    
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/supplement"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        
-//        NSLog(@"result ----- %@", result);
-        if ([result[@"msg"] isEqualToString:@"补签成功"]) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
             self.signedPoint = [result[@"point"] integerValue];
             // 获取签到数据
             [self setupSignIn:GXLuckyShowCongratulationSignedIn];
@@ -134,7 +129,6 @@
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"签到" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
     
-    
     // 设置签到
     [self signIn];
     
@@ -142,7 +136,7 @@
     [self setupluckyView];
     
     
-    // 获取抽奖信息
+    // 获取抽奖的图片
     [self getLucklyImage];
     
  
@@ -152,29 +146,25 @@
 - (void)getLucklyImage
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/luckselects"];
-    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-//        NSLog(@"result ----- %@", result);
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/prizeList"];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            for (NSDictionary *dic in result[@"list"]) {
-                [self.imagesArr addObject:dic[@"code_img"]];
-//                NSLog(@"%@", self.imagesArr);
+            for (NSDictionary *dic in result[@"prizeList"]) {
+                [self.imagesArr addObject:dic[@"imgurl"]];
             }
             for (int i = 0; i < self.imagesArr.count; i++) {
                 NSInteger index = [self.allPrizes[i] integerValue];
                 UIButton *btn = (UIButton *)[self.luckyBackImage viewWithTag:index];
                 [btn sd_setBackgroundImageWithURL:[NSURL URLWithString:self.imagesArr[i]] forState:UIControlStateNormal];
             }
-            
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
+        [CZProgressHUD hideAfterDelay:2];
     } failure:^(NSError *error) {
 //        NSLog(@"%@", error);
     }];
 }
-
-
 
 #pragma mark - 设置抽奖界面
 - (void)setupluckyView
@@ -224,14 +214,14 @@
 #pragma mark - 初始化签到
 - (void)signIn{
     // 获取当前的星期
-    NSArray *weekdays = @[@"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", @"星期天"];
+//    NSArray *weekdays = @[@"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", @"星期天"];
     // 查询当前日期在上面的数组中位置index
-    NSInteger weeksdayIndex = [weekdays indexOfObject:[self weekdayStringFromDate:[NSDate date]]];
+//    NSInteger weeksdayIndex = [weekdays indexOfObject:[self weekdayStringFromDate:[NSDate date]]];
     // 当前位置之前的为补签图片
-    for (int i = 0; i < weeksdayIndex; i++) {
-        UIImageView *imageView = [self.weekDic objectForKey:weekdays[i]];
-        imageView.image = [UIImage imageNamed:@"sign in-supplement"];
-    }
+//    for (int i = 0; i < weeksdayIndex; i++) {
+//        UIImageView *imageView = [self.weekDic objectForKey:weekdays[i]];
+//        imageView.image = [UIImage imageNamed:@"sign in-supplement"];
+//    }
 
     // 查询签到数据
     [self setupSignIn:GXLuckyShowCongratulationsDefault];
@@ -249,18 +239,20 @@
 #pragma mark - 网络请求数据抽奖数据
 - (void)loadRequestLucy:(UIButton *)sender
 {
+    sender.enabled = NO;
     // 判断能不能抽奖
-    if (!self.isLuckyDraw) {
+//    if (!self.isLuckyDraw) {
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"userId"] = USERINFO[@"userId"];
-        NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/luckselect"];
+        NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/startLuckyDraw"];
         
         [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
             
 //            NSLog(@"result ----- %@", result);
+            sender.enabled = YES;
             if ([result[@"msg"] isEqualToString:@"success"]) {
-                // 减 1
-                self.luckIndex = [result[@"list"][0][@"code"] integerValue] - 1;
+                // 抽奖index
+                self.luckIndex = [result[@"myPrize"][@"id"] integerValue];
                 // 抽奖
                 [self luckyAction:sender];
             } else {
@@ -271,11 +263,12 @@
             
         } failure:^(NSError *error) {
             NSLog(@"%@", error);
+            sender.enabled = YES;
         }];
-    } else {
-        [CZProgressHUD showProgressHUDWithText:@"请签满7天再抽奖"];
-        [CZProgressHUD hideAfterDelay:2];
-    }
+//    } else {
+//        [CZProgressHUD showProgressHUDWithText:@"请签满7天再抽奖"];
+//        [CZProgressHUD hideAfterDelay:2];
+//    }
     
 }
 
@@ -302,7 +295,7 @@
     }];
     
     // 控制的角标
-    NSInteger test = arc4random() % 8;// self.luckIndex;
+    NSInteger test = self.luckIndex;
     
 //    NSLog(@"---%ld", (long)test);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -444,38 +437,49 @@
     
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/sign"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/signinDetail"];
     // 请求
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-//            NSLog(@"%@", result);
-            NSArray *data =  result[@"list"];
-            for (NSDictionary *dic in data) {
-                [self.signArr addObject:dic[@"arrays_time"]];
-            }
+//            NSLog(@"%@", result);2： 可以补签  1：已签过  0： 未签到
+            // 获取签到是数组
+            self.signArr =  result[@"weekArray"];
+            NSArray *imageArr = result[@"imgList"];
             
             switch (type) {
                 case GXLuckyShowCongratulationSignIn:// 签到
                     // 弹出奖励
-                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您签到成功", @"subTitle" : @"+3积分"}];
+                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您签到成功", @"subTitle" : [NSString stringWithFormat:@"+%ld积分", self.signedPoint]}];
                     break;
                     
                 case GXLuckyShowCongratulationSignedIn:
                     // 弹出奖励
-                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您补签成功！", @"subTitle" : [NSString stringWithFormat:@"-%ld积分", self.signedPoint]}];
+                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您补签成功！", @"subTitle" : [NSString stringWithFormat:@"%ld积分", self.signedPoint]}];
                     break;
                 default:
                     break;
             }
             
-            // 判断能不能抽奖
-            self.isLuckyDraw = self.signArr.count == 7;
+//            // 判断能不能抽奖
+//            self.isLuckyDraw = self.signArr.count == 7;
             
-            
-            for (NSString *week in self.signArr) {
-                UIImageView *imageView = [self.weekDic objectForKey:week];
-                imageView.image = [UIImage imageNamed:@"sign in-complete"];
+            // 获取当前的星期
+            NSArray *weekdays = @[@"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", @"星期天"];
+            for (int i = 0; i < weekdays.count; i++) {
+                UIImageView *imageView = [self.weekDic objectForKey:weekdays[i]];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:imageArr[i]] placeholderImage:[UIImage imageNamed:@"sign in-supplement"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    switch ([self.signArr[i] integerValue]) {
+                        case 1: // 已签过
+                            imageView.image = [UIImage imageNamed:@"sign in-complete"];
+                            break;
+                        case 2: // 补签
+                            imageView.image = [UIImage imageNamed:@"sign in-supplement"];
+                            break;
+                        default:
+                            break;
+                    }
+                }];
+                
             }
         }
     } failure:^(NSError *error) {
@@ -483,6 +487,7 @@
     }];
 }
 
+#pragma mark - 返回一个当前日期的字符串
 -(NSString*)weekdayStringFromDate:(NSDate*)inputDate {
     
     NSArray *weekdays = [NSArray arrayWithObjects: [NSNull null], @"星期天", @"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六", nil];

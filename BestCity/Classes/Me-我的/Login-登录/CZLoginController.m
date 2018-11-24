@@ -24,7 +24,8 @@
 @property (nonatomic, assign) NSInteger count;
 /** 用户协议 */
 @property (weak, nonatomic) IBOutlet UILabel *userAgreementLabel;
-
+/** 是否登录 */
+@property (nonatomic, assign) BOOL isLogin;
 
 @end
 
@@ -32,11 +33,15 @@
 
 #pragma mark - POP到前一页
 - (IBAction)popAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    UITabBarController *vc = (UITabBarController *)self.nextResponder;
+    if (!_isLogin) {
+        vc.selectedIndex = 0;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 #pragma mark - 登录
 - (IBAction)loginAction:(id)sender {
-//    NSLog(@"%s", __func__);
     
     // 短信登录接口
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -44,26 +49,28 @@
     param[@"code"] = self.passwordTextField.text;
   
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/Messagelogin"];
-    
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyJSON header:nil response:GXResponseStyleJSON success:^(id result) {
-    
-//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"])
         {
-//            NSLog(@"result ----- %@", result[@"msg"]);
             [CZProgressHUD showProgressHUDWithText:@"登录成功"];
+            // 是否登录
+            self.isLogin = YES;
             [CZProgressHUD hideAfterDelay:2];
             // 存储user, 都TM存储上了
             [[NSUserDefaults standardUserDefaults] setObject:result[@"user"] forKey:@"user"];
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"UserDetailPointEntity"][@"points"] forKey:@"point"];
+            // 储存图片
+            [[NSUserDefaults standardUserDefaults] setObject:result[@"user"][@"userNickImg"] forKey:@"userNickImg"];
+            // 积分
+            [[NSUserDefaults standardUserDefaults] setObject:result[@"points"] forKey:@"point"];
+                
             [[NSUserDefaults standardUserDefaults] setObject:result[@"UserAccountEntity"] forKey:@"Account"];
             // 支付宝账号
             [[NSUserDefaults standardUserDefaults] setObject:result[@"user"][@"alipayAccount"] forKey:@"alipayPhone"];
             [[NSUserDefaults standardUserDefaults] setObject:result[@"user"][@"alipayName"] forKey:@"alipayRealName"];
             
-            // 调用代理方法
-            [self.delegate setUpUserInfo];
-            [self.navigationController popViewControllerAnimated:YES];
+            // 登录成功发送通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             [CZProgressHUD hideAfterDelay:2];
@@ -72,7 +79,6 @@
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
-    
 }
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {

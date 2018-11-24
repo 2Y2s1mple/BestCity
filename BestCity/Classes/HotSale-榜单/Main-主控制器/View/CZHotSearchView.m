@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UIButton *rightBtn;
 /** 文本框 */
 @property (nonatomic, strong) CZTextField *textField;
+/** 未读按钮 */
+@property (nonatomic, strong) UILabel *unreadLabel;
 @end
 
 @implementation CZHotSearchView
@@ -44,9 +46,6 @@
 
 - (void)setup
 {
-    UIImage *msgImage = [UIImage imageNamed:@"nav-message"];
-    
-    self.backgroundColor = [UIColor greenColor];
     CZTextField *textF = [[CZTextField alloc] init];
     textF.width = self.width - 40;
     textF.height = self.height;
@@ -55,15 +54,38 @@
     [self addSubview:textF];
     
     UIButton *msgBtn = [[UIButton alloc] init];
-    
-    msgBtn.backgroundColor =[UIColor redColor];
-    [msgBtn setImage:msgImage forState:UIControlStateNormal];
+    [msgBtn setImage:[UIImage imageNamed:@"nav-message"] forState:UIControlStateNormal];
     msgBtn.x = CGRectGetMaxX(textF.frame);
-    msgBtn.size = CGSizeMake(40, self.height);
+    msgBtn.size = CGSizeMake(30, self.height);
     msgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [msgBtn addTarget:self action:@selector(msgAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:msgBtn];
     self.rightBtn = msgBtn;
+    
+    UILabel *unreadLabel = [[UILabel alloc] init];
+    unreadLabel.hidden = YES;
+    self.unreadLabel = unreadLabel;
+    unreadLabel.x = CZGetX(msgBtn) - 10;
+    unreadLabel.y = 0;
+    unreadLabel.textColor = CZGlobalWhiteBg;
+    unreadLabel.font = [UIFont systemFontOfSize:14];
+    unreadLabel.textAlignment = NSTextAlignmentCenter;
+    unreadLabel.size = CGSizeMake(15, 15);
+    unreadLabel.backgroundColor = [UIColor redColor];
+    unreadLabel.layer.cornerRadius = unreadLabel.width / 2.0;
+    unreadLabel.layer.masksToBounds = YES;
+    [self addSubview:unreadLabel];
+}
+
+- (void)setUnreaderCount:(NSString *)unreaderCount
+{
+    _unreaderCount = unreaderCount;
+    if (unreaderCount <= 0) {
+        self.unreadLabel.hidden = YES;
+    } else {
+        self.unreadLabel.hidden = NO;
+        self.unreadLabel.text = [NSString stringWithFormat:@"%@", unreaderCount];
+    }
 }
 
 - (void)setMsgTitle:(NSString *)msgTitle

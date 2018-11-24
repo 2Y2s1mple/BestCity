@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -84,7 +84,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7k-fO-XZg">
-                            <rect key="frame" x="235" y="18" width="70" height="25"/>
+                            <rect key="frame" x="235" y="17.5" width="70" height="25"/>
                             <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="jeT-6q-yQR"/>
@@ -152,11 +152,11 @@
                 <constraint firstItem="EgP-Jf-ird" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="120" id="fmi-qK-hkK"/>
                 <constraint firstItem="nw9-Is-eHF" firstAttribute="top" secondItem="EgP-Jf-ird" secondAttribute="bottom" id="rmI-vq-sxi"/>
             </constraints>
-            <point key="canvasLocation" x="-70" y="-93"/>
+            <point key="canvasLocation" x="60" y="-133"/>
         </view>
     </objects>
     <resources>
-        <image name="phone number" width="13" height="19"/>
+        <image name="phone number" width="13" height="19.5"/>
         <image name="verification Code" width="15" height="11"/>
     </resources>
 </document>

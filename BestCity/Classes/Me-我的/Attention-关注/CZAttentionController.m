@@ -10,11 +10,10 @@
 #import "CZNavigationView.h"
 #import "CZAttentionCell.h"
 #import "CZAttentionDetailController.h"
-#import "GXNetTool.h"
-#import "CZProgressHUD.h"
-#import "MJExtension.h"
 #import "CZAttentionsModel.h"
 #import "MJRefresh.h"
+#import "GXNetTool.h"
+#import "MJExtension.h"
 
 @interface CZAttentionController ()<UITableViewDelegate, UITableViewDataSource, CZAttentionCellDelegate>
 /** 关注列表 */
@@ -122,7 +121,7 @@
     
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concer"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"])
+        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"list"] count] != 0)
         {
             // 字典转模型
             NSArray *attentions = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"list"]];
@@ -164,7 +163,9 @@
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CZAttentionsModel *model = self.attentionsData[indexPath.row];
     CZAttentionDetailController *vc = [[CZAttentionDetailController alloc] init];
+    vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZEvaluateModel : NSObject
+/** 当前回复的ID */
+@property (nonatomic, strong) NSString *commentId;
+/** 文章ID */
+@property (nonatomic, strong) NSString *articId;
 /** 头像 */
 @property (nonatomic, strong) NSString *fromImg;
 /** 名字 */

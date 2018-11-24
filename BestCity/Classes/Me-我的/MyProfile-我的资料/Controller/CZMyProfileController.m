@@ -18,6 +18,7 @@
 #import "CZProgressHUD.h"
 #import "CZUserInfoTool.h"
 #import "CZAlertViewTool.h"
+#import "CZLoginController.h"
 
 @interface CZMyProfileController () <UITableViewDelegate, UITableViewDataSource, CZDatePickViewDelegate, CZChangeNicknameControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 /** tableView */
@@ -87,7 +88,8 @@
         // 删除账户余额信息
         [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"Account"];
         // 返回上一页
-        [self.navigationController popViewControllerAnimated:YES];
+        CZLoginController *vc = [[CZLoginController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
     }];
 }
 
@@ -220,7 +222,7 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
     
-    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark -<UIImagePickerControllerDelegate> 拍照完成回调
@@ -232,6 +234,7 @@
         [GXNetTool uploadNetWithUrl:url fileSource:image success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
                [self changeUserInfo:@{@"userNickImg" : result[@"userNickImg"]}];
+                [[NSUserDefaults standardUserDefaults] setObject:result[@"userNickImg"] forKey:@"userNickImg"];
             } else {
                 [CZProgressHUD showProgressHUDWithText:@"修改失败"];
             }

@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol CZLoginControllerDelegate <NSObject>
-@optional
-- (void)setUpUserInfo;
-
-@end
 
 @interface CZLoginController : UIViewController
-/** 代理方法 */
-@property (nonatomic, assign) id<CZLoginControllerDelegate> delegate;
+
 @end

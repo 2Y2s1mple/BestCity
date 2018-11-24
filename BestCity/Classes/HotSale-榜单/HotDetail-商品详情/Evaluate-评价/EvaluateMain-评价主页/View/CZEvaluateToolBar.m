@@ -8,9 +8,9 @@
 
 #import "CZEvaluateToolBar.h"
 
-@interface CZEvaluateToolBar ()
-
-
+@interface CZEvaluateToolBar ()<UITextViewDelegate>
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
 @end
 
 @implementation CZEvaluateToolBar
@@ -18,6 +18,12 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.textView.layer.cornerRadius = 4;
+    self.textView.layer.masksToBounds = YES;
+    self.textView.layer.borderWidth = 0.5;
+    self.textView.layer.borderColor = CZRGBColor(224, 224, 224).CGColor;
+    
+    self.textView.delegate = self;
 }
 
 + (instancetype)evaluateToolBar
@@ -26,7 +32,18 @@
 }
 
 - (IBAction)sandBtnAction:(UIButton *)sender {
-    NSLog(@"---sandBtnAction---");
+    self.block();
+    self.textView.text = nil;
+    [self textViewDidChange:self.textView];
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSLog(@"%@", textView.text);
+    if (textView.text.length > 0) {
+        self.placeholderLabel.hidden = YES;
+    } else {
+        self.placeholderLabel.hidden = NO;
+    }
+}
 @end

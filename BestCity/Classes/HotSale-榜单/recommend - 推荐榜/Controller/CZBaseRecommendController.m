@@ -74,7 +74,7 @@
     
     CZRecommendListModel *model = self.dataSource[indexPath.row];
     CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
-    vc.detailId = model.goodsId;
+    vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
 
     

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZAttentionsModel.h"
 
 @interface CZAttentionDetailController : UIViewController
-
+/**  */
+@property (nonatomic, strong) CZAttentionsModel *model;
 @end

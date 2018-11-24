@@ -13,7 +13,7 @@
 + (instancetype)buttonWithFrame:(CGRect)frame backImage:(NSString *)backImage target:(id)vc action:(SEL)action
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn setBackgroundImage:[UIImage imageNamed:backImage] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:backImage] forState:UIControlStateNormal];
     btn.frame = frame;
     [btn addTarget:vc action:action forControlEvents:UIControlEventTouchUpInside];
     return btn;

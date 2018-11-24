@@ -17,7 +17,7 @@
 #import "CZMutContentButton.h"
 #import "UIImageView+WebCache.h"
 
-@interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CZLoginControllerDelegate>
+@interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 /** 数据 */
@@ -53,7 +53,6 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         CZLoginController *vc = [[CZLoginController alloc] init];
-        vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -61,7 +60,6 @@
 #pragma mark - 跳转到登陆
 - (IBAction)loginAction:(UIButton *)sender {
     CZLoginController *vc = [[CZLoginController alloc] init];
-    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -93,6 +91,9 @@
     _navImage.frame = CGRectMake(0, 0, SCR_WIDTH, 64);
     [self.view addSubview:_navImage];
     self.navImage.alpha = 0;
+    
+    // 接收登录时候的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpUserInfo) name:loginChangeUserInfo object:nil];
 }
 
 #pragma mark - <UITableViewDataSource>
@@ -110,7 +111,7 @@
 {
     if (indexPath.section == 0) {
         CZMeCell *cell = [CZMeCell cellWithTabelView:tableView];
-        cell.data = _account;
+        cell.data = _account ? _account : @{};
         return cell;
     } else {
        NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
@@ -143,7 +144,7 @@
 {
     NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
     UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
-    if ([dic[@"title"] isEqualToString:@"收藏"] || [dic[@"title"] isEqualToString:@"优惠券"]) {
+    if ([dic[@"title"] isEqualToString:@"优惠券"]) {
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;
         hotVc.menuViewStyle = WMMenuViewStyleLine;
@@ -172,25 +173,24 @@
     }
 }
 
-#pragma mark - <CZLoginControllerDelegate> 给当前用户信息赋值
+#pragma mark - 登录通知响应方法
 - (void)setUpUserInfo
 {
-//    NSLog(@"---------");
     // 给用户信息赋值
-    [self isUserLogin];
+    [self userInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     // 给用户信息赋值
-    [self isUserLogin];
+    [self userInfo];
 }
 
-- (void)isUserLogin
+- (void)userInfo
 {
     // 账户信息
-    _account = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"];
+    _account = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"] ? [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"] : @{};
     [self.tableView reloadData];
     
     // 头像
@@ -217,6 +217,11 @@
     if (point) {
         [self.pointBtn setTitle:[NSString stringWithFormat:@"积分 %@", point] forState:UIControlStateNormal];
     }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

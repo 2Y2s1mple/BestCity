@@ -14,7 +14,8 @@
 #import "MJExtension.h"
 #import "CZHotTitleModel.h"
 #import "GXNetTool.h"
-#import "CZProgressHUD.h"
+// 我的界面系统消息
+#import "CZSystemMessageController.h"
 
 
 @interface CZHotSaleController ()
@@ -49,23 +50,43 @@
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
-    
+}
+
+#pragma mark - 获取未读消息
+- (void)obtainReadMessage
+{
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/message/selectCount"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        self.dataDic = result;
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            // 设置搜索栏
+            [self setupTopView:result[@"count"]];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //设置搜索栏
-    [self setupTopView];
+    // 获取未读数
+    [self obtainReadMessage];
     
     // 获取标题
     [self obtainTtitles];
 }
 
-- (void)setupTopView
+- (void)setupTopView:(NSString *)unreadCount
 {
     CZHotSearchView *search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
         NSLog(@"消息");
+        CZSystemMessageController *vc = [[CZSystemMessageController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
+    
+    search.unreaderCount = [unreadCount integerValue] > 99 ? @"99+" : unreadCount;
     search.textFieldActive = NO;
     [self.view addSubview:search];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchController)];

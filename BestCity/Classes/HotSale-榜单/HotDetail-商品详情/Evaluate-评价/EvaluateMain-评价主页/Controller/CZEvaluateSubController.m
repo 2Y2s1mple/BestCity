@@ -16,8 +16,9 @@
 #import "CZEvaluateToolBar.h"
 #import "CZReplyButton.h"
 #import "UIImageView+WebCache.h"
+#import "CZCommentModel.h"
 
-@interface CZEvaluateSubController ()
+@interface CZEvaluateSubController () <UITableViewDelegate, UITableViewDataSource>
 /** 评论数据 */
 @property (nonatomic, strong) NSArray *evaluateArr;
 /** 文本框View */
@@ -26,10 +27,13 @@
 @property (nonatomic, assign) CGFloat totalHeight;
 /** 评论总数 */
 @property (nonatomic, strong) NSNumber *totalCommentCount;
+/** 记录要回复的model */
+@property (nonatomic, strong) CZEvaluateModel *recordModel;
 @end
 
 @implementation CZEvaluateSubController
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     // 创建文本框
@@ -37,6 +41,7 @@
     // 设置scrollerView
     [self.view addSubview:self.scrollerView];
 }
+
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
@@ -56,6 +61,11 @@
 // 获取评价数据
 - (void)getDataSource
 {
+    [CZEvaluateModel setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"userCommentList" : @"CZCommentModel"
+                 };
+    }];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"articId"] = self.model.goodsId;
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/comment"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -65,13 +75,14 @@
             
             // 创建用户评价
             [self setupSubViews];
+            //隐藏菊花
+            [CZProgressHUD hideAfterDelay:1];
         }
         
     } failure:^(NSError *error) {
         
     }];
 }
-
 
 // 记录高度
 - (void)addHeight:(CGFloat)height
@@ -107,7 +118,6 @@
         // 创建回复按钮一行
         UIView *reply = [self replyViewAddView:backview model:model];
         backview.height += reply.height + 10;
-        
         // 创建回复内容
         UIView *detail = [self commentDetailAddView:backview model:model];
         backview.height += detail.height;
@@ -135,6 +145,7 @@
     
     //加载点赞小手
     CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, self.totalHeight, SCR_WIDTH, 200)];
+    likeView.currentID = self.model.goodsId;
     [self.scrollerView addSubview:likeView];
     // 记录高度
     [self addHeight:likeView.height];
@@ -153,9 +164,24 @@
 {
     CZAllCriticalController *vc = [[CZAllCriticalController alloc] init];
 //    vc.evaluateArr = self.evaluateArr;
-    vc.model = self.model;
+    vc.goodsId = self.model.goodsId;
     vc.totalCommentCount = self.totalCommentCount;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSLog(@"--------");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - 创建文本框
@@ -164,11 +190,17 @@
     // 文本框
     CZEvaluateToolBar *tool = [CZEvaluateToolBar evaluateToolBar];
     self.tool = tool;
+    tool.block = ^{
+        NSLog(@"-------");
+        [[UIApplication sharedApplication].keyWindow endEditing:YES];
+        if (self.tool.textView.text.length > 0) {
+            [self commentInsert:self.recordModel];
+        }
+    };
     tool.autoresizingMask = UIViewAutoresizingNone;
     tool.frame = CGRectMake(0, SCR_HEIGHT, SCR_WIDTH, 49);
     [[UIApplication sharedApplication].keyWindow addSubview:tool];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+   
 }
 
 - (void)keyboardShow:(NSNotification *)notification
@@ -183,12 +215,48 @@
     self.tool.transform = CGAffineTransformMakeTranslation(0, rect.origin.y - SCR_HEIGHT);
 }
 
+#pragma mark - 评论接口
+- (void)commentInsert:(CZEvaluateModel *)model
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"articId"] = model.articId;
+    param[@"content"] = self.tool.textView.text;
+    param[@"parentId"] = model.commentId;
+    param[@"status"] = @"1"; // 1商品 2评测 3发现
+    
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/commentInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"添加成功"]) {
+            NSLog(@"%@", result);
+//            [CZProgressHUD showProgressHUDWithText:@"添加成功"];
+            
+            [CZProgressHUD showProgressHUDWithText:nil];
+            for (UIView *view in self.scrollerView.subviews) {
+                [view removeFromSuperview];
+            }
+//            self.scrollerView = nil;
+            self.totalHeight = 0;
+            [self getDataSource];
+            
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"添加失败"];
+            [CZProgressHUD hideAfterDelay:1];
+        }
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+#pragma mark - 点击回复
 - (void)reply:(CZReplyButton *)sender
 {
     [self.tool.textView becomeFirstResponder];
+    NSLog(@"%@", sender.model.content);
+    self.recordModel = sender.model;
     //    self.tool.textView. = [NSString stringWithFormat:@"回复%@:", sender.model.fromNickname];
 }
-
 
 - (CGFloat)getTextHeight:(NSString *)text widthRectSize:(CGSize)size
 {
@@ -337,7 +405,7 @@
     // 在内容View中加载
      CGFloat replyHeight = 0.0;
     for (NSInteger i = 0; i < maxCommentCount; i++) {
-        NSDictionary *dataDic = model.userCommentList[i];
+        CZCommentModel *commentModel = model.userCommentList[i];
         UILabel *contentLabel = [[UILabel alloc] init];
         [replyView addSubview:contentLabel];
         contentLabel.font = [UIFont systemFontOfSize:15];
@@ -347,9 +415,9 @@
         contentLabel.width = replyView.width - 20;
         
         
-        NSString *nickName = dataDic[@"fromNickname"] != nil &&  dataDic[@"fromNickname"] != [NSNull null] ? dataDic[@"fromNickname"] : @"***";
+        NSString *nickName = commentModel.userShopmember[@"userNickName"] ? commentModel.userShopmember[@"userNickName"] : @"***";
         
-        NSString *textStr = [NSString stringWithFormat:@"%@ 回复:  %@", nickName, dataDic[@"content"]];
+        NSString *textStr = [NSString stringWithFormat:@"%@ 回复:  %@", nickName, commentModel.content];
         contentLabel.height = [self getTextHeight:textStr widthRectSize:CGSizeMake(contentLabel.width, 10000)];
         NSMutableAttributedString *attriString = [[NSMutableAttributedString alloc] initWithString:textStr];
         [attriString addAttributes:@{NSForegroundColorAttributeName : CZREDCOLOR} range:[textStr rangeOfString:nickName]];
@@ -377,6 +445,7 @@
         moreBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -moreBtn.imageView.width, 0, 0);
         [moreBtn setTitleColor:CZRGBColor(74, 144, 226) forState:UIControlStateNormal];
         moreBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [moreBtn addTarget:self action:@selector(pushCommentDetail:) forControlEvents:UIControlEventTouchUpInside];
         replyView.height = CZGetY(moreBtn) + 10;
     }
     

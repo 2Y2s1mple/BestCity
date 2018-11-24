@@ -12,8 +12,9 @@
 #import "CZEvaluationController.h"
 #import "CZMeController.h"
 #import "CZNavigationController.h"
+#import "CZLoginController.h"
 
-@interface CZTabBarController ()
+@interface CZTabBarController ()<UITabBarControllerDelegate>
 
 @end
 
@@ -36,8 +37,11 @@
     
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
     [self setupWithController:[[CZHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
     [self setupWithController:[[CZDiscoverController alloc] init] title:@"发现" image:@"tab-discover-nor" selectedImage:@"tab-discover-sel"];
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
@@ -47,17 +51,30 @@
     self.tabBar.clipsToBounds = YES;
 }
 
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    NSLog(@"%ld", tabBarController.selectedIndex);
+    if ([USERINFO[@"userId"] length] <= 0 && tabBarController.selectedIndex == 3) {
+        CZLoginController *vc = [[CZLoginController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        
+    }
+}
+
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
     if (![vc isKindOfClass:[CZMeController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;
         hotVc.menuViewStyle = WMMenuViewStyleLine;
+        hotVc.progressWidth = 30;
+        hotVc.progressHeight = 3;
         hotVc.automaticallyCalculatesItemWidths = YES;
-//        hotVc.titleFontName = @"PingFangSC-Medium";
+        hotVc.titleFontName = @"PingFangSC-Medium";
         hotVc.titleColorNormal = CZGlobalGray;
         hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
-        hotVc.titleSizeNormal = 16.0f;
+        hotVc.titleSizeNormal = 14.0f;
         hotVc.titleSizeSelected = hotVc.titleSizeNormal;
         hotVc.progressColor = [UIColor redColor];
     }

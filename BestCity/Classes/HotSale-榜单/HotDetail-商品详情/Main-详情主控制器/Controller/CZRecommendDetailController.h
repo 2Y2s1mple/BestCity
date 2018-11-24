@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import "CZRecommendListModel.h"
 
 @interface CZRecommendDetailController : UIViewController
 /** 商品ID */
-@property (nonatomic, strong) NSString *detailId;
+/** 列表传过来的数据模型 */
+@property (nonatomic, strong) CZRecommendListModel *model;
 @end
 
-NS_ASSUME_NONNULL_END

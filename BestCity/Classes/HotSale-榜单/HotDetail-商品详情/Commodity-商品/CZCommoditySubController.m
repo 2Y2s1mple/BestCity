@@ -11,6 +11,7 @@
 #import "CZCommodityView.h"
 #import "CZPointView.h"
 #import "CZRecommendDetailModel.h"
+#import "CZRecommendListModel.h"
 
 @interface CZCommoditySubController ()
 /** 轮播图 */
@@ -35,6 +36,7 @@
 //                           @{@"pic":IMAGE_NAMED(@"testImage3.png"), @"isLoc":@YES}];
 -(JCTopic *)Topic_JC
 {
+    
     if(!_Topic_JC)
     {
         // 轮播图
@@ -44,14 +46,15 @@
         _Topic_JC.totalNum = 3;
         _Topic_JC.type = JCTopicMiddle;
         _Topic_JC.scrollView = self.scrollerView;
-        _Topic_JC.pics = @[
-                            @{@"pic" : self.model.imgList[0][@"imgPath"],
-                                 @"isLoc" : @NO},
-                            @{@"pic" : self.model.imgList[1][@"imgPath"],
-                                 @"isLoc" : @NO},
-                            @{@"pic" : self.model.imgList[2][@"imgPath"],
-                                 @"isLoc" : @NO}
-                          ];
+        NSMutableArray *imagePaths = [NSMutableArray array];
+        for (NSDictionary *dic in self.model.imgList) {
+            NSDictionary *subDic = @{
+                                     @"pic" : dic[@"imgPath"],
+                                     @"isLoc" : @NO
+                                     };
+            [imagePaths addObject:subDic];
+        }
+        _Topic_JC.pics = imagePaths;
         [self.Topic_JC upDate];
     }
     return _Topic_JC;
@@ -79,6 +82,7 @@
     //设置商品的标题
     CZCommodityView *commodity = [[CZCommodityView alloc] init];
     commodity.frame = CGRectMake(0, FSS(410), SCR_WIDTH, commodity.commodityH);
+    commodity.model = self.model;
     [self.scrollerView addSubview:commodity];
     CGFloat originY = FSS(410) + commodity.commodityH;
     

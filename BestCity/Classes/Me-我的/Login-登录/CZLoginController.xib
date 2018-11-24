@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -78,7 +78,7 @@
                             <rect key="frame" x="36" y="21.5" width="134" height="17"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="qDD-7a-V0o"/>
                             </connections>
@@ -157,7 +157,7 @@
                     <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCf-bk-aWJ">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCf-bk-aWJ">
                     <rect key="frame" x="125.5" y="431" width="69" height="40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="-43" minY="65" maxX="0.0" maxY="0.0"/>
@@ -166,7 +166,7 @@
                         <color key="titleColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AU-lg-AwI">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AU-lg-AwI">
                     <rect key="frame" x="45.5" y="431" width="69" height="40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="-43" minY="65" maxX="0.0" maxY="0.0"/>
@@ -175,7 +175,7 @@
                         <color key="titleColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFq-eC-pac">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFq-eC-pac">
                     <rect key="frame" x="205.5" y="431" width="69" height="40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="-43" minY="65" maxX="0.0" maxY="0.0"/>
@@ -191,6 +191,19 @@
                         <action selector="popAction:" destination="-1" eventType="touchUpInside" id="VYL-1a-WCE"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headDefault" translatesAutoresizingMaskIntoConstraints="NO" id="N3l-49-3QR">
+                    <rect key="frame" x="130" y="75" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="8vh-te-vYZ"/>
+                        <constraint firstAttribute="height" constant="60" id="rUA-fx-JNR"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -206,6 +219,7 @@
                 <constraint firstItem="NMf-BX-C8K" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="IGI-DZ-jZt"/>
                 <constraint firstAttribute="trailing" secondItem="YP0-y1-S4k" secondAttribute="trailing" constant="30" id="Ih9-Y7-lvI"/>
                 <constraint firstItem="AFc-09-HGt" firstAttribute="trailing" secondItem="FdZ-Fk-q54" secondAttribute="trailing" id="KqA-sF-DGQ"/>
+                <constraint firstItem="N3l-49-3QR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="M3B-CN-qNH"/>
                 <constraint firstItem="8AU-lg-AwI" firstAttribute="centerY" secondItem="kCf-bk-aWJ" secondAttribute="centerY" id="MXv-Zv-DnO"/>
                 <constraint firstItem="YP0-y1-S4k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="Mta-21-KJe"/>
                 <constraint firstItem="FdZ-Fk-q54" firstAttribute="top" secondItem="YP0-y1-S4k" secondAttribute="bottom" constant="20" id="NIM-aT-yW9"/>
@@ -215,15 +229,17 @@
                 <constraint firstItem="WFq-eC-pac" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.5" id="cS0-U6-VdI"/>
                 <constraint firstItem="81M-ZP-HyG" firstAttribute="leading" secondItem="NMf-BX-C8K" secondAttribute="trailing" id="ci7-L2-VrN"/>
                 <constraint firstAttribute="bottom" secondItem="NMf-BX-C8K" secondAttribute="bottom" constant="30" id="e7J-6q-yyn"/>
+                <constraint firstItem="YP0-y1-S4k" firstAttribute="top" secondItem="N3l-49-3QR" secondAttribute="bottom" constant="45" id="hdt-iG-fer"/>
                 <constraint firstItem="FdZ-Fk-q54" firstAttribute="trailing" secondItem="YP0-y1-S4k" secondAttribute="trailing" id="w97-CT-4Ox"/>
                 <constraint firstItem="81M-ZP-HyG" firstAttribute="centerY" secondItem="NMf-BX-C8K" secondAttribute="centerY" id="y89-TO-ZXY"/>
             </constraints>
-            <point key="canvasLocation" x="-1946" y="95"/>
+            <point key="canvasLocation" x="-2075.625" y="72.887323943661968"/>
         </view>
     </objects>
     <resources>
-        <image name="nav-back" width="9" height="16"/>
-        <image name="phone number" width="13" height="19"/>
+        <image name="headDefault" width="180" height="180"/>
+        <image name="nav-back" width="9.5" height="16"/>
+        <image name="phone number" width="13" height="19.5"/>
         <image name="qq-friend" width="40" height="40"/>
         <image name="verification Code" width="15" height="11"/>
         <image name="wechat" width="40" height="40"/>

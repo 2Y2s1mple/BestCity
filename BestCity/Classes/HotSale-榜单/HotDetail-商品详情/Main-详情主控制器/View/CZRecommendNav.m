@@ -16,6 +16,8 @@
 @property (nonatomic, strong)UIView *scrollerLine;
 /** 记录点击的标题 */
 @property (nonatomic, strong) UIButton *recordBtn;
+/** 右面点击事件 */
+@property (nonatomic, strong) UIButton *rightBtn;
 @end
 
 @implementation CZRecommendNav
@@ -36,7 +38,6 @@
     }
     return self;
 }
-
 
 //自定义的导航栏
 - (void)setupNavigateView
@@ -59,6 +60,9 @@
     CGFloat btnH = 20;
     for (int i = 0; i < self.mainTitles.count; i++) {
         UIButton *titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        if (i == 0) {
+            self.recordBtn = titleBtn;
+        }
         titleBtn.frame = CGRectMake(btnX + i * btnW, 0, btnW, btnH);
         [self addSubview:titleBtn];
         titleBtn.center = CGPointMake(titleBtn.center.x, self.height / 2);
@@ -83,8 +87,10 @@
     }];
     
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.rightBtn = rightBtn;
     [rightBtn setImage:[UIImage imageNamed:@"nav-favor"] forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.rightBtn setImage:[UIImage imageNamed:@"score-sel"] forState:UIControlStateSelected];
+    [rightBtn addTarget:self action:@selector(clickedRight:) forControlEvents:UIControlEventTouchUpInside];
     rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     rightBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
     [self addSubview:rightBtn];
@@ -94,7 +100,23 @@
         make.width.equalTo(@(FSS(40)));
         make.height.equalTo(@(FSS(20)));
     }];
-    
+}
+
+#pragma mark - 判断是否收藏
+- (void)setIsCollect:(BOOL)isCollect
+{
+    _isCollect = isCollect;
+    if (isCollect) {
+        self.rightBtn.selected = YES;
+    } else {
+        self.rightBtn.selected = NO;
+    }
+}
+
+- (void)clickedRight:(UIButton *)sender
+{
+    sender.selected = !sender.isSelected;
+    !self.rightClickedBlock ? : self.rightClickedBlock(sender.isSelected);
 }
 
 - (void)popAction
@@ -118,7 +140,45 @@
         self.scrollerLine.transform = CGAffineTransformMakeTranslation(btnW, 0);
     }];
     self.recordBtn = sender;
+    !self.delegate ? : [self.delegate didClickedTitleWithIndex:sender.tag - 100];
 }
 
-
+- (void)setMonitorIndex:(NSInteger)monitorIndex
+{
+    _monitorIndex = monitorIndex;
+    UIButton *btn = [self viewWithTag:100 + monitorIndex];
+    CGFloat btnW = (SCR_WIDTH - 127) / 3.0;
+    switch (monitorIndex) {
+        case 0:
+        {
+            self.recordBtn.selected = NO;
+            btn.selected = YES;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.scrollerLine.transform = CGAffineTransformMakeTranslation(0, 0);
+            }];
+        }
+            break;
+        case 1:
+        {
+            self.recordBtn.selected = NO;
+            btn.selected = YES;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.scrollerLine.transform = CGAffineTransformMakeTranslation(btnW, 0);
+            }];
+        }
+            break;
+        case 2:
+        {
+            self.recordBtn.selected = NO;
+            btn.selected = YES;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.scrollerLine.transform = CGAffineTransformMakeTranslation(btnW * 2, 0);
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+    self.recordBtn = btn;
+}
 @end

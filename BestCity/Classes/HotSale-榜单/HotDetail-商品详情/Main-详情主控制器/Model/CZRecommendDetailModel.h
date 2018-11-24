@@ -23,6 +23,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *parametersList;
 /** 商品评测数据 */
 @property (nonatomic, strong) NSDictionary *goodsEvalWayEntity;
+
+
+/** 辅助 */
+/** 标题 */
+@property (nonatomic, strong) NSString *mainTitle;
+/** 券后价 */
+@property (nonatomic, strong) NSString *actualPrice;
+/** 其他平台 */
+@property (nonatomic, strong) NSString *sourcePlatform;
+/** 其他平台价格 */
+@property (nonatomic, strong) NSString *sourcePlatformPrice;
+/** 优惠券 */
+@property (nonatomic, strong) NSString *discountCoupon;
 @end
 
 NS_ASSUME_NONNULL_END

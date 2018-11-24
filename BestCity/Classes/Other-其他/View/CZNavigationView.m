@@ -39,9 +39,8 @@
         }
         
         UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        
         [leftBtn setImage:image forState:UIControlStateNormal];
-        leftBtn.frame = CGRectMake(20, 40, 49, 17);
+        leftBtn.frame = CGRectMake(20, 20, 49, self.height - 20);
         leftBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
         [leftBtn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:leftBtn];

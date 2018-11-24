@@ -61,7 +61,7 @@
         sender.backgroundColor = [UIColor whiteColor];
         sender.layer.borderColor = [UIColor redColor].CGColor;
     }
-    self.block();
+    self.block(sender.selected);
 }
 
 - (void)setType:(CZAttentionBtnType)type

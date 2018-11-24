@@ -57,11 +57,11 @@
 - (UIView *)setupTopViewWithFrame:(CGRect)frame
 {
     UIView *topView = [[UIView alloc] initWithFrame:frame];
-    topView.backgroundColor = [UIColor redColor];
+//    topView.backgroundColor = [UIColor redColor];
     [self.view addSubview:topView];
     
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.backgroundColor = [UIColor redColor];
+//    leftBtn.backgroundColor = [UIColor redColor];
     [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
     leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

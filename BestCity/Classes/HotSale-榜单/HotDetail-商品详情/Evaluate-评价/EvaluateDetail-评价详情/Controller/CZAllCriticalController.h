@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CZRecommendDetailModel.h"
-
+@class CZEvaluateModel;
 @interface CZAllCriticalController : UIViewController
 /** 评论数据 */
 @property (nonatomic, strong) NSMutableArray *evaluateArr;
-/** 详情数据模型 */
-@property (nonatomic, strong) CZRecommendDetailModel *model;
 /** 评论总数 */
 @property (nonatomic, strong) NSNumber *totalCommentCount;
+/** 商品ID */
+@property (nonatomic, strong) NSString *goodsId;
 @end

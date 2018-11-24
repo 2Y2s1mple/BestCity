@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZAttentionDetailModel.h"
 
 @interface CZAttentionDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *alphaBlackview;
@@ -14,4 +15,6 @@
 
 /** 高度 */
 @property (nonatomic, assign) CGFloat cellHeight;
+/** 数据模型 */
+@property (nonatomic, strong) CZAttentionDetailModel *model;
 @end

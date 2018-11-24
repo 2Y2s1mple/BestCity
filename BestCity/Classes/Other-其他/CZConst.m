@@ -8,4 +8,5 @@
 
 #import <UIKit/UIKit.h>
 NSString * const OpenBoxInspectWebHeightKey = @"OpenBoxInspectViewWebViewWidthNotifiKey";
-
+/** 登录成功时候发送的通知KEY */
+NSString * const loginChangeUserInfo = @"loginChangeUserInfo";

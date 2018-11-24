@@ -59,13 +59,37 @@
     }];
 }
 
+// 新增关注
+- (void)addAttention
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    // 要关注对象ID
+    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernInsert"];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
+            
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     //添加关注按钮
-    self.btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(SCR_WIDTH - 70, (60 - 24) / 2.0, 60, 24) CommentType:self.model.attentionType didClickedAction:^{
-        NSLog(@"点击了%@按钮", self.model.userShopmember[@"userNickName"]);
-        [self deleteAttention];
-        
+    self.btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(SCR_WIDTH - 70, (60 - 24) / 2.0, 60, 24) CommentType:self.model.attentionType didClickedAction:^(BOOL isSelected){
+        if (isSelected) {
+            [self addAttention];
+        } else {
+            NSLog(@"点击了%@按钮", self.model.userShopmember[@"userNickName"]);
+            [self deleteAttention];
+        }
     }];
     [self.contentView addSubview:self.btn];
 }
