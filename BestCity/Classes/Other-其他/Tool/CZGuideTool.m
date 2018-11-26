@@ -9,27 +9,27 @@
 #import "CZGuideTool.h"
 #import "CZSaveTool.h"
 #import "CZTabBarController.h"
+#import "CZGuideController.h"
 #define CZVERSION @"CZVersion"
 
 @implementation CZGuideTool
-- (void)chooseRootViewController:(UIWindow *)window
++ (void)chooseRootViewController:(UIWindow *)window
 {
     //获取当前的版本号
     NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     
-    //获取报错的版本号
+    //获取存储的版本号
     NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
     
     //比较
     if ([curVersion isEqualToString:lastVersion]) {
         //没有新版本
         window.rootViewController = [[CZTabBarController alloc] init];
-        [window makeKeyAndVisible];
     } else {
         //有新版本
         [CZSaveTool setObject:curVersion forKey:CZVERSION];
-        
-        
+        CZGuideController *vc = [[CZGuideController alloc] init];
+        window.rootViewController = vc;
     }
 }
 @end

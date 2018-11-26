@@ -10,3 +10,5 @@
 NSString * const OpenBoxInspectWebHeightKey = @"OpenBoxInspectViewWebViewWidthNotifiKey";
 /** 登录成功时候发送的通知KEY */
 NSString * const loginChangeUserInfo = @"loginChangeUserInfo";
+/** 系统消息通知 */
+NSString * const systemMessageDetailControllerMessageRead = @"systemMessageDetailControllerMessageRead";

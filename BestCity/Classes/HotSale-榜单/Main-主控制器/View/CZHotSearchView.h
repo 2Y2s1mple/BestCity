@@ -29,7 +29,7 @@
 /** 文本框文字 */
 @property (nonatomic, strong) NSString *searchText;
 /** 未读数量 */
-@property (nonatomic, strong) NSString *unreaderCount;
+@property (nonatomic, assign) NSInteger unreaderCount;
 
 - (instancetype)initWithFrame:(CGRect)frame msgAction:(void (^)(NSString *))block;
 @end

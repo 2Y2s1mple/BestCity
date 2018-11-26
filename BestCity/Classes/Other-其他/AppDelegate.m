@@ -10,6 +10,7 @@
 #import "CZTabBarController.h"
 #import "CZJPushHandler.h"
 #import "CZUMConfigure.h"
+#import "CZGuideTool.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +22,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    self.window.rootViewController = [[CZTabBarController alloc] init];
+    // 设置d引导页
+    [CZGuideTool chooseRootViewController:self.window];
+    
     [self.window makeKeyAndVisible];
     
     //加载极光推送

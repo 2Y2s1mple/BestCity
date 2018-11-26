@@ -34,6 +34,8 @@
 
 /** 保存评论 */
 @property (nonatomic, strong) NSString *commentId;
+/** 保存回复谁 */
+@property (nonatomic, strong) NSString *commentName;
 
 @end
 
@@ -101,12 +103,12 @@
             if (weakSelf.textViewTool.textView.text.length > 0) {
                 [weakSelf commentInsert:weakSelf.commentId];
                 weakSelf.commentId = nil;
+                
             }
         };
     }
     return _textViewTool;
 }
-
 
 // 获取评价数据
 - (void)getDataSource
@@ -116,73 +118,86 @@
     param[@"page"] = @(0);
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/comment"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        NSError *error = nil;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"list"] options:NSJSONWritingPrettyPrinted error:&error];
-        
-        NSMutableArray *mutArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-        
-        NSLog(@"%@", mutArr);
-    
-        // 获取数据
-        NSMutableArray *dataSource = mutArr;
-        
-        // 新数组
-        NSMutableArray *newContentArr = [NSMutableArray array];
-        
-        for (int i = 0; i < dataSource.count; i++) {
-            // 第一条数据
-            NSMutableDictionary *contentDic = dataSource[i];
-            contentDic[@"type"] = @"1"; // 用来判断cell的类型
-            
-            // 取第一条的数据评论数组
-            NSMutableArray *commentArr = contentDic[@"userCommentList"];
-            if (commentArr.count != 0) {
-                if (commentArr.count > 2) {
-                    // 取数组的第一条数据, 为了加个尖
-                    NSMutableDictionary *commentArrDic = [commentArr firstObject];
-                    commentArrDic[@"isArrow"] = @"1";
-                    
-                    // 重新建一个数组
-                    [newContentArr addObject:contentDic]; // 加入第一条数据
-                    [newContentArr addObject:commentArr[0]]; // 加两条
-                    [newContentArr addObject:commentArr[1]];
-                    
-                    // 在评论数组里面添加一个, 为了收起按钮
-                    NSMutableDictionary *packupDic = [NSMutableDictionary dictionary];
-                    packupDic[@"type"] = @"2"; // 类型
-                    packupDic[@"commentArr"] = commentArr; // 评论的数组
-                    packupDic[@"showCount"] = @(2); // 外面显示几条
-                    packupDic[@"packUpStatus"] = @"0";
-                    
-                    [newContentArr addObject:packupDic];
-                } else if (commentArr.count <= 2) {
-                    // 取数组的第一条数据, 为了加个尖
-                    NSMutableDictionary *commentArrDic = [commentArr firstObject];
-                    commentArrDic[@"isArrow"] = @"1";
-                    
-                    // 重新建一个数组
-                    [newContentArr addObject:contentDic]; // 加入第一条数据
-                    for (NSMutableDictionary *dic in commentArr) {
-                        [newContentArr addObject:dic];
-                    }
-                }
-            } else {
-                [newContentArr addObject:contentDic];
-            }
+         if ([result[@"msg"] isEqualToString:@"success"]) {
+             // 处理数据
+             self.evaluateArr = [self processingDataArray:result[@"list"]];
+             // 刷新列表
+             [self.tableView reloadData];
         }
-
-        self.evaluateArr = newContentArr;
-
-        // 创建用户评价
-        [self.tableView reloadData];
-        //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-        
-        }
+     }
     failure:^(NSError *error) {
-        //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
+}
+
+#pragma mark - 处理数据
+- (NSMutableArray *)processingDataArray:(NSArray *)dataArray
+{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:&error];
+    // 里面的子数组全部转化为可变的
+    NSMutableArray *mutArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    
+    // 重新组装后的数组
+    NSMutableArray *newContentArr = [NSMutableArray array];
+    for (int i = 0; i < mutArr.count; i++) {
+        // 将每一条第一个item的拿出来
+        // 添加标识type, 1代表cell为主评论
+        // 添加到新数组中
+        NSMutableDictionary *itemDic = mutArr[i];
+        itemDic[@"type"] = @"1";
+        [newContentArr addObject:itemDic];
+        
+        
+        // 将item的子评论添加到新数组变为同一级数组
+        NSMutableArray *itemDicCommentArr = itemDic[@"userCommentList"];
+        if (itemDicCommentArr.count > 0) {
+            // ? 怎么添加
+            itemDicCommentArr = [self processingCommentData:itemDicCommentArr];
+            [newContentArr addObjectsFromArray:itemDicCommentArr];
+        }
+    }
+    
+    return newContentArr;
+}
+
+#pragma mark - 处理子评论数据
+- (NSMutableArray *)processingCommentData:(NSMutableArray *)subCommentData
+{
+    /**
+     * 1. 数组中第一个, 加标识isArrow, 1代表有带尖号的图片
+     * 2. 大于两条的, 小于等于两条
+     */
+    
+    // 数组中第一条数据
+    NSMutableDictionary *commentDic = [subCommentData firstObject];
+    commentDic[@"isArrow"] = @"1";
+    
+    // 重建子评论数组
+    NSMutableArray *newSubCommentArr = [NSMutableArray array];
+    if (subCommentData.count > 2) { // 大于两条
+        [newSubCommentArr addObject:commentDic];
+        [newSubCommentArr addObject:subCommentData[1]];
+        [newSubCommentArr addObject:[self createPackupDataWithSubComment:subCommentData]]; // 收起按钮
+    } else {
+        for (NSMutableDictionary *dic in subCommentData) {
+            [newSubCommentArr addObject:dic];
+        }
+    }
+    return newSubCommentArr;
+}
+
+#pragma mark - 创建收起按钮数据
+- (NSMutableDictionary *)createPackupDataWithSubComment:(NSMutableArray *)commentArr
+{
+    // 在评论数组里面添加一个, 为了收起按钮
+    NSMutableDictionary *packupDic = [NSMutableDictionary dictionary];
+    packupDic[@"type"] = @"2"; // cell类型
+    packupDic[@"commentArr"] = commentArr; // 评论的数组
+    packupDic[@"showCount"] = @(2); // 默认外面显示两条
+    packupDic[@"packUpStatus"] = @"0"; // 默认收起状态
+    return packupDic;
 }
 
 - (void)viewDidLoad {
@@ -206,19 +221,16 @@
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)keyboardShow:(NSNotification *)notification
 {
     CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     self.textViewTool.transform = CGAffineTransformMakeTranslation(0, rect.origin.y - SCR_HEIGHT);
+    if (rect.origin.y == SCR_WIDTH) {
+        self.textViewTool.placeHolderText = @"";
+    }
 }
-
-//- (void)keyboardHide:(NSNotification *)notification
-//{
-//    self.textViewTool.transform = CGAffineTransformMakeTranslation(0, 0);
-//}
 
 - (void)setupRefresh
 {
@@ -267,64 +279,9 @@
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/comment"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            
-            NSError *error = nil;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"list"] options:NSJSONWritingPrettyPrinted error:&error];
-            
-            NSMutableArray *mutArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-            
-            NSLog(@"%@", mutArr);
-            
-            // 获取数据
-            NSMutableArray *dataSource = mutArr;
-            
-            NSMutableArray *newContentArr = [NSMutableArray array];
-            
-            for (int i = 0; i < dataSource.count; i++) {
-                // 第一条数据
-                NSMutableDictionary *contentDic = dataSource[i];
-                contentDic[@"type"] = @"1"; // 用来判断cell的类型
-                
-                // 取第一条的数据评论数组
-                NSMutableArray *commentArr = contentDic[@"userCommentList"];
-                if (commentArr.count != 0) {
-                    if (commentArr.count > 2) {
-                        // 取数组的第一条数据, 为了加个尖
-                        NSMutableDictionary *commentArrDic = [commentArr firstObject];
-                        commentArrDic[@"isArrow"] = @"1";
-                        
-                        // 重新建一个数组
-                        [newContentArr addObject:contentDic]; // 加入第一条数据
-                        [newContentArr addObject:commentArr[0]]; // 加两条
-                        [newContentArr addObject:commentArr[1]];
-                        
-                        // 在评论数组里面添加一个收起按钮
-                        NSMutableDictionary *packupDic = [NSMutableDictionary dictionary];
-                        packupDic[@"type"] = @"2"; // 类型
-                        packupDic[@"commentArr"] = commentArr; // 评论的数组
-                        packupDic[@"showCount"] = @(2); // 外面显示几条
-                        packupDic[@"packUpStatus"] = @"0";
-                        
-                        [newContentArr addObject:packupDic];
-                    } else if (commentArr.count <= 2) {
-                        // 取数组的第一条数据, 为了加个尖
-                        NSMutableDictionary *commentArrDic = [commentArr firstObject];
-                        commentArrDic[@"isArrow"] = @"1";
-                        
-                        // 重新建一个数组
-                        [newContentArr addObject:contentDic]; // 加入第一条数据
-                        for (NSMutableDictionary *dic in commentArr) {
-                            [newContentArr addObject:dic];
-                        }
-                    }
-                } else {
-                    [newContentArr addObject:contentDic];
-                }
-            }
-            
-            [self.evaluateArr addObjectsFromArray:newContentArr];
-
-            // 创建用户评价
+            // 添加到数组
+            [self.evaluateArr addObjectsFromArray:[self processingDataArray:result[@"list"]]];
+            // 刷新
             [self.tableView reloadData];
             [self.tableView.mj_footer endRefreshing];
         }
@@ -351,10 +308,13 @@
     NSDictionary *dataDic = self.evaluateArr[indexPath.row];
     if ([dataDic[@"type"] isEqualToString:@"1"]) { // 评论上部分
         CZCommentDetailCell *cell = [CZCommentDetailCell cellWithTableView:tableView];
-        cell.block = ^(NSString *commentId){
+        cell.block = ^(NSString *commentId, NSString *commentName){
             NSLog(@"%@", commentId);
             // 保存评论的ID
             self.commentId = commentId;
+            // 回复谁
+            self.commentName = commentName;
+            self.textViewTool.placeHolderText = [NSString stringWithFormat:@"回复  %@:", commentName];
             [self.textViewTool.textView becomeFirstResponder];
         };
         cell.contentDic = self.evaluateArr[indexPath.row];
@@ -437,7 +397,6 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 @end

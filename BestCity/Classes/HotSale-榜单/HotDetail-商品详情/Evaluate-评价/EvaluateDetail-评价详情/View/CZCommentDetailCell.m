@@ -32,7 +32,7 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -45,10 +45,17 @@
 - (void)setContentDic:(NSDictionary *)contentDic
 {
     _contentDic = contentDic;
-    // 头像
-    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:contentDic[@"userShopmember"][@"userNickImg"]]];
-    // 名字
-    self.nameLabel.text = contentDic[@"userShopmember"][@"userNickName"];
+    
+   
+    if (contentDic[@"userShopmember"] != [NSNull null]) {
+        // 头像
+        [self.iconImage sd_setImageWithURL:[NSURL URLWithString:contentDic[@"userShopmember"][@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+         // 名字
+        self.nameLabel.text = contentDic[@"userShopmember"][@"userNickName"];
+    } else {
+        self.iconImage.image = [UIImage imageNamed:@"headDefault"];
+        self.nameLabel.text = @"游客";
+    }
     
     // 点赞
     [self.likeButton setTitle:[NSString stringWithFormat:@"%@", contentDic[@"snapNum"]] forState:UIControlStateNormal];
@@ -70,7 +77,13 @@
 - (IBAction)replyButton:(id)sender
 {
     NSLog(@"000000");
-    self.block(self.contentDic[@"commentId"]);
+    NSString *userName;
+    if (self.contentDic[@"userShopmember"] != [NSNull null]) {
+        userName = self.contentDic[@"userShopmember"][@"userNickName"];
+    } else {
+        userName = @"游客";
+    }
+    self.block(self.contentDic[@"commentId"], userName);
 }
 
 

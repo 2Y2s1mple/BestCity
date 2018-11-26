@@ -12,17 +12,13 @@
 @interface CZGiveLikeView ()
 /** 点赞 */
 @property (nonatomic, strong) UILabel *likeNumber;
+/** 点赞图片 */
+@property (nonatomic, strong) UIView *imageBackView;
 @end
 
 @implementation CZGiveLikeView
 
-- (void)setIsClicked:(BOOL)isClicked
-{
-    _isClicked = isClicked;
-    if (isClicked) {
-        
-    }
-}
+
 
 #pragma mark - 评测的ID
 - (void)setEvalId:(NSString *)evalId
@@ -61,6 +57,7 @@
 {
     //背后的圆圈
     UIView *imageBackView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 76, 76)];
+    self.imageBackView = imageBackView;
     imageBackView.center = CGPointMake(self.width / 2, self.height / 2);
     imageBackView.layer.borderWidth = 1;
     imageBackView.layer.borderColor = [CZREDCOLOR CGColor];
@@ -90,7 +87,9 @@
 #pragma mark - 点击方法
 - (void)action
 {
-    //判断是否点击过
+    self.imageBackView.userInteractionEnabled = NO;
+    
+    // 判断是否点击过
     if (!self.isClicked) {
         // 点赞
         [self snapInsert];
@@ -141,6 +140,7 @@
         } else {
             [CZProgressHUD showProgressHUDWithText:@"取消失败"];
         }
+        self.imageBackView.userInteractionEnabled = YES;
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
         
@@ -169,6 +169,7 @@
         } else {
             [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
         }
+        self.imageBackView.userInteractionEnabled = YES;
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:1];
         

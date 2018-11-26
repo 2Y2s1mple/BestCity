@@ -48,7 +48,7 @@
     
 }
 
-// 加载更多
+
 - (void)messageRead
 {
     // 参数
@@ -59,6 +59,7 @@
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqual: @"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"已读"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:systemMessageDetailControllerMessageRead object:nil];
         }
         [CZProgressHUD hideAfterDelay:1];
     } failure:^(NSError *error) {

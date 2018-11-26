@@ -11,6 +11,7 @@
 #import "GXNetTool.h"
 #import "CZGiveLikeView.h"
 #import "CZCollectButton.h"
+#import "CZCommentBtn.h"
 
 @interface CZEvaluationChoicenessDetailController ()
 /** webView */
@@ -177,17 +178,16 @@
     collectBtn.evalId = self.detailID;
     
     
+
     // 评论
-    UIButton *commentBtn = [[UIButton alloc] init];
+    CZCommentBtn *commentBtn = [CZCommentBtn commentButton];
     [shareView addSubview:commentBtn];
     commentBtn.x = CZGetX(collectBtn);
     commentBtn.y = 0;
     commentBtn.width = SCR_WIDTH / 4.0;
     commentBtn.height = shareView.height;
-    [commentBtn setTitle:@"222" forState:UIControlStateNormal];
-    [commentBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [commentBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
-    [commentBtn setImage:IMAGE_NAMED(@"tab-community") forState:UIControlStateNormal];
+    commentBtn.goodsId = self.detailID;
+    commentBtn.totalCommentCount = self.dicData[@"commentNum"];
 
     // 立即购买
     UIButton *buyBtn = [[UIButton alloc] init];

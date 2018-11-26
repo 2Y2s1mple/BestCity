@@ -91,10 +91,15 @@
         self.arrowImage.hidden = YES;
     }
     
-    NSString *textStr = [NSString stringWithFormat:@"%@ 回复:", contentDic[@"userShopmember"][@"userNickName"]];
+    NSString *userName;
+    if (contentDic[@"userShopmember"] != [NSNull null]) {
+        userName = contentDic[@"userShopmember"][@"userNickName"];
+    } else {
+        userName = @"游客";
+    }
+    NSString *textStr = [NSString stringWithFormat:@"%@ 回复:", userName];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:textStr];
-    [attr addAttributes:@{NSForegroundColorAttributeName : CZGlobalGray} range:[textStr rangeOfString:contentDic[@"userShopmember"][@"userNickName"]]];
-    
+    [attr addAttributes:@{NSForegroundColorAttributeName : CZGlobalGray} range:[textStr rangeOfString:userName]];
     self.replyNameLabel.attributedText = attr;
     self.replyNameLabel.x = 10;
     self.replyNameLabel.y = 10;

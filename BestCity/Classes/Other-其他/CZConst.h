@@ -9,3 +9,4 @@
 #import <UIKit/UIKit.h>
 UIKIT_EXTERN NSString * const OpenBoxInspectWebHeightKey;
 UIKIT_EXTERN NSString * const loginChangeUserInfo;
+UIKIT_EXTERN NSString * const systemMessageDetailControllerMessageRead;

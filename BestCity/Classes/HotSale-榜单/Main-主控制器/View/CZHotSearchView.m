@@ -56,7 +56,7 @@
     UIButton *msgBtn = [[UIButton alloc] init];
     [msgBtn setImage:[UIImage imageNamed:@"nav-message"] forState:UIControlStateNormal];
     msgBtn.x = CGRectGetMaxX(textF.frame);
-    msgBtn.size = CGSizeMake(30, self.height);
+    msgBtn.size = CGSizeMake(40, self.height);
     msgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [msgBtn addTarget:self action:@selector(msgAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:msgBtn];
@@ -77,14 +77,14 @@
     [self addSubview:unreadLabel];
 }
 
-- (void)setUnreaderCount:(NSString *)unreaderCount
+- (void)setUnreaderCount:(NSInteger)unreaderCount
 {
     _unreaderCount = unreaderCount;
     if (unreaderCount <= 0) {
         self.unreadLabel.hidden = YES;
     } else {
         self.unreadLabel.hidden = NO;
-        self.unreadLabel.text = [NSString stringWithFormat:@"%@", unreaderCount];
+        self.unreadLabel.text = [NSString stringWithFormat:@"%ld", unreaderCount];
     }
 }
 

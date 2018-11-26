@@ -19,6 +19,8 @@ typedef void(^toolBarActionBlock)(void);
 + (instancetype)evaluateToolBar;
 /** block */
 @property (nonatomic, copy) toolBarActionBlock block;
+/** placeHolder */
+@property (nonatomic, strong) NSString *placeHolderText;
 @end
 
 NS_ASSUME_NONNULL_END

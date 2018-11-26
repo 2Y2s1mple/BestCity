@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "CZRecommendListModel.h"
 #import "MJExtension.h"
+#import "MJRefresh.h"
 
 @interface CZOneController ()
 
@@ -30,9 +31,14 @@
             self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
         }
+        
+        // 结束刷新
+        [self.tableView.mj_header endRefreshing];
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {
+        // 结束刷新
+        [self.tableView.mj_header endRefreshing];
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
@@ -47,11 +53,23 @@
                  @"goodsScopeList" : @"CZHotScoreModel"
                  };
     }];
-    // 获取数据
-    [self getDataSource];
     
     self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - HOTContentY - 49 - 10);
     self.tableView.tableHeaderView = [self setupHeaderView];
+    
+    // 创建刷新控件
+    [self setupRefresh];
+}
+
+- (void)setupRefresh
+{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    [self.tableView.mj_header beginRefreshing];
+}
+
+- (void)loadNewData
+{
+    [self getDataSource];
 }
 
 - (UIView *)setupHeaderView

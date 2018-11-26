@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSArray *mainTitles;
 /** 首页的数据 */
 @property (nonatomic, strong) NSDictionary *dataDic;
+/** 搜索框 */
+@property (nonatomic, strong) CZHotSearchView *search;
 @end
 
 @implementation CZHotSaleController
@@ -58,8 +60,8 @@
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/message/selectCount"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
         self.dataDic = result;
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            // 设置搜索栏
-            [self setupTopView:result[@"count"]];
+            // 未读消息
+            self.search.unreaderCount = [result[@"count"] integerValue] > 99 ? 99 : [result[@"count"] integerValue];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -71,26 +73,38 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 设置搜索栏
+    [self setupTopView];
+    
     // 获取未读数
     [self obtainReadMessage];
     
     // 获取标题
     [self obtainTtitles];
+    
+    // 接受系统消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageRead) name:systemMessageDetailControllerMessageRead object:nil];
 }
 
-- (void)setupTopView:(NSString *)unreadCount
+// 监听系统消息
+- (void)messageRead
 {
-    CZHotSearchView *search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
+    // 获取未读数
+    [self obtainReadMessage];
+}
+
+
+- (void)setupTopView
+{
+    self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
         NSLog(@"消息");
         CZSystemMessageController *vc = [[CZSystemMessageController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
-    
-    search.unreaderCount = [unreadCount integerValue] > 99 ? @"99+" : unreadCount;
-    search.textFieldActive = NO;
-    [self.view addSubview:search];
+    self.search.textFieldActive = NO;
+    [self.view addSubview:self.search];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchController)];
-    [search addGestureRecognizer:tap];
+    [self.search addGestureRecognizer:tap];
 }
 
 - (void)pushSearchController
@@ -102,8 +116,7 @@
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController
 {
-//    return self.mainTitles.count;
-    return 5;
+    return self.mainTitles.count;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {

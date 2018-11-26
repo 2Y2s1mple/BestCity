@@ -40,6 +40,19 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+- (NSDictionary *)deleteAllNullValue:(NSDictionary *)dic{
+    NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] initWithDictionary:dic];
+    for (NSString *keyStr in mutableDic.allKeys) {
+        if ([[mutableDic objectForKey:keyStr] isEqual:[NSNull null]]) {
+            [mutableDic setObject:@"" forKey:keyStr];
+        }
+        else{
+            [mutableDic setObject:[mutableDic objectForKey:keyStr] forKey:keyStr];
+        }
+    }
+    return mutableDic;
+}
 #pragma mark - 登录
 - (IBAction)loginAction:(id)sender {
     
@@ -56,17 +69,18 @@
             // 是否登录
             self.isLogin = YES;
             [CZProgressHUD hideAfterDelay:2];
+            NSDictionary *userDic = [self deleteAllNullValue:result[@"user"]];
             // 存储user, 都TM存储上了
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"user"] forKey:@"user"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:@"user"];
             // 储存图片
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"user"][@"userNickImg"] forKey:@"userNickImg"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"userNickImg"] forKey:@"userNickImg"];
             // 积分
             [[NSUserDefaults standardUserDefaults] setObject:result[@"points"] forKey:@"point"];
                 
             [[NSUserDefaults standardUserDefaults] setObject:result[@"UserAccountEntity"] forKey:@"Account"];
             // 支付宝账号
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"user"][@"alipayAccount"] forKey:@"alipayPhone"];
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"user"][@"alipayName"] forKey:@"alipayRealName"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayAccount"] forKey:@"alipayPhone"];
+            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayName"] forKey:@"alipayRealName"];
             
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
@@ -123,7 +137,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.userTextField.text = @"13841284944";
+//    self.userTextField.text = @"13841284944";
     //代理方法监听时候都会慢一步
     [self.userTextField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];

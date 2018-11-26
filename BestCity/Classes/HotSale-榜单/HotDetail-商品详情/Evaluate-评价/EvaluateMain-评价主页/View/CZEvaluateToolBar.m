@@ -46,4 +46,10 @@
         self.placeholderLabel.hidden = NO;
     }
 }
+
+- (void)setPlaceHolderText:(NSString *)placeHolderText
+{
+    _placeHolderText = placeHolderText;
+    self.placeholderLabel.text = placeHolderText;
+}
 @end
