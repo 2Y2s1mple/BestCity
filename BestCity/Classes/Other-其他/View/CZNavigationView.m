@@ -50,22 +50,22 @@
         titleLabel.textColor = textColor;
         titleLabel.center = CGPointMake(self.width / 2, leftBtn.center.y);
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:17];
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         [self addSubview:titleLabel];
         
         if (rightBtnTitle) {
             self.rightBlock = rightBtnAction;
             UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            rightBtn.frame = CGRectMake(SCR_WIDTH - 100, 40, 80, 20);
+            rightBtn.frame = CGRectMake(SCR_WIDTH - 100, titleLabel.y, 80, 20);
             [rightBtn setTitle:rightBtnTitle forState:UIControlStateNormal];
             [rightBtn setTitleColor:textColor forState:UIControlStateNormal];
-            rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
             rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             [self addSubview:rightBtn];
             [rightBtn addTarget:self action:@selector(didClickedRightBtn) forControlEvents:UIControlEventTouchUpInside];
         }
         
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(leftBtn) + 10, SCR_WIDTH, 0.7)];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(leftBtn), SCR_WIDTH, 0.7)];
         line.backgroundColor = CZGlobalLightGray;
         line.hidden = linehide;
         [self addSubview:line];

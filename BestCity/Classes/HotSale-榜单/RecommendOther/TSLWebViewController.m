@@ -40,9 +40,13 @@
     _webview.backgroundColor = CZGlobalWhiteBg;
     [self.view addSubview:_webview];
     
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:@"/Users/lgx/Desktop/BestCityProduct/BestCity/Classes/HotSale-榜单/other-其他/File.html"]];
-//    [_webview loadRequest:request];
-    [_webview loadHTMLString:self.stringHtml baseURL:nil];
+
+    if (self.stringHtml) {
+        [_webview loadHTMLString:self.stringHtml baseURL:nil];
+    } else if(self.url) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:self.url];
+        [_webview loadRequest:request];
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -81,6 +85,11 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)dealloc
+{
+    [CZProgressHUD hideAfterDelay:0];
 }
 
 @end

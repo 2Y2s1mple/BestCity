@@ -52,19 +52,6 @@ static id instancet_;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-- (NSDictionary *)deleteAllNullValue:(NSDictionary *)dic{
-    NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] initWithDictionary:dic];
-    for (NSString *keyStr in mutableDic.allKeys) {
-        if ([[mutableDic objectForKey:keyStr] isEqual:[NSNull null]]) {
-            [mutableDic setObject:@"" forKey:keyStr];
-        }
-        else{
-            [mutableDic setObject:[mutableDic objectForKey:keyStr] forKey:keyStr];
-        }
-    }
-    return mutableDic;
-}
 #pragma mark - 登录
 - (IBAction)loginAction:(id)sender {
     
@@ -81,7 +68,7 @@ static id instancet_;
             // 是否登录
             self.isLogin = YES;
             [CZProgressHUD hideAfterDelay:2];
-            NSDictionary *userDic = [self deleteAllNullValue:result[@"user"]];
+            NSDictionary *userDic = [result[@"user"] deleteAllNullValue];
             // 存储user, 都TM存储上了
             [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:@"user"];
             // 储存图片

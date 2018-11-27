@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *commentId;
 /** 文章ID */
 @property (nonatomic, strong) NSString *articId;
-/** 头像 */
-@property (nonatomic, strong) NSString *fromImg;
+///** 头像 */
+//@property (nonatomic, strong) NSString *fromImg;
 /** 名字 */
 @property (nonatomic, strong) NSDictionary *userShopmember;
 /** 内容 */

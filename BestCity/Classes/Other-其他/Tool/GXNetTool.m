@@ -54,7 +54,8 @@
 //    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1";
     param[@"userId"] = USERINFO[@"userId"];
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(responseObject);
+        NSDictionary *result = responseObject;
+        success([result deleteAllNullValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
         NSLog(@"%@", error);
@@ -134,7 +135,9 @@
     
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
        
-        success(responseObject);
+        // 除去NSNUll
+        NSDictionary *result = responseObject;
+        success([result deleteAllNullValue]);
         //隐藏菊花
 //        [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -162,7 +165,8 @@
             [formData appendPartWithFileData:imageData name:@"importFile" fileName:@"imageFile.png" mimeType:@"image/png"];
         }
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(responseObject);
+        NSDictionary *result = responseObject;
+        success([result deleteAllNullValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];

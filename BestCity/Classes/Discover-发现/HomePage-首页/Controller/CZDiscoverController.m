@@ -51,19 +51,35 @@
     return self.mainTitles.count;
 }
 
-- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index
+{
+    CZDiscoverTitleModel *model = self.mainTitles[index];
     switch (index) {
-        case 0:
+        case 0: return [[CZDChoicenessController alloc] init];
+        case 1:
         {
-            CZDiscoverTitleModel *model = self.mainTitles[index];
             CZDChoicenessController *vc = [[CZDChoicenessController alloc] init];
             vc.titleID = model.categoryId;
             return vc;
         }
-        case 1: return [[CZDChoicenessController alloc] init];
-        case 2: return [[CZDChoicenessController alloc] init];
-        case 3: return [[CZDChoicenessController alloc] init];
-        case 4: return [[CZDChoicenessController alloc] init];
+        case 2:
+        {
+            CZDChoicenessController *vc = [[CZDChoicenessController alloc] init];
+            vc.titleID = model.categoryId;
+            return vc;
+        }
+        case 3:
+        {
+            CZDChoicenessController *vc = [[CZDChoicenessController alloc] init];
+            vc.titleID = model.categoryId;
+            return vc;
+        }
+        case 4:
+        {
+            CZDChoicenessController *vc = [[CZDChoicenessController alloc] init];
+            vc.titleID = model.categoryId;
+            return vc;
+        }
     }
     return [[UIViewController alloc] init];
 }

@@ -20,8 +20,7 @@
 #import "GXNetTool.h"
 #import "MJExtension.h"
 
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
+#import "CZOpenAlibcTrade.h"
 
 @interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 滚动视图 */
@@ -84,7 +83,7 @@ static CGFloat const likeAndShareHeight = 49;
     // 标题
     self.recommendDetailModel.mainTitle = self.model.goodsName;
     // 券后价
-    self.recommendDetailModel.actualPrice = self.model.cutPrice;
+    self.recommendDetailModel.actualPrice = self.model.actualPrice;
     // 平台
     NSString *status;
     switch (self.model.sourceStatus) {
@@ -150,48 +149,13 @@ static CGFloat const likeAndShareHeight = 49;
     [self.view addSubview:self.scrollerView];
     
     // 加载数据框
+    __weak typeof(self) weakSelf = self;
     CZShareAndlikeView *likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-        [self.view addSubview:share];
+        [weakSelf.view addSubview:share];
     } rightBtnAction:^{
-        //根据链接打开页面
-        id<AlibcTradePage> page = [AlibcTradePageFactory page: @"https://uland.taobao.com/coupon/edetail?e=wM69ssAE42wN%2BoQUE6FNzL9LZuZAJrjlhJAq7F1uY%2FW2IhUS4bkiA1KHOyVElu2Eg8pBHJnzzOin%2Fh6ekuESQNFKE5I2gZF72IaVVct%2FH6dPoPuk0G3y4%2BjARxA8REx3nEkqICZ7tbKM9pd%2F0R%2BYluy1YQhf8Tm7onv6QcvcARY%3D&af=1&pid=mm_187680147_154700100_46834500420"];
-        //拉起手淘
-        AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
-        showParam.openType = AlibcOpenTypeNative;
-        showParam.backUrl=@"tbopen25025861";
-        showParam.isNeedPush=YES;
-        
-        //淘客信息
-        AlibcTradeTaokeParams *taoKeParams=[[AlibcTradeTaokeParams alloc] init];
-        taoKeParams.pid=nil; //
-        
-        //链路跟踪参数
-        NSDictionary *customParam = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"hello",@"pvid",@"world",@"scm",@"vedio",@"page",@"baichuan",@"subplat",@"trade",@"label",@"ling",@"puid",@"feng",@"pguid",nil];
-        
-        [[AlibcTradeSDK sharedInstance].tradeService show:self page:page showParams:showParam taoKeParams:taoKeParams trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
-            NSLog(@"--------------------");
-            
-            if(tradeProcessResult.result ==AlibcTradeResultTypeAddCard){
-                NSString *tip = [NSString stringWithFormat:@"交易成功:成功的订单%@\n，失败的订单%@\n",[tradeProcessResult payResult].paySuccessOrders, [tradeProcessResult payResult].payFailedOrders];
-                NSLog(@"交易成功 --- %@", tip);
-            } else if(tradeProcessResult.result==AlibcTradeResultTypeAddCard){
-                NSLog(@"加入购物车");
-            }
-            
-            
-        } tradeProcessFailedCallback:^(NSError * _Nullable error) {
-            //        退出交易流程
-            NSLog(@"--------------------");
-            if (error.code==AlibcErrorCancelled) {
-                return ;
-            }
-            NSDictionary *infor = [error userInfo];
-            NSArray *orderid = [infor objectForKey:@"orderIdList"];
-            NSString *tip = [NSString stringWithFormat:@"交易失败:\n订单号\n%@",orderid];
-            NSLog(@"交易失败 -- %@", tip);
-        }];
-        
+        // 打开淘宝
+        [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.recommendDetailModel.goodsBuyLink];
     }];
     [self.view addSubview:likeView];
     
@@ -256,4 +220,5 @@ static CGFloat const likeAndShareHeight = 49;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 @end

@@ -18,9 +18,9 @@
 /** 用户信息 */
 #define USERINFO [[NSUserDefaults standardUserDefaults] objectForKey:@"user"]
 /** 积分规则web */
-#define POINTSRULE_URL @"http://47.92.164.156:8080/jpc-info/src/my/integral-rule.html"
+#define POINTSRULE_URL @"http://www.jipincheng.cn/integral-rule.html"
 /** 用户规则web */
-#define UserAgreement_url @"http://47.92.164.156:8080/jpc-info/src/my/user-agreement.html"
+#define UserAgreement_url @"http://www.jipincheng.cn/user-agreement.html"
 /** 支付宝提现账号记录 */
 #define ALIPAYPhone [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayPhone"]
 #define ALIPAYPREALNAME [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayRealName"]
@@ -79,9 +79,12 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "UIView+GXExtension.h"//为了view.width
 #import "UIImage+CZExtension.h"
 #import "NSString+CZExtension.h" // 为了获取文字高度
+#import "NSDictionary+CZExtension.h" // 出去字典NSNull
 #import "MBProgressHUD.h"
 #import "CZProgressHUD.h"
 #import "CZConst.h"
 #import "CZLoginController.h"
+#import "CZNoDataView.h" // 没有数据的view
+
 /************************************************************/
 #endif 

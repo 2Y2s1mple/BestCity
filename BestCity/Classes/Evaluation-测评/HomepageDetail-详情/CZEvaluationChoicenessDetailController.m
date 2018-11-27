@@ -12,6 +12,7 @@
 #import "CZGiveLikeView.h"
 #import "CZCollectButton.h"
 #import "CZCommentBtn.h"
+#import "CZOpenAlibcTrade.h" // 跳转淘宝
 
 @interface CZEvaluationChoicenessDetailController ()
 /** webView */
@@ -38,6 +39,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.scrollerView];
+    
+    UIButton *btn = [[UIButton alloc] init];
+    [self.view addSubview:btn];
+    btn.y = 35;
+    btn.size = CGSizeMake(50, 50);
+    [btn setImage:IMAGE_NAMED(@"nav-back") forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
+    
     [self obtainMainData];
     
     self.scrollerView.contentSize = CGSizeMake(SCR_WIDTH, SCR_HEIGHT);
@@ -74,13 +83,6 @@
     imageView.width = SCR_WIDTH;
     imageView.height = 314;
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.dicData[@"imgId"]] placeholderImage:IMAGE_NAMED(@"testImage1.png")];
-    
-    UIButton *btn = [[UIButton alloc] init];
-    [imageView addSubview:btn];
-    btn.y = 35;
-    btn.size = CGSizeMake(50, 50);
-    [btn setImage:IMAGE_NAMED(@"nav-back") forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *lightDarkView = [[UIView alloc] init];
     [imageView addSubview:lightDarkView];
@@ -197,9 +199,21 @@
     buyBtn.width = SCR_WIDTH / 4.0;
     buyBtn.height = shareView.height;
     [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+    [buyBtn addTarget:self action:@selector(gotoAlibcTrade) forControlEvents:UIControlEventTouchUpInside];
     buyBtn.backgroundColor = CZREDCOLOR;
 
     
     self.scrollerView.contentSize = CGSizeMake(0, CGRectGetMaxY(likeView.frame));
+}
+
+- (void)gotoAlibcTrade
+{
+    if (self.dicData[@"goodsBuyLink"] != [NSNull null]) {
+        [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dicData[@"goodsBuyLink"]];
+    } else {
+        [CZProgressHUD showProgressHUDWithText:@"商品已下架"];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }
+    
 }
 @end

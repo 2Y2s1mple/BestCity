@@ -47,9 +47,15 @@
     self.view.backgroundColor = CZGlobalWhiteBg;
     //设置scrollerView
     [self.view addSubview:self.scrollerView];
-    
+    UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
+    [self.view addSubview:leftBtn];
     // 获取数据
     [self obtainDetailData];
+}
+
+- (void)popAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 获取数据
@@ -102,12 +108,7 @@
         imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 260);
         [self.scrollerView addSubview:imageView];
     }
-    
-    
-    
-    UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
-    [self.scrollerView addSubview:leftBtn];
-    
+
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 280, SCR_WIDTH - 20, 20)];
     titleLabel.text = self.dicData[@"title"];
     titleLabel.numberOfLines = 0;
@@ -139,11 +140,6 @@
     
     self.likeView.y = CZGetY(self.webView);
     self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.likeView));
-}
-
-- (void)popAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 创建点赞视图

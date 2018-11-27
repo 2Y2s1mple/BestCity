@@ -138,19 +138,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
-    UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
-    if ([dic[@"title"] isEqualToString:@"优惠券"]) {
-        WMPageController *hotVc = (WMPageController *)vc;
-        hotVc.selectIndex = 0;
-        hotVc.menuViewStyle = WMMenuViewStyleLine;
-        hotVc.automaticallyCalculatesItemWidths = YES;
-        hotVc.titleFontName = @"PingFangSC-Medium";
-        hotVc.titleColorNormal = CZGlobalGray;
-        hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
-        hotVc.titleSizeNormal = 15.0f;
-        hotVc.titleSizeSelected = hotVc.titleSizeNormal;
-        hotVc.progressColor = [UIColor redColor];
+    if ([dic[@"destinationVC"] isEqualToString:@"CZBalanceController"]) {
+        [CZProgressHUD showProgressHUDWithText:@"正在开发中..."];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
     }
+    UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
+  
     [self.navigationController pushViewController:vc animated:YES];
 }
 

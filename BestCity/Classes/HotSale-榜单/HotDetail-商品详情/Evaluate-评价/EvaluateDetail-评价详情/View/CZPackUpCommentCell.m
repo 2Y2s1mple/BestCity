@@ -34,7 +34,7 @@
 {
     _contentDic = contentDic;
     self.cellHeight = 40;
-    [self.totalCommentButton setTitle:[NSString stringWithFormat:@"共%ld条回复", [contentDic[@"commentArr"] count]] forState:UIControlStateNormal];
+    [self.totalCommentButton setTitle:[NSString stringWithFormat:@"共%lu条回复", [contentDic[@"commentArr"] count]] forState:UIControlStateNormal];
     
     if ([contentDic[@"packUpStatus"]  isEqual: @"1"]) {
          // 显示更多按钮

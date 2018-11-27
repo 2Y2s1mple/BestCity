@@ -18,7 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "CZCommentModel.h"
 
-@interface CZEvaluateSubController () <UITableViewDelegate, UITableViewDataSource>
+@interface CZEvaluateSubController ()
 /** 评论数据 */
 @property (nonatomic, strong) NSArray *evaluateArr;
 /** 文本框View */
@@ -188,18 +188,18 @@
 - (void)setupTextField
 {
     // 文本框
-    CZEvaluateToolBar *tool = [CZEvaluateToolBar evaluateToolBar];
-    self.tool = tool;
-    tool.block = ^{
+    self.tool = [CZEvaluateToolBar evaluateToolBar];
+    __weak typeof(self) weakSelf = self;
+    self.tool.block = ^{
         NSLog(@"-------");
         [[UIApplication sharedApplication].keyWindow endEditing:YES];
-        if (self.tool.textView.text.length > 0) {
-            [self commentInsert:self.recordModel];
+        if (weakSelf.tool.textView.text.length > 0) {
+            [weakSelf commentInsert:weakSelf.recordModel];
         }
     };
-    tool.autoresizingMask = UIViewAutoresizingNone;
-    tool.frame = CGRectMake(0, SCR_HEIGHT, SCR_WIDTH, 49);
-    [[UIApplication sharedApplication].keyWindow addSubview:tool];
+    self.tool.autoresizingMask = UIViewAutoresizingNone;
+    self.tool.frame = CGRectMake(0, SCR_HEIGHT, SCR_WIDTH, 49);
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tool];
    
 }
 
@@ -253,9 +253,12 @@
 - (void)reply:(CZReplyButton *)sender
 {
     [self.tool.textView becomeFirstResponder];
-    NSLog(@"%@", sender.model.content);
+    NSLog(@"%@ -- %s", sender.model.content, __func__);
+    
+    
     self.recordModel = sender.model;
-    //    self.tool.textView. = [NSString stringWithFormat:@"回复%@:", sender.model.fromNickname];
+    NSString *nickName = sender.model.userShopmember[@"userNickName"] ? sender.model.userShopmember[@"userNickName"] : @"游客";
+    self.tool.placeHolderText = [NSString stringWithFormat:@"回复%@:", nickName];
 }
 
 - (CGFloat)getTextHeight:(NSString *)text widthRectSize:(CGSize)size
@@ -291,7 +294,7 @@
     icon.frame = CGRectMake(10, 0, 38, 38);
     icon.layer.cornerRadius = 19;
     icon.layer.masksToBounds = YES;
-    [icon sd_setImageWithURL:[NSURL URLWithString:model.fromImg] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [icon sd_setImageWithURL:[NSURL URLWithString:model.userShopmember[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     [backview addSubview:icon];
     
     //名字
@@ -392,7 +395,7 @@
     
     // 创建内容
     UIView *replyView = [[UIView alloc] init];
-    replyView.backgroundColor = CZGlobalLightGray;
+    replyView.backgroundColor = UIColorFromRGB(0xF1F1F1);
     replyView.layer.cornerRadius = 5;
     replyView.layer.masksToBounds = YES;
     replyView.x = 58;
@@ -405,6 +408,16 @@
     // 在内容View中加载
      CGFloat replyHeight = 0.0;
     for (NSInteger i = 0; i < maxCommentCount; i++) {
+        if (i == 0) {
+            // 带尖的图片
+            UIImage *image = [UIImage imageNamed:@"LikeCmtBg"];
+            image = [image stretchableImageWithLeftCapWidth:image.size.width * 0.5 topCapHeight:image.size.height * 0.5];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+            imageView.x = 0;
+            imageView.width = replyView.width;
+            imageView.height = 20;
+            [replyView addSubview:imageView];
+        }
         CZCommentModel *commentModel = model.userCommentList[i];
         UILabel *contentLabel = [[UILabel alloc] init];
         [replyView addSubview:contentLabel];
@@ -415,12 +428,12 @@
         contentLabel.width = replyView.width - 20;
         
         
-        NSString *nickName = commentModel.userShopmember[@"userNickName"] ? commentModel.userShopmember[@"userNickName"] : @"***";
+        NSString *nickName = commentModel.userShopmember[@"userNickName"] ? commentModel.userShopmember[@"userNickName"] : @"游客";
         
         NSString *textStr = [NSString stringWithFormat:@"%@ 回复:  %@", nickName, commentModel.content];
         contentLabel.height = [self getTextHeight:textStr widthRectSize:CGSizeMake(contentLabel.width, 10000)];
         NSMutableAttributedString *attriString = [[NSMutableAttributedString alloc] initWithString:textStr];
-        [attriString addAttributes:@{NSForegroundColorAttributeName : CZREDCOLOR} range:[textStr rangeOfString:nickName]];
+        [attriString addAttributes:@{NSForegroundColorAttributeName : CZGlobalGray} range:[textStr rangeOfString:nickName]];
         contentLabel.attributedText = attriString;
         
         replyHeight += contentLabel.height + 5;

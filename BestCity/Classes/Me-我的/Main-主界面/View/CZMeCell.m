@@ -48,13 +48,7 @@
 - (void)setData:(NSDictionary *)data
 {
     _data = data;
-//    self.totalMoney.text =[NSString stringWithFormat:@"总佣金¥%@", data[@"total_account"] == nil ? @"0" : [NSString stringWithFormat:@"%0.2f", [data[@"total_account"] floatValue]]];
-//    self.beingProcessed.text = data[@"state"] == nil ? @"0" : data[@"state"];
-//    self.settleAccount.text = @"0";
-//    self.withdraw.text = [NSString stringWithFormat:@"%@", data[@"use_account"] == nil ? @"0" : data[@"use_account"]];
-//    self.afterSettleAccount.text = [NSString stringWithFormat:@"%@", data[@"unuse_account"] == nil ? @"0" : data[@"unuse_account"]];
-    
-//    [self setupMoney:data];
+
 }
 
 - (void)setupMoney:(NSDictionary *)result

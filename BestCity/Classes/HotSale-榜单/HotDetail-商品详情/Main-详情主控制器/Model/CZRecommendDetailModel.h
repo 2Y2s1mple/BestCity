@@ -23,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *parametersList;
 /** 商品评测数据 */
 @property (nonatomic, strong) NSDictionary *goodsEvalWayEntity;
-
+/** 购买链接 */
+@property (nonatomic, strong) NSString *goodsBuyLink;
 
 /** 辅助 */
 /** 标题 */

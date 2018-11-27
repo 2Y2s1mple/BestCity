@@ -48,7 +48,7 @@ static NSString * const ID = @"myPointCollectionCell";
     
     self.view.backgroundColor = CZGlobalLightGray;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"我的积分" rightBtnTitle:@"积分规则" rightBtnAction:^{
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"我的积分" rightBtnTitle:@"积分规则" rightBtnAction:^{      
         TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:POINTSRULE_URL]];
         webVc.titleName = @"积分规则";
         [self.navigationController pushViewController:webVc animated:YES];

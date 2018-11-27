@@ -51,18 +51,35 @@
     return self.mainTitles.count;
 }
 
-- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index
+{
+    CZEvaluationTitleModel *titleModel = self.mainTitles[index];
     switch (index) {
-        case 0:
+        case 0: return [[CZEvaluationChoicenessController alloc] init];
+        case 1:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = self.mainTitles[index];
+            vc.titleModel = titleModel;
             return vc;
         }
-        case 1: return [[CZEvaluationChoicenessController alloc] init];
-        case 2: return [[CZEvaluationChoicenessController alloc] init];
-        case 3: return [[CZEvaluationChoicenessController alloc] init];
-        case 4: return [[CZEvaluationChoicenessController alloc] init];
+        case 2:
+        {
+            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
+            vc.titleModel = titleModel;
+            return vc;
+        }
+        case 3:
+        {
+            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
+            vc.titleModel = titleModel;
+            return vc;
+        }
+        case 4:
+        {
+            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
+            vc.titleModel = titleModel;
+            return vc;
+        }
     }
     return [[UIViewController alloc] init];
 }

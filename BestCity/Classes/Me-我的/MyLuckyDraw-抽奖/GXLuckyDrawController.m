@@ -449,12 +449,12 @@
             switch (type) {
                 case GXLuckyShowCongratulationSignIn:// 签到
                     // 弹出奖励
-                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您签到成功", @"subTitle" : [NSString stringWithFormat:@"+%ld积分", self.signedPoint]}];
+                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您签到成功", @"subTitle" : [NSString stringWithFormat:@"+%ld积分", (long)self.signedPoint]}];
                     break;
                     
                 case GXLuckyShowCongratulationSignedIn:
                     // 弹出奖励
-                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您补签成功！", @"subTitle" : [NSString stringWithFormat:@"%ld积分", self.signedPoint]}];
+                    [self setupCongratulationsWithImage:[UIImage imageNamed:@"sign in"] param:@{@"title" : @"恭喜您补签成功！", @"subTitle" : [NSString stringWithFormat:@"%ld积分", (long)self.signedPoint]}];
                     break;
                 default:
                     break;

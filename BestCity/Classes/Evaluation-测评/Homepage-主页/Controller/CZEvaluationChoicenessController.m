@@ -21,9 +21,22 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZEvaluationChoicenessController
+#pragma mark - 懒加载
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 220;
+    }
+    return _noDataView;
+}
+
 - (NSMutableArray *)dataSource
 {
     if (_dataSource == nil) {
@@ -69,9 +82,14 @@
     param[@"page"] = @(self.page);
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/evalWay/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
+        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"list"] count] > 0) {
+            // 没有数据图片
+            [self.noDataView removeFromSuperview];
             self.dataSource = [CZEvaluationChoicenessModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
+        } else {
+            // 没有数据图片
+            [self.tableView addSubview:self.noDataView];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
