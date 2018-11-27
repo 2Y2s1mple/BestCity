@@ -12,7 +12,7 @@
 /** 分享时间的block */
 @property (nonatomic, copy) btnClickedBlock shareBlock;
 /** 领券 */
-@property (nonatomic, assign) btnClickedBlock buyBlock;
+@property (nonatomic, copy) btnClickedBlock buyBlock;
 @end
 
 @implementation CZShareAndlikeView

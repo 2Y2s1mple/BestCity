@@ -11,6 +11,24 @@
 		97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */; };
 		970CE6C3219EC52700772D94 /* CZEvaluationChoicenessDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970CE6C2219EC52700772D94 /* CZEvaluationChoicenessDetailController.m */; };
 		970D0AE721AB981500649FC2 /* CZGuideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970D0AE621AB981500649FC2 /* CZGuideController.m */; };
+		970D0B6B21ACE87000649FC2 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5821ACE87000649FC2 /* UTDID.framework */; };
+		970D0B6C21ACE87000649FC2 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5921ACE87000649FC2 /* UTMini.framework */; };
+		970D0B6D21ACE87000649FC2 /* AlibabaAuthExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5B21ACE87000649FC2 /* AlibabaAuthExt.framework */; };
+		970D0B6E21ACE87000649FC2 /* AlibabaAuthSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970D0B5C21ACE87000649FC2 /* AlibabaAuthSDK.bundle */; };
+		970D0B6F21ACE87000649FC2 /* AlibabaAuthSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5D21ACE87000649FC2 /* AlibabaAuthSDK.framework */; };
+		970D0B7021ACE87000649FC2 /* OpenMtopSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5F21ACE87000649FC2 /* OpenMtopSDK.framework */; };
+		970D0B7121ACE87000649FC2 /* OpenMtopExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6021ACE87000649FC2 /* OpenMtopExt.framework */; };
+		970D0B7221ACE87000649FC2 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6221ACE87000649FC2 /* SecurityGuardSDK.framework */; };
+		970D0B7321ACE87000649FC2 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6321ACE87000649FC2 /* SGMain.framework */; };
+		970D0B7421ACE87000649FC2 /* AlibcTradeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6521ACE87000649FC2 /* AlibcTradeSDK.framework */; };
+		970D0B7521ACE87000649FC2 /* AlibcLinkPartnerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6621ACE87000649FC2 /* AlibcLinkPartnerSDK.framework */; };
+		970D0B7621ACE87000649FC2 /* AlibcTradeBiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6721ACE87000649FC2 /* AlibcTradeBiz.framework */; };
+		970D0B7721ACE87000649FC2 /* AlibcTradeCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */; };
+		970D0B7821ACE87000649FC2 /* TUnionTradeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */; };
+		970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970D0B6A21ACE87000649FC2 /* NBResource.bundle */; };
+		970D0B7B21ACE87900649FC2 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 970D0B7A21ACE87800649FC2 /* yw_1222.jpg */; };
+		970D0B7D21ACE90D00649FC2 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */; };
+		970D0B7F21ACE96D00649FC2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B7E21ACE96D00649FC2 /* libc++.tbd */; };
 		970D727D219AFA3700353C06 /* CZCommentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 970D727C219AFA3700353C06 /* CZCommentDetailView.m */; };
 		971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C19EC21706B1400E6D864 /* CZPointDetailModel.m */; };
 		971CBEC821917B6300E4590B /* CZHotTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 971CBEC721917B6300E4590B /* CZHotTagsView.m */; };
@@ -112,7 +130,6 @@
 		977864A1211A7AD6001B41F1 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 97786497211A7AD6001B41F1 /* MASViewConstraint.m */; };
 		977864A2211A7AD6001B41F1 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 97786498211A7AD6001B41F1 /* MASViewAttribute.m */; };
 		977864AB211AC0A0001B41F1 /* CZDatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977864AA211AC0A0001B41F1 /* CZDatePickView.m */; };
-		977864AF211AE0BC001B41F1 /* JCTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 977864AD211AE0BC001B41F1 /* JCTopic.m */; };
 		97798C7A212CF4430052CE94 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97798C77212CF4430052CE94 /* SVProgressHUD.m */; };
 		97798C7B212CF4430052CE94 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97798C78212CF4430052CE94 /* SVIndefiniteAnimatedView.m */; };
 		97798C7C212CF4430052CE94 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97798C79212CF4430052CE94 /* SVProgressHUD.bundle */; };
@@ -282,6 +299,9 @@
 		97F0EC3C212569C4000FE1DC /* CZSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F0EC3B212569C4000FE1DC /* CZSaveTool.m */; };
 		97F152FF21097A24009F7922 /* CZCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F152FE21097A24009F7922 /* CZCommodityView.m */; };
 		97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F1530021097A75009F7922 /* CZCommodityView.xib */; };
+		97F71B9F21AD21A7005BCAC3 /* PlanPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F71B9B21AD21A6005BCAC3 /* PlanPageControl.m */; };
+		97F71BA021AD21A7005BCAC3 /* PlanADScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F71B9C21AD21A6005BCAC3 /* PlanADScrollView.m */; };
+		97F71BA121AD21A7005BCAC3 /* PlanADCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F71B9E21AD21A6005BCAC3 /* PlanADCollectionViewCell.m */; };
 		97FC29F32109C62D003AE857 /* CZPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FC29F22109C62D003AE857 /* CZPointView.m */; };
 		97FCA05121840011003006D0 /* CZHotScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FCA05021840011003006D0 /* CZHotScoreModel.m */; };
 		97FF6DD22117FAD800376435 /* backshadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 97FF6DD12117FAD800376435 /* backshadow.png */; };
@@ -308,6 +328,24 @@
 		970CE6C2219EC52700772D94 /* CZEvaluationChoicenessDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEvaluationChoicenessDetailController.m; sourceTree = "<group>"; };
 		970D0AE521AB981500649FC2 /* CZGuideController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZGuideController.h; sourceTree = "<group>"; };
 		970D0AE621AB981500649FC2 /* CZGuideController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZGuideController.m; sourceTree = "<group>"; };
+		970D0B5821ACE87000649FC2 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
+		970D0B5921ACE87000649FC2 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
+		970D0B5B21ACE87000649FC2 /* AlibabaAuthExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibabaAuthExt.framework; sourceTree = "<group>"; };
+		970D0B5C21ACE87000649FC2 /* AlibabaAuthSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlibabaAuthSDK.bundle; sourceTree = "<group>"; };
+		970D0B5D21ACE87000649FC2 /* AlibabaAuthSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibabaAuthSDK.framework; sourceTree = "<group>"; };
+		970D0B5F21ACE87000649FC2 /* OpenMtopSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenMtopSDK.framework; sourceTree = "<group>"; };
+		970D0B6021ACE87000649FC2 /* OpenMtopExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenMtopExt.framework; sourceTree = "<group>"; };
+		970D0B6221ACE87000649FC2 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
+		970D0B6321ACE87000649FC2 /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
+		970D0B6521ACE87000649FC2 /* AlibcTradeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeSDK.framework; sourceTree = "<group>"; };
+		970D0B6621ACE87000649FC2 /* AlibcLinkPartnerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcLinkPartnerSDK.framework; sourceTree = "<group>"; };
+		970D0B6721ACE87000649FC2 /* AlibcTradeBiz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeBiz.framework; sourceTree = "<group>"; };
+		970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeCommon.framework; sourceTree = "<group>"; };
+		970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TUnionTradeSDK.framework; sourceTree = "<group>"; };
+		970D0B6A21ACE87000649FC2 /* NBResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NBResource.bundle; sourceTree = "<group>"; };
+		970D0B7A21ACE87800649FC2 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
+		970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		970D0B7E21ACE96D00649FC2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		970D727B219AFA3700353C06 /* CZCommentDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommentDetailView.h; sourceTree = "<group>"; };
 		970D727C219AFA3700353C06 /* CZCommentDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommentDetailView.m; sourceTree = "<group>"; };
 		971C19EB21706B1400E6D864 /* CZPointDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointDetailModel.h; sourceTree = "<group>"; };
@@ -495,8 +533,6 @@
 		97786498211A7AD6001B41F1 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
 		977864A9211AC0A0001B41F1 /* CZDatePickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZDatePickView.h; sourceTree = "<group>"; };
 		977864AA211AC0A0001B41F1 /* CZDatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZDatePickView.m; sourceTree = "<group>"; };
-		977864AD211AE0BC001B41F1 /* JCTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCTopic.m; sourceTree = "<group>"; };
-		977864AE211AE0BC001B41F1 /* JCTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCTopic.h; sourceTree = "<group>"; };
 		97798C75212CF4430052CE94 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		97798C76212CF4430052CE94 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		97798C77212CF4430052CE94 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -799,6 +835,12 @@
 		97F152FD21097A24009F7922 /* CZCommodityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommodityView.h; sourceTree = "<group>"; };
 		97F152FE21097A24009F7922 /* CZCommodityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommodityView.m; sourceTree = "<group>"; };
 		97F1530021097A75009F7922 /* CZCommodityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCommodityView.xib; sourceTree = "<group>"; };
+		97F71B9921AD21A6005BCAC3 /* PlanADScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanADScrollView.h; sourceTree = "<group>"; };
+		97F71B9A21AD21A6005BCAC3 /* PlanADCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanADCollectionViewCell.h; sourceTree = "<group>"; };
+		97F71B9B21AD21A6005BCAC3 /* PlanPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanPageControl.m; sourceTree = "<group>"; };
+		97F71B9C21AD21A6005BCAC3 /* PlanADScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanADScrollView.m; sourceTree = "<group>"; };
+		97F71B9D21AD21A6005BCAC3 /* PlanPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanPageControl.h; sourceTree = "<group>"; };
+		97F71B9E21AD21A6005BCAC3 /* PlanADCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanADCollectionViewCell.m; sourceTree = "<group>"; };
 		97FC29F12109C62D003AE857 /* CZPointView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointView.h; sourceTree = "<group>"; };
 		97FC29F22109C62D003AE857 /* CZPointView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZPointView.m; sourceTree = "<group>"; };
 		97FCA04F21840011003006D0 /* CZHotScoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotScoreModel.h; sourceTree = "<group>"; };
@@ -831,23 +873,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97F0EC2F21251E6B000FE1DC /* Photos.framework in Frameworks */,
 				97F0EC2E21251CFE000FE1DC /* libsqlite3.tbd in Frameworks */,
+				970D0B7D21ACE90D00649FC2 /* CoreMotion.framework in Frameworks */,
+				974C586F21229FAB008B3E6A /* libz.tbd in Frameworks */,
+				970D0B7F21ACE96D00649FC2 /* libc++.tbd in Frameworks */,
+				974C586D21229F9F008B3E6A /* Security.framework in Frameworks */,
+				974C586321229F6D008B3E6A /* CFNetwork.framework in Frameworks */,
+				974C586721229F7E008B3E6A /* CoreTelephony.framework in Frameworks */,
+				970D0B7521ACE87000649FC2 /* AlibcLinkPartnerSDK.framework in Frameworks */,
+				974C586921229F87008B3E6A /* SystemConfiguration.framework in Frameworks */,
+				970D0B7121ACE87000649FC2 /* OpenMtopExt.framework in Frameworks */,
+				970D0B7421ACE87000649FC2 /* AlibcTradeSDK.framework in Frameworks */,
+				970D0B7621ACE87000649FC2 /* AlibcTradeBiz.framework in Frameworks */,
+				970D0B7221ACE87000649FC2 /* SecurityGuardSDK.framework in Frameworks */,
+				970D0B7021ACE87000649FC2 /* OpenMtopSDK.framework in Frameworks */,
+				970D0B7321ACE87000649FC2 /* SGMain.framework in Frameworks */,
+				970D0B6D21ACE87000649FC2 /* AlibabaAuthExt.framework in Frameworks */,
+				970D0B6F21ACE87000649FC2 /* AlibabaAuthSDK.framework in Frameworks */,
+				970D0B6C21ACE87000649FC2 /* UTMini.framework in Frameworks */,
+				970D0B7721ACE87000649FC2 /* AlibcTradeCommon.framework in Frameworks */,
+				97F0EC27212512B6000FE1DC /* UTDID.framework in Frameworks */,
+				970D0B7821ACE87000649FC2 /* TUnionTradeSDK.framework in Frameworks */,
+				97F0EC2F21251E6B000FE1DC /* Photos.framework in Frameworks */,
 				97F0EC25212512B6000FE1DC /* libSocialQQ.a in Frameworks */,
 				974C587321229FD0008B3E6A /* UserNotifications.framework in Frameworks */,
 				97F0EC28212512B6000FE1DC /* SecurityEnvSDK.framework in Frameworks */,
+				970D0B6B21ACE87000649FC2 /* UTDID.framework in Frameworks */,
 				974C587121229FC4008B3E6A /* libresolv.tbd in Frameworks */,
-				974C586F21229FAB008B3E6A /* libz.tbd in Frameworks */,
-				974C586D21229F9F008B3E6A /* Security.framework in Frameworks */,
 				97F0EC22212512B6000FE1DC /* UMShare.framework in Frameworks */,
 				97F0EC26212512B6000FE1DC /* UMCommon.framework in Frameworks */,
 				974C586B21229F91008B3E6A /* CoreGraphics.framework in Frameworks */,
-				974C586921229F87008B3E6A /* SystemConfiguration.framework in Frameworks */,
 				97F0EC24212512B6000FE1DC /* libSocialSina.a in Frameworks */,
-				974C586721229F7E008B3E6A /* CoreTelephony.framework in Frameworks */,
 				974C586521229F76008B3E6A /* CoreFoundation.framework in Frameworks */,
-				974C586321229F6D008B3E6A /* CFNetwork.framework in Frameworks */,
-				97F0EC27212512B6000FE1DC /* UTDID.framework in Frameworks */,
 				974C585E21229EE4008B3E6A /* jpush-extension-ios-1.1.1.a in Frameworks */,
 				97F0EC21212512B6000FE1DC /* UShareUI.framework in Frameworks */,
 				974C586021229EE4008B3E6A /* jcore-ios-1.2.1.a in Frameworks */,
@@ -944,6 +1001,77 @@
 				97705CC02108250000485D64 /* CZOneController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		970D0B5521ACE84900649FC2 /* 百川 */ = {
+			isa = PBXGroup;
+			children = (
+				970D0B7A21ACE87800649FC2 /* yw_1222.jpg */,
+				970D0B5621ACE87000649FC2 /* 电商必选组件 */,
+			);
+			path = "百川";
+			sourceTree = "<group>";
+		};
+		970D0B5621ACE87000649FC2 /* 电商必选组件 */ = {
+			isa = PBXGroup;
+			children = (
+				970D0B5721ACE87000649FC2 /* UT */,
+				970D0B5A21ACE87000649FC2 /* 登录授权 */,
+				970D0B5E21ACE87000649FC2 /* mtop */,
+				970D0B6121ACE87000649FC2 /* 基础安全组件 */,
+				970D0B6421ACE87000649FC2 /* 电商基础组件 */,
+			);
+			path = "电商必选组件";
+			sourceTree = "<group>";
+		};
+		970D0B5721ACE87000649FC2 /* UT */ = {
+			isa = PBXGroup;
+			children = (
+				970D0B5821ACE87000649FC2 /* UTDID.framework */,
+				970D0B5921ACE87000649FC2 /* UTMini.framework */,
+			);
+			path = UT;
+			sourceTree = "<group>";
+		};
+		970D0B5A21ACE87000649FC2 /* 登录授权 */ = {
+			isa = PBXGroup;
+			children = (
+				970D0B5B21ACE87000649FC2 /* AlibabaAuthExt.framework */,
+				970D0B5C21ACE87000649FC2 /* AlibabaAuthSDK.bundle */,
+				970D0B5D21ACE87000649FC2 /* AlibabaAuthSDK.framework */,
+			);
+			path = "登录授权";
+			sourceTree = "<group>";
+		};
+		970D0B5E21ACE87000649FC2 /* mtop */ = {
+			isa = PBXGroup;
+			children = (
+				970D0B5F21ACE87000649FC2 /* OpenMtopSDK.framework */,
+				970D0B6021ACE87000649FC2 /* OpenMtopExt.framework */,
+			);
+			path = mtop;
+			sourceTree = "<group>";
+		};
+		970D0B6121ACE87000649FC2 /* 基础安全组件 */ = {
+			isa = PBXGroup;
+			children = (
+				970D0B6221ACE87000649FC2 /* SecurityGuardSDK.framework */,
+				970D0B6321ACE87000649FC2 /* SGMain.framework */,
+			);
+			path = "基础安全组件";
+			sourceTree = "<group>";
+		};
+		970D0B6421ACE87000649FC2 /* 电商基础组件 */ = {
+			isa = PBXGroup;
+			children = (
+				970D0B6521ACE87000649FC2 /* AlibcTradeSDK.framework */,
+				970D0B6621ACE87000649FC2 /* AlibcLinkPartnerSDK.framework */,
+				970D0B6721ACE87000649FC2 /* AlibcTradeBiz.framework */,
+				970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */,
+				970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */,
+				970D0B6A21ACE87000649FC2 /* NBResource.bundle */,
+			);
+			path = "电商基础组件";
 			sourceTree = "<group>";
 		};
 		971C19EA21706AE800E6D864 /* Model */ = {
@@ -1136,6 +1264,8 @@
 		974C586121229F6C008B3E6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				970D0B7E21ACE96D00649FC2 /* libc++.tbd */,
+				970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */,
 				97F0EC2D21251CFE000FE1DC /* libsqlite3.tbd */,
 				974C58912122D4F7008B3E6A /* Photos.framework */,
 				974C588F2122D4DD008B3E6A /* libsqlite3.0.tbd */,
@@ -1540,6 +1670,7 @@
 		97705C5A2107170F00485D64 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				970D0B5521ACE84900649FC2 /* 百川 */,
 				97C7FF09216DDDB50091DC07 /* MJRefresh */,
 				97C7FEEF216DDDAA0091DC07 /* MJExtension */,
 				97798C7D212D0FC90052CE94 /* SDWebImage */,
@@ -1547,7 +1678,7 @@
 				97F0EC0121251187000FE1DC /* 友盟 */,
 				974C585721229E86008B3E6A /* 极光 */,
 				97C85138211C1B9D005540D8 /* MBProgress */,
-				977864AC211AE0BC001B41F1 /* JCTopic */,
+				97F71B9821AD21A6005BCAC3 /* PlanADScrollView */,
 				9778647F211A7AD6001B41F1 /* Masonry */,
 				97BC05CE2112B122001ED65A /* DLIDEKeyboard */,
 				97705CAB2108230F00485D64 /* WMPageController */,
@@ -1668,15 +1799,6 @@
 				97786498211A7AD6001B41F1 /* MASViewAttribute.m */,
 			);
 			path = Masonry;
-			sourceTree = "<group>";
-		};
-		977864AC211AE0BC001B41F1 /* JCTopic */ = {
-			isa = PBXGroup;
-			children = (
-				977864AD211AE0BC001B41F1 /* JCTopic.m */,
-				977864AE211AE0BC001B41F1 /* JCTopic.h */,
-			);
-			path = JCTopic;
 			sourceTree = "<group>";
 		};
 		97798C74212CF4430052CE94 /* SVProgressHUD */ = {
@@ -2492,6 +2614,19 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		97F71B9821AD21A6005BCAC3 /* PlanADScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				97F71B9D21AD21A6005BCAC3 /* PlanPageControl.h */,
+				97F71B9B21AD21A6005BCAC3 /* PlanPageControl.m */,
+				97F71B9921AD21A6005BCAC3 /* PlanADScrollView.h */,
+				97F71B9C21AD21A6005BCAC3 /* PlanADScrollView.m */,
+				97F71B9A21AD21A6005BCAC3 /* PlanADCollectionViewCell.h */,
+				97F71B9E21AD21A6005BCAC3 /* PlanADCollectionViewCell.m */,
+			);
+			path = PlanADScrollView;
+			sourceTree = "<group>";
+		};
 		97FF6DE12118450900376435 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2629,6 +2764,7 @@
 				972E41B82114636100BC751C /* CZMyPointsCell.xib in Resources */,
 				97FF6DD22117FAD800376435 /* backshadow.png in Resources */,
 				97BC05DE2112B122001ED65A /* keyboard.png in Resources */,
+				970D0B6E21ACE87000649FC2 /* AlibabaAuthSDK.bundle in Resources */,
 				97BC05DD2112B122001ED65A /* key.png in Resources */,
 				97D8FCC82111796600D8ED8F /* CZMeArrow.plist in Resources */,
 				97ED11F3211582910003E0F7 /* CZAttentionCell.xib in Resources */,
@@ -2640,6 +2776,7 @@
 				972E41A321142CD700BC751C /* CZCreditorController.xib in Resources */,
 				97BC05E72112CF7E001ED65A /* CZMembershipController.xib in Resources */,
 				97FF6DF9211862EF00376435 /* CZfeedbackController.xib in Resources */,
+				970D0B7B21ACE87900649FC2 /* yw_1222.jpg in Resources */,
 				97BC05DF2112B122001ED65A /* key-blue@2x.png in Resources */,
 				97FF6DED211849A300376435 /* CZCollectCell.xib in Resources */,
 				97BC05E02112B122001ED65A /* key-pressed.png in Resources */,
@@ -2658,6 +2795,7 @@
 				97705C142107068F00485D64 /* Assets.xcassets in Resources */,
 				971E562421870CE400C1A03D /* File.html in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
+				970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */,
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
@@ -2799,10 +2937,10 @@
 				97BB48092133AB6B006AE982 /* CZCommoditySubController.m in Sources */,
 				97705C6C2107172A00485D64 /* AFURLSessionManager.m in Sources */,
 				9778649C211A7AD6001B41F1 /* MASConstraintMaker.m in Sources */,
-				977864AF211AE0BC001B41F1 /* JCTopic.m in Sources */,
 				97798CCC212D0FC90052CE94 /* SDAnimatedImageRep.m in Sources */,
 				972E41D121147C6F00BC751C /* CZDiscountCouponController.m in Sources */,
 				977864A1211A7AD6001B41F1 /* MASViewConstraint.m in Sources */,
+				97F71B9F21AD21A7005BCAC3 /* PlanPageControl.m in Sources */,
 				97ECD7752121276800D07ABE /* CZHotsaleSearchController.m in Sources */,
 				979B05C7210E9CC70023292D /* CZRecommendNav.m in Sources */,
 				97705CBD2108230F00485D64 /* WMMenuView.m in Sources */,
@@ -2817,6 +2955,7 @@
 				97798CD3212D0FC90052CE94 /* SDWebImageGIFCoder.m in Sources */,
 				97C85137211C174F005540D8 /* CZLabel.m in Sources */,
 				97ED11F621158AB70003E0F7 /* CZAttentionDetailController.m in Sources */,
+				97F71BA121AD21A7005BCAC3 /* PlanADCollectionViewCell.m in Sources */,
 				97798CD5212D0FC90052CE94 /* UIView+WebCacheOperation.m in Sources */,
 				97FC29F32109C62D003AE857 /* CZPointView.m in Sources */,
 				977864A2211A7AD6001B41F1 /* MASViewAttribute.m in Sources */,
@@ -2857,6 +2996,7 @@
 				97705C6F2107172A00485D64 /* AFSecurityPolicy.m in Sources */,
 				972E41AB21143E0A00BC751C /* CZMoneySourceCell.m in Sources */,
 				974A3426212C30EA009192E3 /* GXNetTool.m in Sources */,
+				97F71BA021AD21A7005BCAC3 /* PlanADScrollView.m in Sources */,
 				97ED11F2211582910003E0F7 /* CZAttentionCell.m in Sources */,
 				97C7FF3D216DDDB50091DC07 /* UIView+MJExtension.m in Sources */,
 				97C7FF05216DDDAB0091DC07 /* NSObject+MJCoding.m in Sources */,
@@ -3043,12 +3183,18 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G583M5JELZ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/UMSocialUI",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/thirdparties/thirdparties_ios_1.0.5",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -3065,6 +3211,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-force_load",
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/WeChat/libSocialWeChat.a",
@@ -3072,6 +3219,33 @@
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/Sina/libSocialSina.a",
 					"-force_load",
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ/libSocialQQ.a",
+					"-lstdc++",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTDID.framework/UTDID\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTMini.framework/UTMini\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthExt.framework/AlibabaAuthExt\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthSDK.framework/AlibabaAuthSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopSDK.framework/OpenMtopSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopExt.framework/OpenMtopExt\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SecurityGuardSDK.framework/SecurityGuardSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SGMain.framework/SGMain\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeSDK.framework/AlibcTradeSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcLinkPartnerSDK.framework/AlibcLinkPartnerSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeBiz.framework/AlibcTradeBiz\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeCommon.framework/AlibcTradeCommon\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/TUnionTradeSDK.framework/TUnionTradeSDK\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qualityshop.platform;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3089,12 +3263,18 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G583M5JELZ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/UMSocialUI",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/thirdparties/thirdparties_ios_1.0.5",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -3111,6 +3291,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-force_load",
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/WeChat/libSocialWeChat.a",
@@ -3118,6 +3299,33 @@
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/Sina/libSocialSina.a",
 					"-force_load",
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ/libSocialQQ.a",
+					"-lstdc++",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTDID.framework/UTDID\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTMini.framework/UTMini\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthExt.framework/AlibabaAuthExt\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthSDK.framework/AlibabaAuthSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopSDK.framework/OpenMtopSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopExt.framework/OpenMtopExt\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SecurityGuardSDK.framework/SecurityGuardSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SGMain.framework/SGMain\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeSDK.framework/AlibcTradeSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcLinkPartnerSDK.framework/AlibcLinkPartnerSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeBiz.framework/AlibcTradeBiz\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeCommon.framework/AlibcTradeCommon\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/TUnionTradeSDK.framework/TUnionTradeSDK\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qualityshop.platform;
 				PRODUCT_NAME = "$(TARGET_NAME)";

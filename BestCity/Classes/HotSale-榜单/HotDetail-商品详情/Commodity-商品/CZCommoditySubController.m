@@ -7,15 +7,17 @@
 //
 
 #import "CZCommoditySubController.h"
-#import "JCTopic.h"
+
 #import "CZCommodityView.h"
 #import "CZPointView.h"
 #import "CZRecommendDetailModel.h"
 #import "CZRecommendListModel.h"
+#import "PlanADScrollView.h"
+
 
 @interface CZCommoditySubController ()
 /** 轮播图 */
-@property(nonatomic,strong)JCTopic *Topic_JC;
+
 
 
 @end
@@ -31,25 +33,6 @@
     return _scrollerView;
 }
 
--(JCTopic *)Topic_JC
-{
-    
-    if(!_Topic_JC)
-    {
-        // 轮播图
-        _Topic_JC = [[JCTopic alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, FSS(410))];
-        _Topic_JC.rect = CGRectMake(0, 0, SCR_WIDTH, 410);
-        _Topic_JC.backgroundColor = CZGlobalWhiteBg;
-        _Topic_JC.scrollView = self.scrollerView;
-        self.Topic_JC.pics = @[
-                                   @{@"pic":IMAGE_NAMED(@"testImage1.png"), @"isLoc":@YES},
-                                   @{@"pic":IMAGE_NAMED(@"testImage2.png"), @"isLoc":@YES},
-                                   /**@{@"pic":IMAGE_NAMED(@"testImage3.png"), @"isLoc":@YES}*/];
-        [self.Topic_JC upDate];
-    }
-    return _Topic_JC;
-}
-
 - (void)setModel:(CZRecommendDetailModel *)model
 {
     _model = model;
@@ -61,26 +44,39 @@
     self.view.backgroundColor = CZGlobalWhiteBg;
     // 设置scrollerView
     [self.view addSubview:self.scrollerView];
-    // 加载轮播图
-    [self.scrollerView addSubview:self.Topic_JC];
 }
 
 - (void)setupView
 {
-    /**加载商品*/
-//    if (self.model.imgList.count > 0) {
-//        NSMutableArray *imagePaths = [NSMutableArray array];
-//        for (NSDictionary *dic in self.model.imgList) {
-//            NSDictionary *subDic = @{
-//                                     @"pic" : dic[@"imgPath"],
-//                                     @"isLoc" : @NO
-//                                     };
-//            [imagePaths addObject:subDic];
-//        }
-//        _Topic_JC.pics = imagePaths;
-//        [self.Topic_JC upDate];
-//        
-//    }
+    /**加载轮播图*/
+    if (self.model.imgList.count > 0) {
+        NSMutableArray *imagePaths = [NSMutableArray array];
+        for (NSDictionary *dic in self.model.imgList) {
+            [imagePaths addObject:dic[@"imgPath"]];
+        }
+        if (imagePaths.count == 1) {
+            //初始化控件
+            UIImageView *imageView = [[UIImageView alloc] init];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[imagePaths firstObject]] placeholderImage:IMAGE_NAMED(@"headDefault")];
+            imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 410);
+            [self.view addSubview:imageView];
+            
+        } else {
+            //初始化控件
+            PlanADScrollView *ad =[[PlanADScrollView alloc]initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 410)imageUrls:imagePaths placeholderimage:IMAGE_NAMED(@"headDefault")];
+            [self.view addSubview:ad];
+        }
+        
+    } else {
+        //初始化控件
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headDefault"]];
+        imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 410);
+        [self.view addSubview:imageView];
+    }
+    
+    
+    
+
     
     
     //设置商品的标题

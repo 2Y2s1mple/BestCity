@@ -7,7 +7,7 @@
 //
 
 #import "CZDChoiceDetailController.h"
-#import "JCTopic.h"
+#import "PlanADScrollView.h"
 #import "UIButton+CZExtension.h"
 #import "UIImageView+WebCache.h"
 #import "GXNetTool.h"
@@ -16,8 +16,6 @@
 #import "CZCommentBtn.h"
 
 @interface CZDChoiceDetailController () <UIWebViewDelegate>
-/** 轮播图 */
-@property(nonatomic,strong)JCTopic *Topic_JC;
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
 /** 记录高度 */
@@ -31,20 +29,7 @@
 @end
 
 @implementation CZDChoiceDetailController
-#pragma mark - 懒加载
--(JCTopic *)Topic_JC
-{
-    if(!_Topic_JC)
-    {
-        // 轮播图
-        _Topic_JC = [[JCTopic alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 260)];
-        _Topic_JC.rect = CGRectMake(0, 0, SCR_WIDTH, 260);
-        _Topic_JC.backgroundColor = [UIColor whiteColor];
-        _Topic_JC.scrollView = self.scrollerView;
-        
-    }
-    return _Topic_JC;
-}
+
 
 - (UIScrollView *)scrollerView
 {
@@ -91,15 +76,34 @@
 #pragma mark - 创建内容视图
 - (void)setupTopView
 {
-    // 轮播图
-    [self.scrollerView addSubview:self.Topic_JC];
+    
     NSMutableArray *imagePaths = [NSMutableArray array];
     for (NSDictionary *imageDic in self.dicData[@"imgList"]) {
-        NSDictionary *picDic = @{@"pic" : imageDic[@"imgPath"], @"isLoc" : @NO};
-        [imagePaths addObject:picDic];
+        [imagePaths addObject:imageDic[@"imgPath"]];
     }
-    self.Topic_JC.pics = imagePaths;
-    [self.Topic_JC upDate];
+    // 轮播图
+    if (imagePaths.count > 0) {
+        if (imagePaths.count == 1) {
+            //初始化控件
+            UIImageView *imageView = [[UIImageView alloc] init];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[imagePaths firstObject]] placeholderImage:IMAGE_NAMED(@"headDefault")];
+            imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 260);
+            [self.scrollerView addSubview:imageView];
+            
+        } else {
+            //初始化控件
+            PlanADScrollView *ad =[[PlanADScrollView alloc]initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 260) imageUrls:imagePaths placeholderimage:IMAGE_NAMED(@"headDefault")];
+            [self.scrollerView addSubview:ad];
+        }
+        
+    } else {
+        //初始化控件
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headDefault"]];
+        imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 260);
+        [self.scrollerView addSubview:imageView];
+    }
+    
+    
     
     UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
     [self.scrollerView addSubview:leftBtn];

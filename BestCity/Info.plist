@@ -46,6 +46,14 @@
 				<string>QQ42060309</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tbopen25025861</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -147,6 +155,8 @@
 		<string>vkauthorize</string>
 		<string>twitter</string>
 		<string>twitterauth</string>
+		<string>tbopen</string>
+		<string>tmall</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
