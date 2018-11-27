@@ -30,10 +30,7 @@
     }
     return _scrollerView;
 }
-//    self.Topic_JC.pics = @[
-//                           @{@"pic":IMAGE_NAMED(@"testImage1.png"), @"isLoc":@YES},
-//                           @{@"pic":IMAGE_NAMED(@"testImage2.png"), @"isLoc":@YES},
-//                           @{@"pic":IMAGE_NAMED(@"testImage3.png"), @"isLoc":@YES}];
+
 -(JCTopic *)Topic_JC
 {
     
@@ -43,18 +40,11 @@
         _Topic_JC = [[JCTopic alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, FSS(410))];
         _Topic_JC.rect = CGRectMake(0, 0, SCR_WIDTH, 410);
         _Topic_JC.backgroundColor = CZGlobalWhiteBg;
-        _Topic_JC.totalNum = 3;
-        _Topic_JC.type = JCTopicMiddle;
         _Topic_JC.scrollView = self.scrollerView;
-        NSMutableArray *imagePaths = [NSMutableArray array];
-        for (NSDictionary *dic in self.model.imgList) {
-            NSDictionary *subDic = @{
-                                     @"pic" : dic[@"imgPath"],
-                                     @"isLoc" : @NO
-                                     };
-            [imagePaths addObject:subDic];
-        }
-        _Topic_JC.pics = imagePaths;
+        self.Topic_JC.pics = @[
+                                   @{@"pic":IMAGE_NAMED(@"testImage1.png"), @"isLoc":@YES},
+                                   @{@"pic":IMAGE_NAMED(@"testImage2.png"), @"isLoc":@YES},
+                                   /**@{@"pic":IMAGE_NAMED(@"testImage3.png"), @"isLoc":@YES}*/];
         [self.Topic_JC upDate];
     }
     return _Topic_JC;
@@ -69,15 +59,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
-    //设置scrollerView
+    // 设置scrollerView
     [self.view addSubview:self.scrollerView];
+    // 加载轮播图
+    [self.scrollerView addSubview:self.Topic_JC];
 }
 
 - (void)setupView
 {
     /**加载商品*/
-    //记载轮播图
-    [self.scrollerView addSubview:self.Topic_JC];
+//    if (self.model.imgList.count > 0) {
+//        NSMutableArray *imagePaths = [NSMutableArray array];
+//        for (NSDictionary *dic in self.model.imgList) {
+//            NSDictionary *subDic = @{
+//                                     @"pic" : dic[@"imgPath"],
+//                                     @"isLoc" : @NO
+//                                     };
+//            [imagePaths addObject:subDic];
+//        }
+//        _Topic_JC.pics = imagePaths;
+//        [self.Topic_JC upDate];
+//        
+//    }
+    
     
     //设置商品的标题
     CZCommodityView *commodity = [[CZCommodityView alloc] init];

@@ -47,20 +47,15 @@
 #pragma mark - 跳转到我的资料
 - (void)pushMyProfileVc
 {
-    // 用名字字段判断, 没有登录时, 跳转到登录界面
-    if ([USERINFO[@"userNickName"] length] != 0) {
-        CZMyProfileController *vc = [[CZMyProfileController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        CZLoginController *vc = [[CZLoginController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    CZMyProfileController *vc = [[CZMyProfileController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+   
 }
 
 #pragma mark - 跳转到登陆
 - (IBAction)loginAction:(UIButton *)sender {
-    CZLoginController *vc = [[CZLoginController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    CZLoginController *vc = [CZLoginController shareLoginController];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - 跳转到抽奖

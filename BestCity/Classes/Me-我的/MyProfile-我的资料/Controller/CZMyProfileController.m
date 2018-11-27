@@ -88,7 +88,7 @@
         // 删除账户余额信息
         [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"Account"];
         // 返回上一页
-        CZLoginController *vc = [[CZLoginController alloc] init];
+        CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
     }];
 }

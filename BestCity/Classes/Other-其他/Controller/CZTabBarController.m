@@ -55,7 +55,7 @@
 {
     NSLog(@"%ld", tabBarController.selectedIndex);
     if ([USERINFO[@"userId"] length] <= 0 && tabBarController.selectedIndex == 3) {
-        CZLoginController *vc = [[CZLoginController alloc] init];
+        CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
     } else {
         

@@ -40,8 +40,6 @@
         _Topic_JC = [[JCTopic alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 260)];
         _Topic_JC.rect = CGRectMake(0, 0, SCR_WIDTH, 260);
         _Topic_JC.backgroundColor = [UIColor whiteColor];
-        _Topic_JC.totalNum = 3;
-        _Topic_JC.type = JCTopicMiddle;
         _Topic_JC.scrollView = self.scrollerView;
         
     }

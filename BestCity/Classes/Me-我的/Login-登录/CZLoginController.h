@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CZLoginController : UIViewController
-
++ (instancetype)shareLoginController;
 @end

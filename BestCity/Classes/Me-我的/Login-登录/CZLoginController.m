@@ -29,7 +29,19 @@
 
 @end
 
+
+static id instancet_;
 @implementation CZLoginController
+
++ (instancetype)shareLoginController
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instancet_ = [[CZLoginController alloc] init];
+    });
+    return instancet_;
+}
+
 
 #pragma mark - POP到前一页
 - (IBAction)popAction:(id)sender {

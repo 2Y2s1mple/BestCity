@@ -9,6 +9,7 @@
 #import "CZRecommendNav.h"
 #import "UIButton+CZExtension.h"
 #import "Masonry.h"
+#import "GXNetTool.h"
 
 @interface CZRecommendNav ()
 @property (nonatomic, strong) NSArray *mainTitles;
@@ -102,21 +103,96 @@
     }];
 }
 
-#pragma mark - 判断是否收藏
-- (void)setIsCollect:(BOOL)isCollect
+// 商品的ID
+- (void)setProjectId:(NSString *)projectId
 {
-    _isCollect = isCollect;
-    if (isCollect) {
-        self.rightBtn.selected = YES;
-    } else {
-        self.rightBtn.selected = NO;
-    }
+    _projectId = projectId;
+    [self isCollectDetail];
 }
 
+
+#pragma mark - 判断是否收藏了此文章
+- (void)isCollectDetail
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"projectId"] = self.projectId;
+    
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已收藏"]) {
+            NSLog(@"%@", result);
+            self.rightBtn.selected = YES;
+        } else {
+            self.rightBtn.selected = NO;
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+#pragma mark - 取消收藏
+- (void)collectDelete
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"projectId"] = self.projectId;
+    
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已删除"]) {
+            NSLog(@"%@", result);
+            [CZProgressHUD showProgressHUDWithText:@"取消收藏"];
+            self.rightBtn.selected = NO;
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"取消收藏失败"];
+            self.rightBtn.selected = YES;
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+#pragma mark - 收藏
+- (void)collectInsert
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"projectId"] = self.projectId;
+    
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已添加"]) {
+            NSLog(@"%@", result);
+            [CZProgressHUD showProgressHUDWithText:@"收藏成功"];
+            self.rightBtn.selected = YES;
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"收藏失败"];
+            self.rightBtn.selected = NO;
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
 - (void)clickedRight:(UIButton *)sender
 {
-    sender.selected = !sender.isSelected;
-    !self.rightClickedBlock ? : self.rightClickedBlock(sender.isSelected);
+    if (sender.selected) {
+        // 取消收藏
+        [self collectDelete];
+    } else {
+        // 收藏
+        [self collectInsert];
+    }
 }
 
 - (void)popAction

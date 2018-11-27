@@ -71,11 +71,17 @@
 //    vc.titleSizeSelected = vc.titleSizeNormal;
 //    vc.progressColor = [UIColor redColor];
 //    [self.navigationController pushViewController:vc animated:YES];
+    if ([USERINFO[@"userId"] length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {    
+        CZRecommendListModel *model = self.dataSource[indexPath.row];
+        CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
+        vc.model = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
-    CZRecommendListModel *model = self.dataSource[indexPath.row];
-    CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
-    vc.model = model;
-    [self.navigationController pushViewController:vc animated:YES];
 
     
 }

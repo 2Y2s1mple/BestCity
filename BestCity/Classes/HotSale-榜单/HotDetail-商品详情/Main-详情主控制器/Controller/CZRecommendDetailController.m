@@ -7,15 +7,18 @@
 //
 
 #import "CZRecommendDetailController.h"
-#import "CZRecommendNav.h"
 #import "CZCommoditySubController.h"
 #import "CZTestSubController.h"
 #import "CZEvaluateSubController.h"
-#import "GXNetTool.h"
-#import "MJExtension.h"
+
 #import "CZRecommendDetailModel.h"
+
+#import "CZRecommendNav.h"
 #import "CZShareAndlikeView.h"
 #import "CZShareView.h"
+
+#import "GXNetTool.h"
+#import "MJExtension.h"
 
 @interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 滚动视图 */
@@ -61,96 +64,20 @@ static CGFloat const likeAndShareHeight = 49;
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSLog(@"%@", result);
             self.recommendDetailModel = [CZRecommendDetailModel objectWithKeyValues:result[@"GoodsRankdetailEntity"]];
+            [self setupRecommendModel];
             [self createSubViews];
-            // 判断是否收藏了
-            [self isCollectDetail];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-        
     } failure:^(NSError *error) {
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
 }
 
-#pragma mark - 判断是否收藏了此文章
-- (void)isCollectDetail
+/** 设置标题以及优惠券 */
+- (void)setupRecommendModel
 {
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"projectId"] = self.recommendDetailModel.goodsId;
-    
-    [CZProgressHUD showProgressHUDWithText:nil];
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已收藏"]) {
-            NSLog(@"%@", result);
-            self.nav.isCollect = YES;
-        } else {
-            self.nav.isCollect = NO;
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-        
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
-}
-
-#pragma mark - 取消收藏
-- (void)collectDelete
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"projectId"] = self.recommendDetailModel.goodsId;
-    
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已删除"]) {
-            NSLog(@"%@", result);
-            [CZProgressHUD showProgressHUDWithText:@"取消收藏"];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"取消收藏失败"];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:1];
-        
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
-}
-
-#pragma mark - 收藏
-- (void)collectInsert
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"projectId"] = self.recommendDetailModel.goodsId;
-    
-    //获取详情数据
-    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已添加"]) {
-            NSLog(@"%@", result);
-            [CZProgressHUD showProgressHUDWithText:@"收藏成功"];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"收藏失败"];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:1];
-        
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
-}
-
-- (void)createSubViews
-{
-    // 商品
-    CZCommoditySubController *commendVC = [[CZCommoditySubController alloc] init];
-    self.commendVC = commendVC;
-    [self.scrollerView addSubview:commendVC.view];
-    [self addChildViewController:commendVC];
     // 标题
     self.recommendDetailModel.mainTitle = self.model.goodsName;
     // 券后价
@@ -176,27 +103,31 @@ static CGFloat const likeAndShareHeight = 49;
     self.recommendDetailModel.sourcePlatformPrice = self.model.otherPrice;
     // 优惠券
     self.recommendDetailModel.discountCoupon = self.model.cutPrice;
-    commendVC.model = self.recommendDetailModel;
+}
+
+- (void)createSubViews
+{
+    // 商品
+    self.commendVC = [[CZCommoditySubController alloc] init];
+    self.commendVC.model = self.recommendDetailModel;
+    [self.scrollerView addSubview:self.commendVC.view];
+    [self addChildViewController:self.commendVC];
     
     // 测评
-    CZTestSubController *testVc = [[CZTestSubController alloc] init];
-    self.testVc = testVc;
-    testVc.view.y = commendVC.scrollerView.height;
-    [self.scrollerView addSubview:testVc.view];
-    [self addChildViewController:testVc];
-    testVc.model = self.recommendDetailModel;
+    self.testVc = [[CZTestSubController alloc] init];
+    self.testVc.view.y = self.commendVC.scrollerView.height;
+    [self.scrollerView addSubview:self.testVc.view];
+    [self addChildViewController:self.testVc];
+    self.testVc.model = self.recommendDetailModel;
     
     // 评价
-    CZEvaluateSubController *evaluate = [[CZEvaluateSubController alloc] init];
-    self.evaluate = evaluate;
-    evaluate.view.y = commendVC.scrollerView.height + testVc.scrollerView.height;
-    [self.scrollerView addSubview:evaluate.view];
-    [self addChildViewController:evaluate];
-    evaluate.model = self.recommendDetailModel;
+    self.evaluate = [[CZEvaluateSubController alloc] init];
+    self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
+    [self.scrollerView addSubview:self.evaluate.view];
+    [self addChildViewController:self.evaluate];
+    self.evaluate.model = self.recommendDetailModel;
     
-    self.scrollerView.contentSize = CGSizeMake(0, commendVC.scrollerView.height + testVc.scrollerView.height +self.evaluate.scrollerView.height);
-    
-//    self.scrollerView.contentSize = CGSizeMake(0, commendVC.scrollerView.height + testVc.scrollerView.height);
+    self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height +self.evaluate.scrollerView.height);
 }
 
 
@@ -204,19 +135,10 @@ static CGFloat const likeAndShareHeight = 49;
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     // 创建导航栏
-    CZRecommendNav *nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];
-    self.nav = nav;
-    nav.delegate = self;
-    nav.rightClickedBlock = ^(BOOL isSelected){
-        if (isSelected) {
-            NSLog(@"收藏");
-            [self collectInsert];
-        } else {
-            NSLog(@"取消收藏");
-            [self collectDelete];
-        }
-    };
-    [self.view addSubview:nav];
+    self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];
+    self.nav.projectId = self.model.goodsId;
+    self.nav.delegate = self;
+    [self.view addSubview:self.nav];
     
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
@@ -225,9 +147,7 @@ static CGFloat const likeAndShareHeight = 49;
     CZShareAndlikeView *likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
         [self.view addSubview:share];
-    } rightBtnAction:^{
-        
-    }];
+    } rightBtnAction:^{}];
     [self.view addSubview:likeView];
     
     // 获取数据
@@ -235,7 +155,6 @@ static CGFloat const likeAndShareHeight = 49;
     
     // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
-    
 }
 
 #pragma mark - 监听子控件的frame的变化
@@ -253,7 +172,6 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)didClickedTitleWithIndex:(NSInteger)index
 {
-    NSLog(@"%ld", index);
     CGPoint point;
     switch (index) {
         case 0:
@@ -275,7 +193,6 @@ static CGFloat const likeAndShareHeight = 49;
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    NSLog(@"%s", __func__);
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 

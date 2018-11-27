@@ -362,6 +362,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="actualPriceLabel" destination="mgN-a5-t6n" id="RCS-UY-xmu"/>
+                <outlet property="bigImage" destination="Xo2-Di-baj" id="DY5-JX-EuE"/>
                 <outlet property="comprehensiveScore" destination="C3s-S6-7lP" id="y0b-iJ-acK"/>
                 <outlet property="comprehensiveScoreLabel" destination="05p-Q3-oJb" id="5Pe-PT-tNU"/>
                 <outlet property="cutPriceLabel" destination="vY1-hg-Ce7" id="M72-lw-4tu"/>
@@ -379,11 +380,10 @@
                 <outlet property="tag2" destination="lyK-PT-mU2" id="gTQ-In-p0m"/>
                 <outlet property="titleLabel" destination="dNe-77-qGa" id="Iy3-iS-3pZ"/>
                 <outlet property="tmPrice" destination="ili-Pz-7ys" id="5Ae-Fa-iHx"/>
-                <outlet property="topLabel" destination="Uha-OR-Yhx" id="2PK-XU-8Kg"/>
                 <outlet property="topNumber" destination="94f-3d-xn3" id="aoy-IQ-W5T"/>
                 <outlet property="visitLabel" destination="7zT-pP-UUI" id="mgC-Fw-Rmv"/>
             </connections>
-            <point key="canvasLocation" x="-559" y="-3177"/>
+            <point key="canvasLocation" x="-386" y="-3242"/>
         </tableViewCell>
     </objects>
     <resources>

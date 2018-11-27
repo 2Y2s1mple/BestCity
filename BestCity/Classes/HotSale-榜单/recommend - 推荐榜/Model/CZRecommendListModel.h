@@ -12,6 +12,8 @@
 @interface CZRecommendListModel : NSObject
 /** 商品ID */
 @property (nonatomic, strong) NSString *goodsId;
+/** 图片 */
+@property (nonatomic, strong) NSString *rankGoodImg;
 /** 标题 */
 @property (nonatomic, strong) NSString *goodsName;
 /** 标签 */

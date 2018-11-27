@@ -22,7 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    // 设置d引导页
+    // 设置引导页
     [CZGuideTool chooseRootViewController:self.window];
     
     [self.window makeKeyAndVisible];

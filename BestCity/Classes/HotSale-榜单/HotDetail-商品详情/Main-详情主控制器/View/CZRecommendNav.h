@@ -16,12 +16,11 @@
 
 
 @interface CZRecommendNav : UIView
-/** <#注释#> */
+/** 代理 */
 @property (nonatomic, weak) id <CZRecommendNavDelegate> delegate;
 /** 监听vc中scroller的滚动 */
 @property (nonatomic, assign) NSInteger monitorIndex;
-/** 是否收藏 */
-@property (nonatomic, assign) BOOL isCollect;
-/** <#注释#> */
-@property (nonatomic, copy) void(^rightClickedBlock)(BOOL);
+
+/** 商品的ID */
+@property (nonatomic, strong) NSString *projectId;
 @end

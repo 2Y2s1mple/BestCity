@@ -9,15 +9,15 @@
 #import "CZHotSaleCell.h"
 #import "NSString+CZExtension.h"
 #import "CZHotScoreModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface CZHotSaleCell ()
-@property (weak, nonatomic) IBOutlet UILabel *tmPrice;
-@property (weak, nonatomic) IBOutlet UILabel *topLabel;
+/** 最上面的序号*/
 @property (weak, nonatomic) IBOutlet UILabel *topNumber;
+/** 大图片 */
+@property (nonatomic, weak) IBOutlet UIImageView *bigImage;
 //标题
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-//综合评分
-@property (weak, nonatomic) IBOutlet UILabel *comprehensiveScore;
 /** tag1 */
 @property (nonatomic, weak) IBOutlet UILabel *tag1;
 /** tag2 */
@@ -26,10 +26,14 @@
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 /** 省多钱 */
 @property (nonatomic, weak) IBOutlet UILabel *cutPriceLabel;
+/** 其他平台价格*/
+@property (weak, nonatomic) IBOutlet UILabel *tmPrice;
 /** 访问量 */
 @property (nonatomic, weak) IBOutlet UILabel *visitLabel;
 /** 推荐理由 */
 @property (nonatomic, weak) IBOutlet UILabel *recommendReasonLabel;
+/** 综合评分 */
+@property (weak, nonatomic) IBOutlet UILabel *comprehensiveScore;
 /** 评分view */
 @property (weak, nonatomic) IBOutlet UIView *pointView;
 /** 综合评分 */
@@ -61,7 +65,8 @@
 - (void)setModel:(CZRecommendListModel *)model
 {
     _model = model;
-    self.topNumber.text = [NSString stringWithFormat:@"%ld", [model.indexNumber integerValue] + 1];;
+    self.topNumber.text = [NSString stringWithFormat:@"%ld", [model.indexNumber integerValue] + 1];
+    [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.rankGoodImg] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     self.titleLabel.text = model.goodsName;
     if (model.goodstypeList.count >= 2) {
         self.tag1.hidden = NO;
