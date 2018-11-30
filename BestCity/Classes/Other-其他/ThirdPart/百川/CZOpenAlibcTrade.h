@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZOpenAlibcTrade : NSObject
-+ (void)openAlibcTradeWithUrlString:(NSString *)urlStr;
++ (void)openAlibcTradeWithUrlString:(NSString *)urlStr parentController:(UIViewController *__nonnull)parentController;
 @end
 
 NS_ASSUME_NONNULL_END

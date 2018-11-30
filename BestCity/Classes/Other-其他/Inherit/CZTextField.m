@@ -20,9 +20,9 @@
 //        self.layer.borderWidth = 0.5;
 //        self.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor ;
         NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:@"搜索商品榜"];
-        [placeholder addAttribute:NSFontAttributeName
-                            value:[UIFont fontWithName:@"PingFangSC-Regular" size: 13]
-                            range:NSMakeRange(0, [@"搜索商品榜" length])];
+//        [placeholder addAttribute:NSFontAttributeName
+//                            value:[UIFont fontWithName:@"PingFangSC-Regular" size: 13]
+//                            range:NSMakeRange(0, 5)];
         self.placeholder = @"搜索商品榜";
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
         self.leftView = image;

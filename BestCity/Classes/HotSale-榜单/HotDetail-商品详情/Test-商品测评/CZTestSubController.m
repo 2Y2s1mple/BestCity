@@ -9,14 +9,17 @@
 #import "CZTestSubController.h"
 #import "UIImageView+WebCache.h"
 #import "GXNetTool.h"
+#import "CZAttentionBtn.h"
 
-@interface CZTestSubController ()
+@interface CZTestSubController () <UIWebViewDelegate>
 /** webView */
 @property (nonatomic, strong) UIWebView *webView;
 /** 分隔线 */
 @property (nonatomic, strong) UIView *lineView;
 /** 关注按钮 */
-@property (nonatomic, strong) UIButton *attentionBtn;
+@property (nonatomic, strong) CZAttentionBtn *attentionBtn;
+/** 监听WebView的定时器 */
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation CZTestSubController
@@ -78,38 +81,31 @@
     fansLabel.font = [UIFont systemFontOfSize:14];
     fansLabel.textColor = CZGlobalGray;
     [self.scrollerView addSubview:fansLabel];
-    //关注按钮
-    UIButton *attentionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.attentionBtn = attentionBtn;
-    attentionBtn.frame = CGRectMake(self.view.width - (space * 2) - 60, iconImage.center.y - 12, 60, 24);
-    attentionBtn.selected = [self.model.goodsEvalWayEntity[@"concernNum"] integerValue];
-    [attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
-    [attentionBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [attentionBtn setTitle:@"已关注" forState:UIControlStateSelected];
-    [attentionBtn setTitleColor:CZGlobalWhiteBg forState:UIControlStateSelected];
-    attentionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-    attentionBtn.layer.borderWidth = 0.5;
-    attentionBtn.layer.cornerRadius = 13;
-    [attentionBtn addTarget:self action:@selector(attentionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    if (!attentionBtn.isSelected) {
-        // 关注
-        [attentionBtn setBackgroundColor:CZGlobalWhiteBg];
-        attentionBtn.layer.borderColor = [UIColor redColor].CGColor;
-        
+
+    // 关注按钮
+    CZAttentionBtnType type;
+    if ([self.model.goodsEvalWayEntity[@"concernNum"] integerValue] == 0) {
+        type = CZAttentionBtnTypeAttention;
     } else {
-        [attentionBtn setBackgroundColor:CZGlobalGray];
-        attentionBtn.layer.borderColor = CZGlobalGray.CGColor;
+        type = CZAttentionBtnTypeFollowed;
     }
-    [self.scrollerView addSubview:attentionBtn];
+    self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(self.view.width - (space * 2) - 60, iconImage.center.y - 12, 60, 24) CommentType:type didClickedAction:^(BOOL isSelected){
+        if (isSelected) {
+            [self addAttention];
+        } else {
+            [self deleteAttention];
+        }
+    }];
+    [self.scrollerView addSubview:self.attentionBtn];
     
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CZGetY(iconImage) + 2 * space, SCR_WIDTH, 100)];
+    [self.scrollerView addSubview:self.webView];
+    self.webView.delegate = self;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     self.webView.scrollView.scrollEnabled = NO;
-    self.webView.backgroundColor = [UIColor greenColor];
     [self.webView loadHTMLString:self.model.goodsEvalWayEntity[@"content"] baseURL:nil];
-    [self.scrollerView addSubview:self.webView];
-    
+
     /**点赞*/
     //加个分隔线
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.webView.frame), SCR_WIDTH, 7)];
@@ -121,16 +117,20 @@
     self.scrollerView.height = CGRectGetMaxY(lineView.frame);
 }
 
-- (void)attentionBtnAction:(UIButton *)sender
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    if (sender.isSelected) {
-        //取消关注
-        [self deleteAttention];
-    } else {
-        // 添加关注
-        [self addAttention];
-    }
-    sender.selected = !sender.isSelected;
+    [CZProgressHUD showProgressHUDWithText:nil];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [CZProgressHUD hideAfterDelay:0];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [CZProgressHUD hideAfterDelay:0];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
@@ -141,7 +141,6 @@
     self.lineView.y = CGRectGetMaxY(self.webView.frame);
     self.scrollerView.height = CGRectGetMaxY(self.lineView.frame);
     self.view.height = self.scrollerView.height;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:OpenBoxInspectWebHeightKey object:nil userInfo:@{@"height" : @(self.scrollerView.height)}];
 }
 
@@ -161,14 +160,13 @@
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
             // 关注
-            [self.attentionBtn setBackgroundColor:CZGlobalWhiteBg];
-            self.attentionBtn.layer.borderColor = [UIColor redColor].CGColor;
+            self.attentionBtn.type = CZAttentionBtnTypeAttention;
             [CZProgressHUD showProgressHUDWithText:@"取关成功"];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
+        [CZProgressHUD hideAfterDelay:1];
     } failure:^(NSError *error) {
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -185,13 +183,12 @@
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
             [CZProgressHUD showProgressHUDWithText:@"关注成功"];
-            [self.attentionBtn setBackgroundColor:CZGlobalGray];
-            self.attentionBtn.layer.borderColor = CZGlobalGray.CGColor;
+            self.attentionBtn.type = CZAttentionBtnTypeFollowed;
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
+        [CZProgressHUD hideAfterDelay:1];
     } failure:^(NSError *error) {
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];

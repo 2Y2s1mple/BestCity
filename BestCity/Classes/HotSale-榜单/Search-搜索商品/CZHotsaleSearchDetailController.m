@@ -27,7 +27,7 @@
     //设置搜索栏
     UIView *searchView = [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, 34)];
     
-    self.tableView.frame = CGRectMake(0, FSS(35) + 40, SCR_WIDTH, SCR_HEIGHT - CGRectGetMaxY(searchView.frame) - 10);
+    self.tableView.frame = CGRectMake(0, 35 + 40, SCR_WIDTH, SCR_HEIGHT - CGRectGetMaxY(searchView.frame) - 10);
 }
 
 - (void)getSourceData
@@ -69,8 +69,8 @@
     [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(topView);
         make.left.equalTo(topView).offset(20);
-        make.width.equalTo(@(FSS(40)));
-        make.height.equalTo(@(FSS(17)));
+        make.width.equalTo(@(40));
+        make.height.equalTo(@(17));
     }];
 
     CZTextField *textField = [[CZTextField alloc] init];

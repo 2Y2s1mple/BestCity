@@ -44,13 +44,14 @@
     return YES;
 }
 
-#pragma mark - 关于推送的代码
+#pragma mark -
+#pragma mark 关于推送的代码
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //获取设备号
     [[CZJPushHandler shareJPushManager] registerDeviceToken:deviceToken];
 }
-
+#pragma mark 推送失败回调
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //设备号错误是的回调
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
@@ -62,6 +63,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[CZJPushHandler shareJPushManager] handleRemoteNotificationUserInfo:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
+
+
+
 
 
 

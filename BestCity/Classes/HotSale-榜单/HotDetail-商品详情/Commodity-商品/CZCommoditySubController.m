@@ -16,9 +16,6 @@
 
 
 @interface CZCommoditySubController ()
-/** 轮播图 */
-
-
 
 @end
 
@@ -33,12 +30,6 @@
     return _scrollerView;
 }
 
-- (void)setModel:(CZRecommendDetailModel *)model
-{
-    _model = model;
-    [self setupView];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
@@ -46,9 +37,15 @@
     [self.view addSubview:self.scrollerView];
 }
 
+- (void)setModel:(CZRecommendDetailModel *)model
+{
+    _model = model;
+    [self setupView];
+}
+
 - (void)setupView
 {
-    /**加载轮播图*/
+    // 创建轮播图
     if (self.model.imgList.count > 0) {
         NSMutableArray *imagePaths = [NSMutableArray array];
         for (NSDictionary *dic in self.model.imgList) {
@@ -60,31 +57,24 @@
             [imageView sd_setImageWithURL:[NSURL URLWithString:[imagePaths firstObject]] placeholderImage:IMAGE_NAMED(@"headDefault")];
             imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 410);
             [self.view addSubview:imageView];
-            
         } else {
             //初始化控件
             PlanADScrollView *ad =[[PlanADScrollView alloc]initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 410)imageUrls:imagePaths placeholderimage:IMAGE_NAMED(@"headDefault")];
             [self.view addSubview:ad];
         }
-        
     } else {
         //初始化控件
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headDefault"]];
         imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 410);
         [self.view addSubview:imageView];
     }
-    
-    
-    
 
-    
-    
-    //设置商品的标题
+    // 创建标题附标题
     CZCommodityView *commodity = [[CZCommodityView alloc] init];
-    commodity.frame = CGRectMake(0, FSS(410), SCR_WIDTH, commodity.commodityH);
+    commodity.frame = CGRectMake(0, 410, SCR_WIDTH, commodity.commodityH);
     commodity.model = self.model;
     [self.scrollerView addSubview:commodity];
-    CGFloat originY = FSS(410) + commodity.commodityH;
+    CGFloat originY = 410 + commodity.commodityH;
     
     NSMutableArray *qualityList = [NSMutableArray array];
     for (CZRecommendDetailPointModel *model in self.model.qualityList) {
@@ -111,8 +101,7 @@
     CGFloat Height2 = [CZPointView pointFormViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"产品参数" titleImage:@"parameter" formTitles:parametersList1 subformTitles:parametersList2 superView:self.scrollerView];
     originY += Height2 + 40;
     
-    /**点赞*/
-    //加个分隔线
+    // 创建分隔线
     UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, originY, SCR_WIDTH, 7)];
     lineView2.backgroundColor = CZGlobalLightGray;
     [self.scrollerView addSubview:lineView2];

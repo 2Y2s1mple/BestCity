@@ -48,7 +48,6 @@
     self.otherPrice.text = therPrice;
     self.couponPrice.text = [NSString stringWithFormat:@"%@元独家优惠券", model.discountCoupon];
     
-    
     [self layoutIfNeeded];//写在这里是有问题的, 不换行还好
     self.commodityH = CGRectGetMaxY(self.bottomLabel.frame) + 10;
 }

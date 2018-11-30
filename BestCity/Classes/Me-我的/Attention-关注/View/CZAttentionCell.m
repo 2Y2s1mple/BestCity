@@ -48,6 +48,7 @@
             // 刷新tableView
             !self.delegate ? : [self.delegate reloadAttentionTableView];
             self.model.attentionType = CZAttentionBtnTypeAttention;
+            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"取消关注成功"}];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -68,7 +69,10 @@
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernInsert"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
-            
+            // 刷新tableView
+            !self.delegate ? : [self.delegate reloadAttentionTableView];
+            self.model.attentionType = CZAttentionBtnTypeFollowed;
+            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"用户关注成功"}];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }

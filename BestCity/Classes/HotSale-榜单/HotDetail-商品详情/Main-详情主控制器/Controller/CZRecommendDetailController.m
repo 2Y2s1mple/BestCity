@@ -35,6 +35,8 @@
 @property (nonatomic, strong) CZEvaluateSubController *evaluate;
 /** 导航栏 */
 @property (nonatomic, strong) CZRecommendNav *nav;
+/** 分享购买按钮 */
+@property (nonatomic, strong) CZShareAndlikeView *likeView;
 @end
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
@@ -50,6 +52,43 @@ static CGFloat const likeAndShareHeight = 49;
     return _scrollerView;
 }
 
+- (CZShareAndlikeView *)likeView
+{
+    if (_likeView == nil) {
+        __weak typeof(self) weakSelf = self;
+        _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
+            CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+            [weakSelf.view addSubview:share];
+        } rightBtnAction:^{
+            // 打开淘宝
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.recommendDetailModel.goodsBuyLink parentController:self];
+        }];
+    }
+    return _likeView;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = CZGlobalWhiteBg;
+    // 创建导航栏
+    self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];
+    self.nav.projectId = self.model.goodsId;
+    self.nav.delegate = self;
+    [self.view addSubview:self.nav];
+    
+    // 创建滚动视图
+    [self.view addSubview:self.scrollerView];
+    
+    // 创建分享购买视图
+    [self.view addSubview:self.likeView];
+    
+    // 获取数据
+    [self getSourceData];
+    
+    // 添加监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
+}
+
 #pragma mark - 获取数据
 - (void)getSourceData
 {
@@ -60,24 +99,19 @@ static CGFloat const likeAndShareHeight = 49;
     }];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"goodsId"] = self.model.goodsId;
-    [CZProgressHUD showProgressHUDWithText:nil];
     //获取详情数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankDetailList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
             self.recommendDetailModel = [CZRecommendDetailModel objectWithKeyValues:result[@"GoodsRankdetailEntity"]];
+            // 设置标题以及优惠券数据
             [self setupRecommendModel];
             [self createSubViews];
         }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
     }];
 }
 
-/** 设置标题以及优惠券 */
+/** 设置标题以及优惠券数据 */
 - (void)setupRecommendModel
 {
     // 标题
@@ -124,7 +158,6 @@ static CGFloat const likeAndShareHeight = 49;
         self.testVc.model = self.recommendDetailModel;
     }
     
-    
     // 评价
     self.evaluate = [[CZEvaluateSubController alloc] init];
     self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
@@ -132,39 +165,11 @@ static CGFloat const likeAndShareHeight = 49;
     [self addChildViewController:self.evaluate];
     self.evaluate.model = self.recommendDetailModel;
     
-    self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height +self.evaluate.scrollerView.height);
+    // 设置滚动高度
+    self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
 }
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalWhiteBg;
-    // 创建导航栏
-    self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];
-    self.nav.projectId = self.model.goodsId;
-    self.nav.delegate = self;
-    [self.view addSubview:self.nav];
-    
-    // 创建滚动视图
-    [self.view addSubview:self.scrollerView];
-    
-    // 加载数据框
-    __weak typeof(self) weakSelf = self;
-    CZShareAndlikeView *likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
-        CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-        [weakSelf.view addSubview:share];
-    } rightBtnAction:^{
-        // 打开淘宝
-        [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.recommendDetailModel.goodsBuyLink];
-    }];
-    [self.view addSubview:likeView];
-    
-    // 获取数据
-    [self getSourceData];
-    
-    // 添加监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
-}
 
 #pragma mark - 监听子控件的frame的变化
 - (void)openBoxInspectWebViewHeightChange:(NSNotification *)notfi
@@ -200,6 +205,7 @@ static CGFloat const likeAndShareHeight = 49;
 }
 
 #pragma mark - <UIScrollViewDelegate>
+/** 子控制器会用到 */
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];

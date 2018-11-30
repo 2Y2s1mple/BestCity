@@ -61,7 +61,7 @@
 - (void)setTitle:(NSString *)title
 {
     _title = title;
-    UILabel *hisLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, FSS(20))];
+    UILabel *hisLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 20)];
     hisLabel.text = _title;
     hisLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:hisLabel];
@@ -123,7 +123,7 @@
 
 - (void)setup
 {
-    self.tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, FSS(20), self.width, 100)];
+    self.tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, self.width, 100)];
     [self addSubview:_tagsView];
     // 内容
     for (int i = 0; i < self.hisArray.count; i++) {

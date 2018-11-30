@@ -14,6 +14,8 @@
 #import "CZGiveLikeView.h"
 #import "CZCollectButton.h"
 #import "CZCommentBtn.h"
+#import "CZShareView.h"
+#import "CZOpenAlibcTrade.h"
 
 @interface CZDChoiceDetailController () <UIWebViewDelegate>
 /** 滚动视图 */
@@ -26,10 +28,61 @@
 @property (nonatomic, strong) UIWebView *webView;
 /** 点赞 */
 @property (nonatomic, strong) UIView *likeView;
+/** 分享 */
+@property (nonatomic, strong) UIView *shareView;
+/** pop按钮 */
+@property (nonatomic, strong) UIButton *popButton;
 @end
 
 @implementation CZDChoiceDetailController
-
+#pragma mark - 懒加载
+#pragma mark  分享购买视图
+- (UIView *)shareView
+{
+    if (_shareView == nil) {
+        _shareView = [[UIView alloc] init];
+        _shareView.backgroundColor = CZGlobalWhiteBg;
+        _shareView.y = SCR_HEIGHT - 44;
+        _shareView.height = 44;
+        _shareView.width = SCR_WIDTH;
+        CGFloat btnWidth = SCR_WIDTH / 3.0;
+        
+        //加个分隔线
+        UIView *lineView = [[UIView alloc] init];;
+        lineView.y = 0;
+        lineView.height = 0.5;
+        lineView.width = _shareView.width;
+        lineView.backgroundColor = CZGlobalLightGray;
+        [_shareView addSubview:lineView];
+        
+        // 分享
+        UIButton *shareBtn = [[UIButton alloc] init];
+        [_shareView addSubview:shareBtn];
+        shareBtn.y = lineView.y;
+        shareBtn.width = btnWidth;
+        shareBtn.height = _shareView.height - lineView.y;
+        [shareBtn setImage:IMAGE_NAMED(@"tab-bar") forState:UIControlStateNormal];
+        [shareBtn addTarget:self action:@selector(sharedApplication) forControlEvents:UIControlEventTouchUpInside];
+        // 收藏
+        CZCollectButton *collectBtn = [CZCollectButton collectButton];
+        [_shareView addSubview:collectBtn];
+        collectBtn.x = CZGetX(shareBtn);
+        collectBtn.y = shareBtn.y;
+        collectBtn.width = shareBtn.width;
+        collectBtn.height = shareBtn.height;
+        collectBtn.findGoodsId = self.findgoodsId;
+        // 评论
+        CZCommentBtn *commentBtn = [CZCommentBtn commentButton];
+        [_shareView addSubview:commentBtn];
+        commentBtn.x = CZGetX(collectBtn);
+        commentBtn.y = collectBtn.y;
+        commentBtn.width = collectBtn.width;
+        commentBtn.height = collectBtn.height;
+        commentBtn.goodsId = self.findgoodsId;
+        commentBtn.totalCommentCount = self.dicData[@"commentNum"];
+    }
+    return _shareView;
+}
 
 - (UIScrollView *)scrollerView
 {
@@ -41,21 +94,31 @@
     return _scrollerView;
 }
 
+- (UIButton *)popButton
+{
+    if (_popButton == nil) {
+        _popButton = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
+    }
+    return _popButton;
+}
+
+#pragma mark - 事件
+- (void)popAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
-    //设置scrollerView
+    // 加载scrollerView
     [self.view addSubview:self.scrollerView];
-    UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
-    [self.view addSubview:leftBtn];
+    // 加载pop按钮
+    [self.view addSubview:self.popButton];
     // 获取数据
     [self obtainDetailData];
-}
-
-- (void)popAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 获取数据
@@ -69,6 +132,8 @@
             self.dicData = result[@"GoodsFindGoods"];
             // 创建内容视图
             [self setupTopView];
+            // 添加分享按钮
+            [self.view addSubview:self.shareView];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -77,7 +142,6 @@
         [CZProgressHUD hideAfterDelay:0];
     }];
 }
-
 
 #pragma mark - 创建内容视图
 - (void)setupTopView
@@ -126,6 +190,7 @@
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CZGetY(subtitlte), SCR_WIDTH, 100)];
     self.webView.delegate = self;
     [self.scrollerView addSubview:self.webView];
+    self.webView.scrollView.scrollEnabled = NO;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     [self.webView loadHTMLString:self.dicData[@"content"] baseURL:nil];
     
@@ -162,56 +227,14 @@
     CZGiveLikeView *giveLikeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, lineView.height, SCR_WIDTH, 200)];
     giveLikeView.findGoodsId = self.findgoodsId;
     [likeView addSubview:giveLikeView];
-    
-    
-    //加个分隔线
-    UIView *lineView1 = [[UIView alloc] init];;
-    lineView1.y = 207;
-    lineView1.height = 1;
-    lineView1.width = likeView.width;
-    lineView1.backgroundColor = CZGlobalLightGray;
-    [likeView addSubview:lineView1];
-    
-    // 分享的界面
-    UIView *shareView = [[UIView alloc] init];
-    [likeView addSubview:shareView];
-    shareView.y = 207.5;
-    shareView.height = 44;
-    shareView.width = likeView.width;
-    
-    CGFloat btnWidth = SCR_WIDTH / 3.0;
-    
-    // 分享
-    UIButton *shareBtn = [[UIButton alloc] init];
-    [shareView addSubview:shareBtn];
-    shareBtn.y = 0;
-    shareBtn.width = btnWidth;
-    shareBtn.height = shareView.height;
-    [shareBtn setImage:IMAGE_NAMED(@"tab-bar") forState:UIControlStateNormal];
-    
-    // 收藏
-    CZCollectButton *collectBtn = [CZCollectButton collectButton];
-    [shareView addSubview:collectBtn];
-    collectBtn.x = CZGetX(shareBtn);
-    collectBtn.y = 0;
-    collectBtn.width = btnWidth;
-    collectBtn.height = shareView.height;
-    collectBtn.findGoodsId = self.findgoodsId;
-    
-    // 评论
-    CZCommentBtn *commentBtn = [CZCommentBtn commentButton];
-    [shareView addSubview:commentBtn];
-    commentBtn.x = CZGetX(collectBtn);
-    commentBtn.y = 0;
-    commentBtn.width = btnWidth;
-    commentBtn.height = shareView.height;
-    commentBtn.goodsId = self.findgoodsId;
-    commentBtn.totalCommentCount = self.dicData[@"commentNum"];
-    
 
-    
-    
-    self.scrollerView.contentSize = CGSizeMake(0, CGRectGetMaxY(likeView.frame));
+    self.scrollerView.contentSize = CGSizeMake(0, CGRectGetMaxY(giveLikeView.frame));
+}
+
+- (void)sharedApplication
+{
+    CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:share];
 }
 
 - (void)dealloc
@@ -221,8 +244,17 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"%@", [request.URL absoluteString]);
-    return  YES;
+    NSString *url = [request.URL absoluteString];
+    NSString *myProtocolUrl = @"http://qualityshop/?buyId=";
+    if ([url hasPrefix:myProtocolUrl]) {
+        NSString *alibcTradeUrlPath = [url substringFromIndex:[myProtocolUrl length]];
+        NSLog(@"%@", alibcTradeUrlPath);
+        // 打开淘宝
+        [CZOpenAlibcTrade openAlibcTradeWithUrlString:alibcTradeUrlPath parentController:self];
+        return NO;
+    } else {
+        return  YES;
+    }
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView

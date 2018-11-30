@@ -63,9 +63,6 @@
 - (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNowAttentions)];
-    // 进来先刷一次
-    [self.tableView.mj_header beginRefreshing];
-    
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreAttentions)];
 }
 
@@ -150,7 +147,7 @@
     CZAttentionsModel *model = self.attentionsData[indexPath.row];
     CZAttentionCell *cell = [CZAttentionCell cellWithTabelView:tableView];
     cell.delegate = self;
-    cell.title = [NSString stringWithFormat:@"第%ld个", indexPath.row];
+    cell.title = [NSString stringWithFormat:@"第%ld个", (long)indexPath.row];
     cell.model = model;
     return cell;
 }
@@ -174,5 +171,11 @@
 {
     NSLog(@"reloadAttentionTableView");
     [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView.mj_header beginRefreshing];
 }
 @end

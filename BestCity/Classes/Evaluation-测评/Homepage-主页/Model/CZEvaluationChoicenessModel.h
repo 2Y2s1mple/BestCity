@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 用户信息 */
 @property (nonatomic, strong)NSDictionary *userShopmember;
 /** 关注 */
-@property (nonatomic, strong) NSString *concernNum; // 0 围观者 1 关注
+@property (nonatomic, strong) NSNumber *concernNum; // 0 围观者 1 关注
 /** 测评的id */
 @property (nonatomic, strong) NSString *evalWayId;
 /** 大图片 */

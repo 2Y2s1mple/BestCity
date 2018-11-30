@@ -7,8 +7,7 @@
 //
 
 #import "CZJPushHandler.h"
-////极光推送
-#import "JPUSHService.h"
+
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -29,9 +28,9 @@ static id _instance;
     return _instance;
 }
 
+#pragma mark - 注册 DeviceToken
 - (void)registerDeviceToken:(NSData *)deviceToken
 {
-    /// Required - 注册 DeviceToken
     [JPUSHService registerDeviceToken:deviceToken];
 }
 
@@ -42,33 +41,27 @@ static id _instance;
 }
 
 - (void)setupJPUSHServiceOptions:(NSDictionary *)launchOptions{
-    //Required
-    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+    // 初始化APNs代码
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        // 可以添加自定义categories
-        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
-        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
-    }
-    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {}
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-//    [JPUSHService addTags:[NSSet setWithObject:@"你好"] completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
-//        NSLog(@"%tu,%@,%tu",iResCode,iTags,seq);
-//    } seq:0];
-    // Required
-    // init Push
-    // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
-    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+    
+    
+    // 初始化JPush代码
     [JPUSHService setupWithOption:launchOptions appKey:@"60c9c865c70f64ae295972a2"
-                          channel:@""
+                          channel:@"App Store"
                  apsForProduction:0
             advertisingIdentifier:nil];
 }
 
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #pragma mark- JPUSHRegisterDelegate
+
+#pragma mark 手机在前台接受到的
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler  API_AVAILABLE(ios(10.0)){
+    
+    
     NSDictionary * userInfo = notification.request.content.userInfo;
     UNNotificationRequest *request = notification.request; // 收到推送的请求
     UNNotificationContent *content = request.content; // 收到推送的消息内容
@@ -77,6 +70,9 @@ static id _instance;
     UNNotificationSound *sound = content.sound;  // 推送消息的声音
     NSString *subtitle = content.subtitle;  // 推送消息的副标题
     NSString *title = content.title;  // 推送消息的标题
+    
+    
+    
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         NSLog(@"iOS10 前台收到远程通知:%@", userInfo);
@@ -88,6 +84,7 @@ static id _instance;
     completionHandler(UNNotificationPresentationOptionBadge |UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
 
+#pragma mark 手机在后台接受到的
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler  API_AVAILABLE(ios(10.0)){
     
     NSDictionary * userInfo = response.notification.request.content.userInfo;
@@ -112,4 +109,8 @@ static id _instance;
     completionHandler();  // 系统要求执行这个方法
 }
 #endif
+
+
+
+
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+////极光推送
+#import "JPUSHService.h"
 @interface CZJPushHandler : NSObject
 + (instancetype)shareJPushManager;
 /** 初始化推送 */

@@ -13,6 +13,7 @@
 #import "CZCollectButton.h"
 #import "CZCommentBtn.h"
 #import "CZOpenAlibcTrade.h" // 跳转淘宝
+#import "CZShareView.h"
 
 @interface CZEvaluationChoicenessDetailController ()
 /** webView */
@@ -23,9 +24,36 @@
 @property (nonatomic, strong) NSDictionary *dicData;
 /** 点赞 */
 @property (nonatomic, strong) UIView *likeView;
+/** popa按钮 */
+@property (nonatomic, strong) UIButton *popButton;
 @end
 
 @implementation CZEvaluationChoicenessDetailController
+#pragma mark - 懒加载
+#pragma mark 点赞
+- (UIView *)likeView
+{
+    if (_likeView == nil) {
+        _likeView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.webView), SCR_WIDTH, 207 + 44.5)];
+        /**点赞*/
+        //加个分隔线
+        UIView *lineView = [[UIView alloc] init];;
+        lineView.y = 0;
+        lineView.height = 7;
+        lineView.width = _likeView.width;
+        lineView.backgroundColor = CZGlobalLightGray;
+        [_likeView addSubview:lineView];
+        
+        //加载点赞小手
+        CZGiveLikeView *giveLikeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, lineView.height, SCR_WIDTH, 200)];
+        giveLikeView.evalId = self.detailID;
+        [_likeView addSubview:giveLikeView];
+        
+        self.scrollerView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.likeView.frame));
+    }
+    return _likeView;
+}
+#pragma mark 滚动视图
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
@@ -35,21 +63,112 @@
     }
     return _scrollerView;
 }
+#pragma mark 返回按钮
+- (UIButton *)popButton
+{
+    if (_popButton == nil) {
+        _popButton = [[UIButton alloc] init];
+        _popButton.y = 35;
+        _popButton.size = CGSizeMake(50, 50);
+        [_popButton setImage:IMAGE_NAMED(@"nav-back") forState:UIControlStateNormal];
+        [_popButton addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _popButton;
+}
+#pragma mark  分享购买视图
+- (UIView *)shareAndBuy
+{
+    // 分享的界面
+    UIView *shareView = [[UIView alloc] init];
+    shareView.backgroundColor = CZGlobalWhiteBg;
+    shareView.y = SCR_HEIGHT - 44;
+    shareView.height = 44;
+    shareView.width = SCR_WIDTH;
+    
+    //加个分隔线
+    UIView *lineView = [[UIView alloc] init];;
+    lineView.y = 0.5;
+    lineView.height = 0.5;
+    lineView.width = SCR_WIDTH;
+    lineView.backgroundColor = CZGlobalLightGray;
+    [shareView addSubview:lineView];
+    
+    // 分享
+    UIButton *shareBtn = [[UIButton alloc] init];
+    [shareView addSubview:shareBtn];
+    shareBtn.y = lineView.y;
+    shareBtn.width = SCR_WIDTH / 4.0;
+    shareBtn.height = shareView.height;
+    [shareBtn setImage:IMAGE_NAMED(@"tab-bar") forState:UIControlStateNormal];
+    [shareBtn addTarget:self action:@selector(sharedApplication) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 收藏
+    CZCollectButton *collectBtn = [CZCollectButton collectButton];
+    [shareView addSubview:collectBtn];
+    collectBtn.x = CZGetX(shareBtn);
+    collectBtn.y = lineView.y;
+    collectBtn.width = SCR_WIDTH / 4.0;
+    collectBtn.height = shareView.height;
+    collectBtn.evalId = self.detailID;
+    
+    
+    
+    // 评论
+    CZCommentBtn *commentBtn = [CZCommentBtn commentButton];
+    [shareView addSubview:commentBtn];
+    commentBtn.x = CZGetX(collectBtn);
+    commentBtn.y = lineView.y;
+    commentBtn.width = SCR_WIDTH / 4.0;
+    commentBtn.height = shareView.height;
+    commentBtn.goodsId = self.detailID;
+    commentBtn.totalCommentCount = self.dicData[@"commentNum"];
+    
+    // 立即购买
+    UIButton *buyBtn = [[UIButton alloc] init];
+    [shareView addSubview:buyBtn];
+    buyBtn.x = CZGetX(commentBtn);
+    buyBtn.y = lineView.y;
+    buyBtn.width = SCR_WIDTH / 4.0;
+    buyBtn.height = shareView.height;
+    [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+    [buyBtn addTarget:self action:@selector(gotoAlibcTrade) forControlEvents:UIControlEventTouchUpInside];
+    buyBtn.backgroundColor = CZREDCOLOR;
+    
+    return shareView;
+}
+
+#pragma mark - 事件
+#pragma mark 分享
+- (void)sharedApplication
+{
+    CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:share];
+}
+#pragma mark 去淘宝
+- (void)gotoAlibcTrade
+{
+    if (self.dicData[@"goodsBuyLink"] != [NSNull null]) {
+        [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dicData[@"goodsBuyLink"] parentController:self];
+    } else {
+        [CZProgressHUD showProgressHUDWithText:@"商品已下架"];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }
+}
+#pragma mark pop
+- (void)popAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 创建滚动视图
     [self.view addSubview:self.scrollerView];
-    
-    UIButton *btn = [[UIButton alloc] init];
-    [self.view addSubview:btn];
-    btn.y = 35;
-    btn.size = CGSizeMake(50, 50);
-    [btn setImage:IMAGE_NAMED(@"nav-back") forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
-    
+    // 创建pop按钮
+    [self.view addSubview:self.popButton];
+    // 获取数据
     [self obtainMainData];
-    
-    self.scrollerView.contentSize = CGSizeMake(SCR_WIDTH, SCR_HEIGHT);
 }
 
 - (void)obtainMainData
@@ -63,7 +182,9 @@
             // 创建轮播图和webview
             [self setupTopView];
             // 创建点赞
-            [self createLikeView];
+            [self.scrollerView addSubview:self.likeView];
+            // 创建分享购买窗口
+            [self.view addSubview:[self shareAndBuy]];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -72,7 +193,6 @@
         [CZProgressHUD hideAfterDelay:0];
     }];
 }
-
 
 - (void)setupTopView
 {
@@ -83,6 +203,7 @@
     imageView.width = SCR_WIDTH;
     imageView.height = 314;
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.dicData[@"imgId"]] placeholderImage:IMAGE_NAMED(@"testImage1.png")];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     UIView *lightDarkView = [[UIView alloc] init];
     [imageView addSubview:lightDarkView];
@@ -107,7 +228,6 @@
     self.webView.backgroundColor = [UIColor whiteColor];
     [self.webView loadHTMLString:self.dicData[@"content"] baseURL:nil];
     [self.scrollerView addSubview:self.webView];
-    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
@@ -120,100 +240,4 @@
     self.scrollerView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.likeView.frame));
 }
 
-- (void)popAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - 创建点赞
-- (void)createLikeView
-{
-    UIView *likeView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.webView), SCR_WIDTH, 207 + 44.5)];
-    [self.scrollerView addSubview:likeView];
-    self.likeView = likeView;
-    
-    /**点赞*/
-    //加个分隔线
-    UIView *lineView = [[UIView alloc] init];;
-    lineView.y = 0;
-    lineView.height = 7;
-    lineView.width = likeView.width;
-    lineView.backgroundColor = CZGlobalLightGray;
-    [likeView addSubview:lineView];
-    
-    //加载点赞小手
-    CZGiveLikeView *giveLikeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, lineView.height, SCR_WIDTH, 200)];
-    giveLikeView.evalId = self.detailID;
-    [likeView addSubview:giveLikeView];
-    
-    
-    //加个分隔线
-    UIView *lineView1 = [[UIView alloc] init];;
-    lineView1.y = 207;
-    lineView1.height = 0.5;
-    lineView1.width = likeView.width;
-    lineView1.backgroundColor = CZGlobalLightGray;
-    [likeView addSubview:lineView1];
-    
-    // 分享的界面
-    UIView *shareView = [[UIView alloc] init];
-    [likeView addSubview:shareView];
-    shareView.y = 207.5;
-    shareView.height = 44;
-    shareView.width = likeView.width;
-    
-    // 分享
-    UIButton *shareBtn = [[UIButton alloc] init];
-    [shareView addSubview:shareBtn];
-    shareBtn.y = 0;
-    shareBtn.width = SCR_WIDTH / 4.0;
-    shareBtn.height = shareView.height;
-    [shareBtn setImage:IMAGE_NAMED(@"tab-bar") forState:UIControlStateNormal];
-    
-    // 收藏
-    CZCollectButton *collectBtn = [CZCollectButton collectButton];
-    [shareView addSubview:collectBtn];
-    collectBtn.x = CZGetX(shareBtn);
-    collectBtn.y = 0;
-    collectBtn.width = SCR_WIDTH / 4.0;
-    collectBtn.height = shareView.height;
-    collectBtn.evalId = self.detailID;
-    
-    
-
-    // 评论
-    CZCommentBtn *commentBtn = [CZCommentBtn commentButton];
-    [shareView addSubview:commentBtn];
-    commentBtn.x = CZGetX(collectBtn);
-    commentBtn.y = 0;
-    commentBtn.width = SCR_WIDTH / 4.0;
-    commentBtn.height = shareView.height;
-    commentBtn.goodsId = self.detailID;
-    commentBtn.totalCommentCount = self.dicData[@"commentNum"];
-
-    // 立即购买
-    UIButton *buyBtn = [[UIButton alloc] init];
-    [shareView addSubview:buyBtn];
-    buyBtn.x = CZGetX(commentBtn);
-    buyBtn.y = 0;
-    buyBtn.width = SCR_WIDTH / 4.0;
-    buyBtn.height = shareView.height;
-    [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
-    [buyBtn addTarget:self action:@selector(gotoAlibcTrade) forControlEvents:UIControlEventTouchUpInside];
-    buyBtn.backgroundColor = CZREDCOLOR;
-
-    
-    self.scrollerView.contentSize = CGSizeMake(0, CGRectGetMaxY(likeView.frame));
-}
-
-- (void)gotoAlibcTrade
-{
-    if (self.dicData[@"goodsBuyLink"] != [NSNull null]) {
-        [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dicData[@"goodsBuyLink"]];
-    } else {
-        [CZProgressHUD showProgressHUDWithText:@"商品已下架"];
-        [CZProgressHUD hideAfterDelay:1.5];
-    }
-    
-}
 @end

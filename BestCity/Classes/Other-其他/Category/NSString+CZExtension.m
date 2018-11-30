@@ -28,6 +28,15 @@
     return attrStr;
 }
 
+//添加文字大小
+- (NSMutableAttributedString *)addAttributeFont:(UIFont *)Font Range:(NSRange)range
+{
+    NSDictionary *att = @{NSFontAttributeName : Font};
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:self];
+    [attrStr addAttributes:att range:range];
+    return attrStr;
+}
+
 // 设置文字间距
 - (NSString *)setupTextRowSpace
 {

@@ -59,6 +59,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
         NSLog(@"%@", error);
+        [CZProgressHUD showProgressHUDWithText:@"网络出错"];
+        [CZProgressHUD hideAfterDelay:2];
     }];
     
     return manager;

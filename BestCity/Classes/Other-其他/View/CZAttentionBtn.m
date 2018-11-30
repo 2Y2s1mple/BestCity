@@ -22,11 +22,7 @@
     
     //关注按钮
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"+关注" forState:UIControlStateNormal];
-    [btn setTitle:@"已关注" forState:UIControlStateSelected];
     btn.frame = CGRectMake(0, 0, 60, 24);
-    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [btn setTitleColor:CZGlobalGray forState:UIControlStateSelected];
     btn.titleLabel.font = [UIFont systemFontOfSize:12];
     btn.layer.borderWidth = 0.5;
     btn.layer.cornerRadius = 13;
@@ -37,11 +33,15 @@
         case CZAttentionBtnTypeFollowed:
             btn.backgroundColor = CZGlobalLightGray;
             btn.layer.borderColor = CZGlobalLightGray.CGColor;
+            [btn setTitle:@"已关注" forState:UIControlStateNormal];
+            [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
             btn.selected = YES;
             break;
         case CZAttentionBtnTypeAttention:
             btn.backgroundColor = [UIColor whiteColor];
-            btn.layer.borderColor = [UIColor redColor].CGColor;
+            btn.layer.borderColor = CZREDCOLOR.CGColor;
+            [btn setTitle:@"+关注" forState:UIControlStateNormal];
+            [btn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
             btn.selected = NO;
             break;
         default:
@@ -53,14 +53,8 @@
 
 - (void)didClickedBtn:(UIButton *)sender
 {
+    sender.enabled = NO;
     sender.selected = !sender.selected;
-    if (sender.isSelected) {
-        sender.backgroundColor = CZGlobalLightGray;
-        sender.layer.borderColor = CZGlobalLightGray.CGColor;
-    } else {
-        sender.backgroundColor = [UIColor whiteColor];
-        sender.layer.borderColor = [UIColor redColor].CGColor;
-    }
     self.block(sender.selected);
 }
 
@@ -68,15 +62,20 @@
 {
     _type = type;
     UIButton *btn = [self.subviews lastObject];
+    btn.enabled = YES;
     switch (type) {
         case CZAttentionBtnTypeFollowed:
             btn.backgroundColor = CZGlobalLightGray;
             btn.layer.borderColor = CZGlobalLightGray.CGColor;
+            [btn setTitle:@"已关注" forState:UIControlStateNormal];
+            [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
             btn.selected = YES;
             break;
         case CZAttentionBtnTypeAttention:
             btn.backgroundColor = [UIColor whiteColor];
-            btn.layer.borderColor = [UIColor redColor].CGColor;
+            btn.layer.borderColor = CZREDCOLOR.CGColor;
+            [btn setTitle:@"+关注" forState:UIControlStateNormal];
+            [btn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
             btn.selected = NO;
             break;
         default:

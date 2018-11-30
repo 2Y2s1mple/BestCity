@@ -36,7 +36,7 @@ static id _instance;
         UILabel *label = [[UILabel alloc] init];
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont systemFontOfSize:13];
-        label.layer.cornerRadius = FSS(13);
+        label.layer.cornerRadius = 13;
         label.layer.masksToBounds = YES;
         label.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.87];
         _textLabel = label;
@@ -47,6 +47,8 @@ static id _instance;
 + (instancetype)showProgressHUDWithText:(NSString *)text
 {
     if (text == nil) {
+        [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.5]];
+        [SVProgressHUD setForegroundColor:[UIColor blackColor]];
         [SVProgressHUD show];
         return nil;
     } else {
@@ -58,7 +60,7 @@ static id _instance;
         hud.textLabel.text = [NSString stringWithFormat:@"　%@　", text];
         [hud.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(hud);
-            make.height.equalTo(@(FSS(26)));
+            make.height.equalTo(@(26));
         }];
         return hud;
         
@@ -68,8 +70,8 @@ static id _instance;
 
 + (void)hideAfterDelay:(NSTimeInterval)delay
 {
-    [SVProgressHUD dismiss];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
         [[self shareProgress] removeFromSuperview];
     });
 }

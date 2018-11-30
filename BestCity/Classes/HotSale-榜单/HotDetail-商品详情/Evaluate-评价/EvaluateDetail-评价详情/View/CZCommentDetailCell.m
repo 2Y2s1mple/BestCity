@@ -83,7 +83,7 @@
     } else {
         userName = @"游客";
     }
-    self.block(self.contentDic[@"commentId"], userName);
+    self.block(self.contentDic[@"commentId"], userName, [self.contentDic[@"userCommentList"] count], [self.contentDic[@"index"] integerValue]);
 }
 
 

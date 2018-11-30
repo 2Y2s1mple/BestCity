@@ -55,11 +55,17 @@
                             <action selector="attentionAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eSA-oK-ohf"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage4" translatesAutoresizingMaskIntoConstraints="NO" id="4FX-6a-Ilr" userLabel="大图片">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage4" translatesAutoresizingMaskIntoConstraints="NO" id="4FX-6a-Ilr" userLabel="大图片">
                         <rect key="frame" x="10" y="90" width="338" height="300"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="300" id="e9w-2z-joJ"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius = 5">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3分钟前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELW-ca-i8f">
                         <rect key="frame" x="10" y="410" width="52" height="17"/>
@@ -134,7 +140,7 @@
                 <outlet property="timeLabel" destination="ELW-ca-i8f" id="Pbe-rU-iWW"/>
                 <outlet property="visitBtn" destination="HXh-3N-Mub" id="Srs-cY-VH4"/>
             </connections>
-            <point key="canvasLocation" x="-18" y="-794"/>
+            <point key="canvasLocation" x="-598" y="-1192"/>
         </tableViewCell>
     </objects>
     <resources>

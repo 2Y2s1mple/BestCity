@@ -42,7 +42,7 @@
 - (void)setupSearchView
 {
     __weak typeof(self) weakSelf = self;
-    self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH, FSS(34)) msgAction:^(NSString *rightBtnText){
+    self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH, 34) msgAction:^(NSString *rightBtnText){
         if ([rightBtnText isEqualToString:@"搜索"]) {
             [weakSelf pushSearchDetail];
             // 添加到历史搜索

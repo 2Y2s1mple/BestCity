@@ -52,8 +52,8 @@
     [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset(0);
-        make.width.equalTo(@(FSS(60)));
-        make.height.equalTo(@(FSS(20)));
+        make.width.equalTo(@(60));
+        make.height.equalTo(@(20));
     }];
     
     CGFloat btnX = 70;
@@ -70,7 +70,7 @@
         [titleBtn setTitle:self.mainTitles[i] forState:UIControlStateNormal];
         [titleBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
         [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        titleBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        titleBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         if (i == 0) titleBtn.selected = YES;
         titleBtn.tag = i + 100;
         [titleBtn addTarget:self action:@selector(titleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -98,8 +98,8 @@
     [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.right.equalTo(self).offset(0);
-        make.width.equalTo(@(FSS(40)));
-        make.height.equalTo(@(FSS(20)));
+        make.width.equalTo(@(40));
+        make.height.equalTo(@(20));
     }];
 }
 
@@ -117,22 +117,14 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"projectId"] = self.projectId;
     
-    [CZProgressHUD showProgressHUDWithText:nil];
     //获取详情数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"已收藏"]) {
-            NSLog(@"%@", result);
             self.rightBtn.selected = YES;
         } else {
             self.rightBtn.selected = NO;
         }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-        
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+    } failure:^(NSError *error) {}];
 }
 
 #pragma mark - 取消收藏

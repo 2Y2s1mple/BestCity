@@ -56,7 +56,6 @@
     
     self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - HOTContentY - 49 - 10);
     self.tableView.tableHeaderView = [self setupHeaderView];
-    
     // 创建刷新控件
     [self setupRefresh];
 }
@@ -74,7 +73,7 @@
 
 - (UIView *)setupHeaderView
 {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, FSS(180))];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 180)];
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"banner"]];
     imageView.frame = CGRectMake(10, 10, SCR_WIDTH - 20, backView.height - 10);

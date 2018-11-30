@@ -12,7 +12,7 @@
 
 @implementation CZOpenAlibcTrade
 #pragma mark - 跳转到淘宝
-+ (void)openAlibcTradeWithUrlString:(NSString *)urlStr
++ (void)openAlibcTradeWithUrlString:(NSString *)urlStr parentController:(UIViewController *__nonnull)parentController
 {
     //根据链接打开页面
     id<AlibcTradePage> page = [AlibcTradePageFactory page:urlStr];
@@ -23,7 +23,7 @@
     showParam.backUrl=@"tbopen25025861";
     showParam.isNeedPush=YES;
     
-    [[AlibcTradeSDK sharedInstance].tradeService show:self page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
+    [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
         NSLog(@"--------------------");
         
         if(tradeProcessResult.result ==AlibcTradeResultTypeAddCard){

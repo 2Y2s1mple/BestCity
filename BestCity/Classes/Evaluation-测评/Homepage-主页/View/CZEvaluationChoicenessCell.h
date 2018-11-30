@@ -11,7 +11,7 @@
 
 @protocol CZEvaluationChoicenessCellDelegate <NSObject>
 @optional
-- (void)reloadCEvaluationChoicenessData;
+- (void)reloadCEvaluationChoiceness:(NSString *)str userId:(NSString *)userId;
 @end
 
 @interface CZEvaluationChoicenessCell : UITableViewCell

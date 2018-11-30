@@ -34,6 +34,8 @@
     [[UITabBarItem appearance] setTitleTextAttributes:selectedAttr forState:UIControlStateSelected];
     
     [[UITabBar appearance] setBarTintColor: CZRGBColor(254, 254, 254)];
+    // 设配iOS12, tabbar抖动问题
+    [[UITabBar appearance] setTranslucent:NO];
     
 }
 
@@ -53,7 +55,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    NSLog(@"%ld", tabBarController.selectedIndex);
+    NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
     if ([USERINFO[@"userId"] length] <= 0 && tabBarController.selectedIndex == 3) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
@@ -75,7 +77,7 @@
         hotVc.titleColorNormal = CZGlobalGray;
         hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
         hotVc.titleSizeNormal = 14.0f;
-        hotVc.titleSizeSelected = hotVc.titleSizeNormal;
+        hotVc.titleSizeSelected = 14;
         hotVc.progressColor = [UIColor redColor];
     }
     vc.tabBarItem.title = title;

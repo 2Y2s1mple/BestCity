@@ -36,7 +36,7 @@
     [super awakeFromNib];
 }
 
-// 取消关注
+#pragma mark - 取消关注
 - (void)deleteAttention
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -45,13 +45,15 @@
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernDelete"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
+            [CZProgressHUD showProgressHUDWithText:@"取消关注成功"];
             // 刷新tableView
-            !self.delegate ? : [self.delegate reloadCEvaluationChoicenessData];
+            !self.delegate ? : [self.delegate reloadCEvaluationChoiceness:@"取消关注成功" userId:param[@"attentionUserId"]];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
+        self.attentionBtn.enabled = YES;
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -67,13 +69,16 @@
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernInsert"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
+            [CZProgressHUD showProgressHUDWithText:@"关注成功"];
             // 刷新tableView
-            !self.delegate ? : [self.delegate reloadCEvaluationChoicenessData];
+            !self.delegate ? : [self.delegate reloadCEvaluationChoiceness:@"用户关注成功" userId:param[@"attentionUserId"]];
+            
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
+        self.attentionBtn.enabled = YES;
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -81,16 +86,14 @@
 }
 
 - (IBAction)attentionAction:(UIButton *)sender {
+    sender.enabled = NO;
     if (self.attentionBtn.isSelected) {
-        self.attentionBtn.selected = NO;
         // 取消关注
         [self deleteAttention];
     } else {
-        self.attentionBtn.selected = YES;
         // 新增关注
         [self addAttention];
     }
-    [self setupAttentBtn];
 }
 
 - (void)setModel:(CZEvaluationChoicenessModel *)model
@@ -103,8 +106,7 @@
     // 粉丝
     self.fansLabel.text = [NSString stringWithFormat:@"粉丝数:%@", model.userShopmember[@"fansCount"]];
     // 关注
-    self.attentionBtn.selected = [model.concernNum integerValue];
-    [self setupAttentBtn];
+    [model.concernNum boolValue] ? [self attentionBtnStyle] : [self deleteAttentionBtnStyle];
     // 大图片
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.imgId] placeholderImage:[UIImage imageNamed:@"testImage6"]];
     // 大图片文字
@@ -127,25 +129,29 @@
     return cell;
 }
 
-- (void)setupAttentBtn
+#pragma mark - 关注样式
+- (void)attentionBtnStyle
 {
-    if (!_attentionBtn.isSelected) {
-    // 关注
-        [_attentionBtn setBackgroundColor:CZGlobalWhiteBg];
-        _attentionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        _attentionBtn.layer.borderWidth = 0.5;
-        _attentionBtn.layer.cornerRadius = 13;
-        _attentionBtn.layer.borderColor = [UIColor redColor].CGColor;
-        [_attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
-        [_attentionBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    } else {
-        [_attentionBtn setBackgroundColor:CZGlobalGray];
-        _attentionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        _attentionBtn.layer.borderWidth = 0.5;
-        _attentionBtn.layer.cornerRadius = 13;
-        _attentionBtn.layer.borderColor = CZGlobalGray.CGColor;
-        [_attentionBtn setTitle:@"已关注" forState:UIControlStateSelected];
-        [_attentionBtn setTitleColor:CZGlobalWhiteBg forState:UIControlStateSelected];
-    }
+    _attentionBtn.selected = YES;
+    [_attentionBtn setBackgroundColor:CZGlobalGray];
+    _attentionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    _attentionBtn.layer.borderWidth = 0.5;
+    _attentionBtn.layer.cornerRadius = 13;
+    _attentionBtn.layer.borderColor = CZGlobalGray.CGColor;
+    [_attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
+    [_attentionBtn setTitleColor:CZGlobalWhiteBg forState:UIControlStateNormal];
+}
+
+#pragma mark - 取消关注样式
+- (void)deleteAttentionBtnStyle
+{
+    _attentionBtn.selected = NO;
+    [_attentionBtn setBackgroundColor:CZGlobalWhiteBg];
+    _attentionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    _attentionBtn.layer.borderWidth = 0.5;
+    _attentionBtn.layer.cornerRadius = 13;
+    _attentionBtn.layer.borderColor = [UIColor redColor].CGColor;
+    [_attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
+    [_attentionBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 }
 @end

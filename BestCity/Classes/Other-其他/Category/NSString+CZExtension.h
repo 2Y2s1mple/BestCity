@@ -12,6 +12,7 @@
 - (NSMutableAttributedString *)addStrikethroughWithRange:(NSRange)range;
 
 - (NSMutableAttributedString *)addAttributeColor:(UIColor *)color Range:(NSRange)range;
+- (NSMutableAttributedString *)addAttributeFont:(UIFont *)Font Range:(NSRange)range;
 
 - (NSString *)setupTextRowSpace;
 - (CGFloat)getTextHeightWithRectSize:(CGSize)size andFont:(UIFont *)font;

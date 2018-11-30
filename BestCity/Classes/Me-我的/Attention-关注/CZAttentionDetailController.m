@@ -21,6 +21,7 @@
 #import "CZDChoiceDetailController.h" // 发现详情
 
 
+
 @interface CZAttentionDetailController ()<UITableViewDataSource, UITableViewDelegate>
 /** 表单 */
 @property (nonatomic, strong) UITableView *tableView;
@@ -54,6 +55,10 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self.view addSubview:tableView];
+    
+    //返回按钮
+    UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
+    [self.view addSubview:leftBtn];
     
     // 创建刷新控件
     [self setupRefresh];
@@ -156,17 +161,12 @@
     HUDView.frame = topImage.frame;
     [headerView addSubview:HUDView];
     
-   
-    
-    //返回按钮
-    UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
-    [headerView addSubview:leftBtn];
     
     //白色视图
     UIView *titleView = [[UIView alloc] init];
     [headerView addSubview:titleView];
     [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(leftBtn.mas_bottom).offset(70);
+        make.top.equalTo(headerView.mas_top).offset(70 + 80);
         make.left.equalTo(headerView).offset(10);
         make.right.equalTo(headerView).offset(-10);
         make.bottom.equalTo(headerView.mas_bottom).offset(-10);
@@ -215,34 +215,16 @@
     }];
     
     [titleView layoutIfNeeded];
-//    CZAttentionBtn *btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) CommentType:CZAttentionBtnTypeDisable didClickedAction:^(BOOL isSelected){
-//        NSLog(@"点击了按钮");
-//    }];
-    //关注按钮
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"+关注" forState:UIControlStateNormal];
-    [btn setTitle:@"已关注" forState:UIControlStateSelected];
-    btn.frame = CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24);
-    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [btn setTitleColor:CZGlobalGray forState:UIControlStateSelected];
-    btn.titleLabel.font = [UIFont systemFontOfSize:12];
-    btn.layer.borderWidth = 0.5;
-    btn.layer.cornerRadius = 13;
-    btn.layer.borderColor = [UIColor redColor].CGColor;
-//    switch (type) {
-//        case CZAttentionBtnTypeFollowed:
-//            btn.backgroundColor = CZGlobalLightGray;
-//            btn.layer.borderColor = CZGlobalLightGray.CGColor;
-//            btn.selected = YES;
-//            break;
-//        case CZAttentionBtnTypeAttention:
-//            btn.backgroundColor = [UIColor whiteColor];
-//            btn.layer.borderColor = [UIColor redColor].CGColor;
-//            btn.selected = NO;
-//            break;
-//        default:
-//            break;
-//    }
+    
+    // 关注按钮
+    CZAttentionBtn *btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) CommentType:self.model.attentionType didClickedAction:^(BOOL isSelected){
+        if (isSelected) {
+            [self addAttention];
+        } else {
+            NSLog(@"点击了%@按钮", self.model.userShopmember[@"userNickName"]);
+            [self deleteAttention];
+        }
+    }];
     [titleView addSubview:btn];
     return headerView;
 }
@@ -314,6 +296,48 @@
     return bluerImage;
 }
 
+// 取消关注
+- (void)deleteAttention
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    // 要关注对象ID
+    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernDelete"];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
+            [CZProgressHUD showProgressHUDWithText:@"取消关注成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"取消关注成功"}];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
 
+// 新增关注
+- (void)addAttention
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    // 要关注对象ID
+    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernInsert"];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
+            [CZProgressHUD showProgressHUDWithText:@"关注成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"用户关注成功"}];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
 
 @end

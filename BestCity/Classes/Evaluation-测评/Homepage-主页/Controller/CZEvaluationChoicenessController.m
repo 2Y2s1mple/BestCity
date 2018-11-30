@@ -60,14 +60,23 @@
     // 创建刷新控件
     [self addRefresh];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attentionCellNotifAction:) name:attentionCellNotifKey object:nil];
+    
 }
+
+- (void)attentionCellNotifAction:(NSNotification *)notif
+{
+    NSLog(@"%@", notif.userInfo);
+    [self reloadCEvaluationChoiceness:notif.userInfo[@"msg"] userId:notif.userInfo[@"userId"]];
+}
+
 
 #pragma mark - 创建刷新控件
 - (void)addRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     [self.tableView.mj_header beginRefreshing];
-    self.tableView.mj_footer = [MJRefreshBackFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 #pragma mark - 新数据接口
@@ -113,7 +122,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"categoryId"] = self.titleModel.categoryId;
     param[@"page"] = @(self.page);
-    [CZProgressHUD showProgressHUDWithText:nil];
+//    [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/evalWay/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSArray *arr = [CZEvaluationChoicenessModel objectArrayWithKeyValuesArray:result[@"list"]];
@@ -121,7 +130,7 @@
             [self.tableView reloadData];
         }
         //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
+//        [CZProgressHUD hideAfterDelay:0];
          [self.tableView.mj_footer endRefreshing];
     } failure:^(NSError *error) {
         //隐藏菊花
@@ -132,7 +141,7 @@
 
 - (UIView *)setupHeaderView
 {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, FSS(180))];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 180)];
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"evaluating-banner"]];
     imageView.frame = CGRectMake(0, 0, SCR_WIDTH, backView.height);
@@ -142,6 +151,12 @@
 }
 
 #pragma mark - <UITableViewDataSource>
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 454;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataSource.count;
@@ -171,9 +186,21 @@
 
 
 #pragma mark - <CZEvaluationChoicenessCellDelegate> 关注了调刷新
-- (void)reloadCEvaluationChoicenessData
+- (void)reloadCEvaluationChoiceness:(NSString *)str userId:(NSString *)userId
 {
-    NSLog(@"reloadCEvaluationChoicenessData");
-    [self loadMoreData];
+    if ([str isEqualToString:@"用户关注成功"]) {
+        for (CZEvaluationChoicenessModel *model in self.dataSource) {
+            if ([model.userShopmember[@"userId"] isEqualToString:userId]) {
+                model.concernNum = @(1);
+            }
+        }
+    } else {
+        for (CZEvaluationChoicenessModel *model in self.dataSource) {
+            if ([model.userShopmember[@"userId"] isEqualToString:userId]) {
+                model.concernNum = @(0);
+            }
+        }
+    }
+    [self.tableView reloadData];
 }
 @end

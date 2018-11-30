@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef void(^replyCellBlock)(NSString *, NSString *);
+@class CZCommentDetailCell;
+typedef void(^replyCellBlock)(NSString *, NSString *, NSInteger, NSInteger);
 
 @interface CZCommentDetailCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;

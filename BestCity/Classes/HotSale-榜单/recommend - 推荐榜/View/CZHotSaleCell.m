@@ -77,6 +77,14 @@
         self.tag1.hidden = YES;
         self.tag2.hidden = YES;
     }
+    if (model.goodstypeList.count >0) {
+        self.tag1.hidden = NO;
+        self.tag2.hidden = YES;
+        self.tag1.text = model.goodstypeList[0][@"name"];
+    } else {
+        self.tag1.hidden = YES;
+        self.tag2.hidden = YES;
+    }
     self.actualPriceLabel.text = [@"¥" stringByAppendingString:model.actualPrice ? model.actualPrice : @""];
     self.cutPriceLabel.text = [NSString stringWithFormat:@"省%@", model.cutPrice];
     
@@ -110,8 +118,13 @@
     }
     
     
-    NSString *text = [NSString stringWithFormat:@"推荐理由: %@", model.recommendReason];
-    self.recommendReasonLabel.attributedText = [text addAttributeColor:CZREDCOLOR Range:[text rangeOfString:@"推荐理由"]];
+    NSString *text = [NSString stringWithFormat:@"推荐理由:   %@", model.recommendReason];
+    NSDictionary *att = @{NSForegroundColorAttributeName : CZREDCOLOR};
+    NSDictionary *att1 = @{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Regular" size: 13]};
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:text];
+    [attrStr addAttributes:att range:[text rangeOfString:@"推荐理由"]];
+    [attrStr addAttributes:att1 range:[text rangeOfString:text]];
+    self.recommendReasonLabel.attributedText = attrStr;
     
     [self layoutIfNeeded];
     // 综合评分

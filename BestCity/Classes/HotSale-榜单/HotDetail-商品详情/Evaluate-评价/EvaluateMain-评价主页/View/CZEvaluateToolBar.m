@@ -9,8 +9,7 @@
 #import "CZEvaluateToolBar.h"
 
 @interface CZEvaluateToolBar ()<UITextViewDelegate>
-/** <#注释#> */
-@property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
+
 @end
 
 @implementation CZEvaluateToolBar
@@ -33,8 +32,6 @@
 
 - (IBAction)sandBtnAction:(UIButton *)sender {
     self.block();
-    self.textView.text = nil;
-    [self textViewDidChange:self.textView];
 }
 
 - (void)textViewDidChange:(UITextView *)textView

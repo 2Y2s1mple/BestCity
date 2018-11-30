@@ -21,6 +21,8 @@ typedef void(^toolBarActionBlock)(void);
 @property (nonatomic, copy) toolBarActionBlock block;
 /** placeHolder */
 @property (nonatomic, strong) NSString *placeHolderText;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
 @end
 
 NS_ASSUME_NONNULL_END
