@@ -35,6 +35,11 @@
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
     }
+    
+    
+    
+    
+    
     return self;
 }
 
