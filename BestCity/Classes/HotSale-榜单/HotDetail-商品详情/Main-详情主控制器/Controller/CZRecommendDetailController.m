@@ -107,8 +107,7 @@ static CGFloat const likeAndShareHeight = 49;
             [self setupRecommendModel];
             [self createSubViews];
         }
-    } failure:^(NSError *error) {
-    }];
+    } failure:^(NSError *error) {}];
 }
 
 /** 设置标题以及优惠券数据 */
@@ -181,6 +180,7 @@ static CGFloat const likeAndShareHeight = 49;
 #pragma mark - <CZRecommendNavDelegate>
 - (void)recommendNavWithPop:(UIView *)view
 {
+    [CZProgressHUD hideAfterDelay:0];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

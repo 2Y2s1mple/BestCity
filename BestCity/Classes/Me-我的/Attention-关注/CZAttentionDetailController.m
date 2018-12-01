@@ -29,6 +29,8 @@
 @property (nonatomic, assign) NSInteger page;
 /** 数据 */
 @property (nonatomic, strong) NSMutableArray *dataSource;
+/** 关注按钮 */
+@property (nonatomic, strong) CZAttentionBtn *attentionBtn;
 @end
 
 @implementation CZAttentionDetailController
@@ -217,7 +219,7 @@
     [titleView layoutIfNeeded];
     
     // 关注按钮
-    CZAttentionBtn *btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) CommentType:self.model.attentionType didClickedAction:^(BOOL isSelected){
+    self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) CommentType:self.model.attentionType didClickedAction:^(BOOL isSelected){
         if (isSelected) {
             [self addAttention];
         } else {
@@ -225,7 +227,7 @@
             [self deleteAttention];
         }
     }];
-    [titleView addSubview:btn];
+    [titleView addSubview:self.attentionBtn];
     return headerView;
 }
 
@@ -305,17 +307,15 @@
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernDelete"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
-            [CZProgressHUD showProgressHUDWithText:@"取消关注成功"];
+            [CZProgressHUD showProgressHUDWithText:@"取关成功"];
+            self.attentionBtn.type = CZAttentionBtnTypeAttention;
             [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"取消关注成功"}];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+    } failure:^(NSError *error) {}];
 }
 
 // 新增关注
@@ -328,16 +328,14 @@
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
             [CZProgressHUD showProgressHUDWithText:@"关注成功"];
+            self.attentionBtn.type = CZAttentionBtnTypeFollowed;
             [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"用户关注成功"}];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+    } failure:^(NSError *error) {}];
 }
 
 @end

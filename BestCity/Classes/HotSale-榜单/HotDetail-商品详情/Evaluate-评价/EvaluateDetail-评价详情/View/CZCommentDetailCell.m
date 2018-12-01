@@ -8,6 +8,7 @@
 
 #import "CZCommentDetailCell.h"
 #import "UIImageView+WebCache.h"
+#import "GXNetTool.h"
 
 @interface CZCommentDetailCell ()
 /** 头像 */
@@ -42,7 +43,7 @@
     
 }
 
-- (void)setContentDic:(NSDictionary *)contentDic
+- (void)setContentDic:(NSMutableDictionary *)contentDic
 {
     _contentDic = contentDic;
     
@@ -87,4 +88,54 @@
 }
 
 
+- (IBAction)commentLikeAction:(UIButton *)sender {
+    if (sender.isSelected) {
+        sender.selected = NO;
+        [self snapDelete:self.contentDic[@"commentId"]];
+        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)];
+    } else {
+        sender.selected = YES;
+        [self snapInsert:self.contentDic[@"commentId"]];
+        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)];
+    }
+}
+
+#pragma mark - 取消点赞接口
+- (void)snapDelete:(NSString *)commentId
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"commentId"] = commentId;
+    
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已删除"]) {
+            [CZProgressHUD showProgressHUDWithText:@"取消成功"];
+            self.contentDic[@"userSnap"] = @(0);
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"取消失败"];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+        
+    } failure:^(NSError *error) {}];
+}
+
+#pragma mark - 点赞接口
+- (void)snapInsert:(NSString *)commentId
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"commentId"] = commentId;
+    
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"添加成功"]) {
+            [CZProgressHUD showProgressHUDWithText:@"点赞成功"];
+            self.contentDic[@"userSnap"] = @(1);
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+    } failure:^(NSError *error) {}];
+}
 @end

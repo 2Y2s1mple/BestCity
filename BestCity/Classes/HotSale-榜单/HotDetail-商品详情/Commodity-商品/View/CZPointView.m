@@ -15,13 +15,14 @@
     CZPointView *backView = [[self alloc] initWithFrame:frame];
     [superView addSubview:backView];
     UIImageView *qualityImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    qualityImage.frame = CGRectMake(10, 10, 25, 22);
+    qualityImage.frame = CGRectMake(10, 10, 0, 0);
+    [qualityImage sizeToFit];
     [backView addSubview:qualityImage];
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(qualityImage.frame) + 10, qualityImage.y, 70, qualityImage.height)];
     title.text = mainTitle;
     title.textColor = [UIColor blackColor];
-    title.font = [UIFont systemFontOfSize:16];
+    title.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
     [backView addSubview:title];
     
     CGFloat pointX = title.center.x - 10;
@@ -45,17 +46,18 @@
         UILabel *titleName = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(pointView.frame) + 10, CGRectGetMinY(pointView.frame) - 6, 120, 20)];
         titleName.text = pointTitles[i];
         titleName.textColor = CZGlobalGray;
-        titleName.font = [UIFont systemFontOfSize:15];
+        titleName.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
         [backView addSubview:titleName];
         
         UIImageView *checkMark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check out"]];
-        checkMark.frame = CGRectMake(backView.width - 80, pointView.y, 13, 8);
+        checkMark.frame = CGRectMake(backView.width - 80, pointView.y, 0, 0);
+        [checkMark sizeToFit];
         [backView addSubview:checkMark];
         
         UILabel *titleAffirm = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(checkMark.frame) + 10, CGRectGetMinY(titleName.frame), 50, 20)];
         titleAffirm.text = @"已确认";
         titleAffirm.textColor = CZGlobalGray;
-        titleAffirm.font = [UIFont systemFontOfSize:15];
+        titleAffirm.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
         titleAffirm.textColor = [UIColor redColor];
         [backView addSubview:titleAffirm];
         finallyH = CGRectGetMaxY(titleAffirm.frame) + 10;
@@ -73,12 +75,13 @@
     
     //图片和标题
     UIImageView *qualityImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    qualityImage.frame = CGRectMake(10, 10, 25, 22);
+    qualityImage.frame = CGRectMake(10, 10, 0, 0);
+    [qualityImage sizeToFit];
     [backView addSubview:qualityImage];
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(qualityImage.frame) + 10, qualityImage.y, 70, qualityImage.height)];
     title.text = mainTitle;
     title.textColor = [UIColor blackColor];
-    title.font = [UIFont systemFontOfSize:16];
+    title.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
     [backView addSubview:title];
     
     //创建表格
@@ -102,13 +105,13 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, formH * i, 90, formH)];
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.textColor = CZGlobalGray;
-        titleLabel.font = [UIFont systemFontOfSize:15];
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
         titleLabel.text = formTitles[i];
         [formView addSubview:titleLabel];
         //内容
         UILabel *subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(verticalLine.x + 20, titleLabel.y, formView.width - 140, formH)];
         subTitleLabel.textAlignment = NSTextAlignmentLeft;
-        subTitleLabel.font = [UIFont systemFontOfSize:15];
+        subTitleLabel.font = titleLabel.font;
         subTitleLabel.text = subformTitles[i];
         [formView addSubview:subTitleLabel];
     }

@@ -200,7 +200,6 @@
         // 调用一下layout方法, 要不尖号位置不对
         [self.loginBtn layoutIfNeeded];
     }
-    
     // 积分
     NSString *point = [[NSUserDefaults standardUserDefaults] objectForKey:@"point"];
     if (point) {

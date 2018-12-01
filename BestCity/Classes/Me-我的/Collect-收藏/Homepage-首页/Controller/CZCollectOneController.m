@@ -25,9 +25,21 @@
 @property (nonatomic, strong) UITableView *tableView;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZCollectOneController
+#pragma mark - 懒加载
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noSelectView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
 - (NSMutableArray *)collectdsData
 {
     if (_collectdsData == nil) {
@@ -52,12 +64,8 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    
-    
     // 加载刷新控件
     [self setupRefresh];
-    
-    
 }
 
 - (void)setupRefresh
@@ -65,7 +73,6 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     //刷新
     [self.tableView.mj_header beginRefreshing];
-    
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
@@ -82,13 +89,14 @@
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectAll"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.collectdsData = result[@"list"];
-            [self.tableView reloadData];
+            // 没有数据图片
+            [self.noDataView removeFromSuperview];   
         } else {
-            [CZProgressHUD showProgressHUDWithText:@"无数据"];
-            [CZProgressHUD hideAfterDelay:2];
+            // 没有数据图片
+            [self.tableView addSubview:self.noDataView];
         }
-        
+        self.collectdsData = result[@"list"];
+        [self.tableView reloadData];
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
     } failure:^(NSError *error) {
@@ -105,7 +113,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"userId"] = USERINFO[@"userId"];
     param[@"page"] = @(self.page);
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectAll"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
 

@@ -65,9 +65,14 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPo-jd-xJZ">
                         <rect key="frame" x="367" y="19.5" width="40" height="19"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="13"/>
+                        <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="222" image="appreciate-nor">
                             <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <state key="selected" image="appreciate-sel"/>
+                        <connections>
+                            <action selector="commentLikeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yCT-we-Vhw"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -94,11 +99,12 @@
                 <outlet property="replyButton" destination="PVU-d5-8hC" id="SuG-jF-uWG"/>
                 <outlet property="timeLabel" destination="VtO-W1-M3S" id="wSL-QC-Alr"/>
             </connections>
-            <point key="canvasLocation" x="433" y="-409"/>
+            <point key="canvasLocation" x="122" y="-437"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="appreciate-nor" width="16" height="15.5"/>
+        <image name="appreciate-sel" width="16" height="15.5"/>
         <image name="headDefault" width="180" height="180"/>
     </resources>
 </document>

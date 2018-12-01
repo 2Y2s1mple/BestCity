@@ -84,7 +84,7 @@
     vc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     CZNavigationController *nav = [[CZNavigationController alloc] initWithRootViewController:vc];
-    [vc.navigationController setNavigationBarHidden:YES];
+//    [vc.navigationController setNavigationBarHidden:YES];
     [self addChildViewController:nav];
 }
 

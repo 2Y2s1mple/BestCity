@@ -152,10 +152,10 @@
     // 用户评价
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, 100, 20)];
     titleLabel.text = @"用户评价";
-    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:17];
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     [self.scrollerView addSubview:titleLabel];
     // 记录高度
-    [self addHeight:CZGetY(titleLabel) + 10];
+    [self addHeight:CZGetY(titleLabel) + 20];
     
     // 最多加载三个
     NSInteger maxCommentCount = self.evaluateArr.count > 3 ? 3 : self.evaluateArr.count;
@@ -177,7 +177,7 @@
         backview.height += detail.height;
         
         // 记录高度
-        [self addHeight:backview.height];
+        [self addHeight:backview.height + 10];
     }
 
     // 记录高度
@@ -302,28 +302,82 @@
     //名字
     UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(icon) + 10, icon.center.y - 15, 100, 30)];
     name.text = model.userShopmember[@"userNickName"];
-    name.font = [UIFont systemFontOfSize:16];
+    name.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     name.textColor = CZGlobalGray;
     [backview addSubview:name];
     
     //点赞小手
-    UIButton *likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    CZReplyButton *likeBtn = [CZReplyButton buttonWithType:UIButtonTypeCustom];
     likeBtn.x = backview.width - 40;
     likeBtn.y = name.y;
+    likeBtn.commentId = model.commentId;
+    likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     [likeBtn sizeToFit];
     [likeBtn setTitle:model.snapNum forState:UIControlStateNormal];
     [likeBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
     [likeBtn setImage:[UIImage imageNamed:@"appreciate-nor"]
              forState:UIControlStateNormal];
     [likeBtn setImage:[UIImage imageNamed:@"appreciate-sel"]
-             forState:UIControlStateHighlighted];
+             forState:UIControlStateSelected];
+    likeBtn.selected = [model.userSnap boolValue];
+    likeBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    [likeBtn addTarget:self action:@selector(commentLikeAction:) forControlEvents:UIControlEventTouchUpInside];
     [backview addSubview:likeBtn];
-    
     
     backview.height = icon.height;
     return backview;
-    
 }
+
+- (void)commentLikeAction:(CZReplyButton *)sender
+{
+    if (sender.isSelected) {
+        sender.selected = NO;
+        [self snapDelete:sender.commentId];
+        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)];
+    } else {
+        sender.selected = YES;
+        [self snapInsert:sender.commentId];
+        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)];
+    }
+}
+
+#pragma mark - 取消点赞接口
+- (void)snapDelete:(NSString *)commentId
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"commentId"] = commentId;
+    
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已删除"]) {
+            [CZProgressHUD showProgressHUDWithText:@"取消成功"];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"取消失败"];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+        
+    } failure:^(NSError *error) {}];
+}
+
+#pragma mark - 点赞接口
+- (void)snapInsert:(NSString *)commentId
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"commentId"] = commentId;
+
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"添加成功"]) {
+            [CZProgressHUD showProgressHUDWithText:@"点赞成功"];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+    } failure:^(NSError *error) {}];
+}
+
 
 #pragma mark - 创建评论内容
 - (UIView *)commentViewAddView:(UIView *)view model:(CZEvaluateModel *)model
@@ -338,12 +392,12 @@
     // 内容
     NSString *text = model.content;
     UILabel *contentlabel = [[UILabel alloc] initWithFrame:CGRectMake(58, 0, backview.width - 58 - 10, 0)];
-    CGFloat contentlabelHeight = [text boundingRectWithSize:CGSizeMake(contentlabel.width, 1000) options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
-    contentlabel.height = contentlabelHeight;
-    contentlabel.text = text;
-    contentlabel.font = [UIFont systemFontOfSize:15];
-    contentlabel.textColor = CZRGBColor(21, 21, 21);
     contentlabel.numberOfLines = 0;
+    contentlabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+    contentlabel.text = text;
+    CGFloat contentlabelHeight = [text getTextHeightWithRectSize:CGSizeMake(contentlabel.width, 1000) andFont:contentlabel.font];
+    contentlabel.height = contentlabelHeight;
+    contentlabel.textColor = CZRGBColor(21, 21, 21);
     [backview addSubview:contentlabel];
    
     
@@ -375,7 +429,7 @@
     replyBtn.commentId = model.commentId;
     replyBtn.name = model.userShopmember[@"userNickName"];
     replyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    replyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+    replyBtn.titleLabel.font = timeLabel.font;
     [replyBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
     [replyBtn addTarget:self action:@selector(reply:) forControlEvents:UIControlEventTouchUpInside];
     [backview addSubview:replyBtn];
@@ -423,17 +477,18 @@
         CZCommentModel *commentModel = model.userCommentList[i];
         UILabel *contentLabel = [[UILabel alloc] init];
         [replyView addSubview:contentLabel];
-        contentLabel.font = [UIFont systemFontOfSize:15];
+        contentLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
         contentLabel.numberOfLines = 0;
         contentLabel.x = 10;
         contentLabel.y = 10 + replyHeight;
         contentLabel.width = replyView.width - 20;
         NSString *nickName = commentModel.userShopmember[@"userNickName"] ? commentModel.userShopmember[@"userNickName"] : @"游客";
         NSString *textStr = [NSString stringWithFormat:@"%@ 回复:  %@", nickName, commentModel.content];
-        contentLabel.height = [textStr getTextHeightWithRectSize:CGSizeMake(contentLabel.width, 10000) andFont:contentLabel.font];
         NSMutableAttributedString *attriString = [[NSMutableAttributedString alloc] initWithString:textStr];
         [attriString addAttributes:@{NSForegroundColorAttributeName : CZGlobalGray} range:[textStr rangeOfString:nickName]];
+        [attriString addAttributes:@{NSFontAttributeName : contentLabel.font} range:[textStr rangeOfString:textStr]];
         contentLabel.attributedText = attriString;
+        contentLabel.height = [textStr getTextHeightWithRectSize:CGSizeMake(contentLabel.width, 10000) andFont:contentLabel.font];
         
         replyHeight += contentLabel.height + 5;
         replyView.height = CZGetY(contentLabel) + 10;
@@ -446,12 +501,11 @@
         moreBtn.x = 10;
         moreBtn.y = replyView.height;
         moreBtn.height = 20;
-        moreBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [moreBtn setTitle:[NSString stringWithFormat:@"共%@条回复", model.secondNum] forState:UIControlStateNormal];
         [moreBtn setImage:[UIImage imageNamed:@"right-blue"] forState:UIControlStateNormal];
         [moreBtn sizeToFit];
         [moreBtn setTitleColor:CZRGBColor(74, 144, 226) forState:UIControlStateNormal];
-        moreBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        moreBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
         [moreBtn addTarget:self action:@selector(pushCommentDetail:) forControlEvents:UIControlEventTouchUpInside];
         replyView.height = CZGetY(moreBtn) + 10;
     }

@@ -13,8 +13,8 @@
 
 + (void)load
 {
-    Method method1 = class_getClassMethod([self class], @selector(systemFontOfSize:));
-    Method method2 = class_getClassMethod([self class], @selector(myFontOfSize:));
+//    Method method1 = class_getClassMethod([self class], @selector(systemFontOfSize:));
+//    Method method2 = class_getClassMethod([self class], @selector(myFontOfSize:));
 
 //    method_exchangeImplementations(method1, method2);
     

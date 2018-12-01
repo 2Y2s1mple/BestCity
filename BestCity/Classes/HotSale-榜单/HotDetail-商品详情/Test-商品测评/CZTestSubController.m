@@ -54,7 +54,7 @@
     //标题
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, 150, 20)];
     titleLabel.text = @"开箱测评";
-    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:17];
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
     [self.scrollerView addSubview:titleLabel];
     //头像
     UIImageView *iconImage = [[UIImageView alloc] init];
@@ -66,21 +66,25 @@
     //名字
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y, 100, 20)];
     nameLabel.text = self.model.goodsEvalWayEntity[@"userShopmember"][@"userNickName"];
-    nameLabel.font = [UIFont systemFontOfSize:16];
+    nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+    [nameLabel sizeToFit];
     nameLabel.textColor = CZRGBColor(21, 21, 21);
     [self.scrollerView addSubview:nameLabel];
+    //粉丝数
+    if (nameLabel.width > 150) {
+        nameLabel.width = 150;
+    }
+    UILabel *fansLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(nameLabel) + 10, nameLabel.y, 100, 20)];
+    fansLabel.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.goodsEvalWayEntity[@"userShopmember"][@"fansCount"]];
+    fansLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+    fansLabel.textColor = CZGlobalGray;
+    [self.scrollerView addSubview:fansLabel];
     //时间
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CZGetY(nameLabel) + space, 100, 20)];
     timeLabel.text =[self.model.goodsEvalWayEntity[@"createTime"] length] > 10 ? [self.model.goodsEvalWayEntity[@"createTime"] substringToIndex:10] : @"";
     timeLabel.textColor = CZGlobalGray;
-    timeLabel.font = [UIFont systemFontOfSize:14];
+    timeLabel.font = fansLabel.font;
     [self.scrollerView addSubview:timeLabel];
-    //粉丝数
-    UILabel *fansLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(nameLabel), nameLabel.y, 100, 20)];
-    fansLabel.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.goodsEvalWayEntity[@"userShopmember"][@"fansCount"]];
-    fansLabel.font = [UIFont systemFontOfSize:14];
-    fansLabel.textColor = CZGlobalGray;
-    [self.scrollerView addSubview:fansLabel];
 
     // 关注按钮
     CZAttentionBtnType type;

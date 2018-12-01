@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *commentId;
 /** 文章ID */
 @property (nonatomic, strong) NSString *articId;
-///** 头像 */
-//@property (nonatomic, strong) NSString *fromImg;
 /** 名字 */
 @property (nonatomic, strong) NSDictionary *userShopmember;
 /** 内容 */
@@ -25,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *createTime;
 /** 当前点赞的数 */
 @property (nonatomic, strong) NSString *snapNum;
+/** 当前用户点赞数 */
+@property (nonatomic, strong) NSNumber *userSnap;
 /** 子评论的个数 */
 @property (nonatomic, assign) NSString *secondNum;
 /** 子评论 */

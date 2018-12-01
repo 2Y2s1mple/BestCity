@@ -21,10 +21,20 @@
 @property (nonatomic, strong) UITableView *tableView;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZAttentionController
-
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noAttentionView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
 /** 关注数据 */
 - (NSMutableArray *)attentionsData
 {
@@ -85,16 +95,16 @@
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"])
         {
+            if ([result[@"list"] count] > 0) {
+                // 删除nodata
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             // 字典转模型
             self.attentionsData = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-            [CZProgressHUD hideAfterDelay:2];
-            
-            UIView *noDataView = [[UIView alloc] initWithFrame:CGRectMake(0, 67, SCR_WIDTH, SCR_HEIGHT - 67)];
-            noDataView.backgroundColor = [UIColor redColor];
-            [self.view addSubview:noDataView];
         }
         
         // 结束刷新
@@ -102,8 +112,6 @@
     } failure:^(NSError *error) {
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
-        [CZProgressHUD showProgressHUDWithText:@"网络错误!"];
-        [CZProgressHUD hideAfterDelay:2];
     }];
 }
 
@@ -116,7 +124,7 @@
     param[@"userId"] = USERINFO[@"userId"];
     param[@"page"] = @(self.page);
     
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concer"];
+    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/selectAll"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"list"] count] != 0)
         {

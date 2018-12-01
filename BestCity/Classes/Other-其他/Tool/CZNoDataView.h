@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZNoDataView : UIView
 + (instancetype)noDataView;
++ (instancetype)noSelectView;
++ (instancetype)noAttentionView;
 @end
 
 NS_ASSUME_NONNULL_END

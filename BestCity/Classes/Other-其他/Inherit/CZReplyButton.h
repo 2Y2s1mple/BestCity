@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZEvaluateModel.h"
 @interface CZReplyButton : UIButton
 /** ID */
 @property (nonatomic, strong) NSString *commentId;

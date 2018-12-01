@@ -46,6 +46,7 @@
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
             // 刷新tableView
+            [CZProgressHUD showProgressHUDWithText:@"取关成功"];
             !self.delegate ? : [self.delegate reloadAttentionTableView];
             self.model.attentionType = CZAttentionBtnTypeAttention;
             [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"取消关注成功"}];
@@ -53,11 +54,8 @@
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+        [CZProgressHUD hideAfterDelay:1.5];
+    } failure:^(NSError *error) {}];
 }
 
 // 新增关注
@@ -70,6 +68,7 @@
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
             // 刷新tableView
+            [CZProgressHUD showProgressHUDWithText:@"关注成功"];
             !self.delegate ? : [self.delegate reloadAttentionTableView];
             self.model.attentionType = CZAttentionBtnTypeFollowed;
             [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"用户关注成功"}];
@@ -77,11 +76,8 @@
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+        [CZProgressHUD hideAfterDelay:1.5];
+    } failure:^(NSError *error) {}];
 }
 
 - (void)awakeFromNib {
@@ -91,7 +87,6 @@
         if (isSelected) {
             [self addAttention];
         } else {
-            NSLog(@"点击了%@按钮", self.model.userShopmember[@"userNickName"]);
             [self deleteAttention];
         }
     }];

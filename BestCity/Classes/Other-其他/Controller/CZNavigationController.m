@@ -27,6 +27,11 @@
     [super pushViewController:viewController animated:animated];
 }
 
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+{
+    [CZProgressHUD hideAfterDelay:0];
+    return [super popViewControllerAnimated:animated];
+}
 
 
 @end

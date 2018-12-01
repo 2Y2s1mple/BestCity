@@ -58,14 +58,14 @@
     
     // 回复人
     self.replyNameLabel = [[UILabel alloc] init];
-    self.replyNameLabel.font = [UIFont systemFontOfSize:15];
+    self.replyNameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
     [self.backView addSubview:self.replyNameLabel];
     
     // 内容
     self.replyContentLabel = [[UILabel alloc] init];
     self.replyContentLabel.numberOfLines = 0;
     self.replyContentLabel.textColor = [UIColor blackColor];
-    self.replyContentLabel.font = [UIFont systemFontOfSize:14];
+    self.replyContentLabel.font = self.replyNameLabel.font;
     [self.backView addSubview:self.replyContentLabel];
     
 }

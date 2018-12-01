@@ -23,7 +23,7 @@
     //关注按钮
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 60, 24);
-    btn.titleLabel.font = [UIFont systemFontOfSize:12];
+    btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 12];
     btn.layer.borderWidth = 0.5;
     btn.layer.cornerRadius = 13;
     btn.layer.borderColor = [UIColor redColor].CGColor;
