@@ -16,6 +16,7 @@
 #import "GXLuckyDrawController.h"
 #import "CZMutContentButton.h"
 #import "UIImageView+WebCache.h"
+#import "CZUserInfoTool.h"
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
@@ -52,10 +53,10 @@
    
 }
 
-#pragma mark - 跳转到登陆
+#pragma mark - 跳转到我的资料
 - (IBAction)loginAction:(UIButton *)sender {
-    CZLoginController *vc = [CZLoginController shareLoginController];
-    [self presentViewController:vc animated:YES completion:nil];
+    CZMyProfileController *vc = [[CZMyProfileController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 跳转到抽奖
@@ -172,8 +173,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // 给用户信息赋值
-    [self userInfo];
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+        // 给用户信息赋值
+        [self userInfo];
+    }];
+    
 }
 
 - (void)userInfo
@@ -189,17 +193,10 @@
     self.levelLabel.text = [@"V" stringByAppendingFormat:@"%@", USERINFO[@"userMemberGrade"] ? USERINFO[@"userMemberGrade"] : @"0"];
     
     // 用户名字
-    if ([USERINFO[@"userNickName"] length] != 0) {
-        [self.loginBtn setTitle:USERINFO[@"userNickName"] forState:UIControlStateNormal];
-        self.loginBtn.enabled = NO;
-        [self.loginBtn setImage:nil forState:UIControlStateNormal];
-    } else {
-        [self.loginBtn setTitle:@"立即登录" forState:UIControlStateNormal];
-        self.loginBtn.enabled = YES;
-        [self.loginBtn setImage:[UIImage imageNamed:@"right-white"] forState:UIControlStateNormal];
-        // 调用一下layout方法, 要不尖号位置不对
-        [self.loginBtn layoutIfNeeded];
-    }
+    [self.loginBtn setTitle:USERINFO[@"userNickName"] forState:UIControlStateNormal];
+    self.loginBtn.enabled = YES;
+    [self.loginBtn setImage:nil forState:UIControlStateNormal];
+   
     // 积分
     NSString *point = [[NSUserDefaults standardUserDefaults] objectForKey:@"point"];
     if (point) {

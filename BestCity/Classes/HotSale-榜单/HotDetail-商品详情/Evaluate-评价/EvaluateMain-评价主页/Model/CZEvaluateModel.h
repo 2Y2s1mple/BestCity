@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *content;
 /** 时间 */
 @property (nonatomic, strong) NSString *createTime;
+/** 处理后的时间 */
+@property (nonatomic, strong) NSString *showTime;
 /** 当前点赞的数 */
 @property (nonatomic, strong) NSString *snapNum;
 /** 当前用户点赞数 */

@@ -8,7 +8,6 @@
 
 #import "CZTwoController.h"
 #import "CZHotSaleCell.h"
-#import "CZOneDetailController.h"
 #import "CZHotTitleModel.h"
 #import "GXNetTool.h"
 #import "MJExtension.h"
@@ -16,32 +15,50 @@
 #import "CZSubTitleButton.h"
 #import "TSLWebViewController.h"
 
-@interface CZTwoController ()<UITableViewDelegate, UITableViewDataSource>
+@interface CZTwoController ()
 /** 记录高度 */
 @property (nonatomic, assign) CGFloat recordHeight;
 /** 记录点击的按钮 */
 @property (nonatomic, strong) UIButton *recordBtn;
-/** 当前数据 */
-@property (nonatomic, strong) NSArray *dataSource;
-/** 表单 */
-@property (nonatomic, strong) UITableView *tableView;
-
 /** 记录Id避免重复点击刷新 */
 @property (nonatomic, strong) NSString *recordID;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZTwoController
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 140;
+    }
+    return _noDataView;
+}
 
 - (void)getDataSourceWithId:(NSString *)SourceId
 {
+    [CZRecommendListModel setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"goodsScopeList" : @"CZHotScoreModel"
+                 };
+    }];
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"mark"] = @"0";
-        param[@"goodsId"] = SourceId;
+        param[@"category2Id"] = SourceId;
         
         [CZProgressHUD showProgressHUDWithText:nil];
         //获取数据
         [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodRank"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
+                if ([result[@"list"] count] > 0) {
+                    // 没有数据图片
+                    [self.noDataView removeFromSuperview];
+                } else {
+                    // 没有数据图片
+                    [self.tableView addSubview:self.noDataView];
+                }
                 self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
                 [self.tableView reloadData];
             }
@@ -51,8 +68,6 @@
             [self.tableView.mj_header endRefreshing];
             
         } failure:^(NSError *error) {
-            //隐藏菊花
-            [CZProgressHUD hideAfterDelay:0];
             // 结束刷新
             [self.tableView.mj_header endRefreshing];
         }];
@@ -63,33 +78,21 @@
     [super viewDidLoad];
     //line
     CZTOPLINE;
-    [CZRecommendListModel setupObjectClassInArray:^NSDictionary *{
-        return @{
-                 @"goodsScopeList" : @"CZHotScoreModel"
-                 };
-    }];
     
     // 设置头部标题
     [self setupHeaderView];
 
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _recordHeight, SCR_WIDTH, SCR_HEIGHT - HOTContentY - 49 - _recordHeight) style:UITableViewStylePlain];
-    if (@available(iOS 11.0, *)) {
-        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [self.view addSubview:tableView];
-    self.tableView = tableView;
+    // 设置tableView
+    self.tableView.frame = CGRectMake(0, _recordHeight, SCR_WIDTH, SCR_HEIGHT - HOTContentY - 49 - _recordHeight);
     
     // 加载刷新控件
-    [self setupRefreshTableView];
+    [self setupRefresh];
     
     //获取标题1的数据
     [self getDataSourceWithId:self.subTitles[0].categoryid];
 }
 
-- (void)setupRefreshTableView
+- (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
 }
@@ -98,7 +101,6 @@
 {
     [self getDataSourceWithId:self.recordID];
 }
-
 
 - (void)setupHeaderView
 {
@@ -153,49 +155,5 @@
     _recordBtn = sender;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self.dataSource[indexPath.row] cellHeight];
-}
-
-#pragma mark - UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.dataSource.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *ID = @"hotSaleCell";
-    CZHotSaleCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZHotSaleCell class]) owner:nil options:nil] lastObject];
-    }
-    CZRecommendListModel *model = self.dataSource[indexPath.row];
-    model.indexNumber = [NSString stringWithFormat:@"%ld", indexPath.row];
-    cell.model = model;
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //push到详情
-//    CZOneDetailController *vc = [[CZOneDetailController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    
-    CZRecommendListModel *model = self.dataSource[indexPath.row];
-    
-    [GXNetTool GetNetWithUrl:@"http://192.168.5.165:8080/qualityshop-admin/goodsEvalway/selectJ/1" body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-        NSLog(@"%@", result[@"goodsRanklist"][@"content"]);
-        TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://192.168.5.186:8080/ea_cs_tmall_app/showhistory"]];
-        vc.stringHtml = result[@"goodsRanklist"][@"content"];
-        [self.navigationController pushViewController:vc animated:YES];
-
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    
-}
 
 @end

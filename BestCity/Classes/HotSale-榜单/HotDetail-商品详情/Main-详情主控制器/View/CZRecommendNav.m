@@ -53,7 +53,7 @@
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset(0);
         make.width.equalTo(@(60));
-        make.height.equalTo(@(20));
+        make.height.equalTo(@(40));
     }];
     
     CGFloat btnX = 70;

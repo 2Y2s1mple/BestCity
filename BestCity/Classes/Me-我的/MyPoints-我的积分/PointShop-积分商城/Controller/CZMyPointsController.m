@@ -9,7 +9,6 @@
 #import "CZMyPointsController.h"
 #import "CZNavigationView.h"
 #import "CZMyPointsCell.h"
-#import "CZOneDetailController.h"//榜单的详情页面
 #import "CZMyPointDetailController.h"
 #import "TSLWebViewController.h"
 #import "GXNetTool.h"
@@ -87,8 +86,7 @@ static NSString * const ID = @"myPointCollectionCell";
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZOneDetailController *vc = [[CZOneDetailController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [CZProgressHUD showProgressHUDWithText:@"积分不足, 无法兑换!"];
 }
 
 #pragma mark - 获取数据

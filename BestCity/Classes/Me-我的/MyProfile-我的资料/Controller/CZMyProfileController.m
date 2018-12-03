@@ -47,7 +47,7 @@
         NSDictionary *userInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
         if ([userInfo[@"userBirthday"] length] >= 10) {
             NSString *dataStr = [userInfo[@"userBirthday"] substringToIndex:10];
-            _rightTitles = [NSMutableArray arrayWithArray:@[userInfo[@"userNickImg"], userInfo[@"userNickName"], userInfo[@"userMemberGrade"], userInfo[@"userGender"], dataStr, userInfo[@"userPhone"]]];
+            _rightTitles = [NSMutableArray arrayWithArray:@[userInfo[@"userNickImg"], userInfo[@"userNickName"], [NSString stringWithFormat:@"v%@", userInfo[@"userMemberGrade"]], userInfo[@"userGender"], dataStr, userInfo[@"userPhone"]]];
         }
     }
     return _rightTitles;
@@ -106,6 +106,11 @@
         CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:CZMyProfileCellTypeDefault];
         cell.headerImage = self.rightTitles[indexPath.row];;
         return cell;
+    } else if (indexPath.row == 5) {
+        CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:2];
+        cell.title = self.leftTitles[indexPath.row];
+        cell.subTitle = self.rightTitles[indexPath.row];
+        return cell;
     } else {
         CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:CZMyProfileCellTypeSubTitle];
         cell.title = self.leftTitles[indexPath.row];
@@ -138,8 +143,8 @@
         backView.delegate = self;
         [self.view addSubview:backView];
     } else if ([self.leftTitles[indexPath.row] isEqualToString:@"绑定手机"]) {
-        CZBindingMobileController *vc = [[CZBindingMobileController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+//        CZBindingMobileController *vc = [[CZBindingMobileController alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
     } else{
         //
         [self openPhoto];

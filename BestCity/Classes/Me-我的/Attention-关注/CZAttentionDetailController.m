@@ -314,7 +314,7 @@
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
 }
 
@@ -334,7 +334,7 @@
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         // 取消菊花
-        [CZProgressHUD hideAfterDelay:0];
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
 }
 

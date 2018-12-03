@@ -186,6 +186,7 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)didClickedTitleWithIndex:(NSInteger)index
 {
+    self.scrollerView.delegate = nil;
     CGPoint point;
     switch (index) {
         case 0:
@@ -201,7 +202,12 @@ static CGFloat const likeAndShareHeight = 49;
             point = CGPointMake(0, 0);
             break;
     }
-    [self.scrollerView setContentOffset:point animated:YES];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.scrollerView.contentOffset = point;
+    } completion:^(BOOL finished) {
+        self.scrollerView.delegate = self;
+    }];
 }
 
 #pragma mark - <UIScrollViewDelegate>

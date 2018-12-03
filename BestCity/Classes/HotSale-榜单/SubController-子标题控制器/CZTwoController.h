@@ -6,9 +6,9 @@
 //  Copyright © 2018年 JasonBourne. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CZBaseRecommendController.h"
 @class CZHotSubTilteModel;
-@interface CZTwoController : UIViewController
+@interface CZTwoController : CZBaseRecommendController
 /** 附标题 */
 @property (nonatomic, strong) NSArray<CZHotSubTilteModel *> *subTitles;
 @end

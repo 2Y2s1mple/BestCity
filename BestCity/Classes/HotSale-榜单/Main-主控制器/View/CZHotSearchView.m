@@ -50,6 +50,7 @@
     textF.width = self.width - 40;
     textF.height = self.height;
     self.textField = textF;
+    self.textField.delegate = self;
     [textF addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
     [self addSubview:textF];
     
@@ -123,5 +124,10 @@
     self.textField.text = searchText;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    !self.msgBlock ? : self.msgBlock(self.msgTitle);
+    return YES;
+}
 
 @end

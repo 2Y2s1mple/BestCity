@@ -85,7 +85,9 @@
         self.tag1.hidden = YES;
         self.tag2.hidden = YES;
     }
-    self.actualPriceLabel.text = [@"¥" stringByAppendingString:model.actualPrice ? model.actualPrice : @""];
+    
+    NSString *actualPrice = [NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]];
+    self.actualPriceLabel.text = actualPrice;
     self.cutPriceLabel.text = [NSString stringWithFormat:@"省%@", model.cutPrice];
     
     NSString *status;
@@ -106,7 +108,7 @@
     
     if (model.otherPrice.length > 0) {
         status = [status stringByAppendingFormat:@"    ¥%@", model.otherPrice];
-        self.tmPrice.attributedText = [status addStrikethroughWithRange:[status rangeOfString:[NSString stringWithFormat:@"    ¥%@", model.otherPrice]]];
+        self.tmPrice.attributedText = [status addStrikethroughWithRange:[status rangeOfString:[NSString stringWithFormat:@"¥%@", model.otherPrice]]];
     }
     
     
@@ -130,7 +132,7 @@
     // 综合评分
     if (model.goodsScopeList.count >= 4) {
         self.pointView.hidden = NO;
-        self.comprehensiveScoreLabel.text = model.goodsGrade;
+        self.comprehensiveScoreLabel.text = [NSString stringWithFormat:@"%.1f", [model.goodsGrade floatValue]];
         NSInteger maxScore = 150;
         CGFloat everScore = maxScore / 10;
         self.scoreFirstImageConstraint.constant = 150 - [model.goodsScopeList[0].score integerValue] * everScore;

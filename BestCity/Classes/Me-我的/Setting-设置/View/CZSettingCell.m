@@ -37,7 +37,7 @@
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if ([title isEqualToString:@"联系客服"]) {
         self.rightTitle.hidden = NO;
-        self.rightTitle.text = @"400-1801616";
+        self.rightTitle.text = @"0571-88120907";
         self.accessoryType = UITableViewCellAccessoryNone;
     } else if ([title isEqualToString:@"清除缓存"]) {
         //获取缓存的大小

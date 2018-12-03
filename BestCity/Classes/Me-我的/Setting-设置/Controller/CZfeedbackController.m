@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.textCount = 10;
+    self.textCount = 200;
     
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"我要反馈" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
@@ -50,6 +50,12 @@
 #pragma mark - 提交反馈
 - (void)commit
 {
+    if (self.textView.text.length <= 0) {
+        [CZProgressHUD showProgressHUDWithText:@"请输入文字"];
+        [CZProgressHUD hideAfterDelay:1];
+        return;
+    }
+    
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"userId"] = USERINFO[@"userId"];

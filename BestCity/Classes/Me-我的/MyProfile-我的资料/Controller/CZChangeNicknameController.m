@@ -8,7 +8,6 @@
 
 #import "CZChangeNicknameController.h"
 #import "CZNavigationView.h"
-#import "CZTextField.h"
 #import "DLIDEKeyboardView.h"
 #import "GXNetTool.h"
 #import "CZProgressHUD.h"
@@ -16,7 +15,7 @@
 
 @interface CZChangeNicknameController ()
 /** 输入框 */
-@property (nonatomic, strong) CZTextField *textfield;
+@property (nonatomic, strong) UITextField *textfield;
 @end
 
 @implementation CZChangeNicknameController
@@ -33,17 +32,32 @@
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
     
-    CZTextField *textfield = [[CZTextField alloc] initWithFrame:CGRectMake(0, 68, SCR_WIDTH, 40)];
+    
+    
+    UIView *textBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 68, SCR_WIDTH, 40)];
+    textBackView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:textBackView];
+    
+    UITextField *textfield = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, SCR_WIDTH - 20, 40)];
     textfield.backgroundColor = [UIColor whiteColor];
     textfield.text = self.name;
     textfield.font = [UIFont systemFontOfSize:16];
     textfield.clearButtonMode = UITextFieldViewModeAlways;
     textfield.keyboardType = UIKeyboardTypeDefault;
+    [textfield addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     [DLIDEKeyboardView attachToTextView:textfield];
-    [self.view addSubview:textfield];
+    [textBackView addSubview:textfield];
     self.textfield = textfield;
 
 }
+
+- (void)textFieldChange:(UITextField *)textField
+{
+    if (textField.text.length > 16) {
+        textField.text = [textField.text substringToIndex:16];
+    }
+}
+
 
 - (void)saveUserInfo
 {

@@ -23,9 +23,22 @@
 @property (nonatomic, assign) NSInteger page;
 /** 数据 */
 @property (nonatomic, strong) NSMutableArray *dataSource;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZSystemMessageController
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.backgroundColor = CZGlobalLightGray;
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 140;
+    }
+    return _noDataView;
+}
+
 - (NSMutableArray *)dataSource
 {
     if (_dataSource == nil) {
@@ -93,16 +106,17 @@
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"])
         {
+            if ([result[@"list"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
+            
             // 字典转模型
             self.dataSource = [CZSystemMessageModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-            [CZProgressHUD hideAfterDelay:2];
-            
-            UIView *noDataView = [[UIView alloc] initWithFrame:CGRectMake(0, 67, SCR_WIDTH, SCR_HEIGHT - 67)];
-            noDataView.backgroundColor = [UIColor redColor];
-            [self.view addSubview:noDataView];
         }
         // 结束刷新
         [self.tableView.mj_header endRefreshing];

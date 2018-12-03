@@ -48,7 +48,7 @@
 {
     _model = model;
     self.titleName.text = model.mainTitle;
-    self.actualPriceLabel.text = [NSString stringWithFormat:@"券后价：¥%@", model.actualPrice];
+    self.actualPriceLabel.text = [NSString stringWithFormat:@"券后价：¥%.2f", [model.actualPrice floatValue]];
     NSString *therPrice = [NSString stringWithFormat:@"%@：¥%@", model.sourcePlatform, model.sourcePlatformPrice];
     self.otherPrice.text = therPrice;
     self.couponPrice.text = [NSString stringWithFormat:@"%@元独家优惠券", model.discountCoupon];

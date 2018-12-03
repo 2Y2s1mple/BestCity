@@ -52,7 +52,7 @@
 - (NSInteger)maxNumber
 {
     if (!_maxNumber) {
-        _maxNumber = 10;
+        _maxNumber = 5;
     }
     return _maxNumber;
 }
@@ -83,7 +83,11 @@
     label.type = type;
     label.text = title;
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName : label.font}];
-    label.size = CGSizeMake(size.width + 15, 30);
+    if (size.width > SCR_WIDTH - 20) {
+        label.size = CGSizeMake(SCR_WIDTH - 20, 30);
+    } else {
+        label.size = CGSizeMake(size.width + 15, 30);
+    }
     
     // 添加到数组
     [self.tagsView insertSubview:label atIndex:0];
@@ -133,7 +137,12 @@
         label.text = self.hisArray[i];
         [self.tagsView addSubview:label];
         CGSize size = [label.text sizeWithAttributes:@{NSFontAttributeName : label.font}];
-        label.size = CGSizeMake(size.width + 15, 30);
+        if (size.width > SCR_WIDTH - 20) {
+            label.size = CGSizeMake(SCR_WIDTH - 20, 30);
+        } else {
+            label.size = CGSizeMake(size.width + 15, 30);
+        }
+        
     }
 }
 

@@ -97,9 +97,14 @@
 - (void)setupTopView
 {
     self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
-        NSLog(@"消息");
-        CZSystemMessageController *vc = [[CZSystemMessageController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([USERINFO[@"userId"] length] <= 0)
+        {
+            CZLoginController *vc = [CZLoginController shareLoginController];
+            [self presentViewController:vc animated:YES completion:nil];
+        } else {
+            CZSystemMessageController *vc = [[CZSystemMessageController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }];
     self.search.textFieldActive = NO;
     [self.view addSubview:self.search];
@@ -109,8 +114,15 @@
 
 - (void)pushSearchController
 {
-    CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    //push到搜索
+//    if ([USERINFO[@"userId"] length] <= 0)
+//    {
+//        CZLoginController *vc = [CZLoginController shareLoginController];
+//        [self presentViewController:vc animated:YES completion:nil];
+//    } else {
+        CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+//    }
 }
 
 #pragma mark - Datasource & Delegate

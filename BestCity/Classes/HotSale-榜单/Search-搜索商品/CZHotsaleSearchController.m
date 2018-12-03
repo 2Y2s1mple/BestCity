@@ -87,7 +87,7 @@
     self.hotView.type = CZHotTagLabelTypeTapGesture;
     self.hotView.title = @"热门搜索";
     self.hotView.delegate = self;
-    self.hotView.hisArray = [NSMutableArray arrayWithArray:@[@"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|"]];
+    self.hotView.hisArray = [NSMutableArray arrayWithArray:@[@"1电动牙刷|", @"2洗衣轮洗衣机机|", @"2洗衣轮洗衣机机|", @"1电动牙刷|", @"2洗衣轮洗衣机机|"]];
     [self.view addSubview:_hotView];
 }
 

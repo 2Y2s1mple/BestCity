@@ -38,11 +38,19 @@
             static NSString *ID = @"myProfileCell2";
             CZMyProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
             if (cell == nil) {
+                cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][1];
+            }
+            return cell;
+        }
+        case 2:
+        {
+            static NSString *ID = @"myProfileCell3";
+            CZMyProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+            if (cell == nil) {
                 cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
             }
             return cell;
         }
-            break;
             
         default:
             break;

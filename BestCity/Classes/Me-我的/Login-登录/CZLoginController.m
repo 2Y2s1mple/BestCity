@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *userAgreementLabel;
 /** 是否登录 */
 @property (nonatomic, assign) BOOL isLogin;
+/** 判断是否在读秒 */
+@property (nonatomic, assign) BOOL isReadSecond;
 
 @end
 
@@ -81,6 +83,10 @@ static id instancet_;
             [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayAccount"] forKey:@"alipayPhone"];
             [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayName"] forKey:@"alipayRealName"];
             
+            // 删除账号密码
+            self.userTextField.text = nil;
+            self.passwordTextField.text = nil;
+            
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -95,11 +101,7 @@ static id instancet_;
 }
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
-//    NSLog(@"getVerificationCode==");
     [self disabledAndGrayColor:self.verificationCodeBtn];
-    //将用户text失效
-    self.userTextField.enabled = NO;
-    self.userTextField.textColor = [UIColor lightGrayColor];
     self.count = 60;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
     
@@ -121,6 +123,8 @@ static id instancet_;
 
  - (void)timeDown
 {
+    // 是否在读秒
+    self.isReadSecond = YES;
     self.count -= 1;
     [self.verificationCodeBtn setTitle:[NSString stringWithFormat:@"%lds后重发", (long)self.count] forState:UIControlStateNormal];
     if (_count == 0) {
@@ -130,6 +134,7 @@ static id instancet_;
         self.userTextField.enabled = YES;
          self.userTextField.textColor = [UIColor blackColor];
         [self.verificationCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+        self.isReadSecond = NO;
     }
 
 }
@@ -159,6 +164,7 @@ static id instancet_;
     [self.view endEditing:YES];
 }
 
+
 - (void)textFieldAction:(UITextField *)textField
 {
     if (self.userTextField.text.length != 0 && self.passwordTextField.text.length != 0 ) {
@@ -168,11 +174,17 @@ static id instancet_;
     }
     
     if (self.userTextField == textField) {
-        if (self.userTextField.text.length == 11) {
+        if (self.userTextField.text.length > 11) {
+            self.userTextField.text = [self.userTextField.text substringToIndex:11];
+        }
+        if (self.userTextField.text.length == 11 && !self.isReadSecond) {
             [self enabledAndRedColor:self.verificationCodeBtn];
         } else {
             [self disabledAndGrayColor:self.verificationCodeBtn];
         }
+        
+        
+        
     }
 }
 

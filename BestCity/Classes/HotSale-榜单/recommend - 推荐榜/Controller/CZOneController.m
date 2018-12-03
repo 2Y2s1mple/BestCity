@@ -8,7 +8,6 @@
 
 #import "CZOneController.h"
 #import "CZHotSaleCell.h"
-#import "CZOneDetailController.h"
 #import "GXNetTool.h"
 #import "UIImageView+WebCache.h"
 #import "CZRecommendListModel.h"

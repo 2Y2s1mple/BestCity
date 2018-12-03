@@ -8,8 +8,8 @@
 
 #import "CZBaseRecommendController.h"
 #import "CZHotSaleCell.h"
-#import "CZOneDetailController.h"
 #import "CZRecommendDetailController.h"
+#import "CZEndLineView.h"
 
 @interface CZBaseRecommendController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -29,7 +29,15 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
+    tableView.tableFooterView = [self creatFooterView];
     self.tableView = tableView;
+}
+
+- (UIView *)creatFooterView
+{
+    CZEndLineView *footer = [CZEndLineView endLineView];
+    footer.autoresizingMask = UIViewAutoresizingNone;
+    return footer;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,17 +68,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //push到详情
-//    CZOneDetailController *vc = [[CZOneDetailController alloc] init];
-//    vc.selectIndex = 0;
-//    vc.menuViewStyle = WMMenuViewStyleLine;
-//    vc.automaticallyCalculatesItemWidths = YES;
-//    //        hotVc.titleFontName = @"PingFangSC-Medium";
-//    vc.titleColorNormal = CZGlobalGray;
-//    vc.titleColorSelected = CZRGBColor(5, 5, 5);
-//    vc.titleSizeNormal = 16.0f;
-//    vc.titleSizeSelected = vc.titleSizeNormal;
-//    vc.progressColor = [UIColor redColor];
-//    [self.navigationController pushViewController:vc animated:YES];
     if ([USERINFO[@"userId"] length] <= 0)
     {
         CZLoginController *vc = [CZLoginController shareLoginController];

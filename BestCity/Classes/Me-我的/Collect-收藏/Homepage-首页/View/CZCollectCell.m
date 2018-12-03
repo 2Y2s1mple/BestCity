@@ -73,7 +73,7 @@
     _commodityData = commodityData;
     [self.icon sd_setImageWithURL:[NSURL URLWithString:commodityData[@"rankGoodImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     self.titleLabel.text = commodityData[@"goodsName"];
-    self.nowPrice.text = [NSString stringWithFormat:@"¥%@", commodityData[@"actualPrice"]];
+    self.nowPrice.text = [NSString stringWithFormat:@"¥%.2f", [commodityData[@"actualPrice"] floatValue]];
     NSString *source;
     switch ([commodityData[@"sourceStatusg"] integerValue]) {
         case 1: // 京东
@@ -89,7 +89,11 @@
             source = @"淘宝";
             break;
     }
-    self.oldPrice.text = [NSString stringWithFormat:@"%@：¥%@", source, commodityData[@"otherPrice"]];
+    
+    NSString *otherPrice = [NSString stringWithFormat:@"%@：¥%@", source, commodityData[@"otherPrice"]];
+    
+    self.oldPrice.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:[NSString stringWithFormat:@"%@", commodityData[@"otherPrice"]]]];
+    
     [self.lookNumber setTitle:commodityData[@"visitCount"] forState:UIControlStateNormal];
     
     self.tag1.text = @"";
@@ -129,7 +133,7 @@
     self.tag3.text = @"";
     self.tag4.text = @"";
     self.nowPrice.text = @"";
-    self.oldPrice.text = @"";
+    self.oldPrice.text = discoverData[@"publishTime"];
     [self.lookNumber setTitle:discoverData[@"visitCount"] forState:UIControlStateNormal];
     
 }

@@ -47,16 +47,16 @@ static id _instance;
 {
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //设置文本
+//    //设置文本
     messageObject.text = @"如果好友通过您分享的链接完成购买，您即可获得10%的佣金，并可提现到支付宝账户。";
-    
-    //设置图片内容对象
-    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-    shareObject.thumbImage = [UIImage imageNamed:@"icon.png"];//如果有缩略图，则设置缩略图
-    [shareObject setShareImage:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534319537557&di=f5dcb1f44d10702889212857acdb5371&imgtype=0&src=http%3A%2F%2Fwww.qqma.com%2Fimgpic2%2Fcpimagenew%2F2018%2F4%2F5%2F6e1de60ce43d4bf4b9671d7661024e7a.jpg"];
+//
+//    //设置图片内容对象
+//    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+//    shareObject.thumbImage = [UIImage imageNamed:@"icon.png"];//如果有缩略图，则设置缩略图
+//    [shareObject setShareImage:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534319537557&di=f5dcb1f44d10702889212857acdb5371&imgtype=0&src=http%3A%2F%2Fwww.qqma.com%2Fimgpic2%2Fcpimagenew%2F2018%2F4%2F5%2F6e1de60ce43d4bf4b9671d7661024e7a.jpg"];
    
     // 设置网页
-    UMShareWebpageObject *shareUrlObject = [UMShareWebpageObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"icon"]];
+    UMShareWebpageObject *shareUrlObject = [UMShareWebpageObject shareObjectWithTitle:@"分享标题" descr:@"分享内容描述" thumImage:[UIImage imageNamed:@"head3"]];
     //设置网页地址
     shareUrlObject.webpageUrl =@"http://mobile.umeng.com/social";
     

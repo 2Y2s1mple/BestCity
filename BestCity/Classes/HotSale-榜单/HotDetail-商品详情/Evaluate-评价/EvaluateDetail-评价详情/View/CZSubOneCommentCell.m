@@ -101,9 +101,13 @@
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:textStr];
     [attr addAttributes:@{NSForegroundColorAttributeName : CZGlobalGray} range:[textStr rangeOfString:userName]];
     self.replyNameLabel.attributedText = attr;
+    self.replyNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     self.replyNameLabel.x = 10;
     self.replyNameLabel.y = 10;
     [self.replyNameLabel sizeToFit];
+    if (self.replyNameLabel.width > 80) {
+        self.replyNameLabel.width = 80;
+    }
     
     // 更新一下
 //    [self layoutIfNeeded];

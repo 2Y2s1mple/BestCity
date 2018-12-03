@@ -97,7 +97,10 @@
 - (UIButton *)popButton
 {
     if (_popButton == nil) {
-        _popButton = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
+        _popButton = [UIButton buttonWithFrame:CGRectMake(10, 30, 30, 30) backImage:@"nav-back-1" target:self action:@selector(popAction)];
+        _popButton.backgroundColor = CZGlobalGray;
+        _popButton.layer.cornerRadius = 15;
+        _popButton.layer.masksToBounds = YES;
     }
     return _popButton;
 }

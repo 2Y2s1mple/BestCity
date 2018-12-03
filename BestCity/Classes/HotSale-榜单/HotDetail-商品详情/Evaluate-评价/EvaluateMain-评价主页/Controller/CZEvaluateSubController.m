@@ -333,11 +333,11 @@
     if (sender.isSelected) {
         sender.selected = NO;
         [self snapDelete:sender.commentId];
-        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)];
+        [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)] forState:UIControlStateNormal];
     } else {
         sender.selected = YES;
         [self snapInsert:sender.commentId];
-        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)];
+        [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)] forState:UIControlStateNormal];
     }
 }
 
@@ -417,7 +417,8 @@
     
     //时间
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(58, 0, 80, 20)];
-    timeLabel.text = [model.createTime substringToIndex:10];
+    NSString *showTime = (![model.showTime  isEqual: @""] && model.showTime != [NSNull null]) ? model.showTime : [model.createTime substringToIndex:10];
+    timeLabel.text = showTime;
     timeLabel.textColor = CZGlobalGray;
     timeLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     [backview addSubview:timeLabel];
@@ -475,20 +476,41 @@
             [replyView addSubview:imageView];
         }
         CZCommentModel *commentModel = model.userCommentList[i];
+        
+        UILabel *commentNameLabel = [[UILabel alloc] init];
+        commentNameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
+        [replyView addSubview:commentNameLabel];
+        NSString *userName;
+        if (commentModel.userShopmember != [NSNull null] && commentModel.userShopmember != nil) {
+            userName = commentModel.userShopmember[@"userNickName"];
+        } else {
+            userName = @"游客";
+        }
+        
+        NSString *textStr = [NSString stringWithFormat:@"%@ 回复:", userName];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:textStr];
+        [attr addAttributes:@{NSForegroundColorAttributeName : CZGlobalGray} range:[textStr rangeOfString:userName]];
+        commentNameLabel.attributedText = attr;
+        commentNameLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        commentNameLabel.x = 10;
+        commentNameLabel.y = 10 + replyHeight;
+        [commentNameLabel sizeToFit];
+        if (commentNameLabel.width > 80) {
+            commentNameLabel.width = 80;
+        }
+        
+        
+        
+        
         UILabel *contentLabel = [[UILabel alloc] init];
+        contentLabel.text = commentModel.content;
         [replyView addSubview:contentLabel];
-        contentLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
+        contentLabel.font = commentNameLabel.font;
         contentLabel.numberOfLines = 0;
-        contentLabel.x = 10;
-        contentLabel.y = 10 + replyHeight;
-        contentLabel.width = replyView.width - 20;
-        NSString *nickName = commentModel.userShopmember[@"userNickName"] ? commentModel.userShopmember[@"userNickName"] : @"游客";
-        NSString *textStr = [NSString stringWithFormat:@"%@ 回复:  %@", nickName, commentModel.content];
-        NSMutableAttributedString *attriString = [[NSMutableAttributedString alloc] initWithString:textStr];
-        [attriString addAttributes:@{NSForegroundColorAttributeName : CZGlobalGray} range:[textStr rangeOfString:nickName]];
-        [attriString addAttributes:@{NSFontAttributeName : contentLabel.font} range:[textStr rangeOfString:textStr]];
-        contentLabel.attributedText = attriString;
-        contentLabel.height = [textStr getTextHeightWithRectSize:CGSizeMake(contentLabel.width, 10000) andFont:contentLabel.font];
+        contentLabel.x = CZGetX(commentNameLabel) + 10;
+        contentLabel.y = commentNameLabel.y;;
+        contentLabel.width = (SCR_WIDTH - 68) - commentNameLabel.x - 10;
+        contentLabel.height = [contentLabel.text getTextHeightWithRectSize:CGSizeMake(contentLabel.width, 10000) andFont:contentLabel.font];
         
         replyHeight += contentLabel.height + 5;
         replyView.height = CZGetY(contentLabel) + 10;

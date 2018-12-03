@@ -178,10 +178,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZEvaluationChoicenessDetailController *vc = [[CZEvaluationChoicenessDetailController alloc] init];
-    CZEvaluationChoicenessModel *model = self.dataSource[indexPath.row];
-    vc.detailID = model.evalWayId;
-    [self.navigationController pushViewController:vc animated:YES];
+    //push到详情
+    if ([USERINFO[@"userId"] length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        CZEvaluationChoicenessDetailController *vc = [[CZEvaluationChoicenessDetailController alloc] init];
+        CZEvaluationChoicenessModel *model = self.dataSource[indexPath.row];
+        vc.detailID = model.evalWayId;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 

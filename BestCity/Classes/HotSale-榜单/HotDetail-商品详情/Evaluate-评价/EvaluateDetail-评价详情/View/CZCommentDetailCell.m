@@ -68,7 +68,10 @@
     [self layoutIfNeeded];
     
     // 时间
-    self.timeLabel.text = [contentDic[@"createTime"] substringToIndex:10];
+    NSString *createTime = contentDic[@"createTime"];
+    NSString *showTime = contentDic[@"showTime"];
+    NSString *time = (![showTime  isEqual: @""] && showTime != [NSNull null]) ? showTime : [createTime substringToIndex:10];
+    self.timeLabel.text = time;
     
     
     // cell高度
@@ -92,11 +95,13 @@
     if (sender.isSelected) {
         sender.selected = NO;
         [self snapDelete:self.contentDic[@"commentId"]];
-        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)];
+        [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)] forState:UIControlStateNormal];
+        self.contentDic[@"snapNum"] = @([sender.titleLabel.text integerValue]);
     } else {
         sender.selected = YES;
         [self snapInsert:self.contentDic[@"commentId"]];
-        sender.titleLabel.text = [NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)];
+        [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)] forState:UIControlStateNormal];
+        self.contentDic[@"snapNum"] = @([sender.titleLabel.text integerValue]);
     }
 }
 

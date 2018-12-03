@@ -68,10 +68,14 @@
 {
     if (_popButton == nil) {
         _popButton = [[UIButton alloc] init];
+        _popButton.x = 15;
         _popButton.y = 35;
-        _popButton.size = CGSizeMake(50, 50);
-        [_popButton setImage:IMAGE_NAMED(@"nav-back") forState:UIControlStateNormal];
+        _popButton.size = CGSizeMake(30, 30);
+        [_popButton setImage:IMAGE_NAMED(@"nav-back-1") forState:UIControlStateNormal];
         [_popButton addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
+        _popButton.backgroundColor = CZGlobalGray;
+        _popButton.layer.cornerRadius = 15;
+        _popButton.layer.masksToBounds = YES;
     }
     return _popButton;
 }

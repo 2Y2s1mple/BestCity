@@ -81,15 +81,16 @@
     param[@"page"] = @(self.page);
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/findGoods/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"list"] count] > 0) {
-            // 没有数据图片
-            [self.noDataView removeFromSuperview];
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            if ([result[@"list"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             self.dataSource = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
-        } else {
-            // 没有数据图片
-            [self.tableView addSubview:self.noDataView];
-
         }
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
@@ -98,8 +99,6 @@
     } failure:^(NSError *error) {
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
     }];
 }
 
@@ -155,10 +154,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
-    CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-    vc.findgoodsId = model.findgoodsId;
-    [self.navigationController pushViewController:vc animated:YES];
+    //push到详情
+    if ([USERINFO[@"userId"] length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
+        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+        vc.findgoodsId = model.findgoodsId;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 

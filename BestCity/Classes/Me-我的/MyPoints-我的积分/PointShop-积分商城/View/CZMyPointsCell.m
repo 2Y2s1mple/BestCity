@@ -41,8 +41,9 @@
     _dicData = dicData;
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:dicData[@"rankGoodImg"]] placeholderImage:[UIImage imageNamed:@"testImage6"]];
     self.titleLabel.text = dicData[@"goodsName"];
-    self.pointLabel.text = [NSString stringWithFormat:@"%@", dicData[@"goodsPoint"]];
-    self.priceLabel.text = [NSString stringWithFormat:@"%@", dicData[@"otherPrice"]];
+    self.pointLabel.text = [NSString stringWithFormat:@"%@积分", dicData[@"goodsPoint"]];
+    NSString *otherPrice = [NSString stringWithFormat:@"¥%0.2f", [dicData[@"otherPrice"] floatValue]];
+    self.priceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
 }
 
 @end

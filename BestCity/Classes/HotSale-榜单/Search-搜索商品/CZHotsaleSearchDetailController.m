@@ -9,16 +9,26 @@
 #import "CZHotsaleSearchDetailController.h"
 #import "CZTextField.h"
 #import "CZHotSaleCell.h"
-#import "CZOneDetailController.h"
 #import "Masonry.h"
 #import "GXNetTool.h"
 #import "MJExtension.h"
 #import "CZRecommendListModel.h"
 
 @interface CZHotsaleSearchDetailController ()<UITextFieldDelegate>
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZHotsaleSearchDetailController
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +49,13 @@
     //获取数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSLog(@"%@", result);
+            if ([result[@"list"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
         }
@@ -52,16 +68,14 @@
     }];
 }
 
-
 #pragma mark - 创建搜索框以及方法
 - (UIView *)setupTopViewWithFrame:(CGRect)frame
 {
     UIView *topView = [[UIView alloc] initWithFrame:frame];
-//    topView.backgroundColor = [UIColor redColor];
     [self.view addSubview:topView];
     
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    leftBtn.backgroundColor = [UIColor redColor];
+    leftBtn.backgroundColor = RANDOMCOLOR;
     [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
     leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -70,7 +84,7 @@
         make.centerY.equalTo(topView);
         make.left.equalTo(topView).offset(20);
         make.width.equalTo(@(40));
-        make.height.equalTo(@(17));
+        make.height.equalTo(@(topView.height));
     }];
 
     CZTextField *textField = [[CZTextField alloc] init];
@@ -115,11 +129,5 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-    //push到详情
-//    CZOneDetailController *vc = [[CZOneDetailController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    
-//        TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://192.168.5.178:8080/ueditor/goodDetail/goodId_197382787/top-info/info-tab.html"]];
-//        [self.navigationController pushViewController:vc animated:YES];
 
 @end

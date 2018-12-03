@@ -134,6 +134,7 @@
                 // 获取子评论
                 NSMutableArray *subComment = self.originalData[self.currentCellIndex][@"userCommentList"];
                 NSMutableDictionary *comment = [NSMutableDictionary dictionaryWithObject:self.textViewTool.textView.text forKey:@"content"];
+                comment[@"userShopmember"] = [NSMutableDictionary dictionaryWithObject:USERINFO[@"userNickName"] forKey:@"userNickName"];
                 [subComment addObject:comment];
                 // 处理数据
                 self.evaluateArr = [self processingDataArray:self.originalData];
