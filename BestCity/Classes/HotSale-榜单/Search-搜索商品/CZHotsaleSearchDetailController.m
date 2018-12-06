@@ -52,9 +52,12 @@
             if ([result[@"list"] count] > 0) {
                 // 没有数据图片
                 [self.noDataView removeFromSuperview];
+                
             } else {
                 // 没有数据图片
                 [self.tableView addSubview:self.noDataView];
+                self.tableView.tableFooterView = nil;
+                
             }
             self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
@@ -75,19 +78,22 @@
     [self.view addSubview:topView];
     
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.backgroundColor = RANDOMCOLOR;
     [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
     leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    leftBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 10, 10);
     [topView addSubview:leftBtn];
     [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(topView);
-        make.left.equalTo(topView).offset(20);
+        make.centerY.equalTo(topView).offset(2);
+        make.left.equalTo(topView).offset(0);
         make.width.equalTo(@(40));
         make.height.equalTo(@(topView.height));
     }];
 
     CZTextField *textField = [[CZTextField alloc] init];
+    textField.backgroundColor = [UIColor whiteColor];
+    textField.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor;
+    textField.layer.borderWidth = 0.5;
     [topView addSubview:textField];
     textField.delegate = self;
     textField.text = self.textTitle;
@@ -104,6 +110,7 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 20, 20);
+    button.centerY = topView.height / 2.0;
     [button setImage:[UIImage imageNamed:@"search-close"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(clearBtnaction) forControlEvents:UIControlEventTouchUpInside];
     textField.rightView = button;
@@ -128,6 +135,5 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 @end

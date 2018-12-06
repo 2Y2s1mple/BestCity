@@ -32,6 +32,8 @@
 @property (nonatomic, strong) UIView *shareView;
 /** pop按钮 */
 @property (nonatomic, strong) UIButton *popButton;
+/** 分享参数 */
+@property (nonatomic, strong) NSDictionary *shareParam;
 @end
 
 @implementation CZDChoiceDetailController
@@ -42,11 +44,12 @@
     if (_shareView == nil) {
         _shareView = [[UIView alloc] init];
         _shareView.backgroundColor = CZGlobalWhiteBg;
-        _shareView.y = SCR_HEIGHT - 44;
+        _shareView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 44);
         _shareView.height = 44;
         _shareView.width = SCR_WIDTH;
-        CGFloat btnWidth = SCR_WIDTH / 3.0;
         
+        
+        CGFloat btnWidth = SCR_WIDTH / 3.0;
         //加个分隔线
         UIView *lineView = [[UIView alloc] init];;
         lineView.y = 0;
@@ -87,7 +90,7 @@
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, SCR_WIDTH,  SCR_HEIGHT + 20)];
+        UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, - (IsiPhoneX ? 44 : 20), SCR_WIDTH,  SCR_HEIGHT)];
         scrollerView.backgroundColor = CZGlobalWhiteBg;
         self.scrollerView = scrollerView;
     }
@@ -97,8 +100,8 @@
 - (UIButton *)popButton
 {
     if (_popButton == nil) {
-        _popButton = [UIButton buttonWithFrame:CGRectMake(10, 30, 30, 30) backImage:@"nav-back-1" target:self action:@selector(popAction)];
-        _popButton.backgroundColor = CZGlobalGray;
+        _popButton = [UIButton buttonWithFrame:CGRectMake(10, (IsiPhoneX ? 54 : 30), 30, 30) backImage:@"nav-back-1" target:self action:@selector(popAction)];
+        _popButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
         _popButton.layer.cornerRadius = 15;
         _popButton.layer.masksToBounds = YES;
     }
@@ -136,6 +139,7 @@
             // 创建内容视图
             [self setupTopView];
             // 添加分享按钮
+            self.shareParam = result[@"ShareUrl"];
             [self.view addSubview:self.shareView];
         }
         //隐藏菊花
@@ -237,6 +241,7 @@
 - (void)sharedApplication
 {
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    share.param = self.shareParam;
     [self.view addSubview:share];
 }
 

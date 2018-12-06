@@ -86,7 +86,7 @@
     if (size.width > SCR_WIDTH - 20) {
         label.size = CGSizeMake(SCR_WIDTH - 20, 30);
     } else {
-        label.size = CGSizeMake(size.width + 15, 30);
+        label.size = CGSizeMake(size.width + 28, 30);
     }
     
     // 添加到数组
@@ -140,7 +140,7 @@
         if (size.width > SCR_WIDTH - 20) {
             label.size = CGSizeMake(SCR_WIDTH - 20, 30);
         } else {
-            label.size = CGSizeMake(size.width + 15, 30);
+            label.size = CGSizeMake(size.width + 28, 30);
         }
         
     }

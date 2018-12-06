@@ -81,6 +81,8 @@
     // 头像的点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushMyProfileVc)];
     [self.headImage addGestureRecognizer:tap];
+    self.headImage.layer.borderWidth = 2;
+    self.headImage.layer.borderColor = CZGlobalWhiteBg.CGColor;
     
     // 设置最上面的导航栏, 实现滑动改变透明效果
     self.navImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];

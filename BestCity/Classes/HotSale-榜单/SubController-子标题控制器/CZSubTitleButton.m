@@ -22,7 +22,7 @@
 
 - (void)setup
 {
-    self.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;

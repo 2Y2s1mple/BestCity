@@ -44,7 +44,8 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4Z-hV-f4V">
                         <rect key="frame" x="323" y="375" width="40" height="19"/>
-                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="13"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
+                        <inset key="imageEdgeInsets" minX="-3" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="368" image="browse">
                             <color key="titleColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
@@ -73,7 +74,7 @@
                 <outlet property="timeLabel" destination="TSI-P4-7ER" id="nip-6Q-zXe"/>
                 <outlet property="visitLabel" destination="F4Z-hV-f4V" id="Fxc-1a-Z58"/>
             </connections>
-            <point key="canvasLocation" x="-193" y="-159"/>
+            <point key="canvasLocation" x="-402" y="-160"/>
         </tableViewCell>
     </objects>
     <resources>

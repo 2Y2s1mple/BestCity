@@ -15,6 +15,8 @@
 @property (nonatomic, strong) CZCollectionModel *model;
 /** 商品 */
 @property (nonatomic, strong) NSDictionary *commodityData;
-/** 测评 */
+/** 发现 */
 @property (nonatomic, strong) NSDictionary *discoverData;
+/** 测评 */
+@property (nonatomic, strong) NSDictionary *evalwayData;
 @end

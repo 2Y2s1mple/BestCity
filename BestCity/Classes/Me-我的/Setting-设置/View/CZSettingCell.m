@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *leftTitle;
 @property (weak, nonatomic) IBOutlet UILabel *rightTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *arrow;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textSpace;
 
 @end
 
@@ -32,13 +33,14 @@
 - (void)setTitle:(NSString *)title
 {
     _title = title;
+    self.arrow.hidden = NO;
     self.leftTitle.text = title;
     self.rightTitle.hidden = YES;
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if ([title isEqualToString:@"联系客服"]) {
         self.rightTitle.hidden = NO;
         self.rightTitle.text = @"0571-88120907";
-        self.accessoryType = UITableViewCellAccessoryNone;
+        self.arrow.hidden = YES;
+        self.textSpace.constant = 14;
     } else if ([title isEqualToString:@"清除缓存"]) {
         //获取缓存的大小
         NSUInteger intg = [[SDImageCache sharedImageCache] getSize];
@@ -46,7 +48,7 @@
         NSLog(@"%@", currentVolum);
         self.rightTitle.hidden = NO;
         self.rightTitle.text = currentVolum;
-        self.accessoryType = UITableViewCellAccessoryNone;
+        
     }
 }
 

@@ -49,7 +49,7 @@ static id _instance;
     
     
     // 初始化JPush代码
-    [JPUSHService setupWithOption:launchOptions appKey:@"60c9c865c70f64ae295972a2"
+    [JPUSHService setupWithOption:launchOptions appKey:@"ca7f75e088eb97528a5d2dbb"
                           channel:@"App Store"
                  apsForProduction:0
             advertisingIdentifier:nil];

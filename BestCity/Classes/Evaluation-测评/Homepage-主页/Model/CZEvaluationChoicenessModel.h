@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *evalWayName;
 /** 时间 */
 @property (nonatomic, strong) NSString *showTime;
+/** 时间 */
+@property (nonatomic, strong) NSString *publishTime;
 /** 访问量 */
 @property (nonatomic, strong) NSString *visitCount;
 /** 评论 */

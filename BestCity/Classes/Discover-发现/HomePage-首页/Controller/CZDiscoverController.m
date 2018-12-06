@@ -90,11 +90,11 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, 20, SCR_WIDTH, HOTTitleH);
+    return CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, HOTTitleH);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, 72, SCR_WIDTH, SCR_HEIGHT - 72 - 49);
+    return CGRectMake(0, (IsiPhoneX ? 44 : 20) + HOTTitleH, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49));
 }
 
 

@@ -11,5 +11,5 @@
 @interface CZUMConfigure : NSObject
 + (instancetype)shareConfigure;
 - (void)configure;
-- (void)shareToPlatformType:(UMSocialPlatformType)platformType currentViewController:(UIViewController *)vc;
+- (void)shareToPlatformType:(UMSocialPlatformType)platformType currentViewController:(UIViewController *)vc webUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage;
 @end

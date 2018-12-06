@@ -25,31 +25,31 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="飞利浦HD9103/11双层简洁大容量5升多功能蒸…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcw-6D-vy8">
-                        <rect key="frame" x="0.0" y="160" width="332" height="40"/>
+                        <rect key="frame" x="0.0" y="172" width="332" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="fGo-gT-vpa"/>
+                            <constraint firstAttribute="height" constant="40" id="fXg-mh-aBB"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3288积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soc-Fg-eZb">
-                        <rect key="frame" x="0.0" y="210" width="80" height="20"/>
+                        <rect key="frame" x="0.0" y="222" width="80" height="17"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="cLn-is-GON"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.8901960784313725" green="0.078431372549019607" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwB-Wi-saS">
-                        <rect key="frame" x="250" y="215.5" width="72" height="29"/>
+                        <rect key="frame" x="250" y="224.5" width="72" height="29"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="72" id="Epb-mn-CMJ"/>
                             <constraint firstAttribute="height" constant="29" id="FhK-bz-qFF"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="13"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
                         <inset key="imageEdgeInsets" minX="42" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="去兑换 ＞">
                             <color key="titleColor" red="0.89019607840000003" green="0.078431372550000003" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,7 +59,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥699.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kf2-vl-TOn">
-                        <rect key="frame" x="0.0" y="235" width="80" height="20"/>
+                        <rect key="frame" x="0.0" y="244" width="80" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="P94-W8-pAO"/>
                         </constraints>
@@ -72,7 +72,6 @@
             <constraints>
                 <constraint firstItem="gwB-Wi-saS" firstAttribute="centerY" secondItem="Soc-Fg-eZb" secondAttribute="bottom" id="19a-bb-90q"/>
                 <constraint firstItem="Soc-Fg-eZb" firstAttribute="top" secondItem="mcw-6D-vy8" secondAttribute="bottom" constant="10" id="1Oq-Dw-MHe"/>
-                <constraint firstItem="mcw-6D-vy8" firstAttribute="top" secondItem="NWD-nb-2DB" secondAttribute="bottom" id="77b-tg-M8n"/>
                 <constraint firstAttribute="trailing" secondItem="mcw-6D-vy8" secondAttribute="trailing" id="81o-n9-Zl2"/>
                 <constraint firstItem="NWD-nb-2DB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="De0-nZ-5Rx"/>
                 <constraint firstAttribute="trailing" secondItem="NWD-nb-2DB" secondAttribute="trailing" id="Dpk-p0-AKy"/>
@@ -80,6 +79,7 @@
                 <constraint firstItem="kf2-vl-TOn" firstAttribute="top" secondItem="Soc-Fg-eZb" secondAttribute="bottom" constant="5" id="JMP-WI-6OL"/>
                 <constraint firstAttribute="trailing" secondItem="gwB-Wi-saS" secondAttribute="trailing" constant="10" id="LiW-qX-x30"/>
                 <constraint firstItem="kf2-vl-TOn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Uzq-2m-re0"/>
+                <constraint firstItem="mcw-6D-vy8" firstAttribute="top" secondItem="NWD-nb-2DB" secondAttribute="bottom" constant="12" id="dFJ-iJ-bUK"/>
                 <constraint firstItem="Soc-Fg-eZb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lo3-1c-3Bd"/>
                 <constraint firstItem="mcw-6D-vy8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nnH-Bd-0bx"/>
             </constraints>
@@ -91,7 +91,7 @@
                 <outlet property="priceLabel" destination="kf2-vl-TOn" id="5My-sf-w8N"/>
                 <outlet property="titleLabel" destination="mcw-6D-vy8" id="8y6-6m-Ch7"/>
             </connections>
-            <point key="canvasLocation" x="-118" y="-88"/>
+            <point key="canvasLocation" x="-472" y="-154"/>
         </collectionViewCell>
     </objects>
     <resources>

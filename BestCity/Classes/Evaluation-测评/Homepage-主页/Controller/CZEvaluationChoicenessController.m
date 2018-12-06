@@ -50,13 +50,15 @@
     [super viewDidLoad];
     //line
     CZTOPLINE;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, SCR_HEIGHT - 71 - 49) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 45 : 21) + HOTTitleH) - (IsiPhoneX ? 83 : 49)) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = CZGlobalWhiteBg;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-    self.tableView.tableHeaderView = [self setupHeaderView];
+    if (![self.titleModel.img  isEqual: @""]) {
+        self.tableView.tableHeaderView = [self setupHeaderView];
+    }
     // 创建刷新控件
     [self addRefresh];
     
@@ -143,7 +145,8 @@
 {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 180)];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"evaluating-banner"]];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView sd_setImageWithURL:[NSURL URLWithString:self.titleModel.img] placeholderImage:nil];
     imageView.frame = CGRectMake(0, 0, SCR_WIDTH, backView.height);
     [backView addSubview:imageView];
     
@@ -154,7 +157,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 454;
+    return 470;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -173,7 +176,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 454;
+    return 470;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

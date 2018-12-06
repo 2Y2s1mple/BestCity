@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CZShareView : UIView
-
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *param;
 @end

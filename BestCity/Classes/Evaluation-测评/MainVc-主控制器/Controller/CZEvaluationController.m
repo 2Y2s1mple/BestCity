@@ -14,7 +14,7 @@
 
 @interface CZEvaluationController ()
 
-@property (nonatomic, strong) NSArray *mainTitles;
+@property (nonatomic, strong) NSArray <CZEvaluationTitleModel *> *mainTitles;
 @end
 
 @implementation CZEvaluationController
@@ -53,31 +53,41 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index
 {
-    CZEvaluationTitleModel *titleModel = self.mainTitles[index];
+    
     switch (index) {
-        case 0: return [[CZEvaluationChoicenessController alloc] init];
+        case 0:
+        {
+            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
+            self.mainTitles[index].categoryId = @"";
+            vc.titleModel = self.mainTitles[index];
+            return vc;
+        }
         case 1:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = titleModel;
+            self.mainTitles[index].img = @"";
+            vc.titleModel = self.mainTitles[index];
             return vc;
         }
         case 2:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = titleModel;
+            self.mainTitles[index].img = @"";
+            vc.titleModel = self.mainTitles[index];
             return vc;
         }
         case 3:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = titleModel;
+            self.mainTitles[index].img = @"";
+            vc.titleModel = self.mainTitles[index];
             return vc;
         }
         case 4:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = titleModel;
+            self.mainTitles[index].img = @"";
+            vc.titleModel = self.mainTitles[index];
             return vc;
         }
     }
@@ -90,11 +100,11 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, 20, SCR_WIDTH, HOTTitleH);
+    return CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, HOTTitleH);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, 72, SCR_WIDTH, SCR_HEIGHT - 72 - 49);
+    return CGRectMake(0, (IsiPhoneX ? 44 : 20) + HOTTitleH, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49));
 }
 
 @end

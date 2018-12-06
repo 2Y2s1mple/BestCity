@@ -33,12 +33,6 @@
                         <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看更多 ＞" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5s1-pT-wa4">
-                        <rect key="frame" x="351" y="130" width="86" height="19.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzb-Nl-cDr">
                         <rect key="frame" x="0.0" y="59.5" width="447" height="0.5"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,13 +54,22 @@
                             <constraint firstAttribute="width" constant="10" id="XsL-7o-zZS"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXX-LN-Dm0">
+                        <rect key="frame" x="371" y="132.5" width="66" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="-29" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-110" maxY="0.0"/>
+                        <state key="normal" title="查看更多" image="news-right">
+                            <color key="titleColor" red="0.17255046963691711" green="0.17254644632339478" blue="0.17254915833473206" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cvc-aL-oFB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="1U2-Ix-B5y"/>
                     <constraint firstItem="cvc-aL-oFB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="6CA-4h-YeR"/>
-                    <constraint firstAttribute="trailing" secondItem="5s1-pT-wa4" secondAttribute="trailing" constant="10" id="AlN-M3-meW"/>
+                    <constraint firstAttribute="trailing" secondItem="gXX-LN-Dm0" secondAttribute="trailing" constant="10" id="8YC-R0-yfO"/>
                     <constraint firstAttribute="trailing" secondItem="TLw-Dn-7kW" secondAttribute="trailing" constant="10" id="Ina-6n-LEl"/>
-                    <constraint firstAttribute="bottom" secondItem="5s1-pT-wa4" secondAttribute="bottom" constant="10" id="NWv-sJ-LOs"/>
+                    <constraint firstAttribute="bottom" secondItem="gXX-LN-Dm0" secondAttribute="bottom" constant="10" id="PXO-83-D6g"/>
                     <constraint firstItem="VOs-jA-9fY" firstAttribute="centerY" secondItem="cvc-aL-oFB" secondAttribute="centerY" id="V0C-Ue-Hr8"/>
                     <constraint firstItem="wXk-Yx-gcT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="X1d-c5-5mV"/>
                     <constraint firstAttribute="trailing" secondItem="kzb-Nl-cDr" secondAttribute="trailing" id="Z5t-pR-LPP"/>
@@ -84,7 +87,10 @@
                 <outlet property="timerLabel" destination="TLw-Dn-7kW" id="jHZ-JQ-HuB"/>
                 <outlet property="titleLabel" destination="cvc-aL-oFB" id="E5h-nR-pW6"/>
             </connections>
-            <point key="canvasLocation" x="945" y="-15"/>
+            <point key="canvasLocation" x="781.60000000000002" y="-44.07796101949026"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="news-right" width="8" height="13.5"/>
+    </resources>
 </document>

@@ -34,6 +34,8 @@
     self.bugButton.layer.borderColor = CZREDCOLOR.CGColor;
     self.bugButton.layer.cornerRadius = 3.5;
     self.bugButton.layer.masksToBounds = YES;
+    
+    self.pointLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
 }
 
 - (void)setDicData:(NSDictionary *)dicData

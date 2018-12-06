@@ -32,7 +32,7 @@
     if (_noDataView == nil) {
         self.noDataView = [CZNoDataView noDataView];
         self.noDataView.centerX = SCR_WIDTH / 2.0;
-        self.noDataView.y = 140;
+        self.noDataView.y = 150;
     }
     return _noDataView;
 }
@@ -83,7 +83,7 @@
     [self setupHeaderView];
 
     // 设置tableView
-    self.tableView.frame = CGRectMake(0, _recordHeight, SCR_WIDTH, SCR_HEIGHT - HOTContentY - 49 - _recordHeight);
+    self.tableView.frame = CGRectMake(0, _recordHeight, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94) - _recordHeight);
     
     // 加载刷新控件
     [self setupRefresh];
@@ -109,7 +109,31 @@
     [self.view addSubview:backView];
 
     // 最大列数
-    NSInteger maxCols = 5;
+    CGFloat recoredWidth = 0.0;
+    CGFloat width = [self.subTitles[0].categoryname sizeWithAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Regular" size: 13]}].width;
+    NSLog(@"width -- %f", width);
+    for (CZHotSubTilteModel *titleModel in self.subTitles) {
+       CGFloat subWidth = [titleModel.categoryname sizeWithAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Regular" size: 13]}].width;
+        if (subWidth > width) {
+            recoredWidth = subWidth;
+            NSLog(@"recoredWidth - %f", recoredWidth);
+        }
+    }
+    
+    CGFloat cols = 0;
+    if (recoredWidth > width) {
+        cols = SCR_WIDTH / (recoredWidth + 20);
+        NSLog(@"最大的是recoredWidth = %f ---- 一共有%f", recoredWidth, cols);
+        
+    } else {
+        cols = SCR_WIDTH / (width + 20);
+        NSLog(@"最大的是width = %f ---- 一共有%f", width, cols);
+    }
+    
+    NSLog(@"%ld", (NSInteger)cols);
+    
+    
+    NSInteger maxCols = (NSInteger)cols;
     CGFloat w = SCR_WIDTH / maxCols;
     CGFloat h = 40;
     //    NSArray *titles = @[@"剃须刀", @"计步器", @"吹风机", @"足浴盆", @"体重计", @"剃/脱毛器", @"美容仪", @"按摩椅", @"理发器", @"电动牙刷"];

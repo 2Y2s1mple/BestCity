@@ -26,6 +26,8 @@
 @property (nonatomic, strong) UIView *likeView;
 /** popa按钮 */
 @property (nonatomic, strong) UIButton *popButton;
+/** 分享的参数 */
+@property (nonatomic, strong) NSDictionary *shareParam;
 @end
 
 @implementation CZEvaluationChoicenessDetailController
@@ -57,7 +59,7 @@
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, SCR_WIDTH,  SCR_HEIGHT + 20)];
+        UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -(IsiPhoneX ? 44 : 20), SCR_WIDTH,  SCR_HEIGHT)];
         scrollerView.backgroundColor = CZGlobalWhiteBg;
         self.scrollerView = scrollerView;
     }
@@ -69,11 +71,11 @@
     if (_popButton == nil) {
         _popButton = [[UIButton alloc] init];
         _popButton.x = 15;
-        _popButton.y = 35;
+        _popButton.y = (IsiPhoneX ? 44 : 20) + 15;
         _popButton.size = CGSizeMake(30, 30);
         [_popButton setImage:IMAGE_NAMED(@"nav-back-1") forState:UIControlStateNormal];
         [_popButton addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
-        _popButton.backgroundColor = CZGlobalGray;
+        _popButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
         _popButton.layer.cornerRadius = 15;
         _popButton.layer.masksToBounds = YES;
     }
@@ -85,7 +87,7 @@
     // 分享的界面
     UIView *shareView = [[UIView alloc] init];
     shareView.backgroundColor = CZGlobalWhiteBg;
-    shareView.y = SCR_HEIGHT - 44;
+    shareView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 44);
     shareView.height = 44;
     shareView.width = SCR_WIDTH;
     
@@ -134,6 +136,7 @@
     buyBtn.y = lineView.y;
     buyBtn.width = SCR_WIDTH / 4.0;
     buyBtn.height = shareView.height;
+    buyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
     [buyBtn addTarget:self action:@selector(gotoAlibcTrade) forControlEvents:UIControlEventTouchUpInside];
     buyBtn.backgroundColor = CZREDCOLOR;
@@ -146,6 +149,7 @@
 - (void)sharedApplication
 {
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    share.param = self.shareParam;
     [self.view addSubview:share];
 }
 #pragma mark 去淘宝
@@ -167,6 +171,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = CZGlobalWhiteBg;
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
     // 创建pop按钮
@@ -188,6 +193,7 @@
             // 创建点赞
             [self.scrollerView addSubview:self.likeView];
             // 创建分享购买窗口
+            self.shareParam = result[@"ShareUrl"];
             [self.view addSubview:[self shareAndBuy]];
         }
         //隐藏菊花
@@ -208,14 +214,14 @@
     imageView.height = 314;
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.dicData[@"imgId"]] placeholderImage:IMAGE_NAMED(@"testImage1.png")];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
     
     UIView *lightDarkView = [[UIView alloc] init];
     [imageView addSubview:lightDarkView];
     lightDarkView.y = imageView.height - 44;
     lightDarkView.width = imageView.width;
     lightDarkView.height = 44;
-    lightDarkView.backgroundColor = [UIColor blackColor];
-    lightDarkView.alpha = 0.3;
+    lightDarkView.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
     
     UILabel *label = [[UILabel alloc] init];
     [lightDarkView addSubview:label];

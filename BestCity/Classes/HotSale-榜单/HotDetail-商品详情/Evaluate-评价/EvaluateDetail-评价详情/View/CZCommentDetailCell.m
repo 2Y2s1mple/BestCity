@@ -50,7 +50,7 @@
    
     if (contentDic[@"userShopmember"] != [NSNull null]) {
         // 头像
-        [self.iconImage sd_setImageWithURL:[NSURL URLWithString:contentDic[@"userShopmember"][@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+        [self.iconImage sd_setImageWithURL:[NSURL URLWithString:contentDic[@"userShopmember"][@"userNickImg"] != [NSNull null] ? contentDic[@"userShopmember"][@"userNickImg"] : @""] placeholderImage:[UIImage imageNamed:@"headDefault"]];
          // 名字
         self.nameLabel.text = contentDic[@"userShopmember"][@"userNickName"];
     } else {

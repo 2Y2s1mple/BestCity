@@ -36,6 +36,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setupNavigateView];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 1, SCR_WIDTH, 1)];
+        line.backgroundColor = CZGlobalLightGray;
+        [self addSubview:line];
     }
     return self;
 }
@@ -90,7 +93,7 @@
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightBtn = rightBtn;
     [rightBtn setImage:[UIImage imageNamed:@"nav-favor"] forState:UIControlStateNormal];
-    [self.rightBtn setImage:[UIImage imageNamed:@"score-sel"] forState:UIControlStateSelected];
+    [self.rightBtn setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
     [rightBtn addTarget:self action:@selector(clickedRight:) forControlEvents:UIControlEventTouchUpInside];
     rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     rightBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);

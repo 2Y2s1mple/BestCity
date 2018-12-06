@@ -37,6 +37,8 @@
 @property (nonatomic, strong) CZRecommendNav *nav;
 /** 分享购买按钮 */
 @property (nonatomic, strong) CZShareAndlikeView *likeView;
+/** 分享参数 */
+@property (nonatomic, strong) NSDictionary *shareParam;
 @end
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
@@ -45,7 +47,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, SCR_WIDTH, SCR_HEIGHT - 60 - likeAndShareHeight)];
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20) + 40, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + 40) - likeAndShareHeight)];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }
@@ -58,6 +60,7 @@ static CGFloat const likeAndShareHeight = 49;
         __weak typeof(self) weakSelf = self;
         _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
             CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+            share.param = self.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
             // 打开淘宝
@@ -70,20 +73,17 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
+    // 获取数据
+    [self getSourceData];
+    
     // 创建导航栏
-    self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, 40)];
+    self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40)];
     self.nav.projectId = self.model.goodsId;
     self.nav.delegate = self;
     [self.view addSubview:self.nav];
     
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
-    
-    // 创建分享购买视图
-    [self.view addSubview:self.likeView];
-    
-    // 获取数据
-    [self getSourceData];
     
     // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
@@ -106,6 +106,9 @@ static CGFloat const likeAndShareHeight = 49;
             // 设置标题以及优惠券数据
             [self setupRecommendModel];
             [self createSubViews];
+            // 创建分享购买视图
+            self.shareParam = result[@"ShareUrl"];
+            [self.view addSubview:self.likeView];
         }
     } failure:^(NSError *error) {}];
 }

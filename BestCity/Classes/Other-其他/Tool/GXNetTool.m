@@ -76,7 +76,28 @@
                failure:(blockOfFailure)failure
 {
     //(1)获取网络管理者
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager  manager];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager  manager] initWithBaseURL:[NSURL URLWithString:url]];
+    
+    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"apijipinchengcn" ofType:@"cer"];
+    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+    
+    //AFSSLPinningModeNone 这个模式表示不做 SSL pinning，只跟浏览器一样在系统的信任机构列表里验证服务端返回的证书。若证书是信任机构签发的就会通过，若是自己服务器生成的证书，这里是不会通过的。
+    //AFSSLPinningModeCertificate 这个模式表示用证书绑定方式验证证书，需要客户端保存有服务端的证书拷贝，这里验证分两步，第一步验证证书的域名/有效期等信息，第二步是对比服务端返回的证书跟客户端返回的是否一致。
+    //AFSSLPinningModePublicKey 这个模式同样是用证书绑定方式验证，客户端要有服务端的证书拷贝，只是验证时只验证证书里的公钥，不验证证书的有效期等信息。只要公钥是正确的，就能保证通信不会被窃听，因为中间人没有私钥，无法解开通过公钥加密的数据。
+//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
+    if (certData) {
+        NSSet *cerSet = [[NSSet alloc]initWithObjects:certData, nil];
+        securityPolicy.pinnedCertificates = cerSet;
+    }
+    
+    // 不验证证书的域名NO, 如果是需要验证自建证书，需要设置为YES
+//    securityPolicy.validatesDomainName = NO;
+    // 是否允许无效证书（也就是自建的证书），默认为NO
+//    如果是需要验证自建证书，需要设置为YES
+//    securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy = securityPolicy;
+   
     
     //设置body数据类型
     switch (bodyStyle) {
@@ -123,9 +144,6 @@
     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css",@"text/plain", @"application/javascript",@"image/jpeg", @"text/vnd.wap.wml",@"application/xml", @"text/xml", nil]];
     //(5)IOS9--UTF-8转码
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    //请求HTTPS
-    manager.securityPolicy.allowInvalidCertificates = YES;
-    
     
     //加载菊花
 //    [CZProgressHUD showProgressHUDWithText:nil];

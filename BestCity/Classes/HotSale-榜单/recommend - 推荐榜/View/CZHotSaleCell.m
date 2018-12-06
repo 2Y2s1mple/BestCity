@@ -19,9 +19,13 @@
 //标题
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 /** tag1 */
-@property (nonatomic, weak) IBOutlet UILabel *tag1;
+@property (nonatomic, weak) IBOutlet UIButton *tag1;
 /** tag2 */
-@property (nonatomic, weak) IBOutlet UILabel *tag2;
+@property (nonatomic, weak) IBOutlet UIButton *tag2;
+/** tag3 */
+@property (nonatomic, weak) IBOutlet UIButton *tag3;
+/** tag4 */
+@property (nonatomic, weak) IBOutlet UIButton *tag4;
 /** 当前价格 */
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 /** 省多钱 */
@@ -60,7 +64,9 @@
 @implementation CZHotSaleCell
 
 - (void)awakeFromNib {    
-    [super awakeFromNib];}
+    [super awakeFromNib];
+    
+}
 
 - (void)setModel:(CZRecommendListModel *)model
 {
@@ -68,23 +74,48 @@
     self.topNumber.text = [NSString stringWithFormat:@"%ld", [model.indexNumber integerValue] + 1];
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.rankGoodImg] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     self.titleLabel.text = model.goodsName;
-    if (model.goodstypeList.count >= 2) {
-        self.tag1.hidden = NO;
-        self.tag2.hidden = NO;
-        self.tag1.text = model.goodstypeList[0][@"name"];
-        self.tag2.text = model.goodstypeList[1][@"name"];
-    } else {
-        self.tag1.hidden = YES;
-        self.tag2.hidden = YES;
+    self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    
+    self.tag1.hidden = YES;
+    self.tag2.hidden = YES;
+    self.tag3.hidden = YES;
+    self.tag4.hidden = YES;
+    
+    for (int i = 0; i < model.goodstypeList.count; i++) {
+        switch (i) {
+            case 0:
+                [self.tag1 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = YES;
+                self.tag3.hidden = YES;
+                self.tag4.hidden = YES;
+                break;
+            case 1:
+                [self.tag2 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = NO;
+                self.tag3.hidden = YES;
+                self.tag4.hidden = YES;
+                break;
+            case 2:
+                [self.tag3 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = NO;
+                self.tag3.hidden = NO;
+                self.tag4.hidden = YES;
+                break;
+            case 3:
+                [self.tag4 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = NO;
+                self.tag3.hidden = NO;
+                self.tag4.hidden = NO;
+                break;
+            default:
+                break;
+        }
     }
-    if (model.goodstypeList.count >0) {
-        self.tag1.hidden = NO;
-        self.tag2.hidden = YES;
-        self.tag1.text = model.goodstypeList[0][@"name"];
-    } else {
-        self.tag1.hidden = YES;
-        self.tag2.hidden = YES;
-    }
+    
     
     NSString *actualPrice = [NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]];
     self.actualPriceLabel.text = actualPrice;

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *categoryid;
 /** 按钮的序号 */
 @property (nonatomic, assign) NSInteger indexBtn;
+/** 图片 */
+@property (nonatomic, strong) NSString *img;
 @end
 
 NS_ASSUME_NONNULL_END

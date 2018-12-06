@@ -34,6 +34,8 @@
     self.block();
 }
 
+
+
 - (void)textViewDidChange:(UITextView *)textView
 {
     NSLog(@"%@", textView.text);
@@ -48,5 +50,24 @@
 {
     _placeHolderText = placeHolderText;
     self.placeholderLabel.text = placeHolderText;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+//    NSLog(@"yayayayyayay%@", textView.text);
+//    if ([textView.text  isEqual: @"/n"]) {
+//        NSLog(@"yayayayyayay%@", textView.text);
+//        return NO;
+//    }
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqual: @"\n"]) {
+        self.block();
+        return NO;
+    }
+    return YES;
 }
 @end

@@ -9,6 +9,7 @@
 #import "CZShareView.h"
 #import "Masonry.h"
 #import "CZUMConfigure.h"
+#import "CZShareItemButton.h"
 #define PLACEHOLDERTAG 100
 @implementation CZShareView
 
@@ -55,15 +56,18 @@
     }];
     CGFloat wh = 50;
     CGFloat space = (SCR_WIDTH - 20 - 5 * wh) / 4;
-    NSArray *imageArr = @[@"wechat", @"pyq", @"weibo", @"qq-friend", @"qq-space"];
+    NSArray *imageArr = @[@{@"icon" : @"wechat", @"name" : @"微信好友"}, @{@"icon" : @"pyq", @"name" : @"朋友圈"}, @{@"icon" : @"weibo", @"name" : @"微博"}, @{@"icon" : @"qq-friend", @"name" : @"QQ好友"}, @{@"icon" : @"qq-space", @"name" : @"QQ空间"}];
     [imageArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:obj]];
+        CZShareItemButton *imageView = [CZShareItemButton buttonWithType:UIButtonTypeCustom];
+        imageView.adjustsImageWhenHighlighted = NO;
+        [imageView setImage:[UIImage imageNamed:obj[@"icon"]] forState:UIControlStateNormal];
+        [imageView setTitle:obj[@"name"] forState:UIControlStateNormal];
+        imageView.frame = CGRectMake(10 + (wh + space) * idx, 120, 50, 60);
         imageView.tag = idx + PLACEHOLDERTAG;
-        imageView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action:)];
         [imageView addGestureRecognizer:tap];
-        imageView.frame = CGRectMake(10 + (wh + space) * idx, 120, 50, 50);
         [shareView addSubview:imageView];
+        
     }];
     
     UIView *backView = [[UIView alloc] init];
@@ -101,19 +105,13 @@
             break;
     }
     
-    [[CZUMConfigure shareConfigure] shareToPlatformType:type currentViewController:(UIViewController *)[self superview].nextResponder];
+    [[CZUMConfigure shareConfigure] shareToPlatformType:type currentViewController:(UIViewController *)[self superview].nextResponder webUrl:self.param[@"url"] Title:self.param[@"title"] subTitle:self.param[@"smallTitle"] thumImage:self.param[@"img"]];
 }
 
 - (void)dismiss
 {
     [self removeFromSuperview];
 }
-
-
-
-
-
-
 
 
 

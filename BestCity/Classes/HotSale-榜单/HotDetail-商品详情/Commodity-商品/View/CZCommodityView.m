@@ -35,11 +35,6 @@
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
     }
-    
-    
-    
-    
-    
     return self;
 }
 
@@ -48,9 +43,10 @@
 {
     _model = model;
     self.titleName.text = model.mainTitle;
+    self.titleName.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     self.actualPriceLabel.text = [NSString stringWithFormat:@"券后价：¥%.2f", [model.actualPrice floatValue]];
-    NSString *therPrice = [NSString stringWithFormat:@"%@：¥%@", model.sourcePlatform, model.sourcePlatformPrice];
-    self.otherPrice.text = therPrice;
+    NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%@", model.sourcePlatform, model.sourcePlatformPrice];
+    self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%@", model.sourcePlatformPrice]]];
     self.couponPrice.text = [NSString stringWithFormat:@"%@元独家优惠券", model.discountCoupon];
     
     [self layoutIfNeeded];//写在这里是有问题的, 不换行还好

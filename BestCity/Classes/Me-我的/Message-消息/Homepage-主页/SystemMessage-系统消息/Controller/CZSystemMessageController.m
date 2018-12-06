@@ -57,7 +57,7 @@
     
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"系统消息" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"系统消息" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
     
     UITableView *tableView = [[UITableView alloc] init];
@@ -67,7 +67,7 @@
     tableView.backgroundColor = CZGlobalLightGray;
     [self.view addSubview:tableView];
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(68);
+        make.top.equalTo(self.view).offset(68 + (IsiPhoneX ? 24 : 0));
         make.left.equalTo(self.view).offset(0);
         make.right.equalTo(self.view).offset(0);
         make.bottom.equalTo(self.view).offset(0);
@@ -75,6 +75,13 @@
     self.tableView = tableView;
     // 创建刷新控件
     [self setupRefresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 进来先刷一次
+    [self.tableView.mj_header beginRefreshing];
 }
 
 /** 加载刷新控件*/
@@ -174,7 +181,7 @@
 #pragma mark - <UITableViewDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 190;
+    return 170;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

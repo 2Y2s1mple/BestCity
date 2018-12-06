@@ -111,8 +111,9 @@
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.imgId] placeholderImage:[UIImage imageNamed:@"testImage6"]];
     // 大图片文字
     self.bigImageLabel.text = model.evalWayName;
+    self.bigImageLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     // 时间
-    self.timeLabel.text = model.showTime;
+    self.timeLabel.text = (![model.showTime  isEqual: @""] && model.showTime != [NSNull null]) ? model.showTime : [model.publishTime substringToIndex:10];
     // 访问量
     [self.visitBtn setTitle:model.visitCount forState:UIControlStateNormal];
     // 评论

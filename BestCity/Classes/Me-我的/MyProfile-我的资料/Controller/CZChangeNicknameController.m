@@ -23,8 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalLightGray;
+    
+    if (IsiPhoneX) {
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, -22, SCR_WIDTH, 80)];
+        v.backgroundColor = CZGlobalWhiteBg;
+        [self.view addSubview:v];
+    }
+    
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"昵称" rightBtnTitle:@"保存" rightBtnAction:^{
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"昵称" rightBtnTitle:@"保存" rightBtnAction:^{
         // 保存用户信息
         [self saveUserInfo];
 
@@ -34,7 +41,7 @@
     
     
     
-    UIView *textBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 68, SCR_WIDTH, 40)];
+    UIView *textBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 68 + (IsiPhoneX ? 24 : 0), SCR_WIDTH, 40)];
     textBackView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:textBackView];
     

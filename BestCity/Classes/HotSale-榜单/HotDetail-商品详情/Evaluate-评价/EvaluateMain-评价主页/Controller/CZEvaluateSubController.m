@@ -133,7 +133,6 @@
             
             // 创建用户评价
             [self setupSubViews];
-            
         }
     } failure:^(NSError *error) {}];
 }
@@ -246,7 +245,7 @@
         if ([result[@"msg"] isEqualToString:@"添加成功"]) {
             [self getDataSource];
             //隐藏菊花
-            [CZProgressHUD hideAfterDelay:1];
+            [CZProgressHUD hideAfterDelay:0];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"评论失败"];
             [CZProgressHUD hideAfterDelay:1];
@@ -267,7 +266,6 @@
         self.textToolBar.placeHolderText = @"点击输入评论";
     }
 }
-
 
 #pragma mark - 创建评论单块视图
 - (UIView *)setupBackView
@@ -296,7 +294,7 @@
     icon.frame = CGRectMake(10, 0, 38, 38);
     icon.layer.cornerRadius = 19;
     icon.layer.masksToBounds = YES;
-    [icon sd_setImageWithURL:[NSURL URLWithString:model.userShopmember[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [icon sd_setImageWithURL:[NSURL URLWithString:model.userShopmember[@"userNickImg"] != [NSNull null] ? model.userShopmember[@"userNickImg"] : @""] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     [backview addSubview:icon];
     
     //名字
@@ -453,8 +451,8 @@
     // 创建内容
     UIView *replyView = [[UIView alloc] init];
     replyView.backgroundColor = UIColorFromRGB(0xF1F1F1);
-    replyView.layer.cornerRadius = 5;
-    replyView.layer.masksToBounds = YES;
+//    replyView.layer.cornerRadius = 5;
+//    replyView.layer.masksToBounds = YES;
     replyView.x = 58;
     replyView.width = backview.width - replyView.x - 10;
     replyView.height = 0;
@@ -473,6 +471,8 @@
             imageView.x = 0;
             imageView.width = replyView.width;
             imageView.height = 20;
+            
+            
             [replyView addSubview:imageView];
         }
         CZCommentModel *commentModel = model.userCommentList[i];
@@ -508,8 +508,8 @@
         contentLabel.font = commentNameLabel.font;
         contentLabel.numberOfLines = 0;
         contentLabel.x = CZGetX(commentNameLabel) + 10;
-        contentLabel.y = commentNameLabel.y;;
-        contentLabel.width = (SCR_WIDTH - 68) - commentNameLabel.x - 10;
+        contentLabel.y = commentNameLabel.y;
+        contentLabel.width = (SCR_WIDTH - 68) - CZGetX(commentNameLabel) - 20;
         contentLabel.height = [contentLabel.text getTextHeightWithRectSize:CGSizeMake(contentLabel.width, 10000) andFont:contentLabel.font];
         
         replyHeight += contentLabel.height + 5;

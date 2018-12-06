@@ -20,7 +20,7 @@
     //拉起淘宝
     AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
     showParam.openType = AlibcOpenTypeNative;
-    showParam.backUrl=@"tbopen25025861";
+    showParam.backUrl=@"tbopen25195402";
     showParam.isNeedPush=YES;
     
     [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {

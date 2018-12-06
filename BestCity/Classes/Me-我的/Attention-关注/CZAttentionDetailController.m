@@ -44,8 +44,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = CZGlobalWhiteBg;
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0)) style:UITableViewStylePlain];
     self.tableView = tableView;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.delegate = self;
@@ -59,7 +60,10 @@
     [self.view addSubview:tableView];
     
     //返回按钮
-    UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, 30, 50, 50) backImage:@"nav-back" target:self action:@selector(popAction)];
+    UIButton *leftBtn = [UIButton buttonWithFrame:CGRectMake(10, (IsiPhoneX ? 44 : 20) + 10, 28, 28) backImage:@"nav-back" target:self action:@selector(popAction)];
+    leftBtn.backgroundColor = CZGlobalGray;
+    leftBtn.layer.cornerRadius = 14;
+    leftBtn.layer.masksToBounds = YES;
     [self.view addSubview:leftBtn];
     
     // 创建刷新控件

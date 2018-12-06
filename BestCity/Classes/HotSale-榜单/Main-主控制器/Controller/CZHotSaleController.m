@@ -40,8 +40,17 @@
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsCategory"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
         self.dataDic = result;
         if ([result[@"msg"] isEqualToString:@"success"]) {
+            
+            NSArray *list = result[@"list"];
+            NSMutableArray *newList = [NSMutableArray array];
+            for (NSDictionary *dic in list) {
+                [newList addObject:[dic deleteAllNullValue]];
+                
+            }
+            
+             [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"MainTitle"];
             //标题的数据
-            self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:result[@"list"]];
+            self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:list];
             
             //刷新WMPage控件
             [self reloadData];
@@ -49,8 +58,11 @@
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
+        //标题的数据
+        self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"MainTitle"]];
+        //刷新WMPage控件
+        [self reloadData];
+        ;
     }];
 }
 
@@ -93,10 +105,9 @@
     [self obtainReadMessage];
 }
 
-
 - (void)setupTopView
 {
-    self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
+    self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, IsiPhoneX ? 54 : 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
         if ([USERINFO[@"userId"] length] <= 0)
         {
             CZLoginController *vc = [CZLoginController shareLoginController];
@@ -114,15 +125,14 @@
 
 - (void)pushSearchController
 {
-    //push到搜索
-//    if ([USERINFO[@"userId"] length] <= 0)
-//    {
-//        CZLoginController *vc = [CZLoginController shareLoginController];
-//        [self presentViewController:vc animated:YES completion:nil];
-//    } else {
+    if ([USERINFO[@"userId"] length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
         CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-//    }
+    }
 }
 
 #pragma mark - Datasource & Delegate
@@ -135,6 +145,7 @@
     switch (index) {
         case 0: {
             CZOneController *vc = [[CZOneController alloc] init];
+            vc.imageUrl = [[self.mainTitles[index] tilte] img];
             return vc;
         }
         case 1: {
@@ -167,11 +178,11 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, 30 + 34, SCR_WIDTH, 50);
+    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34, SCR_WIDTH, 50);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, 30 + 34 + 50, SCR_WIDTH, SCR_HEIGHT - (30 + 34 + 50 + 49));
+    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)));
 }
 
 

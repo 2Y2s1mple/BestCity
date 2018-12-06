@@ -65,6 +65,7 @@
     
     UILabel *unreadLabel = [[UILabel alloc] init];
     unreadLabel.hidden = YES;
+    unreadLabel.userInteractionEnabled = NO;
     self.unreadLabel = unreadLabel;
     unreadLabel.x = CZGetX(msgBtn) - 10;
     unreadLabel.y = 0;
@@ -107,7 +108,7 @@
 - (void)textFieldAction:(CZTextField *)textField
 {
     !self.delegate ? : [self.delegate hotView:self didTextFieldChange:textField];
-    self.searchText = textField.text;
+    _searchText = textField.text;
 }
 
 - (void)setTextFieldBorderColor:(UIColor *)textFieldBorderColor

@@ -53,7 +53,7 @@
                  };
     }];
     
-    self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - HOTContentY - 49 - 10);
+    self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94));
     self.tableView.tableHeaderView = [self setupHeaderView];
     // 创建刷新控件
     [self setupRefresh];
@@ -74,11 +74,13 @@
 {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 180)];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"banner"]];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:[UIImage imageNamed:@"banner"]];
     imageView.frame = CGRectMake(10, 10, SCR_WIDTH - 20, backView.height - 10);
     [backView addSubview:imageView];
     
     return backView;
 }
+
+
 
 @end

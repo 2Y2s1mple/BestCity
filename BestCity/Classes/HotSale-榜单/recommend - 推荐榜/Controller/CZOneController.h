@@ -9,5 +9,6 @@
 #import "CZBaseRecommendController.h"
 
 @interface CZOneController : CZBaseRecommendController
-
+/** 大图片URL */
+@property (nonatomic, strong) NSString *imageUrl;
 @end

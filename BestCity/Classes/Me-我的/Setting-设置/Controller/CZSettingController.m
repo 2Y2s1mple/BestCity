@@ -25,7 +25,7 @@
 - (NSArray *)contentTitles
 {
     if (_contentTitles == nil) {
-        _contentTitles = @[@"我要反馈", @"清除缓存", @"联系客服", @"鼓励一下", @"用户协议"];
+        _contentTitles = @[@"我要反馈", @"清除缓存", @"联系客服", @"用户协议"];
     }
     return _contentTitles;
 }
@@ -41,10 +41,10 @@
 - (void)setupView
 {
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"设置" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"设置" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 68, SCR_WIDTH, SCR_HEIGHT - 68) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 68 + (IsiPhoneX ? 24 : 0), SCR_WIDTH, SCR_HEIGHT - 68 - (IsiPhoneX ? 24 : 0)) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -127,7 +127,7 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
             break;
-        case 4:
+        case 3:
         {
             /** 跳转到用户协议 */
             TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserAgreement_url]];

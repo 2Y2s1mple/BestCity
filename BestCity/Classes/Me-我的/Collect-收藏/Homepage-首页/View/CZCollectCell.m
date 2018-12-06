@@ -8,6 +8,7 @@
 
 #import "CZCollectCell.h"
 #import "UIImageView+WebCache.h"
+#import "CALayer+LayerColor.h"
 
 @interface CZCollectCell ()
 /** 收藏图片 */
@@ -21,10 +22,10 @@
 /** 访问量 */
 @property (weak, nonatomic) IBOutlet UIButton *lookNumber;
 /** 标签1 */
-@property (weak, nonatomic) IBOutlet UILabel *tag1;
-@property (weak, nonatomic) IBOutlet UILabel *tag2;
-@property (weak, nonatomic) IBOutlet UILabel *tag3;
-@property (weak, nonatomic) IBOutlet UILabel *tag4;
+@property (weak, nonatomic) IBOutlet UIButton *tag1;
+@property (weak, nonatomic) IBOutlet UIButton *tag2;
+@property (weak, nonatomic) IBOutlet UIButton *tag3;
+@property (weak, nonatomic) IBOutlet UIButton *tag4;
 
 
 @end
@@ -60,10 +61,10 @@
     self.oldPrice.text = [@"天猫：¥" stringByAppendingString:model.product_price];
     [self.lookNumber setTitle:model.collect_nubmer forState:UIControlStateNormal];
     if (model.product_tabs.count >= 4) {
-        self.tag1.text = model.product_tabs[0];
-        self.tag2.text = model.product_tabs[1];
-        self.tag3.text = model.product_tabs[2];
-        self.tag4.text = model.product_tabs[3];
+        [self.tag1 setTitle:model.product_tabs[0] forState:UIControlStateNormal];
+        [self.tag2 setTitle:model.product_tabs[1] forState:UIControlStateNormal];
+        [self.tag3 setTitle:model.product_tabs[2] forState:UIControlStateNormal];
+        [self.tag4 setTitle:model.product_tabs[3] forState:UIControlStateNormal];
     }
     
 }
@@ -96,25 +97,42 @@
     
     [self.lookNumber setTitle:commodityData[@"visitCount"] forState:UIControlStateNormal];
     
-    self.tag1.text = @"";
-    self.tag2.text = @"";
-    self.tag3.text = @"";
-    self.tag4.text = @"";
+   
     
+    self.tag1.hidden = YES;
+    self.tag2.hidden = YES;
+    self.tag3.hidden = YES;
+    self.tag4.hidden = YES;
     NSArray *goodsTypeList = commodityData[@"goodstypeList"];
     for (int i = 0; i < goodsTypeList.count; i++) {
         switch (i) {
             case 0:
-                self.tag1.text = goodsTypeList[i][@"name"];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = YES;
+                self.tag3.hidden = YES;
+                self.tag4.hidden = YES;
+                [self.tag1 setTitle:goodsTypeList[i][@"name"] forState:UIControlStateNormal];
                 break;
             case 1:
-                self.tag2.text = goodsTypeList[i][@"name"];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = NO;
+                self.tag3.hidden = YES;
+                self.tag4.hidden = YES;
+                [self.tag2 setTitle:goodsTypeList[i][@"name"] forState:UIControlStateNormal];
                 break;
             case 2:
-                self.tag3.text = goodsTypeList[i][@"name"];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = NO;
+                self.tag3.hidden = NO;
+                self.tag4.hidden = YES;
+                [self.tag3 setTitle:goodsTypeList[i][@"name"] forState:UIControlStateNormal];
                 break;
             case 3:
-                self.tag4.text = goodsTypeList[i][@"name"];
+                self.tag1.hidden = NO;
+                self.tag2.hidden = NO;
+                self.tag3.hidden = NO;
+                self.tag4.hidden = NO;
+                [self.tag4 setTitle:goodsTypeList[i][@"name"] forState:UIControlStateNormal];
                 break;
             default:
                 break;
@@ -128,13 +146,30 @@
     [self.icon sd_setImageWithURL:[NSURL URLWithString:discoverData[@"imgId"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     self.titleLabel.text = discoverData[@"title"];
     
-    self.tag1.text = @"";
-    self.tag2.text = @"";
-    self.tag3.text = @"";
-    self.tag4.text = @"";
+    self.tag1.hidden = YES;
+    self.tag2.hidden = YES;
+    self.tag3.hidden = YES;
+    self.tag4.hidden = YES;
     self.nowPrice.text = @"";
     self.oldPrice.text = discoverData[@"publishTime"];
     [self.lookNumber setTitle:discoverData[@"visitCount"] forState:UIControlStateNormal];
     
 }
+
+- (void)setEvalwayData:(NSDictionary *)evalwayData
+{
+    _evalwayData = evalwayData;
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:evalwayData[@"imgId"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    self.titleLabel.text = evalwayData[@"evalWayName"];
+    
+    self.tag1.hidden = YES;
+    self.tag2.hidden = YES;
+    self.tag3.hidden = YES;
+    self.tag4.hidden = YES;
+    self.nowPrice.text = @"";
+    self.oldPrice.text = evalwayData[@"publishTime"];
+    [self.lookNumber setTitle:evalwayData[@"visitCount"] forState:UIControlStateNormal];
+}
+
+
 @end

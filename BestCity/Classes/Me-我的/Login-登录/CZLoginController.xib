@@ -151,7 +151,7 @@
                     <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="《极品城用户协议》" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81M-ZP-HyG">
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="《诚品会用户协议》" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81M-ZP-HyG">
                     <rect key="frame" x="160" y="521" width="160" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -233,11 +233,11 @@
                 <constraint firstItem="FdZ-Fk-q54" firstAttribute="trailing" secondItem="YP0-y1-S4k" secondAttribute="trailing" id="w97-CT-4Ox"/>
                 <constraint firstItem="81M-ZP-HyG" firstAttribute="centerY" secondItem="NMf-BX-C8K" secondAttribute="centerY" id="y89-TO-ZXY"/>
             </constraints>
-            <point key="canvasLocation" x="-2075.625" y="72.887323943661968"/>
+            <point key="canvasLocation" x="-2796" y="-53"/>
         </view>
     </objects>
     <resources>
-        <image name="headDefault" width="180" height="180"/>
+        <image name="headDefault" width="512" height="512"/>
         <image name="nav-back" width="9.5" height="16"/>
         <image name="phone number" width="13" height="19.5"/>
         <image name="qq-friend" width="40" height="40"/>

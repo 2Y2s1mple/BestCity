@@ -72,7 +72,7 @@
     {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
-    } else {    
+    } else {
         CZRecommendListModel *model = self.dataSource[indexPath.row];
         CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
         vc.model = model;

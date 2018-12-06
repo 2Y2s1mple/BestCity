@@ -12,8 +12,8 @@
 /**
  * 测试环境
  */
-//#define SERVER_URL @"https://api.jipincheng.cn"
-#define SERVER_URL @"http://192.168.1.48:8081"
+#define SERVER_URL @"https://api.jipincheng.cn"
+//#define SERVER_URL @"http://192.168.1.48:8081"
 
 /** 用户信息 */
 #define USERINFO [[NSUserDefaults standardUserDefaults] objectForKey:@"user"]
@@ -54,6 +54,7 @@
 #define SCR_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCR_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define IMAGE_NAMED(image) [UIImage imageNamed:image]
+#define IsiPhoneX (((int)((SCR_HEIGHT / SCR_WIDTH) * 100) == 216) ? YES : NO)
 
 //首页滚动视图的标题尺寸
 #define HOTTitleY 80
@@ -85,6 +86,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZConst.h"
 #import "CZLoginController.h"
 #import "CZNoDataView.h" // 没有数据的view
+
 
 /************************************************************/
 #endif 

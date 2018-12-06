@@ -118,7 +118,9 @@ static id instancet_;
             [CZProgressHUD showProgressHUDWithText:@"验证码发送失败"];
         }
         [CZProgressHUD hideAfterDelay:2];
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
  - (void)timeDown
@@ -157,7 +159,7 @@ static id instancet_;
 {
     TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserAgreement_url]];
     webVc.titleName = @"用户协议";
-    [self.navigationController pushViewController:webVc animated:YES];
+    [self presentViewController:webVc animated:YES completion:nil];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

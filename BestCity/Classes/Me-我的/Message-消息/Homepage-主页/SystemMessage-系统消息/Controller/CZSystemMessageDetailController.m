@@ -17,20 +17,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalLightGray;
+    self.view.backgroundColor = CZGlobalWhiteBg;
     // 调用已读
     [self messageRead];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:self.model.title rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.model.title rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
     
     UIView *backView = [[UIView alloc] init];
-    backView.backgroundColor = CZGlobalWhiteBg;
+    backView.backgroundColor = CZGlobalLightGray;
     backView.layer.cornerRadius = 5;
     backView.layer.masksToBounds = YES;
     [self.view addSubview:backView];
     backView.x = 10;
-    backView.y = 77;
+    backView.y = 67 + (IsiPhoneX ? 24 : 0) + 10;
     backView.width = SCR_WIDTH - 20;
     
     UILabel *label = [[UILabel alloc] init];

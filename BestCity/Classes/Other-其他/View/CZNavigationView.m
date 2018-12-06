@@ -80,11 +80,16 @@
 
 - (void)popAction
 {
+    
+    
     // 隐藏菊花
     [CZProgressHUD hideAfterDelay:0];
     UIView *view = [self superview];
     UIViewController *vc = (UIViewController *)[view nextResponder];
+    [vc dismissViewControllerAnimated:YES completion:nil];    
     [vc.navigationController popViewControllerAnimated:YES];
+    
+    
 }
 
 @end
