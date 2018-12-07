@@ -91,7 +91,7 @@
 
 - (void)didClickedBtn:(UIButton *)sender
 {
-    NSLog(@"%s", __func__);
+
 }
 
 @end

@@ -150,7 +150,6 @@
 
 - (void)dealloc
 {
-    NSLog(@"%s", __func__);
     [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize" context:nil];
 }
 

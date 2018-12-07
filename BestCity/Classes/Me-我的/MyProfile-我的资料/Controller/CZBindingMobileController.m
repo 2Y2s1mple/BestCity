@@ -44,7 +44,6 @@
 
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
-    NSLog(@"getVerificationCode==");
     [self disabledAndGrayColor:self.verificationCodeBtn];
     //将用户text失效
     self.userTextField.enabled = NO;

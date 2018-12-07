@@ -38,7 +38,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    NSLog(@"%@", textView.text);
+    
     if (textView.text.length > 0) {
         self.placeholderLabel.hidden = YES;
     } else {
@@ -54,11 +54,6 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
-//    NSLog(@"yayayayyayay%@", textView.text);
-//    if ([textView.text  isEqual: @"/n"]) {
-//        NSLog(@"yayayayyayay%@", textView.text);
-//        return NO;
-//    }
     return YES;
 }
 

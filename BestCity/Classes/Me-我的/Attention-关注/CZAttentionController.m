@@ -177,7 +177,6 @@
 #pragma mark - <CZAttentionCellDelegate>刷新
 - (void)reloadAttentionTableView
 {
-    NSLog(@"reloadAttentionTableView");
     [self.tableView reloadData];
 }
 

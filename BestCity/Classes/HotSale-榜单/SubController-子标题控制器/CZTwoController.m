@@ -111,28 +111,21 @@
     // 最大列数
     CGFloat recoredWidth = 0.0;
     CGFloat width = [self.subTitles[0].categoryname sizeWithAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Regular" size: 13]}].width;
-    NSLog(@"width -- %f", width);
+    
     for (CZHotSubTilteModel *titleModel in self.subTitles) {
        CGFloat subWidth = [titleModel.categoryname sizeWithAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Regular" size: 13]}].width;
         if (subWidth > width) {
             recoredWidth = subWidth;
-            NSLog(@"recoredWidth - %f", recoredWidth);
         }
     }
     
     CGFloat cols = 0;
     if (recoredWidth > width) {
         cols = SCR_WIDTH / (recoredWidth + 20);
-        NSLog(@"最大的是recoredWidth = %f ---- 一共有%f", recoredWidth, cols);
-        
     } else {
         cols = SCR_WIDTH / (width + 20);
-        NSLog(@"最大的是width = %f ---- 一共有%f", width, cols);
+        
     }
-    
-    NSLog(@"%ld", (NSInteger)cols);
-    
-    
     NSInteger maxCols = (NSInteger)cols;
     CGFloat w = SCR_WIDTH / maxCols;
     CGFloat h = 40;
@@ -171,7 +164,6 @@
 {
     _recordBtn.selected = NO;
     sender.selected = YES;
-    NSLog(@"点击了%@个按钮, ID是: %@", sender.model.categoryname, sender.model.categoryid);
     // 获取点击数据
     if (self.recordID != sender.model.categoryid) {
         [self getDataSourceWithId:sender.model.categoryid];

@@ -331,7 +331,6 @@
             self.currentCellIndex = index;
             self.textViewTool.placeHolderText = [NSString stringWithFormat:@"回复  %@:", commentName];
             [self.textViewTool.textView becomeFirstResponder];
-            NSLog(@"评论的ID:%@ --- 有%ld条评论, 是第%ld个cell", commentId, (long)subCount, (long)index);
         };
         cell.contentDic = self.evaluateArr[indexPath.row];
         

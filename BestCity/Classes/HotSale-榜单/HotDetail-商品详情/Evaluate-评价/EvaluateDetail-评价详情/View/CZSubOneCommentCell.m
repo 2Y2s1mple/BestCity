@@ -85,7 +85,6 @@
     _contentDic = contentDic;
     
     if (contentDic[@"isArrow"]) {
-        NSLog(@"右箭头");
         self.arrowImage.hidden = NO;
     } else {
         self.arrowImage.hidden = YES;

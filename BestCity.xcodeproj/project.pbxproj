@@ -40,7 +40,7 @@
 		9723F28E21B263E2006E18D2 /* TSLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723F28C21B263E2006E18D2 /* TSLWebViewController.m */; };
 		97243A1121B5555200EBFFCE /* CZEndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97243A1021B5555200EBFFCE /* CZEndLineView.m */; };
 		97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97243A1221B5555C00EBFFCE /* CZEndLineView.xib */; };
-		97243A1921B620E100EBFFCE /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97243A1621B620E100EBFFCE /* logo@3x.png */; };
+		97243A1921B620E100EBFFCE /* launchLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 97243A1621B620E100EBFFCE /* launchLogo.png */; };
 		9729617121B11CB600648940 /* CZJPushHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9729616F21B11CB600648940 /* CZJPushHandler.m */; };
 		972E41532113102B00BC751C /* CZBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41512113102B00BC751C /* CZBalanceController.m */; };
 		972E41542113102B00BC751C /* CZBalanceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972E41522113102B00BC751C /* CZBalanceController.xib */; };
@@ -367,7 +367,7 @@
 		97243A0F21B5555200EBFFCE /* CZEndLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEndLineView.h; sourceTree = "<group>"; };
 		97243A1021B5555200EBFFCE /* CZEndLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEndLineView.m; sourceTree = "<group>"; };
 		97243A1221B5555C00EBFFCE /* CZEndLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEndLineView.xib; sourceTree = "<group>"; };
-		97243A1621B620E100EBFFCE /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		97243A1621B620E100EBFFCE /* launchLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchLogo.png; sourceTree = "<group>"; };
 		9729616F21B11CB600648940 /* CZJPushHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZJPushHandler.m; sourceTree = "<group>"; };
 		9729617021B11CB600648940 /* CZJPushHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZJPushHandler.h; sourceTree = "<group>"; };
 		972E41502113102B00BC751C /* CZBalanceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZBalanceController.h; sourceTree = "<group>"; };
@@ -1441,7 +1441,7 @@
 				97705C132107068F00485D64 /* Assets.xcassets */,
 				97705C152107068F00485D64 /* LaunchScreen.storyboard */,
 				97705C182107068F00485D64 /* Info.plist */,
-				97243A1621B620E100EBFFCE /* logo@3x.png */,
+				97243A1621B620E100EBFFCE /* launchLogo.png */,
 			);
 			path = BestCity;
 			sourceTree = "<group>";
@@ -2761,7 +2761,7 @@
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
-				97243A1921B620E100EBFFCE /* logo@3x.png in Resources */,
+				97243A1921B620E100EBFFCE /* launchLogo.png in Resources */,
 				97BC05DC2112B122001ED65A /* key-blue.png in Resources */,
 				97D8FCC32111612200D8ED8F /* CZMeArrowCell.xib in Resources */,
 				972E41CC21147C3A00BC751C /* CZAttentionController.xib in Resources */,

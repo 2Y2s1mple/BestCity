@@ -52,7 +52,7 @@
         [CZProgressHUD hideAfterDelay:2];
         
     } failure:^(NSError *error) {
-        NSLog(@"%@", error);
+        
     }];
 }
 @end

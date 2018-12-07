@@ -78,7 +78,6 @@
     //获取详情数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"已收藏"]) {
-            NSLog(@"%@", result);
             self.selected = YES;
         } else {
             self.selected = NO;

@@ -68,7 +68,6 @@
 
 - (void)attentionCellNotifAction:(NSNotification *)notif
 {
-    NSLog(@"%@", notif.userInfo);
     [self reloadCEvaluationChoiceness:notif.userInfo[@"msg"] userId:notif.userInfo[@"userId"]];
 }
 

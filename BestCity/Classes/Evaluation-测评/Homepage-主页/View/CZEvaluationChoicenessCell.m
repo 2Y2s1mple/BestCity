@@ -34,6 +34,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.icon.layer.cornerRadius = 25;
+    self.icon.layer.masksToBounds = YES;
 }
 
 #pragma mark - 取消关注

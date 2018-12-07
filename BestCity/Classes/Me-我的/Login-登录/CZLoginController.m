@@ -95,9 +95,7 @@ static id instancet_;
             [CZProgressHUD hideAfterDelay:2];
         }
         
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
+    } failure:^(NSError *error) {}];
 }
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
@@ -111,7 +109,6 @@ static id instancet_;
     
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/pushMessage"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyJSON header:nil response:GXResponseStyleJSON success:^(id result) {
-//        NSLog(@"%@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"验证码发送成功"];
         } else {

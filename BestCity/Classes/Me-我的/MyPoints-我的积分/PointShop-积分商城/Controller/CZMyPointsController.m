@@ -27,7 +27,6 @@
 @implementation CZMyPointsController
 #pragma mark - 跳转到积分明细
 - (IBAction)pushPointDetail:(id)sender {
-    NSLog(@"%s", __func__);
     CZMyPointDetailController *vc = [[CZMyPointDetailController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

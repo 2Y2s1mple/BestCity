@@ -80,7 +80,6 @@
 
 - (IBAction)replyButton:(id)sender
 {
-    NSLog(@"000000");
     NSString *userName;
     if (self.contentDic[@"userShopmember"] != [NSNull null]) {
         userName = self.contentDic[@"userShopmember"][@"userNickName"];

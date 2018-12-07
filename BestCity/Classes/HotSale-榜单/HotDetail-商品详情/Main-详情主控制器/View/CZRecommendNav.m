@@ -139,7 +139,6 @@
     //获取详情数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"已删除"]) {
-            NSLog(@"%@", result);
             [CZProgressHUD showProgressHUDWithText:@"取消收藏"];
             self.rightBtn.selected = NO;
         } else {
@@ -164,7 +163,6 @@
     //获取详情数据
     [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"已添加"]) {
-            NSLog(@"%@", result);
             [CZProgressHUD showProgressHUDWithText:@"收藏成功"];
             self.rightBtn.selected = YES;
         } else {

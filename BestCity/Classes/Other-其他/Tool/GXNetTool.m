@@ -95,7 +95,7 @@
 //    securityPolicy.validatesDomainName = NO;
     // 是否允许无效证书（也就是自建的证书），默认为NO
 //    如果是需要验证自建证书，需要设置为YES
-//    securityPolicy.allowInvalidCertificates = NO;
+//    securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy = securityPolicy;
    
     

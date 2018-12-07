@@ -45,7 +45,6 @@
         //获取缓存的大小
         NSUInteger intg = [[SDImageCache sharedImageCache] getSize];
         NSString *currentVolum = [NSString stringWithFormat:@"%@",[self fileSizeWithInterge:intg]];
-        NSLog(@"%@", currentVolum);
         self.rightTitle.hidden = NO;
         self.rightTitle.text = currentVolum;
         

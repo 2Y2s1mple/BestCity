@@ -227,7 +227,6 @@
         if (isSelected) {
             [self addAttention];
         } else {
-            NSLog(@"点击了%@按钮", self.model.userShopmember[@"userNickName"]);
             [self deleteAttention];
         }
     }];

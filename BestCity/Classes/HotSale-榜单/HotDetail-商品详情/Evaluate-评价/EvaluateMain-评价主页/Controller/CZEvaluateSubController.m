@@ -91,7 +91,6 @@
 
 - (void)keyboardShow:(NSNotification *)notification
 {
-    NSLog(@"%@", notification);
     CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     self.textToolBar.transform = CGAffineTransformMakeTranslation(0, -(rect.size.height + self.textToolBar.height));
 }
@@ -258,7 +257,6 @@
 - (void)reply:(CZReplyButton *)sender
 {
     [self.textToolBar.textView becomeFirstResponder];
-    NSLog(@"%@ -- %s", sender.commentId, __func__);
     if (sender.commentId) {
         self.recordCommentId = sender.commentId;
         self.textToolBar.placeHolderText = [NSString stringWithFormat:@"回复%@:", sender.name ? sender.name : @"游客"];

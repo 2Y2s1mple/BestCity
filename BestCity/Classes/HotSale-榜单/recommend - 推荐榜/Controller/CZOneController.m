@@ -25,7 +25,6 @@
     [CZProgressHUD showProgressHUDWithText:nil];
     //获取数据
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-        NSLog(@"-----------");
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];

@@ -256,7 +256,6 @@
     NSString *myProtocolUrl = @"http://qualityshop/?buyId=";
     if ([url hasPrefix:myProtocolUrl]) {
         NSString *alibcTradeUrlPath = [url substringFromIndex:[myProtocolUrl length]];
-        NSLog(@"%@", alibcTradeUrlPath);
         // 打开淘宝
         [CZOpenAlibcTrade openAlibcTradeWithUrlString:alibcTradeUrlPath parentController:self];
         return NO;
@@ -264,19 +263,4 @@
         return  YES;
     }
 }
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    NSLog(@"webViewDidStartLoad");
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    NSLog(@"webViewDidFinishLoad");
-}
-
-
-
-
-
 @end
