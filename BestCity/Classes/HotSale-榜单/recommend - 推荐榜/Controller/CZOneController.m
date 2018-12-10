@@ -42,8 +42,11 @@
     }];
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //line
     CZTOPLINE;
     [CZRecommendListModel setupObjectClassInArray:^NSDictionary *{
@@ -56,6 +59,26 @@
     self.tableView.tableHeaderView = [self setupHeaderView];
     // 创建刷新控件
     [self setupRefresh];
+    
+    // 判断是否更新
+    [self isNeedUpdate];
+}
+
+- (void)isNeedUpdate
+{
+    NSDictionary *versionContrl = [CZSaveTool objectForKey:requiredVersionCode];
+    if (![versionContrl[@"needUpdate"] isEqual:@(0)]) {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"发现新版本%@",versionContrl[@"versionName"]] message:versionContrl[@"content"] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction * update = [UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //跳转到App Store
+            NSString *urlStr = [NSString stringWithFormat:@"%@",versionContrl[@"downloadUrl"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+        }];
+        [alert addAction:ok];
+        [alert addAction:update];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)setupRefresh

@@ -15,6 +15,7 @@
 #define SERVER_URL @"https://api.jipincheng.cn"
 //#define SERVER_URL @"http://192.168.1.48:8081"
 
+
 /** 用户信息 */
 #define USERINFO [[NSUserDefaults standardUserDefaults] objectForKey:@"user"]
 /** 积分规则web */
@@ -86,6 +87,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZConst.h"
 #import "CZLoginController.h"
 #import "CZNoDataView.h" // 没有数据的view
+#import "CZSaveTool.h" // 自定义的储存
 
 
 /************************************************************/

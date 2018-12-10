@@ -14,3 +14,6 @@ NSString * const loginChangeUserInfo = @"loginChangeUserInfo";
 NSString * const systemMessageDetailControllerMessageRead = @"systemMessageDetailControllerMessageRead";
 /** 关注时候发测评通知 */
 NSString * const attentionCellNotifKey = @"CZAttentionCellNotifKey";
+/** 记录是否更新 */
+NSString * const requiredVersionCode = @"requiredVersionCode";
+BOOL appVersion = NO;

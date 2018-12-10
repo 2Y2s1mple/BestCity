@@ -11,9 +11,31 @@
 #import "CZTabBarController.h"
 #import "CZGuideController.h"
 #define CZVERSION @"CZVersion"
+#import "GXNetTool.h"
 
 @implementation CZGuideTool
 + (void)chooseRootViewController:(UIWindow *)window
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"type"] = @(0);
+    param[@"clientVersionCode"] = @"1.00";
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSNumber *appVersion1 = result[@"appVersion"][@"open"];
+            if (![appVersion1 isEqual:@(0)]) {
+                appVersion = YES;
+            } else {
+                appVersion = NO;
+            }
+            //有新版本
+            [CZSaveTool setObject:result[@"appVersion"] forKey:requiredVersionCode];
+        }
+    } failure:^(NSError *error) {}];
+    
+     [self loadController:window];
+}
+
++ (void)loadController:(UIWindow *)window
 {
     //获取当前的版本号
     NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
@@ -32,4 +54,5 @@
         window.rootViewController = vc;
     }
 }
+
 @end

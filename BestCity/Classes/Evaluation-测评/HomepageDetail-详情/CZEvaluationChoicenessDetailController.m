@@ -99,11 +99,18 @@
     lineView.backgroundColor = CZGlobalLightGray;
     [shareView addSubview:lineView];
     
+    CGFloat width;
+    if (!appVersion) {
+        width = SCR_WIDTH / 3.0;
+    } else {
+        width = SCR_WIDTH / 4.0;
+    }
+    
     // 分享
     UIButton *shareBtn = [[UIButton alloc] init];
     [shareView addSubview:shareBtn];
     shareBtn.y = lineView.y;
-    shareBtn.width = SCR_WIDTH / 4.0;
+    shareBtn.width = width;
     shareBtn.height = shareView.height;
     [shareBtn setImage:IMAGE_NAMED(@"tab-bar") forState:UIControlStateNormal];
     [shareBtn addTarget:self action:@selector(sharedApplication) forControlEvents:UIControlEventTouchUpInside];
@@ -113,7 +120,7 @@
     [shareView addSubview:collectBtn];
     collectBtn.x = CZGetX(shareBtn);
     collectBtn.y = lineView.y;
-    collectBtn.width = SCR_WIDTH / 4.0;
+    collectBtn.width = width;
     collectBtn.height = shareView.height;
     collectBtn.evalId = self.detailID;
     
@@ -124,22 +131,25 @@
     [shareView addSubview:commentBtn];
     commentBtn.x = CZGetX(collectBtn);
     commentBtn.y = lineView.y;
-    commentBtn.width = SCR_WIDTH / 4.0;
+    commentBtn.width = width;
     commentBtn.height = shareView.height;
     commentBtn.goodsId = self.detailID;
     commentBtn.totalCommentCount = self.dicData[@"commentNum"];
     
-    // 立即购买
-    UIButton *buyBtn = [[UIButton alloc] init];
-    [shareView addSubview:buyBtn];
-    buyBtn.x = CZGetX(commentBtn);
-    buyBtn.y = lineView.y;
-    buyBtn.width = SCR_WIDTH / 4.0;
-    buyBtn.height = shareView.height;
-    buyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
-    [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
-    [buyBtn addTarget:self action:@selector(gotoAlibcTrade) forControlEvents:UIControlEventTouchUpInside];
-    buyBtn.backgroundColor = CZREDCOLOR;
+    if (!appVersion) {
+        // 立即购买
+        UIButton *buyBtn = [[UIButton alloc] init];
+        [shareView addSubview:buyBtn];
+        buyBtn.x = CZGetX(commentBtn);
+        buyBtn.y = lineView.y;
+        buyBtn.width = width;
+        buyBtn.height = shareView.height;
+        buyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+        [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+        [buyBtn addTarget:self action:@selector(gotoAlibcTrade) forControlEvents:UIControlEventTouchUpInside];
+        buyBtn.backgroundColor = CZREDCOLOR;
+    }
+    
     
     return shareView;
 }

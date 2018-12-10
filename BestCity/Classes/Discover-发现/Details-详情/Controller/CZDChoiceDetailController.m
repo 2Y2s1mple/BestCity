@@ -132,6 +132,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"findgoodsId"] = self.findgoodsId;
+    param[@"mark"] = @(2);
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/findGoods/selectById"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
