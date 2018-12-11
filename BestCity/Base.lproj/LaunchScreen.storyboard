@@ -22,23 +22,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8rP-x1-svD">
-                                <rect key="frame" x="157.5" y="563" width="60" height="60"/>
+                                <rect key="frame" x="157.5" y="543" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="LYA-R8-Hgq"/>
                                     <constraint firstAttribute="height" constant="60" id="dft-zV-TzX"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="极好物 极有品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHe-0u-VbW">
+                                <rect key="frame" x="143" y="615" width="89.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8rP-x1-svD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2a9-nC-oAb"/>
-                            <constraint firstItem="bZE-ED-mn0" firstAttribute="top" secondItem="8rP-x1-svD" secondAttribute="bottom" constant="44" id="gdq-Ft-DQu"/>
+                            <constraint firstItem="VHe-0u-VbW" firstAttribute="top" secondItem="8rP-x1-svD" secondAttribute="bottom" constant="12" id="3Xt-AG-txC"/>
+                            <constraint firstItem="VHe-0u-VbW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="f1Z-nW-AxF"/>
+                            <constraint firstItem="bZE-ED-mn0" firstAttribute="top" secondItem="8rP-x1-svD" secondAttribute="bottom" constant="64" id="gdq-Ft-DQu"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1290" y="300"/>
+            <point key="canvasLocation" x="-1974" y="128"/>
         </scene>
     </scenes>
     <resources>
