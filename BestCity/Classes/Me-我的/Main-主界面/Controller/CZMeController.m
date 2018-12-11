@@ -142,8 +142,8 @@
 {
     NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
     if ([dic[@"destinationVC"] isEqualToString:@"CZBalanceController"]) {
-        [CZProgressHUD showProgressHUDWithText:@"正在开发中..."];
-        [CZProgressHUD hideAfterDelay:1.5];
+//        [CZProgressHUD showProgressHUDWithText:@"正在开发中..."];
+//        [CZProgressHUD hideAfterDelay:1.5];
         return;
     }
     UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];

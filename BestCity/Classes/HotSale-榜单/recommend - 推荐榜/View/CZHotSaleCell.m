@@ -123,6 +123,9 @@
     
     NSString *status;
     switch (model.sourceStatus) {
+        case 0:
+            status = @"原价:";
+            break;
         case 1:
             status = @"京东:";
             break;

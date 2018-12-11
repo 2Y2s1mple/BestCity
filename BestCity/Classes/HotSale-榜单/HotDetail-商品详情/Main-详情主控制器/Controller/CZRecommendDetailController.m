@@ -58,7 +58,7 @@ static CGFloat const likeAndShareHeight = 49;
 {
     if (_likeView == nil) {
         __weak typeof(self) weakSelf = self;
-        _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - likeAndShareHeight, SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
+        _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
             CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
             share.param = self.shareParam;
             [weakSelf.view addSubview:share];
@@ -123,6 +123,9 @@ static CGFloat const likeAndShareHeight = 49;
     // 平台
     NSString *status;
     switch (self.model.sourceStatus) {
+        case 0:
+            status = @"原价:";
+            break;
         case 1:
             status = @"京东:";
             break;

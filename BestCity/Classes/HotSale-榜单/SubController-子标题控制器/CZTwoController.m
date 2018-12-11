@@ -47,6 +47,7 @@
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"mark"] = @"0";
         param[@"category2Id"] = SourceId;
+        param[@"client"] = @(2);
         
         [CZProgressHUD showProgressHUDWithText:nil];
         //获取数据

@@ -23,8 +23,10 @@
 - (void)getDataSource
 {
     [CZProgressHUD showProgressHUDWithText:nil];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"mark"] = @(2);
     //获取数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
             [self.tableView reloadData];
@@ -60,8 +62,26 @@
     // 创建刷新控件
     [self setupRefresh];
     
-    // 判断是否更新
-    [self isNeedUpdate];
+    
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"type"] = @(0);
+    param[@"clientVersionCode"] = @"1.00";
+    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSNumber *appVersion1 = result[@"appVersion"][@"open"];
+            if (![appVersion1 isEqual:@(0)]) {
+                appVersion = YES;
+            } else {
+                appVersion = NO;
+            }
+            //有新版本
+            [CZSaveTool setObject:result[@"appVersion"] forKey:requiredVersionCode];
+            // 判断是否更新
+            [self isNeedUpdate];
+        }
+    } failure:^(NSError *error) {}];
+    
+    
 }
 
 - (void)isNeedUpdate
