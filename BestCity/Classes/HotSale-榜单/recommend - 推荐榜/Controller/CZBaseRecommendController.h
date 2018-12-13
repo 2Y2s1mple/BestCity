@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *dataSource;
 /** 表单 */
 @property (nonatomic, strong) UITableView *tableView;
+- (UIView *)creatFooterView;
 @end
 
 NS_ASSUME_NONNULL_END

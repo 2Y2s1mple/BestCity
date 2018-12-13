@@ -22,6 +22,7 @@
     self.textView.layer.borderWidth = 0.5;
     self.textView.layer.borderColor = CZRGBColor(224, 224, 224).CGColor;
     
+    
     self.textView.delegate = self;
 }
 

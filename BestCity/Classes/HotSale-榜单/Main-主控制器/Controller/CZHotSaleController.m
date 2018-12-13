@@ -150,21 +150,25 @@
         }
         case 1: {
             CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.imageUrl = [[self.mainTitles[index] tilte] img];
             vc.subTitles = [self.mainTitles[index] subtilte];
             return vc;
         }
         case 2: {
             CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.imageUrl = [[self.mainTitles[index] tilte] img];
             vc.subTitles = [self.mainTitles[index] subtilte];
             return vc;
         }
         case 3: {
             CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.imageUrl = [[self.mainTitles[index] tilte] img];
             vc.subTitles = [self.mainTitles[index] subtilte];
             return vc;
         }
         case 4: {
             CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.imageUrl = [[self.mainTitles[index] tilte] img];
             vc.subTitles = [self.mainTitles[index] subtilte];
             return vc;
         }

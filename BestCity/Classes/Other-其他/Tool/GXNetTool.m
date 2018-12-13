@@ -85,18 +85,18 @@
     //AFSSLPinningModeCertificate 这个模式表示用证书绑定方式验证证书，需要客户端保存有服务端的证书拷贝，这里验证分两步，第一步验证证书的域名/有效期等信息，第二步是对比服务端返回的证书跟客户端返回的是否一致。
     //AFSSLPinningModePublicKey 这个模式同样是用证书绑定方式验证，客户端要有服务端的证书拷贝，只是验证时只验证证书里的公钥，不验证证书的有效期等信息。只要公钥是正确的，就能保证通信不会被窃听，因为中间人没有私钥，无法解开通过公钥加密的数据。
 //    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
-    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-    if (certData) {
-        NSSet *cerSet = [[NSSet alloc]initWithObjects:certData, nil];
-        securityPolicy.pinnedCertificates = cerSet;
-    }
+//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
+//    if (certData) {
+//        NSSet *cerSet = [[NSSet alloc]initWithObjects:certData, nil];
+//        securityPolicy.pinnedCertificates = cerSet;
+//    }
     
     // 不验证证书的域名NO, 如果是需要验证自建证书，需要设置为YES
 //    securityPolicy.validatesDomainName = NO;
     // 是否允许无效证书（也就是自建的证书），默认为NO
 //    如果是需要验证自建证书，需要设置为YES
 //    securityPolicy.allowInvalidCertificates = YES;
-    manager.securityPolicy = securityPolicy;
+//    manager.securityPolicy = securityPolicy;
    
     
     //设置body数据类型

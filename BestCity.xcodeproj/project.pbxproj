@@ -1564,9 +1564,9 @@
 		97705C41210716A300485D64 /* HotSale-榜单 */ = {
 			isa = PBXGroup;
 			children = (
-				9785778A21A80B1C00E42B29 /* SubController-子标题控制器 */,
 				97054BF92182F1F60008E416 /* Main-主控制器 */,
 				970B668A210ABE1B003EC382 /* recommend - 推荐榜 */,
+				9785778A21A80B1C00E42B29 /* SubController-其他推荐榜 */,
 				97054C02218315180008E416 /* HotDetail-商品详情 */,
 				97054BFA2182F26F0008E416 /* Search-搜索商品 */,
 			);
@@ -1905,7 +1905,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		9785778A21A80B1C00E42B29 /* SubController-子标题控制器 */ = {
+		9785778A21A80B1C00E42B29 /* SubController-其他推荐榜 */ = {
 			isa = PBXGroup;
 			children = (
 				9785778F21A80B4100E42B29 /* CZSubTitleButton.h */,
@@ -1913,7 +1913,7 @@
 				9785778B21A80B2700E42B29 /* CZTwoController.h */,
 				9785778C21A80B2700E42B29 /* CZTwoController.m */,
 			);
-			path = "SubController-子标题控制器";
+			path = "SubController-其他推荐榜";
 			sourceTree = "<group>";
 		};
 		9785779121A832BF00E42B29 /* HomePage-首页 */ = {

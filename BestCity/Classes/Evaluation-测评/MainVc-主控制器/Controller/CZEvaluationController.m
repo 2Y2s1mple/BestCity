@@ -65,28 +65,24 @@
         case 1:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            self.mainTitles[index].img = @"";
             vc.titleModel = self.mainTitles[index];
             return vc;
         }
         case 2:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            self.mainTitles[index].img = @"";
             vc.titleModel = self.mainTitles[index];
             return vc;
         }
         case 3:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            self.mainTitles[index].img = @"";
             vc.titleModel = self.mainTitles[index];
             return vc;
         }
         case 4:
         {
             CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            self.mainTitles[index].img = @"";
             vc.titleModel = self.mainTitles[index];
             return vc;
         }

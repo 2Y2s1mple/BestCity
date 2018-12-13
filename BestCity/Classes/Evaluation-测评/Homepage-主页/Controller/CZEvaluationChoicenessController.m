@@ -45,7 +45,7 @@
     return _dataSource;
 }
 
-#pragma mark - viewDidLoad
+#pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
     //line
@@ -63,7 +63,6 @@
     [self addRefresh];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attentionCellNotifAction:) name:attentionCellNotifKey object:nil];
-    
 }
 
 - (void)attentionCellNotifAction:(NSNotification *)notif
