@@ -34,30 +34,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *tmPrice;
 /** 访问量 */
 @property (nonatomic, weak) IBOutlet UILabel *visitLabel;
-/** 推荐理由 */
-@property (nonatomic, weak) IBOutlet UILabel *recommendReasonLabel;
-/** 综合评分 */
-@property (weak, nonatomic) IBOutlet UILabel *comprehensiveScore;
-/** 评分view */
-@property (weak, nonatomic) IBOutlet UIView *pointView;
-/** 综合评分 */
-@property (nonatomic, weak) IBOutlet UILabel *comprehensiveScoreLabel;
-/** 评分中第1个的长度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scoreFirstImageConstraint;
-/** 评分中第1个的文字 */
-@property (weak, nonatomic) IBOutlet UILabel *scoreFirstName;
-/** 评分中第2个的长度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scoreSecondImageConstraint;
-/** 评分中第2个的文字 */
-@property (weak, nonatomic) IBOutlet UILabel *scoreSecondName;
-/** 评分中第3个的长度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scoreThreeImageConstraint;
-/** 评分中第3个的文字 */
-@property (weak, nonatomic) IBOutlet UILabel *scoreThreeName;
-/** 评分中第4个的长度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scoreThirdImageConstraint;
-/** 评分中第4个的文字 */
-@property (weak, nonatomic) IBOutlet UILabel *scoreThirdName;
 
 @end
 
@@ -72,7 +48,7 @@
 {
     _model = model;
     self.topNumber.text = [NSString stringWithFormat:@"%ld", [model.indexNumber integerValue] + 1];
-    [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.rankGoodImg] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     self.titleLabel.text = model.goodsName;
     self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     
@@ -81,31 +57,31 @@
     self.tag3.hidden = YES;
     self.tag4.hidden = YES;
     
-    for (int i = 0; i < model.goodstypeList.count; i++) {
+    for (int i = 0; i < model.goodsTagsList.count; i++) {
         switch (i) {
             case 0:
-                [self.tag1 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                [self.tag1 setTitle:model.goodsTagsList[i][@"name"] forState:UIControlStateNormal];
                 self.tag1.hidden = NO;
                 self.tag2.hidden = YES;
                 self.tag3.hidden = YES;
                 self.tag4.hidden = YES;
                 break;
             case 1:
-                [self.tag2 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                [self.tag2 setTitle:model.goodsTagsList[i][@"name"] forState:UIControlStateNormal];
                 self.tag1.hidden = NO;
                 self.tag2.hidden = NO;
                 self.tag3.hidden = YES;
                 self.tag4.hidden = YES;
                 break;
             case 2:
-                [self.tag3 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                [self.tag3 setTitle:model.goodsTagsList[i][@"name"] forState:UIControlStateNormal];
                 self.tag1.hidden = NO;
                 self.tag2.hidden = NO;
                 self.tag3.hidden = NO;
                 self.tag4.hidden = YES;
                 break;
             case 3:
-                [self.tag4 setTitle:model.goodstypeList[i][@"name"] forState:UIControlStateNormal];
+                [self.tag4 setTitle:model.goodsTagsList[i][@"name"] forState:UIControlStateNormal];
                 self.tag1.hidden = NO;
                 self.tag2.hidden = NO;
                 self.tag3.hidden = NO;
@@ -122,7 +98,7 @@
     self.cutPriceLabel.text = [NSString stringWithFormat:@"省%@", model.cutPrice];
     
     NSString *status;
-    switch (model.sourceStatus) {
+    switch ([model.source integerValue]) {
         case 0:
             status = @"原价:";
             break;
@@ -146,44 +122,15 @@
     }
     
     
-    NSInteger visiterCount = [model.visitCount integerValue];
+    NSInteger visiterCount = [model.pv integerValue];
     if (visiterCount > 1000) {
         self.visitLabel.text = [NSString stringWithFormat:@"%0.1f万", visiterCount / 10000.0];
     } else {
-        self.visitLabel.text = [NSString stringWithFormat:@"%@", model.visitCount];
+        self.visitLabel.text = [NSString stringWithFormat:@"%@", model.pv];
     }
-    
-    
-    NSString *text = [NSString stringWithFormat:@"推荐理由:   %@", model.recommendReason];
-    NSDictionary *att = @{NSForegroundColorAttributeName : CZREDCOLOR};
-    NSDictionary *att1 = @{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Regular" size: 13]};
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:text];
-    [attrStr addAttributes:att range:[text rangeOfString:@"推荐理由"]];
-    [attrStr addAttributes:att1 range:[text rangeOfString:text]];
-    self.recommendReasonLabel.attributedText = attrStr;
-    
+
     [self layoutIfNeeded];
-    // 综合评分
-    if (model.goodsScopeList.count >= 4) {
-        self.pointView.hidden = NO;
-        self.comprehensiveScoreLabel.text = [NSString stringWithFormat:@"%.1f", [model.goodsGrade floatValue]];
-        NSInteger maxScore = 150;
-        CGFloat everScore = maxScore / 10;
-        self.scoreFirstImageConstraint.constant = 150 - [model.goodsScopeList[0].score integerValue] * everScore;
-        self.scoreFirstName.text = [model.goodsScopeList[0].name setupTextRowSpace];
-        self.scoreSecondImageConstraint.constant = 150 - [model.goodsScopeList[1].score integerValue] * everScore;
-        self.scoreSecondName.text = [model.goodsScopeList[1].name setupTextRowSpace];
-        self.scoreThreeImageConstraint.constant = 150 - [model.goodsScopeList[2].score integerValue] * everScore;
-        self.scoreThreeName.text = [model.goodsScopeList[2].name setupTextRowSpace];
-        self.scoreThirdImageConstraint.constant = 150 - [model.goodsScopeList[3].score integerValue] * everScore;
-        self.scoreThirdName.text = [model.goodsScopeList[3].name setupTextRowSpace];
-        
-        model.cellHeight = CGRectGetMaxY(self.pointView.frame);
-    } else {
-        self.pointView.hidden = YES;
-        model.cellHeight = CGRectGetMaxY(self.recommendReasonLabel.frame);
-    }
-    
+    model.cellHeight = CGRectGetMaxY(self.visitLabel.frame);
     
 }
 

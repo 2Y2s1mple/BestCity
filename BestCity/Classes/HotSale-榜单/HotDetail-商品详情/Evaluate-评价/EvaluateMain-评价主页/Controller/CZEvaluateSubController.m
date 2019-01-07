@@ -86,7 +86,6 @@
     self.textToolBar.autoresizingMask = UIViewAutoresizingNone;
     self.textToolBar.frame = CGRectMake(0, SCR_HEIGHT, SCR_WIDTH, 49);
     [[UIApplication sharedApplication].keyWindow addSubview:self.textToolBar];
-    
 }
 
 - (void)keyboardShow:(NSNotification *)notification
@@ -100,11 +99,9 @@
     self.textToolBar.transform = CGAffineTransformMakeTranslation(0, 0);
 }
 
-
-
-- (void)setModel:(CZRecommendDetailModel *)model
+- (void)setTargetId:(NSString *)targetId
 {
-    _model = model;
+    _targetId = targetId;
     [self getDataSource];
 }
 
@@ -113,12 +110,13 @@
 {
     [CZEvaluateModel setupObjectClassInArray:^NSDictionary *{
         return @{
-                 @"userCommentList" : @"CZCommentModel"
+                 @"children" : @"CZEvaluateModel"
                  };
     }];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"articId"] = self.model.goodsId;
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/comment"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    param[@"targetId"] = self.targetId;
+    param[@"type"] = @(1);
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 删除以前的视图
             self.totalHeight = 0;
@@ -127,8 +125,8 @@
             }
             
             // 获取数据
-            self.evaluateArr = [CZEvaluateModel objectArrayWithKeyValuesArray:result[@"list"]];
-            self.totalCommentCount = result[@"count"];
+            self.evaluateArr = [CZEvaluateModel objectArrayWithKeyValuesArray:result[@"data"]];
+            self.totalCommentCount = result[@"total"];
             
             // 创建用户评价
             [self setupSubViews];
@@ -141,7 +139,6 @@
 {
     self.totalHeight += height;
 }
-
 
 #pragma mark - 创建用户评价
 - (void)setupSubViews
@@ -192,8 +189,6 @@
         [self addHeight:ReplyBtn.height + 10];
     }
     
-    
-    
     /**点赞*/
     //加个分隔线
     UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, self.totalHeight, SCR_WIDTH, 7)];
@@ -204,7 +199,7 @@
     
     //加载点赞小手
     CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, self.totalHeight, SCR_WIDTH, 200)];
-    likeView.currentID = self.model.goodsId;
+    likeView.currentID = self.targetId;
     [self.scrollerView addSubview:likeView];
     // 记录高度
     [self addHeight:likeView.height];
@@ -222,26 +217,26 @@
 - (void)pushCommentDetail:(UIButton *)sendre
 {
     CZAllCriticalController *vc = [[CZAllCriticalController alloc] init];
-    vc.goodsId = self.model.goodsId;
+    vc.goodsId = self.targetId;
     vc.totalCommentCount = self.totalCommentCount;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 #pragma mark - 事件
 #pragma mark 评论接口
 - (void)commentInsert:(NSString *)commentId
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"articId"] = self.model.goodsId;
+    param[@"type"] = @"1"; // 1商品 2评测 3发现
+    param[@"targetId"] = self.targetId;
     param[@"content"] = self.textToolBar.textView.text;
     param[@"parentId"] = commentId ? commentId : @(0);
-    param[@"status"] = @"1"; // 1商品 2评测 3发现
+    param[@"toUserId"] = @(0);
     
     //获取详情数据
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/commentInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"添加成功"]) {
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
             [self getDataSource];
             //隐藏菊花
             [CZProgressHUD hideAfterDelay:0];
@@ -292,12 +287,12 @@
     icon.frame = CGRectMake(10, 0, 38, 38);
     icon.layer.cornerRadius = 19;
     icon.layer.masksToBounds = YES;
-    [icon sd_setImageWithURL:[NSURL URLWithString:model.userShopmember[@"userNickImg"] != [NSNull null] ? model.userShopmember[@"userNickImg"] : @""] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [icon sd_setImageWithURL:[NSURL URLWithString:model.userAvatar != [NSNull null] ? model.userAvatar : @""] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     [backview addSubview:icon];
     
     //名字
     UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(icon) + 10, icon.center.y - 15, 100, 30)];
-    name.text = model.userShopmember[@"userNickName"];
+    name.text = model.userNickname;
     name.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     name.textColor = CZGlobalGray;
     [backview addSubview:name];
@@ -309,13 +304,13 @@
     likeBtn.commentId = model.commentId;
     likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     [likeBtn sizeToFit];
-    [likeBtn setTitle:model.snapNum forState:UIControlStateNormal];
+    [likeBtn setTitle:[NSString stringWithFormat:@"%@", model.voteCount] forState:UIControlStateNormal];
     [likeBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
     [likeBtn setImage:[UIImage imageNamed:@"appreciate-nor"]
              forState:UIControlStateNormal];
     [likeBtn setImage:[UIImage imageNamed:@"appreciate-sel"]
              forState:UIControlStateSelected];
-    likeBtn.selected = [model.userSnap boolValue];
+    likeBtn.selected = [model.vote boolValue];
     likeBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
     [likeBtn addTarget:self action:@selector(commentLikeAction:) forControlEvents:UIControlEventTouchUpInside];
     [backview addSubview:likeBtn];
@@ -413,7 +408,7 @@
     
     //时间
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(58, 0, 80, 20)];
-    NSString *showTime = (![model.showTime  isEqual: @""] && model.showTime != [NSNull null]) ? model.showTime : [model.createTime substringToIndex:10];
+    NSString *showTime = model.createTimeStr;
     timeLabel.text = showTime;
     timeLabel.textColor = CZGlobalGray;
     timeLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
@@ -424,13 +419,12 @@
     replyBtn.frame = CGRectMake(CZGetX(timeLabel), timeLabel.center.y - 10, 80, 20);
     [replyBtn setTitle:@"·   回复"forState:UIControlStateNormal];
     replyBtn.commentId = model.commentId;
-    replyBtn.name = model.userShopmember[@"userNickName"];
+    replyBtn.name = model.userNickname;
     replyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     replyBtn.titleLabel.font = timeLabel.font;
     [replyBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
     [replyBtn addTarget:self action:@selector(reply:) forControlEvents:UIControlEventTouchUpInside];
     [backview addSubview:replyBtn];
-    
     
     backview.height = replyBtn.height;
     return backview;
@@ -456,7 +450,7 @@
     replyView.height = 0;
     [backview addSubview:replyView];
     
-    NSInteger maxCommentCount = model.userCommentList.count > 2 ? 2 : model.userCommentList.count;
+    NSInteger maxCommentCount = model.children.count > 2 ? 2 : model.children.count;
     
     // 在内容View中加载
      CGFloat replyHeight = 0.0;
@@ -473,14 +467,14 @@
             
             [replyView addSubview:imageView];
         }
-        CZCommentModel *commentModel = model.userCommentList[i];
+        CZEvaluateModel *commentModel = model.children[i];
         
         UILabel *commentNameLabel = [[UILabel alloc] init];
         commentNameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
         [replyView addSubview:commentNameLabel];
         NSString *userName;
-        if (commentModel.userShopmember != [NSNull null] && commentModel.userShopmember != nil) {
-            userName = commentModel.userShopmember[@"userNickName"];
+        if (commentModel.userNickname != [NSNull null] && commentModel.userNickname != nil) {
+            userName = commentModel.userNickname;
         } else {
             userName = @"游客";
         }
@@ -514,14 +508,14 @@
         replyView.height = CZGetY(contentLabel) + 10;
     }
     
-    if (model.userCommentList.count > 2) {
+    if (model.children.count > 2) {
         // 显示更多按钮
         CZMutContentButton *moreBtn = [[CZMutContentButton alloc] init];
         [replyView addSubview:moreBtn];
         moreBtn.x = 10;
         moreBtn.y = replyView.height;
         moreBtn.height = 20;
-        [moreBtn setTitle:[NSString stringWithFormat:@"共%@条回复", model.secondNum] forState:UIControlStateNormal];
+        [moreBtn setTitle:[NSString stringWithFormat:@"共%@条回复", model.childCount] forState:UIControlStateNormal];
         [moreBtn setImage:[UIImage imageNamed:@"right-blue"] forState:UIControlStateNormal];
         [moreBtn sizeToFit];
         [moreBtn setTitleColor:CZRGBColor(74, 144, 226) forState:UIControlStateNormal];

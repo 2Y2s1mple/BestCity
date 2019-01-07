@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZRecommendDetailModel.h"
+
 
 @interface CZEvaluateSubController : UIViewController
-/** 详情数据模型 */
-@property (nonatomic, strong) CZRecommendDetailModel *model;
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
+/** 商品ID */
+@property (nonatomic, strong) NSString *targetId;
 @end

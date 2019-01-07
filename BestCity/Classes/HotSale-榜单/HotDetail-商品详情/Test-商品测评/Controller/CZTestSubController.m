@@ -41,7 +41,7 @@
     [self.view addSubview:self.scrollerView];
 }
 
-- (void)setModel:(CZRecommendDetailModel *)model
+- (void)setModel:(CZHotSaleDetailModel *)model
 {
     _model = model;
     [self setup];
@@ -60,12 +60,12 @@
     UIImageView *iconImage = [[UIImageView alloc] init];
     iconImage.layer.cornerRadius = 25;
     iconImage.layer.masksToBounds = YES;
-    [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.goodsEvalWayEntity[@"userShopmember"][@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.evaluationEntity.user[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     iconImage.frame = CGRectMake(space, CZGetY(titleLabel) + (2 * space), 50, 50);
     [self.scrollerView addSubview:iconImage];
     //名字
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y, 100, 20)];
-    nameLabel.text = self.model.goodsEvalWayEntity[@"userShopmember"][@"userNickName"];
+    nameLabel.text = self.model.evaluationEntity.user[@"nickname"];
     nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     [nameLabel sizeToFit];
     nameLabel.textColor = CZRGBColor(21, 21, 21);
@@ -75,20 +75,20 @@
         nameLabel.width = 150;
     }
     UILabel *fansLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(nameLabel) + 10, nameLabel.y, 100, 20)];
-    fansLabel.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.goodsEvalWayEntity[@"userShopmember"][@"fansCount"]];
+    fansLabel.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.evaluationEntity.user[@"fansCount"]];
     fansLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     fansLabel.textColor = CZGlobalGray;
     [self.scrollerView addSubview:fansLabel];
     //时间
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CZGetY(nameLabel) + space, 100, 20)];
-    timeLabel.text =[self.model.goodsEvalWayEntity[@"createTime"] length] > 10 ? [self.model.goodsEvalWayEntity[@"createTime"] substringToIndex:10] : @"";
+    timeLabel.text = self.model.evaluationEntity.createTime;
     timeLabel.textColor = CZGlobalGray;
     timeLabel.font = fansLabel.font;
     [self.scrollerView addSubview:timeLabel];
 
     // 关注按钮
     CZAttentionBtnType type;
-    if ([self.model.goodsEvalWayEntity[@"concernNum"] integerValue] == 0) {
+    if ([self.model.evaluationEntity.user[@"follow"] integerValue] == 0) {
         type = CZAttentionBtnTypeAttention;
     } else {
         type = CZAttentionBtnTypeFollowed;
@@ -108,7 +108,7 @@
     self.webView.delegate = self;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     self.webView.scrollView.scrollEnabled = NO;
-    [self.webView loadHTMLString:self.model.goodsEvalWayEntity[@"content"] baseURL:nil];
+    [self.webView loadHTMLString:self.model.evaluationEntity.content baseURL:nil];
 
     /**点赞*/
     //加个分隔线
@@ -158,7 +158,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
-    param[@"attentionUserId"] = self.model.goodsEvalWayEntity[@"userShopmember"][@"userId"];
+    param[@"attentionUserId"] = self.model.evaluationEntity.user[@"userId"];
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernDelete"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
@@ -181,7 +181,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
-    param[@"attentionUserId"] = self.model.goodsEvalWayEntity[@"userShopmember"][@"userId"];
+    param[@"attentionUserId"] = self.model.evaluationEntity.user[@"userId"];
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernInsert"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {

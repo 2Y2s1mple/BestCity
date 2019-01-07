@@ -7,26 +7,28 @@
 //
 
 #import "CZRecommendDetailController.h"
-#import "CZCommoditySubController.h"
-#import "CZTestSubController.h"
-#import "CZEvaluateSubController.h"
+#import "CZCommoditySubController.h" // 商品
+#import "CZTestSubController.h" // 测评
+#import "CZEvaluateSubController.h" // 评论
 
-#import "CZRecommendDetailModel.h"
 
-#import "CZRecommendNav.h"
-#import "CZShareAndlikeView.h"
-#import "CZShareView.h"
+#import "CZRecommendNav.h" // 导航
+#import "CZShareAndlikeView.h" // 分享
+#import "CZShareView.h" // 分享详情
 
-#import "GXNetTool.h"
-#import "MJExtension.h"
+#import "GXNetTool.h" // 网络请求
+#import "MJExtension.h" // 数据转换
 
-#import "CZOpenAlibcTrade.h"
+#import "CZOpenAlibcTrade.h" // 跳淘宝
+#import "UIButton+CZExtension.h" // 按钮扩展
+
+#import "CZHotSaleDetailModel.h" // 当前数据模型
 
 @interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
 /** 详情数据 */
-@property (nonatomic, strong) CZRecommendDetailModel *recommendDetailModel;
+@property (nonatomic, strong) CZHotSaleDetailModel *detailModel;
 /** 商品 */
 @property (nonatomic, strong) CZCommoditySubController *commendVC;
 /** 评测 */
@@ -39,15 +41,22 @@
 @property (nonatomic, strong) CZShareAndlikeView *likeView;
 /** 分享参数 */
 @property (nonatomic, strong) NSDictionary *shareParam;
+/** 记录偏移量 */
+@property (nonatomic, assign) CGFloat recordOffsetY;
+/** 返回键 */
+@property (nonatomic, strong) UIButton *popButton;
+/** 返回键 */
+@property (nonatomic, strong) UIButton *collectButton;
 @end
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
 
 @implementation CZRecommendDetailController
+#pragma mark - 懒加载
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20) + 40, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + 40) - likeAndShareHeight)];
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - likeAndShareHeight)];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }
@@ -64,26 +73,68 @@ static CGFloat const likeAndShareHeight = 49;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.recommendDetailModel.goodsBuyLink parentController:self];
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
         }];
     }
     return _likeView;
 }
 
+- (CZRecommendNav *)nav
+{
+    if (_nav == nil) {
+        self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40)];
+        self.nav.projectId = self.goodsId;
+        self.nav.delegate = self;
+    }
+    return _nav;
+}
+
+- (UIButton *)popButton
+{
+    if (_popButton == nil) {
+        _popButton = [UIButton buttonWithFrame:CGRectMake(14, (IsiPhoneX ? 54 : 30), 30, 30) backImage:@"nav-back-1" target:self action:@selector(popAction)];
+        _popButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
+        _popButton.layer.cornerRadius = 15;
+        _popButton.layer.masksToBounds = YES;
+    }
+    return _popButton;
+}
+
+- (UIButton *)collectButton
+{
+    if (_collectButton == nil) {
+        _collectButton = [UIButton buttonWithFrame:CGRectMake(SCR_WIDTH - 14 - 30, (IsiPhoneX ? 54 : 30), 30, 30) backImage:@"hot-list-favor" target:self action:@selector(popAction)];
+        _collectButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
+        _collectButton.layer.cornerRadius = 15;
+        _collectButton.layer.masksToBounds = YES;
+    }
+    return _collectButton;
+}
+
+- (void)popAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalWhiteBg;
+    self.view.backgroundColor = [UIColor orangeColor];;
     // 获取数据
     [self getSourceData];
-    
-    // 创建导航栏
-    self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40)];
-    self.nav.projectId = self.model.goodsId;
-    self.nav.delegate = self;
-    [self.view addSubview:self.nav];
-    
+     
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
+    
+    // 加载pop按钮
+    [self.view addSubview:self.popButton];
+    
+    // 加载收藏按钮
+    [self.view addSubview:self.collectButton];
+    
+    // 创建导航栏
+    [self.view addSubview:self.nav];
+    self.nav.alpha = 0;
     
     // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
@@ -92,19 +143,14 @@ static CGFloat const likeAndShareHeight = 49;
 #pragma mark - 获取数据
 - (void)getSourceData
 {
-    [CZRecommendDetailModel setupObjectClassInArray:^NSDictionary *{
-        return @{
-                 @"qualityList" : @"CZRecommendDetailPointModel"
-                 };
-    }];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"goodsId"] = self.model.goodsId;
+    param[@"goodsId"] = self.goodsId;
+    param[@"client"] = @(2);
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankDetailList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.recommendDetailModel = [CZRecommendDetailModel objectWithKeyValues:result[@"GoodsRankdetailEntity"]];
-            // 设置标题以及优惠券数据
-            [self setupRecommendModel];
+            self.detailModel = [CZHotSaleDetailModel objectWithKeyValues:result[@"data"]];
+           
             [self createSubViews];
             // 创建分享购买视图
             self.shareParam = result[@"ShareUrl"];
@@ -113,54 +159,24 @@ static CGFloat const likeAndShareHeight = 49;
     } failure:^(NSError *error) {}];
 }
 
-/** 设置标题以及优惠券数据 */
-- (void)setupRecommendModel
-{
-    // 标题
-    self.recommendDetailModel.mainTitle = self.model.goodsName;
-    // 券后价
-    self.recommendDetailModel.actualPrice = self.model.actualPrice;
-    // 平台
-    NSString *status;
-    switch (self.model.sourceStatus) {
-        case 0:
-            status = @"原价:";
-            break;
-        case 1:
-            status = @"京东:";
-            break;
-        case 2:
-            status = @"淘宝:";
-            break;
-        case 3:
-            status = @"天猫:";
-            break;
-        default:
-            status = @"";
-            break;
-    }
-    self.recommendDetailModel.sourcePlatform = status;
-    // 平台价格
-    self.recommendDetailModel.sourcePlatformPrice = self.model.otherPrice;
-    // 优惠券
-    self.recommendDetailModel.discountCoupon = self.model.cutPrice;
-}
-
 - (void)createSubViews
 {
     // 商品
     self.commendVC = [[CZCommoditySubController alloc] init];
-    self.commendVC.model = self.recommendDetailModel;
+    self.commendVC.detailData = self.detailModel.goodsEntity;
+    self.commendVC.commodityDetailData = self.detailModel.goodsDetailEntity;
+    self.commendVC.couponData = self.detailModel.goodsCouponsEntity;
+    self.commendVC.view.y = (IsiPhoneX ? -44 : -20);
     [self.scrollerView addSubview:self.commendVC.view];
     [self addChildViewController:self.commendVC];
     
     // 测评
-    if (self.recommendDetailModel.goodsEvalWayEntity != nil) {
+    if (self.detailModel.evaluationEntity != nil) {
         self.testVc = [[CZTestSubController alloc] init];
         self.testVc.view.y = self.commendVC.scrollerView.height;
         [self.scrollerView addSubview:self.testVc.view];
         [self addChildViewController:self.testVc];
-        self.testVc.model = self.recommendDetailModel;
+        self.testVc.model = self.detailModel;
     }
     
     // 评价
@@ -168,13 +184,11 @@ static CGFloat const likeAndShareHeight = 49;
     self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
     [self.scrollerView addSubview:self.evaluate.view];
     [self addChildViewController:self.evaluate];
-    self.evaluate.model = self.recommendDetailModel;
+    self.evaluate.targetId = self.detailModel.goodsDetailEntity.goodsId;
     
     // 设置滚动高度
     self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
 }
-
-
 
 #pragma mark - 监听子控件的frame的变化
 - (void)openBoxInspectWebViewHeightChange:(NSNotification *)notfi
@@ -214,6 +228,7 @@ static CGFloat const likeAndShareHeight = 49;
     } completion:^(BOOL finished) {
         self.scrollerView.delegate = self;
     }];
+    
 }
 
 #pragma mark - <UIScrollViewDelegate>
@@ -225,12 +240,36 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.scrollerView.contentOffset.y >= -20 && self.scrollerView.contentOffset.y < CGRectGetMinY(self.testVc.view.frame)) {
+    NSLog(@"scrollViewDidScroll -- %lf", self.scrollerView.contentOffset.y);
+    
+    BOOL offset1 = self.scrollerView.contentOffset.y >= -20 && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
+    
+    BOOL offset2 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20)) && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.evaluate.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
+    
+    BOOL offset3 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.evaluate.view.frame) - 80- (IsiPhoneX ? 44 : 20));
+    
+    
+    if (offset1) {
         self.nav.monitorIndex = 0;
-    } else if (self.scrollerView.contentOffset.y >= CGRectGetMinY(self.testVc.view.frame) && self.scrollerView.contentOffset.y < CGRectGetMinY(self.evaluate.view.frame)) {
+    } else if (offset2) {
         self.nav.monitorIndex = 1;
-    } else if (self.scrollerView.contentOffset.y >= CGRectGetMinY(self.evaluate.view.frame)) {
+    } else if (offset3) {
         self.nav.monitorIndex = 2;
+    }
+    
+     CGFloat offsetY = scrollView.contentOffset.y;
+    if (offsetY <= 0) {
+        self.nav.alpha = 0;
+    }
+    if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) {
+        if (offsetY - self.recordOffsetY >= 0) {
+//            NSLog(@"向上滑动");
+//            NSLog(@"%f", offsetY / 50.0);
+            self.nav.alpha = offsetY / 50.0;
+        } else {
+//            NSLog(@"向下滑动");
+        }
+        self.recordOffsetY = offsetY;
     }
 }
 

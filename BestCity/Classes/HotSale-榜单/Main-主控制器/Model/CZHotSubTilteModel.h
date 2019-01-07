@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZHotSubTilteModel : NSObject
 /** 具体标题 */
-@property (nonatomic, strong) NSString *categoryname;
+@property (nonatomic, strong) NSString *categoryName;
 /** ID */
-@property (nonatomic, strong) NSString *categoryid;
+@property (nonatomic, strong) NSString *categoryId;
 /** 按钮的序号 */
 @property (nonatomic, assign) NSInteger indexBtn;
 /** 图片 */

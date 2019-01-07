@@ -13,6 +13,7 @@
 
 - (NSMutableAttributedString *)addAttributeColor:(UIColor *)color Range:(NSRange)range;
 - (NSMutableAttributedString *)addAttributeFont:(UIFont *)Font Range:(NSRange)range;
+- (NSMutableAttributedString *)addAttribute:(NSDictionary *)attributs Range:(NSRange)range;
 
 - (NSString *)setupTextRowSpace;
 - (CGFloat)getTextHeightWithRectSize:(CGSize)size andFont:(UIFont *)font;

@@ -33,7 +33,7 @@
 - (void)setModel:(CZHotSubTilteModel *)model
 {
     _model = model;
-    [self setTitle:model.categoryname forState:UIControlStateNormal];
+    [self setTitle:model.categoryName forState:UIControlStateNormal];
     if (model.indexBtn == 0) {
         self.selected = YES;
     }

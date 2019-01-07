@@ -49,14 +49,14 @@
     [self setupHeaderView];
     
     // 设置tableView
-    self.tableView.frame = CGRectMake(0, _recordHeight, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94) - _recordHeight);
+    self.tableView.frame = CGRectMake(0, 40, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94) - 40 + 50);
     self.tableView.tableHeaderView = [self headerView];
     
     // 加载刷新控件
     [self setupRefresh];
     
     //获取标题1的数据
-    [self getDataSourceWithId:self.subTitles[0].categoryid];
+    [self getDataSourceWithId:self.subTitles[0].categoryId];
 }
 
 - (void)getDataSourceWithId:(NSString *)SourceId
@@ -113,7 +113,8 @@
 
 - (void)setupHeaderView
 {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 180)];
+    UIScrollView *backView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 40)];
+    backView.showsHorizontalScrollIndicator = NO;
     backView.backgroundColor = CZGlobalLightGray;
     [self.view addSubview:backView];
     //    NSArray *titles = @[@"剃须刀", @"计步器", @"吹风机", @"足浴盆", @"体重计", @"剃/脱毛器", @"美容仪", @"按摩椅", @"理发器", @"电动牙刷"];
@@ -139,19 +140,14 @@
             btn.height = h;
         } else {
             CGFloat leftSpace = CZGetX(backView.subviews[i - 1]) + space;
-            if (self.view.width - leftSpace > btn.width) {
-                btn.x = leftSpace;
-                btn.y = backView.subviews[i - 1].y;
-            } else {
-                btn.x = space;
-                btn.y = CZGetY(backView.subviews[i - 1]);
-            }
+            btn.x = leftSpace;
+            btn.y = backView.subviews[i - 1].y;
             btn.height = h;
         }
         [backView addSubview:btn];
-        _recordHeight = CZGetY(btn);
+        _recordHeight = CZGetX(btn);
     }
-    backView.frame = CGRectMake(0, 0, SCR_WIDTH, _recordHeight);
+    backView.contentSize = CGSizeMake(_recordHeight + 10, 0);
 }
 
 - (void)didClickedBtn:(CZSubTitleButton *)sender
@@ -159,8 +155,8 @@
     _recordBtn.selected = NO;
     sender.selected = YES;
     // 获取点击数据
-    if (self.recordID != sender.model.categoryid) {
-        [self getDataSourceWithId:sender.model.categoryid];
+    if (self.recordID != sender.model.categoryId) {
+        [self getDataSourceWithId:sender.model.categoryId];
     }
     _recordBtn = sender;
 }
@@ -177,5 +173,10 @@
     return backView;
 }
 
-
+#pragma mark - <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSString *OneControllerScrollViewDidScroll = @"CZOneControllerScrollViewDidScroll";
+    [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
+}
 @end

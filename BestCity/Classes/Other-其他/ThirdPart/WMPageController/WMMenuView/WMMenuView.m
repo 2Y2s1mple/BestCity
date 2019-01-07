@@ -284,12 +284,18 @@
     CGFloat itemX = frame.origin.x;
     CGFloat width = self.scrollView.frame.size.width;
     CGSize contentSize = self.scrollView.contentSize;
-    if (itemX > width/2) {
+    
+    WMMenuItem *item = [self viewWithTag:WMMENUITEM_TAG_OFFSET + 1];
+    
+    
+    CGFloat position = item.frame.origin.x + item.frame.size.width;
+    
+    if (itemX > position) {
         CGFloat targetX;
-        if ((contentSize.width-itemX) <= width/2) {
+        if ((contentSize.width - itemX) <= width/2) {
             targetX = contentSize.width - width;
         } else {
-            targetX = frame.origin.x - width/2 + frame.size.width/2;
+            targetX = frame.origin.x - item.frame.origin.x;
         }
         // 应该有更好的解决方法
         if (targetX + width > contentSize.width) {

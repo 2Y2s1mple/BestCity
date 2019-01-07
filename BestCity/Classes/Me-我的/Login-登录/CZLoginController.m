@@ -62,26 +62,32 @@ static id instancet_;
     param[@"mobile"] = self.userTextField.text;
     param[@"code"] = self.passwordTextField.text;
   
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/Messagelogin"];
-    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyJSON header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"])
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/mobileLogin"];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)])
         {
             [CZProgressHUD showProgressHUDWithText:@"登录成功"];
             // 是否登录
             self.isLogin = YES;
             [CZProgressHUD hideAfterDelay:2];
-            NSDictionary *userDic = [result[@"user"] deleteAllNullValue];
-            // 存储user, 都TM存储上了
-            [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:@"user"];
-            // 储存图片
-            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"userNickImg"] forKey:@"userNickImg"];
-            // 积分
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"points"] forKey:@"point"];
-                
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"UserAccountEntity"] forKey:@"Account"];
-            // 支付宝账号
-            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayAccount"] forKey:@"alipayPhone"];
-            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayName"] forKey:@"alipayRealName"];
+            // 用户数据
+            NSDictionary *userDic = [result[@"data"] deleteAllNullValue];
+            
+            // 存储token 
+            [CZSaveTool setObject:userDic[@"token"] forKey:@"token"];
+
+            // 存储用户信息, 都TM存储上了
+            [CZSaveTool setObject:userDic forKey:@"user"];
+            
+//            // 储存图片
+//            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"userNickImg"] forKey:@"userNickImg"];
+//            // 积分
+//            [[NSUserDefaults standardUserDefaults] setObject:result[@"points"] forKey:@"point"];
+//                
+//            [[NSUserDefaults standardUserDefaults] setObject:result[@"UserAccountEntity"] forKey:@"Account"];
+//            // 支付宝账号
+//            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayAccount"] forKey:@"alipayPhone"];
+//            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayName"] forKey:@"alipayRealName"];
             
             // 删除账号密码
             self.userTextField.text = nil;
@@ -106,9 +112,11 @@ static id instancet_;
     // 发送验证码
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"mobile"] = self.userTextField.text;
+    param[@"type"] = @(1); // 1代表登录验证码
     
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/pushMessage"];
-    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyJSON header:nil response:GXResponseStyleJSON success:^(id result) {
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/sendMessage"];
+    
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"验证码发送成功"];
         } else {

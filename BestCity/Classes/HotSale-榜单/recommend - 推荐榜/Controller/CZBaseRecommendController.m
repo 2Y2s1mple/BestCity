@@ -75,7 +75,7 @@
     } else {
         CZRecommendListModel *model = self.dataSource[indexPath.row];
         CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
-        vc.model = model;
+        vc.goodsId = model.goodsId;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -83,9 +83,9 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 500;
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 500;
+//}
 
 @end

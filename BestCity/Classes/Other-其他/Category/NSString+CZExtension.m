@@ -37,6 +37,14 @@
     return attrStr;
 }
 
+// 添加各种属性
+- (NSMutableAttributedString *)addAttribute:(NSDictionary *)attributs Range:(NSRange)range
+{
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:self];
+    [attrStr addAttributes:attributs range:range];
+    return attrStr;
+}
+
 // 设置文字间距
 - (NSString *)setupTextRowSpace
 {

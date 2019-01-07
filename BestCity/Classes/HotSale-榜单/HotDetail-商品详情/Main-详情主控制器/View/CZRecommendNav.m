@@ -35,6 +35,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? -44 : -20), SCR_WIDTH, (IsiPhoneX ? 44 : 20))];
+        [self addSubview:topView];
+        topView.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor whiteColor];
         [self setupNavigateView];
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 1, SCR_WIDTH, 1)];
         line.backgroundColor = CZGlobalLightGray;

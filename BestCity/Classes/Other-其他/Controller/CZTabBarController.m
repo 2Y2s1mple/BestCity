@@ -70,14 +70,15 @@
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;
         hotVc.menuViewStyle = WMMenuViewStyleLine;
-        hotVc.progressWidth = 30;
+//        hotVc.progressWidth = 30;
+        hotVc.itemMargin = 10;
         hotVc.progressHeight = 3;
         hotVc.automaticallyCalculatesItemWidths = YES;
         hotVc.titleFontName = @"PingFangSC-Medium";
         hotVc.titleColorNormal = CZGlobalGray;
         hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
-        hotVc.titleSizeNormal = 14.0f;
-        hotVc.titleSizeSelected = 14;
+        hotVc.titleSizeNormal = 15.0f;
+        hotVc.titleSizeSelected = 16;
         hotVc.progressColor = [UIColor redColor];
     }
     vc.tabBarItem.title = title;

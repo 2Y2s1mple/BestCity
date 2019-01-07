@@ -24,11 +24,12 @@
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager  manager];
     //(2)请求头的设置
-    if (headers) {
-        for (NSString *key in headers.allKeys) {
-            [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
+
+    headers = @{@"token" : JPTOKEN};
+    for (NSString *key in headers.allKeys) {
+        [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
+    
     //(3)设置返回数据的类型
     switch (response) {
         case GXResponseStyleJSON:
@@ -51,8 +52,8 @@
     
     //(6)发送请求
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
-//    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1";
     param[@"userId"] = USERINFO[@"userId"];
+    param[@"client"] = @(2);
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *result = responseObject;
         success([result deleteAllNullValue]);
@@ -118,11 +119,13 @@
     }
     
     //(2)请求头的设置
-    if (headers) {
-        for (NSString *key in headers.allKeys) {
-            [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
+    headers = @{@"token" : JPTOKEN};
+    for (NSString *key in headers.allKeys) {
+        [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
+    
+    
+    
     
     
     //(3)设置返回数据的类型
@@ -151,7 +154,7 @@
     
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
     //    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1";
-    param[@"userId"] = USERINFO[@"userId"];
+    param[@"userId"] = JPUSERINFO[@"userId"];
     
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
        

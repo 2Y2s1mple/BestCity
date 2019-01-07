@@ -16,21 +16,21 @@ NS_ASSUME_NONNULL_BEGIN
 /** 文章ID */
 @property (nonatomic, strong) NSString *articId;
 /** 名字 */
-@property (nonatomic, strong) NSDictionary *userShopmember;
+@property (nonatomic, strong) NSString *userNickname;
+/** 头像 */
+@property (nonatomic, strong) NSString *userAvatar;
 /** 内容 */
 @property (nonatomic, strong) NSString *content;
 /** 时间 */
-@property (nonatomic, strong) NSString *createTime;
-/** 处理后的时间 */
-@property (nonatomic, strong) NSString *showTime;
+@property (nonatomic, strong) NSString *createTimeStr;
 /** 当前点赞的数 */
-@property (nonatomic, strong) NSString *snapNum;
+@property (nonatomic, strong) NSString *voteCount;
 /** 当前用户点赞数 */
-@property (nonatomic, strong) NSNumber *userSnap;
+@property (nonatomic, strong) NSNumber *vote;
 /** 子评论的个数 */
-@property (nonatomic, assign) NSString *secondNum;
+@property (nonatomic, assign) NSString *childCount;
 /** 子评论 */
-@property (nonatomic, strong) NSArray *userCommentList;
+@property (nonatomic, strong) NSArray *children;
 
 
 //辅助

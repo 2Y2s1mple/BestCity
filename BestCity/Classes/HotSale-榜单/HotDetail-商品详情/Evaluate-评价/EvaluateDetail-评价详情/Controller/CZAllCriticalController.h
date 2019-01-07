@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZRecommendDetailModel.h"
 @class CZEvaluateModel;
 @interface CZAllCriticalController : UIViewController
 /** 评论数据 */

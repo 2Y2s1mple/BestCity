@@ -14,7 +14,7 @@
 #import "MJExtension.h"
 #import "MJRefresh.h"
 
-@interface CZOneController ()
+@interface CZOneController ()<UIScrollViewDelegate>
 
 @end
 
@@ -24,11 +24,11 @@
 {
     [CZProgressHUD showProgressHUDWithText:nil];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"mark"] = @(2);
+    param[@"client"] = @(2);
     //获取数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodsRankList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getTopGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
+            self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
         
@@ -44,8 +44,6 @@
     }];
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -57,8 +55,9 @@
                  };
     }];
     
-    self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94));
+    self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94) + 50);
     self.tableView.tableHeaderView = [self setupHeaderView];
+    
     // 创建刷新控件
     [self setupRefresh];
     
@@ -114,7 +113,7 @@
 
 - (UIView *)setupHeaderView
 {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 180)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 170)];
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:[UIImage imageNamed:@"banner"]];
     imageView.frame = CGRectMake(10, 10, SCR_WIDTH - 20, backView.height - 10);
@@ -123,6 +122,12 @@
     return backView;
 }
 
+#pragma mark - <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSString *OneControllerScrollViewDidScroll = @"CZOneControllerScrollViewDidScroll";
+    [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
+}
 
 
 @end

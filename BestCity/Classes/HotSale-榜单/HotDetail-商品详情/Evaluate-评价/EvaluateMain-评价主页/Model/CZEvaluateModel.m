@@ -11,7 +11,7 @@
 @implementation CZEvaluateModel
 - (NSInteger)realCommentArrCount
 {
-    return self.userCommentList.count;
+    return self.children.count;
 }
 
 - (NSInteger)contrlCommentArrCount

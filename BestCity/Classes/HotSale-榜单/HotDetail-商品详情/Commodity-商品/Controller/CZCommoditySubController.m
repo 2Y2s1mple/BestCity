@@ -10,7 +10,6 @@
 
 #import "CZCommodityView.h"
 #import "CZPointView.h"
-#import "CZRecommendDetailModel.h"
 #import "CZRecommendListModel.h"
 #import "PlanADScrollView.h"
 
@@ -37,19 +36,20 @@
     [self.view addSubview:self.scrollerView];
 }
 
-- (void)setModel:(CZRecommendDetailModel *)model
+- (void)setCouponData:(CZCouponsModel *)couponData
 {
-    _model = model;
-    [self setupView];
+    _couponData = couponData;
+     [self setupView];
 }
+
 
 - (void)setupView
 {
     // 创建轮播图
-    if (self.model.imgList.count > 0) {
+    if ([self.detailData.imgList count] > 0) {
         NSMutableArray *imagePaths = [NSMutableArray array];
-        for (NSDictionary *dic in self.model.imgList) {
-            [imagePaths addObject:dic[@"imgPath"]];
+        for (NSString *imgPath in self.detailData.imgList) {
+            [imagePaths addObject:imgPath];
         }
         if (imagePaths.count == 1) {
             //初始化控件
@@ -72,30 +72,18 @@
     // 创建标题附标题
     CZCommodityView *commodity = [[CZCommodityView alloc] init];
     commodity.frame = CGRectMake(0, 410, SCR_WIDTH, commodity.commodityH);
-    commodity.model = self.model;
+    commodity.couponModel = self.couponData;
+    commodity.model = self.detailData;
+    
     [self.scrollerView addSubview:commodity];
-    CGFloat originY = 410 + commodity.commodityH;
-    
-    NSMutableArray *qualityList = [NSMutableArray array];
-    for (CZRecommendDetailPointModel *model in self.model.qualityList) {
-        [qualityList addObject:model.name];
-    }
-    CGFloat Height = [CZPointView pointViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"正品保证" titleImage:@"quality" pointTitles:qualityList superView:self.scrollerView];
-    originY += Height + 10;
-    
-    NSMutableArray *serviceList = [NSMutableArray array];
-    for (NSDictionary *dic in self.model.serviceList) {
-        [serviceList addObject:dic[@"name"]];
-    }
-    CGFloat Height1 = [CZPointView pointViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"售后服务" titleImage:@"service" pointTitles:serviceList superView:self.scrollerView];
-    originY += Height1 + 10;
-    
+    CGFloat originY = 420 + commodity.commodityH;
+ 
     NSMutableArray *parametersList1 = [NSMutableArray array];
-    for (NSDictionary *dic in self.model.parametersList) {
+    for (NSDictionary *dic in self.commodityDetailData.parametersList) {
         [parametersList1 addObject:dic[@"name"]];
     }
     NSMutableArray *parametersList2 = [NSMutableArray array];
-    for (NSDictionary *dic in self.model.parametersList) {
+    for (NSDictionary *dic in self.commodityDetailData.parametersList) {
         [parametersList2 addObject:dic[@"value"]];
     }
     CGFloat Height2 = [CZPointView pointFormViewWithFrame:CGRectMake(0, originY, SCR_WIDTH, 0) tilte:@"产品参数" titleImage:@"parameter" formTitles:parametersList1 subformTitles:parametersList2 superView:self.scrollerView];
@@ -111,5 +99,7 @@
     self.scrollerView.height = originY;
     self.view.height = self.scrollerView.height;
 }
+
+
 
 @end

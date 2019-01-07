@@ -180,7 +180,7 @@
         {
             CZRecommendListModel *model = [CZRecommendListModel objectWithKeyValues:dic[@"goodsRanklist"]];
             CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
-            vc.model = model;
+            vc.goodsId = model.goodsId;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

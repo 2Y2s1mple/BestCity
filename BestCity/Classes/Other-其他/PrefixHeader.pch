@@ -12,12 +12,23 @@
 /**
  * 测试环境
  */
-//#define SERVER_URL @"https://api.jipincheng.cn"
-#define SERVER_URL @"http://192.168.1.48:8081"
+#define SERVER_URL @"https://api.jipincheng.cn"
+//#define SERVER_URL @"http://192.168.1.48:8081"
+
+
+/**
+ * 极品城测试URL
+ */
+#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/"
 
 
 /** 用户信息 */
-#define USERINFO [[NSUserDefaults standardUserDefaults] objectForKey:@"user"]
+#define JPUSERINFO [CZSaveTool objectForKey:@"user"]
+#define USERINFO [CZSaveTool objectForKey:@"user"]
+/** Token */
+#define JPTOKEN [CZSaveTool objectForKey:@"token"]
+
+
 /** 积分规则web */
 #define POINTSRULE_URL @"http://www.jipincheng.cn/integral-rule.html"
 /** 用户规则web */

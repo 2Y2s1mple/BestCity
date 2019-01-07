@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZHotTitleModel : NSObject
 /** 标题 */
-@property (nonatomic, strong) CZHotSubTilteModel *tilte;
+@property (nonatomic, strong) NSString *categoryName;
 /** 副标题 */
-@property (nonatomic, strong) NSArray *subtilte;
+@property (nonatomic, strong) NSArray *children;
 @end
 
 NS_ASSUME_NONNULL_END
