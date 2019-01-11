@@ -8,7 +8,6 @@
 
 #import "CZHotSaleCell.h"
 #import "NSString+CZExtension.h"
-#import "CZHotScoreModel.h"
 #import "UIImageView+WebCache.h"
 
 @interface CZHotSaleCell ()
@@ -28,8 +27,6 @@
 @property (nonatomic, weak) IBOutlet UIButton *tag4;
 /** 当前价格 */
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
-/** 省多钱 */
-@property (nonatomic, weak) IBOutlet UILabel *cutPriceLabel;
 /** 其他平台价格*/
 @property (weak, nonatomic) IBOutlet UILabel *tmPrice;
 /** 访问量 */
@@ -95,7 +92,6 @@
     
     NSString *actualPrice = [NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]];
     self.actualPriceLabel.text = actualPrice;
-    self.cutPriceLabel.text = [NSString stringWithFormat:@"省%@", model.cutPrice];
     
     NSString *status;
     switch ([model.source integerValue]) {

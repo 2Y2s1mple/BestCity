@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *categoryId;
 /** 标题名 */
 @property (nonatomic, strong) NSString *categoryName;
+/** 图片 */
+@property (nonatomic, strong) NSArray *adList;
 @end
 
 NS_ASSUME_NONNULL_END

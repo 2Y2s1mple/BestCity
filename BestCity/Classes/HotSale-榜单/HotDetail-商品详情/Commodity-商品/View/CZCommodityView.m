@@ -22,6 +22,10 @@
 @property (nonatomic, weak) IBOutlet UILabel *recommendReasonLabel;
 /** 下边线 */
 @property (nonatomic, weak) IBOutlet UIView *lineView;
+/** 功能评分图片 */
+@property (nonatomic, weak) IBOutlet UIImageView *scoreImage;
+/** 功能评分文字 */
+@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 
 /** 评分view */
 @property (weak, nonatomic) IBOutlet UIView *pointView;
@@ -59,6 +63,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *score5;
 /** 评分中第5个的View */
 @property (nonatomic, weak) IBOutlet UIView *scoreFiveView;
+
+/** 评分功能 */
+@property (nonatomic, weak) IBOutlet UILabel *cscoreLabel;
 @end
 
 @implementation CZCommodityView
@@ -68,6 +75,7 @@
     [super awakeFromNib];
     self.actualPriceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
     self.titleName.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    self.cscoreLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
 }
 
 - (instancetype)init
@@ -131,7 +139,13 @@
             [self layoutIfNeeded];//写在这里是有问题的, 不换行还好
             self.commodityH = CGRectGetMaxY(self.pointView.frame) - 30;
         }
-    } 
+    } else {
+        self.pointView.hidden = YES;
+        self.scoreImage.hidden = YES;
+        self.scoreLabel.hidden = YES;
+        [self layoutIfNeeded];//写在这里是有问题的, 不换行还好
+        self.commodityH = CGRectGetMaxY(self.lineView.frame);
+    }
 }
 
 - (NSString *)platfromNameWithNumber:(NSNumber *)platformNumber

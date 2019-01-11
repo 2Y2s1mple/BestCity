@@ -16,6 +16,7 @@
 #import "CZRecommendDetailController.h" // 榜单的详情
 #import "CZEvaluationChoicenessDetailController.h" // 测评详情
 #import "CZDChoiceDetailController.h" // 发现详情
+#import "CZRecommendListModel.h"
 
 
 @interface CZCollectOneController ()<UITableViewDelegate, UITableViewDataSource>

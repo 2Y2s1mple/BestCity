@@ -15,5 +15,5 @@
 /** 数据模型 */
 @property (nonatomic, strong) CZDiscoverDetailModel *model;
 /** 关注界面用到 */
-@property (nonatomic, strong) CZAttentionDetailModel *attentionModel;
+//@property (nonatomic, strong) CZAttentionDetailModel *attentionModel;
 @end

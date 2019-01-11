@@ -11,7 +11,8 @@
 #import "CZCommodityView.h"
 #import "CZPointView.h"
 #import "CZRecommendListModel.h"
-#import "PlanADScrollView.h"
+//#import "PlanADScrollView.h"
+#import "CZScollerImageTool.h"
 
 
 @interface CZCommoditySubController ()
@@ -46,28 +47,9 @@
 - (void)setupView
 {
     // 创建轮播图
-    if ([self.detailData.imgList count] > 0) {
-        NSMutableArray *imagePaths = [NSMutableArray array];
-        for (NSString *imgPath in self.detailData.imgList) {
-            [imagePaths addObject:imgPath];
-        }
-        if (imagePaths.count == 1) {
-            //初始化控件
-            UIImageView *imageView = [[UIImageView alloc] init];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[imagePaths firstObject]] placeholderImage:IMAGE_NAMED(@"headDefault")];
-            imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 410);
-            [self.view addSubview:imageView];
-        } else {
-            //初始化控件
-            PlanADScrollView *ad =[[PlanADScrollView alloc]initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 410)imageUrls:imagePaths placeholderimage:IMAGE_NAMED(@"headDefault")];
-            [self.view addSubview:ad];
-        }
-    } else {
-        //初始化控件
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headDefault"]];
-        imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 410);
-        [self.view addSubview:imageView];
-    }
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 410)];
+    [self.view addSubview:imageView];
+    imageView.imgList = self.detailData.imgList;
 
     // 创建标题附标题
     CZCommodityView *commodity = [[CZCommodityView alloc] init];

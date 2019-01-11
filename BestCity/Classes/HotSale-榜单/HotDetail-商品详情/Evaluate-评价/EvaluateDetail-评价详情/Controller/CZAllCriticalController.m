@@ -118,8 +118,8 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if (self.goodsId) {
-        param[@"articId"] = self.goodsId;
-        param[@"status"] = @"1"; // 1商品 2评测 3发现
+        param[@"targetId"] = self.goodsId;
+        param[@"type"] = @"1"; // 1商品 2评测 3发现
     }
     param[@"content"] = self.textViewTool.textView.text;
     if (parentId) {
@@ -127,14 +127,15 @@
     } else {
         param[@"parentId"] = @(0); // 回复文章
     }
+    param[@"toUserId"] = @(0);
     //获取详情数据
-    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/commentInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"添加成功"]) {
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
             if (![param[@"parentId"]  isEqual: @(0)]) {
                 // 获取子评论
-                NSMutableArray *subComment = self.originalData[self.currentCellIndex][@"userCommentList"];
+                NSMutableArray *subComment = self.originalData[self.currentCellIndex][@"children"];
                 NSMutableDictionary *comment = [NSMutableDictionary dictionaryWithObject:self.textViewTool.textView.text forKey:@"content"];
-                comment[@"userShopmember"] = [NSMutableDictionary dictionaryWithObject:USERINFO[@"userNickName"] forKey:@"userNickName"];
+                comment[@"userNickName"] = USERINFO[@"userNickName"]; 
                 [subComment addObject:comment];
                 // 处理数据
                 self.evaluateArr = [self processingDataArray:self.originalData];
@@ -158,14 +159,15 @@
 - (void)getDataSource
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"articId"] = self.goodsId;
-    param[@"page"] = @(0);
+    param[@"targetId"] = self.goodsId;
+    param[@"type"] = @(1);
+    param[@"page"] = @(1);
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/comment"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
          if ([result[@"msg"] isEqualToString:@"success"]) {
              // 子数组转化为可变数组
              NSError *error = nil;
-             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"list"] options:NSJSONWritingPrettyPrinted error:&error];
+             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"data"] options:NSJSONWritingPrettyPrinted error:&error];
              self.originalData = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
              // 处理数据
              self.evaluateArr = [self processingDataArray:self.originalData];
@@ -177,6 +179,37 @@
     failure:^(NSError *error) {}];
 }
 
+#pragma mark - 更多数据
+- (void)loadMoredata
+{
+    self.page++;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"targetId"] = self.goodsId;
+    param[@"type"] = @(1);
+    param[@"page"] = @(self.page);
+    
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            // 子数组转化为可变数组
+            NSError *error = nil;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"data"] options:NSJSONWritingPrettyPrinted error:&error];
+            
+            NSMutableArray *mutArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+            [self.originalData addObjectsFromArray:mutArr];
+            
+            // 添加到数组
+            [self.evaluateArr addObjectsFromArray:[self processingDataArray:mutArr]];
+            // 刷新
+            [self.tableView reloadData];
+            [self.tableView.mj_footer endRefreshing];
+        }
+        
+    } failure:^(NSError *error) {
+        [self.tableView.mj_footer endRefreshing];
+    }];
+}
+
+
 #pragma mark - 处理数据
 - (NSMutableArray *)processingDataArray:(NSMutableArray *)mutArr
 {
@@ -187,13 +220,13 @@
         // 添加标识type, 1代表cell为主评论
         // 添加到新数组中
         NSMutableDictionary *itemDic = mutArr[i];
-        itemDic[@"type"] = @"1";
+        itemDic[@"jpType"] = @"1";
         itemDic[@"index"] = @(i);
         [newContentArr addObject:itemDic];
         
         
         // 将item的子评论添加到新数组变为同一级数组
-        NSMutableArray *itemDicCommentArr = itemDic[@"userCommentList"];
+        NSMutableArray *itemDicCommentArr = itemDic[@"children"];
         if (itemDicCommentArr.count > 0) {
             // ? 怎么添加
             itemDicCommentArr = [self processingCommentData:itemDicCommentArr];
@@ -235,7 +268,7 @@
 {
     // 在评论数组里面添加一个, 为了收起按钮
     NSMutableDictionary *packupDic = [NSMutableDictionary dictionary];
-    packupDic[@"type"] = @"2"; // cell类型
+    packupDic[@"jpType"] = @"2"; // cell类型
     packupDic[@"commentArr"] = commentArr; // 评论的数组
     packupDic[@"showCount"] = @(2); // 默认外面显示两条
     packupDic[@"packUpStatus"] = @"0"; // 默认收起状态
@@ -244,6 +277,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.page = 1;
     // 获取数据
     [self getDataSource];
     // 导航条
@@ -276,35 +310,6 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoredata)];
 }
 
-#pragma mark - 更多数据
-- (void)loadMoredata
-{
-    self.page++;
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"articId"] = self.goodsId;
-    param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/comment"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            // 子数组转化为可变数组
-            NSError *error = nil;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"list"] options:NSJSONWritingPrettyPrinted error:&error];
-            
-            NSMutableArray *mutArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-            [self.originalData addObjectsFromArray:mutArr];
-            
-            // 添加到数组
-            [self.evaluateArr addObjectsFromArray:[self processingDataArray:mutArr]];
-            // 刷新
-            [self.tableView reloadData];
-            [self.tableView.mj_footer endRefreshing];
-        }
-        
-    } failure:^(NSError *error) {
-        [self.tableView.mj_footer endRefreshing];
-    }];
-}
-
-
 - (void)popAction
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -319,7 +324,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dataDic = self.evaluateArr[indexPath.row];
-    if ([dataDic[@"type"] isEqualToString:@"1"]) { // 评论上部分
+    if ([dataDic[@"jpType"] isEqualToString:@"1"]) { // 评论上部分
         CZCommentDetailCell *cell = [CZCommentDetailCell cellWithTableView:tableView];
         cell.block = ^(NSString *commentId, NSString *commentName, NSInteger subCount, NSInteger index){
             
@@ -336,7 +341,7 @@
         
         self.cellHeightDic[@(indexPath.row)] = [NSString stringWithFormat:@"%f", cell.cellHeight];
         return cell;
-    } else if ([dataDic[@"type"] isEqualToString:@"2"]) { //评论的内容
+    } else if ([dataDic[@"jpType"] isEqualToString:@"2"]) { //评论的内容
         CZPackUpCommentCell *cell = [CZPackUpCommentCell cellWithTableView:tableView];
         cell.contentDic = self.evaluateArr[indexPath.row];
         self.cellHeightDic[@(indexPath.row)] = [NSString stringWithFormat:@"%f", cell.cellHeight];
@@ -358,7 +363,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableDictionary *dataDic = self.evaluateArr[indexPath.row];
-    if ([dataDic[@"type"]  isEqual: @"2"]) {
+    if ([dataDic[@"jpType"]  isEqual: @"2"]) {
         NSMutableArray *insetArr = dataDic[@"commentArr"];
         if ([dataDic[@"packUpStatus"]  isEqual: @"2"]) { // 收起
             NSInteger index = [dataDic[@"commentArr"] count] - 2;

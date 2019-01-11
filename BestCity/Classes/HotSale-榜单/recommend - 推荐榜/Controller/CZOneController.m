@@ -49,18 +49,12 @@
     
     //line
     CZTOPLINE;
-    [CZRecommendListModel setupObjectClassInArray:^NSDictionary *{
-        return @{
-                 @"goodsScopeList" : @"CZHotScoreModel"
-                 };
-    }];
     
     self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94) + 50);
     self.tableView.tableHeaderView = [self setupHeaderView];
     
     // 创建刷新控件
     [self setupRefresh];
-    
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @(0);
@@ -79,8 +73,6 @@
             [self isNeedUpdate];
         }
     } failure:^(NSError *error) {}];
-    
-    
 }
 
 - (void)isNeedUpdate

@@ -11,12 +11,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZTestDetailModel : NSObject
+/** 标题 */
+@property (nonatomic, strong) NSString *title;
 /** 用户信息 */
 @property (nonatomic, strong) NSDictionary *user;
 /** 创建时间 */
 @property (nonatomic, strong) NSString *createTime;
 /** 内容HTML */
 @property (nonatomic, strong) NSString *content;
+/** 当前的ID */
+@property (nonatomic, strong) NSString *articleId;
 @end
 
 NS_ASSUME_NONNULL_END

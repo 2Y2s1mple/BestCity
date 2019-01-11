@@ -11,4 +11,6 @@
 @interface CZDChoicenessController : UIViewController
 /**  标题的ID */
 @property (nonatomic, strong) NSString *titleID;
+/** 大图片URL */
+@property (nonatomic, strong) NSArray *imageUrlList;
 @end

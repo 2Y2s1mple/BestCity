@@ -48,19 +48,19 @@
     _contentDic = contentDic;
     
    
-    if (contentDic[@"userShopmember"] != [NSNull null]) {
+    if (contentDic[@"userNickname"] != [NSNull null]) {
         // 头像
-        [self.iconImage sd_setImageWithURL:[NSURL URLWithString:contentDic[@"userShopmember"][@"userNickImg"] != [NSNull null] ? contentDic[@"userShopmember"][@"userNickImg"] : @""] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+        [self.iconImage sd_setImageWithURL:[NSURL URLWithString:contentDic[@"userAvatar"] != [NSNull null] ? contentDic[@"userAvatar"] : @""] placeholderImage:[UIImage imageNamed:@"headDefault"]];
          // 名字
-        self.nameLabel.text = contentDic[@"userShopmember"][@"userNickName"];
+        self.nameLabel.text = contentDic[@"userNickname"];
     } else {
         self.iconImage.image = [UIImage imageNamed:@"headDefault"];
         self.nameLabel.text = @"游客";
     }
     
     // 点赞
-    [self.likeButton setTitle:[NSString stringWithFormat:@"%@", contentDic[@"snapNum"]] forState:UIControlStateNormal];
-    self.likeButton.selected = [[NSString stringWithFormat:@"%@", contentDic[@"userSnap"]] integerValue];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%@", contentDic[@"voteCount"]] forState:UIControlStateNormal];
+    self.likeButton.selected = [[NSString stringWithFormat:@"%@", contentDic[@"vote"]] integerValue];
     
     // 评论内容
     self.contentLabel.text = contentDic[@"content"];
@@ -68,10 +68,10 @@
     [self layoutIfNeeded];
     
     // 时间
-    NSString *createTime = contentDic[@"createTime"];
-    NSString *showTime = contentDic[@"showTime"];
-    NSString *time = (![showTime  isEqual: @""] && showTime != [NSNull null]) ? showTime : [createTime substringToIndex:10];
-    self.timeLabel.text = time;
+//    NSString *createTime = contentDic[@"createTime"];
+//    NSString *showTime = contentDic[@"showTime"];
+//    NSString *time = (![showTime  isEqual: @""] && showTime != [NSNull null]) ? showTime : [createTime substringToIndex:10];
+    self.timeLabel.text = contentDic[@"createTimeStr"];
     
     
     // cell高度
@@ -81,12 +81,12 @@
 - (IBAction)replyButton:(id)sender
 {
     NSString *userName;
-    if (self.contentDic[@"userShopmember"] != [NSNull null]) {
-        userName = self.contentDic[@"userShopmember"][@"userNickName"];
+    if (self.contentDic[@"userNickname"] != [NSNull null]) {
+        userName = self.contentDic[@"userNickname"];
     } else {
         userName = @"游客";
     }
-    self.block(self.contentDic[@"commentId"], userName, [self.contentDic[@"userCommentList"] count], [self.contentDic[@"index"] integerValue]);
+    self.block(self.contentDic[@"commentId"], userName, [self.contentDic[@"children"] count], [self.contentDic[@"index"] integerValue]);
 }
 
 
@@ -95,12 +95,12 @@
         sender.selected = NO;
         [self snapDelete:self.contentDic[@"commentId"]];
         [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)] forState:UIControlStateNormal];
-        self.contentDic[@"snapNum"] = @([sender.titleLabel.text integerValue]);
+        self.contentDic[@"voteCount"] = @([sender.titleLabel.text integerValue]);
     } else {
         sender.selected = YES;
         [self snapInsert:self.contentDic[@"commentId"]];
         [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)] forState:UIControlStateNormal];
-        self.contentDic[@"snapNum"] = @([sender.titleLabel.text integerValue]);
+        self.contentDic[@"voteCount"] = @([sender.titleLabel.text integerValue]);
     }
 }
 
@@ -108,13 +108,14 @@
 - (void)snapDelete:(NSString *)commentId
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"commentId"] = commentId;
+    param[@"targetId"] = commentId;
+    param[@"type"] = @(5);
     
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已删除"]) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/delete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
             [CZProgressHUD showProgressHUDWithText:@"取消成功"];
-            self.contentDic[@"userSnap"] = @(0);
+            self.contentDic[@"vote"] = @(0);
         } else {
             [CZProgressHUD showProgressHUDWithText:@"取消失败"];
         }
@@ -128,13 +129,14 @@
 - (void)snapInsert:(NSString *)commentId
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"commentId"] = commentId;
+    param[@"targetId"] = commentId;
+    param[@"type"] = @(5);
     
     //获取详情数据
-    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"添加成功"]) {
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
             [CZProgressHUD showProgressHUDWithText:@"点赞成功"];
-            self.contentDic[@"userSnap"] = @(1);
+            self.contentDic[@"vote"] = @(1);
         } else {
             [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
         }

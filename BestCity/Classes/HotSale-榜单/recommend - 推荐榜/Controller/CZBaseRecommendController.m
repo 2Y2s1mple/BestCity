@@ -78,9 +78,6 @@
         vc.goodsId = model.goodsId;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
-
-    
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath

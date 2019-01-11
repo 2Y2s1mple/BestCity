@@ -25,7 +25,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager  manager];
     //(2)请求头的设置
 
-    headers = @{@"token" : JPTOKEN};
+    headers = @{@"token" : JPTOKEN ? JPTOKEN : @""};
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -119,7 +119,7 @@
     }
     
     //(2)请求头的设置
-    headers = @{@"token" : JPTOKEN};
+    headers = @{@"token" : JPTOKEN ? JPTOKEN : @""};
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }

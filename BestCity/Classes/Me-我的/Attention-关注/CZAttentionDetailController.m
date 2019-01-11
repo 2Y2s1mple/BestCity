@@ -251,7 +251,7 @@
         return cell;
     } else { // 发现
         CZChoicenessCell *cell = [CZChoicenessCell cellwithTableView:tableView];
-        cell.attentionModel = model;
+//        cell.attentionModel = model;
         return cell;
     }
 }

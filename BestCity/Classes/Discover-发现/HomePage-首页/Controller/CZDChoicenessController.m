@@ -15,6 +15,8 @@
 #import "UIImageView+WebCache.h"
 #import "CZDiscoverDetailModel.h"
 #import "MJRefresh.h"
+#import "CZScollerImageTool.h"
+
 
 @interface CZDChoicenessController ()<UITableViewDelegate, UITableViewDataSource>
 /** tabelview */
@@ -49,17 +51,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.page = 1;
     self.view.backgroundColor = CZGlobalWhiteBg;
     //line
     CZTOPLINE;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49)) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, 0) style:UITableViewStylePlain];
+    self.tableView.height = SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)) + 50;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = [self setupHeaderView];
     
     //创建刷新控件
     [self setupRefresh];
+    
 }
 
 - (void)setupRefresh
@@ -70,26 +76,36 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDiscover)];
 }
 
+- (UIView *)setupHeaderView
+{
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 170)];
+    // 创建轮播图
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, backView.height)];
+    [backView addSubview:imageView];
+    imageView.imgList = self.imageUrlList;
+    return backView;
+}
+
 #pragma mark - 加载第一页
 - (void)reloadNewDiscover
 {
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
-    self.page = 0;
+    self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"categoryId"] = self.titleID;
     param[@"page"] = @(self.page);
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/findGoods/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/found/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            if ([result[@"list"] count] > 0) {
+            if ([result[@"data"] count] > 0) {
                 // 没有数据图片
                 [self.noDataView removeFromSuperview];
             } else {
                 // 没有数据图片
                 [self.tableView addSubview:self.noDataView];
             }
-            self.dataSource = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"list"]];
+            self.dataSource = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
         // 结束刷新
@@ -113,9 +129,9 @@
     param[@"categoryId"] = self.titleID;
     param[@"page"] = @(self.page);
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/findGoods/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]&& [result[@"list"] count] != 0) {
-            NSArray *newArr = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"list"]];
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/found/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
+            NSArray *newArr = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.dataSource addObjectsFromArray:newArr];
             [self.tableView reloadData];
             // 结束刷新
@@ -149,7 +165,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 400;
+    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
+    return model.cellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,11 +179,17 @@
     } else {
         CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        vc.findgoodsId = model.findgoodsId;
+        vc.findgoodsId = model.articleId;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
+#pragma mark - <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSString *OneControllerScrollViewDidScroll = @"CZOneControllerScrollViewDidScroll";
+    [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
+}
 
 
 

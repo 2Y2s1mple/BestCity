@@ -10,17 +10,19 @@
 
 
 @interface CZDiscoverDetailModel : NSObject
-/** ID */
-@property (nonatomic, strong) NSString *findgoodsId;
-/** 大图片 */
-@property (nonatomic, strong) NSString *imgId;
 /** 主标题 */
 @property (nonatomic, strong) NSString *title;
-/** 附标题 */
-@property (nonatomic, strong) NSString *smallTitle;
-/** 时间 */
-@property (nonatomic, strong) NSString *publishTime;
+/** ID */
+@property (nonatomic, strong) NSString *articleId;
+/** 大图片 */
+@property (nonatomic, strong) NSString *img;
+/** 文章用户信息 */
+@property (nonatomic, strong) NSDictionary *user;
 /** 访问量 */
-@property (nonatomic, strong) NSString *visitCount;
+@property (nonatomic, strong) NSString *pv;
+
+/** 辅助 */
+/** cell的高度 */
+@property (nonatomic, assign) CGFloat cellHeight;
 @end
 

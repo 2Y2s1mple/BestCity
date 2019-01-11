@@ -13,3 +13,5 @@ UIKIT_EXTERN NSString * const systemMessageDetailControllerMessageRead;
 UIKIT_EXTERN NSString * const attentionCellNotifKey;
 UIKIT_EXTERN NSString * const requiredVersionCode;
 UIKIT_EXTERN BOOL appVersion;
+/** 收藏通知的KEY */
+UIKIT_EXTERN NSString * const collectNotification;

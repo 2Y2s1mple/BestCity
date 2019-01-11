@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZRecommendListModel.h"
 
 @interface CZRecommendDetailController : UIViewController
 /** 商品ID */
-/** 列表传过来的数据模型 */
-//@property (nonatomic, strong) CZRecommendListModel *model;
 @property (nonatomic, strong) NSString *goodsId;
 @end
 

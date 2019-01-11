@@ -21,7 +21,7 @@
 
 @interface CZHotSaleController ()
 /** 主标题数组 */
-@property (nonatomic, strong) NSArray *mainTitles;
+@property (nonatomic, strong) NSArray<CZHotTitleModel *> *mainTitles;
 /** 搜索框 */
 @property (nonatomic, strong) CZHotSearchView *search;
 /** 当前的偏移量 */
@@ -39,7 +39,7 @@
 {
     [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
         return @{
-                 @"subtilte" : @"CZHotSubTilteModel"
+                 @"children" : @"CZHotSubTilteModel"
                  };
     }];
     //获取数据
@@ -211,12 +211,22 @@
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-//    switch (index) {
-//        case 0: {
-//            CZOneController *vc = [[CZOneController alloc] init];
-//             self.recordOffsetY = vc.tableView.contentOffset.y;
-//            return vc;
-//        }
+    switch (index) {
+        case 0: {
+            CZOneController *vc = [[CZOneController alloc] init];
+            vc.imageUrl = [[self.mainTitles[index].adList firstObject] objectForKey:@"img"];
+             self.recordOffsetY = vc.tableView.contentOffset.y;
+            return vc;
+        }
+        default: {
+            CZTwoController *vc = [[CZTwoController alloc] init];
+            vc.imageUrl = [[self.mainTitles[index].adList firstObject] objectForKey:@"img"];
+            vc.subTitles = self.mainTitles[index].children;
+            self.recordOffsetY = vc.tableView.contentOffset.y;
+            return vc;
+        }
+           
+    }
 //        case 1: {
 //            CZTwoController *vc = [[CZTwoController alloc] init];
 //            vc.subTitles = [self.mainTitles[index] children];
@@ -242,11 +252,7 @@
 //            return vc;
 //        }
 //    }
-    
-    CZOneController *vc = [[CZOneController alloc] init];
-//    vc.subTitles = [self.mainTitles[index] children];
-    self.recordOffsetY = vc.tableView.contentOffset.y;
-    return vc;
+
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {

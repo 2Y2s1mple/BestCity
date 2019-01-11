@@ -75,10 +75,10 @@
     
     //图片和标题
     UIImageView *qualityImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    qualityImage.frame = CGRectMake(10, 10, 0, 0);
+    qualityImage.frame = CGRectMake(12, 10, 0, 0);
     [qualityImage sizeToFit];
     [backView addSubview:qualityImage];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(qualityImage.frame) + 10, qualityImage.y, 70, qualityImage.height)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(qualityImage.frame) + 4, qualityImage.y, 70, qualityImage.height)];
     title.text = mainTitle;
     title.textColor = [UIColor blackColor];
     title.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];

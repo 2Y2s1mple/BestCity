@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZHotSaleDetailModel.h"
+#import "CZTestDetailModel.h"
 
 @interface CZTestSubController : UIViewController
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
 /** 详情数据模型 */
-@property (nonatomic, strong) CZHotSaleDetailModel *model;
+@property (nonatomic, strong) CZTestDetailModel *model;
+/** 文章的类型: 1商品，2评测, 3发现，4试用 */
+@property (nonatomic, strong) NSString *type;
 @end

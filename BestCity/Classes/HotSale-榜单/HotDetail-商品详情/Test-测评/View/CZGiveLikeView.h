@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @interface CZGiveLikeView : UIView
-/** 判断是否点击了小手 */
-@property (nonatomic, assign) BOOL isClicked;
-/** 改文章的ID */
+/** 文章的ID */
 @property (nonatomic, strong) NSString *currentID;
+/** 文章的类型: 1商品，2评测, 3发现，4试用 */
+@property (nonatomic, strong) NSString *type;
+
+
+
+// 后期要去掉
 /** 发现的ID */
 @property (nonatomic, strong) NSString *findGoodsId;
 /** 评测的ID */
 @property (nonatomic, strong) NSString *evalId;
+
+
 @end

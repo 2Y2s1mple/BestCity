@@ -197,14 +197,6 @@
     // 记录高度
     [self addHeight:lineView2.height];
     
-    //加载点赞小手
-    CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, self.totalHeight, SCR_WIDTH, 200)];
-    likeView.currentID = self.targetId;
-    [self.scrollerView addSubview:likeView];
-    // 记录高度
-    [self addHeight:likeView.height];
-    
-    
     // 计算父视图高度
     self.scrollerView.contentSize = CGSizeMake(0, self.totalHeight);
     self.scrollerView.height = self.totalHeight;
@@ -336,11 +328,12 @@
 - (void)snapDelete:(NSString *)commentId
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"commentId"] = commentId;
+    param[@"targetId"] = commentId;
+    param[@"type"] = @(5);
     
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已删除"]) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/delete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
             [CZProgressHUD showProgressHUDWithText:@"取消成功"];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"取消失败"];
@@ -355,11 +348,12 @@
 - (void)snapInsert:(NSString *)commentId
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"commentId"] = commentId;
+    param[@"targetId"] = commentId;
+    param[@"type"] = @(5);
 
     //获取详情数据
-    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/snapInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"添加成功"]) {
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
             [CZProgressHUD showProgressHUDWithText:@"点赞成功"];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
@@ -491,9 +485,6 @@
             commentNameLabel.width = 80;
         }
         
-        
-        
-        
         UILabel *contentLabel = [[UILabel alloc] init];
         contentLabel.text = commentModel.content;
         [replyView addSubview:contentLabel];
@@ -569,11 +560,5 @@
     [self.scrollerView addSubview:addReplyBtn];
     return addReplyBtn;
 }
-
-
-
-
-
-
 
 @end

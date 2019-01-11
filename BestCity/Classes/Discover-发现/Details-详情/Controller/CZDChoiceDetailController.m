@@ -7,141 +7,68 @@
 //
 
 #import "CZDChoiceDetailController.h"
-#import "PlanADScrollView.h"
-#import "UIButton+CZExtension.h"
-#import "UIImageView+WebCache.h"
 #import "GXNetTool.h"
-#import "CZGiveLikeView.h"
-#import "CZCollectButton.h"
-#import "CZCommentBtn.h"
-#import "CZShareView.h"
-#import "CZOpenAlibcTrade.h"
+#import "CZRecommendNav.h" // 导航
+#import "CZTestSubController.h" // 测评
+#import "CZEvaluateSubController.h" // 评论
+#import "MJExtension.h"
 
-@interface CZDChoiceDetailController () <UIWebViewDelegate>
+/** 模型 */
+#import "CZTestDetailModel.h"
+
+@interface CZDChoiceDetailController () <CZRecommendNavDelegate, UIScrollViewDelegate>
+/** 数据 */
+@property (nonatomic, strong) CZTestDetailModel *dicDataModel;
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
-/** 记录高度 */
-@property (nonatomic, assign) CGFloat recordY;
-/** 数据 */
-@property (nonatomic, strong) NSDictionary *dicData;
-/** webView */
-@property (nonatomic, strong) UIWebView *webView;
-/** 点赞 */
-@property (nonatomic, strong) UIView *likeView;
-/** 分享 */
-@property (nonatomic, strong) UIView *shareView;
-/** pop按钮 */
-@property (nonatomic, strong) UIButton *popButton;
-/** 分享参数 */
-@property (nonatomic, strong) NSDictionary *shareParam;
+/** 导航栏 */
+@property (nonatomic, strong) CZRecommendNav *nav;
+/** 评测 */
+@property (nonatomic, strong) CZTestSubController *testVc;
+/** 评价 */
+@property (nonatomic, strong) CZEvaluateSubController *evaluate;
+
 @end
 
 @implementation CZDChoiceDetailController
+/** 分享控件高度 */
+static CGFloat const likeAndShareHeight = 49;
+/** 文章的类型: 1商品，2评测, 3发现，4试用 */
+static NSString * const type = @"3";
 #pragma mark - 懒加载
-#pragma mark  分享购买视图
-- (UIView *)shareView
-{
-    if (_shareView == nil) {
-        _shareView = [[UIView alloc] init];
-        _shareView.backgroundColor = CZGlobalWhiteBg;
-        _shareView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 44);
-        _shareView.height = 44;
-        _shareView.width = SCR_WIDTH;
-        
-        
-        CGFloat btnWidth = SCR_WIDTH / 3.0;
-        //加个分隔线
-        UIView *lineView = [[UIView alloc] init];;
-        lineView.y = 0;
-        lineView.height = 0.5;
-        lineView.width = _shareView.width;
-        lineView.backgroundColor = CZGlobalLightGray;
-        [_shareView addSubview:lineView];
-        
-        // 分享
-        UIButton *shareBtn = [[UIButton alloc] init];
-        [_shareView addSubview:shareBtn];
-        shareBtn.y = lineView.y;
-        shareBtn.width = btnWidth;
-        shareBtn.height = _shareView.height - lineView.y;
-        [shareBtn setImage:IMAGE_NAMED(@"tab-bar") forState:UIControlStateNormal];
-        [shareBtn addTarget:self action:@selector(sharedApplication) forControlEvents:UIControlEventTouchUpInside];
-        // 收藏
-        CZCollectButton *collectBtn = [CZCollectButton collectButton];
-        [_shareView addSubview:collectBtn];
-        collectBtn.x = CZGetX(shareBtn);
-        collectBtn.y = shareBtn.y;
-        collectBtn.width = shareBtn.width;
-        collectBtn.height = shareBtn.height;
-        collectBtn.findGoodsId = self.findgoodsId;
-        // 评论
-        CZCommentBtn *commentBtn = [CZCommentBtn commentButton];
-        [_shareView addSubview:commentBtn];
-        commentBtn.x = CZGetX(collectBtn);
-        commentBtn.y = collectBtn.y;
-        commentBtn.width = collectBtn.width;
-        commentBtn.height = collectBtn.height;
-        commentBtn.goodsId = self.findgoodsId;
-        commentBtn.totalCommentCount = self.dicData[@"commentNum"];
-    }
-    return _shareView;
-}
-
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, - (IsiPhoneX ? 44 : 20), SCR_WIDTH,  SCR_HEIGHT)];
-        scrollerView.backgroundColor = CZGlobalWhiteBg;
-        self.scrollerView = scrollerView;
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20) + 40, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 44 : 20) - 40)];
+        self.scrollerView.delegate = self;
+        _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }
     return _scrollerView;
 }
 
-- (UIButton *)popButton
+- (CZRecommendNav *)nav
 {
-    if (_popButton == nil) {
-        _popButton = [UIButton buttonWithFrame:CGRectMake(10, (IsiPhoneX ? 54 : 30), 30, 30) backImage:@"nav-back-1" target:self action:@selector(popAction)];
-        _popButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
-        _popButton.layer.cornerRadius = 15;
-        _popButton.layer.masksToBounds = YES;
+    if (_nav == nil) {
+        self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:CZRecommendNavDiscover];
+        self.nav.type = type;
+        self.nav.projectId = self.findgoodsId;
+        self.nav.delegate = self;
     }
-    return _popButton;
-}
-
-#pragma mark - 事件
-- (void)popAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-#pragma mark - viewDidLoad
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalWhiteBg;
-    // 加载scrollerView
-    [self.view addSubview:self.scrollerView];
-    // 加载pop按钮
-    [self.view addSubview:self.popButton];
-    // 获取数据
-    [self obtainDetailData];
+    return _nav;
 }
 
 #pragma mark - 获取数据
 - (void)obtainDetailData
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"findgoodsId"] = self.findgoodsId;
-    param[@"mark"] = @(2);
+    param[@"articleId"] = self.findgoodsId;
+    param[@"type"] = type;
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/findGoods/selectById"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/article/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.dicData = result[@"GoodsFindGoods"];
+            self.dicDataModel = [CZTestDetailModel objectWithKeyValues:result[@"data"]];
             // 创建内容视图
-            [self setupTopView];
-            // 添加分享按钮
-            self.shareParam = result[@"ShareUrl"];
-            [self.view addSubview:self.shareView];
+            [self createSubViews];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -151,117 +78,61 @@
     }];
 }
 
-#pragma mark - 创建内容视图
-- (void)setupTopView
+- (void)createSubViews
 {
     
-    NSMutableArray *imagePaths = [NSMutableArray array];
-    for (NSDictionary *imageDic in self.dicData[@"imgList"]) {
-        [imagePaths addObject:imageDic[@"imgPath"]];
-    }
-    // 轮播图
-    if (imagePaths.count > 0) {
-        if (imagePaths.count == 1) {
-            //初始化控件
-            UIImageView *imageView = [[UIImageView alloc] init];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[imagePaths firstObject]] placeholderImage:IMAGE_NAMED(@"headDefault")];
-            imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 260);
-            [self.scrollerView addSubview:imageView];
-            
-        } else {
-            //初始化控件
-            PlanADScrollView *ad =[[PlanADScrollView alloc]initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 260) imageUrls:imagePaths placeholderimage:IMAGE_NAMED(@"headDefault")];
-            [self.scrollerView addSubview:ad];
-        }
-        
-    } else {
-        //初始化控件
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headDefault"]];
-        imageView.frame = CGRectMake(0, 0, SCR_WIDTH, 260);
-        [self.scrollerView addSubview:imageView];
-    }
-
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 280, SCR_WIDTH - 20, 20)];
-    titleLabel.text = self.dicData[@"title"];
-    titleLabel.numberOfLines = 0;
-    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:17];
-    [self.scrollerView addSubview:titleLabel];
+    // 测评
+    self.testVc = [[CZTestSubController alloc] init];
+    self.testVc.view.y = 0;
+    [self.scrollerView addSubview:self.testVc.view];
+    [self addChildViewController:self.testVc];
+    self.testVc.type = type;
+    self.testVc.model = self.dicDataModel;
     
-    UILabel *subtitlte = [[UILabel alloc] initWithFrame:CGRectMake(titleLabel.x, CZGetY(titleLabel) + 10, titleLabel.width, 20)];
-    subtitlte.text = self.dicData[@"smallTitle"];
-    subtitlte.textColor = CZGlobalGray;
-    subtitlte.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
-    subtitlte.numberOfLines = 0;
-    [self.scrollerView addSubview:subtitlte];
+    // 评价
+//    self.evaluate = [[CZEvaluateSubController alloc] init];
+//    self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
+//    [self.scrollerView addSubview:self.evaluate.view];
+//    [self addChildViewController:self.evaluate];
+//    self.evaluate.targetId = self.detailModel.goodsDetailEntity.goodsId;
     
-    // 创建webView
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CZGetY(subtitlte), SCR_WIDTH, 100)];
-    self.webView.delegate = self;
-    [self.scrollerView addSubview:self.webView];
-    self.webView.scrollView.scrollEnabled = NO;
-    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-    [self.webView loadHTMLString:self.dicData[@"content"] baseURL:nil];
-    
-    // 创建点赞
-    [self createLikeView];
+    // 设置滚动高度
+    self.scrollerView.contentSize = CGSizeMake(0, self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+- (void)viewDidLoad
 {
-    CGSize size =  [change[@"new"] CGSizeValue];
-    self.webView.height = size.height;
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    // 获取数据
+    [self obtainDetailData];
+    // 创建滚动视图
+    [self.view addSubview:self.scrollerView];
+    // 创建导航栏
+    [self.view addSubview:self.nav];
+    // 添加监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
     
-    self.likeView.y = CZGetY(self.webView);
-    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.likeView));
 }
 
-#pragma mark - 创建点赞视图
-- (void)createLikeView
+#pragma mark - 监听子控件的frame的变化
+- (void)openBoxInspectWebViewHeightChange:(NSNotification *)notfi
 {
-    UIView *likeView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.webView), SCR_WIDTH, 207 + 44.5)];
-    [self.scrollerView addSubview:likeView];
-    self.likeView = likeView;
-    
-    /**点赞*/
-    //加个分隔线
-    UIView *lineView = [[UIView alloc] init];;
-    lineView.y = 0;
-    lineView.height = 7;
-    lineView.width = likeView.width;
-    lineView.backgroundColor = CZGlobalLightGray;
-    [likeView addSubview:lineView];
-    
-    //加载点赞小手
-    CZGiveLikeView *giveLikeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, lineView.height, SCR_WIDTH, 200)];
-    giveLikeView.findGoodsId = self.findgoodsId;
-    [likeView addSubview:giveLikeView];
-
-    self.scrollerView.contentSize = CGSizeMake(0, CGRectGetMaxY(giveLikeView.frame));
+    self.evaluate.view.y = self.testVc.scrollerView.height;
+    self.scrollerView.contentSize = CGSizeMake(0, self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
 }
 
-- (void)sharedApplication
+#pragma mark - <UIScrollViewDelegate>
+/** 子控制器会用到 */
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-    share.param = self.shareParam;
-    [self.view addSubview:share];
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
-- (void)dealloc
+#pragma mark - <CZRecommendNavDelegate>
+- (void)recommendNavWithPop:(UIView *)view
 {
-    [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize" context:nil];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSString *url = [request.URL absoluteString];
-    NSString *myProtocolUrl = @"http://qualityshop/?buyId=";
-    if ([url hasPrefix:myProtocolUrl]) {
-        NSString *alibcTradeUrlPath = [url substringFromIndex:[myProtocolUrl length]];
-        // 打开淘宝
-        [CZOpenAlibcTrade openAlibcTradeWithUrlString:alibcTradeUrlPath parentController:self];
-        return NO;
-    } else {
-        return  YES;
-    }
+    [CZProgressHUD hideAfterDelay:0];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

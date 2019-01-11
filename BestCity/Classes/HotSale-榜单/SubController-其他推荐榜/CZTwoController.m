@@ -39,7 +39,7 @@
     return _noDataView;
 }
 
-#pragma mark - 初始化
+#pragma mark - 控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     //line
@@ -59,23 +59,19 @@
     [self getDataSourceWithId:self.subTitles[0].categoryId];
 }
 
+#pragma mark - 网络请求
 - (void)getDataSourceWithId:(NSString *)SourceId
 {
-    [CZRecommendListModel setupObjectClassInArray:^NSDictionary *{
-        return @{
-                 @"goodsScopeList" : @"CZHotScoreModel"
-                 };
-    }];
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
-        param[@"mark"] = @"0";
+        param[@"page"] = @"0";
         param[@"category2Id"] = SourceId;
         param[@"client"] = @(2);
         
         [CZProgressHUD showProgressHUDWithText:nil];
         //获取数据
-        [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/goodRank"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/goodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
-                if ([result[@"list"] count] > 0) {
+                if ([result[@"data"] count] > 0) {
                     // 删除noData图片
                     [self.noDataView removeFromSuperview];
                     self.tableView.tableFooterView = [self creatFooterView];;
@@ -84,7 +80,7 @@
                     [self.tableView addSubview:self.noDataView];
                     self.tableView.tableFooterView = nil;
                 }
-                self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
+                self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"data"]];
                 [self.tableView reloadData];
             }
             //隐藏菊花
@@ -101,16 +97,8 @@
 
 
 
-- (void)setupRefresh
-{
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-}
 
-- (void)loadNewData
-{
-    [self getDataSourceWithId:self.recordID];
-}
-
+#pragma mark - 初始化视图
 - (void)setupHeaderView
 {
     UIScrollView *backView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 40)];
@@ -150,18 +138,9 @@
     backView.contentSize = CGSizeMake(_recordHeight + 10, 0);
 }
 
-- (void)didClickedBtn:(CZSubTitleButton *)sender
-{
-    _recordBtn.selected = NO;
-    sender.selected = YES;
-    // 获取点击数据
-    if (self.recordID != sender.model.categoryId) {
-        [self getDataSourceWithId:sender.model.categoryId];
-    }
-    _recordBtn = sender;
-}
-
-#pragma mark - 头视图
+/**
+ * 头部的大图片
+ */
 - (UIView *)headerView
 {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 180)];
@@ -173,6 +152,32 @@
     return backView;
 }
 
+/**
+ * 加载刷新视图
+ */
+- (void)setupRefresh
+{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+}
+
+#pragma mark - 事件
+- (void)didClickedBtn:(CZSubTitleButton *)sender
+{
+    _recordBtn.selected = NO;
+    sender.selected = YES;
+    // 获取点击数据
+    if (self.recordID != sender.model.categoryId) {
+        [self getDataSourceWithId:sender.model.categoryId];
+    }
+    _recordBtn = sender;
+}
+
+- (void)loadNewData
+{
+    [self getDataSourceWithId:self.recordID];
+}
+
+#pragma mark - 代理方法
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

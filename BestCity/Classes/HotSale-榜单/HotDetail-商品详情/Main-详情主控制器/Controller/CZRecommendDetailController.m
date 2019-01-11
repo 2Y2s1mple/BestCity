@@ -13,8 +13,10 @@
 
 
 #import "CZRecommendNav.h" // 导航
+#import "CZCollectButton.h"
 #import "CZShareAndlikeView.h" // 分享
 #import "CZShareView.h" // 分享详情
+
 
 #import "GXNetTool.h" // 网络请求
 #import "MJExtension.h" // 数据转换
@@ -45,8 +47,8 @@
 @property (nonatomic, assign) CGFloat recordOffsetY;
 /** 返回键 */
 @property (nonatomic, strong) UIButton *popButton;
-/** 返回键 */
-@property (nonatomic, strong) UIButton *collectButton;
+/** 收藏 */
+@property (nonatomic, strong) CZCollectButton *collectButton;
 @end
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
@@ -82,7 +84,8 @@ static CGFloat const likeAndShareHeight = 49;
 - (CZRecommendNav *)nav
 {
     if (_nav == nil) {
-        self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40)];
+        self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:CZRecommendNavDefault];
+        self.nav.type = @"1"; /** 类型: 1商品，2评测, 3发现，4试用 */
         self.nav.projectId = self.goodsId;
         self.nav.delegate = self;
     }
@@ -100,13 +103,18 @@ static CGFloat const likeAndShareHeight = 49;
     return _popButton;
 }
 
-- (UIButton *)collectButton
+- (CZCollectButton *)collectButton
 {
     if (_collectButton == nil) {
-        _collectButton = [UIButton buttonWithFrame:CGRectMake(SCR_WIDTH - 14 - 30, (IsiPhoneX ? 54 : 30), 30, 30) backImage:@"hot-list-favor" target:self action:@selector(popAction)];
+        _collectButton = [CZCollectButton collectButton];
+        _collectButton.frame = CGRectMake(SCR_WIDTH - 14 - 30, (IsiPhoneX ? 54 : 30), 30, 30);
+        [_collectButton setImage:[UIImage imageNamed:@"hot-list-favor"] forState:UIControlStateNormal];
+        [_collectButton setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
         _collectButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
         _collectButton.layer.cornerRadius = 15;
         _collectButton.layer.masksToBounds = YES;
+        _collectButton.type = @"1";
+        _collectButton.commodityID = self.goodsId;
     }
     return _collectButton;
 }
@@ -119,7 +127,6 @@ static CGFloat const likeAndShareHeight = 49;
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor orangeColor];;
     // 获取数据
     [self getSourceData];
      
@@ -138,6 +145,15 @@ static CGFloat const likeAndShareHeight = 49;
     
     // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
+    // 添加收藏监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectChange) name:collectNotification object:nil];
+}
+
+- (void)collectChange
+{
+    _collectButton.type = @"1";
+    _collectButton.commodityID = self.goodsId;
+    self.nav.projectId = self.goodsId;
 }
 
 #pragma mark - 获取数据
@@ -176,7 +192,8 @@ static CGFloat const likeAndShareHeight = 49;
         self.testVc.view.y = self.commendVC.scrollerView.height;
         [self.scrollerView addSubview:self.testVc.view];
         [self addChildViewController:self.testVc];
-        self.testVc.model = self.detailModel;
+        self.testVc.type = @"1"; /** 类型: 1商品，2评测, 3发现，4试用 */
+        self.testVc.model = self.detailModel.evaluationEntity;
     }
     
     // 评价
@@ -213,16 +230,17 @@ static CGFloat const likeAndShareHeight = 49;
             point = CGPointMake(0, 0);
             break;
         case 1:
-            point = CGPointMake(0, CGRectGetMinY(self.testVc.view.frame));
+            point = CGPointMake(0, CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
             break;
         case 2:
-            point = CGPointMake(0, CGRectGetMinY(self.evaluate.view.frame));
+            point = CGPointMake(0, CGRectGetMinY(self.evaluate.view.frame) - 40 - (IsiPhoneX ? 44 : 20));
             break;
         default:
             point = CGPointMake(0, 0);
             break;
     }
     
+    self.nav.alpha = 1;
     [UIView animateWithDuration:0.3 animations:^{
         self.scrollerView.contentOffset = point;
     } completion:^(BOOL finished) {
@@ -246,7 +264,7 @@ static CGFloat const likeAndShareHeight = 49;
     
     BOOL offset2 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20)) && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.evaluate.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
     
-    BOOL offset3 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.evaluate.view.frame) - 80- (IsiPhoneX ? 44 : 20));
+    BOOL offset3 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.evaluate.view.frame) - 80 - (IsiPhoneX ? 44 : 20));
     
     
     if (offset1) {

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *imgList;
 /** 我们的名字 */
 @property (nonatomic, strong) NSString *goodsName;
+/** 当前的ID */
+@property (nonatomic, strong) NSString *goodsId;
 /** 券后价 */
 @property (nonatomic, strong) NSString *actualPrice;
 /** 其他平台 */
@@ -27,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *scoreOptionsList;
 /** 综合评分分数 */
 @property (nonatomic, strong) NSString *score;
+/** 点赞数量 */
+@property (nonatomic, strong) NSString *voteCount;
 
 
 @end

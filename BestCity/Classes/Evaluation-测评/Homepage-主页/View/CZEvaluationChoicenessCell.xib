@@ -161,7 +161,7 @@
                 <outlet property="timeLabel" destination="ELW-ca-i8f" id="Pbe-rU-iWW"/>
                 <outlet property="visitBtn" destination="HXh-3N-Mub" id="Srs-cY-VH4"/>
             </connections>
-            <point key="canvasLocation" x="-1398" y="-1280"/>
+            <point key="canvasLocation" x="-1398.4000000000001" y="-1280.5097451274364"/>
         </tableViewCell>
     </objects>
     <resources>

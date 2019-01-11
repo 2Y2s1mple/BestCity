@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, CZRecommendNavType){
+    CZRecommendNavDefault,
+    CZRecommendNavDiscover,
+};
+
 @protocol CZRecommendNavDelegate <NSObject>
 @optional
 - (void)recommendNavWithPop:(UIView *)view;
@@ -16,6 +21,8 @@
 
 
 @interface CZRecommendNav : UIView
+@property (nonatomic, strong) NSArray *mainTitles;
+- (instancetype)initWithFrame:(CGRect)frame type:(CZRecommendNavType)type;
 /** 代理 */
 @property (nonatomic, weak) id <CZRecommendNavDelegate> delegate;
 /** 监听vc中scroller的滚动 */
@@ -23,4 +30,6 @@
 
 /** 商品的ID */
 @property (nonatomic, strong) NSString *projectId;
+/** 收藏的类型 */
+@property (nonatomic, strong) NSString *type;
 @end

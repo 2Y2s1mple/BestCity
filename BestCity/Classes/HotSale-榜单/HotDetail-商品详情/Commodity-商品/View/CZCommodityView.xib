@@ -502,6 +502,7 @@
                 <outlet property="bottomLabel" destination="zxE-BT-riR" id="0ie-Jf-bk4"/>
                 <outlet property="comprehensiveScoreLabel" destination="lBb-Id-MtN" id="oZh-hj-5go"/>
                 <outlet property="couponPrice" destination="q0E-vJ-eSR" id="mww-ZJ-fgd"/>
+                <outlet property="cscoreLabel" destination="WJc-eE-HqH" id="uws-o2-O0w"/>
                 <outlet property="lineView" destination="z9A-Lr-IQH" id="v6M-FO-bEn"/>
                 <outlet property="otherPrice" destination="HLq-C7-qyt" id="SvG-zJ-Dui"/>
                 <outlet property="pointView" destination="rph-sl-Ylk" id="lZ0-bv-eS5"/>
@@ -516,6 +517,8 @@
                 <outlet property="scoreFiveImageConstraint" destination="ySe-Fl-Ez7" id="YgD-CI-cgZ"/>
                 <outlet property="scoreFiveName" destination="qOj-M0-8Dr" id="1ay-Ff-uku"/>
                 <outlet property="scoreFiveView" destination="maI-re-e3K" id="2ru-9y-mVi"/>
+                <outlet property="scoreImage" destination="rcj-gS-1q6" id="Ppk-qY-9ae"/>
+                <outlet property="scoreLabel" destination="WJc-eE-HqH" id="srd-fx-BcM"/>
                 <outlet property="scoreSecondImageConstraint" destination="E3b-40-Q1R" id="oku-JC-7N2"/>
                 <outlet property="scoreSecondName" destination="U9h-6e-lDk" id="qtJ-e7-meU"/>
                 <outlet property="scoreThirdImageConstraint" destination="709-91-e7O" id="1u7-if-RmN"/>
@@ -524,7 +527,7 @@
                 <outlet property="scoreThreeName" destination="Wiz-eh-1nv" id="sU0-3Z-fbo"/>
                 <outlet property="titleName" destination="dPF-SL-8uW" id="xbI-tV-OdR"/>
             </connections>
-            <point key="canvasLocation" x="-1669" y="-1368"/>
+            <point key="canvasLocation" x="-1800" y="-1362"/>
         </view>
     </objects>
     <resources>

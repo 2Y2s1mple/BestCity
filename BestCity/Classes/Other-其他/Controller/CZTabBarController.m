@@ -14,6 +14,7 @@
 #import "CZNavigationController.h"
 #import "CZLoginController.h"
 
+
 @interface CZTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -49,7 +50,7 @@
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
     
-    self.selectedIndex = 0;
+    self.selectedIndex = 1;
     self.tabBar.clipsToBounds = YES;
 }
 

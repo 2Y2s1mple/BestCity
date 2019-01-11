@@ -91,8 +91,8 @@
     }
     
     NSString *userName;
-    if (contentDic[@"userShopmember"] != [NSNull null] && contentDic[@"userShopmember"] != nil) {
-        userName = contentDic[@"userShopmember"][@"userNickName"];
+    if (contentDic[@"userNickname"] != [NSNull null] && contentDic[@"userNickname"] != nil) {
+        userName = contentDic[@"userNickname"];
     } else {
         userName = @"游客";
     }

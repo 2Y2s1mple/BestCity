@@ -12,7 +12,7 @@
 #import "GXNetTool.h"
 
 @interface CZRecommendNav ()
-@property (nonatomic, strong) NSArray *mainTitles;
+
 /** 上部的滑动条 */
 @property (nonatomic, strong)UIView *scrollerLine;
 /** 记录点击的标题 */
@@ -31,7 +31,7 @@
     return _mainTitles;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame type:(CZRecommendNavType)type
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -39,7 +39,7 @@
         [self addSubview:topView];
         topView.backgroundColor = [UIColor whiteColor];
         self.backgroundColor = [UIColor whiteColor];
-        [self setupNavigateView];
+        [self setupNavigateView:type];
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, self.height - 1, SCR_WIDTH, 1)];
         line.backgroundColor = CZGlobalLightGray;
         [self addSubview:line];
@@ -47,8 +47,9 @@
     return self;
 }
 
+
 //自定义的导航栏
-- (void)setupNavigateView
+- (void)setupNavigateView:(CZRecommendNavType)type
 {
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
@@ -63,41 +64,54 @@
         make.height.equalTo(@(40));
     }];
     
-    CGFloat btnX = 70;
-    CGFloat btnW = (SCR_WIDTH - 127) / 3.0;
-    CGFloat btnH = 20;
-    for (int i = 0; i < self.mainTitles.count; i++) {
-        UIButton *titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        if (i == 0) {
-            self.recordBtn = titleBtn;
+    if (type == CZRecommendNavDefault) {
+        CGFloat btnX = 70;
+        CGFloat btnW = (SCR_WIDTH - 127) / 3.0;
+        CGFloat btnH = 20;
+        for (int i = 0; i < self.mainTitles.count; i++) {
+            UIButton *titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            if (i == 0) {
+                self.recordBtn = titleBtn;
+            }
+            titleBtn.frame = CGRectMake(btnX + i * btnW, 0, btnW, btnH);
+            [self addSubview:titleBtn];
+            titleBtn.center = CGPointMake(titleBtn.center.x, self.height / 2);
+            [titleBtn setTitle:self.mainTitles[i] forState:UIControlStateNormal];
+            [titleBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
+            [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+            titleBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+            if (i == 0) titleBtn.selected = YES;
+            titleBtn.tag = i + 100;
+            [titleBtn addTarget:self action:@selector(titleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         }
-        titleBtn.frame = CGRectMake(btnX + i * btnW, 0, btnW, btnH);
-        [self addSubview:titleBtn];
-        titleBtn.center = CGPointMake(titleBtn.center.x, self.height / 2);
-        [titleBtn setTitle:self.mainTitles[i] forState:UIControlStateNormal];
-        [titleBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
-        [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        titleBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
-        if (i == 0) titleBtn.selected = YES;
-        titleBtn.tag = i + 100;
-        [titleBtn addTarget:self action:@selector(titleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIView *scrollerLine = [[UIView alloc] init];
+        scrollerLine.backgroundColor = [UIColor redColor];
+        self.scrollerLine = scrollerLine;
+        [self addSubview:scrollerLine];
+        [scrollerLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo([self viewWithTag:100]);
+            make.bottom.equalTo(self).offset(-2);
+            make.height.equalTo(@2);
+            make.width.equalTo(@20);
+        }];
+    } else {
+        UILabel *titleLabel = [[UILabel alloc] init];
+        titleLabel.text = @"发现详情";
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.textColor = [UIColor blackColor];
+        [self addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self);
+        }];
     }
-    
-    UIView *scrollerLine = [[UIView alloc] init];
-    scrollerLine.backgroundColor = [UIColor redColor];
-    self.scrollerLine = scrollerLine;
-    [self addSubview:scrollerLine];
-    [scrollerLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo([self viewWithTag:100]);
-        make.bottom.equalTo(self).offset(-2);
-        make.height.equalTo(@2);
-        make.width.equalTo(@20);
-    }];
     
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightBtn = rightBtn;
     [rightBtn setImage:[UIImage imageNamed:@"nav-favor"] forState:UIControlStateNormal];
-    [self.rightBtn setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
+    [rightBtn setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
+    
+    
     [rightBtn addTarget:self action:@selector(clickedRight:) forControlEvents:UIControlEventTouchUpInside];
     rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     rightBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
@@ -110,11 +124,23 @@
     }];
 }
 
+- (void)clickedRight:(UIButton *)sender
+{
+    if (sender.selected) {
+        // 取消收藏
+        [self collectDelete];
+    } else {
+        // 收藏
+        [self collectInsert];
+    }
+}
+
 // 商品的ID
 - (void)setProjectId:(NSString *)projectId
 {
     _projectId = projectId;
     [self isCollectDetail];
+    
 }
 
 
@@ -122,11 +148,12 @@
 - (void)isCollectDetail
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"projectId"] = self.projectId;
+    param[@"targetId"] = self.projectId;
+    param[@"type"] = self.type;
     
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collect"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已收藏"]) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/view/status"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"collect"] isEqualToNumber:@(1)]) {
             self.rightBtn.selected = YES;
         } else {
             self.rightBtn.selected = NO;
@@ -138,13 +165,15 @@
 - (void)collectDelete
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"projectId"] = self.projectId;
+    param[@"targetId"] = self.projectId;
+    param[@"type"] = self.type;
     
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectDelete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已删除"]) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"/api/collect/delete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已取消"]) {
             [CZProgressHUD showProgressHUDWithText:@"取消收藏"];
             self.rightBtn.selected = NO;
+            [[NSNotificationCenter defaultCenter] postNotificationName:collectNotification object:nil];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"取消收藏失败"];
             self.rightBtn.selected = YES;
@@ -162,13 +191,15 @@
 - (void)collectInsert
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"projectId"] = self.projectId;
+    param[@"targetId"] = self.projectId;
+    param[@"type"] = self.type;
     
     //获取详情数据
-    [GXNetTool PostNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/collectInsert"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"已添加"]) {
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已收藏"]) {
             [CZProgressHUD showProgressHUDWithText:@"收藏成功"];
             self.rightBtn.selected = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:collectNotification object:nil];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"收藏失败"];
             self.rightBtn.selected = NO;
@@ -180,16 +211,6 @@
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
-}
-- (void)clickedRight:(UIButton *)sender
-{
-    if (sender.selected) {
-        // 取消收藏
-        [self collectDelete];
-    } else {
-        // 收藏
-        [self collectInsert];
-    }
 }
 
 - (void)popAction

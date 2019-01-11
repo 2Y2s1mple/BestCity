@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *findGoodsId;
 /** 测评 */
 @property (nonatomic, strong) NSString *evalId;
+
+/** 商品ID */
+@property (nonatomic, strong) NSString *commodityID;
+/** 类型: 1商品，2评测, 3发现，4试用 */
+@property (nonatomic, strong) NSString *type;
+
 @end
 
 NS_ASSUME_NONNULL_END
