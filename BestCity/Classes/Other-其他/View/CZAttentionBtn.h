@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, CZAttentionBtnType) {
     CZAttentionBtnTypeFollowed,
     CZAttentionBtnTypeAttention,
     CZAttentionBtnTypeDisable,
+    CZAttentionBtnTypeTogether,
 };
 
 @interface CZAttentionBtn : UIView

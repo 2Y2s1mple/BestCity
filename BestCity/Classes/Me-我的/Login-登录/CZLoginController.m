@@ -79,16 +79,6 @@ static id instancet_;
             // 存储用户信息, 都TM存储上了
             [CZSaveTool setObject:userDic forKey:@"user"];
             
-//            // 储存图片
-//            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"userNickImg"] forKey:@"userNickImg"];
-//            // 积分
-//            [[NSUserDefaults standardUserDefaults] setObject:result[@"points"] forKey:@"point"];
-//                
-//            [[NSUserDefaults standardUserDefaults] setObject:result[@"UserAccountEntity"] forKey:@"Account"];
-//            // 支付宝账号
-//            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayAccount"] forKey:@"alipayPhone"];
-//            [[NSUserDefaults standardUserDefaults] setObject:userDic[@"alipayName"] forKey:@"alipayRealName"];
-            
             // 删除账号密码
             self.userTextField.text = nil;
             self.passwordTextField.text = nil;

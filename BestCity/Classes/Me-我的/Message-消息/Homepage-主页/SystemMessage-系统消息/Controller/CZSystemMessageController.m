@@ -49,11 +49,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [CZSystemMessageModel setupReplacedKeyFromPropertyName:^NSDictionary *{
-        return @{
-                 @"contentID" : @"id"
-                 };
-    }];
+//    [CZSystemMessageModel setupReplacedKeyFromPropertyName:^NSDictionary *{
+//        return @{
+//                 @"contentID" : @"id"
+//                 };
+//    }];
     
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
@@ -101,19 +101,19 @@
     [self.tableView.mj_footer endRefreshing];
     
     // 加载数据
-    self.page = 0;
+    self.page = 1;
     
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @"1";
     param[@"page"] = @(self.page);
     
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/message/selectAll"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/message/selectAll"];
     
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"])
         {
-            if ([result[@"list"] count] > 0) {
+            if ([result[@"data"] count] > 0) {
                 // 没有数据图片
                 [self.noDataView removeFromSuperview];
             } else {
@@ -122,7 +122,7 @@
             }
             
             // 字典转模型
-            self.dataSource = [CZSystemMessageModel objectArrayWithKeyValuesArray:result[@"list"]];
+            self.dataSource = [CZSystemMessageModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
         // 结束刷新
@@ -144,12 +144,12 @@
     param[@"type"] = @"1";
     param[@"page"] = @(self.page);
     
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/message/selectAll"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/message/selectAll"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"list"] count] != 0)
+        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0)
         {
             // 字典转模型
-            NSArray *message = [CZSystemMessageModel objectArrayWithKeyValuesArray:result[@"list"]];
+            NSArray *message = [CZSystemMessageModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.dataSource addObjectsFromArray:message];
             [self.tableView reloadData];
             // 结束刷新

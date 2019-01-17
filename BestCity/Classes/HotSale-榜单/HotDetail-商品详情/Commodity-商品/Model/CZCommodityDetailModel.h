@@ -17,6 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *goodsId;
 /** 购买链接 */
 @property (nonatomic, strong) NSString *goodsBuyLink;
+/** 分享标题 */
+@property (nonatomic, strong) NSString *shareTitle;
+/** 分享内容 */
+@property (nonatomic, strong) NSString *shareContent;
+/** 分享的URL */
+@property (nonatomic, strong) NSString *shareUrl;
+/** 分享的图片 */
+@property (nonatomic, strong) NSString *shareImg;
 @end
 
 NS_ASSUME_NONNULL_END

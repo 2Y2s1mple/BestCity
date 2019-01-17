@@ -74,10 +74,10 @@
 #pragma mark - 获取未读消息
 - (void)obtainReadMessage
 {
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/message/selectCount"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/message/count"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 未读消息
-            self.search.unreaderCount = [result[@"count"] integerValue] > 99 ? 99 : [result[@"count"] integerValue];
+            self.search.unreaderCount = [result[@"data"] integerValue] > 99 ? 99 : [result[@"data"] integerValue];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];

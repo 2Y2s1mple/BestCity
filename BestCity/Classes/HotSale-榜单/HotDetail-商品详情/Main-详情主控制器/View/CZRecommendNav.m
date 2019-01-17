@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UIButton *recordBtn;
 /** 右面点击事件 */
 @property (nonatomic, strong) UIButton *rightBtn;
+/** 标题 */
+@property (nonatomic, strong) UILabel *titleLabel;
 @end
 
 @implementation CZRecommendNav
@@ -46,7 +48,6 @@
     }
     return self;
 }
-
 
 //自定义的导航栏
 - (void)setupNavigateView:(CZRecommendNavType)type
@@ -95,9 +96,20 @@
             make.height.equalTo(@2);
             make.width.equalTo(@20);
         }];
+    } else if (type == CZRecommendNavDiscover){
+        UILabel *titleLabel = [[UILabel alloc] init];
+        self.titleLabel = titleLabel;
+        titleLabel.text = @"发现详情";
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.textColor = [UIColor blackColor];
+        [self addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self);
+        }];
     } else {
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.text = @"发现详情";
+        self.titleLabel = titleLabel;
+        titleLabel.text = @"评测详情";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
@@ -142,7 +154,6 @@
     [self isCollectDetail];
     
 }
-
 
 #pragma mark - 判断是否收藏了此文章
 - (void)isCollectDetail
@@ -274,5 +285,15 @@
             break;
     }
     self.recordBtn = btn;
+}
+
+- (void)hiddenTitle
+{
+    self.titleLabel.hidden = YES;
+}
+
+- (void)showTitle
+{
+    self.titleLabel.hidden = NO;
 }
 @end

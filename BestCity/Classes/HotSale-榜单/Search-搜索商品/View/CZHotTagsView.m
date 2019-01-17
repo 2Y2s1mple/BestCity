@@ -62,8 +62,8 @@
 {
     _title = title;
     UILabel *hisLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 20)];
+    hisLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
     hisLabel.text = _title;
-    hisLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:hisLabel];
 }
 
@@ -80,15 +80,14 @@
 {
     CZHotTagLabel *label = [[CZHotTagLabel alloc] init];
     label.delegate = self;
-    label.type = type;
     label.text = title;
     CGSize size = [title sizeWithAttributes:@{NSFontAttributeName : label.font}];
     if (size.width > SCR_WIDTH - 20) {
         label.size = CGSizeMake(SCR_WIDTH - 20, 30);
     } else {
-        label.size = CGSizeMake(size.width + 28, 30);
+        label.size = CGSizeMake((int)((size.width + 28) + 0.5), 30);
     }
-    
+    label.type = type;
     // 添加到数组
     [self.tagsView insertSubview:label atIndex:0];
     [self.hisArray insertObject:title atIndex:0];
@@ -97,7 +96,6 @@
         [[self.tagsView.subviews lastObject] removeFromSuperview];
         [self.hisArray removeLastObject];
     }
-    
     // 重新布局
     [self tagLabelLayout];
     [[NSUserDefaults standardUserDefaults] setObject:self.hisArray forKey:@"hisSearchKey"];
@@ -133,16 +131,15 @@
     for (int i = 0; i < self.hisArray.count; i++) {
         CZHotTagLabel *label = [[CZHotTagLabel alloc] init];
         label.delegate = self;
-        label.type = self.type;
         label.text = self.hisArray[i];
         [self.tagsView addSubview:label];
         CGSize size = [label.text sizeWithAttributes:@{NSFontAttributeName : label.font}];
         if (size.width > SCR_WIDTH - 20) {
             label.size = CGSizeMake(SCR_WIDTH - 20, 30);
         } else {
-            label.size = CGSizeMake(size.width + 28, 30);
+            label.size = CGSizeMake((int)((size.width + 28) + 0.5), 30);
         }
-        
+        label.type = self.type;
     }
 }
 

@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSInteger, CZRecommendNavType){
     CZRecommendNavDefault,
     CZRecommendNavDiscover,
+    CZRecommendNavEvaluation,
 };
 
 @protocol CZRecommendNavDelegate <NSObject>
@@ -18,7 +19,6 @@ typedef NS_ENUM(NSInteger, CZRecommendNavType){
 - (void)recommendNavWithPop:(UIView *)view;
 - (void)didClickedTitleWithIndex:(NSInteger)index;
 @end
-
 
 @interface CZRecommendNav : UIView
 @property (nonatomic, strong) NSArray *mainTitles;
@@ -32,4 +32,7 @@ typedef NS_ENUM(NSInteger, CZRecommendNavType){
 @property (nonatomic, strong) NSString *projectId;
 /** 收藏的类型 */
 @property (nonatomic, strong) NSString *type;
+/** 隐藏标题 */
+- (void)hiddenTitle;
+- (void)showTitle;
 @end

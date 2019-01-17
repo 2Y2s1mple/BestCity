@@ -11,7 +11,15 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>关注</string>
+			<string>消息通知</string>
+			<key>icon</key>
+			<string>message</string>
+			<key>destinationVC</key>
+			<string>CZSystemMessageController</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>每日奖励</string>
 			<key>icon</key>
 			<string>follow</string>
 			<key>destinationVC</key>
@@ -19,19 +27,11 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>收藏</string>
+			<string>我的收藏</string>
 			<key>icon</key>
 			<string>favor</string>
 			<key>destinationVC</key>
-			<string>CZCollectOneController</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>消息</string>
-			<key>icon</key>
-			<string>message</string>
-			<key>destinationVC</key>
-			<string>CZSystemMessageController</string>
+			<string>CZCollectController</string>
 		</dict>
 		<dict>
 			<key>title</key>

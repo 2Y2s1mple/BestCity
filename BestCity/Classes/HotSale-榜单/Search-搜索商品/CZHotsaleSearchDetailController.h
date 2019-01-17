@@ -6,7 +6,8 @@
 //  Copyright © 2018年 JasonBourne. All rights reserved.
 //
 
-#import "CZBaseRecommendController.h"
+
+#import "WMPageController.h"
 
 @protocol hotsaleSearchDetailControllerDelegate <NSObject>
 @optional
@@ -14,9 +15,11 @@
 
 @end
 
-@interface CZHotsaleSearchDetailController : CZBaseRecommendController
+@interface CZHotsaleSearchDetailController : WMPageController
 /** 保存的标题 */
 @property (nonatomic, strong) NSString *textTitle;
 /** 代理 */
-@property (nonatomic, assign) id<hotsaleSearchDetailControllerDelegate> delegate;
+@property (nonatomic, assign) id<hotsaleSearchDetailControllerDelegate> currentDelegate;
+/** 类型 */
+@property (nonatomic, strong) NSString *type;
 @end

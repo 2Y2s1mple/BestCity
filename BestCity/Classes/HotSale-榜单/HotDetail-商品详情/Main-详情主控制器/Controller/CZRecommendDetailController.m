@@ -11,19 +11,13 @@
 #import "CZTestSubController.h" // 测评
 #import "CZEvaluateSubController.h" // 评论
 
-
 #import "CZRecommendNav.h" // 导航
 #import "CZCollectButton.h"
 #import "CZShareAndlikeView.h" // 分享
-#import "CZShareView.h" // 分享详情
-
 
 #import "GXNetTool.h" // 网络请求
-#import "MJExtension.h" // 数据转换
 
-#import "CZOpenAlibcTrade.h" // 跳淘宝
 #import "UIButton+CZExtension.h" // 按钮扩展
-
 #import "CZHotSaleDetailModel.h" // 当前数据模型
 
 @interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
@@ -52,6 +46,7 @@
 @end
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
+static NSString * const type = @"1";
 
 @implementation CZRecommendDetailController
 #pragma mark - 懒加载
@@ -70,13 +65,15 @@ static CGFloat const likeAndShareHeight = 49;
     if (_likeView == nil) {
         __weak typeof(self) weakSelf = self;
         _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
-            CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-            share.param = self.shareParam;
+            CZShareView *share = [[CZShareView alloc] initWithFrame:weakSelf.view.frame];
+            
+            share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
             // 打开淘宝
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
         }];
+        _likeView.titleData = @{@"left" : @"分享赚20元", @"right" : @"领券并购买"};
     }
     return _likeView;
 }
@@ -161,7 +158,7 @@ static CGFloat const likeAndShareHeight = 49;
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"goodsId"] = self.goodsId;
-    param[@"client"] = @(2);
+    
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -169,7 +166,12 @@ static CGFloat const likeAndShareHeight = 49;
            
             [self createSubViews];
             // 创建分享购买视图
-            self.shareParam = result[@"ShareUrl"];
+            NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
+            shareDic[@"shareTitle"] =  self.detailModel.goodsDetailEntity.shareTitle;
+            shareDic[@"shareContent"] = self.detailModel.goodsDetailEntity.shareContent;
+            shareDic[@"shareUrl"] = self.detailModel.goodsDetailEntity.shareUrl;
+            shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
+            self.shareParam = shareDic;
             [self.view addSubview:self.likeView];
         }
     } failure:^(NSError *error) {}];
@@ -192,7 +194,7 @@ static CGFloat const likeAndShareHeight = 49;
         self.testVc.view.y = self.commendVC.scrollerView.height;
         [self.scrollerView addSubview:self.testVc.view];
         [self addChildViewController:self.testVc];
-        self.testVc.type = @"1"; /** 类型: 1商品，2评测, 3发现，4试用 */
+        self.testVc.detailTtype = @"1"; /** 类型: 1商品，2评测, 3发现，4试用 */
         self.testVc.model = self.detailModel.evaluationEntity;
     }
     
@@ -201,6 +203,7 @@ static CGFloat const likeAndShareHeight = 49;
     self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
     [self.scrollerView addSubview:self.evaluate.view];
     [self addChildViewController:self.evaluate];
+    self.evaluate.type = type;
     self.evaluate.targetId = self.detailModel.goodsDetailEntity.goodsId;
     
     // 设置滚动高度
@@ -258,14 +261,11 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"scrollViewDidScroll -- %lf", self.scrollerView.contentOffset.y);
-    
     BOOL offset1 = self.scrollerView.contentOffset.y >= -20 && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
     
     BOOL offset2 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20)) && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.evaluate.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
     
     BOOL offset3 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.evaluate.view.frame) - 80 - (IsiPhoneX ? 44 : 20));
-    
     
     if (offset1) {
         self.nav.monitorIndex = 0;

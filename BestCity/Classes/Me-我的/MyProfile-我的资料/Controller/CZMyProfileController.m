@@ -35,7 +35,7 @@
 - (NSArray *)leftTitles
 {
     if (_leftTitles == nil) {
-        _leftTitles = @[@"头像", @"昵称", @"会员等级", @"性别", @"生日", @"绑定手机"];
+        _leftTitles = @[@"头像", @"昵称", @"性别", @"生日", @"账号管理"];
     }
     return _leftTitles;
 }
@@ -45,10 +45,8 @@
     if (_rightTitles == nil) {
         // 用户信息
         NSDictionary *userInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
-        if ([userInfo[@"userBirthday"] length] >= 10) {
-            NSString *dataStr = [userInfo[@"userBirthday"] substringToIndex:10];
-            _rightTitles = [NSMutableArray arrayWithArray:@[userInfo[@"userNickImg"], userInfo[@"userNickName"], [NSString stringWithFormat:@"v%@", userInfo[@"userMemberGrade"]], userInfo[@"userGender"], dataStr, userInfo[@"userPhone"]]];
-        }
+        _rightTitles = [NSMutableArray arrayWithArray:@[
+                                                        userInfo[@"avatar"], userInfo[@"nickname"], userInfo[@"gender"], userInfo[@"birthday"], userInfo[@"mobile"]]];
     }
     return _rightTitles;
 }
@@ -56,6 +54,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
+    // 获取数据
+    [self getUserInfo];
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我的资料" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
@@ -142,7 +142,7 @@
         CZDatePickView *backView = [CZDatePickView datePickWithCurrentDate:self.rightTitles[indexPath.row] type:CZDatePickViewTypeOther];
         backView.delegate = self;
         [self.view addSubview:backView];
-    } else if ([self.leftTitles[indexPath.row] isEqualToString:@"绑定手机"]) {
+    } else if ([self.leftTitles[indexPath.row] isEqualToString:@"账号管理"]) {
 //        CZBindingMobileController *vc = [[CZBindingMobileController alloc] init];
 //        [self.navigationController pushViewController:vc animated:YES];
     } else{
@@ -156,10 +156,10 @@
 {
     if (dateString.length > 0 && pickView.type == CZDatePickViewTypeDate) {
         // 修改生日
-        [self changeUserInfo:@{@"userBirthday" : dateString}];
+        [self changeUserInfo:@{@"birthday" : dateString}];
     } else if (dateString.length > 0) {
         // 修改性别
-        [self changeUserInfo:@{@"userGender" : dateString}];
+        [self changeUserInfo:@{@"gender" : dateString}];
         
     }
 }
@@ -235,13 +235,14 @@
 {
     if(picker.sourceType == UIImagePickerControllerSourceTypeCamera || picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
         //上传图片
-        NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/importCustomer"];
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/uploadImage"];
         [GXNetTool uploadNetWithUrl:url fileSource:image success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
-               [self changeUserInfo:@{@"userNickImg" : result[@"userNickImg"]}];
-                [[NSUserDefaults standardUserDefaults] setObject:result[@"userNickImg"] forKey:@"userNickImg"];
+               [self changeUserInfo:@{@"avatar" : result[@"data"]}];
+               [self getUserInfo];
             } else {
                 [CZProgressHUD showProgressHUDWithText:@"修改失败"];
+                [CZProgressHUD hideAfterDelay:1];
             }
         } failure:^(NSError *error) {
             

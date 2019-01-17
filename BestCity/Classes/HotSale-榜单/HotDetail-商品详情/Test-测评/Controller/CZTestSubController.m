@@ -52,72 +52,129 @@
 
 - (void)setup
 {
-    /**加载开箱测评*/
-    CGFloat space = 10.0f;
-    //标题
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, 150, 20)];
-    titleLabel.text = @"开箱测评";
-    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
-    [self.scrollerView addSubview:titleLabel];
-    //头像
-    UIImageView *iconImage = [[UIImageView alloc] init];
-    iconImage.layer.cornerRadius = 25;
-    iconImage.layer.masksToBounds = YES;
-    [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.user[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
-    iconImage.frame = CGRectMake(space, CZGetY(titleLabel) + (2 * space), 50, 50);
-    [self.scrollerView addSubview:iconImage];
-    //名字
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y, 100, 20)];
-    nameLabel.text = self.model.user[@"nickname"];
-    nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
-    [nameLabel sizeToFit];
-    nameLabel.textColor = CZRGBColor(21, 21, 21);
-    [self.scrollerView addSubview:nameLabel];
-    //粉丝数
-    if (nameLabel.width > 150) {
-        nameLabel.width = 150;
-    }
-    UILabel *fansLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(nameLabel) + 10, nameLabel.y, 100, 20)];
-    fansLabel.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.user[@"fansCount"]];
-    fansLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
-    fansLabel.textColor = CZGlobalGray;
-    [self.scrollerView addSubview:fansLabel];
-    //时间
-    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CZGetY(nameLabel) + space, 100, 20)];
-    timeLabel.text = self.model.createTime;
-    timeLabel.textColor = CZGlobalGray;
-    timeLabel.font = fansLabel.font;
-    [self.scrollerView addSubview:timeLabel];
-
-    // 关注按钮
-    CZAttentionBtnType type;
-    if ([self.model.user[@"follow"] integerValue] == 0) {
-        type = CZAttentionBtnTypeAttention;
-    } else {
-        type = CZAttentionBtnTypeFollowed;
-    }
-    self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(self.view.width - (space * 2) - 60, iconImage.center.y - 12, 60, 24) CommentType:type didClickedAction:^(BOOL isSelected){
-        if (isSelected) {
-            [self addAttention];
-        } else {
-            [self deleteAttention];
+    CGFloat space = 14.0f;
+    if ([self.detailTtype isEqualToString:@"1"]) {
+        /**加载开箱测评*/
+        //标题
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, 150, 20)];
+        titleLabel.text = @"开箱测评";
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+        [self.scrollerView addSubview:titleLabel];
+        //头像
+        UIImageView *iconImage = [[UIImageView alloc] init];
+        iconImage.layer.cornerRadius = 25;
+        iconImage.layer.masksToBounds = YES;
+        [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.user[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+        iconImage.frame = CGRectMake(space, CZGetY(titleLabel) + (2 * space), 50, 50);
+        [self.scrollerView addSubview:iconImage];
+        //名字
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y, 100, 20)];
+        nameLabel.text = self.model.user[@"nickname"];
+        nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+        [nameLabel sizeToFit];
+        nameLabel.textColor = CZRGBColor(21, 21, 21);
+        [self.scrollerView addSubview:nameLabel];
+        //粉丝数
+        if (nameLabel.width > 150) {
+            nameLabel.width = 150;
         }
-    }];
-    [self.scrollerView addSubview:self.attentionBtn];
+        UILabel *fansLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(nameLabel) + 10, nameLabel.y, 100, 20)];
+        fansLabel.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.user[@"fansCount"]];
+        fansLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+        fansLabel.textColor = CZGlobalGray;
+        [self.scrollerView addSubview:fansLabel];
+        //时间
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CZGetY(nameLabel) + space, 100, 20)];
+        timeLabel.text = self.model.createTime;
+        timeLabel.textColor = CZGlobalGray;
+        timeLabel.font = fansLabel.font;
+        [self.scrollerView addSubview:timeLabel];
+        
+        // 关注按钮
+        CZAttentionBtnType type;
+        if ([self.model.user[@"follow"] integerValue] == 0) {
+            type = CZAttentionBtnTypeAttention;
+        } else {
+            type = CZAttentionBtnTypeFollowed;
+        }
+        self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(self.view.width - (space * 2) - 60, iconImage.center.y - 12, 60, 24) CommentType:type didClickedAction:^(BOOL isSelected){
+            if (isSelected) {
+                [self addAttention];
+            } else {
+                [self deleteAttention];
+            }
+        }];
+        [self.scrollerView addSubview:self.attentionBtn];
+        
+        
+        self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CZGetY(iconImage) + 2 * space, SCR_WIDTH, 100)];
+        self.webView.backgroundColor = [UIColor whiteColor];
+        [self.scrollerView addSubview:self.webView];
+        self.webView.delegate = self;
+        [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+        self.webView.scrollView.scrollEnabled = NO;
+        [self.webView loadHTMLString:self.model.content baseURL:nil];
+    } else {
+        /**加载开箱测评*/
+        //标题
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, SCR_WIDTH - 2 * space, 20)];
+        titleLabel.text = self.model.title;
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+        [self.scrollerView addSubview:titleLabel];
+        //头像
+        UIImageView *iconImage = [[UIImageView alloc] init];
+        iconImage.layer.cornerRadius = 25;
+        iconImage.layer.masksToBounds = YES;
+        [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.user[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+        iconImage.frame = CGRectMake(space, CZGetY(titleLabel) + (2 * space), 50, 50);
+        [self.scrollerView addSubview:iconImage];
+        //名字
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y + 15, 100, 20)];
+        nameLabel.text = self.model.user[@"nickname"];
+        nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+        [nameLabel sizeToFit];
+        nameLabel.textColor = CZRGBColor(21, 21, 21);
+        [self.scrollerView addSubview:nameLabel];
+
+        //时间
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(nameLabel) + space, nameLabel.y, 160, 20)];
+        timeLabel.text = self.model.createTimeStr;
+        timeLabel.textColor = CZGlobalGray;
+        timeLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+        [self.scrollerView addSubview:timeLabel];
+        
+        // 关注按钮
+        CZAttentionBtnType type;
+        if ([self.model.user[@"follow"] integerValue] == 0) {
+            type = CZAttentionBtnTypeAttention;
+        } else {
+            type = CZAttentionBtnTypeFollowed;
+        }
+        self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(self.view.width - space - 60, iconImage.center.y - 12, 60, 24) CommentType:type didClickedAction:^(BOOL isSelected){
+            if (isSelected) {
+                [self addAttention];
+            } else {
+                [self deleteAttention];
+            }
+        }];
+        [self.scrollerView addSubview:self.attentionBtn];
+        
+        
+        self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(4, CZGetY(iconImage) + space, SCR_WIDTH - 8, 100)];
+        self.webView.backgroundColor = [UIColor whiteColor];
+        [self.scrollerView addSubview:self.webView];
+        self.webView.delegate = self;
+        [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+        self.webView.scrollView.scrollEnabled = NO;
+        [self.webView loadHTMLString:self.model.content baseURL:nil];
+    }
     
-    
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CZGetY(iconImage) + 2 * space, SCR_WIDTH, 100)];
-    [self.scrollerView addSubview:self.webView];
-    self.webView.delegate = self;
-    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-    self.webView.scrollView.scrollEnabled = NO;
-    [self.webView loadHTMLString:self.model.content baseURL:nil];
 
     /** 点赞 */
     //加载点赞小手
-    CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, 200, 115, 36)];
+    CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, 1000, 115, 36)];
     likeView.centerX = self.view.centerX;
-    likeView.type = self.type;
+    likeView.type = self.detailTtype;
     likeView.currentID = self.model.articleId;
     [self.scrollerView addSubview:likeView];
     self.likeView = likeView;
@@ -177,6 +234,7 @@
             // 关注
             self.attentionBtn.type = CZAttentionBtnTypeAttention;
             [CZProgressHUD showProgressHUDWithText:@"取关成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"discoverAttentionChangeNOtification" object:nil userInfo:@{@"value" : @(0)}];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -199,6 +257,8 @@
         if ([result[@"msg"] isEqualToString:@"关注成功"]) {
             [CZProgressHUD showProgressHUDWithText:@"关注成功"];
             self.attentionBtn.type = CZAttentionBtnTypeFollowed;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"discoverAttentionChangeNOtification" object:nil userInfo:@{@"value" : @(1)}];
+            
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -208,6 +268,16 @@
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
+}
+
+- (void)setIsAttentionUser:(BOOL)isAttentionUser
+{
+    _isAttentionUser = isAttentionUser;
+    if (isAttentionUser) {
+        self.attentionBtn.type = CZAttentionBtnTypeFollowed; // 关注
+    } else {
+        self.attentionBtn.type = CZAttentionBtnTypeAttention; // 未关注
+    }
 }
 
 @end

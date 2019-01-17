@@ -17,10 +17,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *user;
 /** 创建时间 */
 @property (nonatomic, strong) NSString *createTime;
+@property (nonatomic, strong) NSString *createTimeStr;
 /** 内容HTML */
 @property (nonatomic, strong) NSString *content;
 /** 当前的ID */
 @property (nonatomic, strong) NSString *articleId;
+/** 分享标题 */
+@property (nonatomic, strong) NSString *shareTitle;
+/** 分享内容 */
+@property (nonatomic, strong) NSString *shareContent;
+/** 分享的URL */
+@property (nonatomic, strong) NSString *shareUrl;
+/** 分享的图片 */
+@property (nonatomic, strong) NSString *shareImg;
+/** 购买数据 */
+@property (nonatomic, strong) NSArray *relatedGoodsList;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -19,6 +19,7 @@
 #import "CZCommentModel.h"
 #import "CZMutContentButton.h"
 
+
 @interface CZEvaluateSubController ()
 /** 评论数据 */
 @property (nonatomic, strong) NSArray *evaluateArr;
@@ -115,7 +116,7 @@
     }];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.targetId;
-    param[@"type"] = @(1);
+    param[@"type"] = self.type;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 删除以前的视图
@@ -210,6 +211,7 @@
 {
     CZAllCriticalController *vc = [[CZAllCriticalController alloc] init];
     vc.goodsId = self.targetId;
+    vc.type = self.type;
     vc.totalCommentCount = self.totalCommentCount;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -219,7 +221,7 @@
 - (void)commentInsert:(NSString *)commentId
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"type"] = @"1"; // 1商品 2评测 3发现
+    param[@"type"] = self.type; // 1商品 2评测 3发现
     param[@"targetId"] = self.targetId;
     param[@"content"] = self.textToolBar.textView.text;
     param[@"parentId"] = commentId ? commentId : @(0);

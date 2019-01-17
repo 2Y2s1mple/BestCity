@@ -105,7 +105,7 @@
             break;
     }
     
-    [[CZUMConfigure shareConfigure] shareToPlatformType:type currentViewController:(UIViewController *)[self superview].nextResponder webUrl:self.param[@"url"] Title:self.param[@"title"] subTitle:self.param[@"smallTitle"] thumImage:self.param[@"img"]];
+    [[CZUMConfigure shareConfigure] shareToPlatformType:type currentViewController:(UIViewController *)[self superview].nextResponder webUrl:self.param[@"shareUrl"] Title:self.param[@"shareTitle"] subTitle:self.param[@"shareContent"] thumImage:self.param[@"shareImg"]];
 }
 
 - (void)dismiss

@@ -9,11 +9,12 @@
 #import "CZAttentionsModel.h"
 
 @implementation CZAttentionsModel
-- (CZAttentionBtnType)attentionType
+
+- (void)setStatus:(NSNumber *)status
 {
-    if (!_attentionType) {
-        _attentionType = CZAttentionBtnTypeFollowed;
+    _status = status;
+    if ([status isEqualToNumber:@(1)]) { // 互关
+        self.attentionType = CZAttentionBtnTypeTogether;
     }
-    return _attentionType;
 }
 @end

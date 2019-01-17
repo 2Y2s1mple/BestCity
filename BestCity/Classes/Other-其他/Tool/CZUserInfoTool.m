@@ -14,18 +14,17 @@
 /** 获取用户信息*/
 + (void)userInfoInformation:(CZUserInfoBlock)block
 {
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/modelUser"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/getUserInfo"];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-//            NSLog(@"%@", result);
-            NSDictionary *userInfo = [[result[@"list"] firstObject] deleteAllNullValue];
-            [[NSUserDefaults standardUserDefaults] setObject:userInfo forKey:@"user"];
-            // 积分
-            [[NSUserDefaults standardUserDefaults] setObject:result[@"points"] forKey:@"point"];
+            // 用户数据
+            NSDictionary *userDic = [result[@"data"] deleteAllNullValue];
             
-            block(result);
+            // 存储用户信息, 都TM存储上了, 这个接口没有token返回
+            [CZSaveTool setObject:userDic forKey:@"user"];
+            
+            block(userDic);
         }
     } failure:^(NSError *error) {
         
@@ -36,9 +35,8 @@
 + (void)changeUserInfo:(NSDictionary *)info callbackAction:(CZUserInfoBlock)action
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
     [param addEntriesFromDictionary:info];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/ModelUserUpdate"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/update"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         
 //        NSLog(@"result ----- %@", result);

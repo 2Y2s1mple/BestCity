@@ -12,8 +12,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZAttentionsModel : NSObject
-/** 用户信息 */
-@property (nonatomic, strong) NSDictionary *userShopmember;
+/** 用户ID */
+@property (nonatomic, strong) NSString *userId;
+/** 名字 */
+@property (nonatomic, strong) NSString *nickname;
+/** 头像 */
+@property (nonatomic, strong) NSString *avatar;
+/** 关注状态 */
+@property (nonatomic, strong) NSNumber *status; // status:1互关 0没有互关
 /** 记录关注按钮 */
 @property (nonatomic, assign) CZAttentionBtnType attentionType;
 @end

@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import "MJExtension.h" // 数据转换
+#import "MJRefresh.h"
 
 typedef void(^blockOfSuccess)(id result);
 typedef void(^blockOfFailure)(NSError *error);

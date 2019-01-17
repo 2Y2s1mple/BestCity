@@ -41,15 +41,15 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
-    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernDelete"];
-    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
+    param[@"attentionUserId"] = self.model.userId;
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/follow/delete"];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已取消"]) {
             // 刷新tableView
             [CZProgressHUD showProgressHUDWithText:@"取关成功"];
             !self.delegate ? : [self.delegate reloadAttentionTableView];
             self.model.attentionType = CZAttentionBtnTypeAttention;
-            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"取消关注成功"}];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"取消关注成功"}];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -62,16 +62,19 @@
 - (void)addAttention
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    // 要关注对象ID
-    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernInsert"];
+    param[@"attentionUserId"] = self.model.userId;
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/follow"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {
+        if ([result[@"msg"] isEqualToString:@"关注成功"]) {
             // 刷新tableView
             [CZProgressHUD showProgressHUDWithText:@"关注成功"];
+            if ([self.model.status  isEqual: @(1)])  {
+                self.model.attentionType = CZAttentionBtnTypeTogether;
+            } else {
+                self.model.attentionType = CZAttentionBtnTypeFollowed;
+            }
             !self.delegate ? : [self.delegate reloadAttentionTableView];
-            self.model.attentionType = CZAttentionBtnTypeFollowed;
-            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"用户关注成功"}];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"用户关注成功"}];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -97,8 +100,9 @@
 {
     _model = model;
     self.btn.type = model.attentionType;
-    self.attentionNameLabel.text = model.userShopmember[@"userNickName"];
-    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:model.userShopmember[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    self.attentionNameLabel.text = model.nickname;
+    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    self.btn.type = self.model.attentionType;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

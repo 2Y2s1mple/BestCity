@@ -7,17 +7,15 @@
 //
 
 #import "CZAttentionController.h"
-#import "CZNavigationView.h"
 #import "CZAttentionCell.h"
-#import "CZAttentionDetailController.h"
 #import "CZAttentionsModel.h"
-#import "MJRefresh.h"
 #import "GXNetTool.h"
-#import "MJExtension.h"
+#import "CZAttentionDetailController.h"
 
 @interface CZAttentionController ()<UITableViewDelegate, UITableViewDataSource, CZAttentionCellDelegate>
 /** 关注列表 */
 @property (nonatomic, strong) NSMutableArray *attentionsData;
+
 @property (nonatomic, strong) UITableView *tableView;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
@@ -48,11 +46,7 @@
 - (void)setupTableView
 {
     self.view.backgroundColor = CZGlobalWhiteBg;
-    //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我的关注" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
-    [self.view addSubview:navigationView];
-    
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CZGetY(navigationView) + 1, SCR_WIDTH, SCR_HEIGHT - CZGetY(navigationView) - 68) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + 50.7)) style:UITableViewStylePlain];;
     [self.view addSubview:tableView];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -83,19 +77,22 @@
     [self.tableView.mj_footer endRefreshing];
     
     // 加载数据
-    self.page = 0;
+    self.page = 1;
     
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
     param[@"page"] = @(self.page);
-    
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/selectAll"];
+    NSString *url;
+    if ([self.type isEqualToString:@"1"]) {    
+        url = [JPSERVER_URL stringByAppendingPathComponent:@"api/follow/list"];
+    } else {
+        url = [JPSERVER_URL stringByAppendingPathComponent:@"api/fans/list"];
+    }
     
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"])
         {
-            if ([result[@"list"] count] > 0) {
+            if ([result[@"data"] count] > 0) {
                 // 删除nodata
                 [self.noDataView removeFromSuperview];
             } else {
@@ -103,7 +100,7 @@
                 [self.tableView addSubview:self.noDataView];
             }
             // 字典转模型
-            self.attentionsData = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"list"]];
+            self.attentionsData = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
         
@@ -121,15 +118,18 @@
     self.page++;
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
     param[@"page"] = @(self.page);
-    
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/selectAll"];
+    NSString *url;
+    if ([self.type isEqualToString:@"1"]) {    
+        url = [JPSERVER_URL stringByAppendingPathComponent:@"api/follow/list"];
+    } else {
+        url = [JPSERVER_URL stringByAppendingPathComponent:@"api/fans/list"];
+    };
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"list"] count] != 0)
         {
             // 字典转模型
-            NSArray *attentions = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"list"]];
+            NSArray *attentions = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.attentionsData addObjectsFromArray:attentions];
             [self.tableView reloadData];
             // 结束刷新

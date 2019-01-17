@@ -8,15 +8,18 @@
 
 #import "CZHotsaleSearchDetailController.h"
 #import "CZTextField.h"
-#import "CZHotSaleCell.h"
 #import "Masonry.h"
 #import "GXNetTool.h"
-#import "MJExtension.h"
-#import "CZRecommendListModel.h"
+#import "CZSearchSubDetailOneController.h"
+#import "CZSearchSubDetailTwoController.h"
 
 @interface CZHotsaleSearchDetailController ()<UITextFieldDelegate>
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
+/** 当前的偏移量 */
+@property (nonatomic, assign) CGFloat currentOffsetY;
+/** 记录偏移量 */
+@property (nonatomic, assign) CGFloat recordOffsetY;
 @end
 
 @implementation CZHotsaleSearchDetailController
@@ -32,43 +35,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 获取数据
-    [self getSourceData];
+    self.view.backgroundColor = [UIColor whiteColor];
     //设置搜索栏
     UIView *searchView = [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, 34)];
-    
-    self.tableView.frame = CGRectMake(0, 35 + 40, SCR_WIDTH, SCR_HEIGHT - CGRectGetMaxY(searchView.frame) - 10);
-}
-
-- (void)getSourceData
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"goodsName"] = self.textTitle;
-    
-    [CZProgressHUD showProgressHUDWithText:nil];
-    //获取数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            if ([result[@"list"] count] > 0) {
-                // 没有数据图片
-                [self.noDataView removeFromSuperview];
-                
-            } else {
-                // 没有数据图片
-                [self.tableView addSubview:self.noDataView];
-                self.tableView.tableFooterView = nil;
-                
-            }
-            self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"list"]];
-            [self.tableView reloadData];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-        
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+    [self.view addSubview:searchView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneControllerScrollViewDidScroll:) name:@"CZSearchSubDetailOneController" object:nil];
 }
 
 #pragma mark - 创建搜索框以及方法
@@ -120,13 +91,13 @@
 
 - (void)clearBtnaction
 {
-    [self.delegate HotsaleSearchDetailController:self isClear:YES];
+    [self.currentDelegate HotsaleSearchDetailController:self isClear:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    [self.delegate HotsaleSearchDetailController:self isClear:NO];
+    [self.currentDelegate HotsaleSearchDetailController:self isClear:NO];
     [self.navigationController popViewControllerAnimated:YES];
     return NO;
 }
@@ -134,6 +105,81 @@
 - (void)cancleAction
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Datasource & Delegate
+- (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController
+{
+    return 4;
+}
+
+- (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
+    NSArray *titles = @[@"商品", @"发现", @"评测", @"试用报告"];
+    return titles[index];
+}
+
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
+    
+    switch (index) {
+        case 0: {
+            CZSearchSubDetailOneController *vc = [[CZSearchSubDetailOneController alloc] init];
+            vc.textSearch = self.textTitle;
+            return vc;
+        }
+        case 1: {
+            CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
+            vc.type = CZDChoicenessControllerTypeDiscover;
+            vc.textSearch = self.textTitle;
+            return vc;
+        }
+        case 2: {
+            CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
+            vc.type = CZDChoicenessControllerTypeEvaluation;
+            vc.textSearch = self.textTitle;
+            return vc;
+        }
+            
+        default:{
+            CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
+            vc.type = CZDChoicenessControllerTypeTry;
+            vc.textSearch = self.textTitle;
+            return vc;
+        };
+    }
+}
+
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
+    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34, SCR_WIDTH, 50);
+}
+
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
+    
+    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84) + 50);
+}
+
+#pragma mark - 通知: 监听scrollerView的滚动
+- (void)oneControllerScrollViewDidScroll:(NSNotification *)notifx
+{
+    UIScrollView *scrollView = notifx.userInfo[@"scrollView"];
+    CGFloat offsetY = scrollView.contentOffset.y;
+    
+    if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) {
+        if (offsetY - self.recordOffsetY >= 0) {
+            NSLog(@"向上滑动");
+            [UIView animateWithDuration:0.25 animations:^{
+                self.view.frame = CGRectMake(0, -50, SCR_WIDTH, SCR_HEIGHT + 50);
+                self.currentOffsetY = -50;
+            }];
+        } else {
+            NSLog(@"向下滑动");
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                self.view.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT);
+                self.currentOffsetY = 0;
+            }];
+        } 
+    }
+    self.recordOffsetY = offsetY;
 }
 
 @end

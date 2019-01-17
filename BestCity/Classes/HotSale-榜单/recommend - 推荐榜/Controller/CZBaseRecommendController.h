@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZBaseRecommendController : UIViewController
 /** 当前数据 */
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 /** 表单 */
 @property (nonatomic, strong) UITableView *tableView;
 - (UIView *)creatFooterView;

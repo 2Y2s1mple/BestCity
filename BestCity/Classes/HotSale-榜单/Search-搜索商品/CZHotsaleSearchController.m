@@ -10,19 +10,25 @@
 #import "CZHotsaleSearchDetailController.h"
 #import "CZHotSearchView.h"
 #import "CZHotTagsView.h"
+#import "GXNetTool.h"
+#import "CZHisSearchCell.h"
 
-@interface CZHotsaleSearchController ()<hotsaleSearchDetailControllerDelegate, CZHotSearchViewDelegate, CZHotTagsViewDelegate>
+@interface CZHotsaleSearchController ()<hotsaleSearchDetailControllerDelegate, CZHotSearchViewDelegate, CZHotTagsViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 /** 历史搜索视图 */
 @property (nonatomic, strong) CZHotTagsView *hisView;
-/** 热门搜索视图 */
-@property (nonatomic, strong) CZHotTagsView *hotView;
 /** 删除Btn */
 @property (nonatomic, strong) UIButton *btnClose;
 /** 记录要删除的tag */
 @property (nonatomic, assign) NSInteger recordTag;
 /** 搜索框 */
 @property (nonatomic, strong) CZHotSearchView *searchView;
+/** search记录 */
+@property (nonatomic, strong) NSMutableArray *searchArr;
+/** 历史搜索记录 */
+@property (nonatomic, strong) NSMutableArray *hisArr;
+/** 历史记录tableView */
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation CZHotsaleSearchController
@@ -32,10 +38,40 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 创建搜索栏
     [self setupSearchView];
-    // 创建历史搜索
-    [self createHistorySearchModule];
-    // 创建热门搜索
-    [self createHotSearchModule];
+    // 获取数据
+    [self getSourceData];
+}
+
+- (void)getSourceData
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/log"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSLog(@"%@", result[@"data"]);
+            // 大家都在搜
+            self.searchArr = [NSMutableArray array];
+            for (NSDictionary *dic in result[@"data"][@"hotWordList"]) {
+                [self.searchArr addObject:dic[@"word"]];
+            }
+            // 历史
+            self.hisArr = [NSMutableArray array];
+            for (NSDictionary *dic in result[@"data"][@"logList"]) {
+                [self.hisArr addObject:dic[@"word"]];
+            }
+            // 创建大家都在搜
+            [self createHistorySearchModule];
+            // 创建历史搜索
+            [self createHotSearchModule];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
 }
 
 #pragma mark - 创建搜索及代理方法
@@ -48,7 +84,7 @@
             // 添加到历史搜索
             [weakSelf.hisView createTagLabelWithTitle:weakSelf.searchView.searchText withEventType:CZHotTagLabelTypeDefault];
             // 更新热门的尺寸
-            weakSelf.hotView.frame = CGRectMake(0, CZGetY(weakSelf.hisView) + 20, SCR_WIDTH, 300);
+//            weakSelf.hotView.frame = CGRectMake(0, CZGetY(weakSelf.hisView) + 20, SCR_WIDTH, 300);
         } else {
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -59,6 +95,7 @@
     self.searchView.delegate = self;
     [self.view addSubview:self.searchView];
 }
+
 // <CZHotSearchViewDelegate>
 - (void)hotView:(CZHotSearchView *)hotView didTextFieldChange:(CZTextField *)textField
 {
@@ -69,26 +106,100 @@
     }
 }
 
-#pragma mark - 创建历史, 热门搜索及代理方法
-// 历史
+#pragma mark - 创建大家都在搜, 历史搜索及代理方法
+// 大家都在搜
 - (void)createHistorySearchModule
 {
     self.hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, 100, SCR_WIDTH, 300)];
-    self.hisView.type = CZHotTagLabelTypeDefault;
+    self.hisView.type = CZHotTagLabelTypeTapGesture;
     self.hisView.delegate = self;
-    self.hisView.title = @"历史搜索";
+    self.hisView.title = @"大家都在搜";
+    self.hisView.hisArray = [NSMutableArray arrayWithArray:self.searchArr];
     [self.view addSubview:_hisView];
 }
 
-// 热门
+// 历史搜索
 - (void)createHotSearchModule
 {
-    self.hotView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, CZGetY(_hisView) + 20, SCR_WIDTH, 300)];
-    self.hotView.type = CZHotTagLabelTypeTapGesture;
-    self.hotView.title = @"热门搜索";
-    self.hotView.delegate = self;
-    self.hotView.hisArray = [NSMutableArray arrayWithArray:@[@"理发器", @"空气净化器", @"豆浆机", @"蒸蛋器", @"剃须刀", @"电火锅"]];
-    [self.view addSubview:_hotView];
+    UIView *historyView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 40, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.hisView) + 40))];
+    [self.view addSubview:historyView];
+
+    UILabel *hisLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 20)];
+    hisLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+    hisLabel.text = @"历史搜索";
+    [historyView addSubview:hisLabel];
+  
+    UIButton *deleteBtn = [[UIButton alloc] init];
+    deleteBtn.frame = CGRectMake(SCR_WIDTH - 14 - 17, hisLabel.y, 17, 17);
+    [deleteBtn setImage:[UIImage imageNamed:@"delete-1"] forState:UIControlStateNormal];
+    [deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
+    [historyView addSubview:deleteBtn];
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, CZGetY(hisLabel) + 20, SCR_WIDTH - 20, SCR_HEIGHT - (CZGetY(hisLabel) + 20)) style:UITableViewStylePlain];
+    tableView.bounces = NO;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [historyView addSubview:tableView];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    self.tableView = tableView;
+}
+
+#pragma mark - 全部删除
+- (void)deleteAction
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除全部历史记录？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        [CZProgressHUD showProgressHUDWithText:nil];
+        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/deleteAll"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"msg"] isEqualToString:@"success"]) {
+                [self reloadData];
+            }        
+        } failure:^(NSError *error) {}];
+    }]];
+    [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:alert animated:NO completion:nil];
+}
+
+- (void)reloadData
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/log"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            // 历史
+            self.hisArr = [NSMutableArray array];
+            for (NSDictionary *dic in result[@"data"][@"logList"]) {
+                [self.hisArr addObject:dic[@"word"]];
+            }
+            [self.tableView reloadData];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.hisArr.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CZHisSearchCell *cell = [CZHisSearchCell cellWithTableView:tableView];
+    cell.historyData = self.hisArr[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *title = self.hisArr[indexPath.row];
+    self.searchView.searchText = title;
+    [self pushSearchDetail];
 }
 
 // 点击事件 <CZHotTagsViewDelegate>
@@ -101,8 +212,8 @@
 // 长按事件 <CZHotTagsViewDelegate>
 - (void)hotTagsViewLongPressAccessoryEvent
 {
-    // 更新热门的尺寸
-    self.hotView.frame = CGRectMake(0, CZGetY(self.hisView) + 20, SCR_WIDTH, 300);
+//    // 大家都在搜
+//    self.hotView.frame = CGRectMake(0, CZGetY(self.hisView) + 20, SCR_WIDTH, 300);
 }
 
 #pragma mark - 回收键盘
@@ -132,7 +243,21 @@
 {
     CZHotsaleSearchDetailController *vc = [[CZHotsaleSearchDetailController alloc] init];
     vc.textTitle = self.searchView.searchText;
-    vc.delegate = self;
+    vc.type = @"1";
+    vc.currentDelegate = self;
+    WMPageController *hotVc = (WMPageController *)vc;
+    hotVc.selectIndex = 0;
+    hotVc.menuViewStyle = WMMenuViewStyleLine;
+    //        hotVc.progressWidth = 30;
+    hotVc.itemMargin = 10;
+    hotVc.progressHeight = 3;
+    hotVc.automaticallyCalculatesItemWidths = YES;
+    hotVc.titleFontName = @"PingFangSC-Medium";
+    hotVc.titleColorNormal = CZGlobalGray;
+    hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
+    hotVc.titleSizeNormal = 15.0f;
+    hotVc.titleSizeSelected = 16;
+    hotVc.progressColor = [UIColor redColor];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

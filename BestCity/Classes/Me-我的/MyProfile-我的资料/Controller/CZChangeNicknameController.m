@@ -68,7 +68,7 @@
 
 - (void)saveUserInfo
 {
-    NSDictionary *param = @{@"userNickName" : self.textfield.text};
+    NSDictionary *param = @{@"nickname" : self.textfield.text};
     [CZUserInfoTool changeUserInfo:param callbackAction:^(NSDictionary *param) {
         // 代理方法更新上一页的用户信息
         [self.delegate updateUserInfo];

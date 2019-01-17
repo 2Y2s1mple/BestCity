@@ -25,7 +25,7 @@
 - (NSArray *)contentTitles
 {
     if (_contentTitles == nil) {
-        _contentTitles = @[@"我要反馈", @"清除缓存", @"联系客服", @"用户协议"];
+        _contentTitles = @[@"我要反馈", @"清除缓存", @"联系客服", @"用户协议", @"关于极品城"];
     }
     return _contentTitles;
 }
@@ -135,6 +135,7 @@
             [self.navigationController pushViewController:webVc animated:YES];
         }
             break;
+        
             
         default:
             break;

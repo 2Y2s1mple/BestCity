@@ -160,7 +160,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.goodsId;
-    param[@"type"] = @(1);
+    param[@"type"] = self.type;
     param[@"page"] = @(1);
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -185,7 +185,7 @@
     self.page++;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.goodsId;
-    param[@"type"] = @(1);
+    param[@"type"] = self.type;
     param[@"page"] = @(self.page);
     
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {

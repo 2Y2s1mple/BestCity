@@ -21,7 +21,7 @@
 {
     self.font = [UIFont systemFontOfSize:13];
     self.textAlignment = NSTextAlignmentCenter;
-    self.layer.cornerRadius = 15;
+    self.layer.cornerRadius = self.height * 0.5;
     self.layer.masksToBounds = YES;
     self.backgroundColor = CZGlobalLightGray;
     self.userInteractionEnabled = YES;

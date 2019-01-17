@@ -72,7 +72,7 @@
 - (void)setHeaderImage:(NSString *)headerImage
 {
     _headerImage = headerImage;
-    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:headerImage] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:headerImage]];
 }
 
 

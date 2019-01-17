@@ -48,6 +48,11 @@
         self.rightTitle.hidden = NO;
         self.rightTitle.text = currentVolum;
         
+    } else if ([title isEqualToString:@"关于极品城"]) {
+         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        self.rightTitle.hidden = NO;
+        self.rightTitle.text = [NSString stringWithFormat:@"v%@", infoDic[@"CFBundleShortVersionString"]];
+        
     }
 }
 

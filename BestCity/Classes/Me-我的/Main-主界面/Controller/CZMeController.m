@@ -7,38 +7,106 @@
 //
 
 #import "CZMeController.h"
-#import "CZMeCell.h"
+
 #import "CZMeArrowCell.h"
 #import "CZMyProfileController.h"
 #import "CZMyPointsController.h"
 #import "WMPageController.h"
-#import "CZLoginController.h"
-#import "GXLuckyDrawController.h"
 #import "CZMutContentButton.h"
+
+#import "CZLoginController.h"
+#import "CZVoteShowView.h"
 #import "UIImageView+WebCache.h"
-#import "CZUserInfoTool.h"
+#import "CZMainAttentionController.h"
+
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 /** 数据 */
 @property (nonatomic, strong) NSArray *dataSource;
-/** 头像 */
-@property (weak, nonatomic) IBOutlet UIImageView *headImage;
 /** 顶部的隐藏的导航栏 */
 @property (nonatomic, strong) UIImageView *navImage;
+/** 头像 */
+@property (weak, nonatomic) IBOutlet UIImageView *headImage;
 /** 登录按钮加用户名 */
 @property (weak, nonatomic) IBOutlet CZMutContentButton *loginBtn;
-/** 积分 */
-@property (weak, nonatomic) IBOutlet CZMutContentButton *pointBtn;
-/** 账户信息 */
-@property (nonatomic, strong) NSDictionary *account;
-/** 会员级别 */
-@property (nonatomic, weak) IBOutlet UILabel *levelLabel;
-
+/** 极币数 */
+@property (nonatomic, weak) IBOutlet UILabel *moneyLabel;
+/** 关注 : follow */
+@property (nonatomic, weak) IBOutlet UILabel *attentionLabel;
+/** 粉丝 */
+@property (nonatomic, weak) IBOutlet UILabel *fansLabel;
+/** 点赞: vote */
+@property (nonatomic, weak) IBOutlet UILabel *voteLabel;
+/** 弹出点赞数 */
+@property (nonatomic, strong) UIView *backView;
 @end
 
 @implementation CZMeController
+#pragma mark - 弹出点赞数
+- (IBAction)voteBtnAction:(UIButton *)sender {
+    UIView *backView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    backView.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backViewHidden)];
+    [backView addGestureRecognizer:tap];
+    self.backView = backView;
+
+    CZVoteShowView *vc = [CZVoteShowView voteShowView];
+    vc.nameLabel.text = JPUSERINFO[@"nickname"];
+    
+    NSString *number = [NSString stringWithFormat:@"%@", JPUSERINFO[@"voteCount"]];
+    NSString *therPrice = [NSString stringWithFormat:@"共获得%@个赞", number];
+    vc.numberLabel.attributedText = [therPrice addAttributeColor:[UIColor colorWithRed:246/255.0 green:92/255.0 blue:56/255.0 alpha:1.0] Range:[therPrice rangeOfString:[NSString stringWithFormat:@"%@", number]]];
+    
+    vc.center = backView.center;
+    [backView addSubview:vc];
+    
+    [self.view addSubview:backView];
+}
+
+- (void)backViewHidden
+{
+    [self.backView removeFromSuperview];
+}
+
+#pragma mark - 跳转到关注
+- (IBAction)AttentionAction:(UIButton *)sender {
+    WMPageController *hotVc = [[CZMainAttentionController alloc] init];
+    hotVc.selectIndex = 0;
+    hotVc.menuViewStyle = WMMenuViewStyleLine;
+    //        hotVc.progressWidth = 30;
+    hotVc.itemMargin = 10;
+    hotVc.progressHeight = 3;
+    hotVc.automaticallyCalculatesItemWidths = YES;
+    hotVc.titleFontName = @"PingFangSC-Medium";
+    hotVc.titleColorNormal = CZGlobalGray;
+    hotVc.titleColorSelected = CZREDCOLOR;
+    hotVc.titleSizeNormal = 15.0f;
+    hotVc.titleSizeSelected = 15;
+    hotVc.progressColor = CZREDCOLOR;
+    [self.navigationController pushViewController:hotVc animated:YES];
+}
+
+#pragma mark - 跳转到关注
+- (IBAction)fansAction:(UIButton *)sender {
+    WMPageController *hotVc = [[CZMainAttentionController alloc] init];
+    hotVc.selectIndex = 1;
+    hotVc.menuViewStyle = WMMenuViewStyleLine;
+    //        hotVc.progressWidth = 30;
+    hotVc.itemMargin = 10;
+    hotVc.progressHeight = 3;
+    hotVc.automaticallyCalculatesItemWidths = YES;
+    hotVc.titleFontName = @"PingFangSC-Medium";
+    hotVc.titleColorNormal = CZGlobalGray;
+    hotVc.titleColorSelected = CZREDCOLOR;
+    hotVc.titleSizeNormal = 15.0f;
+    hotVc.titleSizeSelected = 15;
+    hotVc.progressColor = CZREDCOLOR;
+    [self.navigationController pushViewController:hotVc animated:YES];
+}
+
+
 #pragma mark - 跳转到的我的积分
 - (IBAction)pushMyPointsController:(id)sender {
     CZMyPointsController *vc = [[CZMyPointsController alloc] init];
@@ -50,19 +118,11 @@
 {
     CZMyProfileController *vc = [[CZMyProfileController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-   
 }
 
 #pragma mark - 跳转到我的资料
 - (IBAction)loginAction:(UIButton *)sender {
-    CZMyProfileController *vc = [[CZMyProfileController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - 跳转到抽奖
-- (IBAction)pushLuckyDraw:(id)sender {
-    GXLuckyDrawController *vc = [[GXLuckyDrawController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self pushMyProfileVc];
 }
 
 /** 从plist文件加载数据 */
@@ -94,35 +154,65 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpUserInfo) name:loginChangeUserInfo object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setUpUserInfo];
+}
+
+#pragma mark - 登录时候的通知
+- (void)setUpUserInfo
+{
+    // 给用户信息赋值
+    [self userInfo];
+}
+
+- (void)userInfo
+{
+    // 头像
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:JPUSERINFO[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    
+    // 用户名字
+    [self.loginBtn setTitle:JPUSERINFO[@"nickname"] forState:UIControlStateNormal];
+    self.loginBtn.enabled = YES;
+    [self.loginBtn setImage:nil forState:UIControlStateNormal];
+    
+    // 极币数
+    self.moneyLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"point"]];
+    
+    // 关注
+    self.attentionLabel.text = [NSString stringWithFormat:@"%@",  JPUSERINFO[@"followCount"]];
+    
+    // 粉丝
+    self.fansLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"fansCount"]];
+    
+    // 点赞
+    self.voteLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"voteCount"]];
+}
+
 #pragma mark - <UITableViewDataSource>
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.dataSource.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataSource[section] count];
+    return [self.dataSource[1] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        CZMeCell *cell = [CZMeCell cellWithTabelView:tableView];
-        cell.data = _account ? _account : @{};
-        return cell;
-    } else {
-       NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
-        CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
-        cell.dataSource = dic;
-        return cell;
-    }
+    NSDictionary *dic = self.dataSource[1][indexPath.row];
+    CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
+    cell.dataSource = dic;
+    return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == 0 ? 140 : 60;
+    return 60;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -140,14 +230,25 @@
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
-    if ([dic[@"destinationVC"] isEqualToString:@"CZBalanceController"]) {
-//        [CZProgressHUD showProgressHUDWithText:@"正在开发中..."];
-//        [CZProgressHUD hideAfterDelay:1.5];
+    NSDictionary *dic = self.dataSource[1][indexPath.row];
+    if ([dic[@"destinationVC"] isEqualToString:@"CZCollectController"]) {
+        WMPageController *hotVc = (WMPageController *)[[NSClassFromString(dic[@"destinationVC"]) alloc] init];
+        hotVc.selectIndex = 0;
+        hotVc.menuViewStyle = WMMenuViewStyleLine;
+        //        hotVc.progressWidth = 30;
+        hotVc.itemMargin = 10;
+        hotVc.progressHeight = 3;
+        hotVc.automaticallyCalculatesItemWidths = YES;
+        hotVc.titleFontName = @"PingFangSC-Medium";
+        hotVc.titleColorNormal = CZGlobalGray;
+        hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
+        hotVc.titleSizeNormal = 15.0f;
+        hotVc.titleSizeSelected = 15;
+        hotVc.progressColor = CZREDCOLOR;
+        [self.navigationController pushViewController:hotVc animated:YES];
         return;
     }
     UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
-  
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -162,47 +263,6 @@
     }
     if (offsetY < -20) {
         self.navImage.alpha = 0;
-    }
-}
-
-#pragma mark - 登录通知响应方法
-- (void)setUpUserInfo
-{
-    // 给用户信息赋值
-    [self userInfo];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-        // 给用户信息赋值
-        [self userInfo];
-    }];
-    
-}
-
-- (void)userInfo
-{
-    // 账户信息
-    _account = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"] ? [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"] : @{};
-    [self.tableView reloadData];
-    
-    // 头像
-    [self.headImage sd_setImageWithURL:[NSURL URLWithString:USERINFO[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
-    
-    // 会员等级
-    self.levelLabel.text = [@"V" stringByAppendingFormat:@"%@", USERINFO[@"userMemberGrade"] ? USERINFO[@"userMemberGrade"] : @"0"];
-    
-    // 用户名字
-    [self.loginBtn setTitle:USERINFO[@"userNickName"] forState:UIControlStateNormal];
-    self.loginBtn.enabled = YES;
-    [self.loginBtn setImage:nil forState:UIControlStateNormal];
-   
-    // 积分
-    NSString *point = [[NSUserDefaults standardUserDefaults] objectForKey:@"point"];
-    if (point) {
-        [self.pointBtn setTitle:[NSString stringWithFormat:@"积分 %@", point] forState:UIControlStateNormal];
     }
 }
 

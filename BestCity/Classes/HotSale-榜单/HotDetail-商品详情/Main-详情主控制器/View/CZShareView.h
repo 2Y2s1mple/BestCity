@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZTestDetailModel.h"
 
 @interface CZShareView : UIView
-/** <#注释#> */
+/** 分享的数据 */
 @property (nonatomic, strong) NSDictionary *param;
 @end

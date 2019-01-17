@@ -15,5 +15,7 @@
 /** 详情数据模型 */
 @property (nonatomic, strong) CZTestDetailModel *model;
 /** 文章的类型: 1商品，2评测, 3发现，4试用 */
-@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *detailTtype;
+/** 判断关注的状态 */
+@property (nonatomic, assign) BOOL isAttentionUser;
 @end

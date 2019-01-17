@@ -25,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.textCount = 200;
-    
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我要反馈" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
@@ -34,7 +33,10 @@
     [DLIDEKeyboardView attachToTextView:self.textView];
     
     // 文字个数
-    self.label.text = [NSString stringWithFormat:@"您还可以输入%ld个字", (self.textCount - self.textView.text.length)];
+    NSInteger number = self.textCount - self.textView.text.length;
+    NSString *therPrice = [NSString stringWithFormat:@"您还可以输入%ld个字", number];
+    self.label.attributedText = [therPrice addAttributeColor:CZREDCOLOR Range:[therPrice rangeOfString:[NSString stringWithFormat:@"%ld", number]]];
+    
     
     // 底部退出按钮
     UIButton *loginOut = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -58,18 +60,19 @@
     
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"userId"] = USERINFO[@"userId"];
     param[@"content"] = self.textView.text;
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/feedBackInsert"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/feedback/add"];
     // 请求
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"提交成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         } else {
             [CZProgressHUD showProgressHUDWithText:@"提交失败"];
         }
-        [CZProgressHUD hideAfterDelay:2];
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {
         
     }];
@@ -84,7 +87,10 @@
         NSString *text = [textView.text substringToIndex:self.textCount ];
         self.textView.text = text;
     }
-    self.label.text = [NSString stringWithFormat:@"您还可以输入%ld个字", (self.textCount - textView.text.length)];
+    
+    NSInteger number = self.textCount - textView.text.length;
+    NSString *therPrice = [NSString stringWithFormat:@"您还可以输入%ld个字", number];
+    self.label.attributedText = [therPrice addAttributeColor:CZREDCOLOR Range:[therPrice rangeOfString:[NSString stringWithFormat:@"%ld", number]]];
 }
 
 

@@ -7,14 +7,13 @@
 //
 
 #import "CZEvaluationController.h"
-#import "CZEvaluationChoicenessController.h"
 #import "GXNetTool.h"
-#import "CZEvaluationTitleModel.h"
-#import "MJExtension.h"
+#import "CZDChoicenessController.h"
+#import "CZDiscoverTitleModel.h"
 
 @interface CZEvaluationController ()
 
-@property (nonatomic, strong) NSArray <CZEvaluationTitleModel *> *mainTitles;
+@property (nonatomic, strong) NSArray <CZDiscoverTitleModel *> *mainTitles;
 @end
 
 @implementation CZEvaluationController
@@ -22,10 +21,10 @@
 - (void)obtainTtitles
 {
     //获取数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/evalWay/selectCategory"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/evaluation/categoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             //标题的数据
-            self.mainTitles = [CZEvaluationTitleModel objectArrayWithKeyValuesArray:result[@"list"]];
+            self.mainTitles = [CZDiscoverTitleModel objectArrayWithKeyValuesArray:result[@"data"]];
             
             //刷新WMPage控件
             [self reloadData];
@@ -53,45 +52,20 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index
 {
-    
-    switch (index) {
-        case 0:
-        {
-            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            self.mainTitles[index].categoryId = @"";
-            vc.titleModel = self.mainTitles[index];
-            return vc;
-        }
-        case 1:
-        {
-            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = self.mainTitles[index];
-            return vc;
-        }
-        case 2:
-        {
-            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = self.mainTitles[index];
-            return vc;
-        }
-        case 3:
-        {
-            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = self.mainTitles[index];
-            return vc;
-        }
-        case 4:
-        {
-            CZEvaluationChoicenessController *vc = [[CZEvaluationChoicenessController alloc] init];
-            vc.titleModel = self.mainTitles[index];
-            return vc;
-        }
+    CZDiscoverTitleModel *model = self.mainTitles[index];
+    NSMutableArray *imageList = [NSMutableArray array];
+    for (NSDictionary *dic in model.adList) {
+        [imageList addObject:dic[@"img"]];
     }
-    return [[UIViewController alloc] init];
+    CZDChoicenessController *vc = [[CZDChoicenessController alloc] init];
+    vc.type = CZDChoicenessControllerTypeEvaluation;
+    vc.titleID = model.categoryId;
+    vc.imageUrlList = imageList;
+    return vc;        
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    CZEvaluationTitleModel *model = self.mainTitles[index];
+    CZDiscoverTitleModel *model = self.mainTitles[index];
     return model.categoryName;
 }
 

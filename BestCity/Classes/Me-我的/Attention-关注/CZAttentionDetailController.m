@@ -17,7 +17,6 @@
 #import "CZAttentionDetailModel.h"
 #import "CZChoicenessCell.h" // 发现cell
 #import "CZAttentionDetailCell.h" //没有重用这个测评cell
-#import "CZEvaluationChoicenessDetailController.h" // 测评详情
 #import "CZDChoiceDetailController.h" // 发现详情
 
 
@@ -91,7 +90,7 @@
     
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    param[@"attentionUserId"] = self.model.userId;
     param[@"page"] = @(self.page);
     
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/selectConcern"];
@@ -128,7 +127,7 @@
     self.page++;
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    param[@"attentionUserId"] = self.model.userId;
     param[@"page"] = @(self.page);
     
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/selectConcern"];
@@ -157,7 +156,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 250)];
     UIImageView *topImage = [[UIImageView alloc] init];
     topImage.frame = CGRectMake(0, 0, SCR_WIDTH, 180);
-    [topImage sd_setImageWithURL:[NSURL URLWithString:self.model.userShopmember[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [topImage sd_setImageWithURL:[NSURL URLWithString:self.model.avatar] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     [headerView addSubview:topImage];
     
     // 毛玻璃效果
@@ -190,16 +189,16 @@
     UIImageView *iconImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"head1"]];
     iconImage.layer.cornerRadius = 55 / 2.0;
     iconImage.layer.masksToBounds = YES;
-    [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.userShopmember[@"userNickImg"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+    [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.avatar] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     [titleView addSubview:iconImage];
     //名字
     UILabel *nameLabel = [[UILabel alloc] init];
-    nameLabel.text = self.model.userShopmember[@"userNickName"];
+    nameLabel.text = self.model.nickname;
     nameLabel.font = [UIFont systemFontOfSize:16];
     [titleView addSubview:nameLabel];
     //粉丝数
     UILabel *funsNumber = [[UILabel alloc] init];
-    funsNumber.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.userShopmember[@"fansCount"]];
+    funsNumber.text = [NSString stringWithFormat:@"粉丝数:%@", self.model.status];
     funsNumber.font = [UIFont systemFontOfSize:14];
     funsNumber.textColor = CZGlobalGray;
     [titleView addSubview:funsNumber];
@@ -272,9 +271,7 @@
 {
      CZAttentionDetailModel *model = self.dataSource[indexPath.row];
     if ([model.smallTitle isEqualToString:@"0"]) { // 测评文章
-        CZEvaluationChoicenessDetailController *vc = [[CZEvaluationChoicenessDetailController alloc] init];
-        vc.detailID = model.articleId;
-        [self.navigationController pushViewController:vc animated:YES];
+        
     } else { // 发现
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
         vc.findgoodsId = model.articleId;
@@ -306,7 +303,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
-    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    param[@"attentionUserId"] = self.model.userId;
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernDelete"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"取消关注成功"]) {
@@ -326,7 +323,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
-    param[@"attentionUserId"] = self.model.userShopmember[@"userId"];
+    param[@"attentionUserId"] = self.model.userId;
     NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/concernInsert"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"用户关注成功"]) {

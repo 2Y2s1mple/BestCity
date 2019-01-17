@@ -53,9 +53,9 @@
 {
     // 参数
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"id"] = self.model.contentID;
+    param[@"id"] = self.model.messageUserId;
     
-    NSString *url = [SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/message/selectById"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/message/selectById"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqual: @"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"已读"];

@@ -15,4 +15,6 @@
 @property (nonatomic, strong) NSNumber *totalCommentCount;
 /** 商品ID */
 @property (nonatomic, strong) NSString *goodsId;
+/** 类型: 1商品，2评测, 3发现，4试用 */
+@property (nonatomic, strong) NSString *type;
 @end

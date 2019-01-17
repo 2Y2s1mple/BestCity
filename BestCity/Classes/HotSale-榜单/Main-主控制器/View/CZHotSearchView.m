@@ -70,7 +70,7 @@
     unreadLabel.x = CZGetX(msgBtn) - 10;
     unreadLabel.y = 0;
     unreadLabel.textColor = CZGlobalWhiteBg;
-    unreadLabel.font = [UIFont systemFontOfSize:14];
+    unreadLabel.font = [UIFont systemFontOfSize:11];
     unreadLabel.textAlignment = NSTextAlignmentCenter;
     unreadLabel.size = CGSizeMake(15, 15);
     unreadLabel.backgroundColor = [UIColor redColor];

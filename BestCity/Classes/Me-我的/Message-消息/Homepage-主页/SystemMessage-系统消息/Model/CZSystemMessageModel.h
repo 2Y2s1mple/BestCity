@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZSystemMessageModel : NSObject
 /** id */
-@property (nonatomic, strong) NSString *contentID;
+@property (nonatomic, strong) NSString *messageUserId;
 /** 标题 */
 @property (nonatomic, strong) NSString *title;
 /** 内容 */
