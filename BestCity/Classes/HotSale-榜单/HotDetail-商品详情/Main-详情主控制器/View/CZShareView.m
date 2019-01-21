@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "CZUMConfigure.h"
 #import "CZShareItemButton.h"
+
 #define PLACEHOLDERTAG 100
 @implementation CZShareView
 
@@ -35,7 +36,8 @@
         make.height.equalTo(@(SCR_HEIGHT / 3));
     }];
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"一边分享 一边赚钱";
+//    titleLabel.text = @"分享 一边赚钱";
+    titleLabel.text = @"分享";
     titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
     titleLabel.textColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.87];
     [shareView addSubview:titleLabel];
@@ -44,7 +46,7 @@
         make.centerX.equalTo(shareView);
     }];
     UILabel *subTitleLabel = [[UILabel alloc] init];
-    subTitleLabel.text = @"如果好友通过您分享的链接完成购买，您即可获得10%的佣金，并可提现到支付宝账户。";
+//    subTitleLabel.text = @"如果好友通过您分享的链接完成购买，您即可获得10%的佣金，并可提现到支付宝账户。";
     subTitleLabel.numberOfLines = 2;
     subTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
     subTitleLabel.textColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.87];
@@ -56,7 +58,7 @@
     }];
     CGFloat wh = 50;
     CGFloat space = (SCR_WIDTH - 20 - 5 * wh) / 4;
-    NSArray *imageArr = @[@{@"icon" : @"wechat", @"name" : @"微信好友"}, @{@"icon" : @"pyq", @"name" : @"朋友圈"}, @{@"icon" : @"weibo", @"name" : @"微博"}, @{@"icon" : @"qq-friend", @"name" : @"QQ好友"}, @{@"icon" : @"qq-space", @"name" : @"QQ空间"}];
+    NSArray *imageArr = @[@{@"icon" : @"wechat", @"name" : @"微信好友"}, @{@"icon" : @"pyq", @"name" : @"朋友圈"}, @{@"icon" : @"weibo", @"name" : @"微博"}];
     [imageArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         CZShareItemButton *imageView = [CZShareItemButton buttonWithType:UIButtonTypeCustom];
         imageView.adjustsImageWhenHighlighted = NO;
@@ -111,6 +113,31 @@
 - (void)dismiss
 {
     [self removeFromSuperview];
+}
+
+- (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
+{  
+//    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
+//        
+//        if (error) {
+//            NSLog(@"%@", error);
+//        } else {
+//            UMSocialUserInfoResponse *resp = result;
+//            // 授权信息
+//            NSLog(@"Wechat uid: %@", resp.uid);
+//            NSLog(@"Wechat openid: %@", resp.openid);
+//            NSLog(@"Wechat unionid: %@", resp.unionId);
+//            NSLog(@"Wechat accessToken: %@", resp.accessToken);
+//            NSLog(@"Wechat refreshToken: %@", resp.refreshToken);
+//            NSLog(@"Wechat expiration: %@", resp.expiration);
+//            // 用户信息
+//            NSLog(@"Wechat name: %@", resp.name);
+//            NSLog(@"Wechat iconurl: %@", resp.iconurl);
+//            NSLog(@"Wechat gender: %@", resp.unionGender);
+//            // 第三方平台SDK源数据
+//            NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
+//        }
+//    }];
 }
 
 

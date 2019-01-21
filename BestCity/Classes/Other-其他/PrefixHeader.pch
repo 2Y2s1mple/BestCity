@@ -30,9 +30,9 @@
 
 
 /** 积分规则web */
-#define POINTSRULE_URL @"http://www.jipincheng.cn/integral-rule.html"
+#define POINTSRULE_URL @"https://www.jipincheng.cn/rule.html"
 /** 用户规则web */
-#define UserAgreement_url @"http://www.jipincheng.cn/user-agreement.html"
+#define UserAgreement_url @"https://www.jipincheng.cn/agreement.html"
 /** 支付宝提现账号记录 */
 #define ALIPAYPhone [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayPhone"]
 #define ALIPAYPREALNAME [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayRealName"]

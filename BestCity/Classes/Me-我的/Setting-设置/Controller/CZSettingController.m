@@ -69,10 +69,8 @@
     [CZAlertViewTool showAlertWithTitle:@"确认退出" action:^{
         // 删除用户信息
         [[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"user"];
-        // 删除积分
-        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"point"];
-        // 删除账户余额信息
-        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"Account"];
+        // 删除token
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"token"];
         // 返回上一页
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];

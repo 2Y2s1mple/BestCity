@@ -129,39 +129,23 @@
 #pragma mark - 通知: 监听scrollerView的滚动
 - (void)oneControllerScrollViewDidScroll:(NSNotification *)notifx
 {
-    
     UIScrollView *scrollView = notifx.userInfo[@"scrollView"];
-    
     CGFloat offsetY = scrollView.contentOffset.y;
-    if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) {
-        if (offsetY - self.recordOffsetY >= 0) {
-            NSLog(@"向上滑动");
-            if (self.currentOffsetY <= 50 && self.currentOffsetY >= 0) {
-                self.currentOffsetY += (offsetY - self.recordOffsetY);
-                if (self.currentOffsetY >= 50) {
-                    self.currentOffsetY = 50;
-                    self.search.hidden = YES;
-                }
-            }
-            self.view.frame = CGRectMake(0, -self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
-            self.scrollView.frame = CGRectMake(0, 0, 100, 300);
+    if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) { if (offsetY - self.recordOffsetY >= 0) {
+        NSLog(@"向上滑动");
+            [UIView animateWithDuration:0.25 animations:^{
+                self.view.frame = CGRectMake(0, -50, SCR_WIDTH, SCR_HEIGHT + 50);
+                self.currentOffsetY = -50;
+            }];
         } else {
             NSLog(@"向下滑动");
-            self.search.hidden = NO;
-            if (self.currentOffsetY >= 0) {            
-                self.currentOffsetY += (offsetY - self.recordOffsetY);
-                if (self.currentOffsetY < 0) {
-                    self.currentOffsetY = 0;
-                }
-            }
             
-            self.view.frame = CGRectMake(0, -self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
-        } 
+            [UIView animateWithDuration:0.25 animations:^{
+                self.view.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT);
+                self.currentOffsetY = 0;
+            }];
+        }
     }
-    
-    NSLog(@"scrollView -- %f", offsetY);
-    NSLog(@"currentOffsetY -- %f", self.currentOffsetY);
-    NSLog(@"contentSize.height -- %f", scrollView.contentSize.height - scrollView.height);
     self.recordOffsetY = offsetY;
 }
 
@@ -225,34 +209,7 @@
             self.recordOffsetY = vc.tableView.contentOffset.y;
             return vc;
         }
-           
     }
-//        case 1: {
-//            CZTwoController *vc = [[CZTwoController alloc] init];
-//            vc.subTitles = [self.mainTitles[index] children];
-//            self.recordOffsetY = vc.tableView.contentOffset.y;
-//            return vc;
-//        }
-//        case 2: {
-//            CZTwoController *vc = [[CZTwoController alloc] init];
-//            vc.subTitles = [self.mainTitles[index] children];
-//            self.recordOffsetY = vc.tableView.contentOffset.y;
-//            return vc;
-//        }
-//        case 3: {
-//            CZTwoController *vc = [[CZTwoController alloc] init];
-//            vc.subTitles = [self.mainTitles[index] children];
-//            self.recordOffsetY = vc.tableView.contentOffset.y;
-//            return vc;
-//        }
-//        case 4: {
-//            CZTwoController *vc = [[CZTwoController alloc] init];
-//            vc.subTitles = [self.mainTitles[index] children];
-//            self.recordOffsetY = vc.tableView.contentOffset.y;
-//            return vc;
-//        }
-//    }
-
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {

@@ -10,6 +10,8 @@
 #import "GXNetTool.h"
 #import "CZProgressHUD.h"
 #import "TSLWebViewController.h"
+#import <UMShare/UMShare.h>
+#import "CZBindingController.h"
 
 @interface CZLoginController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -44,7 +46,6 @@ static id instancet_;
     return instancet_;
 }
 
-
 #pragma mark - POP到前一页
 - (IBAction)popAction:(id)sender {
     UITabBarController *vc = (UITabBarController *)self.nextResponder;
@@ -52,6 +53,41 @@ static id instancet_;
         vc.selectedIndex = 0;
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 微信登录
+- (IBAction)logininWithWxin
+{
+    [[UMSocialManager defaultManager] authWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+        UMSocialShareResponse *resp = result;
+        NSLog(@"authWithPlatform -  %@", resp.originalResponse);
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        param[@"accessToken"] =  resp.originalResponse[@"access_token"];
+        param[@"openid"] = resp.originalResponse[@"openid"];
+        param[@"channel"] = @(1);
+        
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/thirdLogin"];
+        [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"code"] isEqualToNumber:@(700)])
+            {
+                CZBindingController *vc = [[CZBindingController alloc] init];
+                vc.openid = param[@"openid"];
+                [self presentViewController:vc animated:NO completion:nil];
+            } else if ([result[@"code"] isEqualToNumber:@(0)]){
+                [CZProgressHUD showProgressHUDWithText:@"登录成功"];
+                [CZProgressHUD hideAfterDelay:1];
+                // 用户数据
+                NSDictionary *userDic = [result[@"data"] deleteAllNullValue];
+                // 存储token 
+                [CZSaveTool setObject:userDic[@"token"] forKey:@"token"];
+                // 存储用户信息, 都TM存储上了
+                [CZSaveTool setObject:userDic forKey:@"user"];
+                // 登录成功发送通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
+            }
+            
+        } failure:^(NSError *error) {}];
+    }];
 }
 
 #pragma mark - 登录
@@ -72,10 +108,8 @@ static id instancet_;
             [CZProgressHUD hideAfterDelay:2];
             // 用户数据
             NSDictionary *userDic = [result[@"data"] deleteAllNullValue];
-            
             // 存储token 
             [CZSaveTool setObject:userDic[@"token"] forKey:@"token"];
-
             // 存储用户信息, 都TM存储上了
             [CZSaveTool setObject:userDic forKey:@"user"];
             
@@ -85,7 +119,6 @@ static id instancet_;
             
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             [CZProgressHUD hideAfterDelay:2];
@@ -147,6 +180,14 @@ static id instancet_;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userAgreement)];
     [self.userAgreementLabel addGestureRecognizer:tap];
     self.userAgreementLabel.userInteractionEnabled = YES;
+    
+    // 接收登录时候的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissViewController) name:loginChangeUserInfo object:nil];
+}
+
+- (void)dismissViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /** 跳转用户协议 */

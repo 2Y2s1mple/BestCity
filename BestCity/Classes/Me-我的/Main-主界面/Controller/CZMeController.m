@@ -18,6 +18,7 @@
 #import "CZVoteShowView.h"
 #import "UIImageView+WebCache.h"
 #import "CZMainAttentionController.h"
+#import "CZCoinCenterController.h"
 
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -123,6 +124,14 @@
 #pragma mark - 跳转到我的资料
 - (IBAction)loginAction:(UIButton *)sender {
     [self pushMyProfileVc];
+}
+
+#pragma mark - 跳转到极币数
+- (IBAction)coinAction:(UIButton *)sender {
+    CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES
+     ];
+    
 }
 
 /** 从plist文件加载数据 */

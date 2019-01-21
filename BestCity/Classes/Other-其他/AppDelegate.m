@@ -12,6 +12,7 @@
 #import "CZUMConfigure.h"
 #import "CZGuideTool.h"
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
+//#import "UMSocialSnsService.h"
 
 @interface AppDelegate ()
 
@@ -36,11 +37,11 @@
    [[CZUMConfigure shareConfigure] configure];
     
     // 百川平台基础SDK初始化，加载并初始化各个业务能力插件
-//    [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
-//        NSLog(@" 百川平台基础SDK初始化，加载并初始化各个业务能力插件");
-//    } failure:^(NSError *error) {
-//        NSLog(@"Init failed: %@", error.description);
-//    }];
+    [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
+        NSLog(@" 百川平台基础SDK初始化，加载并初始化各个业务能力插件");
+    } failure:^(NSError *error) {
+        NSLog(@"Init failed: %@", error.description);
+    }];
 
     return YES;
 }
@@ -65,14 +66,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
-
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
+{ 
+    [[UMSocialManager defaultManager] handleOpenURL:url];
     NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
     NSLog(@"URL scheme:%@", [url scheme]);
     NSLog(@"URL query: %@", [url query]);
-    
     // Customer Code
     return YES;
 }

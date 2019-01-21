@@ -23,6 +23,7 @@
 {
     if (self.childViewControllers.count > 0) {
         [viewController setHidesBottomBarWhenPushed:YES];
+        viewController.tabBarController.tabBar.hidden = YES;
     }
     [super pushViewController:viewController animated:animated];
 }

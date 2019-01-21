@@ -73,7 +73,7 @@ static NSString * const type = @"1";
             // 打开淘宝
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
         }];
-        _likeView.titleData = @{@"left" : @"分享赚20元", @"right" : @"领券并购买"};
+        _likeView.titleData = @{@"left" : @"分享", @"right" : @"领券并购买"};
     }
     return _likeView;
 }

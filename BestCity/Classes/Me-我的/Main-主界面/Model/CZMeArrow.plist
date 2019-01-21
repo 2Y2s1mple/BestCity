@@ -23,7 +23,7 @@
 			<key>icon</key>
 			<string>follow</string>
 			<key>destinationVC</key>
-			<string>CZAttentionController</string>
+			<string>CZCoinCenterController</string>
 		</dict>
 		<dict>
 			<key>title</key>

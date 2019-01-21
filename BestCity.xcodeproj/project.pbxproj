@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFC2182F46B0008E416 /* CZHotTitleModel.m */; };
 		97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */; };
+		970C50A521F17E890091D7FF /* CZCoinCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970C50A321F17E890091D7FF /* CZCoinCenterController.m */; };
+		970C50A621F17E890091D7FF /* CZCoinCenterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970C50A421F17E890091D7FF /* CZCoinCenterController.xib */; };
+		970C50A821F17F490091D7FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970C50A721F17F480091D7FF /* Assets.xcassets */; };
 		970D0AE721AB981500649FC2 /* CZGuideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970D0AE621AB981500649FC2 /* CZGuideController.m */; };
 		970D0B6B21ACE87000649FC2 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5821ACE87000649FC2 /* UTDID.framework */; };
 		970D0B6C21ACE87000649FC2 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5921ACE87000649FC2 /* UTMini.framework */; };
@@ -25,7 +28,6 @@
 		970D0B7721ACE87000649FC2 /* AlibcTradeCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */; };
 		970D0B7821ACE87000649FC2 /* TUnionTradeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */; };
 		970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970D0B6A21ACE87000649FC2 /* NBResource.bundle */; };
-		970D0B7B21ACE87900649FC2 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 970D0B7A21ACE87800649FC2 /* yw_1222.jpg */; };
 		970D0B7D21ACE90D00649FC2 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */; };
 		970D0B7F21ACE96D00649FC2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B7E21ACE96D00649FC2 /* libc++.tbd */; };
 		971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C19EC21706B1400E6D864 /* CZPointDetailModel.m */; };
@@ -40,7 +42,6 @@
 		9723F28E21B263E2006E18D2 /* TSLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723F28C21B263E2006E18D2 /* TSLWebViewController.m */; };
 		97243A1121B5555200EBFFCE /* CZEndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97243A1021B5555200EBFFCE /* CZEndLineView.m */; };
 		97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97243A1221B5555C00EBFFCE /* CZEndLineView.xib */; };
-		97243A1921B620E100EBFFCE /* launchLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 97243A1621B620E100EBFFCE /* launchLogo.png */; };
 		9729617121B11CB600648940 /* CZJPushHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9729616F21B11CB600648940 /* CZJPushHandler.m */; };
 		972E419E2113FC7A00BC751C /* UIImage+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E419D2113FC7A00BC751C /* UIImage+CZExtension.m */; };
 		972E41B0211450ED00BC751C /* CZMyPointsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41AF211450ED00BC751C /* CZMyPointsController.m */; };
@@ -97,7 +98,6 @@
 		9765333B21B8F007002F9308 /* apijipinchengcn.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9765333A21B8F007002F9308 /* apijipinchengcn.cer */; };
 		9765649921A53BF2008A0293 /* CZCollectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765649821A53BF2008A0293 /* CZCollectButton.m */; };
 		97705C122107068E00485D64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C102107068E00485D64 /* Main.storyboard */; };
-		97705C142107068F00485D64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97705C132107068F00485D64 /* Assets.xcassets */; };
 		97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C152107068F00485D64 /* LaunchScreen.storyboard */; };
 		97705C53210716A300485D64 /* CZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C34210716A300485D64 /* CZTabBarController.m */; };
 		97705C54210716A300485D64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C36210716A300485D64 /* main.m */; };
@@ -191,6 +191,10 @@
 		979EFD8521E085B5000FE466 /* CZHotSaleDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8421E085B5000FE466 /* CZHotSaleDetailModel.m */; };
 		979EFD8921E08923000FE466 /* CZCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8821E08923000FE466 /* CZCommodityModel.m */; };
 		979EFD8D21E0AC9B000FE466 /* CZCouponsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */; };
+		97B30CFA21F2FEF900B8427E /* launchLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 97B30CF921F2FEF900B8427E /* launchLogo.png */; };
+		97B30CFE21F30CA000B8427E /* CZBindingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B30CFB21F30C9F00B8427E /* CZBindingController.m */; };
+		97B30CFF21F30CA000B8427E /* CZBindingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B30CFD21F30CA000B8427E /* CZBindingController.xib */; };
+		97B30D0121F32B1000B8427E /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 97B30D0021F32B1000B8427E /* yw_1222.jpg */; };
 		97B875FC21EDC472001CC393 /* CZVoteShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B875FB21EDC472001CC393 /* CZVoteShowView.m */; };
 		97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B875FD21EDC47D001CC393 /* CZVoteShowView.xib */; };
 		97B8760A21EED78A001CC393 /* CZMainAttentionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B8760921EED78A001CC393 /* CZMainAttentionController.m */; };
@@ -321,6 +325,10 @@
 		97054BFC2182F46B0008E416 /* CZHotTitleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotTitleModel.m; sourceTree = "<group>"; };
 		97054BFE2182FACC0008E416 /* CZHotSubTilteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotSubTilteModel.h; sourceTree = "<group>"; };
 		97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSubTilteModel.m; sourceTree = "<group>"; };
+		970C50A221F17E890091D7FF /* CZCoinCenterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCoinCenterController.h; sourceTree = "<group>"; };
+		970C50A321F17E890091D7FF /* CZCoinCenterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCoinCenterController.m; sourceTree = "<group>"; };
+		970C50A421F17E890091D7FF /* CZCoinCenterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCoinCenterController.xib; sourceTree = "<group>"; };
+		970C50A721F17F480091D7FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		970D0AE521AB981500649FC2 /* CZGuideController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZGuideController.h; sourceTree = "<group>"; };
 		970D0AE621AB981500649FC2 /* CZGuideController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZGuideController.m; sourceTree = "<group>"; };
 		970D0B5821ACE87000649FC2 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
@@ -338,7 +346,6 @@
 		970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeCommon.framework; sourceTree = "<group>"; };
 		970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TUnionTradeSDK.framework; sourceTree = "<group>"; };
 		970D0B6A21ACE87000649FC2 /* NBResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NBResource.bundle; sourceTree = "<group>"; };
-		970D0B7A21ACE87800649FC2 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		970D0B7E21ACE96D00649FC2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		971C19EB21706B1400E6D864 /* CZPointDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointDetailModel.h; sourceTree = "<group>"; };
@@ -363,7 +370,6 @@
 		97243A0F21B5555200EBFFCE /* CZEndLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEndLineView.h; sourceTree = "<group>"; };
 		97243A1021B5555200EBFFCE /* CZEndLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEndLineView.m; sourceTree = "<group>"; };
 		97243A1221B5555C00EBFFCE /* CZEndLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEndLineView.xib; sourceTree = "<group>"; };
-		97243A1621B620E100EBFFCE /* launchLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchLogo.png; sourceTree = "<group>"; };
 		9729616F21B11CB600648940 /* CZJPushHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZJPushHandler.m; sourceTree = "<group>"; };
 		9729617021B11CB600648940 /* CZJPushHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZJPushHandler.h; sourceTree = "<group>"; };
 		972E419C2113FC7A00BC751C /* UIImage+CZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CZExtension.h"; sourceTree = "<group>"; };
@@ -458,7 +464,6 @@
 		9765649821A53BF2008A0293 /* CZCollectButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectButton.m; sourceTree = "<group>"; };
 		97705C072107068E00485D64 /* BestCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97705C112107068E00485D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		97705C132107068F00485D64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97705C162107068F00485D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97705C182107068F00485D64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97705C32210716A300485D64 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -649,6 +654,11 @@
 		979EFD8821E08923000FE466 /* CZCommodityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommodityModel.m; sourceTree = "<group>"; };
 		979EFD8B21E0AC9B000FE466 /* CZCouponsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCouponsModel.h; sourceTree = "<group>"; };
 		979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCouponsModel.m; sourceTree = "<group>"; };
+		97B30CF921F2FEF900B8427E /* launchLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchLogo.png; sourceTree = "<group>"; };
+		97B30CFB21F30C9F00B8427E /* CZBindingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZBindingController.m; sourceTree = "<group>"; };
+		97B30CFC21F30C9F00B8427E /* CZBindingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZBindingController.h; sourceTree = "<group>"; };
+		97B30CFD21F30CA000B8427E /* CZBindingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CZBindingController.xib; sourceTree = "<group>"; };
+		97B30D0021F32B1000B8427E /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		97B875FA21EDC472001CC393 /* CZVoteShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZVoteShowView.h; sourceTree = "<group>"; };
 		97B875FB21EDC472001CC393 /* CZVoteShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZVoteShowView.m; sourceTree = "<group>"; };
 		97B875FD21EDC47D001CC393 /* CZVoteShowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZVoteShowView.xib; sourceTree = "<group>"; };
@@ -1004,12 +1014,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		970C50A121F17E350091D7FF /* CoinCenter-极币中心 */ = {
+			isa = PBXGroup;
+			children = (
+				970C50A221F17E890091D7FF /* CZCoinCenterController.h */,
+				970C50A321F17E890091D7FF /* CZCoinCenterController.m */,
+				970C50A421F17E890091D7FF /* CZCoinCenterController.xib */,
+			);
+			path = "CoinCenter-极币中心";
+			sourceTree = "<group>";
+		};
 		970D0B5521ACE84900649FC2 /* 百川 */ = {
 			isa = PBXGroup;
 			children = (
+				97B30D0021F32B1000B8427E /* yw_1222.jpg */,
 				9723075B21AD73850004C00C /* CZOpenAlibcTrade.h */,
 				9723075C21AD73850004C00C /* CZOpenAlibcTrade.m */,
-				970D0B7A21ACE87800649FC2 /* yw_1222.jpg */,
 				970D0B5621ACE87000649FC2 /* 电商必选组件 */,
 			);
 			path = "百川";
@@ -1469,10 +1489,10 @@
 				974C58742122A056008B3E6A /* BestCity.entitlements */,
 				97705C30210716A300485D64 /* Classes */,
 				97705C102107068E00485D64 /* Main.storyboard */,
-				97705C132107068F00485D64 /* Assets.xcassets */,
 				97705C152107068F00485D64 /* LaunchScreen.storyboard */,
+				970C50A721F17F480091D7FF /* Assets.xcassets */,
 				97705C182107068F00485D64 /* Info.plist */,
-				97243A1621B620E100EBFFCE /* launchLogo.png */,
+				97B30CF921F2FEF900B8427E /* launchLogo.png */,
 			);
 			path = BestCity;
 			sourceTree = "<group>";
@@ -1546,6 +1566,7 @@
 			isa = PBXGroup;
 			children = (
 				97CF34282177397100DA9198 /* Main-主界面 */,
+				970C50A121F17E350091D7FF /* CoinCenter-极币中心 */,
 				972E41C221147BE400BC751C /* Attention-关注 */,
 				972E41D321147C8000BC751C /* Collect-收藏 */,
 				972E41DE21147CE500BC751C /* Message-消息 */,
@@ -2349,6 +2370,9 @@
 		97CF34272177393900DA9198 /* Login-登录 */ = {
 			isa = PBXGroup;
 			children = (
+				97B30CFC21F30C9F00B8427E /* CZBindingController.h */,
+				97B30CFB21F30C9F00B8427E /* CZBindingController.m */,
+				97B30CFD21F30CA000B8427E /* CZBindingController.xib */,
 				97572A8921198F7F00FB42DE /* CZLoginController.h */,
 				97572A8A21198F7F00FB42DE /* CZLoginController.m */,
 				97572A8B21198F7F00FB42DE /* CZLoginController.xib */,
@@ -2710,17 +2734,18 @@
 				97D8FCC82111796600D8ED8F /* CZMeArrow.plist in Resources */,
 				97ED11F3211582910003E0F7 /* CZAttentionCell.xib in Resources */,
 				97FF6DE021182FF900376435 /* CZDiscountCouponCell.xib in Resources */,
+				97B30CFF21F30CA000B8427E /* CZBindingController.xib in Resources */,
 				97798C7C212CF4430052CE94 /* SVProgressHUD.bundle in Resources */,
 				974F489221A3B5BE00E1ED1A /* CZAttentionDetailCell.xib in Resources */,
 				9799933821A67B1A0000D42B /* CZCommentDetailCell.xib in Resources */,
 				97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */,
 				97BC05E72112CF7E001ED65A /* CZMembershipController.xib in Resources */,
 				97FF6DF9211862EF00376435 /* CZfeedbackController.xib in Resources */,
-				970D0B7B21ACE87900649FC2 /* yw_1222.jpg in Resources */,
 				97BC05DF2112B122001ED65A /* key-blue@2x.png in Resources */,
 				9765333B21B8F007002F9308 /* apijipinchengcn.cer in Resources */,
 				97BC05E02112B122001ED65A /* key-pressed.png in Resources */,
 				97F0EC20212512B6000FE1DC /* UMSocialSDKResources.bundle in Resources */,
+				970C50A821F17F490091D7FF /* Assets.xcassets in Resources */,
 				9785778821A6E04800E42B29 /* CZPackUpCommentCell.xib in Resources */,
 				972E41C721147C2000BC751C /* CZOrderController.xib in Resources */,
 				97C78FCD21197E9500374CCD /* CZMessageActivityCell.xib in Resources */,
@@ -2729,8 +2754,8 @@
 				97BC05DB2112B122001ED65A /* key-pressed@2x.png in Resources */,
 				97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */,
 				97C78FC621196C6F00374CCD /* CZSystemMessageCell.xib in Resources */,
+				97B30D0121F32B1000B8427E /* yw_1222.jpg in Resources */,
 				9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */,
-				97705C142107068F00485D64 /* Assets.xcassets in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
 				970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */,
 				9723076221AD77000004C00C /* CZNoDataView.xib in Resources */,
@@ -2739,18 +2764,19 @@
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
-				97243A1921B620E100EBFFCE /* launchLogo.png in Resources */,
 				97BC05DC2112B122001ED65A /* key-blue.png in Resources */,
 				97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */,
 				97D8FCC32111612200D8ED8F /* CZMeArrowCell.xib in Resources */,
 				972E41CC21147C3A00BC751C /* CZAttentionController.xib in Resources */,
 				97705CD52108495D00485D64 /* CZHotSaleCell.xib in Resources */,
 				97BDB85F211077D800966FF0 /* CZMeController.xib in Resources */,
+				970C50A621F17E890091D7FF /* CZCoinCenterController.xib in Resources */,
 				97420DCF21E9BE5100FE3D9F /* CZBuyViewCell.xib in Resources */,
 				97FF6DF421184F5A00376435 /* CZSettingCell.xib in Resources */,
 				97F0EC1F212512B6000FE1DC /* UMCommonLog.bundle in Resources */,
 				972E41B2211455C500BC751C /* CZMyPointsController.xib in Resources */,
 				97C85131211AFAA9005540D8 /* CZBindingMobileController.xib in Resources */,
+				97B30CFA21F2FEF900B8427E /* launchLogo.png in Resources */,
 				97C7FF3A216DDDB50091DC07 /* MJRefresh.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2780,6 +2806,7 @@
 				97BDE5CB2195B232005FB405 /* CZConst.m in Sources */,
 				979B05CD210EBD270023292D /* CZMutContentButton.m in Sources */,
 				97BB480F2133BDA3006AE982 /* CZEvaluateSubController.m in Sources */,
+				97B30CFE21F30CA000B8427E /* CZBindingController.m in Sources */,
 				97C7FF42216DDDB50091DC07 /* MJRefreshAutoGifFooter.m in Sources */,
 				979EFD8921E08923000FE466 /* CZCommodityModel.m in Sources */,
 				97C85130211AFAA9005540D8 /* CZBindingMobileController.m in Sources */,
@@ -2904,6 +2931,7 @@
 				97CDCB32211D625700521ED5 /* UILabel+CZAdapter.m in Sources */,
 				974F488D21A3B03600E1ED1A /* CZAttentionDetailModel.m in Sources */,
 				97BDB84D21100B8800966FF0 /* CZChoicenessCell.m in Sources */,
+				970C50A521F17E890091D7FF /* CZCoinCenterController.m in Sources */,
 				972E41C621147C2000BC751C /* CZOrderController.m in Sources */,
 				97705C77210729BA00485D64 /* CZTextField.m in Sources */,
 				97C7FF07216DDDAB0091DC07 /* NSString+MJExtension.m in Sources */,
@@ -3119,7 +3147,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = G583M5JELZ;
+				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/umcommonlog/umcommonlog_ios_1.0.0",
@@ -3184,10 +3212,10 @@
 					"-force_load",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/TUnionTradeSDK.framework/TUnionTradeSDK\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qualityshop.platform;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.administrator.jipinshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c69694f4-0041-4bf3-aaea-e9357e2bb2bf";
-				PROVISIONING_PROFILE_SPECIFIER = qualityshop;
+				PROVISIONING_PROFILE_SPECIFIER = JIPINDevelopment;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
@@ -3199,9 +3227,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = G583M5JELZ;
+				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/umcommonlog/umcommonlog_ios_1.0.0",
@@ -3266,10 +3294,10 @@
 					"-force_load",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/TUnionTradeSDK.framework/TUnionTradeSDK\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qualityshop.platform;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.administrator.jipinshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c69694f4-0041-4bf3-aaea-e9357e2bb2bf";
-				PROVISIONING_PROFILE_SPECIFIER = qualityshop;
+				PROVISIONING_PROFILE_SPECIFIER = JIPINDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
