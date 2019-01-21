@@ -42,6 +42,9 @@
                     <state key="normal" title="优惠券" backgroundImage="hot-list-coupon">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="ticketBugLink" destination="iN0-l3-epB" eventType="touchUpInside" id="lwT-CN-2JY"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0E-vJ-eSR">
                     <rect key="frame" x="81" y="172.5" width="52" height="45"/>

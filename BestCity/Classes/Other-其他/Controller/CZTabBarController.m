@@ -58,9 +58,7 @@
     if ([USERINFO[@"userId"] length] <= 0 && tabBarController.selectedIndex == 3) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
-    } else {
-        
-    }
+    } else {}
 }
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage

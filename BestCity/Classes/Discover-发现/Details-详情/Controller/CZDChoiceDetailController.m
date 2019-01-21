@@ -93,7 +93,7 @@ static CGFloat const likeAndShareHeight = 49;
             buyView.buyDataList = self.dicDataModel.relatedGoodsList;
             [weakSelf.view addSubview:buyView];
         }];
-        _likeView.titleData = @{@"left" : @"分享赚20元", @"right" : @"相关商品"};
+        _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
     }
     return _likeView;
 }

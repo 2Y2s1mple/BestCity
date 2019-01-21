@@ -34,6 +34,7 @@
 
 @implementation CZHotSaleController
 
+
 #pragma mark - 获取标题数据
 - (void)obtainTtitles
 {

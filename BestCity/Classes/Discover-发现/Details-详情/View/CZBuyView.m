@@ -9,6 +9,7 @@
 #import "CZBuyView.h"
 #import "Masonry.h"
 #import "CZBuyViewCell.h"
+#import "CZOpenAlibcTrade.h"
 
 @interface CZBuyView () <UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
@@ -111,6 +112,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.buyDataList.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dic = self.buyDataList[indexPath.row];
+    // 打开淘宝
+    [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:self];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

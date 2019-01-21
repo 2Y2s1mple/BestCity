@@ -7,6 +7,7 @@
 //
 
 #import "CZCommodityView.h"
+#import "CZOpenAlibcTrade.h"
 
 @interface CZCommodityView ()
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
@@ -146,6 +147,12 @@
         [self layoutIfNeeded];//写在这里是有问题的, 不换行还好
         self.commodityH = CGRectGetMaxY(self.lineView.frame);
     }
+}
+
+- (IBAction)ticketBugLink
+{
+    // 打开淘宝
+    [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.couponModel.couponsUrl parentController:self];
 }
 
 - (NSString *)platfromNameWithNumber:(NSNumber *)platformNumber

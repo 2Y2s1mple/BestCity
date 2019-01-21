@@ -124,6 +124,7 @@ static NSString * const type = @"1";
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     // 获取数据
     [self getSourceData];
      

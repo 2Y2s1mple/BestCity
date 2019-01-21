@@ -42,7 +42,7 @@
                         <color key="textColor" red="0.6744493842124939" green="0.6745484471321106" blue="0.67442780733108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5N-Ey-L3C">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5N-Ey-L3C">
                         <rect key="frame" x="414" y="98.5" width="75" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="立即购买" backgroundImage="buy">
@@ -74,7 +74,7 @@
                 <outlet property="otherPrice" destination="QGH-NS-IUl" id="zTa-23-PQJ"/>
                 <outlet property="titleLabel" destination="ThD-WA-k6b" id="sNP-rg-UBN"/>
             </connections>
-            <point key="canvasLocation" x="54" y="-53"/>
+            <point key="canvasLocation" x="-247" y="-61"/>
         </tableViewCell>
     </objects>
     <resources>

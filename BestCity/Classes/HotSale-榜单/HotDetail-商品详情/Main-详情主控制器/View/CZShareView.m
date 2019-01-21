@@ -56,15 +56,15 @@
         make.left.equalTo(shareView).offset(20);
         make.right.equalTo(shareView).offset(-20);
     }];
-    CGFloat wh = 50;
-    CGFloat space = (SCR_WIDTH - 20 - 5 * wh) / 4;
+
+    CGFloat space = SCR_WIDTH / 7.0;
     NSArray *imageArr = @[@{@"icon" : @"wechat", @"name" : @"微信好友"}, @{@"icon" : @"pyq", @"name" : @"朋友圈"}, @{@"icon" : @"weibo", @"name" : @"微博"}];
     [imageArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         CZShareItemButton *imageView = [CZShareItemButton buttonWithType:UIButtonTypeCustom];
         imageView.adjustsImageWhenHighlighted = NO;
         [imageView setImage:[UIImage imageNamed:obj[@"icon"]] forState:UIControlStateNormal];
         [imageView setTitle:obj[@"name"] forState:UIControlStateNormal];
-        imageView.frame = CGRectMake(10 + (wh + space) * idx, 120, 50, 60);
+        imageView.frame = CGRectMake(space * ((idx +  1) * 2 - 1), 120, 50, 60);
         imageView.tag = idx + PLACEHOLDERTAG;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action:)];
         [imageView addGestureRecognizer:tap];
@@ -85,6 +85,10 @@
 
 - (void)action:(UITapGestureRecognizer *)tap
 {
+    
+   
+    
+    
     UMSocialPlatformType type = UMSocialPlatformType_UnKnown;//未知的
     switch (tap.view.tag - PLACEHOLDERTAG) {
         case 0:
@@ -105,6 +109,12 @@
         default:
             
             break;
+    }
+    
+    if (![[UMSocialManager defaultManager] isInstall:type]) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
+        [CZProgressHUD hideAfterDelay:2];
+        return;
     }
     
     [[CZUMConfigure shareConfigure] shareToPlatformType:type currentViewController:(UIViewController *)[self superview].nextResponder webUrl:self.param[@"shareUrl"] Title:self.param[@"shareTitle"] subTitle:self.param[@"shareContent"] thumImage:self.param[@"shareImg"]];

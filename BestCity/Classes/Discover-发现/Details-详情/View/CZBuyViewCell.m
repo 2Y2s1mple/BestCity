@@ -31,8 +31,16 @@
     [self. bidImage sd_setImageWithURL:[NSURL URLWithString:buyDataDic[@"img"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     self.titleLabel.text = buyDataDic[@"goodsName"];
     self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [buyDataDic[@"actualPrice"] floatValue]];
-    NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%@", [self platfromNameWithNumber:buyDataDic[@"source"]], buyDataDic[@"otherPrice"]];
-    self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%@", buyDataDic[@"otherPrice"]]]];
+    if ([buyDataDic[@"status"] isEqualToNumber:@(1)]) {
+        self.otherPrice.hidden = NO;
+        NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%@", [self platfromNameWithNumber:buyDataDic[@"source"]], buyDataDic[@"otherPrice"]];
+        self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%@", buyDataDic[@"otherPrice"]]]];
+    } else {
+        self.otherPrice.hidden = YES;
+    }
+    
+    
+    
     
 }
 
