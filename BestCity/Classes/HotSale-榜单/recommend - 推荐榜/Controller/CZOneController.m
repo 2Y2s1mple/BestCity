@@ -59,16 +59,12 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @(0);
     param[@"clientVersionCode"] = @"1.00";
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSNumber *appVersion1 = result[@"appVersion"][@"open"];
-            if (![appVersion1 isEqual:@(0)]) {
-                appVersion = YES;
-            } else {
-                appVersion = NO;
-            }
+            if (![appVersion1 isEqual:@(0)]) {} else {}
             //有新版本
-            [CZSaveTool setObject:result[@"appVersion"] forKey:requiredVersionCode];
+            [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
             // 判断是否更新
             [self isNeedUpdate];
         }
@@ -110,7 +106,6 @@
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:[UIImage imageNamed:@"banner"]];
     imageView.frame = CGRectMake(10, 10, SCR_WIDTH - 20, backView.height - 10);
     [backView addSubview:imageView];
-    
     return backView;
 }
 

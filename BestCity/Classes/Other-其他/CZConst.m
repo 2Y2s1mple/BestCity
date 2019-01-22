@@ -16,7 +16,6 @@ NSString * const systemMessageDetailControllerMessageRead = @"systemMessageDetai
 NSString * const attentionCellNotifKey = @"CZAttentionCellNotifKey";
 /** 记录是否更新 */
 NSString * const requiredVersionCode = @"requiredVersionCode";
-BOOL appVersion = NO;
 
 /** 收藏通知的KEY */
 NSString * const collectNotification = @"collectNotification";

@@ -38,6 +38,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 创建搜索栏
     [self setupSearchView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     // 获取数据
     [self getSourceData];
 }
@@ -56,10 +61,7 @@
                 [self.searchArr addObject:dic[@"word"]];
             }
             // 历史
-            self.hisArr = [NSMutableArray array];
-            for (NSDictionary *dic in result[@"data"][@"logList"]) {
-                [self.hisArr addObject:dic[@"word"]];
-            }
+            self.hisArr = result[@"data"][@"logList"];
             // 创建大家都在搜
             [self createHistorySearchModule];
             // 创建历史搜索
@@ -82,7 +84,7 @@
         if ([rightBtnText isEqualToString:@"搜索"]) {
             [weakSelf pushSearchDetail];
             // 添加到历史搜索
-            [weakSelf.hisView createTagLabelWithTitle:weakSelf.searchView.searchText withEventType:CZHotTagLabelTypeDefault];
+//            [weakSelf.hisView createTagLabelWithTitle:weakSelf.searchView.searchText withEventType:CZHotTagLabelTypeDefault];
             // 更新热门的尺寸
 //            weakSelf.hotView.frame = CGRectMake(0, CZGetY(weakSelf.hisView) + 20, SCR_WIDTH, 300);
         } else {
@@ -135,7 +137,7 @@
     [deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
     [historyView addSubview:deleteBtn];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, CZGetY(hisLabel) + 20, SCR_WIDTH - 20, SCR_HEIGHT - (CZGetY(hisLabel) + 20)) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, CZGetY(hisLabel) + 20, SCR_WIDTH - 10, SCR_HEIGHT - (CZGetY(hisLabel) + 20)) style:UITableViewStylePlain];
     tableView.bounces = NO;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [historyView addSubview:tableView];
@@ -168,10 +170,7 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/log"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 历史
-            self.hisArr = [NSMutableArray array];
-            for (NSDictionary *dic in result[@"data"][@"logList"]) {
-                [self.hisArr addObject:dic[@"word"]];
-            }
+            self.hisArr =  result[@"data"][@"logList"];
             [self.tableView reloadData];
         }
         //隐藏菊花
@@ -190,15 +189,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZHisSearchCell *cell = [CZHisSearchCell cellWithTableView:tableView];
+    CZHisSearchCell *cell = [CZHisSearchCell cellWithTableView:tableView deleteBtnBlock:^{
+        [self reloadData];
+    }];
     cell.historyData = self.hisArr[indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *title = self.hisArr[indexPath.row];
-    self.searchView.searchText = title;
+    NSDictionary *titleData = self.hisArr[indexPath.row];
+    self.searchView.searchText = titleData[@"word"];
     [self pushSearchDetail];
 }
 

@@ -71,6 +71,13 @@
     UIButton *btn = [self.subviews lastObject];
     btn.enabled = YES;
     switch (type) {
+        case CZAttentionBtnTypeTogether:
+            btn.backgroundColor = CZGlobalLightGray;
+            btn.layer.borderColor = CZGlobalLightGray.CGColor;
+            [btn setTitle:@"相互关注" forState:UIControlStateNormal];
+            [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
+            btn.selected = YES;
+            break;
         case CZAttentionBtnTypeFollowed:
             btn.backgroundColor = CZGlobalLightGray;
             btn.layer.borderColor = CZGlobalLightGray.CGColor;

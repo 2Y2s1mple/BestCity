@@ -20,19 +20,31 @@
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
 /** 没有数据图片 */
-@property (nonatomic, strong) CZNoDataView *noDataView;
+@property (nonatomic, strong) CZNoDataView *noAttentionView;
+@property (nonatomic, strong) CZNoDataView *noFansView;
 @end
 
 @implementation CZAttentionController
-- (CZNoDataView *)noDataView
+- (CZNoDataView *)noAttentionView
 {
-    if (_noDataView == nil) {
-        self.noDataView = [CZNoDataView noAttentionView];
-        self.noDataView.centerX = SCR_WIDTH / 2.0;
-        self.noDataView.y = 170;
+    if (_noAttentionView == nil) {
+        self.noAttentionView = [CZNoDataView noAttentionView];
+        self.noAttentionView.centerX = SCR_WIDTH / 2.0;
+        self.noAttentionView.y = 170;
     }
-    return _noDataView;
+    return _noAttentionView;
 }
+
+- (CZNoDataView *)noFansView
+{
+    if (_noFansView == nil) {
+        self.noFansView = [CZNoDataView noFansView];
+        self.noFansView.centerX = SCR_WIDTH / 2.0;
+        self.noFansView.y = 170;
+    }
+    return _noFansView;
+}
+
 /** 关注数据 */
 - (NSMutableArray *)attentionsData
 {
@@ -94,10 +106,18 @@
         {
             if ([result[@"data"] count] > 0) {
                 // 删除nodata
-                [self.noDataView removeFromSuperview];
+                if ([self.type isEqualToString:@"1"]) { 
+                    [self.noAttentionView removeFromSuperview];
+                } else {
+                    [self.noFansView removeFromSuperview];
+                }
             } else {
                 // 没有数据图片
-                [self.tableView addSubview:self.noDataView];
+                if ([self.type isEqualToString:@"1"]) { 
+                    [self.tableView addSubview:self.noAttentionView];
+                } else {
+                    [self.tableView addSubview:self.noFansView];
+                }
             }
             // 字典转模型
             self.attentionsData = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"data"]];
@@ -153,6 +173,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CZAttentionsModel *model = self.attentionsData[indexPath.row];
+    if (![self.type isEqualToString:@"1"]) { 
+        model.cellType = @"fans";
+    } else {
+        model.cellType = @"follow";
+    }
     CZAttentionCell *cell = [CZAttentionCell cellWithTabelView:tableView];
     cell.delegate = self;
     cell.title = [NSString stringWithFormat:@"第%ld个", (long)indexPath.row];
@@ -168,10 +193,10 @@
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZAttentionsModel *model = self.attentionsData[indexPath.row];
-    CZAttentionDetailController *vc = [[CZAttentionDetailController alloc] init];
-    vc.model = model;
-    [self.navigationController pushViewController:vc animated:YES];
+//    CZAttentionsModel *model = self.attentionsData[indexPath.row];
+//    CZAttentionDetailController *vc = [[CZAttentionDetailController alloc] init];
+//    vc.model = model;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - <CZAttentionCellDelegate>刷新

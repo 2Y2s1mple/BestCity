@@ -47,9 +47,10 @@
         if ([result[@"msg"] isEqualToString:@"已取消"]) {
             // 刷新tableView
             [CZProgressHUD showProgressHUDWithText:@"取关成功"];
-            !self.delegate ? : [self.delegate reloadAttentionTableView];
-            self.model.attentionType = CZAttentionBtnTypeAttention;
-//            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"取消关注成功"}];
+//            !self.delegate ? : [self.delegate reloadAttentionTableView];
+            self.btn.type = CZAttentionBtnTypeAttention;
+            
+            
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -68,13 +69,12 @@
         if ([result[@"msg"] isEqualToString:@"关注成功"]) {
             // 刷新tableView
             [CZProgressHUD showProgressHUDWithText:@"关注成功"];
-            if ([self.model.status  isEqual: @(1)])  {
-                self.model.attentionType = CZAttentionBtnTypeTogether;
+            if ([self.model.cellType  isEqual: @"fans"]) {
+                self.btn.type = CZAttentionBtnTypeTogether;
             } else {
-                self.model.attentionType = CZAttentionBtnTypeFollowed;
+                self.btn.type = CZAttentionBtnTypeFollowed;
             }
-            !self.delegate ? : [self.delegate reloadAttentionTableView];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:attentionCellNotifKey object:nil userInfo:@{@"userId" : param[@"attentionUserId"], @"msg" : @"用户关注成功"}];
+//            !self.delegate ? : [self.delegate reloadAttentionTableView];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -86,7 +86,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     //添加关注按钮
-    self.btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(SCR_WIDTH - 70, (60 - 24) / 2.0, 60, 24) CommentType:self.model.attentionType didClickedAction:^(BOOL isSelected){
+    self.btn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(SCR_WIDTH - 70, (60 - 24) / 2.0, 60, 24) CommentType:0 didClickedAction:^(BOOL isSelected){
         if (isSelected) {
             [self addAttention];
         } else {
@@ -99,10 +99,17 @@
 - (void)setModel:(CZAttentionsModel *)model
 {
     _model = model;
-    self.btn.type = model.attentionType;
+    if ([self.model.cellType  isEqual: @"fans"]) {
+        if ([self.model.status isEqualToNumber:@(1)]) {
+            self.btn.type = CZAttentionBtnTypeTogether;
+        } else {
+            self.btn.type = CZAttentionBtnTypeAttention;
+        }
+    } else {
+        self.btn.type = CZAttentionBtnTypeFollowed;
+    }
     self.attentionNameLabel.text = model.nickname;
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"headDefault"]];
-    self.btn.type = self.model.attentionType;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

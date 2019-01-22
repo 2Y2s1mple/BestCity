@@ -10,11 +10,5 @@
 
 @implementation CZAttentionsModel
 
-- (void)setStatus:(NSNumber *)status
-{
-    _status = status;
-    if ([status isEqualToNumber:@(1)]) { // 互关
-        self.attentionType = CZAttentionBtnTypeTogether;
-    }
-}
+
 @end

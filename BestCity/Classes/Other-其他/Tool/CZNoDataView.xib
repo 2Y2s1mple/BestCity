@@ -149,6 +149,52 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-191" y="-159"/>
         </view>
+        <view contentMode="scaleToFill" id="lT3-mj-2wY" customClass="CZNoDataView">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无粉丝" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ek-rN-6df">
+                    <rect key="frame" x="163.5" y="150" width="60" height="21"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="D2p-DS-Ih8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关注内容为空，先去逛逛吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzb-Cv-yH6">
+                    <rect key="frame" x="115" y="181" width="157" height="19"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="5Jw-Ex-2GF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
+                    <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qs-collection" translatesAutoresizingMaskIntoConstraints="NO" id="I8R-y2-4DL">
+                    <rect key="frame" x="112" y="0.0" width="163" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="163" id="3oZ-aY-auo"/>
+                        <constraint firstAttribute="height" constant="150" id="UhX-OE-aPU"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="I8R-y2-4DL" firstAttribute="top" secondItem="lT3-mj-2wY" secondAttribute="top" id="G1e-qQ-F1F"/>
+                <constraint firstItem="5Ek-rN-6df" firstAttribute="top" secondItem="I8R-y2-4DL" secondAttribute="bottom" id="RX6-U8-k5x"/>
+                <constraint firstItem="lzb-Cv-yH6" firstAttribute="top" secondItem="5Ek-rN-6df" secondAttribute="bottom" constant="10" id="eL8-4Y-lwK"/>
+                <constraint firstItem="lzb-Cv-yH6" firstAttribute="centerX" secondItem="lT3-mj-2wY" secondAttribute="centerX" id="gsw-aB-Dja"/>
+                <constraint firstItem="I8R-y2-4DL" firstAttribute="centerX" secondItem="lT3-mj-2wY" secondAttribute="centerX" id="jb5-x4-VMU"/>
+                <constraint firstItem="5Ek-rN-6df" firstAttribute="centerX" secondItem="lT3-mj-2wY" secondAttribute="centerX" id="psf-69-825"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-191" y="50"/>
+        </view>
     </objects>
     <resources>
         <image name="qs-collection" width="163" height="150"/>

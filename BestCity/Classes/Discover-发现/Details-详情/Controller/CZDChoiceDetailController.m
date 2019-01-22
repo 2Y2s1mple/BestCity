@@ -89,11 +89,17 @@ static CGFloat const likeAndShareHeight = 49;
             share.param = self.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
-            CZBuyView *buyView = [[CZBuyView alloc] initWithFrame:self.view.frame];
-            buyView.buyDataList = self.dicDataModel.relatedGoodsList;
-            [weakSelf.view addSubview:buyView];
+            if (self.dicDataModel.relatedGoodsList.count != 0) {
+                CZBuyView *buyView = [[CZBuyView alloc] initWithFrame:self.view.frame];
+                buyView.buyDataList = self.dicDataModel.relatedGoodsList;
+                [weakSelf.view addSubview:buyView];
+            }
         }];
-        _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
+        if (self.dicDataModel.relatedGoodsList.count != 0) {
+            _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
+        } else {
+            _likeView.titleData = @{@"left" : @"分享", @"right" : @"暂无商品"};
+        }
     }
     return _likeView;
 }

@@ -24,6 +24,7 @@
         if (self.imgList.count == 1) {
             // 初始化控件
             UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             [imageView sd_setImageWithURL:[NSURL URLWithString:[self.imgList firstObject]] placeholderImage:IMAGE_NAMED(@"headDefault")];
             imageView.frame = CGRectMake(0, 0, self.width, self.height);
             [self addSubview:imageView];

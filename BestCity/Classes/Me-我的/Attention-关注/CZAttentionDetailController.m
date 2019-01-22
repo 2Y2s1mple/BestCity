@@ -222,7 +222,7 @@
     [titleView layoutIfNeeded];
     
     // 关注按钮
-    self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) CommentType:self.model.attentionType didClickedAction:^(BOOL isSelected){
+    self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(titleView.width - 20 - 60, iconImage.y, 60, 24) CommentType:0 didClickedAction:^(BOOL isSelected){
         if (isSelected) {
             [self addAttention];
         } else {

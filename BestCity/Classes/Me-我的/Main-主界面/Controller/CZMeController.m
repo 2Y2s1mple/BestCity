@@ -19,6 +19,7 @@
 #import "UIImageView+WebCache.h"
 #import "CZMainAttentionController.h"
 #import "CZCoinCenterController.h"
+#import "CZUserInfoTool.h"
 
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -166,18 +167,22 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setUpUserInfo];
+    [self getNetworkUserInfo];
+}
+
+#pragma mark - 获取用户信息
+- (void)getNetworkUserInfo
+{
+    __weak typeof(self) weakSelf = self;
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+        [weakSelf setUpUserInfo];
+    }];
 }
 
 #pragma mark - 登录时候的通知
 - (void)setUpUserInfo
 {
     // 给用户信息赋值
-    [self userInfo];
-}
-
-- (void)userInfo
-{
     // 头像
     [self.headImage sd_setImageWithURL:[NSURL URLWithString:JPUSERINFO[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     

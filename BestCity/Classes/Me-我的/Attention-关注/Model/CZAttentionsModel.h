@@ -20,8 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *avatar;
 /** 关注状态 */
 @property (nonatomic, strong) NSNumber *status; // status:1互关 0没有互关
-/** 记录关注按钮 */
-@property (nonatomic, assign) CZAttentionBtnType attentionType;
+/** cell的类型 */
+@property (nonatomic, strong) NSString *cellType;
 @end
 
 NS_ASSUME_NONNULL_END
