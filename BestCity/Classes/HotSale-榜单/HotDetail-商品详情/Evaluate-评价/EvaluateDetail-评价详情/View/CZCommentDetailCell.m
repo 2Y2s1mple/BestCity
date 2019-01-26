@@ -80,6 +80,12 @@
 
 - (IBAction)replyButton:(id)sender
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     NSString *userName;
     if (self.contentDic[@"userNickname"] != [NSNull null]) {
         userName = self.contentDic[@"userNickname"];
@@ -91,6 +97,12 @@
 
 
 - (IBAction)commentLikeAction:(UIButton *)sender {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     if (sender.isSelected) {
         sender.selected = NO;
         [self snapDelete:self.contentDic[@"commentId"]];

@@ -73,6 +73,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"token"];
         // 返回上一页
         CZLoginController *vc = [CZLoginController shareLoginController];
+        vc.isLogin = NO;
         [self presentViewController:vc animated:YES completion:nil];
     }];
 }

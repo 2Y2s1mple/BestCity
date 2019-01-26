@@ -11,7 +11,6 @@
 #import "CZMyProfileCell.h"
 #import "UIButton+CZExtension.h"
 #import "CZChangeNicknameController.h"
-#import "CZMembershipController.h"
 #import "CZDatePickView.h"
 #import "CZBindingMobileController.h"
 #import "GXNetTool.h"
@@ -87,6 +86,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"token"];
         // 返回上一页
         CZLoginController *vc = [CZLoginController shareLoginController];
+        vc.isLogin = NO;
         [self presentViewController:vc animated:YES completion:nil];
     }];
 }
@@ -127,10 +127,6 @@
         vc.name = cell.subTitle;
         vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES]; 
-    } else if ([self.leftTitles[indexPath.row] isEqualToString:@"会员等级"]) {
-        //跳转到会员等级
-        CZMembershipController *vc = [[CZMembershipController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
     } else if ([self.leftTitles[indexPath.row] isEqualToString:@"生日"]) {
         NSString *dataStr = [self.rightTitles[indexPath.row] substringToIndex:10];
         CZDatePickView *backView = [CZDatePickView datePickWithCurrentDate:dataStr type:CZDatePickViewTypeDate];

@@ -62,7 +62,7 @@
     // 设置搜索栏
     [self setupTopView];
     
-    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 20)];
+    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, (IsiPhoneX ? 44 : 20))];
     statusView.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication].keyWindow addSubview:statusView];
     self.statusView = statusView;
@@ -76,14 +76,15 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
     self.statusView.hidden = NO;
 }
 
 
-- (void)viewWillLayoutSubviews
-{
-    self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
-}
+//- (void)viewWillLayoutSubviews
+//{
+//    self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
+//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -104,7 +105,7 @@
 #pragma mark - 响应事件
 - (void)pushSearchController
 {
-    if ([USERINFO[@"userId"] length] <= 0)
+    if ([JPTOKEN length] <= 0)
     {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];

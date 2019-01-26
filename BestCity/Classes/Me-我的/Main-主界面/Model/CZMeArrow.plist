@@ -21,7 +21,7 @@
 			<key>title</key>
 			<string>每日奖励</string>
 			<key>icon</key>
-			<string>follow</string>
+			<string>list-reward</string>
 			<key>destinationVC</key>
 			<string>CZCoinCenterController</string>
 		</dict>

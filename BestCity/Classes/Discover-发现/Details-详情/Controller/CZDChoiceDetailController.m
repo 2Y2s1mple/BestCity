@@ -56,7 +56,7 @@ static CGFloat const likeAndShareHeight = 49;
 {
     if (_scrollerView == nil) {
         CGFloat originY = (IsiPhoneX ? 44 : 20) + 40;
-        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, originY, SCR_WIDTH, SCR_HEIGHT - originY - likeAndShareHeight)];
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, originY, SCR_WIDTH, SCR_HEIGHT - originY - (IsiPhoneX ? 83 : likeAndShareHeight))];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }

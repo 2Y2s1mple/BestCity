@@ -5,6 +5,7 @@
 //
 
 #import "GXNetTool.h"
+#import "KCUtilMd5.h"
 
 @interface GXNetTool()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
@@ -23,9 +24,12 @@
 {
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager  manager];
+    
     //(2)请求头的设置
-
-    headers = @{@"token" : JPTOKEN ? JPTOKEN : @""};
+    NSString *CONSTANT_KEY = @"quality-shop";
+    NSString *timestamp = [self getNowTimeTimestamp3];
+    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
+    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -52,7 +56,6 @@
     
     //(6)发送请求
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
-    param[@"userId"] = USERINFO[@"userId"];
     param[@"client"] = @(2);
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *result = responseObject;
@@ -119,7 +122,10 @@
     }
     
     //(2)请求头的设置
-    headers = @{@"token" : JPTOKEN ? JPTOKEN : @""};
+    NSString *CONSTANT_KEY = @"quality-shop";
+    NSString *timestamp = [self getNowTimeTimestamp3];
+    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
+    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -149,9 +155,6 @@
     //(6)发送请求
     
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
-    //    param[@"userId"] = @"7d67892cb02f4766aa72fd5b08b8d8d1";
-    param[@"userId"] = JPUSERINFO[@"userId"];
-    
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
        
         // 除去NSNUll
@@ -172,7 +175,10 @@
 {
     // 获取管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSDictionary *headers = @{@"token" : JPTOKEN ? JPTOKEN : @""};
+    NSString *CONSTANT_KEY = @"quality-shop";
+    NSString *timestamp = [self getNowTimeTimestamp3];
+    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
+    NSDictionary *headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};;
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -287,6 +293,30 @@
         failure(error);
         NSLog(@"%@", error);
     }];
+}
+
++(NSString *)getNowTimeTimestamp3{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    
+    //设置时区,这个对于时间的处理有时很重要
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    
+    [formatter setTimeZone:timeZone];
+    
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];
+    
+    return timeSp;
+    
 }
 
 @end

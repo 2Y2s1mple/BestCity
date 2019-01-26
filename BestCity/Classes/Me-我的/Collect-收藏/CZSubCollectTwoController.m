@@ -179,7 +179,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //push到详情
-    if ([USERINFO[@"userId"] length] <= 0)
+    if ([JPTOKEN length] <= 0)
     {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];

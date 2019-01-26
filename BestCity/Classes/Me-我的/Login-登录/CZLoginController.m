@@ -26,8 +26,7 @@
 @property (nonatomic, assign) NSInteger count;
 /** 用户协议 */
 @property (weak, nonatomic) IBOutlet UILabel *userAgreementLabel;
-/** 是否登录 */
-@property (nonatomic, assign) BOOL isLogin;
+
 /** 判断是否在读秒 */
 @property (nonatomic, assign) BOOL isReadSecond;
 

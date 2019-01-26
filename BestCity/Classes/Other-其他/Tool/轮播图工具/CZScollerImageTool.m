@@ -24,19 +24,21 @@
         if (self.imgList.count == 1) {
             // 初始化控件
             UIImageView *imageView = [[UIImageView alloc] init];
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[self.imgList firstObject]] placeholderImage:IMAGE_NAMED(@"headDefault")];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.layer.masksToBounds = YES;
             imageView.frame = CGRectMake(0, 0, self.width, self.height);
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[self.imgList firstObject]] placeholderImage:nil];
             [self addSubview:imageView];
         } else {
             // 初始化控件
-            PlanADScrollView *ad =[[PlanADScrollView alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height) imageUrls:self.imgList placeholderimage:IMAGE_NAMED(@"headDefault")];
+            PlanADScrollView *ad = [[PlanADScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height) imageUrls:self.imgList placeholderimage:nil];
             [self addSubview:ad];
         }
     } else {
         // 初始化控件
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headDefault"]];
+        UIImageView *imageView = [[UIImageView alloc] init];
         imageView.frame = CGRectMake(0, 0, self.width, self.height);
+        imageView.image = [UIImage imageNamed:@"headDefault"];
         [self addSubview:imageView];
     }
 }

@@ -116,6 +116,12 @@
 #pragma mark - 评论接口
 - (void)commentInsert:(NSString *)parentId
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if (self.goodsId) {
         param[@"targetId"] = self.goodsId;
@@ -135,7 +141,7 @@
                 // 获取子评论
                 NSMutableArray *subComment = self.originalData[self.currentCellIndex][@"children"];
                 NSMutableDictionary *comment = [NSMutableDictionary dictionaryWithObject:self.textViewTool.textView.text forKey:@"content"];
-                comment[@"userNickName"] = USERINFO[@"userNickName"]; 
+                comment[@"userNickname"] = JPUSERINFO[@"nickname"]; 
                 [subComment addObject:comment];
                 // 处理数据
                 self.evaluateArr = [self processingDataArray:self.originalData];

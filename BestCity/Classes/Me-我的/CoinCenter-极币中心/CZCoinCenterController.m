@@ -182,10 +182,8 @@
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/signin"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
-            
             [CZProgressHUD showProgressHUDWithText:@"签到成功"];
             self.piaopiaoLabel.text = [NSString stringWithFormat:@"+%@极币", result[@"addPoint"]];
-            
             self.piaopiaoLabel.hidden = NO;
             [UIView animateWithDuration:0.5 animations:^{
                 self.piaopiaoLabel.transform = CGAffineTransformMakeTranslation(0, -50);
@@ -193,15 +191,12 @@
                 self.piaopiaoLabel.hidden = YES;
                 self.piaopiaoLabel.transform = CGAffineTransformIdentity;
             }];
-            
-            
             [self getDataSource];
         } else {
-            [CZProgressHUD showProgressHUDWithText:@"签到失败"];
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:1];
-        
     } failure:^(NSError *error) {
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];

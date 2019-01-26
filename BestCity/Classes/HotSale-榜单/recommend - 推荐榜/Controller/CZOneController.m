@@ -61,7 +61,7 @@
     param[@"clientVersionCode"] = @"1.00";
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSNumber *appVersion1 = result[@"appVersion"][@"open"];
+            NSNumber *appVersion1 = result[@"data"][@"open"];
             if (![appVersion1 isEqual:@(0)]) {} else {}
             //有新版本
             [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];

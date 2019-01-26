@@ -13,7 +13,7 @@
 #import "CZGuideTool.h"
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 //#import "UMSocialSnsService.h"
-
+#import "GXNetTool.h"
 @interface AppDelegate ()
 
 @end
@@ -25,13 +25,25 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"type"] = @(0);
+    param[@"clientVersionCode"] = @"1.00";
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSNumber *appVersion1 = result[@"data"][@"open"];
+            if (![appVersion1 isEqual:@(0)]) {} else {}
+            NSLog(@"-------------%@", appVersion1);
+        }
+    } failure:^(NSError *error) {}];
+    
+    
     // 设置引导页
     [CZGuideTool chooseRootViewController:self.window];
     
     [self.window makeKeyAndVisible];
     
     //加载极光推送
-    [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
+//    [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
     
     //加载友盟分享
    [[CZUMConfigure shareConfigure] configure];

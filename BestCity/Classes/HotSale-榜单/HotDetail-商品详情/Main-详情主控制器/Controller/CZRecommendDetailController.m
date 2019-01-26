@@ -53,7 +53,7 @@ static NSString * const type = @"1";
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - likeAndShareHeight)];
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight))];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }
@@ -65,11 +65,23 @@ static NSString * const type = @"1";
     if (_likeView == nil) {
         __weak typeof(self) weakSelf = self;
         _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
+            if ([JPTOKEN length] <= 0)
+            {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+                return;
+            }
             CZShareView *share = [[CZShareView alloc] initWithFrame:weakSelf.view.frame];
             
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
+            if ([JPTOKEN length] <= 0)
+            {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+                return;
+            }
             // 打开淘宝
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
         }];
@@ -190,14 +202,12 @@ static NSString * const type = @"1";
     [self addChildViewController:self.commendVC];
     
     // 测评
-    if (self.detailModel.evaluationEntity != nil) {
-        self.testVc = [[CZTestSubController alloc] init];
-        self.testVc.view.y = self.commendVC.scrollerView.height;
-        [self.scrollerView addSubview:self.testVc.view];
-        [self addChildViewController:self.testVc];
-        self.testVc.detailTtype = @"1"; /** 类型: 1商品，2评测, 3发现，4试用 */
-        self.testVc.model = self.detailModel.evaluationEntity;
-    }
+    self.testVc = [[CZTestSubController alloc] init];
+    self.testVc.view.y = self.commendVC.scrollerView.height;
+    [self.scrollerView addSubview:self.testVc.view];
+    [self addChildViewController:self.testVc];
+    self.testVc.detailTtype = @"1"; /** 类型: 1商品，2评测, 3发现，4试用 */
+    self.testVc.model = self.detailModel.evaluationEntity;
     
     // 评价
     self.evaluate = [[CZEvaluateSubController alloc] init];

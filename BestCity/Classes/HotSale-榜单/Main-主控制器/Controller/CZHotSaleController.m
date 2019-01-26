@@ -18,7 +18,6 @@
 #import "CZSystemMessageController.h"
 #import "CZBaseRecommendController.h"
 
-
 @interface CZHotSaleController ()
 /** 主标题数组 */
 @property (nonatomic, strong) NSArray<CZHotTitleModel *> *mainTitles;
@@ -30,81 +29,87 @@
 @property (nonatomic, assign) CGFloat recordOffsetY;
 /** statusView */
 @property (nonatomic, strong) UIView *statusView;
+
+/** <#注释#> */
+@property (nonatomic, assign) void (^myBlock)(void);
 @end
 
 @implementation CZHotSaleController
 
+#pragma mark - 懒加载
+- (UIView *)statusView
+{
+    if (_statusView == nil) {
+        _statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, (IsiPhoneX ? 44 : 20))];
+        _statusView.backgroundColor = [UIColor whiteColor];
+        [[UIApplication sharedApplication].keyWindow addSubview:_statusView];
+    }
+    return _statusView;
+}
 
 #pragma mark - 获取标题数据
-- (void)obtainTtitles
+- (CZHotSaleController *(^)(void))obtainTtitles
 {
-    [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
-        return @{
-                 @"children" : @"CZHotSubTilteModel"
-                 };
-    }];
-    //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/goodsCategoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            
-            NSArray *list = result[@"data"];
-            NSMutableArray *newList = [NSMutableArray array];
-            for (NSDictionary *dic in list) {
-                [newList addObject:dic[@"categoryName"]];
+    return ^ {
+        [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
+            return @{
+                     @"children" : @"CZHotSubTilteModel"
+                     };
+        }];
+        //获取数据
+        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/goodsCategoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"msg"] isEqualToString:@"success"]) {
+                NSArray *list = result[@"data"];
+                NSMutableArray *newList = [NSMutableArray array];
+                for (NSDictionary *dic in list) {
+                    [newList addObject:@{@"categoryName" : dic[@"categoryName"]}];   
+                }
+                [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"MainTitle"];
                 
+                //标题的数据
+                self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:list];
+                
+                //刷新WMPage控件
+                [self reloadData];
             }
-             [[NSUserDefaults standardUserDefaults] setObject:newList forKey:@"MainTitle"];
-            
+            //隐藏菊花
+            [CZProgressHUD hideAfterDelay:0];
+        } failure:^(NSError *error) {
             //标题的数据
-            self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:list];
-
+            self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"MainTitle"]];
             //刷新WMPage控件
             [self reloadData];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        //标题的数据
-        self.mainTitles = [CZHotTitleModel objectArrayWithKeyValuesArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"MainTitle"]];
-        //刷新WMPage控件
-        [self reloadData];
-        ;
-    }];
+            ;
+        }];
+        return self;
+    };
 }
 
 #pragma mark - 获取未读消息
-- (void)obtainReadMessage
+- (CZHotSaleController *(^)(void))obtainReadMessage
 {
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/message/count"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            // 未读消息
-            self.search.unreaderCount = [result[@"data"] integerValue] > 99 ? 99 : [result[@"data"] integerValue];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+    return ^ {
+        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/message/count"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"msg"] isEqualToString:@"success"]) {
+                // 未读消息
+                self.search.unreaderCount = [result[@"data"] integerValue] > 99 ? 99 : [result[@"data"] integerValue];
+            }
+            //隐藏菊花
+            [CZProgressHUD hideAfterDelay:0];
+        } failure:^(NSError *error) {
+            //隐藏菊花
+            [CZProgressHUD hideAfterDelay:0];
+        }];
+        return self;
+    };
 }
 
 #pragma mark - 控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 设置搜索栏
-    [self setupTopView];
-    
-    // 获取未读数
-    [self obtainReadMessage];
-    
-    // 获取标题
-    [self obtainTtitles];
-    
-    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 20)];
-    statusView.backgroundColor = [UIColor whiteColor];
-    [[UIApplication sharedApplication].keyWindow addSubview:statusView];
-    self.statusView = statusView;
+    // 设置搜索栏 获取未读数 获取标题数据
+    self.setupTopView().obtainReadMessage().obtainTtitles();
     
     // 接受系统消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageRead) name:systemMessageDetailControllerMessageRead object:nil];
@@ -112,11 +117,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneControllerScrollViewDidScroll:) name:@"CZOneControllerScrollViewDidScroll" object:nil];
 }
 
+// 监听系统消息
+- (void)messageRead
+{
+    // 获取未读数
+    self.obtainReadMessage();
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+     self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
     self.search.hidden = NO;
-    self.view.frame = CGRectMake(0, -self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
     self.statusView.hidden = NO;
 }
 
@@ -133,14 +145,13 @@
     UIScrollView *scrollView = notifx.userInfo[@"scrollView"];
     CGFloat offsetY = scrollView.contentOffset.y;
     if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) { if (offsetY - self.recordOffsetY >= 0) {
-        NSLog(@"向上滑动");
+//        NSLog(@"向上滑动");
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.frame = CGRectMake(0, -50, SCR_WIDTH, SCR_HEIGHT + 50);
                 self.currentOffsetY = -50;
             }];
         } else {
-            NSLog(@"向下滑动");
-            
+//            NSLog(@"向下滑动");
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT);
                 self.currentOffsetY = 0;
@@ -150,36 +161,32 @@
     self.recordOffsetY = offsetY;
 }
 
-// 监听系统消息
-- (void)messageRead
-{
-    // 获取未读数
-    [self obtainReadMessage];
-}
-
 #pragma mark - 初始化
-- (void)setupTopView
+- (CZHotSaleController * (^)(void))setupTopView
 {
-    self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, IsiPhoneX ? 54 : 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
-        if ([USERINFO[@"userId"] length] <= 0)
-        {
-            CZLoginController *vc = [CZLoginController shareLoginController];
-            [self presentViewController:vc animated:YES completion:nil];
-        } else {
-            CZSystemMessageController *vc = [[CZSystemMessageController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }];
-    self.search.textFieldActive = NO;
-    [self.view addSubview:self.search];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchController)];
-    [self.search addGestureRecognizer:tap];
+    return ^ {
+        self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, IsiPhoneX ? 54 : 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
+            if ([JPTOKEN length] <= 0)
+            {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                [self presentViewController:vc animated:YES completion:nil];
+            } else {
+                CZSystemMessageController *vc = [[CZSystemMessageController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        self.search.textFieldActive = NO;
+        [self.view addSubview:self.search];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchController)];
+        [self.search addGestureRecognizer:tap];
+        return self;
+    };
 }
 
 #pragma mark - 响应事件
 - (void)pushSearchController
 {
-    if ([USERINFO[@"userId"] length] <= 0)
+    if ([JPTOKEN length] <= 0)
     {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];

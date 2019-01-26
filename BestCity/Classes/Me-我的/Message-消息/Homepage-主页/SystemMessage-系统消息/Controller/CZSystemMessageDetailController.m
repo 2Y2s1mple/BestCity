@@ -33,14 +33,25 @@
     backView.y = 67 + (IsiPhoneX ? 24 : 0) + 10;
     backView.width = SCR_WIDTH - 20;
     
+    
+    UILabel *labelTitle = [[UILabel alloc] init];
+    [backView addSubview:labelTitle];
+    labelTitle.text = @"尊敬的用户您好：";
+    labelTitle.font = [UIFont systemFontOfSize:14];
+    labelTitle.textColor = CZGlobalGray;
+    labelTitle.numberOfLines = 0;
+    labelTitle.x = 20;
+    labelTitle.y = 10;
+    [labelTitle sizeToFit];
+    
     UILabel *label = [[UILabel alloc] init];
     [backView addSubview:label];
-    label.text = self.model.content;
+    label.text = [NSString stringWithFormat:@"        %@", self.model.content];
     label.font = [UIFont systemFontOfSize:14];
     label.textColor = CZGlobalGray;
     label.numberOfLines = 0;
     label.x = 20;
-    label.y = 10;
+    label.y = CZGetY(labelTitle) + 5;
     label.width = backView.width - 40;
     label.height = [label.text getTextHeightWithRectSize:CGSizeMake(label.width, 10000) andFont:label.font];
     

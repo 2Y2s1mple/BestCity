@@ -10,7 +10,7 @@
 #import "CZAttentionCell.h"
 #import "CZAttentionsModel.h"
 #import "GXNetTool.h"
-#import "CZAttentionDetailController.h"
+
 
 @interface CZAttentionController ()<UITableViewDelegate, UITableViewDataSource, CZAttentionCellDelegate>
 /** 关注列表 */

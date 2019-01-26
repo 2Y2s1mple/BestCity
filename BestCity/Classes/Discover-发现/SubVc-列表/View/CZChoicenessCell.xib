@@ -32,7 +32,7 @@
                             <color key="titleColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage6" translatesAutoresizingMaskIntoConstraints="NO" id="hKL-an-TeU">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage6" translatesAutoresizingMaskIntoConstraints="NO" id="hKL-an-TeU">
                         <rect key="frame" x="14" y="80.5" width="345" height="290"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="290" id="vdc-DA-Oa2"/>
@@ -85,7 +85,7 @@
                 <outlet property="nameLabel" destination="Ip4-Bd-vdw" id="EtO-L7-hXZ"/>
                 <outlet property="visitLabel" destination="F4Z-hV-f4V" id="Fxc-1a-Z58"/>
             </connections>
-            <point key="canvasLocation" x="-380" y="-1249"/>
+            <point key="canvasLocation" x="-583" y="-1250"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="choiceCell" rowHeight="444" id="ZuU-wj-b7y" customClass="CZChoicenessCell">
             <rect key="frame" x="0.0" y="0.0" width="373" height="444"/>
@@ -102,7 +102,7 @@
                             <color key="titleColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage6" translatesAutoresizingMaskIntoConstraints="NO" id="BJk-d4-omI">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage6" translatesAutoresizingMaskIntoConstraints="NO" id="BJk-d4-omI">
                         <rect key="frame" x="14" y="41" width="345" height="290"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="290" id="bMC-nU-YEr"/>
@@ -161,7 +161,7 @@
                 <outlet property="nameLabel" destination="lEh-lL-XZv" id="wgR-Zo-Aeg"/>
                 <outlet property="visitLabel" destination="B1s-gY-b9h" id="bxa-sK-T5d"/>
             </connections>
-            <point key="canvasLocation" x="265" y="-1249"/>
+            <point key="canvasLocation" x="73" y="-1251"/>
         </tableViewCell>
     </objects>
     <resources>

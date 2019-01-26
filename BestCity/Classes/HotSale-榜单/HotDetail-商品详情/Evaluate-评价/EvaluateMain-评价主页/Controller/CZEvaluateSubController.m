@@ -109,6 +109,7 @@
 #pragma mark - 获取评价数据
 - (void)getDataSource
 {
+    
     [CZEvaluateModel setupObjectClassInArray:^NSDictionary *{
         return @{
                  @"children" : @"CZEvaluateModel"
@@ -220,6 +221,12 @@
 #pragma mark 评论接口
 - (void)commentInsert:(NSString *)commentId
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = self.type; // 1商品 2评测 3发现
     param[@"targetId"] = self.targetId;
@@ -245,6 +252,12 @@
 #pragma mark 点击回复
 - (void)reply:(CZReplyButton *)sender
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     [self.textToolBar.textView becomeFirstResponder];
     if (sender.commentId) {
         self.recordCommentId = sender.commentId;
@@ -315,6 +328,12 @@
 
 - (void)commentLikeAction:(CZReplyButton *)sender
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     if (sender.isSelected) {
         sender.selected = NO;
         [self snapDelete:sender.commentId];

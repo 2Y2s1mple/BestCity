@@ -55,10 +55,11 @@
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
-    if ([USERINFO[@"userId"] length] <= 0 && tabBarController.selectedIndex == 3) {
+    if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 3) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
     } else {}
+    ;
 }
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage

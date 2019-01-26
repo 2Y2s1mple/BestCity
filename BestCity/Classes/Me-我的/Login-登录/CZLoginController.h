@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CZLoginController : UIViewController
+/** 是否登录 */
+@property (nonatomic, assign) BOOL isLogin;
 + (instancetype)shareLoginController;
 @end

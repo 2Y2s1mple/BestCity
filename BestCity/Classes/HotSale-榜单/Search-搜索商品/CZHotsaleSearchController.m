@@ -137,8 +137,8 @@
     [deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
     [historyView addSubview:deleteBtn];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, CZGetY(hisLabel) + 20, SCR_WIDTH - 10, SCR_HEIGHT - (CZGetY(hisLabel) + 20)) style:UITableViewStylePlain];
-    tableView.bounces = NO;
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, CZGetY(hisLabel) + 20, SCR_WIDTH - 10, 200) style:UITableViewStylePlain];
+    tableView.height = SCR_WIDTH - CGRectGetMinY(tableView.frame); 
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [historyView addSubview:tableView];
     tableView.delegate = self;

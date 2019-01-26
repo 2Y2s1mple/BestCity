@@ -91,22 +91,22 @@ static NSString * const ID = @"myPointCollectionCell";
 #pragma mark - 获取数据
 - (void)getDataSource
 {
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"page"] = @(0);
-    [CZProgressHUD showProgressHUDWithText:nil];
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/goodsPoint/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.dataSource = result[@"list"];
-            [self.collectionView reloadData];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-        
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+//    param[@"page"] = @(0);
+//    [CZProgressHUD showProgressHUDWithText:nil];
+//    //获取详情数据
+//    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/goodsPoint/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+//        if ([result[@"msg"] isEqualToString:@"success"]) {
+//            self.dataSource = result[@"list"];
+//            [self.collectionView reloadData];
+//        }
+//        //隐藏菊花
+//        [CZProgressHUD hideAfterDelay:0];
+//        
+//    } failure:^(NSError *error) {
+//        //隐藏菊花
+//        [CZProgressHUD hideAfterDelay:0];
+//    }];
 }
 
 

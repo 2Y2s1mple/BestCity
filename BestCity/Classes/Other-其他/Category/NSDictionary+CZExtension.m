@@ -9,6 +9,7 @@
 #import "NSDictionary+CZExtension.h"
 
 @implementation NSDictionary (CZExtension)
+
 - (NSDictionary *)deleteAllNullValue
 {
     NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] initWithDictionary:self];

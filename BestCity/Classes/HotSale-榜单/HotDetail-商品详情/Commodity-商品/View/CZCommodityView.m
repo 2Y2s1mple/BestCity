@@ -105,7 +105,7 @@
     self.bottomLabel.text = [NSString stringWithFormat:@"使用期限%@至%@", self.couponModel.validStartTime, self.couponModel.validEndTime];
     
     // 综合评分
-    if (model.scoreOptionsList.count >= 4) {
+    if (model.scoreOptionsList.count >= 4 && ![model.scoreOptionsList[0][@"name"]  isEqual: @""]) {
         self.pointView.hidden = NO;
         self.comprehensiveScoreLabel.text = [NSString stringWithFormat:@"%.1f", [model.score floatValue]];
         NSInteger maxScore = 150;
@@ -151,6 +151,12 @@
 
 - (IBAction)ticketBugLink
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     // 打开淘宝
     [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.couponModel.couponsUrl parentController:self];
 }

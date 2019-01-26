@@ -47,8 +47,43 @@
 - (void)setModel:(CZTestDetailModel *)model
 {
     _model = model;
-    [self setup];
+    if (model != nil) {    
+        [self setup];
+    } else {
+        [self createNodataView];
+    }
 }
+
+- (void)createNodataView
+{
+    //设置scrollerView
+    CGFloat space = 14.0f;
+    if ([self.detailTtype isEqualToString:@"1"]) {
+        /**加载开箱测评*/
+        //标题
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 0, 150, 20)];
+        titleLabel.text = @"评测报告";
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+        [self.scrollerView addSubview:titleLabel];
+        
+        UILabel *content = [[UILabel alloc] initWithFrame:CGRectMake(space, 0, 150, 20)];
+        content.centerX = self.view.centerX;
+        content.y = CZGetY(titleLabel) + 20;
+        content.text = @"评测进行中......";
+        content.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+        content.textColor = CZGlobalGray;
+        [self.scrollerView addSubview:content];
+    }
+    
+    //加个分隔线
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 100, SCR_WIDTH, 7)];
+    self.lineView = lineView;
+    lineView.backgroundColor = CZGlobalLightGray;
+    [self.scrollerView addSubview:lineView];
+    
+    self.scrollerView.height = CGRectGetMaxY(lineView.frame);
+}
+
 
 - (void)setup
 {
@@ -56,8 +91,8 @@
     if ([self.detailTtype isEqualToString:@"1"]) {
         /**加载开箱测评*/
         //标题
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, 150, 20)];
-        titleLabel.text = @"开箱测评";
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 0, 150, 20)];
+        titleLabel.text = @"评测报告";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
         [self.scrollerView addSubview:titleLabel];
         //头像
@@ -159,7 +194,6 @@
         }];
         [self.scrollerView addSubview:self.attentionBtn];
         
-        
         self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(4, CZGetY(iconImage) + space, SCR_WIDTH - 8, 100)];
         self.webView.backgroundColor = [UIColor whiteColor];
         [self.scrollerView addSubview:self.webView];
@@ -169,7 +203,6 @@
         [self.webView loadHTMLString:self.model.content baseURL:nil];
     }
     
-
     /** 点赞 */
     //加载点赞小手
     CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, 1000, 115, 36)];
@@ -179,7 +212,6 @@
     [self.scrollerView addSubview:likeView];
     self.likeView = likeView;
 
-    
     //加个分隔线
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.webView.frame), SCR_WIDTH, 7)];
     self.lineView = lineView;
@@ -192,6 +224,7 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [CZProgressHUD showProgressHUDWithText:nil];
+    [CZProgressHUD hideAfterDelay:2];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

@@ -40,12 +40,6 @@
                             <constraint firstAttribute="height" constant="0.69999999999999996" id="kYq-s0-SuG"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊敬的用户您好: 京东商城返利体城返利体城返利体城返利商城返利体城返利体城返利体城返利商城返利体城返利体城返利体城返利" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXk-Yx-gcT">
-                        <rect key="frame" x="10" y="80" width="427" height="33.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOs-jA-9fY">
                         <rect key="frame" x="118" y="25" width="10" height="10"/>
                         <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -63,12 +57,26 @@
                             <color key="titleColor" red="0.17255046963691711" green="0.17254644632339478" blue="0.17254915833473206" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊敬的用户您好:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pi-LR-GOe">
+                        <rect key="frame" x="10" y="72" width="437" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="京东商城返利体城返利体城返利体城返利商城返利体城返利体城返利体城返利商城返利体城返利体城返利体城返利" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXk-Yx-gcT">
+                        <rect key="frame" x="10" y="94" width="427" height="33.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cvc-aL-oFB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="1U2-Ix-B5y"/>
                     <constraint firstItem="cvc-aL-oFB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="6CA-4h-YeR"/>
                     <constraint firstAttribute="trailing" secondItem="gXX-LN-Dm0" secondAttribute="trailing" constant="10" id="8YC-R0-yfO"/>
+                    <constraint firstItem="6Pi-LR-GOe" firstAttribute="top" secondItem="kzb-Nl-cDr" secondAttribute="bottom" constant="12" id="B97-y7-iCg"/>
                     <constraint firstAttribute="trailing" secondItem="TLw-Dn-7kW" secondAttribute="trailing" constant="10" id="Ina-6n-LEl"/>
+                    <constraint firstItem="wXk-Yx-gcT" firstAttribute="top" secondItem="6Pi-LR-GOe" secondAttribute="bottom" constant="5" id="OAu-2N-aJT"/>
                     <constraint firstAttribute="bottom" secondItem="gXX-LN-Dm0" secondAttribute="bottom" constant="10" id="PXO-83-D6g"/>
                     <constraint firstItem="VOs-jA-9fY" firstAttribute="centerY" secondItem="cvc-aL-oFB" secondAttribute="centerY" id="V0C-Ue-Hr8"/>
                     <constraint firstItem="wXk-Yx-gcT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="X1d-c5-5mV"/>
@@ -76,8 +84,9 @@
                     <constraint firstAttribute="trailing" secondItem="wXk-Yx-gcT" secondAttribute="trailing" constant="10" id="dXD-hd-Ar6"/>
                     <constraint firstItem="kzb-Nl-cDr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fYs-qF-nxr"/>
                     <constraint firstItem="VOs-jA-9fY" firstAttribute="leading" secondItem="cvc-aL-oFB" secondAttribute="trailing" constant="10" id="gcp-Vv-5D0"/>
-                    <constraint firstItem="wXk-Yx-gcT" firstAttribute="top" secondItem="kzb-Nl-cDr" secondAttribute="bottom" constant="20" id="hv1-Fd-KUd"/>
+                    <constraint firstItem="6Pi-LR-GOe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="lW7-RK-Upm"/>
                     <constraint firstItem="TLw-Dn-7kW" firstAttribute="centerY" secondItem="cvc-aL-oFB" secondAttribute="centerY" id="nNe-Io-jfE"/>
+                    <constraint firstAttribute="trailing" secondItem="6Pi-LR-GOe" secondAttribute="trailing" id="oT5-da-Xng"/>
                     <constraint firstItem="kzb-Nl-cDr" firstAttribute="top" secondItem="cvc-aL-oFB" secondAttribute="bottom" constant="20" id="rfz-jv-LIP"/>
                 </constraints>
             </tableViewCellContentView>
@@ -87,7 +96,7 @@
                 <outlet property="timerLabel" destination="TLw-Dn-7kW" id="jHZ-JQ-HuB"/>
                 <outlet property="titleLabel" destination="cvc-aL-oFB" id="E5h-nR-pW6"/>
             </connections>
-            <point key="canvasLocation" x="781.60000000000002" y="-44.07796101949026"/>
+            <point key="canvasLocation" x="640.79999999999995" y="-114.24287856071965"/>
         </tableViewCell>
     </objects>
     <resources>

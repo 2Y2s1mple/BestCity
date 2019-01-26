@@ -68,6 +68,12 @@
 #pragma mark - 点击方法
 - (void)action
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     self.imageBackView.userInteractionEnabled = NO;
 
     // 判断是否点击过

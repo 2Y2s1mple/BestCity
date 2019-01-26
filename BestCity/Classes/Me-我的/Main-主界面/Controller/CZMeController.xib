@@ -80,15 +80,16 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fw1-09-kap">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="60"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdO-yN-bTb">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdO-yN-bTb">
                                             <rect key="frame" x="0.0" y="0.0" width="94" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HS-Jj-Co8">
-                                            <rect key="frame" x="0.0" y="31" width="94" height="29"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="94" height="60"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" title="极币数">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -101,6 +102,7 @@
                                     <constraints>
                                         <constraint firstItem="AdO-yN-bTb" firstAttribute="leading" secondItem="Fw1-09-kap" secondAttribute="leading" id="6H7-OT-xmc"/>
                                         <constraint firstAttribute="trailing" secondItem="3HS-Jj-Co8" secondAttribute="trailing" id="72w-iQ-fbZ"/>
+                                        <constraint firstItem="3HS-Jj-Co8" firstAttribute="top" secondItem="Fw1-09-kap" secondAttribute="top" id="D49-Mz-Sbx"/>
                                         <constraint firstItem="AdO-yN-bTb" firstAttribute="top" secondItem="Fw1-09-kap" secondAttribute="top" id="RMZ-Sc-FRd"/>
                                         <constraint firstAttribute="trailing" secondItem="AdO-yN-bTb" secondAttribute="trailing" id="dxZ-gW-9Hk"/>
                                         <constraint firstAttribute="bottom" secondItem="3HS-Jj-Co8" secondAttribute="bottom" id="upt-HJ-yeJ"/>
@@ -110,15 +112,16 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Id8-le-yus">
                                     <rect key="frame" x="94" y="0.0" width="93.5" height="60"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyr-cb-5gs">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyr-cb-5gs">
                                             <rect key="frame" x="0.0" y="0.0" width="93.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlX-GF-2Ot">
-                                            <rect key="frame" x="0.0" y="31" width="93.5" height="29"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="93.5" height="60"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" title="关注">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -134,21 +137,23 @@
                                         <constraint firstItem="wyr-cb-5gs" firstAttribute="top" secondItem="Id8-le-yus" secondAttribute="top" id="ToM-L1-og8"/>
                                         <constraint firstItem="wyr-cb-5gs" firstAttribute="leading" secondItem="Id8-le-yus" secondAttribute="leading" id="cqp-2P-MKI"/>
                                         <constraint firstAttribute="bottom" secondItem="FlX-GF-2Ot" secondAttribute="bottom" id="kpx-4m-ME0"/>
+                                        <constraint firstItem="FlX-GF-2Ot" firstAttribute="top" secondItem="Id8-le-yus" secondAttribute="top" id="pF3-yE-D9A"/>
                                         <constraint firstAttribute="trailing" secondItem="wyr-cb-5gs" secondAttribute="trailing" id="y1I-Ti-5qn"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FmP-Se-c3d">
                                     <rect key="frame" x="187.5" y="0.0" width="94" height="60"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qes-kj-45g">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qes-kj-45g">
                                             <rect key="frame" x="0.0" y="0.0" width="94" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVh-vH-xJo">
-                                            <rect key="frame" x="0.0" y="31" width="94" height="29"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="94" height="60"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" title="粉丝">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -160,6 +165,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="qes-kj-45g" firstAttribute="leading" secondItem="FmP-Se-c3d" secondAttribute="leading" id="0oo-bB-ART"/>
+                                        <constraint firstItem="jVh-vH-xJo" firstAttribute="top" secondItem="FmP-Se-c3d" secondAttribute="top" id="2RS-we-19g"/>
                                         <constraint firstAttribute="trailing" secondItem="qes-kj-45g" secondAttribute="trailing" id="5EZ-rW-spo"/>
                                         <constraint firstItem="qes-kj-45g" firstAttribute="top" secondItem="FmP-Se-c3d" secondAttribute="top" id="70x-5s-TfC"/>
                                         <constraint firstAttribute="trailing" secondItem="jVh-vH-xJo" secondAttribute="trailing" id="BTa-AI-EKJ"/>
@@ -170,15 +176,16 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hs-lk-17J">
                                     <rect key="frame" x="281.5" y="0.0" width="93.5" height="60"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wse-2f-Y8Q">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wse-2f-Y8Q">
                                             <rect key="frame" x="0.0" y="0.0" width="93.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykC-52-57q">
-                                            <rect key="frame" x="0.0" y="31" width="93.5" height="29"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="93.5" height="60"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" title="点赞">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -190,6 +197,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="ykC-52-57q" firstAttribute="leading" secondItem="0hs-lk-17J" secondAttribute="leading" id="BQM-jh-fL4"/>
+                                        <constraint firstItem="ykC-52-57q" firstAttribute="top" secondItem="0hs-lk-17J" secondAttribute="top" id="HLp-Lc-1Kq"/>
                                         <constraint firstItem="Wse-2f-Y8Q" firstAttribute="top" secondItem="0hs-lk-17J" secondAttribute="top" id="KGQ-On-X5F"/>
                                         <constraint firstAttribute="bottom" secondItem="ykC-52-57q" secondAttribute="bottom" id="mRC-u0-OL2"/>
                                         <constraint firstItem="Wse-2f-Y8Q" firstAttribute="leading" secondItem="0hs-lk-17J" secondAttribute="leading" id="vf8-dr-3Cy"/>
@@ -253,7 +261,7 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-4159" y="-2134"/>
+            <point key="canvasLocation" x="-4686" y="-2140"/>
         </view>
         <tapGestureRecognizer id="chO-RR-YYN">
             <connections>
