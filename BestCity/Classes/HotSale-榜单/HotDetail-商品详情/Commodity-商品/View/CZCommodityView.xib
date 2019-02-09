@@ -530,7 +530,7 @@
                 <outlet property="scoreThreeName" destination="Wiz-eh-1nv" id="sU0-3Z-fbo"/>
                 <outlet property="titleName" destination="dPF-SL-8uW" id="xbI-tV-OdR"/>
             </connections>
-            <point key="canvasLocation" x="-1992" y="-1354"/>
+            <point key="canvasLocation" x="-1992" y="-1354.2728635682161"/>
         </view>
     </objects>
     <resources>

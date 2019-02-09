@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSString *recordID;
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
+/** <#注释#> */
+@property (nonatomic, strong) NSMutableDictionary *param;
 @end
 
 @implementation CZTwoController
@@ -66,10 +68,14 @@
         param[@"page"] = @"0";
         param[@"category2Id"] = SourceId;
         param[@"client"] = @(2);
+        self.param = param;
         
         [CZProgressHUD showProgressHUDWithText:nil];
         //获取数据
         [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/goodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+            NSLog(@"记录%@\n最新%@", self.param, param);
+            if (self.param != param) return ;
+            
             if ([result[@"msg"] isEqualToString:@"success"]) {
                 if ([result[@"data"] count] > 0) {
                     // 删除noData图片
