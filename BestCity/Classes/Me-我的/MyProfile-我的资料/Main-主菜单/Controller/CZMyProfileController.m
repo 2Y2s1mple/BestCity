@@ -12,12 +12,12 @@
 #import "UIButton+CZExtension.h"
 #import "CZChangeNicknameController.h"
 #import "CZDatePickView.h"
-#import "CZBindingMobileController.h"
 #import "GXNetTool.h"
 #import "CZProgressHUD.h"
 #import "CZUserInfoTool.h"
 #import "CZAlertViewTool.h"
 #import "CZLoginController.h"
+#import "CZAdministratorAccountController.h"
 
 @interface CZMyProfileController () <UITableViewDelegate, UITableViewDataSource, CZDatePickViewDelegate, CZChangeNicknameControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 /** tableView */
@@ -142,8 +142,8 @@
         backView.delegate = self;
         [self.view addSubview:backView];
     } else if ([self.leftTitles[indexPath.row] isEqualToString:@"账号管理"]) {
-//        CZBindingMobileController *vc = [[CZBindingMobileController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
+        CZAdministratorAccountController *vc = [[CZAdministratorAccountController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     } else{
         //
         [self openPhoto];

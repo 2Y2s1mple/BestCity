@@ -22,8 +22,9 @@
     showParam.openType = AlibcOpenTypeNative;
     showParam.backUrl = @"tbopen25025861";
     showParam.isNeedPush = YES;
+    showParam.nativeFailMode = AlibcNativeFailModeNone;
     
-    [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
+    NSInteger code = [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
         NSLog(@"--------------------");
         
         if(tradeProcessResult.result ==AlibcTradeResultTypeAddCard){
@@ -45,6 +46,12 @@
         NSString *tip = [NSString stringWithFormat:@"交易失败:\n订单号\n%@",orderid];
         NSLog(@"交易失败 -- %@", tip);
     }];
+    
+    if (code != 0) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }
+    
 }
 
 @end

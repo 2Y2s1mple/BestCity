@@ -19,3 +19,5 @@ NSString * const requiredVersionCode = @"requiredVersionCode";
 
 /** 收藏通知的KEY */
 NSString * const collectNotification = @"collectNotification";
+
+BOOL appVersion = YES;

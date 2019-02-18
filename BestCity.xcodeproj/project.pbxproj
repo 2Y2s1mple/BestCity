@@ -96,6 +96,8 @@
 		9761EE0B219940D100E3276D /* CZEvaluateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE0A219940D100E3276D /* CZEvaluateModel.m */; };
 		9761EE0E2199669700E3276D /* CZEvaluateToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE0D2199669700E3276D /* CZEvaluateToolBar.m */; };
 		9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9761EE11219969B600E3276D /* CZEvaluateToolBar.xib */; };
+		97643476221AA27100EB0291 /* CZAdministratorAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97643474221AA27100EB0291 /* CZAdministratorAccountController.m */; };
+		97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97643475221AA27100EB0291 /* CZAdministratorAccountController.xib */; };
 		9765333B21B8F007002F9308 /* apijipinchengcn.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9765333A21B8F007002F9308 /* apijipinchengcn.cer */; };
 		9765649921A53BF2008A0293 /* CZCollectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765649821A53BF2008A0293 /* CZCollectButton.m */; };
 		97705C122107068E00485D64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C102107068E00485D64 /* Main.storyboard */; };
@@ -459,6 +461,9 @@
 		9761EE0C2199669700E3276D /* CZEvaluateToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEvaluateToolBar.h; sourceTree = "<group>"; };
 		9761EE0D2199669700E3276D /* CZEvaluateToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEvaluateToolBar.m; sourceTree = "<group>"; };
 		9761EE11219969B600E3276D /* CZEvaluateToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEvaluateToolBar.xib; sourceTree = "<group>"; };
+		97643473221AA27100EB0291 /* CZAdministratorAccountController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAdministratorAccountController.h; sourceTree = "<group>"; };
+		97643474221AA27100EB0291 /* CZAdministratorAccountController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAdministratorAccountController.m; sourceTree = "<group>"; };
+		97643475221AA27100EB0291 /* CZAdministratorAccountController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAdministratorAccountController.xib; sourceTree = "<group>"; };
 		9765333A21B8F007002F9308 /* apijipinchengcn.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = apijipinchengcn.cer; sourceTree = "<group>"; };
 		9765649721A53BF2008A0293 /* CZCollectButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectButton.h; sourceTree = "<group>"; };
 		9765649821A53BF2008A0293 /* CZCollectButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectButton.m; sourceTree = "<group>"; };
@@ -1411,6 +1416,28 @@
 				975E761321E73CCD00B0819B /* CZScollerImageTool.m */,
 			);
 			path = "轮播图工具";
+			sourceTree = "<group>";
+		};
+		97643472221AA11900EB0291 /* Administration-账号管理 */ = {
+			isa = PBXGroup;
+			children = (
+				97643473221AA27100EB0291 /* CZAdministratorAccountController.h */,
+				97643474221AA27100EB0291 /* CZAdministratorAccountController.m */,
+				97643475221AA27100EB0291 /* CZAdministratorAccountController.xib */,
+				97C8512D211AFAA9005540D8 /* CZBindingMobileController.h */,
+				97C8512E211AFAA9005540D8 /* CZBindingMobileController.m */,
+				97C8512F211AFAA9005540D8 /* CZBindingMobileController.xib */,
+			);
+			path = "Administration-账号管理";
+			sourceTree = "<group>";
+		};
+		97643478221AA2D700EB0291 /* Main-主菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				97D8FCD02111B9F800D8ED8F /* Controller */,
+				97D8FCD12111BA0000D8ED8F /* View */,
+			);
+			path = "Main-主菜单";
 			sourceTree = "<group>";
 		};
 		9765649A21A58C89008A0293 /* PointList-积分明细 */ = {
@@ -2388,8 +2415,8 @@
 		97D8FCCF2111B9D700D8ED8F /* MyProfile-我的资料 */ = {
 			isa = PBXGroup;
 			children = (
-				97D8FCD02111B9F800D8ED8F /* Controller */,
-				97D8FCD12111BA0000D8ED8F /* View */,
+				97643478221AA2D700EB0291 /* Main-主菜单 */,
+				97643472221AA11900EB0291 /* Administration-账号管理 */,
 			);
 			path = "MyProfile-我的资料";
 			sourceTree = "<group>";
@@ -2401,9 +2428,6 @@
 				97D8FCCA2111A67700D8ED8F /* CZMyProfileController.m */,
 				97BC05CA21129ECC001ED65A /* CZChangeNicknameController.h */,
 				97BC05CB21129ECC001ED65A /* CZChangeNicknameController.m */,
-				97C8512D211AFAA9005540D8 /* CZBindingMobileController.h */,
-				97C8512E211AFAA9005540D8 /* CZBindingMobileController.m */,
-				97C8512F211AFAA9005540D8 /* CZBindingMobileController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2750,6 +2774,7 @@
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
 				970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */,
 				9723076221AD77000004C00C /* CZNoDataView.xib in Resources */,
+				97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */,
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
 				97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
@@ -2873,6 +2898,7 @@
 				97798CC0212D0FC90052CE94 /* SDWebImageFrame.m in Sources */,
 				97798CCD212D0FC90052CE94 /* SDImageCache.m in Sources */,
 				97798CD8212D0FC90052CE94 /* UIButton+WebCache.m in Sources */,
+				97643476221AA27100EB0291 /* CZAdministratorAccountController.m in Sources */,
 				97798CCF212D0FC90052CE94 /* SDWebImageTransition.m in Sources */,
 				97B875FC21EDC472001CC393 /* CZVoteShowView.m in Sources */,
 				97798CD1212D0FC90052CE94 /* UIImageView+WebCache.m in Sources */,

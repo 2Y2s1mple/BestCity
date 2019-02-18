@@ -82,8 +82,10 @@ static NSString * const type = @"1";
                 [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
                 return;
             }
+            
             // 打开淘宝
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
+            
         }];
         _likeView.titleData = @{@"left" : @"分享", @"right" : @"领券并购买"};
     }

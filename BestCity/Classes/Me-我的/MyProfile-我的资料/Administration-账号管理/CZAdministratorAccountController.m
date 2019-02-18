@@ -7,7 +7,7 @@
 //
 
 #import "CZAdministratorAccountController.h"
-
+#import "CZNavigationView.h"
 @interface CZAdministratorAccountController ()
 
 @end
@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    //导航条
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"账号管理" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    [self.view addSubview:navigationView];
 }
 
 /*

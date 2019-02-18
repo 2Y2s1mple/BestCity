@@ -157,8 +157,9 @@
         [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
         return;
     }
+    UIViewController *vc = [[UIApplication sharedApplication].keyWindow rootViewController];
     // 打开淘宝
-    [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.couponModel.couponsUrl parentController:self];
+    [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.couponModel.couponsUrl parentController:vc];
 }
 
 - (NSString *)platfromNameWithNumber:(NSNumber *)platformNumber

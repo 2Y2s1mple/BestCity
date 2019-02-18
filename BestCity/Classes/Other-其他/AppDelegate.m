@@ -54,7 +54,9 @@
     } failure:^(NSError *error) {
         NSLog(@"Init failed: %@", error.description);
     }];
-
+    // 设置全局配置，是否强制使用h5
+    [[AlibcTradeSDK sharedInstance] setIsForceH5:NO];
+   
     return YES;
 }
 
@@ -81,6 +83,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 { 
+    //3.1.1接口
+    if (![[AlibcTradeSDK sharedInstance] application:application
+                                             openURL:url
+                                   sourceApplication:sourceApplication
+                                          annotation:annotation]) {
+        // 处理其他app跳转到自己的app
+    }
+    
     [[UMSocialManager defaultManager] handleOpenURL:url];
     NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
     NSLog(@"URL scheme:%@", [url scheme]);
@@ -89,7 +99,16 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     return YES;
 }
 
-
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    
+    if (![[AlibcTradeSDK sharedInstance] application:application
+                                             openURL:url
+                                             options:options]) {
+        //处理其他app跳转到自己的app，如果百川处理过会返回YES
+    }
+    return YES;
+}
 
 
 

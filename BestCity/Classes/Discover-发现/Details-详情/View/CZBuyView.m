@@ -117,8 +117,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dic = self.buyDataList[indexPath.row];
+    UIViewController *vc = [[UIApplication sharedApplication].keyWindow rootViewController];
     // 打开淘宝
-    [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:self];
+    [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:vc];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
