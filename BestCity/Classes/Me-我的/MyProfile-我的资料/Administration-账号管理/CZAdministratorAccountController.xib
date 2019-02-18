@@ -1,27 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZAdministratorAccountController">
             <connections>
+                <outlet property="numberChangeBtn" destination="fAS-pS-nhg" id="y8L-Yr-oDu"/>
+                <outlet property="phoneLabel" destination="Owk-Gd-dR3" id="VFY-0X-FIN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weixinChangeBtn" destination="UdG-YX-HgR" id="0Jz-NY-RDO"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHo-AF-Un8">
+                    <rect key="frame" x="0.0" y="67" width="375" height="66"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone-big" translatesAutoresizingMaskIntoConstraints="NO" id="euQ-4Y-4LR">
+                            <rect key="frame" x="14" y="12" width="42" height="42"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBo-Mo-pp0">
+                            <rect key="frame" x="73" y="12" width="50" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13866588111 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owk-Gd-dR3">
+                            <rect key="frame" x="73" y="36" width="96" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fAS-pS-nhg">
+                            <rect key="frame" x="313" y="20.5" width="48" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="9uy-Cy-VPZ"/>
+                                <constraint firstAttribute="width" constant="48" id="MZo-JA-s3V"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="更换">
+                                <color key="titleColor" red="0.6744493842124939" green="0.6745484471321106" blue="0.67442780733108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                    <color key="value" red="0.6744493842124939" green="0.6745484471321106" blue="0.67442780733108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="changePhoneNumber" destination="-1" eventType="touchUpInside" id="AUV-WK-k3t"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="NBo-Mo-pp0" firstAttribute="leading" secondItem="euQ-4Y-4LR" secondAttribute="trailing" constant="17" id="1vU-cL-DOn"/>
+                        <constraint firstItem="Owk-Gd-dR3" firstAttribute="leading" secondItem="NBo-Mo-pp0" secondAttribute="leading" id="KM1-VS-fmE"/>
+                        <constraint firstItem="NBo-Mo-pp0" firstAttribute="top" secondItem="euQ-4Y-4LR" secondAttribute="top" id="Pty-5u-PQv"/>
+                        <constraint firstAttribute="height" constant="66" id="WGx-Sb-6HX"/>
+                        <constraint firstItem="euQ-4Y-4LR" firstAttribute="centerY" secondItem="tHo-AF-Un8" secondAttribute="centerY" id="eTO-gv-Mmf"/>
+                        <constraint firstItem="Owk-Gd-dR3" firstAttribute="bottom" secondItem="euQ-4Y-4LR" secondAttribute="bottom" id="gmR-Gw-dya"/>
+                        <constraint firstItem="fAS-pS-nhg" firstAttribute="centerY" secondItem="tHo-AF-Un8" secondAttribute="centerY" id="n6g-BU-1Mj"/>
+                        <constraint firstItem="euQ-4Y-4LR" firstAttribute="leading" secondItem="tHo-AF-Un8" secondAttribute="leading" constant="14" id="qxX-Oz-H1y"/>
+                        <constraint firstAttribute="trailing" secondItem="fAS-pS-nhg" secondAttribute="trailing" constant="14" id="srS-MV-ZUZ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADb-e2-Wtj">
+                    <rect key="frame" x="0.0" y="133" width="375" height="66"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wechat-big" translatesAutoresizingMaskIntoConstraints="NO" id="Zse-HI-9CH">
+                            <rect key="frame" x="14" y="12" width="42" height="42"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJC-bj-y7D">
+                            <rect key="frame" x="73" y="24" width="50" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdG-YX-HgR">
+                            <rect key="frame" x="313" y="20.5" width="48" height="25"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="6nu-Zv-AbB"/>
+                                <constraint firstAttribute="width" constant="48" id="g4Y-QY-Gbr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="更换">
+                                <color key="titleColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                    <color key="value" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Zse-HI-9CH" firstAttribute="leading" secondItem="ADb-e2-Wtj" secondAttribute="leading" constant="14" id="36v-QM-Wkx"/>
+                        <constraint firstItem="UdG-YX-HgR" firstAttribute="centerY" secondItem="ADb-e2-Wtj" secondAttribute="centerY" id="3cR-Ua-ETI"/>
+                        <constraint firstItem="Zse-HI-9CH" firstAttribute="centerY" secondItem="ADb-e2-Wtj" secondAttribute="centerY" id="3ee-Xq-nnr"/>
+                        <constraint firstItem="ZJC-bj-y7D" firstAttribute="leading" secondItem="Zse-HI-9CH" secondAttribute="trailing" constant="17" id="LNV-ao-kr3"/>
+                        <constraint firstAttribute="height" constant="66" id="VV5-Nu-8fO"/>
+                        <constraint firstItem="ZJC-bj-y7D" firstAttribute="centerY" secondItem="Zse-HI-9CH" secondAttribute="centerY" id="c7e-rw-iPI"/>
+                        <constraint firstAttribute="trailing" secondItem="UdG-YX-HgR" secondAttribute="trailing" constant="14" id="fC5-R1-etZ"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-116" y="-63"/>
+            <constraints>
+                <constraint firstItem="ADb-e2-Wtj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FHp-WG-cxh"/>
+                <constraint firstItem="tHo-AF-Un8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="67" id="M5F-dl-zrC"/>
+                <constraint firstItem="ADb-e2-Wtj" firstAttribute="top" secondItem="tHo-AF-Un8" secondAttribute="bottom" id="dfS-ds-1al"/>
+                <constraint firstItem="tHo-AF-Un8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="imH-WK-dSb"/>
+                <constraint firstAttribute="trailing" secondItem="tHo-AF-Un8" secondAttribute="trailing" id="lCG-fs-nfH"/>
+                <constraint firstAttribute="trailing" secondItem="ADb-e2-Wtj" secondAttribute="trailing" id="qmY-Tk-muz"/>
+            </constraints>
+            <point key="canvasLocation" x="-562" y="-67"/>
         </view>
     </objects>
+    <resources>
+        <image name="phone-big" width="42" height="42"/>
+        <image name="wechat-big" width="42" height="42"/>
+    </resources>
 </document>

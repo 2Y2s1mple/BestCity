@@ -126,8 +126,8 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="3GI-b3-vKe"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="立即更换 ">
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="下一步">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -152,7 +152,7 @@
                 <constraint firstItem="EgP-Jf-ird" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="120" id="fmi-qK-hkK"/>
                 <constraint firstItem="nw9-Is-eHF" firstAttribute="top" secondItem="EgP-Jf-ird" secondAttribute="bottom" id="rmI-vq-sxi"/>
             </constraints>
-            <point key="canvasLocation" x="60" y="-133"/>
+            <point key="canvasLocation" x="-86" y="-153"/>
         </view>
     </objects>
     <resources>

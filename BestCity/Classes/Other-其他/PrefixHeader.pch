@@ -19,8 +19,8 @@
 /**
  * 极品城URL
  */
-//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/"
-#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/"
+#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/"
+//#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/"
 
 /** 用户信息 */
 #define JPUSERINFO [CZSaveTool objectForKey:@"user"]

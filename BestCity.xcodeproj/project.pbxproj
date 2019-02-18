@@ -98,6 +98,8 @@
 		9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9761EE11219969B600E3276D /* CZEvaluateToolBar.xib */; };
 		97643476221AA27100EB0291 /* CZAdministratorAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97643474221AA27100EB0291 /* CZAdministratorAccountController.m */; };
 		97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97643475221AA27100EB0291 /* CZAdministratorAccountController.xib */; };
+		97643481221AB2FD00EB0291 /* CZCZChangeMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9764347F221AB2FD00EB0291 /* CZCZChangeMobileController.m */; };
+		97643482221AB2FD00EB0291 /* CZCZChangeMobileController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97643480221AB2FD00EB0291 /* CZCZChangeMobileController.xib */; };
 		9765333B21B8F007002F9308 /* apijipinchengcn.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9765333A21B8F007002F9308 /* apijipinchengcn.cer */; };
 		9765649921A53BF2008A0293 /* CZCollectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765649821A53BF2008A0293 /* CZCollectButton.m */; };
 		97705C122107068E00485D64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C102107068E00485D64 /* Main.storyboard */; };
@@ -464,6 +466,9 @@
 		97643473221AA27100EB0291 /* CZAdministratorAccountController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAdministratorAccountController.h; sourceTree = "<group>"; };
 		97643474221AA27100EB0291 /* CZAdministratorAccountController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAdministratorAccountController.m; sourceTree = "<group>"; };
 		97643475221AA27100EB0291 /* CZAdministratorAccountController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAdministratorAccountController.xib; sourceTree = "<group>"; };
+		9764347E221AB2FD00EB0291 /* CZCZChangeMobileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCZChangeMobileController.h; sourceTree = "<group>"; };
+		9764347F221AB2FD00EB0291 /* CZCZChangeMobileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCZChangeMobileController.m; sourceTree = "<group>"; };
+		97643480221AB2FD00EB0291 /* CZCZChangeMobileController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCZChangeMobileController.xib; sourceTree = "<group>"; };
 		9765333A21B8F007002F9308 /* apijipinchengcn.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = apijipinchengcn.cer; sourceTree = "<group>"; };
 		9765649721A53BF2008A0293 /* CZCollectButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectButton.h; sourceTree = "<group>"; };
 		9765649821A53BF2008A0293 /* CZCollectButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectButton.m; sourceTree = "<group>"; };
@@ -1427,6 +1432,9 @@
 				97C8512D211AFAA9005540D8 /* CZBindingMobileController.h */,
 				97C8512E211AFAA9005540D8 /* CZBindingMobileController.m */,
 				97C8512F211AFAA9005540D8 /* CZBindingMobileController.xib */,
+				9764347E221AB2FD00EB0291 /* CZCZChangeMobileController.h */,
+				9764347F221AB2FD00EB0291 /* CZCZChangeMobileController.m */,
+				97643480221AB2FD00EB0291 /* CZCZChangeMobileController.xib */,
 			);
 			path = "Administration-账号管理";
 			sourceTree = "<group>";
@@ -2769,6 +2777,7 @@
 				97BDB84E21100B8800966FF0 /* CZChoicenessCell.xib in Resources */,
 				97BC05DB2112B122001ED65A /* key-pressed@2x.png in Resources */,
 				97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */,
+				97643482221AB2FD00EB0291 /* CZCZChangeMobileController.xib in Resources */,
 				97C78FC621196C6F00374CCD /* CZSystemMessageCell.xib in Resources */,
 				9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
@@ -3017,6 +3026,7 @@
 				97C7FF45216DDDB50091DC07 /* MJRefreshStateHeader.m in Sources */,
 				979EFD8521E085B5000FE466 /* CZHotSaleDetailModel.m in Sources */,
 				970D0AE721AB981500649FC2 /* CZGuideController.m in Sources */,
+				97643481221AB2FD00EB0291 /* CZCZChangeMobileController.m in Sources */,
 				97C7FF48216DDDB50091DC07 /* MJRefreshHeader.m in Sources */,
 				97F0EC32212529F5000FE1DC /* CZUMConfigure.m in Sources */,
 				97C7FF03216DDDAB0091DC07 /* MJType.m in Sources */,
