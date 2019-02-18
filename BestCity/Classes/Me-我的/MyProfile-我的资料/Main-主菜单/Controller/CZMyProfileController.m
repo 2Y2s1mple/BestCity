@@ -45,7 +45,12 @@
         // 用户信息
         NSDictionary *userInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
         _rightTitles = [NSMutableArray arrayWithArray:@[
-                                                        userInfo[@"avatar"], userInfo[@"nickname"], userInfo[@"gender"], userInfo[@"birthday"], userInfo[@"mobile"]]];
+                                                        userInfo[@"avatar"],
+                                                        userInfo[@"nickname"], 
+                                                        userInfo[@"gender"],
+                                                        userInfo[@"birthday"], 
+                                                        userInfo[@"mobile"]
+                                                        ]];
     }
     return _rightTitles;
 }
@@ -104,7 +109,7 @@
         CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:CZMyProfileCellTypeDefault];
         cell.headerImage = self.rightTitles[indexPath.row];;
         return cell;
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 4) {
         CZMyProfileCell *cell = [CZMyProfileCell cellWithTableView:tableView cellType:2];
         cell.title = self.leftTitles[indexPath.row];
         cell.subTitle = self.rightTitles[indexPath.row];
