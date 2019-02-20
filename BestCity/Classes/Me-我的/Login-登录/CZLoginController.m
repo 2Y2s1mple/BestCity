@@ -87,6 +87,7 @@ static id instancet_;
             
         } failure:^(NSError *error) {}];
     }];
+    
 }
 
 #pragma mark - 登录

@@ -8,6 +8,8 @@
 
 #import "CZBindingMobileController.h"
 #import "CZNavigationView.h"
+#import "GXNetTool.h"
+#import "CZMyProfileController.h"
 
 @interface CZBindingMobileController ()
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -38,8 +40,36 @@
 }
 
 #pragma mark - 立即更换
-- (IBAction)loginAction:(id)sender {
+- (IBAction)loginAction:(UIButton *)sender {
     NSLog(@"%s", __func__);
+    
+    sender.enabled = NO;
+    // 验证
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"newMobile"] = self.userTextField.text;
+    param[@"code"] = self.passwordTextField.text;
+    
+    
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/changeMobile"];
+    
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        sender.enabled = YES;
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            [CZProgressHUD showProgressHUDWithText:@"修改成功"];
+            [CZProgressHUD hideAfterDelay:1.5];
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[CZMyProfileController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+            }
+            
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"验证码错误"];
+        }
+        [CZProgressHUD hideAfterDelay:2];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - 获取验证码
@@ -49,6 +79,23 @@
     self.userTextField.enabled = NO;
     self.count = 60;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
+    // 发送验证码
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"mobile"] = self.userTextField.text;
+    param[@"type"] = @(3); // 3更换手机号
+    
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/sendMessage"];
+    
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            [CZProgressHUD showProgressHUDWithText:@"验证码发送成功"];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"验证码发送失败"];
+        }
+        [CZProgressHUD hideAfterDelay:2];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)timeDown
@@ -72,7 +119,7 @@
         [self disabledAndGrayColor:self.loginBtn];
     }
     
-    if (self.userTextField.text.length == 1) {
+    if (self.userTextField.text.length == 11) {
         [self enabledAndRedColor:self.verificationCodeBtn];
     } else {
         [self disabledAndGrayColor:self.verificationCodeBtn];

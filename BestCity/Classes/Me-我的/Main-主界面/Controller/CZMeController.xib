@@ -50,12 +50,12 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Y-z1-cIv" customClass="CZMutContentButton">
-                            <rect key="frame" x="99" y="60" width="79" height="26"/>
+                            <rect key="frame" x="99" y="60" width="30" height="38"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="Aoe-LN-5nq"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="18"/>
-                            <state key="normal" title="立即登录" image="right-white">
+                            <state key="normal">
                                 <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="highlighted" image="right-white"/>
@@ -261,7 +261,7 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-4686" y="-2140"/>
+            <point key="canvasLocation" x="-4898" y="-2144"/>
         </view>
         <tapGestureRecognizer id="chO-RR-YYN">
             <connections>

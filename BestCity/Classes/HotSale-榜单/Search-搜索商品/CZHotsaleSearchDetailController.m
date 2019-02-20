@@ -165,13 +165,13 @@
     
     if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) {
         if (offsetY - self.recordOffsetY >= 0) {
-            NSLog(@"向上滑动");
+//            NSLog(@"向上滑动");
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.frame = CGRectMake(0, -50, SCR_WIDTH, SCR_HEIGHT + 50);
                 self.currentOffsetY = -50;
             }];
         } else {
-            NSLog(@"向下滑动");
+//            NSLog(@"向下滑动");
             
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT);

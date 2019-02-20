@@ -12,6 +12,7 @@
 
 @interface CZHotSaleCell ()
 /** 最上面的序号*/
+@property (nonatomic, weak) IBOutlet UILabel *topNumberDefault;
 @property (weak, nonatomic) IBOutlet UILabel *topNumber;
 /** 大图片 */
 @property (nonatomic, weak) IBOutlet UIImageView *bigImage;
@@ -31,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *tmPrice;
 /** 访问量 */
 @property (nonatomic, weak) IBOutlet UILabel *visitLabel;
+/** 推荐理由 */
+@property (nonatomic, weak) IBOutlet UILabel *recommendReasonLabel;
 
 @end
 
@@ -38,7 +41,8 @@
 
 - (void)awakeFromNib {    
     [super awakeFromNib];
-    
+    self.topNumberDefault.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 23];
+    self.topNumber.font = self.topNumberDefault.font;
 }
 
 - (void)setModel:(CZRecommendListModel *)model
@@ -124,9 +128,14 @@
     } else {
         self.visitLabel.text = [NSString stringWithFormat:@"%@", model.pv];
     }
+    
+    // 推荐理由
+    NSString *text = [NSString stringWithFormat:@"推荐理由: %@", model.recommendReason];
+    self.recommendReasonLabel.textColor = UIColorFromRGB(0x151515);
+    self.recommendReasonLabel.attributedText = [text addAttributeColor:[UIColor blackColor] Range:[text rangeOfString:@"推荐理由"]];
 
     [self layoutIfNeeded];
-    model.cellHeight = CGRectGetMaxY(self.visitLabel.frame);
+    model.cellHeight = CGRectGetMaxY(self.recommendReasonLabel.frame);
     
 }
 

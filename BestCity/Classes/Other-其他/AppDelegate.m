@@ -56,7 +56,8 @@
     }];
     // 设置全局配置，是否强制使用h5
     [[AlibcTradeSDK sharedInstance] setIsForceH5:NO];
-   
+    //默认调试模式打开日志,release关闭,可以不调用下面的函数
+    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:YES];
     return YES;
 }
 
@@ -101,12 +102,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
 {
-    
+    [[UMSocialManager defaultManager] handleOpenURL:url];
     if (![[AlibcTradeSDK sharedInstance] application:application
                                              openURL:url
                                              options:options]) {
         //处理其他app跳转到自己的app，如果百川处理过会返回YES
     }
+    
+    NSLog(@"URL scheme:%@", [url scheme]);
+    NSLog(@"URL query: %@", [url query]);
     return YES;
 }
 

@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSString *otherPrice;
 /** 访问次数 */
 @property (nonatomic, strong) NSString *pv;
+/** 推荐理由 */
+@property (nonatomic, strong) NSString *recommendReason;
 
 /**
  * 辅助

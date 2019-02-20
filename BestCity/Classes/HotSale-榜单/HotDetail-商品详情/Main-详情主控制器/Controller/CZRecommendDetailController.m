@@ -72,7 +72,6 @@ static NSString * const type = @"1";
                 return;
             }
             CZShareView *share = [[CZShareView alloc] initWithFrame:weakSelf.view.frame];
-            
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
@@ -82,7 +81,6 @@ static NSString * const type = @"1";
                 [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
                 return;
             }
-            
             // 打开淘宝
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
             

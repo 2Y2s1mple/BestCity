@@ -117,7 +117,9 @@
         [CZProgressHUD hideAfterDelay:2];
     } failure:^(NSError *error) {
         
-    }];}
+    }];
+    
+}
 
 /** 激活红色 */
 - (void)enabledAndRedColor:(UIButton *)btn
@@ -131,6 +133,11 @@
 {
     btn.backgroundColor = CZBTNGRAY;
     btn.enabled = NO;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 @end

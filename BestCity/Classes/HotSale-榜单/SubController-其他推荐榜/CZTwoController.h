@@ -7,10 +7,10 @@
 //
 
 #import "CZBaseRecommendController.h"
-@class CZHotSubTilteModel;
+@class CZHotTitleModel;
 @interface CZTwoController : CZBaseRecommendController
 /** 大图片URL */
 @property (nonatomic, strong) NSString *imageUrl;
 /** 附标题 */
-@property (nonatomic, strong) NSArray<CZHotSubTilteModel *> *subTitles;
+@property (nonatomic, strong) CZHotTitleModel *subTitles;
 @end

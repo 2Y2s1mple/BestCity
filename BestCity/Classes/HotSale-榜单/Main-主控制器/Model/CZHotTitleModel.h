@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZHotTitleModel : NSObject
 /** 标题 */
 @property (nonatomic, strong) NSString *categoryName;
+/** 分类的ID */
+@property (nonatomic, strong) NSString *categoryId;
 /** 副标题 */
 @property (nonatomic, strong) NSArray *children;
 /** 大图片 */

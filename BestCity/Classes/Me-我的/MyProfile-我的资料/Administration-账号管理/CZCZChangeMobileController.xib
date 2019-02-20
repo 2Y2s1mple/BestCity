@@ -38,7 +38,7 @@
                             <rect key="frame" x="36" y="21.5" width="189" height="17"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWL-1Q-PlL">
                             <rect key="frame" x="36" y="58" width="279" height="2"/>
@@ -130,7 +130,7 @@
                 <constraint firstItem="Ux4-8Q-SXz" firstAttribute="leading" secondItem="MSq-3h-W8I" secondAttribute="trailing" id="rKO-RB-OH3"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="lCT-fi-odr"/>
-            <point key="canvasLocation" x="394" y="-217"/>
+            <point key="canvasLocation" x="154" y="-230"/>
         </view>
     </objects>
     <resources>

@@ -12,21 +12,16 @@
 #import "GXNetTool.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
-#import "CZSubTitleButton.h"
-#import "TSLWebViewController.h"
 #import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
+#import "CZSubButton.h"
+#import "CZHotListController.h"
+
 
 @interface CZTwoController ()
-/** 记录高度 */
-@property (nonatomic, assign) CGFloat recordHeight;
-/** 记录点击的按钮 */
-@property (nonatomic, strong) UIButton *recordBtn;
-/** 记录Id避免重复点击刷新 */
-@property (nonatomic, strong) NSString *recordID;
+
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
-/** <#注释#> */
-@property (nonatomic, strong) NSMutableDictionary *param;
 @end
 
 @implementation CZTwoController
@@ -47,35 +42,30 @@
     //line
     CZTOPLINE;
     
-    // 设置头部标题
-    [self setupHeaderView];
-    
     // 设置tableView
-    self.tableView.frame = CGRectMake(0, 40, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94) - 40 + 50);
-    self.tableView.tableHeaderView = [self headerView];
+    self.tableView.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94) + 50);
+    
+    // 设置头部标题
+    self.tableView.tableHeaderView = [self setupHeaderView]; 
     
     // 加载刷新控件
     [self setupRefresh];
     
-    //获取标题1的数据
-    [self getDataSourceWithId:self.subTitles[0].categoryId];
+    //获取数据
+    [self getDataSource];
 }
 
 #pragma mark - 网络请求
-- (void)getDataSourceWithId:(NSString *)SourceId
+- (void)getDataSource
 {
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"page"] = @"0";
-        param[@"category2Id"] = SourceId;
+        param[@"category1Id"] = self.subTitles.categoryId;
         param[@"client"] = @(2);
-        self.param = param;
         
         [CZProgressHUD showProgressHUDWithText:nil];
         //获取数据
         [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/goodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-            NSLog(@"记录%@\n最新%@", self.param, param);
-            if (self.param != param) return ;
-            
             if ([result[@"msg"] isEqualToString:@"success"]) {
                 if ([result[@"data"] count] > 0) {
                     // 删除noData图片
@@ -98,50 +88,46 @@
             // 结束刷新
             [self.tableView.mj_header endRefreshing];
         }];
-        self.recordID = SourceId;
 }
 
-
-
-
 #pragma mark - 初始化视图
-- (void)setupHeaderView
+- (UIView *)setupHeaderView
 {
-    UIScrollView *backView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 40)];
+    UIScrollView *backView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 90)];
     backView.showsHorizontalScrollIndicator = NO;
     backView.backgroundColor = CZGlobalLightGray;
     [self.view addSubview:backView];
     //    NSArray *titles = @[@"剃须刀", @"计步器", @"吹风机", @"足浴盆", @"体重计", @"剃/脱毛器", @"美容仪", @"按摩椅", @"理发器", @"电动牙刷"];
-    CGFloat space = 8;
-    CGFloat h = 40;
-    for (int i = 0; i < self.subTitles.count; i++) {
+    CGFloat space = (SCR_WIDTH - 20 - 5 * 55) / 4;
+    CGFloat w = 55;
+    CGFloat h = w + 20;
+    
+    for (int i = 0; i < self.subTitles.children.count; i++) {
+        CZHotSubTilteModel *model = self.subTitles.children[i];
         // 创建按钮
-        CZSubTitleButton *btn = [CZSubTitleButton buttonWithType:UIButtonTypeCustom];
-//        btn.backgroundColor = RANDOMCOLOR;
-        // 设置模型
-        CZHotSubTilteModel *model = self.subTitles[i];
-        model.indexBtn = i;
-        btn.model = model;
-        [btn sizeToFit];
+        CZSubButton *btn = [CZSubButton buttonWithType:UIButtonTypeCustom];
+        btn.tag = i + 100;
+        btn.width = w;
+        btn.height = h;
         
-        // 添加监听
-        [btn addTarget:self action:@selector(didClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        if (i == 0) {
-            _recordBtn = btn;
-            btn.x = space;
-            btn.y = 0;
-            btn.height = h;
+        if (i > 4) {
+            btn.x = 10 + (i - 5) * (w + space);
+            btn.y = 12 + h + 10;
+            backView.height = 180;
         } else {
-            CGFloat leftSpace = CZGetX(backView.subviews[i - 1]) + space;
-            btn.x = leftSpace;
-            btn.y = backView.subviews[i - 1].y;
-            btn.height = h;
+            btn.x = 10 + i * (w + space);
+            btn.y = 12;
         }
+        [btn sd_setImageWithURL:[NSURL URLWithString:model.img] forState:UIControlStateNormal];
+        
+        [btn setTitle:model.categoryName forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13];
         [backView addSubview:btn];
-        _recordHeight = CZGetX(btn);
+        
+        // 点击事件
+        [btn addTarget:self action:@selector(didClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
-    backView.contentSize = CGSizeMake(_recordHeight + 10, 0);
+    return backView;
 }
 
 /**
@@ -154,7 +140,6 @@
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:[UIImage imageNamed:@"banner"]];
     imageView.frame = CGRectMake(10, 10, SCR_WIDTH - 20, backView.height - 10);
     [backView addSubview:imageView];
-    
     return backView;
 }
 
@@ -167,20 +152,44 @@
 }
 
 #pragma mark - 事件
-- (void)didClickedBtn:(CZSubTitleButton *)sender
+- (void)didClickedBtn:(UIButton *)sender
 {
-    _recordBtn.selected = NO;
-    sender.selected = YES;
-    // 获取点击数据
-    if (self.recordID != sender.model.categoryId) {
-        [self getDataSourceWithId:sender.model.categoryId];
+    CZHotListController *hotVc = [[CZHotListController alloc] init];
+    hotVc.selectIndex = 0;
+    hotVc.menuViewStyle = WMMenuViewStyleLine;
+    hotVc.itemMargin = 10;
+    hotVc.progressHeight = 3;
+    hotVc.automaticallyCalculatesItemWidths = YES;
+    hotVc.titleFontName = @"PingFangSC-Medium";
+    hotVc.titleColorNormal = CZGlobalGray;
+    hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
+    hotVc.titleSizeNormal = 15.0f;
+    hotVc.titleSizeSelected = 15;
+    hotVc.progressColor = CZREDCOLOR;
+    
+    NSMutableArray *subTitles = [NSMutableArray array];
+    NSArray *titles = @[@"综合榜", @"热卖榜", @"轻奢榜", @"新品榜", @"性价比榜"];
+    CZHotSubTilteModel *model = self.subTitles.children[sender.tag - 100];
+    hotVc.mainTitle = model.categoryName;
+    for (int i = 0; i < titles.count; i++) {    
+        CZHotTitleModel *titleModel = [[CZHotTitleModel alloc] init];
+        titleModel.categoryId = model.categoryId;
+        titleModel.categoryName = titles[i];
+        [subTitles addObject:titleModel];
     }
-    _recordBtn = sender;
+    hotVc.subTitles = subTitles;
+    hotVc.isList2 = YES;
+    [hotVc reloadData];
+    
+    NSLog(@"didClickedBtn --- %@", model.categoryName);
+    
+    [self.navigationController pushViewController:hotVc animated:YES];
 }
 
 - (void)loadNewData
 {
-    [self getDataSourceWithId:self.recordID];
+    //获取数据
+    [self getDataSource];
 }
 
 #pragma mark - 代理方法

@@ -38,8 +38,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.bigImage.layer.cornerRadius = 5;
-    self.bigImage.layer.masksToBounds = YES;
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.width / 2.0;
     self.avatarImageView.layer.masksToBounds = YES;
     

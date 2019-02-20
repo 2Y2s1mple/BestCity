@@ -207,13 +207,14 @@
         case 0: {
             CZOneController *vc = [[CZOneController alloc] init];
             vc.imageUrl = [[self.mainTitles[index].adList firstObject] objectForKey:@"img"];
-             self.recordOffsetY = vc.tableView.contentOffset.y;
+            vc.titlesArray = self.mainTitles;
+            self.recordOffsetY = vc.tableView.contentOffset.y;
             return vc;
         }
         default: {
             CZTwoController *vc = [[CZTwoController alloc] init];
             vc.imageUrl = [[self.mainTitles[index].adList firstObject] objectForKey:@"img"];
-            vc.subTitles = self.mainTitles[index].children;
+            vc.subTitles = self.mainTitles[index];
             self.recordOffsetY = vc.tableView.contentOffset.y;
             return vc;
         }

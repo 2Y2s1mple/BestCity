@@ -157,7 +157,10 @@
         [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
         return;
     }
-    UIViewController *vc = [[UIApplication sharedApplication].keyWindow rootViewController];
+    UITabBarController *tabVc = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabVc.selectedViewController;
+    UIViewController *vc = nav.topViewController;
+    
     // 打开淘宝
     [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.couponModel.couponsUrl parentController:vc];
 }

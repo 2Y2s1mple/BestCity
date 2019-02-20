@@ -14,6 +14,13 @@
 #pragma mark - 跳转到淘宝
 + (void)openAlibcTradeWithUrlString:(NSString *)urlStr parentController:(UIViewController *)parentController
 {
+    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"taobao://"]]) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    }
+    
+    
     //根据链接打开页面
     id<AlibcTradePage> page = [AlibcTradePageFactory page:urlStr];
     
@@ -25,32 +32,19 @@
     showParam.nativeFailMode = AlibcNativeFailModeNone;
     
     NSInteger code = [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
-        NSLog(@"--------------------");
-        
-        if(tradeProcessResult.result ==AlibcTradeResultTypeAddCard){
-            NSString *tip = [NSString stringWithFormat:@"交易成功:成功的订单%@\n，失败的订单%@\n",[tradeProcessResult payResult].paySuccessOrders, [tradeProcessResult payResult].payFailedOrders];
-            NSLog(@"交易成功 --- %@", tip);
-        } else if(tradeProcessResult.result==AlibcTradeResultTypeAddCard){
-            NSLog(@"加入购物车");
-        }
-        
-        
+            if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){
+                NSLog(@"交易成功");
+            } else if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){
+                NSLog(@"加入购物车");
+            }
     } tradeProcessFailedCallback:^(NSError * _Nullable error) {
-        //        退出交易流程
-        NSLog(@"--------------------");
-        if (error.code==AlibcErrorCancelled) {
-            return ;
-        }
-        NSDictionary *infor = [error userInfo];
-        NSArray *orderid = [infor objectForKey:@"orderIdList"];
-        NSString *tip = [NSString stringWithFormat:@"交易失败:\n订单号\n%@",orderid];
-        NSLog(@"交易失败 -- %@", tip);
+        NSLog(@"----------退出交易流程----------");
     }];
     
-    if (code != 0) {
-        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
-        [CZProgressHUD hideAfterDelay:1.5];
-    }
+//    if (code != 0) {
+//        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
+//        [CZProgressHUD hideAfterDelay:1.5];
+//    }
     
 }
 
