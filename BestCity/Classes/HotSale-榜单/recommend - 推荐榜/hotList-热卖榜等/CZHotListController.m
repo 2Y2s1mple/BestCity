@@ -28,6 +28,21 @@
     [self.view addSubview:line];
 }
 
+- (void)setUpPorperty
+{
+    self.selectIndex = 0;
+    self.menuViewStyle = WMMenuViewStyleLine;
+    self.itemMargin = 10;
+    self.progressHeight = 3;
+    self.automaticallyCalculatesItemWidths = YES;
+    self.titleFontName = @"PingFangSC-Medium";
+    self.titleColorNormal = CZGlobalGray;
+    self.titleColorSelected = CZRGBColor(5, 5, 5);
+    self.titleSizeNormal = 15.0f;
+    self.titleSizeSelected = 15;
+    self.progressColor = CZREDCOLOR;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;

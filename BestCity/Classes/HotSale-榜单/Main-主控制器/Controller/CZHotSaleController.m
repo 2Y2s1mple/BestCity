@@ -164,7 +164,7 @@
 #pragma mark - 初始化
 - (CZHotSaleController * (^)(void))setupTopView
 {
-    return ^ {
+    CZHotSaleController * (^block)(void) = ^ {
         self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, IsiPhoneX ? 54 : 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
             if ([JPTOKEN length] <= 0)
             {
@@ -181,6 +181,8 @@
         [self.search addGestureRecognizer:tap];
         return self;
     };
+    
+    return block;
 }
 
 #pragma mark - 响应事件

@@ -14,6 +14,7 @@
 {
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self setTitleColor:CZGlobalGray forState:UIControlStateNormal];
+    self.titleLabel.font = [UIFont systemFontOfSize:13];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

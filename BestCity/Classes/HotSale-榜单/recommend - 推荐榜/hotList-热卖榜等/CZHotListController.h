@@ -10,6 +10,7 @@
 #import "CZHotTitleModel.h"
 
 @interface CZHotListController : WMPageController
+- (void)setUpPorperty;
 /** 标题 */
 @property (nonatomic, strong) NSString *mainTitle;
 /** 子标题 */

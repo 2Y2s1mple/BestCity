@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 分类的ID */
 @property (nonatomic, strong) NSString *categoryId;
 /** 副标题 */
-@property (nonatomic, strong) NSArray *children;
+@property (nonatomic, strong) NSArray <CZHotSubTilteModel *> *children;
 /** 大图片 */
 @property (nonatomic, strong) NSArray *adList;
 @end

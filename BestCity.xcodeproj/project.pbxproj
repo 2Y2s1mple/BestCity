@@ -308,6 +308,7 @@
 		97F152FF21097A24009F7922 /* CZCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F152FE21097A24009F7922 /* CZCommodityView.m */; };
 		97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F1530021097A75009F7922 /* CZCommodityView.xib */; };
 		97F586A2221CEC9A00C9BE4A /* CZHotListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F586A1221CEC9A00C9BE4A /* CZHotListController.m */; };
+		97F586A8221E537C00C9BE4A /* CZAllHotListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F586A7221E537C00C9BE4A /* CZAllHotListController.m */; };
 		97F71B9F21AD21A7005BCAC3 /* PlanPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F71B9B21AD21A6005BCAC3 /* PlanPageControl.m */; };
 		97F71BA021AD21A7005BCAC3 /* PlanADScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F71B9C21AD21A6005BCAC3 /* PlanADScrollView.m */; };
 		97F71BA121AD21A7005BCAC3 /* PlanADCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F71B9E21AD21A6005BCAC3 /* PlanADCollectionViewCell.m */; };
@@ -855,6 +856,8 @@
 		97F1530021097A75009F7922 /* CZCommodityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCommodityView.xib; sourceTree = "<group>"; };
 		97F586A0221CEC9A00C9BE4A /* CZHotListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotListController.h; sourceTree = "<group>"; };
 		97F586A1221CEC9A00C9BE4A /* CZHotListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotListController.m; sourceTree = "<group>"; };
+		97F586A6221E537C00C9BE4A /* CZAllHotListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAllHotListController.h; sourceTree = "<group>"; };
+		97F586A7221E537C00C9BE4A /* CZAllHotListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAllHotListController.m; sourceTree = "<group>"; };
 		97F71B9921AD21A6005BCAC3 /* PlanADScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanADScrollView.h; sourceTree = "<group>"; };
 		97F71B9A21AD21A6005BCAC3 /* PlanADCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanADCollectionViewCell.h; sourceTree = "<group>"; };
 		97F71B9B21AD21A6005BCAC3 /* PlanPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanPageControl.m; sourceTree = "<group>"; };
@@ -1978,6 +1981,7 @@
 				9785778E21A80B4100E42B29 /* CZSubTitleButton.m */,
 				9785778B21A80B2700E42B29 /* CZTwoController.h */,
 				9785778C21A80B2700E42B29 /* CZTwoController.m */,
+				97F586A5221E534C00C9BE4A /* AllHotList-全部 */,
 			);
 			path = "SubController-其他推荐榜";
 			sourceTree = "<group>";
@@ -2646,6 +2650,15 @@
 			path = "hotList-热卖榜等";
 			sourceTree = "<group>";
 		};
+		97F586A5221E534C00C9BE4A /* AllHotList-全部 */ = {
+			isa = PBXGroup;
+			children = (
+				97F586A6221E537C00C9BE4A /* CZAllHotListController.h */,
+				97F586A7221E537C00C9BE4A /* CZAllHotListController.m */,
+			);
+			path = "AllHotList-全部";
+			sourceTree = "<group>";
+		};
 		97F71B9821AD21A6005BCAC3 /* PlanADScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2996,6 +3009,7 @@
 				97C85134211C07EA005540D8 /* MBProgressHUD.m in Sources */,
 				977864A0211A7AD6001B41F1 /* MASConstraint.m in Sources */,
 				97798CBD212D0FC90052CE94 /* MKAnnotationView+WebCache.m in Sources */,
+				97F586A8221E537C00C9BE4A /* CZAllHotListController.m in Sources */,
 				97C7FF46216DDDB50091DC07 /* MJRefreshGifHeader.m in Sources */,
 				97C7FF3F216DDDB50091DC07 /* MJRefreshBackStateFooter.m in Sources */,
 				9744821221B7CDFA00F1639B /* CZShareItemButton.m in Sources */,
