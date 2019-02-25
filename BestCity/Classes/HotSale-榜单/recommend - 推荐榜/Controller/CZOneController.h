@@ -24,13 +24,4 @@ typedef NS_ENUM(NSInteger, CZRecommendType) {
 /** 标题数组 */
 @property (nonatomic, strong) NSArray<CZHotTitleModel *> *titlesArray;
 
-// 热卖榜
-/** 标的数据模型 */
-@property (nonatomic, strong) CZHotTitleModel *titleModel;
-/** 是否是内部的热卖榜等 */
-@property (nonatomic, assign) BOOL isHotList;
-/** 各种榜: 1热卖榜，2轻奢榜，3新品榜，4性价比榜 */
-@property (nonatomic, assign) CZRecommendType type;
-/** 是否是二级列表 */
-@property (nonatomic, assign) BOOL isList2;
 @end

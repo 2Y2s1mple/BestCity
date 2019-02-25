@@ -23,29 +23,12 @@
 @property (nonatomic, strong) NSArray<CZHotTitleModel *> *mainTitles;
 /** 搜索框 */
 @property (nonatomic, strong) CZHotSearchView *search;
-/** 当前的偏移量 */
-@property (nonatomic, assign) CGFloat currentOffsetY;
-/** 记录偏移量 */
-@property (nonatomic, assign) CGFloat recordOffsetY;
-/** statusView */
-@property (nonatomic, strong) UIView *statusView;
 
 /** <#注释#> */
 @property (nonatomic, assign) void (^myBlock)(void);
 @end
 
 @implementation CZHotSaleController
-
-#pragma mark - 懒加载
-- (UIView *)statusView
-{
-    if (_statusView == nil) {
-        _statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, (IsiPhoneX ? 44 : 20))];
-        _statusView.backgroundColor = [UIColor whiteColor];
-        [[UIApplication sharedApplication].keyWindow addSubview:_statusView];
-    }
-    return _statusView;
-}
 
 #pragma mark - 获取标题数据
 - (CZHotSaleController *(^)(void))obtainTtitles
@@ -113,8 +96,6 @@
     
     // 接受系统消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageRead) name:systemMessageDetailControllerMessageRead object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneControllerScrollViewDidScroll:) name:@"CZOneControllerScrollViewDidScroll" object:nil];
 }
 
 // 监听系统消息
@@ -122,43 +103,6 @@
 {
     // 获取未读数
     self.obtainReadMessage();
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-     self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
-    self.search.hidden = NO;
-    self.statusView.hidden = NO;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.search.hidden = NO;
-    self.statusView.hidden = YES;
-}
-
-#pragma mark - 通知: 监听scrollerView的滚动
-- (void)oneControllerScrollViewDidScroll:(NSNotification *)notifx
-{
-    UIScrollView *scrollView = notifx.userInfo[@"scrollView"];
-    CGFloat offsetY = scrollView.contentOffset.y;
-    if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) { if (offsetY - self.recordOffsetY >= 0) {
-//        NSLog(@"向上滑动");
-            [UIView animateWithDuration:0.25 animations:^{
-                self.view.frame = CGRectMake(0, -50, SCR_WIDTH, SCR_HEIGHT + 50);
-                self.currentOffsetY = -50;
-            }];
-        } else {
-//            NSLog(@"向下滑动");
-            [UIView animateWithDuration:0.25 animations:^{
-                self.view.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT);
-                self.currentOffsetY = 0;
-            }];
-        }
-    }
-    self.recordOffsetY = offsetY;
 }
 
 #pragma mark - 初始化
@@ -210,14 +154,12 @@
             CZOneController *vc = [[CZOneController alloc] init];
             vc.imageUrl = [[self.mainTitles[index].adList firstObject] objectForKey:@"img"];
             vc.titlesArray = self.mainTitles;
-            self.recordOffsetY = vc.tableView.contentOffset.y;
             return vc;
         }
         default: {
             CZTwoController *vc = [[CZTwoController alloc] init];
             vc.imageUrl = [[self.mainTitles[index].adList firstObject] objectForKey:@"img"];
             vc.subTitles = self.mainTitles[index];
-            self.recordOffsetY = vc.tableView.contentOffset.y;
             return vc;
         }
     }
@@ -234,13 +176,8 @@
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     
-    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)) + 50);
+    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)));
 }
 
-- (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
-{
-    CZBaseRecommendController *vc = viewController;
-    self.recordOffsetY = vc.tableView.contentOffset.y;
-}
 
 @end
