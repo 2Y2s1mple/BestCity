@@ -43,18 +43,18 @@
         shareBtn.frame = CGRectMake(0, 0, width, self.height);
         [shareBtn setTitle:@"分享给好友" forState:UIControlStateNormal];
         [shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        shareBtn.backgroundColor = CZGlobalLightGray;
+        shareBtn.backgroundColor = CZBTNGRAY;
         [shareBtn addTarget:self action:@selector(shareBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:shareBtn];
         self.height = CGRectGetMaxY(shareBtn.frame);
     } else {
         width = SCR_WIDTH / 2;
-//        两个按钮
+        // 两个按钮
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         shareBtn.frame = CGRectMake(0, 0, width, self.height);
         [shareBtn setTitle:_titleData[@"left"] forState:UIControlStateNormal];
         [shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        shareBtn.backgroundColor = CZGlobalLightGray;
+        shareBtn.backgroundColor = CZBTNGRAY;
         [shareBtn addTarget:self action:@selector(shareBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:shareBtn];
         
@@ -62,7 +62,7 @@
         buyBtn.frame = CGRectMake(shareBtn.width, shareBtn.y, shareBtn.width, shareBtn.height);
         [buyBtn setTitle:_titleData[@"right"] forState:UIControlStateNormal];
         [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        buyBtn.backgroundColor = CZRGBColor(227,20,54);
+        buyBtn.backgroundColor = CZREDCOLOR;
         [buyBtn addTarget:self action:@selector(buyBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:buyBtn];
         self.height = CGRectGetMaxY(shareBtn.frame);

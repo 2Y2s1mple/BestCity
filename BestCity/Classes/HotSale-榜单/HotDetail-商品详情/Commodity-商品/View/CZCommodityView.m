@@ -8,6 +8,7 @@
 
 #import "CZCommodityView.h"
 #import "CZOpenAlibcTrade.h"
+#import "Masonry.h"
 
 @interface CZCommodityView ()
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
@@ -19,15 +20,14 @@
 @property (nonatomic, weak) IBOutlet UILabel *otherPrice;
 /** 优惠券 */
 @property (nonatomic, weak) IBOutlet UILabel *couponPrice;
-/** 推荐理由 */
-@property (nonatomic, weak) IBOutlet UILabel *recommendReasonLabel;
+/** 优惠券View */
+@property (nonatomic, weak) IBOutlet UIView *couponView;
 /** 下边线 */
 @property (nonatomic, weak) IBOutlet UIView *lineView;
 /** 功能评分图片 */
 @property (nonatomic, weak) IBOutlet UIImageView *scoreImage;
 /** 功能评分文字 */
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
-
 /** 评分view */
 @property (weak, nonatomic) IBOutlet UIView *pointView;
 /** 综合评分 */
@@ -64,7 +64,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *score5;
 /** 评分中第5个的View */
 @property (nonatomic, weak) IBOutlet UIView *scoreFiveView;
-
 /** 评分功能 */
 @property (nonatomic, weak) IBOutlet UILabel *cscoreLabel;
 @end
@@ -96,13 +95,28 @@
     NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%@", [self platfromNameWithNumber:model.source], model.otherPrice];
     self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%@", model.otherPrice]]];
     
-    NSString *text = [NSString stringWithFormat:@"推荐理由:   %@", model.recommendReason];
-    NSDictionary *att = @{NSForegroundColorAttributeName : [UIColor blackColor], NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Medium" size: 13]};
-    self.recommendReasonLabel.attributedText = [text addAttribute:att Range:[text rangeOfString:@"推荐理由"]];
     
-    // 优惠券信息
-    self.couponPrice.text = [NSString stringWithFormat:@"%@", self.couponModel.couponMoney];
-    self.bottomLabel.text = [NSString stringWithFormat:@"使用期限%@至%@", self.couponModel.validStartTime, self.couponModel.validEndTime];
+    UIView *line = [[UIView alloc] init];
+    if (![self.couponModel.dataFlag  isEqual: @(-1)]) {
+        line.hidden = YES;
+        self.couponView.hidden = NO;
+        // 优惠券信息
+        self.couponPrice.text = [NSString stringWithFormat:@"%@", self.couponModel.couponMoney];
+        self.bottomLabel.text = [NSString stringWithFormat:@"使用期限%@至%@", self.couponModel.validStartTime, self.couponModel.validEndTime];
+    } else {
+        [self layoutIfNeeded];
+        line.hidden = NO;
+        line.height = 6;
+        line.width = SCR_WIDTH;
+        line.backgroundColor = CZGlobalLightGray;
+        line.y = CZGetY(self.otherPrice) + 13;
+        [self addSubview:line];
+        self.couponView.hidden = YES;
+        [self.couponView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(0));
+        }];
+    }
+    
     
     // 综合评分
     if (model.scoreOptionsList.count >= 4 && ![model.scoreOptionsList[0][@"name"]  isEqual: @""]) {

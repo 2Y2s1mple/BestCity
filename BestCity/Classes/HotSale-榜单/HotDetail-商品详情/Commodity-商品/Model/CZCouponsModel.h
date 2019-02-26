@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *validEndTime;
 /** 优惠券链接*/
 @property (nonatomic, strong) NSString *couponsUrl;
+/** 判断优惠券过期 1:有效 -1:过期 */
+@property (nonatomic, strong) NSNumber *dataFlag;
 @end
 
 NS_ASSUME_NONNULL_END

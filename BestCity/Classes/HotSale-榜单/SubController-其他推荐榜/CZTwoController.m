@@ -105,9 +105,11 @@
 #pragma mark - 初始化视图
 - (UIView *)setupHeaderView
 {
-    UIScrollView *backView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 90)];
-    backView.showsHorizontalScrollIndicator = NO;
-    [self.view addSubview:backView];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 90)];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 90)];
+    [backView addSubview:scrollView];
+    scrollView.pagingEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator = NO;
     NSArray *children = self.subTitles.children;
     
     CGFloat space = (SCR_WIDTH - 20 - 5 * 55) / 4;
@@ -123,26 +125,55 @@
         btn.tag = i + 100;
         btn.width = w;
         btn.height = h;
-        btn.x = 10 + col * (w + space);
+        btn.x = 10 + col * (w + space) + (i / 10) * SCR_WIDTH;
         btn.y = 12 + row * (h + 10);
         [btn sd_setImageWithURL:[NSURL URLWithString:model.img] forState:UIControlStateNormal];
         [btn setTitle:model.categoryName forState:UIControlStateNormal];
-        [backView addSubview:btn];
+        [scrollView addSubview:btn];
         // 点击事件
         [btn addTarget:self action:@selector(headerViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
-        backView.height = backView.height < CZGetY(btn) ? CZGetY(btn) : backView.height;
+        scrollView.height = scrollView.height < CZGetY(btn) ? CZGetY(btn) : scrollView.height;
         if (i == 0) {
             self.recordMainBtn = btn;
             [btn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
         }
     }
     
+    NSInteger page = (children.count + 9) / 10;
     NSInteger row =  (children.count + (cols - 1)) / cols;
     NSLog(@"一共%ld行", row);
-    backView.contentSize = CGSizeMake(row / 2, 0);
+    scrollView.contentSize = CGSizeMake(page * SCR_WIDTH, 0);
+    CGFloat lineY = row <= 2 ? scrollView.height + 12 : scrollView.height + 40;
+    scrollView.height = lineY;
+    
+    if (page >= 2) {
+        CGFloat circleX = 0.0;
+        for (int i = 0; i < page; i++) {
+            UIView *pointView = [[UIView alloc] init];
+            for (int j = 0; j < page; j++) {
+                UIView *circle = [[UIView alloc] init];
+                circle.backgroundColor = CZGlobalGray;
+                if (j == i) {
+                    circle.width = 19;
+                } else {                
+                    circle.width = 8;
+                }
+                circle.height = 8;
+                circle.x = CGRectGetMaxX([[pointView.subviews lastObject] frame]) + 8; 
+                circle.layer.cornerRadius = 4;
+                [pointView addSubview:circle];
+                circleX = CGRectGetMaxX(circle.frame);
+            }
+            pointView.width = circleX;
+            pointView.height = 8;
+            pointView.centerX = scrollView.width / 2.0 + i * scrollView.width;
+            pointView.y = lineY - 20;
+            [scrollView addSubview:pointView];
+        }
+        
+    }
     
     
-    CGFloat lineY = row <= 2 ? backView.height + 12 : backView.height + 40;  
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, lineY, SCR_WIDTH, 6)];
     line.backgroundColor = CZGlobalLightGray; 
     [backView addSubview:line];

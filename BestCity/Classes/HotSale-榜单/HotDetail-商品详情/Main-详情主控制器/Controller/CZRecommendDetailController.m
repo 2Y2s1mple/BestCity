@@ -85,7 +85,7 @@ static NSString * const type = @"1";
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
             
         }];
-        _likeView.titleData = @{@"left" : @"分享", @"right" : @"领券并购买"};
+        
     }
     return _likeView;
 }
@@ -185,6 +185,12 @@ static NSString * const type = @"1";
             shareDic[@"shareUrl"] = self.detailModel.goodsDetailEntity.shareUrl;
             shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
             self.shareParam = shareDic;
+            
+            if ([self.detailModel.goodsCouponsEntity.dataFlag isEqual:@(-1)]) {
+                self.likeView.titleData = @{@"left" : @"分享给好友", @"right" : @"立即购买"};
+            } else {
+                self.likeView.titleData = @{@"left" : @"分享给好友", @"right" : @"领券并购买"};
+            };
             [self.view addSubview:self.likeView];
         }
     } failure:^(NSError *error) {}];
