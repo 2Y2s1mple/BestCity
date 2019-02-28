@@ -96,6 +96,7 @@
     
     NSString *actualPrice = [NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]];
     self.actualPriceLabel.text = actualPrice;
+    self.actualPriceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
     
     NSString *status;
     switch ([model.source integerValue]) {
@@ -116,9 +117,13 @@
             break;
     }
     
-    if (model.otherPrice.length > 0) {
-        status = [status stringByAppendingFormat:@"    ¥%@", model.otherPrice];
+    if (model.otherPrice.length > 0 && ![model.actualPrice isEqualToString:model.otherPrice]) {
+        self.tmPrice.hidden = NO;
+        NSLog(@"%@--------------%@", model.actualPrice, model.otherPrice);
+        status = [status stringByAppendingFormat:@" ¥%@", model.otherPrice];
         self.tmPrice.attributedText = [status addStrikethroughWithRange:[status rangeOfString:[NSString stringWithFormat:@"¥%@", model.otherPrice]]];
+    } else {
+        self.tmPrice.hidden = YES;
     }
     
     
@@ -135,7 +140,7 @@
     self.recommendReasonLabel.attributedText = [text addAttributeColor:[UIColor blackColor] Range:[text rangeOfString:@"推荐理由"]];
 
     [self layoutIfNeeded];
-    model.cellHeight = CGRectGetMaxY(self.recommendReasonLabel.frame);
+    model.cellHeight = CGRectGetMaxY(self.recommendReasonLabel.frame) + 20;
     
 }
 

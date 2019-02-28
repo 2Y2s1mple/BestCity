@@ -31,7 +31,7 @@
     showParam.isNeedPush = YES;
     showParam.nativeFailMode = AlibcNativeFailModeNone;
     
-    NSInteger code = [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
+    [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
             if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){
                 NSLog(@"交易成功");
             } else if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){
@@ -40,11 +40,6 @@
     } tradeProcessFailedCallback:^(NSError * _Nullable error) {
         NSLog(@"----------退出交易流程----------");
     }];
-    
-//    if (code != 0) {
-//        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
-//        [CZProgressHUD hideAfterDelay:1.5];
-//    }
     
 }
 

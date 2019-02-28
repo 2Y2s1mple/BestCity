@@ -210,17 +210,17 @@
     backView.width = SCR_WIDTH;
     
     
-    CGFloat space = (SCR_WIDTH - 26 - 4 * 55) / 3;
+    CGFloat space = (SCR_WIDTH - 30 - 4 * 55) / 3;
     NSArray *titles = @[@"热卖榜", @"轻奢榜", @"新品榜", @"性价比榜"];
     for (int i = 0; i < 4; i++) {
         UIButton *btn = [[UIButton alloc] init];
         btn.tag = i + 100;
         [btn setTitle:titles[i] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
         [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
         [btn sizeToFit];
         btn.centerY = backView.height / 2.0;
-        btn.x = 13 + i * (space + 55);
+        btn.x = 15 + i * (space + 55);
         [backView addSubview:btn];
         [btn addTarget:self action:@selector(contentViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -242,6 +242,7 @@
         if (i == 0) {
             view.hidden = NO;
             [btn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
+            btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
             self.recordBtn = btn;
         }
     }
@@ -254,6 +255,7 @@
     if (self.recordBtn != sender) {
         // 现在的btn
         [sender setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
+        sender.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         NSInteger lineViewTag = sender.tag + 100;
         UIView *lineView =  [sender.superview viewWithTag:lineViewTag];
         lineView.hidden = NO;
@@ -261,6 +263,7 @@
         NSLog(@"%s", __func__);
         // 前一个Btn
         [self.recordBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
+        self.recordBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
         UIView *recordLineView =  [sender.superview viewWithTag:self.recordBtn.tag + 100];
         recordLineView.hidden = YES;
         self.recordBtn = sender;

@@ -92,8 +92,14 @@
     _model = model;
     self.titleName.text = model.goodsName;
     self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]];
-    NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%@", [self platfromNameWithNumber:model.source], model.otherPrice];
-    self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%@", model.otherPrice]]];
+    
+    if (model.otherPrice.length > 0 && ![model.actualPrice isEqualToString:model.otherPrice]) {
+        self.otherPrice.hidden = NO;
+        NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%@", [self platfromNameWithNumber:model.source], model.otherPrice];
+        self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%@", model.otherPrice]]];
+    } else {
+        self.otherPrice.hidden = YES;
+    }
     
     
     UIView *line = [[UIView alloc] init];

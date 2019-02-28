@@ -74,9 +74,10 @@
         hotVc.automaticallyCalculatesItemWidths = YES;
         hotVc.titleFontName = @"PingFangSC-Medium";
         hotVc.titleColorNormal = CZGlobalGray;
-        hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
+        hotVc.titleColorSelected = [UIColor blackColor];
         hotVc.titleSizeNormal = 15.0f;
         hotVc.titleSizeSelected = 16;
+        
         hotVc.progressColor = [UIColor redColor];
     }
     vc.tabBarItem.title = title;

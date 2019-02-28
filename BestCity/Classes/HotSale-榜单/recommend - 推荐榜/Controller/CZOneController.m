@@ -65,6 +65,9 @@
     CZTOPLINE;
     
     self.tableView.frame = CGRectMake(0, 10, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + (IsiPhoneX ? 83 : 49) + 94));
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.tableHeaderView = [self setupHeaderView];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @(0);

@@ -221,7 +221,9 @@
     NSInteger tag = (NSInteger)progress + WMMENUITEM_TAG_OFFSET;
     CGFloat rate = progress - tag + WMMENUITEM_TAG_OFFSET;
     WMMenuItem *currentItem = (WMMenuItem *)[self viewWithTag:tag];
+//    currentItem.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
     WMMenuItem *nextItem = (WMMenuItem *)[self viewWithTag:tag+1];
+//    nextItem.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     if (rate == 0.0) {
         [self.selItem setSelected:NO withAnimation:NO];
         self.selItem = currentItem;

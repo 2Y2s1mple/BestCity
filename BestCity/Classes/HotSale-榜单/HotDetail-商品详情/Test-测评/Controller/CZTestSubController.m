@@ -103,7 +103,7 @@
         iconImage.frame = CGRectMake(space, CZGetY(titleLabel) + (2 * space), 50, 50);
         [self.scrollerView addSubview:iconImage];
         //名字
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y, 100, 20)];
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y + 5, 100, 20)];
         nameLabel.text = self.model.user[@"nickname"];
         nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
         [nameLabel sizeToFit];
@@ -119,7 +119,7 @@
         fansLabel.textColor = CZGlobalGray;
         [self.scrollerView addSubview:fansLabel];
         //时间
-        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CZGetY(nameLabel) + space, 100, 20)];
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CZGetY(nameLabel), 100, 20)];
         timeLabel.text = self.model.createTime;
         timeLabel.textColor = CZGlobalGray;
         timeLabel.font = fansLabel.font;
@@ -132,7 +132,7 @@
         } else {
             type = CZAttentionBtnTypeFollowed;
         }
-        self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(self.view.width - (space * 2) - 60, iconImage.center.y - 12, 60, 24) CommentType:type didClickedAction:^(BOOL isSelected){
+        self.attentionBtn = [CZAttentionBtn attentionBtnWithframe:CGRectMake(self.view.width - space - 60, iconImage.center.y - 12, 60, 24) CommentType:type didClickedAction:^(BOOL isSelected){
             if (isSelected) {
                 [self addAttention];
             } else {
