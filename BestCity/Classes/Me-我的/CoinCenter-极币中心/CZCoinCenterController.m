@@ -143,7 +143,6 @@
         } else {
             subLabel.text = [NSString stringWithFormat:@"+%@", self.dataSource[@"pointArr"][i]];
         }
-        
     }
     
     for (int i = 0; i < 7; i++) {
@@ -155,8 +154,6 @@
             coinImage.highlighted = NO;
         }
     }
-    
-    
 }
 
 /** 跳转规则说明 */
