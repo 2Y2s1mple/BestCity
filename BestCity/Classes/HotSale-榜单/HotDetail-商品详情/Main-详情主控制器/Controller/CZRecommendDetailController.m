@@ -176,8 +176,8 @@ static NSString * const type = @"1";
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.detailModel = [CZHotSaleDetailModel objectWithKeyValues:result[@"data"]];
-           
             [self createSubViews];
+            
             // 创建分享购买视图
             NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
             shareDic[@"shareTitle"] =  self.detailModel.goodsDetailEntity.shareTitle;
@@ -185,7 +185,6 @@ static NSString * const type = @"1";
             shareDic[@"shareUrl"] = self.detailModel.goodsDetailEntity.shareUrl;
             shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
             self.shareParam = shareDic;
-            
             if ([self.detailModel.goodsCouponsEntity.dataFlag isEqual:@(-1)]) {
                 self.likeView.titleData = @{@"left" : @"分享给好友", @"right" : @"立即购买"};
             } else {
@@ -193,7 +192,9 @@ static NSString * const type = @"1";
             };
             [self.view addSubview:self.likeView];
         }
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)createSubViews
@@ -259,14 +260,12 @@ static NSString * const type = @"1";
             point = CGPointMake(0, 0);
             break;
     }
-    
     self.nav.alpha = 1;
     [UIView animateWithDuration:0.3 animations:^{
         self.scrollerView.contentOffset = point;
     } completion:^(BOOL finished) {
         self.scrollerView.delegate = self;
     }];
-    
 }
 
 #pragma mark - <UIScrollViewDelegate>

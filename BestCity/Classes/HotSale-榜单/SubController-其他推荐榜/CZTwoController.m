@@ -35,6 +35,9 @@
 @property (nonatomic, assign) CGFloat  contentTitlesViewY;
 /** 记录请求参数 */
 @property (nonatomic, strong) NSDictionary *param;
+
+/** 三级标题数组 */
+@property (nonatomic, strong) NSArray *thirdTitles;
 @end
 
 @implementation CZTwoController
@@ -47,6 +50,32 @@
         self.noDataView.y = self.tableView.tableHeaderView.height;
     }
     return _noDataView;
+}
+
+- (NSArray *)thirdTitles
+{
+    return @[
+             @{
+                 @"title" : @"热卖榜",
+                 @"orderbyType" : @(1)
+                 },
+             @{
+                 @"title" : @"轻奢榜",
+                 @"orderbyType" : @(2)
+                 },
+             @{
+                 @"title" : @"性能榜",
+                 @"orderbyType" : @(5)
+                 },
+             @{  
+                 @"title" : @"新品榜",
+                 @"orderbyType" : @(3)
+                 },
+             @{
+                 @"title" : @"性价比榜",
+                 @"orderbyType" : @(4)
+                 },
+             ];
 }
 
 #pragma mark - 控制器的生命周期
@@ -106,14 +135,15 @@
 - (UIView *)setupHeaderView
 {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 90)];
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 90)];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 60)];
     [backView addSubview:scrollView];
     scrollView.pagingEnabled = YES;
     scrollView.showsHorizontalScrollIndicator = NO;
     NSArray *children = self.subTitles.children;
     
-    CGFloat space = (SCR_WIDTH - 20 - 5 * 55) / 4;
-    CGFloat w = 55;
+    CGFloat w = 33;
+    CGFloat leftSpace = 10;
+    CGFloat space = (SCR_WIDTH - leftSpace * 2 - 5 * w) / 4;
     CGFloat h = w + 20;
     NSInteger cols = 5;
     for (int i = 0; i < children.count; i++) {
@@ -125,7 +155,7 @@
         btn.tag = i + 100;
         btn.width = w;
         btn.height = h;
-        btn.x = 10 + col * (w + space) + (i / 10) * SCR_WIDTH;
+        btn.x = leftSpace + col * (w + space) + (i / 10) * SCR_WIDTH;
         btn.y = 12 + row * (h + 10);
         [btn sd_setImageWithURL:[NSURL URLWithString:model.img] forState:UIControlStateNormal];
         [btn setTitle:model.categoryName forState:UIControlStateNormal];
@@ -210,12 +240,12 @@
     backView.width = SCR_WIDTH;
     
     
-    CGFloat space = (SCR_WIDTH - 30 - 4 * 55) / 3;
-    NSArray *titles = @[@"热卖榜", @"轻奢榜", @"新品榜", @"性价比榜"];
-    for (int i = 0; i < 4; i++) {
+    NSArray *titles = self.thirdTitles;
+    CGFloat space = (SCR_WIDTH - 30 - titles.count * 55) / (titles.count - 1);
+    for (int i = 0; i < titles.count; i++) {
         UIButton *btn = [[UIButton alloc] init];
         btn.tag = i + 100;
-        [btn setTitle:titles[i] forState:UIControlStateNormal];
+        [btn setTitle:titles[i][@"title"] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
         [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
         [btn sizeToFit];
@@ -268,8 +298,11 @@
         recordLineView.hidden = YES;
         self.recordBtn = sender;
         //获取数据
-        self.orderbyType = sender.tag - 100;
+        self.orderbyType = [self.thirdTitles[sender.tag - 100][@"orderbyType"] integerValue];
+        
     }
+    
+    
     
     [self getDataSourceWithId:self.categoryId type:@(self.orderbyType)];
 }

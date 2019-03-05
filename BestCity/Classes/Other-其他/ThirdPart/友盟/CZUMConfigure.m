@@ -67,6 +67,7 @@ static id _instance;
             NSLog(@"************Share fail with error %@*********",error);
         }else{
             NSLog(@"response data is %@",data);
+            
         }
     }];
 }

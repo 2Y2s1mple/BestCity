@@ -23,7 +23,7 @@
               failure:(blockOfFailure)failure
 {
     //(1)获取网络管理者
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager  manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //(2)请求头的设置
     NSString *CONSTANT_KEY = @"quality-shop";
@@ -210,15 +210,16 @@
 
 - (GXNetTool *(^)(NSString *))url
 {
-    return ^(NSString *url){
-        self.urlPath = url;
+    return ^(NSString *entityUrl){
+        entityUrl = [entityUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        self.urlPath = entityUrl;
         return self;
     };
 }
 
 - (GXNetTool *(^)(NSDictionary *))header
 {
-    return ^(NSDictionary *headers){
+    GXNetTool * (^block)(NSDictionary *) = ^(NSDictionary *headers) {
         if (headers) {
             for (NSString *key in headers.allKeys) {
                 [self.manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
@@ -226,6 +227,7 @@
         }
         return self;
     };
+    return block;
 }
 
 - (GXNetTool *(^)(id))body

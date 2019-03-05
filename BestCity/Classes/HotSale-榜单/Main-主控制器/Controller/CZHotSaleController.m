@@ -34,11 +34,14 @@
 - (CZHotSaleController *(^)(void))obtainTtitles
 {
     return ^ {
+        
         [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
             return @{
                      @"children" : @"CZHotSubTilteModel"
                      };
         }];
+        
+        
         //获取数据
         [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/goodsCategoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -140,6 +143,14 @@
         CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
+    
+    [GXNetTool netWorkMaker:^(GXNetTool *marker) {
+        marker.url(@"");
+    } success:^(id result) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - Datasource & Delegate
