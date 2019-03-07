@@ -40,8 +40,9 @@
         
         UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         [leftBtn setImage:image forState:UIControlStateNormal];
-        leftBtn.frame = CGRectMake(20, 20, 49, self.height - 20);
+        leftBtn.frame = CGRectMake(0, 20, 49, self.height - 20);
         leftBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
+        leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
         [leftBtn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:leftBtn];
         

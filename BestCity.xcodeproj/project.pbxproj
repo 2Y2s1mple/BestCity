@@ -184,6 +184,24 @@
 		9785779021A80B4100E42B29 /* CZSubTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778E21A80B4100E42B29 /* CZSubTitleButton.m */; };
 		9785779821A8374800E42B29 /* CZCommentBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785779721A8374800E42B29 /* CZCommentBtn.m */; };
 		978D25A6219993C4004040DD /* CZReplyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 978D25A5219993C4004040DD /* CZReplyButton.m */; };
+		97911045222F6A2100C2DE5B /* CZMyWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97911043222F6A2100C2DE5B /* CZMyWalletController.m */; };
+		97911046222F6A2200C2DE5B /* CZMyWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97911044222F6A2100C2DE5B /* CZMyWalletController.xib */; };
+		9791104B222F6B7600C2DE5B /* CZAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97911049222F6B7600C2DE5B /* CZAddressController.m */; };
+		9791104C222F6B7600C2DE5B /* CZAddressController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9791104A222F6B7600C2DE5B /* CZAddressController.xib */; };
+		97911050222F7F0200C2DE5B /* CZAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9791104E222F7F0200C2DE5B /* CZAddressCell.m */; };
+		97911051222F7F0200C2DE5B /* CZAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9791104F222F7F0200C2DE5B /* CZAddressCell.xib */; };
+		97911054222FA4D000C2DE5B /* CZAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97911053222FA4D000C2DE5B /* CZAddressModel.m */; };
+		97911058222FAE3B00C2DE5B /* CZEditAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97911056222FAE3B00C2DE5B /* CZEditAddressController.m */; };
+		97911059222FAE3B00C2DE5B /* CZEditAddressController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97911057222FAE3B00C2DE5B /* CZEditAddressController.xib */; };
+		979110622230F3A600C2DE5B /* CZOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 979110602230F3A600C2DE5B /* CZOrderListCell.m */; };
+		979110632230F3A600C2DE5B /* CZOrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 979110612230F3A600C2DE5B /* CZOrderListCell.xib */; };
+		979110732231131400C2DE5B /* province_data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 979110692231131400C2DE5B /* province_data.xml */; };
+		979110742231131400C2DE5B /* MOFSDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9791106A2231131400C2DE5B /* MOFSDatePicker.m */; };
+		979110752231131400C2DE5B /* MOFSToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9791106B2231131400C2DE5B /* MOFSToolView.m */; };
+		979110762231131400C2DE5B /* MOFSPickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9791106D2231131400C2DE5B /* MOFSPickerManager.m */; };
+		979110772231131400C2DE5B /* MOFSPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9791106E2231131400C2DE5B /* MOFSPickerView.m */; };
+		979110782231131400C2DE5B /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9791106F2231131400C2DE5B /* AddressModel.m */; };
+		979110792231131400C2DE5B /* MOFSAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979110722231131400C2DE5B /* MOFSAddressPickerView.m */; };
 		979182AF219E6FED0011133E /* CZEvaluationTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979182AE219E6FED0011133E /* CZEvaluationTitleModel.m */; };
 		9794FC5C2193E761003C6AA6 /* CZBaseRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9794FC5B2193E761003C6AA6 /* CZBaseRecommendController.m */; };
 		9794FC5F21940660003C6AA6 /* CZRecommendDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9794FC5E21940660003C6AA6 /* CZRecommendDetailController.m */; };
@@ -642,6 +660,36 @@
 		9785779721A8374800E42B29 /* CZCommentBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommentBtn.m; sourceTree = "<group>"; };
 		978D25A4219993C4004040DD /* CZReplyButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZReplyButton.h; sourceTree = "<group>"; };
 		978D25A5219993C4004040DD /* CZReplyButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZReplyButton.m; sourceTree = "<group>"; };
+		97911042222F6A2100C2DE5B /* CZMyWalletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletController.h; sourceTree = "<group>"; };
+		97911043222F6A2100C2DE5B /* CZMyWalletController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyWalletController.m; sourceTree = "<group>"; };
+		97911044222F6A2100C2DE5B /* CZMyWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyWalletController.xib; sourceTree = "<group>"; };
+		97911048222F6B7600C2DE5B /* CZAddressController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAddressController.h; sourceTree = "<group>"; };
+		97911049222F6B7600C2DE5B /* CZAddressController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAddressController.m; sourceTree = "<group>"; };
+		9791104A222F6B7600C2DE5B /* CZAddressController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAddressController.xib; sourceTree = "<group>"; };
+		9791104D222F7F0200C2DE5B /* CZAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAddressCell.h; sourceTree = "<group>"; };
+		9791104E222F7F0200C2DE5B /* CZAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAddressCell.m; sourceTree = "<group>"; };
+		9791104F222F7F0200C2DE5B /* CZAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAddressCell.xib; sourceTree = "<group>"; };
+		97911052222FA4D000C2DE5B /* CZAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAddressModel.h; sourceTree = "<group>"; };
+		97911053222FA4D000C2DE5B /* CZAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAddressModel.m; sourceTree = "<group>"; };
+		97911055222FAE3B00C2DE5B /* CZEditAddressController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEditAddressController.h; sourceTree = "<group>"; };
+		97911056222FAE3B00C2DE5B /* CZEditAddressController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEditAddressController.m; sourceTree = "<group>"; };
+		97911057222FAE3B00C2DE5B /* CZEditAddressController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEditAddressController.xib; sourceTree = "<group>"; };
+		9791105F2230F3A600C2DE5B /* CZOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZOrderListCell.h; sourceTree = "<group>"; };
+		979110602230F3A600C2DE5B /* CZOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZOrderListCell.m; sourceTree = "<group>"; };
+		979110612230F3A600C2DE5B /* CZOrderListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZOrderListCell.xib; sourceTree = "<group>"; };
+		979110662231131400C2DE5B /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
+		979110672231131400C2DE5B /* MOFSPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOFSPickerView.h; sourceTree = "<group>"; };
+		979110682231131400C2DE5B /* MOFSPickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOFSPickerManager.h; sourceTree = "<group>"; };
+		979110692231131400C2DE5B /* province_data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = province_data.xml; sourceTree = "<group>"; };
+		9791106A2231131400C2DE5B /* MOFSDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOFSDatePicker.m; sourceTree = "<group>"; };
+		9791106B2231131400C2DE5B /* MOFSToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOFSToolView.m; sourceTree = "<group>"; };
+		9791106C2231131400C2DE5B /* MOFSAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOFSAddressPickerView.h; sourceTree = "<group>"; };
+		9791106D2231131400C2DE5B /* MOFSPickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOFSPickerManager.m; sourceTree = "<group>"; };
+		9791106E2231131400C2DE5B /* MOFSPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOFSPickerView.m; sourceTree = "<group>"; };
+		9791106F2231131400C2DE5B /* AddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressModel.m; sourceTree = "<group>"; };
+		979110702231131400C2DE5B /* MOFSToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOFSToolView.h; sourceTree = "<group>"; };
+		979110712231131400C2DE5B /* MOFSDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOFSDatePicker.h; sourceTree = "<group>"; };
+		979110722231131400C2DE5B /* MOFSAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOFSAddressPickerView.m; sourceTree = "<group>"; };
 		979182AD219E6FED0011133E /* CZEvaluationTitleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEvaluationTitleModel.h; sourceTree = "<group>"; };
 		979182AE219E6FED0011133E /* CZEvaluationTitleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEvaluationTitleModel.m; sourceTree = "<group>"; };
 		9794FC5A2193E761003C6AA6 /* CZBaseRecommendController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZBaseRecommendController.h; sourceTree = "<group>"; };
@@ -991,7 +1039,7 @@
 		970B668A210ABE1B003EC382 /* recommend - 推荐榜 */ = {
 			isa = PBXGroup;
 			children = (
-				97F5869E221CEC0B00C9BE4A /* Main-主菜单 */,
+				9791105E2230E44900C2DE5B /* Main-主菜单 */,
 			);
 			path = "recommend - 推荐榜";
 			sourceTree = "<group>";
@@ -1211,6 +1259,9 @@
 				972E41C321147C2000BC751C /* CZOrderController.h */,
 				972E41C421147C2000BC751C /* CZOrderController.m */,
 				972E41C521147C2000BC751C /* CZOrderController.xib */,
+				9791105F2230F3A600C2DE5B /* CZOrderListCell.h */,
+				979110602230F3A600C2DE5B /* CZOrderListCell.m */,
+				979110612230F3A600C2DE5B /* CZOrderListCell.xib */,
 			);
 			path = "Order-订单";
 			sourceTree = "<group>";
@@ -1597,6 +1648,9 @@
 			isa = PBXGroup;
 			children = (
 				97CF34282177397100DA9198 /* Main-主界面 */,
+				972E41C121147B8000BC751C /* Order-订单 */,
+				97911047222F6B5800C2DE5B /* MyAddress-收货地址 */,
+				97911041222F69F700C2DE5B /* MyWallet-钱包 */,
 				970C50A121F17E350091D7FF /* CoinCenter-极币中心 */,
 				972E41C221147BE400BC751C /* Attention-关注 */,
 				972E41D321147C8000BC751C /* Collect-收藏 */,
@@ -1605,7 +1659,6 @@
 				97CF34272177393900DA9198 /* Login-登录 */,
 				97D8FCCF2111B9D700D8ED8F /* MyProfile-我的资料 */,
 				972E41AD211450AF00BC751C /* MyPoints-我的积分 */,
-				972E41C121147B8000BC751C /* Order-订单 */,
 				972E41CD21147C4B00BC751C /* DiscountCoupon-优惠券 */,
 			);
 			path = "Me-我的";
@@ -1845,31 +1898,31 @@
 		9778647F211A7AD6001B41F1 /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
-				97786480211A7AD6001B41F1 /* MASCompositeConstraint.h */,
-				97786481211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				97786482211A7AD6001B41F1 /* MASConstraint+Private.h */,
-				97786483211A7AD6001B41F1 /* MASLayoutConstraint.h */,
-				97786484211A7AD6001B41F1 /* NSArray+MASShorthandAdditions.h */,
-				97786485211A7AD6001B41F1 /* MASConstraintMaker.h */,
-				97786486211A7AD6001B41F1 /* View+MASAdditions.h */,
-				97786487211A7AD6001B41F1 /* NSArray+MASAdditions.h */,
-				97786488211A7AD6001B41F1 /* MASUtilities.h */,
-				97786489211A7AD6001B41F1 /* MASViewAttribute.h */,
-				9778648A211A7AD6001B41F1 /* ViewController+MASAdditions.m */,
-				9778648B211A7AD6001B41F1 /* MASViewConstraint.h */,
 				9778648C211A7AD6001B41F1 /* MASConstraint.h */,
-				9778648D211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				9778648E211A7AD6001B41F1 /* MASCompositeConstraint.m */,
-				9778648F211A7AD6001B41F1 /* MASConstraintMaker.m */,
-				97786490211A7AD6001B41F1 /* MASLayoutConstraint.m */,
-				97786491211A7AD6001B41F1 /* NSArray+MASAdditions.m */,
-				97786492211A7AD6001B41F1 /* View+MASAdditions.m */,
-				97786493211A7AD6001B41F1 /* View+MASShorthandAdditions.h */,
-				97786494211A7AD6001B41F1 /* Masonry.h */,
 				97786495211A7AD6001B41F1 /* MASConstraint.m */,
-				97786496211A7AD6001B41F1 /* ViewController+MASAdditions.h */,
-				97786497211A7AD6001B41F1 /* MASViewConstraint.m */,
+				97786489211A7AD6001B41F1 /* MASViewAttribute.h */,
 				97786498211A7AD6001B41F1 /* MASViewAttribute.m */,
+				97786496211A7AD6001B41F1 /* ViewController+MASAdditions.h */,
+				9778648A211A7AD6001B41F1 /* ViewController+MASAdditions.m */,
+				9778648D211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				97786481211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				97786485211A7AD6001B41F1 /* MASConstraintMaker.h */,
+				9778648F211A7AD6001B41F1 /* MASConstraintMaker.m */,
+				97786486211A7AD6001B41F1 /* View+MASAdditions.h */,
+				97786492211A7AD6001B41F1 /* View+MASAdditions.m */,
+				97786483211A7AD6001B41F1 /* MASLayoutConstraint.h */,
+				97786490211A7AD6001B41F1 /* MASLayoutConstraint.m */,
+				97786480211A7AD6001B41F1 /* MASCompositeConstraint.h */,
+				9778648E211A7AD6001B41F1 /* MASCompositeConstraint.m */,
+				9778648B211A7AD6001B41F1 /* MASViewConstraint.h */,
+				97786497211A7AD6001B41F1 /* MASViewConstraint.m */,
+				97786487211A7AD6001B41F1 /* NSArray+MASAdditions.h */,
+				97786491211A7AD6001B41F1 /* NSArray+MASAdditions.m */,
+				97786488211A7AD6001B41F1 /* MASUtilities.h */,
+				97786482211A7AD6001B41F1 /* MASConstraint+Private.h */,
+				97786493211A7AD6001B41F1 /* View+MASShorthandAdditions.h */,
+				97786484211A7AD6001B41F1 /* NSArray+MASShorthandAdditions.h */,
+				97786494211A7AD6001B41F1 /* Masonry.h */,
 			);
 			path = Masonry;
 			sourceTree = "<group>";
@@ -2014,6 +2067,96 @@
 				97705C52210716A300485D64 /* View */,
 			);
 			path = "Details-详情";
+			sourceTree = "<group>";
+		};
+		97911041222F69F700C2DE5B /* MyWallet-钱包 */ = {
+			isa = PBXGroup;
+			children = (
+				97911042222F6A2100C2DE5B /* CZMyWalletController.h */,
+				97911043222F6A2100C2DE5B /* CZMyWalletController.m */,
+				97911044222F6A2100C2DE5B /* CZMyWalletController.xib */,
+			);
+			path = "MyWallet-钱包";
+			sourceTree = "<group>";
+		};
+		97911047222F6B5800C2DE5B /* MyAddress-收货地址 */ = {
+			isa = PBXGroup;
+			children = (
+				9791105C2230E3EA00C2DE5B /* Model */,
+				9791105B2230E3DE00C2DE5B /* View */,
+				9791105A2230E3CD00C2DE5B /* Controller */,
+			);
+			path = "MyAddress-收货地址";
+			sourceTree = "<group>";
+		};
+		9791105A2230E3CD00C2DE5B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				97911048222F6B7600C2DE5B /* CZAddressController.h */,
+				97911049222F6B7600C2DE5B /* CZAddressController.m */,
+				9791104A222F6B7600C2DE5B /* CZAddressController.xib */,
+				97911055222FAE3B00C2DE5B /* CZEditAddressController.h */,
+				97911056222FAE3B00C2DE5B /* CZEditAddressController.m */,
+				97911057222FAE3B00C2DE5B /* CZEditAddressController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9791105B2230E3DE00C2DE5B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9791104D222F7F0200C2DE5B /* CZAddressCell.h */,
+				9791104E222F7F0200C2DE5B /* CZAddressCell.m */,
+				9791104F222F7F0200C2DE5B /* CZAddressCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9791105C2230E3EA00C2DE5B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97911052222FA4D000C2DE5B /* CZAddressModel.h */,
+				97911053222FA4D000C2DE5B /* CZAddressModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9791105E2230E44900C2DE5B /* Main-主菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				970B668D210ABEDD003EC382 /* Controller */,
+				979B05DC210F218A0023292D /* Model */,
+				970B668C210ABEBA003EC382 /* View */,
+			);
+			path = "Main-主菜单";
+			sourceTree = "<group>";
+		};
+		979110642231130800C2DE5B /* 省市区 */ = {
+			isa = PBXGroup;
+			children = (
+				979110652231131400C2DE5B /* MOFSPickerManager */,
+			);
+			path = "省市区";
+			sourceTree = "<group>";
+		};
+		979110652231131400C2DE5B /* MOFSPickerManager */ = {
+			isa = PBXGroup;
+			children = (
+				979110662231131400C2DE5B /* AddressModel.h */,
+				979110672231131400C2DE5B /* MOFSPickerView.h */,
+				979110682231131400C2DE5B /* MOFSPickerManager.h */,
+				979110692231131400C2DE5B /* province_data.xml */,
+				9791106A2231131400C2DE5B /* MOFSDatePicker.m */,
+				9791106B2231131400C2DE5B /* MOFSToolView.m */,
+				9791106C2231131400C2DE5B /* MOFSAddressPickerView.h */,
+				9791106D2231131400C2DE5B /* MOFSPickerManager.m */,
+				9791106E2231131400C2DE5B /* MOFSPickerView.m */,
+				9791106F2231131400C2DE5B /* AddressModel.m */,
+				979110702231131400C2DE5B /* MOFSToolView.h */,
+				979110712231131400C2DE5B /* MOFSDatePicker.h */,
+				979110722231131400C2DE5B /* MOFSAddressPickerView.m */,
+			);
+			path = MOFSPickerManager;
 			sourceTree = "<group>";
 		};
 		979182A6219C28690011133E /* Controller */ = {
@@ -2604,6 +2747,7 @@
 		97F0EC3621256912000FE1DC /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				979110642231130800C2DE5B /* 省市区 */,
 				975E760E21E71DB700B0819B /* 轮播图工具 */,
 				971CDFF621E44A3A00DE3883 /* 收藏工具 */,
 				971CDFF521E44A0B00DE3883 /* 网络请求工具 */,
@@ -2621,16 +2765,6 @@
 				975DB214217B14FA00A062AB /* CZUserInfoTool.m */,
 			);
 			path = Tool;
-			sourceTree = "<group>";
-		};
-		97F5869E221CEC0B00C9BE4A /* Main-主菜单 */ = {
-			isa = PBXGroup;
-			children = (
-				970B668D210ABEDD003EC382 /* Controller */,
-				979B05DC210F218A0023292D /* Model */,
-				970B668C210ABEBA003EC382 /* View */,
-			);
-			name = "Main-主菜单";
 			sourceTree = "<group>";
 		};
 		97F71B9821AD21A6005BCAC3 /* PlanADScrollView */ = {
@@ -2759,6 +2893,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9791104C222F6B7600C2DE5B /* CZAddressController.xib in Resources */,
 				972E41C0211473B100BC751C /* CZMyPointDetailCell.xib in Resources */,
 				97BC05E12112B122001ED65A /* key@2x.png in Resources */,
 				972E41B82114636100BC751C /* CZMyPointsCell.xib in Resources */,
@@ -2778,6 +2913,7 @@
 				97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */,
 				97A41B0021FC330200719AAA /* yw_1222.jpg in Resources */,
 				97FF6DF9211862EF00376435 /* CZfeedbackController.xib in Resources */,
+				97911046222F6A2200C2DE5B /* CZMyWalletController.xib in Resources */,
 				97BC05DF2112B122001ED65A /* key-blue@2x.png in Resources */,
 				9765333B21B8F007002F9308 /* apijipinchengcn.cer in Resources */,
 				97BC05E02112B122001ED65A /* key-pressed.png in Resources */,
@@ -2798,16 +2934,20 @@
 				9723076221AD77000004C00C /* CZNoDataView.xib in Resources */,
 				97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */,
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
+				97911051222F7F0200C2DE5B /* CZAddressCell.xib in Resources */,
 				97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
 				97BC05DC2112B122001ED65A /* key-blue.png in Resources */,
+				979110732231131400C2DE5B /* province_data.xml in Resources */,
 				97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */,
 				97D8FCC32111612200D8ED8F /* CZMeArrowCell.xib in Resources */,
 				972E41CC21147C3A00BC751C /* CZAttentionController.xib in Resources */,
 				97705CD52108495D00485D64 /* CZHotSaleCell.xib in Resources */,
+				97911059222FAE3B00C2DE5B /* CZEditAddressController.xib in Resources */,
 				97BDB85F211077D800966FF0 /* CZMeController.xib in Resources */,
+				979110632230F3A600C2DE5B /* CZOrderListCell.xib in Resources */,
 				970C50A621F17E890091D7FF /* CZCoinCenterController.xib in Resources */,
 				97420DCF21E9BE5100FE3D9F /* CZBuyViewCell.xib in Resources */,
 				97FF6DF421184F5A00376435 /* CZSettingCell.xib in Resources */,
@@ -2827,6 +2967,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C7FF3B216DDDB50091DC07 /* UIScrollView+MJExtension.m in Sources */,
+				979110772231131400C2DE5B /* MOFSPickerView.m in Sources */,
 				97C78FB521196A2A00374CCD /* CZSystemMessageController.m in Sources */,
 				97D8FCCE2111ABA000D8ED8F /* CZNavigationView.m in Sources */,
 				9761EE0B219940D100E3276D /* CZEvaluateModel.m in Sources */,
@@ -2838,6 +2979,7 @@
 				97786499211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				97705C9D2108225A00485D64 /* UIButton+CZExtension.m in Sources */,
 				97BC05CC21129ECC001ED65A /* CZChangeNicknameController.m in Sources */,
+				979110762231131400C2DE5B /* MOFSPickerManager.m in Sources */,
 				97FF6DF8211862EF00376435 /* CZfeedbackController.m in Sources */,
 				97705CBA2108230F00485D64 /* UIViewController+WMPageController.m in Sources */,
 				97B8760A21EED78A001CC393 /* CZMainAttentionController.m in Sources */,
@@ -2847,6 +2989,7 @@
 				97B30CFE21F30CA000B8427E /* CZBindingController.m in Sources */,
 				97C7FF42216DDDB50091DC07 /* MJRefreshAutoGifFooter.m in Sources */,
 				979EFD8921E08923000FE466 /* CZCommodityModel.m in Sources */,
+				9791104B222F6B7600C2DE5B /* CZAddressController.m in Sources */,
 				97C85130211AFAA9005540D8 /* CZBindingMobileController.m in Sources */,
 				97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */,
 				97798C7A212CF4430052CE94 /* SVProgressHUD.m in Sources */,
@@ -2873,6 +3016,7 @@
 				979B05D3210F07EF0023292D /* CZShareAndlikeView.m in Sources */,
 				97D8FCCB2111A67700D8ED8F /* CZMyProfileController.m in Sources */,
 				9745082F21F807FE006A71EF /* KCUtilMd5.m in Sources */,
+				979110782231131400C2DE5B /* AddressModel.m in Sources */,
 				97BC05DA2112B122001ED65A /* DLIDEKeyboardView.m in Sources */,
 				97C7FF04216DDDAB0091DC07 /* MJConst.m in Sources */,
 				97F0EC3C212569C4000FE1DC /* CZSaveTool.m in Sources */,
@@ -2916,6 +3060,7 @@
 				9794FC5C2193E761003C6AA6 /* CZBaseRecommendController.m in Sources */,
 				97798CD2212D0FC90052CE94 /* NSImage+WebCache.m in Sources */,
 				97705CBB2108230F00485D64 /* WMMenuItem.m in Sources */,
+				97911054222FA4D000C2DE5B /* CZAddressModel.m in Sources */,
 				9785779821A8374800E42B29 /* CZCommentBtn.m in Sources */,
 				97798CC0212D0FC90052CE94 /* SDWebImageFrame.m in Sources */,
 				97798CCD212D0FC90052CE94 /* SDImageCache.m in Sources */,
@@ -2953,6 +3098,7 @@
 				9723F28E21B263E2006E18D2 /* TSLWebViewController.m in Sources */,
 				97705CE92108733F00485D64 /* CZNavigationController.m in Sources */,
 				97420DDA21EC918800FE3D9F /* CZSearchSubDetailOneController.m in Sources */,
+				97911058222FAE3B00C2DE5B /* CZEditAddressController.m in Sources */,
 				97643485221BF31000EB0291 /* CZSubButton.m in Sources */,
 				97798CC6212D0FC90052CE94 /* UIImage+MultiFormat.m in Sources */,
 				97F152FF21097A24009F7922 /* CZCommodityView.m in Sources */,
@@ -2972,6 +3118,7 @@
 				974F488D21A3B03600E1ED1A /* CZAttentionDetailModel.m in Sources */,
 				97BDB84D21100B8800966FF0 /* CZChoicenessCell.m in Sources */,
 				970C50A521F17E890091D7FF /* CZCoinCenterController.m in Sources */,
+				97911050222F7F0200C2DE5B /* CZAddressCell.m in Sources */,
 				972E41C621147C2000BC751C /* CZOrderController.m in Sources */,
 				97705C77210729BA00485D64 /* CZTextField.m in Sources */,
 				97C7FF07216DDDAB0091DC07 /* NSString+MJExtension.m in Sources */,
@@ -2980,6 +3127,7 @@
 				975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */,
 				97705C6D2107172A00485D64 /* AFURLRequestSerialization.m in Sources */,
 				97420DD621EC321400FE3D9F /* CZHisSearchCell.m in Sources */,
+				979110622230F3A600C2DE5B /* CZOrderListCell.m in Sources */,
 				97C85134211C07EA005540D8 /* MBProgressHUD.m in Sources */,
 				977864A0211A7AD6001B41F1 /* MASConstraint.m in Sources */,
 				97798CBD212D0FC90052CE94 /* MKAnnotationView+WebCache.m in Sources */,
@@ -2996,6 +3144,7 @@
 				975B85A4219FB84D00525198 /* CZDiscoverDetailModel.m in Sources */,
 				972E41D721147CAE00BC751C /* CZCollectController.m in Sources */,
 				9778649B211A7AD6001B41F1 /* MASCompositeConstraint.m in Sources */,
+				979110752231131400C2DE5B /* MOFSToolView.m in Sources */,
 				97798CC2212D0FC90052CE94 /* SDWebImageCodersManager.m in Sources */,
 				97CDCB35211D76CC00521ED5 /* UIFont+CZExtension.m in Sources */,
 				97705C6F2107172A00485D64 /* AFSecurityPolicy.m in Sources */,
@@ -3003,6 +3152,7 @@
 				974A3426212C30EA009192E3 /* GXNetTool.m in Sources */,
 				97F71BA021AD21A7005BCAC3 /* PlanADScrollView.m in Sources */,
 				97ED11F2211582910003E0F7 /* CZAttentionCell.m in Sources */,
+				979110742231131400C2DE5B /* MOFSDatePicker.m in Sources */,
 				97C7FF3D216DDDB50091DC07 /* UIView+MJExtension.m in Sources */,
 				97C7FF05216DDDAB0091DC07 /* NSObject+MJCoding.m in Sources */,
 				97CAE7C021194C5D00858749 /* CZMessageCell.m in Sources */,
@@ -3011,6 +3161,7 @@
 				97705C6E2107172A00485D64 /* AFNetworkReachabilityManager.m in Sources */,
 				97798CD9212D0FC90052CE94 /* SDWebImageWebPCoder.m in Sources */,
 				97798CC8212D0FC90052CE94 /* SDWebImageCompat.m in Sources */,
+				97911045222F6A2100C2DE5B /* CZMyWalletController.m in Sources */,
 				975B85A1219FB12C00525198 /* CZDiscoverTitleModel.m in Sources */,
 				97FF6DF321184F5A00376435 /* CZSettingCell.m in Sources */,
 				97C7FF4E216DE0130091DC07 /* CZAttentionsModel.m in Sources */,
@@ -3037,6 +3188,7 @@
 				975E761421E73CCD00B0819B /* CZScollerImageTool.m in Sources */,
 				97798CC5212D0FC90052CE94 /* UIImage+GIF.m in Sources */,
 				971CBEC821917B6300E4590B /* CZHotTagsView.m in Sources */,
+				979110792231131400C2DE5B /* MOFSAddressPickerView.m in Sources */,
 				97C7FF45216DDDB50091DC07 /* MJRefreshStateHeader.m in Sources */,
 				979EFD8521E085B5000FE466 /* CZHotSaleDetailModel.m in Sources */,
 				970D0AE721AB981500649FC2 /* CZGuideController.m in Sources */,
@@ -3267,7 +3419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
@@ -3337,7 +3489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.jipinshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c69694f4-0041-4bf3-aaea-e9357e2bb2bf";
-				PROVISIONING_PROFILE_SPECIFIER = JIPINDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = JIPINDevelopment;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";

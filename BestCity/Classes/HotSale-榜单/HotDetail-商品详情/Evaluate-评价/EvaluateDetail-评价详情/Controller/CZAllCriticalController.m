@@ -65,7 +65,7 @@
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 68, SCR_WIDTH, SCR_HEIGHT - 68 - 49) style:UITableViewStylePlain];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 68 + (IsiPhoneX ? 24 : 0), SCR_WIDTH, SCR_HEIGHT - 68 - 49) style:UITableViewStylePlain];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         self.tableView.backgroundColor = CZGlobalWhiteBg;
@@ -80,7 +80,7 @@
     if (_nav == nil) {
         self.view.backgroundColor = CZGlobalWhiteBg;
         NSString *title = [NSString stringWithFormat:@"所有评论(%@)", self.totalCommentCount];
-        self.nav = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:title rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+        self.nav = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:title rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     }
     return _nav;
 }

@@ -14,11 +14,11 @@
 #pragma mark - 跳转到淘宝
 + (void)openAlibcTradeWithUrlString:(NSString *)urlStr parentController:(UIViewController *)parentController
 {
-    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"taobao://"]]) {
-        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
-        [CZProgressHUD hideAfterDelay:1.5];
-        return;
-    }
+//    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"taobao://"]]) {
+//        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
+//        [CZProgressHUD hideAfterDelay:1.5];
+//        return;
+//    }
     
     
     //根据链接打开页面
@@ -29,7 +29,7 @@
     showParam.openType = AlibcOpenTypeNative;
     showParam.backUrl = @"tbopen25025861";
     showParam.isNeedPush = YES;
-    showParam.nativeFailMode = AlibcNativeFailModeNone;
+    showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
     
     [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
             if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){

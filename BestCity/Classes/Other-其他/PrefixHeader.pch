@@ -9,18 +9,22 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+
 /**
  * 诚品会URL
  */
 //#define SERVER_URL @"https://www.jipincheng.cn"
 //#define SERVER_URL @"http://192.168.1.48:8081"
 
+#ifdef DEBUG
+//极品城URL
+#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/"
 
-/**
- * 极品城URL
- */
-//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/"
+#else
+//极品城URL
 #define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/"
+
+#endif
 
 /** 用户信息 */
 #define JPUSERINFO [CZSaveTool objectForKey:@"user"]

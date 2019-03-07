@@ -75,14 +75,15 @@ static NSString * const type = @"1";
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
+            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
             if ([JPTOKEN length] <= 0)
             {
                 CZLoginController *vc = [CZLoginController shareLoginController];
-                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+                [tabbar presentViewController:vc animated:NO completion:nil];
                 return;
             }
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:self];
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:tabbar];
             
         }];
         

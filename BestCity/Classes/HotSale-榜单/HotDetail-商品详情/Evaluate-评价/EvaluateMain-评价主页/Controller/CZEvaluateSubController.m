@@ -109,7 +109,6 @@
 #pragma mark - 获取评价数据
 - (void)getDataSource
 {
-    
     [CZEvaluateModel setupObjectClassInArray:^NSDictionary *{
         return @{
                  @"children" : @"CZEvaluateModel"
@@ -151,6 +150,14 @@
     titleLabel.text = @"用户评价";
     titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     [self.scrollerView addSubview:titleLabel];
+    
+    UIButton *ReplyBtn = [self createAddCommentBtn];
+    ReplyBtn.centerY = titleLabel.centerY;
+    ReplyBtn.width = 81;
+    ReplyBtn.x = SCR_WIDTH - ReplyBtn.width - space;
+    [ReplyBtn setTitle:@"写评论" forState:UIControlStateNormal];
+    [self.scrollerView addSubview:ReplyBtn];
+    
     // 记录高度
     [self addHeight:CZGetY(titleLabel) + 20];
     
@@ -186,9 +193,7 @@
         // 记录高度
         [self addHeight:moreReplyBtn.height + 10];
     } else {
-        UIButton *ReplyBtn = [self createAddCommentBtn];
-        // 记录高度
-        [self addHeight:ReplyBtn.height + 10];
+        [self addHeight:ReplyBtn.height + 40];
     }
     
     /**点赞*/
@@ -437,7 +442,7 @@
     replyBtn.name = model.userNickname;
     replyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     replyBtn.titleLabel.font = timeLabel.font;
-    [replyBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
+    [replyBtn setTitleColor:UIColorFromRGB(0xFF4A90E2) forState:UIControlStateNormal];
     [replyBtn addTarget:self action:@selector(reply:) forControlEvents:UIControlEventTouchUpInside];
     [backview addSubview:replyBtn];
     
@@ -465,7 +470,7 @@
     replyView.height = 0;
     [backview addSubview:replyView];
     
-    NSInteger maxCommentCount = model.children.count > 2 ? 2 : model.children.count;
+    NSInteger maxCommentCount = model.children.count > 3 ? 3 : model.children.count;
     
     // 在内容View中加载
      CGFloat replyHeight = 0.0;
@@ -520,16 +525,14 @@
         replyView.height = CZGetY(contentLabel) + 10;
     }
     
-    if (model.children.count > 2) {
+    if (model.children.count > 3) {
         // 显示更多按钮
         CZMutContentButton *moreBtn = [[CZMutContentButton alloc] init];
         [replyView addSubview:moreBtn];
         moreBtn.x = 10;
         moreBtn.y = replyView.height;
         moreBtn.height = 20;
-        [moreBtn setTitle:[NSString stringWithFormat:@"共%@条回复", model.childCount] forState:UIControlStateNormal];
-        [moreBtn setImage:[UIImage imageNamed:@"right-blue"] forState:UIControlStateNormal];
-        [moreBtn sizeToFit];
+        [moreBtn setTitle:[NSString stringWithFormat:@"查看%@条回复", model.childCount] forState:UIControlStateNormal];
         [moreBtn setTitleColor:CZRGBColor(74, 144, 226) forState:UIControlStateNormal];
         moreBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
         [moreBtn addTarget:self action:@selector(pushCommentDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -567,14 +570,15 @@
     CZReplyButton *addReplyBtn = [[CZReplyButton alloc] init];
     addReplyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     [addReplyBtn setTitle:@"添加评论" forState:UIControlStateNormal];
-    [addReplyBtn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
+    [addReplyBtn setImage:[UIImage imageNamed:@"write"] forState:UIControlStateNormal];
+    [addReplyBtn setTitleColor:UIColorFromRGB(0xFF4A90E2) forState:UIControlStateNormal];
     addReplyBtn.backgroundColor =  CZGlobalWhiteBg;
     addReplyBtn.layer.borderWidth = 1;
     addReplyBtn.layer.cornerRadius = 4;
     addReplyBtn.layer.masksToBounds = YES;
-    addReplyBtn.layer.borderColor = CZREDCOLOR.CGColor;
+    addReplyBtn.layer.borderColor = UIColorFromRGB(0xFF4A90E2).CGColor;
     addReplyBtn.y = self.totalHeight;
-    addReplyBtn.height = 30;
+    addReplyBtn.height = 24;
     addReplyBtn.width = 100;
     addReplyBtn.centerX = SCR_WIDTH * 0.5;
     [addReplyBtn addTarget:self action:@selector(reply:) forControlEvents:UIControlEventTouchUpInside];

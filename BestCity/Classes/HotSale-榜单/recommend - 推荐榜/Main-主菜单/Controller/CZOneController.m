@@ -14,10 +14,13 @@
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "CZSubButton.h"
+#import "CZScollerImageTool.h"
 
 @interface CZOneController ()
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
+/** 轮播图 */
+@property (nonatomic, strong) NSMutableArray *imageUrlList;
 @end
 
 @implementation CZOneController
@@ -42,6 +45,11 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getTopGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"data"]];
+            self.imageUrlList = [NSMutableArray array];
+            for (NSDictionary *dic in result[@"adList"] ) {
+                [self.imageUrlList addObject:dic[@"img"]];
+            }
+            self.tableView.tableHeaderView = [self setupHeaderView];
             [self.tableView reloadData];
         }
         
@@ -68,7 +76,7 @@
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
-    self.tableView.tableHeaderView = [self setupHeaderView];
+    
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @(0);
     param[@"clientVersionCode"] = @"1.00";
@@ -118,9 +126,10 @@
 - (UIView *)setupHeaderView
 {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 167)];
-    UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:[UIImage imageNamed:@"banner"]];
-    imageView.frame = CGRectMake(10, 10, SCR_WIDTH - 20, 157);
+    
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(10, 10, SCR_WIDTH - 20, 157)];
+    [backView addSubview:imageView];
+    imageView.imgList = self.imageUrlList;
     [backView addSubview:imageView];
     return backView;
 }
