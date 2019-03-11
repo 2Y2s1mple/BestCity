@@ -37,6 +37,12 @@
                             <constraint firstAttribute="width" constant="90" id="ph7-th-LYi"/>
                             <constraint firstAttribute="height" constant="90" id="qHn-Zw-krO"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待收货" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FwG-GN-GJw">
                         <rect key="frame" x="424" y="8" width="40" height="30"/>
@@ -89,6 +95,9 @@
                                 <integer key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="affirmAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Fdw-5o-s2p"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -114,7 +123,18 @@
                     <constraint firstItem="Elx-AE-yt1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="uF6-hF-18j"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-546" y="139"/>
+            <connections>
+                <outlet property="affirmBtn" destination="ckf-b2-jrF" id="svk-Do-oeI"/>
+                <outlet property="bigImage" destination="gxS-hi-ODq" id="ZPp-Iz-ewD"/>
+                <outlet property="goodsName" destination="f54-T2-w3E" id="9hg-uA-9bd"/>
+                <outlet property="lineView" destination="Pq7-vi-ve0" id="vwh-Yt-Ug8"/>
+                <outlet property="pointLabel" destination="GpF-bK-oB9" id="zO0-fz-gmm"/>
+                <outlet property="realPayLabel" destination="GpF-bK-oB9" id="Rw6-mj-PRF"/>
+                <outlet property="sendTimelabel" destination="UO1-kG-7Xk" id="JTV-bl-L2i"/>
+                <outlet property="statuslabel" destination="FwG-GN-GJw" id="NiB-gK-oeS"/>
+                <outlet property="totalLabel" destination="OCW-k4-wYH" id="W5X-sq-7ij"/>
+            </connections>
+            <point key="canvasLocation" x="-446" y="162"/>
         </tableViewCell>
     </objects>
 </document>

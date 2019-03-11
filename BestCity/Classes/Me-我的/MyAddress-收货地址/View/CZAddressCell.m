@@ -63,10 +63,7 @@
             if (([result[@"code"] isEqual:@(0)])) {
                 [CZProgressHUD showProgressHUDWithText:@"删除成功"];
                 [CZProgressHUD hideAfterDelay:1.5];
-                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-                UINavigationController *nav = tabbar.selectedViewController;
-                CZAddressController *vc = nav.topViewController;
-                [vc getDataSource];
+                [self uploadTableView];
             } 
         } failure:^(NSError *error) {}];
     }]];
@@ -77,16 +74,17 @@
 /** 设置为默认 */
 - (IBAction)handleBtnAction:(UIButton *)sender
 {
+    if (self.handleBtn.selected) {
+        return;
+    }
     sender.enabled = NO;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"addressId"] = self.addressModel.addressId;
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/address/setDefault"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if (([result[@"code"] isEqual:@(0)])) {
-            sender.selected = YES;
-        } else {
-            sender.selected = NO;
         }
         sender.enabled = YES;
+        [self uploadTableView];
     } failure:^(NSError *error) {
         sender.enabled = YES;
     }];
@@ -103,8 +101,6 @@
     [nav pushViewController:vc animated:YES];
 }
 
-
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -114,6 +110,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)uploadTableView
+{
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZAddressController *vc = nav.topViewController;
+    [vc getDataSource];
 }
 
 @end

@@ -20,7 +20,6 @@
 #import "UIImageView+WebCache.h"
 
 
-
 @interface CZDChoiceDetailController () <CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 分享参数 */
 @property (nonatomic, strong) NSDictionary *shareParam;

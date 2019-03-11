@@ -29,7 +29,8 @@
     NSString *CONSTANT_KEY = @"quality-shop";
     NSString *timestamp = [self getNowTimeTimestamp3];
     NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
-    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
+//    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
+    headers = @{@"token" : JPTOKEN ? @"a06531a09c5b4eb7859124d4dfab09ed" : @"a06531a09c5b4eb7859124d4dfab09ed", @"sign" : MD5string, @"timestamp" : timestamp};
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }

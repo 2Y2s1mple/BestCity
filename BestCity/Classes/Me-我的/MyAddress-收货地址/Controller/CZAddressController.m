@@ -70,9 +70,9 @@
         if (([result[@"code"] isEqual:@(0)])) {
             self.addressArray = [CZAddressModel objectArrayWithKeyValuesArray:result[@"data"]];
             
-            [CZProgressHUD hideAfterDelay:1];
             [self.tableView reloadData];
-        }
+        } 
+        [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {}];
 }
 

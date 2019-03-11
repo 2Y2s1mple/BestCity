@@ -9,6 +9,8 @@
 #import "CZOrderController.h"
 #import "CZNavigationView.h"
 #import "CZOrderListCell.h"
+#import "GXNetTool.h"
+#import "CZOrderModel.h"
 
 @interface CZOrderController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -38,28 +40,47 @@
     
     // 创建类表
     [self.view addSubview:self.tableView];
+    [self getDataSource];
+}
+
+- (void)getDataSource
+{
+    [CZOrderModel setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                    @"orderId" : @"id"
+                 };
+    }];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/order/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (([result[@"code"] isEqual:@(0)])) {
+            self.roderArray = [CZOrderModel objectArrayWithKeyValuesArray:result[@"data"]];
+            
+            [self.tableView reloadData];
+        } 
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {}];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.roderArray.count ? 10 : 10;
+    return self.roderArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CZOrderListCell *cell = [CZOrderListCell cellWithTableView:tableView];
-//    self.roderArray[indexPath.row];
+    cell.model = self.roderArray[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 216;
+    CZOrderModel *model = self.roderArray[indexPath.row];
+    
+    return model.heightCell;;
 }
 
-- (void)getDataSource
-{
-    
-}
 
 @end

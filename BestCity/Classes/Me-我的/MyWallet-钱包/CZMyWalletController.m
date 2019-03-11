@@ -7,20 +7,47 @@
 //
 
 #import "CZMyWalletController.h"
-#import "CZNavigationView.h"
 
 @interface CZMyWalletController ()
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollerView;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIView *lineView;
 
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *leftLabel;
+@property (nonatomic, weak) IBOutlet UILabel *rightLabel;
 @end
 
 @implementation CZMyWalletController
+- (IBAction)popAction:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"钱包" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
-    [self.view addSubview:navigationView];
 }
+
+- (IBAction)leftActoin:(UITapGestureRecognizer *)sender {
+    NSLog(@"----------%@", sender.view);
+    CGFloat lineX = sender.view.frame.origin.x;
+    self.leftLabel.textColor = [UIColor blackColor];
+    self.lineView.x = lineX;
+    
+    self.rightLabel.textColor = CZGlobalGray;
+}
+
+- (IBAction)rightAction:(UITapGestureRecognizer *)sender
+{
+    NSLog(@"----------%@", sender.view);
+    CGFloat lineX = sender.view.frame.origin.x;
+    self.rightLabel.textColor = [UIColor blackColor];
+    self.lineView.x = lineX;
+    
+    self.leftLabel.textColor = CZGlobalGray;
+    
+}
+
 
 /*
 #pragma mark - Navigation

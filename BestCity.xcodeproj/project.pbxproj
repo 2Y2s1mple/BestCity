@@ -290,6 +290,7 @@
 		97CAE7C321194DF900858749 /* CZMessageData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97CAE7C221194DF900858749 /* CZMessageData.plist */; };
 		97CDCB32211D625700521ED5 /* UILabel+CZAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB31211D625700521ED5 /* UILabel+CZAdapter.m */; };
 		97CDCB35211D76CC00521ED5 /* UIFont+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */; };
+		97D39173223645290081F229 /* CZOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D39172223645290081F229 /* CZOrderModel.m */; };
 		97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D68C67219054E000802B30 /* CZHotTagLabel.m */; };
 		97D8FCBC2111504000D8ED8F /* CZMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCBB2111504000D8ED8F /* CZMeCell.m */; };
 		97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D8FCBD2111505000D8ED8F /* CZMeCell.xib */; };
@@ -848,6 +849,8 @@
 		97CDCB31211D625700521ED5 /* UILabel+CZAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CZAdapter.m"; sourceTree = "<group>"; };
 		97CDCB33211D76CC00521ED5 /* UIFont+CZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CZExtension.h"; sourceTree = "<group>"; };
 		97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CZExtension.m"; sourceTree = "<group>"; };
+		97D39171223645290081F229 /* CZOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZOrderModel.h; sourceTree = "<group>"; };
+		97D39172223645290081F229 /* CZOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZOrderModel.m; sourceTree = "<group>"; };
 		97D68C66219054E000802B30 /* CZHotTagLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTagLabel.h; sourceTree = "<group>"; };
 		97D68C67219054E000802B30 /* CZHotTagLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotTagLabel.m; sourceTree = "<group>"; };
 		97D8FCBA2111504000D8ED8F /* CZMeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeCell.h; sourceTree = "<group>"; };
@@ -1262,6 +1265,8 @@
 				9791105F2230F3A600C2DE5B /* CZOrderListCell.h */,
 				979110602230F3A600C2DE5B /* CZOrderListCell.m */,
 				979110612230F3A600C2DE5B /* CZOrderListCell.xib */,
+				97D39171223645290081F229 /* CZOrderModel.h */,
+				97D39172223645290081F229 /* CZOrderModel.m */,
 			);
 			path = "Order-订单";
 			sourceTree = "<group>";
@@ -2977,6 +2982,7 @@
 				978D25A6219993C4004040DD /* CZReplyButton.m in Sources */,
 				9778649F211A7AD6001B41F1 /* View+MASAdditions.m in Sources */,
 				97786499211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				97D39173223645290081F229 /* CZOrderModel.m in Sources */,
 				97705C9D2108225A00485D64 /* UIButton+CZExtension.m in Sources */,
 				97BC05CC21129ECC001ED65A /* CZChangeNicknameController.m in Sources */,
 				979110762231131400C2DE5B /* MOFSPickerManager.m in Sources */,
