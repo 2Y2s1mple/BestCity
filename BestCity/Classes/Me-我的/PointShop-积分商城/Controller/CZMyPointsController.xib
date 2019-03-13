@@ -75,7 +75,7 @@
                 <constraint firstItem="Jg3-Al-wSO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aeG-fj-PXO"/>
                 <constraint firstItem="Jg3-Al-wSO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="88" id="b2e-DJ-nA6"/>
             </constraints>
-            <point key="canvasLocation" x="65" y="-119"/>
+            <point key="canvasLocation" x="-153" y="-114"/>
         </view>
     </objects>
     <resources>

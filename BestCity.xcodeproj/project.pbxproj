@@ -176,6 +176,8 @@
 		97798CD8212D0FC90052CE94 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 97798CB9212D0FC90052CE94 /* UIButton+WebCache.m */; };
 		97798CD9212D0FC90052CE94 /* SDWebImageWebPCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 97798CBA212D0FC90052CE94 /* SDWebImageWebPCoder.m */; };
 		97798CDC212D2D3E0052CE94 /* CZRecommendListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97798CDB212D2D3E0052CE94 /* CZRecommendListModel.m */; };
+		9779CE882239060F0090303F /* CZTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE872239060F0090303F /* CZTaskView.m */; };
+		9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE8A2239264E0090303F /* CZTaskMainView.m */; };
 		977C33B6218D951000FAA144 /* CZHotSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977C33B5218D951000FAA144 /* CZHotSearchView.m */; };
 		9785778221A6B82400E42B29 /* CZSubOneCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778121A6B82400E42B29 /* CZSubOneCommentCell.m */; };
 		9785778721A6E04800E42B29 /* CZPackUpCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778521A6E04800E42B29 /* CZPackUpCommentCell.m */; };
@@ -646,6 +648,10 @@
 		97798CBB212D0FC90052CE94 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		97798CDA212D2D3E0052CE94 /* CZRecommendListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRecommendListModel.h; sourceTree = "<group>"; };
 		97798CDB212D2D3E0052CE94 /* CZRecommendListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRecommendListModel.m; sourceTree = "<group>"; };
+		9779CE862239060F0090303F /* CZTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTaskView.h; sourceTree = "<group>"; };
+		9779CE872239060F0090303F /* CZTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaskView.m; sourceTree = "<group>"; };
+		9779CE892239264E0090303F /* CZTaskMainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTaskMainView.h; sourceTree = "<group>"; };
+		9779CE8A2239264E0090303F /* CZTaskMainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaskMainView.m; sourceTree = "<group>"; };
 		977C33B4218D951000FAA144 /* CZHotSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotSearchView.h; sourceTree = "<group>"; };
 		977C33B5218D951000FAA144 /* CZHotSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSearchView.m; sourceTree = "<group>"; };
 		9785778021A6B82400E42B29 /* CZSubOneCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSubOneCommentCell.h; sourceTree = "<group>"; };
@@ -1074,9 +1080,8 @@
 		970C50A121F17E350091D7FF /* CoinCenter-极币中心 */ = {
 			isa = PBXGroup;
 			children = (
-				970C50A221F17E890091D7FF /* CZCoinCenterController.h */,
-				970C50A321F17E890091D7FF /* CZCoinCenterController.m */,
-				970C50A421F17E890091D7FF /* CZCoinCenterController.xib */,
+				9779CE8C2239362C0090303F /* CoinCenter-Main-主页 */,
+				9765649A21A58C89008A0293 /* PointList-积分明细 */,
 			);
 			path = "CoinCenter-极币中心";
 			sourceTree = "<group>";
@@ -1235,15 +1240,6 @@
 				9721CE0321E30805007F9208 /* CZTestDetailModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		972E41AD211450AF00BC751C /* MyPoints-我的积分 */ = {
-			isa = PBXGroup;
-			children = (
-				9765649C21A58CF2008A0293 /* PointShop-积分商城 */,
-				9765649A21A58C89008A0293 /* PointList-积分明细 */,
-			);
-			path = "MyPoints-我的积分";
 			sourceTree = "<group>";
 		};
 		972E41B32114632200BC751C /* View */ = {
@@ -1657,13 +1653,13 @@
 				97911047222F6B5800C2DE5B /* MyAddress-收货地址 */,
 				97911041222F69F700C2DE5B /* MyWallet-钱包 */,
 				970C50A121F17E350091D7FF /* CoinCenter-极币中心 */,
+				9765649C21A58CF2008A0293 /* PointShop-积分商城 */,
 				972E41C221147BE400BC751C /* Attention-关注 */,
 				972E41D321147C8000BC751C /* Collect-收藏 */,
 				972E41DE21147CE500BC751C /* Message-消息 */,
 				972E41DF21147D0900BC751C /* Setting-设置 */,
 				97CF34272177393900DA9198 /* Login-登录 */,
 				97D8FCCF2111B9D700D8ED8F /* MyProfile-我的资料 */,
-				972E41AD211450AF00BC751C /* MyPoints-我的积分 */,
 				972E41CD21147C4B00BC751C /* DiscountCoupon-优惠券 */,
 			);
 			path = "Me-我的";
@@ -2008,6 +2004,36 @@
 				97798CBB212D0FC90052CE94 /* UIImage+GIF.h */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		9779CE8C2239362C0090303F /* CoinCenter-Main-主页 */ = {
+			isa = PBXGroup;
+			children = (
+				9779CE8E223936720090303F /* View */,
+				9779CE8D223936640090303F /* Controller */,
+			);
+			path = "CoinCenter-Main-主页";
+			sourceTree = "<group>";
+		};
+		9779CE8D223936640090303F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				970C50A221F17E890091D7FF /* CZCoinCenterController.h */,
+				970C50A321F17E890091D7FF /* CZCoinCenterController.m */,
+				970C50A421F17E890091D7FF /* CZCoinCenterController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9779CE8E223936720090303F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9779CE862239060F0090303F /* CZTaskView.h */,
+				9779CE872239060F0090303F /* CZTaskView.m */,
+				9779CE892239264E0090303F /* CZTaskMainView.h */,
+				9779CE8A2239264E0090303F /* CZTaskMainView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9785778921A7DE4000E42B29 /* View */ = {
@@ -2978,6 +3004,7 @@
 				9761EE0B219940D100E3276D /* CZEvaluateModel.m in Sources */,
 				972E419E2113FC7A00BC751C /* UIImage+CZExtension.m in Sources */,
 				97798CBC212D0FC90052CE94 /* UIImage+WebP.m in Sources */,
+				9779CE882239060F0090303F /* CZTaskView.m in Sources */,
 				9778649E211A7AD6001B41F1 /* NSArray+MASAdditions.m in Sources */,
 				978D25A6219993C4004040DD /* CZReplyButton.m in Sources */,
 				9778649F211A7AD6001B41F1 /* View+MASAdditions.m in Sources */,
@@ -3047,6 +3074,7 @@
 				97F0EC35212559A3000FE1DC /* CZShareView.m in Sources */,
 				97420DCE21E9BE5100FE3D9F /* CZBuyViewCell.m in Sources */,
 				97798CD0212D0FC90052CE94 /* NSData+ImageContentType.m in Sources */,
+				9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */,
 				97798CCE212D0FC90052CE94 /* SDWebImageDownloaderOperation.m in Sources */,
 				97572A8C21198F7F00FB42DE /* CZLoginController.m in Sources */,
 				97705CB92108230F00485D64 /* WMPageController.m in Sources */,

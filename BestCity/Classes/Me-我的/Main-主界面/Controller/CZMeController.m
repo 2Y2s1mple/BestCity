@@ -8,9 +8,10 @@
 
 #import "CZMeController.h"
 
+#import "CZMeCell.h"
 #import "CZMeArrowCell.h"
 #import "CZMyProfileController.h"
-#import "CZMyPointsController.h"
+
 #import "WMPageController.h"
 #import "CZMutContentButton.h"
 
@@ -72,7 +73,7 @@
     [self.backView removeFromSuperview];
 }
 
-#pragma mark - 跳转到关注
+#pragma mark - 跳关注
 - (IBAction)AttentionAction:(UIButton *)sender {
     WMPageController *hotVc = [[CZMainAttentionController alloc] init];
     hotVc.selectIndex = 0;
@@ -90,7 +91,7 @@
     [self.navigationController pushViewController:hotVc animated:YES];
 }
 
-#pragma mark - 跳转到关注
+#pragma mark - 跳关注
 - (IBAction)fansAction:(UIButton *)sender {
     WMPageController *hotVc = [[CZMainAttentionController alloc] init];
     hotVc.selectIndex = 1;
@@ -108,23 +109,10 @@
     [self.navigationController pushViewController:hotVc animated:YES];
 }
 
-
-#pragma mark - 跳转到的我的积分
-- (IBAction)pushMyPointsController:(id)sender {
-    CZMyPointsController *vc = [[CZMyPointsController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - 跳转到我的资料
-- (void)pushMyProfileVc
-{
+#pragma mark - 跳我的资料
+- (IBAction)loginAction:(UIButton *)sender {
     CZMyProfileController *vc = [[CZMyProfileController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - 跳转到我的资料
-- (IBAction)loginAction:(UIButton *)sender {
-    [self pushMyProfileVc];
 }
 
 #pragma mark - 跳转到极币数
@@ -132,7 +120,6 @@
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
     [self.navigationController pushViewController:vc animated:YES
      ];
-    
 }
 
 /** 从plist文件加载数据 */
@@ -149,7 +136,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalLightGray;
     // 头像的点击事件
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushMyProfileVc)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginAction:)];
     [self.headImage addGestureRecognizer:tap];
     self.headImage.layer.borderWidth = 2;
     self.headImage.layer.borderColor = CZGlobalWhiteBg.CGColor;
@@ -207,26 +194,31 @@
 #pragma mark - <UITableViewDataSource>
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataSource[1] count];
+    return [self.dataSource[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dic = self.dataSource[1][indexPath.row];
-    CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
-    cell.dataSource = dic;
-    return cell;
+    NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
+    if (indexPath.section == 0) {
+        CZMeCell *cell = [CZMeCell cellWithTabelView:tableView];
+        return cell;
+    } else {
+        CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
+        cell.dataSource = dic;
+        return cell;
+    }
 }
 
 #pragma mark - <UITableViewDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return indexPath.section == 0 ? 82 : 60;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -244,26 +236,32 @@
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dic = self.dataSource[1][indexPath.row];
-    if ([dic[@"destinationVC"] isEqualToString:@"CZCollectController"]) {
-        WMPageController *hotVc = (WMPageController *)[[NSClassFromString(dic[@"destinationVC"]) alloc] init];
-        hotVc.selectIndex = 0;
-        hotVc.menuViewStyle = WMMenuViewStyleLine;
-        //        hotVc.progressWidth = 30;
-        hotVc.itemMargin = 10;
-        hotVc.progressHeight = 3;
-        hotVc.automaticallyCalculatesItemWidths = YES;
-        hotVc.titleFontName = @"PingFangSC-Medium";
-        hotVc.titleColorNormal = CZGlobalGray;
-        hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
-        hotVc.titleSizeNormal = 15.0f;
-        hotVc.titleSizeSelected = 15;
-        hotVc.progressColor = CZREDCOLOR;
-        [self.navigationController pushViewController:hotVc animated:YES];
-        return;
-    }
-    UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        
+    
+    } else {
+        NSDictionary *dic = self.dataSource[1][indexPath.row];
+        if ([dic[@"destinationVC"] isEqualToString:@"CZCollectController"]) {
+            WMPageController *hotVc = (WMPageController *)[[NSClassFromString(dic[@"destinationVC"]) alloc] init];
+            hotVc.selectIndex = 0;
+            hotVc.menuViewStyle = WMMenuViewStyleLine;
+            //        hotVc.progressWidth = 30;
+            hotVc.itemMargin = 10;
+            hotVc.progressHeight = 3;
+            hotVc.automaticallyCalculatesItemWidths = YES;
+            hotVc.titleFontName = @"PingFangSC-Medium";
+            hotVc.titleColorNormal = CZGlobalGray;
+            hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
+            hotVc.titleSizeNormal = 15.0f;
+            hotVc.titleSizeSelected = 15;
+            hotVc.progressColor = CZREDCOLOR;
+            [self.navigationController pushViewController:hotVc animated:YES];
+            return;
+        }
+        UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
+        [self.navigationController pushViewController:vc animated:YES]; 
+    };
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

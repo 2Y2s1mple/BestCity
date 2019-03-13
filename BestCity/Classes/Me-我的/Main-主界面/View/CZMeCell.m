@@ -7,21 +7,60 @@
 //
 
 #import "CZMeCell.h"
+
+#import "CZMeController.h"
+#import "CZCoinCenterController.h"
+#import "CZOrderController.h"
+#import "CZMyWalletController.h"
+#import "CZMyPointsController.h"
+
 @interface CZMeCell ()
 /** 总钱数 */
-@property (weak, nonatomic) IBOutlet UILabel *totalMoney;
+@property (weak, nonatomic) IBOutlet UIView *signInView;
 /** 处理中 */
-@property (weak, nonatomic) IBOutlet UILabel *beingProcessed;
+@property (weak, nonatomic) IBOutlet UIView *coinView;
 /** 可提现 */
-@property (weak, nonatomic) IBOutlet UILabel *withdraw;
+@property (weak, nonatomic) IBOutlet UIView *orderView;
 /** 待结算 */
-@property (weak, nonatomic) IBOutlet UILabel *settleAccount;
-/** 已提现 */
-@property (weak, nonatomic) IBOutlet UILabel *afterSettleAccount;
+@property (weak, nonatomic) IBOutlet UIView *walletView;
 
 @end
 
 @implementation CZMeCell
+
+- (IBAction)signInAction:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    // 跳签到
+    CZCoinCenterController *toVc = [[CZCoinCenterController alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+- (IBAction)coinAction:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    // 跳商城
+    CZMyPointsController *toVc = [[CZMyPointsController alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+- (IBAction)orderAction:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    // 跳订单
+    CZOrderController *toVc = [[CZOrderController alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+- (IBAction)walletAction:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    // 跳钱包
+    CZMyWalletController *toVc = [[CZMyWalletController alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -40,7 +79,7 @@
     static NSString *ID = @"meCell";
     CZMeCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeCell class]) owner:nil options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeCell class]) owner:nil options:nil] firstObject];
     }
     return cell;
 }
@@ -48,7 +87,6 @@
 - (void)setData:(NSDictionary *)data
 {
     _data = data;
-
 }
 
 - (void)setupMoney:(NSDictionary *)result
@@ -58,11 +96,6 @@
     // 已体现
     NSString *afterAccount = [self changeStr:result[@"use_account"]];
     
-    self.totalMoney.text = [@"总佣金¥" stringByAppendingString:total];
-    self.beingProcessed.text = result[@"state"];
-    self.withdraw.text = total;
-    self.settleAccount.text = @"0";
-    self.afterSettleAccount.text = afterAccount;
     
 }
 

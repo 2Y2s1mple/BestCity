@@ -64,7 +64,7 @@
                             </connections>
                         </button>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
-                            <rect key="frame" x="20" y="264" width="335" height="600"/>
+                            <rect key="frame" x="20" y="220" width="335" height="600"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="600" id="nbk-yn-gRV"/>
@@ -236,7 +236,7 @@
                         <constraint firstItem="Q9Y-z1-cIv" firstAttribute="leading" secondItem="XOO-5G-ru1" secondAttribute="trailing" constant="19" id="4ra-DT-xL1"/>
                         <constraint firstAttribute="trailing" secondItem="zJo-aO-yIP" secondAttribute="trailing" constant="20" id="6w2-LS-IRA"/>
                         <constraint firstItem="zJo-aO-yIP" firstAttribute="leading" secondItem="D8s-nW-E3e" secondAttribute="leading" constant="20" id="AXq-8L-zdW"/>
-                        <constraint firstItem="zJo-aO-yIP" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="bottom" constant="144" id="DR1-Dz-eon"/>
+                        <constraint firstItem="zJo-aO-yIP" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="bottom" constant="100" id="DR1-Dz-eon"/>
                         <constraint firstItem="fc7-il-25H" firstAttribute="centerX" secondItem="D8s-nW-E3e" secondAttribute="centerX" id="RIR-JQ-9ax"/>
                         <constraint firstItem="LaF-gn-9r4" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="bottom" constant="28" id="WvM-rb-Byc"/>
                         <constraint firstAttribute="trailing" secondItem="fc7-il-25H" secondAttribute="trailing" id="Xyh-yp-zLY"/>
@@ -261,13 +261,8 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-5116" y="-2151"/>
+            <point key="canvasLocation" x="-5450" y="-2165"/>
         </view>
-        <tapGestureRecognizer id="chO-RR-YYN">
-            <connections>
-                <action selector="pushMyPointsController:" destination="-1" id="sjB-SX-yne"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="background" width="414" height="210"/>

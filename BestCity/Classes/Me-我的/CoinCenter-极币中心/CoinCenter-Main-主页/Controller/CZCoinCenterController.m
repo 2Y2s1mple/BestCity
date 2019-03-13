@@ -10,11 +10,12 @@
 #import "GXNetTool.h"
 #import "CZMyPointDetailController.h"
 #import "TSLWebViewController.h"
+#import "CZTaskMainView.h"
 
-@interface CZCoinCenterController ()
+@interface CZCoinCenterController () <CZTaskMainViewDelegate>
 /** 顶部的隐藏的导航栏 */
 @property (nonatomic, strong) UIView *navView;
-/** <#注释#> */
+/** 总极币 */
 @property (nonatomic, weak) IBOutlet UILabel *totalPointLabel;
 @property (nonatomic, weak) IBOutlet UILabel *totalPointNumber;
 
@@ -40,6 +41,16 @@
 
 /** 飘飞的label */
 @property (nonatomic, weak) IBOutlet UILabel *piaopiaoLabel;
+
+/** 每日任务视图 */
+@property (nonatomic, strong) CZTaskMainView *taskView;
+/** 每日任务数据 */
+@property (nonatomic, strong) NSArray *taskData;
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+
+
 @end
 
 @implementation CZCoinCenterController
@@ -53,6 +64,34 @@
     self.todayPointLabel.font= [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     self.usablePointLabel.font = self.todayPointLabel.font;
     self.backView.layer.cornerRadius = 10;
+    
+    
+    // 创建每日任务视图
+    [self getTaskViewData];
+}
+
+- (void)getTaskViewData
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/dailytask/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            self.taskData = result[@"data"];
+            // 创建每日任务视图
+            self.taskView = [[CZTaskMainView alloc] initWithFrame:CGRectMake(14, CZGetY(self.backView) + 20, SCR_WIDTH - 28, 50)];
+            self.taskView.dataSource = self.taskData;
+            self.taskView.delegate = self;
+            self.taskView.backgroundColor = CZGlobalWhiteBg;
+            [self.scrollView addSubview:self.taskView];
+            self.scrollView.contentSize = CGSizeMake(SCR_WIDTH, CZGetY(self.taskView) + 100);
+        } 
+    } failure:^(NSError *error) {}];
+}
+
+#pragma mark - <CZTaskMainViewDelegate>
+- (void)reloadContentView
+{
+    self.scrollView.contentSize = CGSizeMake(SCR_WIDTH, CZGetY(self.taskView) + 100);
 }
 
 - (void)createNav
