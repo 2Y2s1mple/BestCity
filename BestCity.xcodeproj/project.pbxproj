@@ -179,6 +179,11 @@
 		9779CE882239060F0090303F /* CZTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE872239060F0090303F /* CZTaskView.m */; };
 		9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE8A2239264E0090303F /* CZTaskMainView.m */; };
 		977C33B6218D951000FAA144 /* CZHotSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977C33B5218D951000FAA144 /* CZHotSearchView.m */; };
+		977E82D1223C9B4700C8C01B /* CZInvitationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E82CF223C9B4700C8C01B /* CZInvitationController.m */; };
+		977E82D2223C9B4700C8C01B /* CZInvitationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977E82D0223C9B4700C8C01B /* CZInvitationController.xib */; };
+		977E82D5223CA96600C8C01B /* CZGetJIBITool.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E82D4223CA96600C8C01B /* CZGetJIBITool.m */; };
+		977E82D8223CD3CA00C8C01B /* CZUpdataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E82D7223CD3CA00C8C01B /* CZUpdataView.m */; };
+		977E82DA223CD3D600C8C01B /* CZUpdataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977E82D9223CD3D600C8C01B /* CZUpdataView.xib */; };
 		9785778221A6B82400E42B29 /* CZSubOneCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778121A6B82400E42B29 /* CZSubOneCommentCell.m */; };
 		9785778721A6E04800E42B29 /* CZPackUpCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778521A6E04800E42B29 /* CZPackUpCommentCell.m */; };
 		9785778821A6E04800E42B29 /* CZPackUpCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9785778621A6E04800E42B29 /* CZPackUpCommentCell.xib */; };
@@ -239,6 +244,9 @@
 		97BC05DF2112B122001ED65A /* key-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BC05D72112B122001ED65A /* key-blue@2x.png */; };
 		97BC05E02112B122001ED65A /* key-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BC05D82112B122001ED65A /* key-pressed.png */; };
 		97BC05E12112B122001ED65A /* key@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BC05D92112B122001ED65A /* key@2x.png */; };
+		97BC3945223A8EF000DC4D67 /* CZMyPointsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BC3944223A8EF000DC4D67 /* CZMyPointsDetailController.m */; };
+		97BC3949223BB0F800DC4D67 /* CZAffirmPointController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BC3947223BB0F800DC4D67 /* CZAffirmPointController.m */; };
+		97BC394A223BB0F800DC4D67 /* CZAffirmPointController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97BC3948223BB0F800DC4D67 /* CZAffirmPointController.xib */; };
 		97BDB8492110072100966FF0 /* CZDChoicenessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BDB8482110072100966FF0 /* CZDChoicenessController.m */; };
 		97BDB84D21100B8800966FF0 /* CZChoicenessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BDB84B21100B8800966FF0 /* CZChoicenessCell.m */; };
 		97BDB84E21100B8800966FF0 /* CZChoicenessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97BDB84C21100B8800966FF0 /* CZChoicenessCell.xib */; };
@@ -654,6 +662,14 @@
 		9779CE8A2239264E0090303F /* CZTaskMainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaskMainView.m; sourceTree = "<group>"; };
 		977C33B4218D951000FAA144 /* CZHotSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotSearchView.h; sourceTree = "<group>"; };
 		977C33B5218D951000FAA144 /* CZHotSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSearchView.m; sourceTree = "<group>"; };
+		977E82CE223C9B4700C8C01B /* CZInvitationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZInvitationController.h; sourceTree = "<group>"; };
+		977E82CF223C9B4700C8C01B /* CZInvitationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZInvitationController.m; sourceTree = "<group>"; };
+		977E82D0223C9B4700C8C01B /* CZInvitationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZInvitationController.xib; sourceTree = "<group>"; };
+		977E82D3223CA96600C8C01B /* CZGetJIBITool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZGetJIBITool.h; sourceTree = "<group>"; };
+		977E82D4223CA96600C8C01B /* CZGetJIBITool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZGetJIBITool.m; sourceTree = "<group>"; };
+		977E82D6223CD3CA00C8C01B /* CZUpdataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUpdataView.h; sourceTree = "<group>"; };
+		977E82D7223CD3CA00C8C01B /* CZUpdataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZUpdataView.m; sourceTree = "<group>"; };
+		977E82D9223CD3D600C8C01B /* CZUpdataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZUpdataView.xib; sourceTree = "<group>"; };
 		9785778021A6B82400E42B29 /* CZSubOneCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSubOneCommentCell.h; sourceTree = "<group>"; };
 		9785778121A6B82400E42B29 /* CZSubOneCommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSubOneCommentCell.m; sourceTree = "<group>"; };
 		9785778421A6E04800E42B29 /* CZPackUpCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPackUpCommentCell.h; sourceTree = "<group>"; };
@@ -755,6 +771,11 @@
 		97BC05D72112B122001ED65A /* key-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "key-blue@2x.png"; sourceTree = "<group>"; };
 		97BC05D82112B122001ED65A /* key-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "key-pressed.png"; sourceTree = "<group>"; };
 		97BC05D92112B122001ED65A /* key@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "key@2x.png"; sourceTree = "<group>"; };
+		97BC3943223A8EF000DC4D67 /* CZMyPointsDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyPointsDetailController.h; sourceTree = "<group>"; };
+		97BC3944223A8EF000DC4D67 /* CZMyPointsDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyPointsDetailController.m; sourceTree = "<group>"; };
+		97BC3946223BB0F800DC4D67 /* CZAffirmPointController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAffirmPointController.h; sourceTree = "<group>"; };
+		97BC3947223BB0F800DC4D67 /* CZAffirmPointController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAffirmPointController.m; sourceTree = "<group>"; };
+		97BC3948223BB0F800DC4D67 /* CZAffirmPointController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAffirmPointController.xib; sourceTree = "<group>"; };
 		97BDB8472110072100966FF0 /* CZDChoicenessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZDChoicenessController.h; sourceTree = "<group>"; };
 		97BDB8482110072100966FF0 /* CZDChoicenessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZDChoicenessController.m; sourceTree = "<group>"; };
 		97BDB84A21100B8800966FF0 /* CZChoicenessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZChoicenessCell.h; sourceTree = "<group>"; };
@@ -1073,6 +1094,9 @@
 				97243A1221B5555C00EBFFCE /* CZEndLineView.xib */,
 				97705CBF2108250000485D64 /* CZOneController.h */,
 				97705CC02108250000485D64 /* CZOneController.m */,
+				977E82D6223CD3CA00C8C01B /* CZUpdataView.h */,
+				977E82D7223CD3CA00C8C01B /* CZUpdataView.m */,
+				977E82D9223CD3D600C8C01B /* CZUpdataView.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1081,6 +1105,7 @@
 			isa = PBXGroup;
 			children = (
 				9779CE8C2239362C0090303F /* CoinCenter-Main-主页 */,
+				977E82CD223C9B1B00C8C01B /* invitation-邀请 */,
 				9765649A21A58C89008A0293 /* PointList-积分明细 */,
 			);
 			path = "CoinCenter-极币中心";
@@ -1526,6 +1551,11 @@
 				972E41AE211450ED00BC751C /* CZMyPointsController.h */,
 				972E41AF211450ED00BC751C /* CZMyPointsController.m */,
 				972E41B1211455C500BC751C /* CZMyPointsController.xib */,
+				97BC3943223A8EF000DC4D67 /* CZMyPointsDetailController.h */,
+				97BC3944223A8EF000DC4D67 /* CZMyPointsDetailController.m */,
+				97BC3946223BB0F800DC4D67 /* CZAffirmPointController.h */,
+				97BC3947223BB0F800DC4D67 /* CZAffirmPointController.m */,
+				97BC3948223BB0F800DC4D67 /* CZAffirmPointController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2034,6 +2064,16 @@
 				9779CE8A2239264E0090303F /* CZTaskMainView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		977E82CD223C9B1B00C8C01B /* invitation-邀请 */ = {
+			isa = PBXGroup;
+			children = (
+				977E82CE223C9B4700C8C01B /* CZInvitationController.h */,
+				977E82CF223C9B4700C8C01B /* CZInvitationController.m */,
+				977E82D0223C9B4700C8C01B /* CZInvitationController.xib */,
+			);
+			path = "invitation-邀请";
 			sourceTree = "<group>";
 		};
 		9785778921A7DE4000E42B29 /* View */ = {
@@ -2794,6 +2834,8 @@
 				975DB211217AFF1100A062AB /* CZAlertViewTool.m */,
 				975DB213217B14FA00A062AB /* CZUserInfoTool.h */,
 				975DB214217B14FA00A062AB /* CZUserInfoTool.m */,
+				977E82D3223CA96600C8C01B /* CZGetJIBITool.h */,
+				977E82D4223CA96600C8C01B /* CZGetJIBITool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2933,6 +2975,7 @@
 				97FF6DD22117FAD800376435 /* backshadow.png in Resources */,
 				97BC05DE2112B122001ED65A /* keyboard.png in Resources */,
 				970D0B6E21ACE87000649FC2 /* AlibabaAuthSDK.bundle in Resources */,
+				977E82D2223C9B4700C8C01B /* CZInvitationController.xib in Resources */,
 				97BC05DD2112B122001ED65A /* key.png in Resources */,
 				97D8FCC82111796600D8ED8F /* CZMeArrow.plist in Resources */,
 				97ED11F3211582910003E0F7 /* CZAttentionCell.xib in Resources */,
@@ -2967,7 +3010,9 @@
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
 				97911051222F7F0200C2DE5B /* CZAddressCell.xib in Resources */,
 				97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */,
+				977E82DA223CD3D600C8C01B /* CZUpdataView.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
+				97BC394A223BB0F800DC4D67 /* CZAffirmPointController.xib in Resources */,
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
 				97BC05DC2112B122001ED65A /* key-blue.png in Resources */,
@@ -3031,6 +3076,7 @@
 				9723075A21AD50D50004C00C /* NSDictionary+CZExtension.m in Sources */,
 				97F0EC392125692B000FE1DC /* CZGuideTool.m in Sources */,
 				97798C7B212CF4430052CE94 /* SVIndefiniteAnimatedView.m in Sources */,
+				977E82D1223C9B4700C8C01B /* CZInvitationController.m in Sources */,
 				97C7FF38216DDDB50091DC07 /* UIScrollView+MJRefresh.m in Sources */,
 				97C7FF47216DDDB50091DC07 /* MJRefreshFooter.m in Sources */,
 				97705C59210716A300485D64 /* CZDiscoverController.m in Sources */,
@@ -3157,6 +3203,7 @@
 				97705C77210729BA00485D64 /* CZTextField.m in Sources */,
 				97C7FF07216DDDAB0091DC07 /* NSString+MJExtension.m in Sources */,
 				97705C53210716A300485D64 /* CZTabBarController.m in Sources */,
+				977E82D8223CD3CA00C8C01B /* CZUpdataView.m in Sources */,
 				9721CE0121E2FE82007F9208 /* CZCommodityDetailModel.m in Sources */,
 				975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */,
 				97705C6D2107172A00485D64 /* AFURLRequestSerialization.m in Sources */,
@@ -3173,6 +3220,7 @@
 				9785779021A80B4100E42B29 /* CZSubTitleButton.m in Sources */,
 				974F489121A3B5BE00E1ED1A /* CZAttentionDetailCell.m in Sources */,
 				97705C56210716A300485D64 /* CZMeController.m in Sources */,
+				977E82D5223CA96600C8C01B /* CZGetJIBITool.m in Sources */,
 				979B05D6210F0D270023292D /* CZAllCriticalController.m in Sources */,
 				975DB215217B14FA00A062AB /* CZUserInfoTool.m in Sources */,
 				975B85A4219FB84D00525198 /* CZDiscoverDetailModel.m in Sources */,
@@ -3188,6 +3236,7 @@
 				97ED11F2211582910003E0F7 /* CZAttentionCell.m in Sources */,
 				979110742231131400C2DE5B /* MOFSDatePicker.m in Sources */,
 				97C7FF3D216DDDB50091DC07 /* UIView+MJExtension.m in Sources */,
+				97BC3945223A8EF000DC4D67 /* CZMyPointsDetailController.m in Sources */,
 				97C7FF05216DDDAB0091DC07 /* NSObject+MJCoding.m in Sources */,
 				97CAE7C021194C5D00858749 /* CZMessageCell.m in Sources */,
 				97705C6A2107172A00485D64 /* AFURLResponseSerialization.m in Sources */,
@@ -3196,6 +3245,7 @@
 				97798CD9212D0FC90052CE94 /* SDWebImageWebPCoder.m in Sources */,
 				97798CC8212D0FC90052CE94 /* SDWebImageCompat.m in Sources */,
 				97911045222F6A2100C2DE5B /* CZMyWalletController.m in Sources */,
+				97BC3949223BB0F800DC4D67 /* CZAffirmPointController.m in Sources */,
 				975B85A1219FB12C00525198 /* CZDiscoverTitleModel.m in Sources */,
 				97FF6DF321184F5A00376435 /* CZSettingCell.m in Sources */,
 				97C7FF4E216DE0130091DC07 /* CZAttentionsModel.m in Sources */,

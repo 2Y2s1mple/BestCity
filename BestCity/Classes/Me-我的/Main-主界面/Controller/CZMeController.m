@@ -146,6 +146,15 @@
     _navImage.frame = CGRectMake(0, 0, SCR_WIDTH, 64);
     [self.view addSubview:_navImage];
     self.navImage.alpha = 0;
+//    UILabel *mytitle = [[UILabel alloc] init];
+//    mytitle.text = @"我的";
+//    mytitle.textColor = [UIColor whiteColor];
+//    mytitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+//    [self.navImage addSubview:mytitle];
+//    [mytitle sizeToFit];
+//    mytitle.center = CGPointMake(SCR_WIDTH / 2, 44);
+    
+    
     
     // 接收登录时候的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpUserInfo) name:loginChangeUserInfo object:nil];

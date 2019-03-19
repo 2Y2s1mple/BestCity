@@ -86,7 +86,6 @@ static NSString * const type = @"1";
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:tabbar];
             
         }];
-        
     }
     return _likeView;
 }

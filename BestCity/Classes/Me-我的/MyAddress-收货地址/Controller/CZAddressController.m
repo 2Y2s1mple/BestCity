@@ -18,10 +18,23 @@
 @property (nonatomic, strong) UITableView *tableView;
 /** <#注释#> */
 @property (nonatomic, strong) NSMutableArray *addressArray;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZAddressController
 #pragma mark - 懒加载
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 180;
+        self.noDataView.backgroundColor = [UIColor clearColor];
+    }
+    return _noDataView;
+}
+
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
@@ -68,8 +81,16 @@
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/address/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if (([result[@"code"] isEqual:@(0)])) {
+            if ([result[@"data"] count] > 0) {
+                // 删除noData图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 加载NnoData图片
+                [self.tableView addSubview:self.noDataView];
+                !self.delegate ? : [self.delegate addressUpdata:nil];
+                
+            }
             self.addressArray = [CZAddressModel objectArrayWithKeyValuesArray:result[@"data"]];
-            
             [self.tableView reloadData];
         } 
         [CZProgressHUD hideAfterDelay:0];
@@ -93,5 +114,12 @@
     return 136;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (![self.vc isKindOfClass:NSClassFromString(@"CZAffirmPointController")]) return; 
+    CZAddressModel *model = self.addressArray[indexPath.row];
+    !self.delegate ? : [self.delegate addressUpdata:model];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

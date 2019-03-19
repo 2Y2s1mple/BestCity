@@ -50,8 +50,8 @@
                         <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="摩飞便携式果汁机料理机榨汁机MR92…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f54-T2-w3E">
-                        <rect key="frame" x="118" y="48" width="231.5" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="摩飞便携式果汁机料理机榨汁机MR92…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f54-T2-w3E">
+                        <rect key="frame" x="118" y="48" width="346" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -69,8 +69,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCW-k4-wYH">
-                        <rect key="frame" x="447" y="77" width="17" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="452" y="80.5" width="12" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -115,6 +115,7 @@
                     <constraint firstItem="Pq7-vi-ve0" firstAttribute="top" secondItem="gxS-hi-ODq" secondAttribute="bottom" constant="17" id="bK5-l0-AC7"/>
                     <constraint firstItem="UO1-kG-7Xk" firstAttribute="top" secondItem="GpF-bK-oB9" secondAttribute="bottom" constant="15" id="bfW-Rx-elG"/>
                     <constraint firstItem="gxS-hi-ODq" firstAttribute="top" secondItem="Elx-AE-yt1" secondAttribute="bottom" constant="17" id="dgs-5g-B7C"/>
+                    <constraint firstAttribute="trailing" secondItem="f54-T2-w3E" secondAttribute="trailing" constant="14" id="ifi-aE-wBG"/>
                     <constraint firstAttribute="trailing" secondItem="Pq7-vi-ve0" secondAttribute="trailing" id="iza-R7-N9Y"/>
                     <constraint firstItem="f54-T2-w3E" firstAttribute="top" secondItem="gxS-hi-ODq" secondAttribute="top" id="k3F-gC-JYF"/>
                     <constraint firstItem="UO1-kG-7Xk" firstAttribute="leading" secondItem="GpF-bK-oB9" secondAttribute="leading" id="qtD-6m-oMM"/>
@@ -134,7 +135,7 @@
                 <outlet property="statuslabel" destination="FwG-GN-GJw" id="NiB-gK-oeS"/>
                 <outlet property="totalLabel" destination="OCW-k4-wYH" id="W5X-sq-7ij"/>
             </connections>
-            <point key="canvasLocation" x="-446" y="162"/>
+            <point key="canvasLocation" x="-853" y="154"/>
         </tableViewCell>
     </objects>
 </document>

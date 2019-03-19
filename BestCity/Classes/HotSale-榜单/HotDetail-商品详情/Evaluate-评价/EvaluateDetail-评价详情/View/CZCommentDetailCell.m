@@ -147,13 +147,14 @@
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
-            [CZProgressHUD showProgressHUDWithText:@"点赞成功"];
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             self.contentDic[@"vote"] = @(1);
+            
         } else {
             [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
         }
         //隐藏菊花
-        [CZProgressHUD hideAfterDelay:1];
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
 }
 @end

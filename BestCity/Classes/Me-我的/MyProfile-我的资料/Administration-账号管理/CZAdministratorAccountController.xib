@@ -86,8 +86,8 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wechat-big" translatesAutoresizingMaskIntoConstraints="NO" id="Zse-HI-9CH">
                             <rect key="frame" x="14" y="12" width="42" height="42"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJC-bj-y7D">
-                            <rect key="frame" x="73" y="24" width="50" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJC-bj-y7D">
+                            <rect key="frame" x="73" y="24" width="31" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                 <constraint firstAttribute="trailing" secondItem="tHo-AF-Un8" secondAttribute="trailing" id="lCG-fs-nfH"/>
                 <constraint firstAttribute="trailing" secondItem="ADb-e2-Wtj" secondAttribute="trailing" id="qmY-Tk-muz"/>
             </constraints>
-            <point key="canvasLocation" x="-562" y="-67"/>
+            <point key="canvasLocation" x="-778" y="-73"/>
         </view>
     </objects>
     <resources>

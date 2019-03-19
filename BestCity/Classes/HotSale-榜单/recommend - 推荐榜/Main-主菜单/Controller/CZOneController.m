@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "CZSubButton.h"
 #import "CZScollerImageTool.h"
+#import "CZUpdataView.h"
 
 @interface CZOneController ()
 /** 没有数据图片 */
@@ -79,7 +80,7 @@
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @(0);
-    param[@"clientVersionCode"] = @"1.00";
+    param[@"clientVersionCode"] = @"1.2.0";
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSNumber *appVersion1 = result[@"data"][@"open"];
@@ -87,28 +88,17 @@
             //有新版本
             [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
             // 判断是否更新
-            [self isNeedUpdate];
+            if (![result[@"data"][@"needUpdate"] isEqual:@(0)]) {
+                CZUpdataView *backView = [CZUpdataView updataView];
+                backView.versionMessage = result[@"data"];
+                backView.frame = [UIScreen mainScreen].bounds;
+                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                [[UIApplication sharedApplication].keyWindow addSubview: backView];
+            }
         }
     } failure:^(NSError *error) {}];
     // 创建刷新控件
     [self setupRefresh];
-}
-
-- (void)isNeedUpdate
-{
-    NSDictionary *versionContrl = [CZSaveTool objectForKey:requiredVersionCode];
-    if (![versionContrl[@"needUpdate"] isEqual:@(0)]) {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"发现新版本%@",versionContrl[@"versionName"]] message:versionContrl[@"content"] preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
-        UIAlertAction * update = [UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //跳转到App Store
-            NSString *urlStr = [NSString stringWithFormat:@"%@",versionContrl[@"downloadUrl"]];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-        }];
-        [alert addAction:ok];
-        [alert addAction:update];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
 }
 
 - (void)setupRefresh

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)noSelectView;
 + (instancetype)noAttentionView;
 + (instancetype)noFansView;
++ (instancetype)noOrderView;
 @end
 
 NS_ASSUME_NONNULL_END

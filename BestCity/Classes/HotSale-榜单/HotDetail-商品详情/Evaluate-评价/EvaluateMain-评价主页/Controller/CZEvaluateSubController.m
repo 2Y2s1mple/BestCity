@@ -242,14 +242,14 @@
     //获取详情数据
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
+        if ([result[@"code"] isEqual:@(0)]) {
             [self getDataSource];
             //隐藏菊花
-            [CZProgressHUD hideAfterDelay:0];
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"评论失败"];
-            [CZProgressHUD hideAfterDelay:1];
         }
+        [CZProgressHUD hideAfterDelay:1.5];
         
     } failure:^(NSError *error) {}];
 }
@@ -379,13 +379,10 @@
 
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqualToNumber:@(0)]) {
-            [CZProgressHUD showProgressHUDWithText:@"点赞成功"];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
-        }
+        if ([result[@"code"] isEqualToNumber:@(0)]) {}
+        [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         //隐藏菊花
-        [CZProgressHUD hideAfterDelay:1];
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
 }
 

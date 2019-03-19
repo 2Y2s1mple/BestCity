@@ -136,11 +136,12 @@
     param[@"toUserId"] = @(0);
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/comment/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
+        if ([result[@"code"] isEqual:@(0)]) {
             if (![param[@"parentId"]  isEqual: @(0)]) {
                 // 获取子评论
                 NSMutableArray *subComment = self.originalData[self.currentCellIndex][@"children"];
-                NSMutableDictionary *comment = [NSMutableDictionary dictionaryWithObject:self.textViewTool.textView.text forKey:@"content"];
+                NSMutableDictionary *comment = [NSMutableDictionary dictionary];
+                comment[@"content"] = self.textViewTool.textView.text; 
                 comment[@"userNickname"] = JPUSERINFO[@"nickname"]; 
                 [subComment addObject:comment];
                 // 处理数据
@@ -149,13 +150,13 @@
             } else {
                 [self getDataSource];
             }
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             self.textViewTool.textView.text = nil;
             self.textViewTool.placeholderLabel.hidden = NO;
-            
         } else {
             [CZProgressHUD showProgressHUDWithText:@"评论失败"];
-            [CZProgressHUD hideAfterDelay:1.5];
         }
+        [CZProgressHUD hideAfterDelay:1.5];
         
         
     } failure:^(NSError *error) {}];

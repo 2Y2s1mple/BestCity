@@ -19,7 +19,6 @@
 #ifdef DEBUG
 //极品城URL
 #define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/"
-
 #else
 //极品城URL
 #define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/"
@@ -60,6 +59,8 @@
 #define CZGlobalGray CZRGBColor(172, 172, 172)
 /** 红色 */
 #define CZREDCOLOR CZRGBColor(227, 20, 54)
+/** 红色 */
+#define CZBLACKCOLOR CZRGBColor(21, 21, 21)
 /** 按钮灰 */
 #define CZBTNGRAY CZRGBColor(216, 216, 216)
 
@@ -103,7 +104,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZLoginController.h"
 #import "CZNoDataView.h" // 没有数据的view
 #import "CZSaveTool.h" // 自定义的储存
-
+#import "CZGetJIBITool.h" // 获得极币
 
 /************************************************************/
 #endif 

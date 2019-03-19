@@ -121,13 +121,12 @@
     
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"点赞成功"]) {
+        if ([result[@"code"] isEqual:@(0)]) {
             self.likeBtn.selected = YES;
             self.voteCount = [NSString stringWithFormat:@"%ld", ([self.voteCount integerValue] + 1)];
             [self snapStyle];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"点赞失败"];
-        }
+        } 
+        [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         self.imageBackView.userInteractionEnabled = YES;
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:1];

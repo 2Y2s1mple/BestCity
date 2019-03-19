@@ -9,10 +9,8 @@
 #import "CZMyPointsController.h"
 #import "CZNavigationView.h"
 #import "CZMyPointsCell.h"
-#import "CZMyPointDetailController.h"
-#import "TSLWebViewController.h"
 #import "GXNetTool.h"
-#import "CZUserInfoTool.h"
+#import "CZMyPointsDetailController.h"
 
 @interface CZMyPointsController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *lineView;
@@ -25,41 +23,29 @@
 @end
 
 @implementation CZMyPointsController
-#pragma mark - 跳转到积分明细
-- (IBAction)pushPointDetail:(id)sender {
-    CZMyPointDetailController *vc = [[CZMyPointDetailController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 static NSString * const ID = @"myPointCollectionCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-        NSString *point = [[NSUserDefaults standardUserDefaults] objectForKey:@"point"];
-        self.pointNum.text = [NSString stringWithFormat:@"%@", point];
-    }];
-    // 积分
-    
-    
     // 获取数据
     [self getDataSource];
     
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我的积分" rightBtnTitle:@"积分规则" rightBtnAction:^{
-        TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:POINTSRULE_URL]];
-        webVc.titleName = @"积分规则";
-        [self.navigationController pushViewController:webVc animated:YES];
-    } navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"极币商城" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
+    //导航条
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
+    line.backgroundColor = CZGlobalLightGray;
+    [self.view addSubview:line];
+    
     [self.view addSubview:navigationView];
     
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake((SCR_WIDTH - 30) / 2, 260);
-    layout.minimumInteritemSpacing = 10;
-    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    layout.itemSize = CGSizeMake((SCR_WIDTH - 48) / 2, 180);
+    layout.minimumInteritemSpacing = 20;
+    layout.sectionInset = UIEdgeInsetsMake(18, 14, 10, 14);
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CZGetY(self.lineView), SCR_WIDTH, SCR_HEIGHT - CZGetY(self.lineView)) collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67.7, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 24 : 0) - 67.7) collectionViewLayout:layout];
     [self.view addSubview:collectionView];
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.delegate = self;
@@ -85,28 +71,30 @@ static NSString * const ID = @"myPointCollectionCell";
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [CZProgressHUD showProgressHUDWithText:@"积分不足, 无法兑换!"];
+    CZMyPointsDetailController *vc = [[CZMyPointsDetailController alloc] init];
+    vc.pointId = self.dataSource[indexPath.row][@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 获取数据
 - (void)getDataSource
 {
-//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//    param[@"page"] = @(0);
-//    [CZProgressHUD showProgressHUDWithText:nil];
-//    //获取详情数据
-//    [GXNetTool GetNetWithUrl:[SERVER_URL stringByAppendingPathComponent:@"qualityshop-api/goodsPoint/selectList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-//        if ([result[@"msg"] isEqualToString:@"success"]) {
-//            self.dataSource = result[@"list"];
-//            [self.collectionView reloadData];
-//        }
-//        //隐藏菊花
-//        [CZProgressHUD hideAfterDelay:0];
-//        
-//    } failure:^(NSError *error) {
-//        //隐藏菊花
-//        [CZProgressHUD hideAfterDelay:0];
-//    }];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"page"] = @(0);
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/point/getGoodslist"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            self.dataSource = result[@"data"];
+            [self.collectionView reloadData];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+        
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
 }
 
 

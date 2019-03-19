@@ -225,8 +225,10 @@
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
-    
     [self presentViewController:alert animated:YES completion:nil];
+    
+    
+    
 }
 
 #pragma mark -<UIImagePickerControllerDelegate> 拍照完成回调

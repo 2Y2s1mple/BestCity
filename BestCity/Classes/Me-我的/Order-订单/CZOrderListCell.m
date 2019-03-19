@@ -65,6 +65,9 @@
 - (void)setModel:(CZOrderModel *)model
 {
     _model = model;
+    self.sendTimelabel.hidden = NO;
+    self.sendTimelabel.text = [NSString stringWithFormat:@"发件时间：%@", model.sendTime];
+    
     NSString *statuslabel;
     switch ([model.status integerValue]) {
         case 2:
@@ -72,9 +75,11 @@
             break;
         case 1:
             statuslabel = @"待发货";
+            self.sendTimelabel.hidden = YES;
             break;
         case 3:
             statuslabel = @"已完成";
+            self.sendTimelabel.text = [NSString stringWithFormat:@"发件时间：%@", model.finishTime];
             break;
         default:
             break;
@@ -83,7 +88,6 @@
     self.statuslabel.text = statuslabel;
     self.goodsName.text = model.goodsName;
     self.pointLabel.text = [NSString stringWithFormat:@"实付:%@极币", model.point];
-    self.sendTimelabel.text = [NSString stringWithFormat:@"发件时间：%@", model.sendTime];
     self.totalLabel.text = [NSString stringWithFormat:@"x%@", model.total];
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.img]];
     

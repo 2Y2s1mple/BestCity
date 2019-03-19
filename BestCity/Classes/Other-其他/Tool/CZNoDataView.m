@@ -12,7 +12,7 @@
 
 + (instancetype)noDataView
 {
-    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0] ;
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0];
 }
 
 + (instancetype)noSelectView
@@ -28,5 +28,10 @@
 + (instancetype)noFansView
 {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][3];
+}
+
++ (instancetype)noOrderView
+{
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][4];
 }
 @end

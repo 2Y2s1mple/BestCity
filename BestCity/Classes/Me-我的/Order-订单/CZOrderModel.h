@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *point;
 /** 发货时间 */
 @property (nonatomic, strong) NSString *sendTime;
+/** 完成时间 */
+@property (nonatomic, strong) NSString *finishTime;
 /** 数量 */
 @property (nonatomic, strong) NSString *total;
 /** 图片 */

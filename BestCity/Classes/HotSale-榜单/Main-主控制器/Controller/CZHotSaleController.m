@@ -34,14 +34,11 @@
 - (CZHotSaleController *(^)(void))obtainTtitles
 {
     return ^ {
-        
         [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
             return @{
                      @"children" : @"CZHotSubTilteModel"
                      };
         }];
-        
-        
         //获取数据
         [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/goodsCategoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {

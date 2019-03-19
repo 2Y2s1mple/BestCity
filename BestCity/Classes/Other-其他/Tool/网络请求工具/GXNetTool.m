@@ -164,7 +164,7 @@
         //隐藏菊花
 //        [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure(error);
+        !failure ? : failure(error);
         NSLog(@"%@", error);
         [CZProgressHUD showProgressHUDWithText:@"网络出错"];
         [CZProgressHUD hideAfterDelay:2];

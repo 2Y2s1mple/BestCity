@@ -16,10 +16,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 /** 积分数 */
 @property (nonatomic, weak) IBOutlet UILabel *pointLabel;
-/** 钱数 */
-@property (nonatomic, weak) IBOutlet UILabel *priceLabel;
-/** 去兑换 */
-@property (nonatomic, weak) IBOutlet UIButton *bugButton;
+
 @end
 
 @implementation CZMyPointsCell
@@ -30,22 +27,17 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.bugButton.layer.borderWidth = 1;
-    self.bugButton.layer.borderColor = CZREDCOLOR.CGColor;
-    self.bugButton.layer.cornerRadius = 3.5;
-    self.bugButton.layer.masksToBounds = YES;
-    
     self.pointLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
 }
 
 - (void)setDicData:(NSDictionary *)dicData
 {
     _dicData = dicData;
-    [self.bigImage sd_setImageWithURL:[NSURL URLWithString:dicData[@"rankGoodImg"]] placeholderImage:[UIImage imageNamed:@"testImage6"]];
+    [self.bigImage sd_setImageWithURL:[NSURL URLWithString:dicData[@"img"]] placeholderImage:[UIImage imageNamed:@"testImage6"]];
     self.titleLabel.text = dicData[@"goodsName"];
-    self.pointLabel.text = [NSString stringWithFormat:@"%@积分", dicData[@"goodsPoint"]];
-    NSString *otherPrice = [NSString stringWithFormat:@"¥%0.2f", [dicData[@"otherPrice"] floatValue]];
-    self.priceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
+    self.pointLabel.text = [NSString stringWithFormat:@"%@极币", dicData[@"exchangePoint"]];
+//    NSString *otherPrice = [NSString stringWithFormat:@"¥%0.2f", [dicData[@"otherPrice"] floatValue]];
+//    self.priceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
 }
 
 @end

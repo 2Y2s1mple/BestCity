@@ -85,10 +85,6 @@
 
 - (void)action:(UITapGestureRecognizer *)tap
 {
-    
-   
-    
-    
     UMSocialPlatformType type = UMSocialPlatformType_UnKnown;//未知的
     switch (tap.view.tag - PLACEHOLDERTAG) {
         case 0:

@@ -18,6 +18,11 @@
 
 @implementation CZEvaluationController
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self obtainTtitles];
+}
+
 - (void)obtainTtitles
 {
     //获取数据

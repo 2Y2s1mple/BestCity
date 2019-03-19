@@ -7,6 +7,8 @@
 //
 
 #import "CZTaskView.h"
+#import "CZInvitationController.h"
+
 @interface CZTaskView ()
 /** 详情 */
 @property (nonatomic, strong) UILabel *contentLabel;
@@ -36,9 +38,38 @@
     itemTitle.centerY = self.height / 2;
     [self addSubview:itemTitle];
     
-    // 按钮 1首页，2发现，3评测，4邀请页面，5.认证页面
+    // 按钮 1邀请好友，2个人认证，3企业认证，4点赞，5分享内容，6阅读文章，7评论文章，8发文奖励）
+    NSString *btnTitle;
+    switch ([self.taskData[@"type"] integerValue]) {
+        case 1:
+            btnTitle = @"立即邀请";
+            break;
+        case 2:
+            btnTitle = @"立即认证";
+            break;
+        case 3:
+            btnTitle = @"立即认证";
+            break;
+        case 4:
+            btnTitle = @"立即点赞";
+            break;
+        case 5:
+            btnTitle = @"立即分享";
+            break;
+        case 6:
+            btnTitle = @"立即阅读";
+            break;
+        case 7:
+            btnTitle = @"立即评论";
+            break;
+        case 8:
+            btnTitle = @"发文奖励";
+            break;
+        default:
+            break;
+    }
     UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [itemBtn setTitle:@"立即邀请" forState:UIControlStateNormal];
+    [itemBtn setTitle:btnTitle forState:UIControlStateNormal];
     [itemBtn setTitleColor:UIColorFromRGB(0xFFFF533A) forState:UIControlStateNormal];
     itemBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
     itemBtn.width = 79;
@@ -49,6 +80,7 @@
     itemBtn.layer.masksToBounds = YES;
     itemBtn.centerY = itemTitle.centerY;
     itemBtn.x = self.width - 49 - itemBtn.width;
+    [itemBtn addTarget:self action:@selector(itemBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:itemBtn];
     
     // 上下尖号按钮
@@ -103,6 +135,54 @@
     }
     sender.selected = !sender.selected;
     !self.delegate ? :[self.delegate updataTaskView:self];    
+}
+
+
+- (void)itemBtnAction:(UIButton *)sender
+{
+//    1首页，2发现，3评测，4邀请页面，5.认证页面
+    switch ([self.taskData[@"location"] integerValue]) {
+        case 1:
+        {
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabbar.selectedIndex = 0;
+            break;
+        }
+        case 2:
+        {
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabbar.selectedIndex = 1;
+            break;
+        }
+        case 3:
+        {
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabbar.selectedIndex = 2;
+            break;
+        }
+        case 4:
+        {
+            CZInvitationController *vc = [[CZInvitationController alloc] init];
+             [[self viewController].navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 5:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
 }
 
 @end

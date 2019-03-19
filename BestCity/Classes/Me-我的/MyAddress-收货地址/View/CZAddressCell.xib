@@ -77,9 +77,13 @@
                             <constraint firstAttribute="height" constant="5" id="7tA-6t-zR8"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDq-Pf-Gyv">
-                        <rect key="frame" x="400" y="66" width="20" height="20"/>
-                        <state key="normal" backgroundImage="delet"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDq-Pf-Gyv">
+                        <rect key="frame" x="370" y="51" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Wyj-FN-cmJ"/>
+                            <constraint firstAttribute="height" constant="50" id="r80-FR-1A8"/>
+                        </constraints>
+                        <state key="normal" image="delet"/>
                         <connections>
                             <action selector="delete" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hDx-Ud-fbo"/>
                         </connections>
@@ -117,7 +121,7 @@
                 <outlet property="nameLabel" destination="8ud-1O-NtZ" id="gUp-Aa-lM3"/>
                 <outlet property="numberLabel" destination="LHr-Sn-wf5" id="2jQ-Eu-U1d"/>
             </connections>
-            <point key="canvasLocation" x="637" y="-63"/>
+            <point key="canvasLocation" x="314" y="-121"/>
         </tableViewCell>
     </objects>
     <resources>

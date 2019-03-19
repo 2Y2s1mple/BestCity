@@ -116,7 +116,7 @@
 {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
-    CZAddressController *vc = nav.topViewController;
+    CZAddressController *vc = (CZAddressController *)nav.topViewController;
     [vc getDataSource];
 }
 

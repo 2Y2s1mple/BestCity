@@ -44,7 +44,12 @@
 /** 名字 */
 @property (nonatomic, strong) UILabel *nameLabel;
 
+/** <#注释#> */
+@property (nonatomic, copy) dispatch_block_t block;
+
 @end
+
+
 
 @implementation CZDChoiceDetailController
 /** 分享控件高度 */
@@ -216,6 +221,17 @@ static CGFloat const likeAndShareHeight = 49;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openBoxInspectWebViewHeightChange:) name:OpenBoxInspectWebHeightKey object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attentionChange:) name:@"discoverAttentionChangeNOtification" object:nil];
+    
+    self.block = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+        [CZGetJIBITool getJiBiWitType:@(6)];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), self.block);
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    dispatch_block_cancel(self.block);
 }
 
 #pragma mark - 监听关注的变化
@@ -271,7 +287,8 @@ static CGFloat const likeAndShareHeight = 49;
 }
 
 
-#pragma mark - 取消关注
+#pragma mark - 事件
+// 取消关注
 - (void)deleteAttention
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -295,7 +312,7 @@ static CGFloat const likeAndShareHeight = 49;
     }];
 }
 
-#pragma mark - 新增关注
+//新增关注
 - (void)addAttention
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];

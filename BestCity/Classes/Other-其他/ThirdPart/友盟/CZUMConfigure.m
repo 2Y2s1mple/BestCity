@@ -9,6 +9,7 @@
 #import "CZUMConfigure.h"
 #import <UMCommon/UMCommon.h>
 #import <UShareUI/UShareUI.h>
+#import "CZGetJIBITool.h"
 
 @implementation CZUMConfigure
 static id _instance;
@@ -66,9 +67,11 @@ static id _instance;
         if (error) {
             NSLog(@"************Share fail with error %@*********",error);
         }else{
-            NSLog(@"response data is %@",data);
-            
+            UMSocialShareResponse *dataResponse = data;
+            NSLog(@"response data is %@", dataResponse.message);
+            [CZGetJIBITool getJiBiWitType:@(5)];
         }
+        
     }];
 }
 
