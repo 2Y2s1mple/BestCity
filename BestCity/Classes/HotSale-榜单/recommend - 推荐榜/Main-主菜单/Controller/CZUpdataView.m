@@ -20,7 +20,6 @@
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0] ;
 }
 
-
 /** <#注释#> */
 - (IBAction)gotoUpdata
 {

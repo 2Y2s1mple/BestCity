@@ -120,8 +120,7 @@
     CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(10, 10, SCR_WIDTH - 20, 157)];
     [backView addSubview:imageView];
     imageView.imgList = self.imageUrlList;
-    [backView addSubview:imageView];
-    return backView;
+    [backView addSubview:imageView];     return backView;
 }
 
 

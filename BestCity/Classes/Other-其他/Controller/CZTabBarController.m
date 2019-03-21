@@ -10,6 +10,7 @@
 #import "CZHotSaleController.h"
 #import "CZDiscoverController.h"
 #import "CZEvaluationController.h"
+#import "CZTrialMainController.h"
 #import "CZMeController.h"
 #import "CZNavigationController.h"
 #import "CZLoginController.h"
@@ -46,16 +47,17 @@
     [self setupWithController:[[CZHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
     [self setupWithController:[[CZDiscoverController alloc] init] title:@"发现" image:@"tab-discover-nor" selectedImage:@"tab-discover-sel"];
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
+    [self setupWithController:[[CZTrialMainController alloc] init] title:@"试用" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
     
-    self.selectedIndex = 0;
+    self.selectedIndex = 3;
     self.tabBar.clipsToBounds = YES;
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
-    if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 3) {
+    if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 4) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
     } else {}
@@ -64,7 +66,7 @@
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
-    if (![vc isKindOfClass:[CZMeController class]]) {
+    if (![vc isKindOfClass:[CZMeController class]] && ![vc isKindOfClass:[CZTrialMainController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;
         hotVc.menuViewStyle = WMMenuViewStyleLine;

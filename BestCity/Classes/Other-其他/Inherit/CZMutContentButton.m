@@ -15,10 +15,8 @@
     [super layoutSubviews];
 //    [self setImageEdgeInsets:UIEdgeInsetsMake(0, self.titleLabel.frame.size.width + 20, 0, 0)];
 //    [self setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0,(self.imageView.frame.size.width))];
-    
-    self.imageView.x = self.titleLabel.width + 10;
     self.titleLabel.x = 0;
-    
+    self.imageView.x = self.titleLabel.width + 10;
 }
 
 @end
