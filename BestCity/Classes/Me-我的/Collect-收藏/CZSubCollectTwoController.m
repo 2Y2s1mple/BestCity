@@ -75,13 +75,7 @@
     self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    if (self.type == CZTypeDiscover) {
-        param[@"type"] = @(3); // 发现
-    } else if (self.type == CZTypeEvaluation) {
-        param[@"type"] = @(2); // 测评
-    } else {
-        param[@"type"] = @(4);
-    }
+    param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.type];
     
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -115,13 +109,8 @@
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    if (self.type == CZTypeDiscover) {
-        param[@"type"] = @(3); // 发现
-    } else if (self.type == CZTypeEvaluation) {
-        param[@"type"] = @(2); // 测评
-    } else {
-        param[@"type"] = @(4);
-    }
+    param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.type];
+   
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
@@ -157,7 +146,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
-    if (self.type == CZTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         static NSString *ID = @"choiceCell";
         CZChoicenessCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
         if (cell == nil) {
@@ -186,11 +175,7 @@
     } else {
         CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        if (self.type == CZTypeDiscover) {        
-            vc.detailType = CZDChoiceDetailControllerDiscover;
-        } else {
-            vc.detailType = CZDChoiceDetailControllerEvaluation;
-        }
+        vc.detailType = self.type;
         vc.findgoodsId = model.articleId;
         [self.navigationController pushViewController:vc animated:YES];
     }

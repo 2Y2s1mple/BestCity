@@ -125,7 +125,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if (self.goodsId) {
         param[@"targetId"] = self.goodsId;
-        param[@"type"] = @"1"; // 1商品 2评测 3发现
+        param[@"type"] = self.type; // 1商品 2评测 3发现
     }
     param[@"content"] = self.textViewTool.textView.text;
     if (parentId) {

@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef NS_ENUM(NSInteger, CZDChoicenessControllerType) {
-    CZDChoicenessControllerTypeDiscover,
-    CZDChoicenessControllerTypeEvaluation,
-    CZDChoicenessControllerTypeTry,
-};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZSearchSubDetailTwoController : UIViewController
 /** 搜索文字 */
 @property (nonatomic, strong) NSString *textSearch;
 /** 类型 */
-@property (nonatomic, assign) CZDChoicenessControllerType type;
+@property (nonatomic, assign) CZJIPINModuleType type;
 @end
 
 NS_ASSUME_NONNULL_END

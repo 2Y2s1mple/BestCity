@@ -75,15 +75,8 @@ static NSString * const type = @"1";
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
-            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-            if ([JPTOKEN length] <= 0)
-            {
-                CZLoginController *vc = [CZLoginController shareLoginController];
-                [tabbar presentViewController:vc animated:NO completion:nil];
-                return;
-            }
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:tabbar];
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
             
         }];
     }
@@ -93,7 +86,7 @@ static NSString * const type = @"1";
 - (CZRecommendNav *)nav
 {
     if (_nav == nil) {
-        self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:CZRecommendNavDefault];
+        self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:CZJIPINModuleHotSale];
         self.nav.type = @"1"; /** 类型: 1商品，2评测, 3发现，4试用 */
         self.nav.projectId = self.goodsId;
         self.nav.delegate = self;

@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef NS_ENUM(NSInteger, CZDChoiceDetailControllerType) {
-    CZDChoiceDetailControllerDiscover,
-    CZDChoiceDetailControllerEvaluation,
-};
+
 @interface CZDChoiceDetailController : UIViewController
 /** Id */
 @property (nonatomic, strong) NSString *findgoodsId;
 /** 详情的类型 */
-@property (nonatomic, assign)  CZDChoiceDetailControllerType detailType;
+@property (nonatomic, assign) CZJIPINModuleType detailType;
 
 @end

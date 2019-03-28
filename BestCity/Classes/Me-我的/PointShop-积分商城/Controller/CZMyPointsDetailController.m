@@ -27,7 +27,7 @@
 /** 记录偏移量 */
 @property (nonatomic, assign) CGFloat recordOffsetY;
 /** <#注释#> */
-@property (nonatomic, strong) CZNavigationView *navigationView;
+@property (nonatomic, strong) UIView *navigationView;
 @end
 
 static CGFloat const likeAndShareHeight = 49;
@@ -37,7 +37,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? -44 : -20), SCR_WIDTH, SCR_HEIGHT - likeAndShareHeight - (IsiPhoneX ? -44 : -20))];
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? -44 : -20), SCR_WIDTH, SCR_HEIGHT - likeAndShareHeight - (IsiPhoneX ? -44 : -20) - (IsiPhoneX ? 34 : 0))];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }
@@ -69,7 +69,7 @@ static CGFloat const likeAndShareHeight = 49;
         [_buyBtn setBackgroundColor:CZREDCOLOR];
         [_buyBtn addTarget:self action:@selector(buyBtnAction) forControlEvents:UIControlEventTouchUpInside];
         _buyBtn.x = 0;
-        _buyBtn.y = SCR_HEIGHT - likeAndShareHeight;
+        _buyBtn.y = SCR_HEIGHT - likeAndShareHeight - (IsiPhoneX ? 34 : 0);
         _buyBtn.width = SCR_WIDTH;
         _buyBtn.height = likeAndShareHeight;
     }
@@ -98,11 +98,15 @@ static CGFloat const likeAndShareHeight = 49;
     [self.view addSubview:self.buyBtn];
     
     //导航条
+    UIView *navigationBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67 + (IsiPhoneX ? 24 : 0))];
+    navigationBackView.backgroundColor = [UIColor whiteColor];
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"商品详情" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
-    self.navigationView = navigationView;
-    [self.view addSubview:navigationView];
+    [navigationBackView addSubview:navigationView];
+    [self.view addSubview:navigationBackView];
+    self.navigationView = navigationBackView;
     self.navigationView.hidden = YES;
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

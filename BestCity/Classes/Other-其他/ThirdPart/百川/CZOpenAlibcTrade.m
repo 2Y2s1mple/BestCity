@@ -14,6 +14,20 @@
 #pragma mark - 跳转到淘宝
 + (void)openAlibcTradeWithUrlString:(NSString *)urlStr parentController:(UIViewController *)parentController
 {
+    
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    
+    if ([parentController isKindOfClass:[UIViewController class]]) {
+        parentController = tabbar;
+    }
+        
+
 //    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"taobao://"]]) {
 //        [CZProgressHUD showProgressHUDWithText:@"没有安装淘宝客户端"];
 //        [CZProgressHUD hideAfterDelay:1.5];

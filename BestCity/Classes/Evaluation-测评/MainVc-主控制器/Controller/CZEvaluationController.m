@@ -63,7 +63,7 @@
         [imageList addObject:dic[@"img"]];
     }
     CZDChoicenessController *vc = [[CZDChoicenessController alloc] init];
-    vc.type = CZDChoicenessControllerTypeEvaluation;
+    vc.type = CZJIPINModuleEvaluation;
     vc.titleID = model.categoryId;
     vc.imageUrlList = imageList;
     return vc;        

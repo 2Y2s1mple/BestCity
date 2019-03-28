@@ -21,3 +21,5 @@ NSString * const requiredVersionCode = @"requiredVersionCode";
 NSString * const collectNotification = @"collectNotification";
 
 BOOL appVersion = YES;
+
+

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZTrailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZTrialMainCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+/** <#注释#> */
+@property (nonatomic, strong) CZTrailModel *trailModel;
 @end
 
 NS_ASSUME_NONNULL_END

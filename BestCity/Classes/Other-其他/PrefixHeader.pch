@@ -59,7 +59,7 @@
 #define CZGlobalGray CZRGBColor(172, 172, 172)
 /** 红色 */
 #define CZREDCOLOR CZRGBColor(227, 20, 54)
-/** 红色 */
+/** 全局黑色 */
 #define CZBLACKCOLOR CZRGBColor(21, 21, 21)
 /** 按钮灰 */
 #define CZBTNGRAY CZRGBColor(216, 216, 216)
@@ -72,6 +72,7 @@
 #define SCR_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define IMAGE_NAMED(image) [UIImage imageNamed:image]
 #define IsiPhoneX (((int)((SCR_HEIGHT / SCR_WIDTH) * 100) == 216) ? YES : NO)
+#define NavViewMaxY ((IsiPhoneX ? 24 : 0) + 67.7)
 
 //首页滚动视图的标题尺寸
 #define HOTTitleY 80
@@ -105,6 +106,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZNoDataView.h" // 没有数据的view
 #import "CZSaveTool.h" // 自定义的储存
 #import "CZGetJIBITool.h" // 获得极币
+#import "CZJIPINSynthesisTool.h" //综合工具
 
 /************************************************************/
 #endif 

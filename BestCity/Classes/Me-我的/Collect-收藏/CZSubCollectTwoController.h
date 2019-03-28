@@ -8,17 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, CZSubCollectTwoControllerType) {
-    CZTypeDiscover,
-    CZTypeEvaluation,
-    CZTypeTryout,
-};
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZSubCollectTwoController : UIViewController
 /** 类型 */
-@property (nonatomic, assign) CZSubCollectTwoControllerType type; // 
+@property (nonatomic, assign) CZJIPINModuleType type; // 
 @end
 
 NS_ASSUME_NONNULL_END

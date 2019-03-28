@@ -15,3 +15,12 @@ UIKIT_EXTERN NSString * const requiredVersionCode;
 UIKIT_EXTERN BOOL appVersion;
 /** 收藏通知的KEY */
 UIKIT_EXTERN NSString * const collectNotification;
+
+typedef NS_ENUM(NSInteger, CZJIPINModuleType){
+    CZJIPINModuleHotSale,
+    CZJIPINModuleDiscover,
+    CZJIPINModuleEvaluation,
+    CZJIPINModuleTrail,
+    CZJIPINModuleTrailReport,
+    CZJIPINModuleMe,
+};

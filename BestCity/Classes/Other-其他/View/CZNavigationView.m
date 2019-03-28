@@ -86,10 +86,16 @@
     } else {
         // 隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-        UIView *view = [self superview];
-        UIViewController *vc = (UIViewController *)[view nextResponder];
-        [vc dismissViewControllerAnimated:YES completion:nil];    
-        [vc.navigationController popViewControllerAnimated:YES];
+        
+        for (UIView *next = [self superview]; next; next = next.superview) {
+            UIResponder *nextResponder = [next nextResponder];
+            if ([nextResponder isKindOfClass:[UIViewController class]]) {
+                UIViewController *vc = (UIViewController *)nextResponder;
+                [vc dismissViewControllerAnimated:YES completion:nil];    
+                [vc.navigationController popViewControllerAnimated:YES];
+                return;
+            }
+        }
     }
 }
 

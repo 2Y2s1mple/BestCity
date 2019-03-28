@@ -270,7 +270,6 @@
         UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
         [self.navigationController pushViewController:vc animated:YES]; 
     };
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

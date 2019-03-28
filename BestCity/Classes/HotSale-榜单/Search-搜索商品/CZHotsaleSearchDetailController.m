@@ -128,20 +128,20 @@
         }
         case 1: {
             CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
-            vc.type = CZDChoicenessControllerTypeDiscover;
+            vc.type = CZJIPINModuleDiscover;
             vc.textSearch = self.textTitle;
             return vc;
         }
         case 2: {
             CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
-            vc.type = CZDChoicenessControllerTypeEvaluation;
+            vc.type = CZJIPINModuleEvaluation;
             vc.textSearch = self.textTitle;
             return vc;
         }
             
         default:{
             CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
-            vc.type = CZDChoicenessControllerTypeTry;
+            vc.type = CZJIPINModuleTrail;
             vc.textSearch = self.textTitle;
             return vc;
         };

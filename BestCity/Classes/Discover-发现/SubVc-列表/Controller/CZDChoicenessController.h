@@ -8,16 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, CZDChoicenessControllerType) {
-    CZDChoicenessControllerTypeDiscover,
-    CZDChoicenessControllerTypeEvaluation,
-};
-
 @interface CZDChoicenessController : UIViewController
 /**  标题的ID */
 @property (nonatomic, strong) NSString *titleID;
 /** 大图片URL */
 @property (nonatomic, strong) NSArray *imageUrlList;
 /** 类型 */
-@property (nonatomic, assign) CZDChoicenessControllerType type;
+@property (nonatomic, assign) CZJIPINModuleType type;
 @end

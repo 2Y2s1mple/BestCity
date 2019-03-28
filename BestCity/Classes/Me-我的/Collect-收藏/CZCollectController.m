@@ -71,17 +71,17 @@
         }
         case 1: {
             CZSubCollectTwoController *vc = [[CZSubCollectTwoController alloc] init];
-            vc.type = CZTypeDiscover;
+            vc.type = CZJIPINModuleDiscover;
             return vc;
         }
         case 2: {
             CZSubCollectTwoController *vc = [[CZSubCollectTwoController alloc] init];
-            vc.type = CZTypeEvaluation;
+            vc.type = CZJIPINModuleEvaluation;
             return vc;
         }
         default:{
             CZSubCollectTwoController *vc = [[CZSubCollectTwoController alloc] init];
-            vc.type = CZTypeTryout;
+            vc.type = CZJIPINModuleTrail;
             return vc;
         };
     }

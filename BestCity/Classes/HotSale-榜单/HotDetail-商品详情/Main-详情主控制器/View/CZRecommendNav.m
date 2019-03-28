@@ -33,7 +33,7 @@
     return _mainTitles;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame type:(CZRecommendNavType)type
+- (instancetype)initWithFrame:(CGRect)frame type:(CZJIPINModuleType)type
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -50,7 +50,7 @@
 }
 
 //自定义的导航栏
-- (void)setupNavigateView:(CZRecommendNavType)type
+- (void)setupNavigateView:(CZJIPINModuleType)type
 {
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
@@ -65,7 +65,7 @@
         make.height.equalTo(@(40));
     }];
     
-    if (type == CZRecommendNavDefault) {
+    if (type == CZJIPINModuleHotSale) {
         CGFloat btnX = 70;
         CGFloat btnW = (SCR_WIDTH - 127) / 3.0;
         CGFloat btnH = 20;
@@ -96,7 +96,7 @@
             make.height.equalTo(@2);
             make.width.equalTo(@20);
         }];
-    } else if (type == CZRecommendNavDiscover){
+    } else if (type == CZJIPINModuleDiscover){
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
         titleLabel.text = @"发现详情";
@@ -106,10 +106,20 @@
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
         }];
-    } else {
+    } else if (type == CZJIPINModuleEvaluation) {
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
         titleLabel.text = @"评测详情";
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.textColor = [UIColor blackColor];
+        [self addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self);
+        }];
+    } else {
+        UILabel *titleLabel = [[UILabel alloc] init];
+        self.titleLabel = titleLabel;
+        titleLabel.text = @"报告详情";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];

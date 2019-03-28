@@ -71,13 +71,8 @@ static CGFloat const likeAndShareHeight = 49;
 {
     /** 文章的类型: 1商品，2评测, 3发现，4试用 */
     if (_nav == nil) {
-        if (self.detailType == CZDChoiceDetailControllerDiscover) {
-            self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:CZRecommendNavDiscover];
-            self.nav.type = @"3";
-        } else {
-            self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:CZRecommendNavEvaluation];
-            self.nav.type = @"2";
-        }
+        self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:self.detailType];
+        self.nav.type = [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType];
         self.nav.projectId = self.findgoodsId;
         self.nav.delegate = self;
     }
@@ -113,11 +108,8 @@ static CGFloat const likeAndShareHeight = 49;
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"articleId"] = self.findgoodsId;
-    if (self.detailType == CZDChoiceDetailControllerDiscover) {
-        param[@"type"] = @"3";
-    } else {
-        param[@"type"] = @"2";
-    }
+    param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType];
+    
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/article/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -185,7 +177,8 @@ static CGFloat const likeAndShareHeight = 49;
     self.attentionBtn.hidden = YES;
     
     /** 文章的类型: 1商品，2评测, 3发现，4试用 */
-    NSString *type  = (self.detailType == CZDChoiceDetailControllerDiscover) ? @"3" : @"2";
+    NSString *type  = (self.detailType == CZJIPINModuleDiscover) ? [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType] : [CZJIPINSynthesisTool getModuleTypeNumber:CZJIPINModuleEvaluation];
+    
     // 测评
     self.testVc = [[CZTestSubController alloc] init];
     self.testVc.view.y = 0;

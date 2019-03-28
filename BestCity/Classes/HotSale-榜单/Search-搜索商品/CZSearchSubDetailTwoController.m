@@ -57,7 +57,7 @@
     //line
     CZTOPLINE;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, 0) style:UITableViewStylePlain];
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         self.tableView.height = SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)) + 50;
     } else {
         self.tableView.height = SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49);
@@ -100,13 +100,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
     param[@"keyword"] = self.textSearch;
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
-        param[@"type"] = @(3); // 发现
-    } else if (self.type == CZDChoicenessControllerTypeEvaluation){
-        param[@"type"] = @(2); // 测评
-    }  else {
-        param[@"type"] = @(4); // 使用
-    }
+    param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.type];
     
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -141,13 +135,8 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
     param[@"keyword"] = self.textSearch;
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
-        param[@"type"] = @(3); // 发现
-    } else if (self.type == CZDChoicenessControllerTypeEvaluation){
-        param[@"type"] = @(2); // 测评
-    }  else {
-        param[@"type"] = @(4); // 使用
-    }
+    param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.type];
+    
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
@@ -177,7 +166,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         static NSString *ID = @"choiceCell";
         CZChoicenessCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
         if (cell == nil) {
@@ -212,13 +201,7 @@
     } else {
         CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        if (self.type == CZDChoicenessControllerTypeDiscover) {        
-            vc.detailType = CZDChoiceDetailControllerDiscover;
-        } else if (self.type == CZDChoicenessControllerTypeEvaluation){
-            vc.detailType = CZDChoiceDetailControllerEvaluation;
-        } else {
-            
-        }
+        vc.detailType = self.type;
         vc.findgoodsId = model.articleId;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -227,7 +210,7 @@
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         NSString *OneControllerScrollViewDidScroll = @"CZSearchSubDetailOneController";
         [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
     }

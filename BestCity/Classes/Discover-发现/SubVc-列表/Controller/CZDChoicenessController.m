@@ -57,7 +57,7 @@
     //line
     CZTOPLINE;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, 0) style:UITableViewStylePlain];
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         self.tableView.height = SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)) + 50;
     } else {
         self.tableView.height = SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49);
@@ -104,10 +104,10 @@
     param[@"page"] = @(self.page);
     [CZProgressHUD showProgressHUDWithText:nil];
     NSString *path;
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         path = @"api/found/list"; // 发现
     } else {
-         path = @"api/evaluation/list"; // 测评
+        path = @"api/evaluation/list"; // 测评
     }
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:path] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -143,7 +143,7 @@
     param[@"page"] = @(self.page);
     [CZProgressHUD showProgressHUDWithText:nil];
     NSString *path;
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         path = @"api/found/list"; // 发现
     } else {
         path = @"api/evaluation/list"; // 测评
@@ -176,7 +176,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         static NSString *ID = @"choiceCell";
         CZChoicenessCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
         if (cell == nil) {
@@ -211,11 +211,7 @@
     } else {
         CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        if (self.type == CZDChoicenessControllerTypeDiscover) {        
-            vc.detailType = CZDChoiceDetailControllerDiscover;
-        } else {
-            vc.detailType = CZDChoiceDetailControllerEvaluation;
-        }
+        vc.detailType = self.type;
         vc.findgoodsId = model.articleId;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -224,7 +220,7 @@
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.type == CZDChoicenessControllerTypeDiscover) {
+    if (self.type == CZJIPINModuleDiscover) {
         NSString *OneControllerScrollViewDidScroll = @"CZOneControllerScrollViewDidScroll";
         [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
     }
