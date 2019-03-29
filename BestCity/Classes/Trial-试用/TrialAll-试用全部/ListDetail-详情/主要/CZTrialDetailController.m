@@ -26,6 +26,7 @@
 #import "CZCoinCenterController.h" // 极币
 #import "CZvoteUserController.h"//使用名单
 #import "CZShareView.h" // 分享
+#import "CZUserInfoTool.h"
 
 
 @interface CZTrialDetailController () <UIScrollViewDelegate>
@@ -55,6 +56,8 @@
 @property (nonatomic, strong) CZTestReportController *testReport;
 /** 分享拉赞 */
 @property (nonatomic, strong) UIButton *listBtn;
+/** 分享拉赞URL */
+@property (nonatomic, strong) NSString *voteShareUrl;
 @end
 
 /** 最下面控件高度 */
@@ -185,6 +188,13 @@ static CGFloat const likeAndShareHeight = 49;
    
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [CZUserInfoTool userInfoInformation:nil];
+}
+
+
 #pragma mark - 监听子控件的frame的变化
 - (void)heightChange:(NSNotification *)notfi
 {
@@ -206,6 +216,7 @@ static CGFloat const likeAndShareHeight = 49;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = result[@"data"];
+            self.voteShareUrl = self.dataSource[@"voteShareUrl"];
             [self setupSubViews]; 
             // 创建底部按钮
             [self setupBottomView];
@@ -297,7 +308,7 @@ static CGFloat const likeAndShareHeight = 49;
         UIButton *btn = [[UIButton alloc] init];
         btn.tag = i + 100;
         [btn setTitle:titles[i][@"title"] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
         [btn sizeToFit];
         btn.centerY = backView.height / 2.0;
@@ -378,7 +389,7 @@ static CGFloat const likeAndShareHeight = 49;
         
         // 前一个Btn
         [self.recordBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
-        self.recordBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+        self.recordBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         UIView *recordLineView =  [sender.superview viewWithTag:self.recordBtn.tag + 100];
         recordLineView.hidden = YES;
         self.recordBtn = sender;
@@ -403,6 +414,16 @@ static CGFloat const likeAndShareHeight = 49;
     [commentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [commentBtn addTarget:self action:@selector(commentBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:commentBtn];
+    
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = CZGlobalLightGray;
+    lineView.x = 0;
+    lineView.y = 0;
+    lineView.width = commentBtn.width;
+    lineView.height = 1;
+    [bottomView addSubview:lineView];
+    
+    
     
     UIButton *buyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     buyBtn.frame = CGRectMake(commentBtn.width, commentBtn.y, (SCR_WIDTH - commentBtn.width) / 2.0, commentBtn.height);
@@ -471,7 +492,7 @@ static CGFloat const likeAndShareHeight = 49;
     [rightBtn setImage:[UIImage imageNamed:@"Trail-share-black"] forState:UIControlStateNormal];
     [rightBtn setImage:[UIImage imageNamed:@"Trail-share-black"] forState:UIControlStateSelected];
 
-    [rightBtn addTarget:self action:@selector(clickedRight:) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn addTarget:self action:@selector(shareButtonAction) forControlEvents:UIControlEventTouchUpInside];
     rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     rightBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
     [topView addSubview:rightBtn];
@@ -513,10 +534,10 @@ static CGFloat const likeAndShareHeight = 49;
             [alert addAction:[UIAlertAction actionWithTitle:@"确认申请" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSMutableDictionary *param = [NSMutableDictionary dictionary];
                 param[@"trialId"] = self.trialId;
-                
                 //获取详情数据
                 [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
                     if ([result[@"code"] isEqual:@(0)] && [result[@"msg"] isEqual:@"success"]) {
+                        self.voteShareUrl = result[@"voteShareUrl"];
                         [CZProgressHUD showProgressHUDWithText:@"已提交，赶快去拉赞吧"];
                         [self.listBtn setTitle:@"分享拉赞" forState:UIControlStateNormal];
                     } 
@@ -550,7 +571,7 @@ static CGFloat const likeAndShareHeight = 49;
     } else if ([sender.titleLabel.text isEqualToString:@"分享拉赞"]) {
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
         share.param = @{
-                        @"shareUrl" : self.dataSource[@"voteShareUrl"], 
+                        @"shareUrl" : self.voteShareUrl, 
                         @"shareTitle" : self.dataSource[@"voteShareTitle"],
                         @"shareContent" : self.dataSource[@"voteShareContent"],
                         @"shareImg" : self.dataSource[@"voteShareImg"],

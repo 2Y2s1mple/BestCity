@@ -44,6 +44,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.nameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

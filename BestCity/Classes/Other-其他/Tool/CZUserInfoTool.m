@@ -24,7 +24,7 @@
             // 存储用户信息, 都TM存储上了, 这个接口没有token返回
             [CZSaveTool setObject:userDic forKey:@"user"];
             
-            block(userDic);
+            !block ? : block(userDic);
         }
     } failure:^(NSError *error) {
         

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,9 +29,20 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUp-q2-AEn">
                             <rect key="frame" x="0.0" y="0.0" width="4" height="24"/>
-                            <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trail-apply-line" translatesAutoresizingMaskIntoConstraints="NO" id="Dxx-rx-1ec">
+                                    <rect key="frame" x="0.0" y="3.5" width="4" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="rsO-ou-JnA"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="4" id="9Du-Ky-VPX"/>
+                                <constraint firstItem="Dxx-rx-1ec" firstAttribute="centerY" secondItem="NUp-q2-AEn" secondAttribute="centerY" id="DXf-JE-P4J"/>
+                                <constraint firstItem="Dxx-rx-1ec" firstAttribute="leading" secondItem="NUp-q2-AEn" secondAttribute="leading" id="hcV-eh-ki6"/>
+                                <constraint firstAttribute="trailing" secondItem="Dxx-rx-1ec" secondAttribute="trailing" id="qNp-Mh-FkJ"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审核筛选规则" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YID-wj-SvB">
@@ -63,8 +74,19 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Iq-rA-OGf">
                             <rect key="frame" x="0.0" y="0.0" width="4" height="24"/>
-                            <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trail-apply-line" translatesAutoresizingMaskIntoConstraints="NO" id="Yu9-no-yHT">
+                                    <rect key="frame" x="0.0" y="3.5" width="4" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="4aG-nt-xrY"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Yu9-no-yHT" secondAttribute="trailing" id="Nak-EI-ZlU"/>
+                                <constraint firstItem="Yu9-no-yHT" firstAttribute="leading" secondItem="1Iq-rA-OGf" secondAttribute="leading" id="bgL-K5-RTb"/>
+                                <constraint firstItem="Yu9-no-yHT" firstAttribute="centerY" secondItem="1Iq-rA-OGf" secondAttribute="centerY" id="rfD-oR-eJl"/>
                                 <constraint firstAttribute="width" constant="4" id="xPb-c9-UCn"/>
                             </constraints>
                         </view>
@@ -97,9 +119,20 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-3g-GNj">
                             <rect key="frame" x="0.0" y="0.0" width="4" height="24"/>
-                            <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trail-apply-line" translatesAutoresizingMaskIntoConstraints="NO" id="x3r-mD-OBd">
+                                    <rect key="frame" x="0.0" y="3.5" width="4" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="fkw-aK-0HL"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="4" id="QzB-yo-j5y"/>
+                                <constraint firstItem="x3r-mD-OBd" firstAttribute="centerY" secondItem="XUS-3g-GNj" secondAttribute="centerY" id="RME-VP-rOD"/>
+                                <constraint firstItem="x3r-mD-OBd" firstAttribute="leading" secondItem="XUS-3g-GNj" secondAttribute="leading" id="jmk-hG-CNC"/>
+                                <constraint firstAttribute="trailing" secondItem="x3r-mD-OBd" secondAttribute="trailing" id="lj4-Ra-9zB"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动说明" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hM-LM-vdy">
@@ -131,9 +164,20 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9U-dZ-eT9">
                             <rect key="frame" x="0.0" y="0.0" width="4" height="24"/>
-                            <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trail-apply-line" translatesAutoresizingMaskIntoConstraints="NO" id="H3q-gU-aHr">
+                                    <rect key="frame" x="0.0" y="3.5" width="4" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="wXd-bv-Zdv"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="4" id="OyL-NY-ROo"/>
+                                <constraint firstItem="H3q-gU-aHr" firstAttribute="centerY" secondItem="k9U-dZ-eT9" secondAttribute="centerY" id="YQI-1W-PH5"/>
+                                <constraint firstAttribute="trailing" secondItem="H3q-gU-aHr" secondAttribute="trailing" id="azy-h0-VvD"/>
+                                <constraint firstItem="H3q-gU-aHr" firstAttribute="leading" secondItem="k9U-dZ-eT9" secondAttribute="leading" id="wRC-uN-j6g"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试用服务协议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LN5-gc-duM">
@@ -159,9 +203,20 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWf-AP-UIr">
                             <rect key="frame" x="0.0" y="0.0" width="4" height="24"/>
-                            <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trail-apply-line" translatesAutoresizingMaskIntoConstraints="NO" id="Q0O-cm-xBS">
+                                    <rect key="frame" x="0.0" y="3.5" width="4" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="wWb-96-XU2"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="Q0O-cm-xBS" firstAttribute="leading" secondItem="VWf-AP-UIr" secondAttribute="leading" id="2xU-le-qik"/>
                                 <constraint firstAttribute="width" constant="4" id="D8m-UI-fiC"/>
+                                <constraint firstItem="Q0O-cm-xBS" firstAttribute="centerY" secondItem="VWf-AP-UIr" secondAttribute="centerY" id="iRl-TQ-2G0"/>
+                                <constraint firstAttribute="trailing" secondItem="Q0O-cm-xBS" secondAttribute="trailing" id="qoh-o7-WpK"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动流程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CMD-3K-ztt">
@@ -230,7 +285,10 @@
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <point key="canvasLocation" x="559" y="-195"/>
+            <point key="canvasLocation" x="596" y="-210"/>
         </view>
     </objects>
+    <resources>
+        <image name="Trail-apply-line" width="3" height="17"/>
+    </resources>
 </document>

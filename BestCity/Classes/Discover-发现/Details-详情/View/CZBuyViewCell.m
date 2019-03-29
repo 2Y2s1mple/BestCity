@@ -50,7 +50,7 @@
     self.actualPriceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
     self.contentView.layer.cornerRadius = 5;
     self.contentView.layer.borderWidth = 1;
-    self.contentView.layer.borderColor = CZGlobalGray.CGColor;
+    self.contentView.layer.borderColor = CZGlobalLightGray.CGColor;
     self.contentView.layer.masksToBounds = YES;
 }
 

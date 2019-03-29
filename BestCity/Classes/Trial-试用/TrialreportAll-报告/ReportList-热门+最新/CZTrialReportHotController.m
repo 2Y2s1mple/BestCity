@@ -22,9 +22,21 @@
 @property (nonatomic, assign) NSInteger page;
 /** 报告数据 */
 @property (nonatomic, strong) NSMutableArray *reportDatasArr;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZTrialReportHotController
+#pragma mark - 懒加载
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
 
 - (UITableView *)tableView
 {
@@ -61,6 +73,13 @@
     param[@"orderbyType"] = @(self.type); //（1最新，2热门）
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/reportList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             self.reportDatasArr = [CZTrailReportModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
@@ -79,8 +98,16 @@
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
+    param[@"orderbyType"] = @(self.type); //（1最新，2热门）
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/reportList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             NSArray *newArr = [CZTrailReportModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.reportDatasArr addObjectsFromArray:newArr];
             [self.tableView reloadData];

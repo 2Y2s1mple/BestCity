@@ -102,16 +102,19 @@
             break;
     }
     
-    NSInteger seconds = [self.detailData[@"endtimeObj"][@"seconds"] integerValue];
+    NSInteger secondsNumber = [self.detailData[@"endtimeObj"][@"seconds"] integerValue];
     
-    NSInteger minutes = [self.detailData[@"endtimeObj"][@"minutes"] integerValue] * 60;
-    NSInteger hours = [self.detailData[@"endtimeObj"][@"hours"] integerValue] * 60 * 60;
-    NSInteger day = [self.detailData[@"endtimeObj"][@"day"] integerValue] * 60 * 60 * 24;
+    NSInteger minutesNumber = [self.detailData[@"endtimeObj"][@"minutes"] integerValue] * 60;
+    NSInteger hoursNumber = [self.detailData[@"endtimeObj"][@"hours"] integerValue] * 60 * 60;
+    NSInteger dayNumber = [self.detailData[@"endtimeObj"][@"day"] integerValue] * 60 * 60 * 24;
     
-    self.secondsCount = seconds + minutes + hours + day;
+    self.secondsCount = secondsNumber + minutesNumber + hoursNumber + dayNumber;
+    
     [self setupTimer]; 
 
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(setupTimer) userInfo:nil repeats:YES];
+    if (self.secondsCount > 0) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(setupTimer) userInfo:nil repeats:YES];
+    }
     
     [self.view layoutIfNeeded];
     self.view.x = 0;
@@ -122,7 +125,6 @@
 
 - (void)setupTimer
 {
-    self.secondsCount--;
     
     // 秒
     NSString *seconds1 = [NSString stringWithFormat:@"%.2ld", (self.secondsCount % 60)];
@@ -143,6 +145,8 @@
      NSString *day1 = [NSString stringWithFormat:@"%.2ld", (self.secondsCount / 60 / 60 / 24)];
     self.day1.text = [day1 substringToIndex:1];
     self.day2.text = [day1 substringFromIndex:1];
+    
+    self.secondsCount--;
 }
 
 - (void)dealloc

@@ -116,21 +116,22 @@
     [navLabel sizeToFit];
     
     CZMutContentButton *rightBtn = [CZMutContentButton buttonWithType:UIButtonTypeCustom];
-    [rightBtn setTitle:@"查看全部" forState:UIControlStateNormal];
+    
+    if ([title isEqualToString:@"免费试用"]) {
+        [rightBtn setTitle:@"查看全部" forState:UIControlStateNormal];
+        [rightBtn addTarget:self action:@selector(moreTrialDatas:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [rightBtn setTitle:@"查看更多" forState:UIControlStateNormal];
+        [rightBtn addTarget:self action:@selector(moreTrialReport:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [rightBtn setImage:[UIImage imageNamed:@"right-blue"] forState:UIControlStateNormal];
     rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
     [rightBtn setTitleColor:UIColorFromRGB(0x4A90E2) forState:UIControlStateNormal];
     [navigationView addSubview:rightBtn];
     [rightBtn sizeToFit];
-    rightBtn.x = navigationView.width - 90;
+    rightBtn.x = navigationView.width - 85;
     rightBtn.centerY = navLabel.centerY;
-    if ([title isEqualToString:@"免费试用"]) {
-        [rightBtn addTarget:self action:@selector(moreTrialDatas:) forControlEvents:UIControlEventTouchUpInside];
-        return navigationView;
-    } else {
-        [rightBtn addTarget:self action:@selector(moreTrialReport:) forControlEvents:UIControlEventTouchUpInside];
-        return navigationView;
-    }
+    
     return navigationView;
 }
 
