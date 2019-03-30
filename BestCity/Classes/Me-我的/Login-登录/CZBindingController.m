@@ -88,6 +88,7 @@
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/sendMessage"];
     
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"验证码发送成功"];
         } else {
