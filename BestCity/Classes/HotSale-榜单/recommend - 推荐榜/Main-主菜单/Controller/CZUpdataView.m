@@ -7,11 +7,16 @@
 //
 
 #import "CZUpdataView.h"
+#import "CZCoinCenterController.h"
+
 @interface CZUpdataView ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *chengeContent;
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *pointLabel;
 @end
 
 @implementation CZUpdataView
@@ -38,6 +43,32 @@
     _versionMessage = versionMessage;
     self.versionLabel.text = versionMessage[@"versionName"];
     self.chengeContent.text = versionMessage[@"content"];
+}
+
+
++ (instancetype)newUserRegistrationView
+{
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][1] ;
+}
+
+- (void)setUserPoint:(NSString *)userPoint
+{
+    _userPoint = userPoint;
+    self.pointLabel.text = userPoint;
+}
+
+/** 新用户祖册 */
+- (IBAction)newUserRegistrationAction
+{
+    [self removeFromSuperview];
+    NSLog(@"------");
+    CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
+    
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    
+    [nav pushViewController:vc animated:YES
+     ];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "CZBindingController.h"
 #import "GXNetTool.h"
+#import "CZUpdataView.h"
 
 @interface CZBindingController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -55,6 +56,13 @@
             [CZSaveTool setObject:userDic[@"token"] forKey:@"token"];
             // 存储用户信息, 都TM存储上了
             [CZSaveTool setObject:userDic forKey:@"user"];
+            if (![result[@"data"][@"addPoint"] isEqual:@(0)]) {
+                CZUpdataView *backView = [CZUpdataView newUserRegistrationView];
+                backView.userPoint = [NSString stringWithFormat:@"%@", result[@"data"][@"addPoint"]];
+                backView.frame = [UIScreen mainScreen].bounds;
+                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                [[UIApplication sharedApplication].keyWindow addSubview: backView];
+             }
             [self dismissViewControllerAnimated:YES completion:nil];
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];

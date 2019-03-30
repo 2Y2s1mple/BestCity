@@ -97,7 +97,7 @@ static CGFloat const likeAndShareHeight = 49;
         self.navView.hidden = YES;
     }
     
-    CGFloat commodityVcY = self.commodityVc.view.y - (self.navView.height + self.menusView.height);
+    CGFloat commodityVcY = 0;
     CGFloat applyForY = self.applyFor.view.y - (self.navView.height + self.menusView.height);
     CGFloat testY = self.test.view.y - (self.navView.height + self.menusView.height);
     CGFloat testReport = self.testReport.view.y - (self.navView.height + self.menusView.height);
@@ -348,7 +348,7 @@ static CGFloat const likeAndShareHeight = 49;
     NSInteger tag = sender.tag - 100;
     switch (tag) {
         case 0:
-            point = CGPointMake(0, self.commodityVc.view.y - (self.navView.height + self.menusView.height));
+            point = CGPointMake(0, 0);
             break;
         case 1:
             point = CGPointMake(0, self.applyFor.view.y - (self.navView.height + self.menusView.height));

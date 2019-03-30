@@ -85,9 +85,9 @@
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSNumber *appVersion1 = result[@"data"][@"open"];
             if (![appVersion1 isEqual:@(0)]) {} else {}
-            //有新版本
+//            //有新版本
             [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
-            // 判断是否更新
+//            // 判断是否更新
             if (![result[@"data"][@"needUpdate"] isEqual:@(0)]) {
                 CZUpdataView *backView = [CZUpdataView updataView];
                 backView.versionMessage = result[@"data"];

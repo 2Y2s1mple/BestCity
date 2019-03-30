@@ -12,8 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZUpdataView : UIView
 + (instancetype)updataView;
-/** <#注释#> */
+/** 更新数据 */
 @property (nonatomic, strong) NSDictionary *versionMessage;
+
+/** 新用户给积分 */
+@property (nonatomic, strong) NSString *userPoint;
++ (instancetype)newUserRegistrationView;
 @end
 
 NS_ASSUME_NONNULL_END

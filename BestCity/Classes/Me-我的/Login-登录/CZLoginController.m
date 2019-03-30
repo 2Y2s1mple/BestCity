@@ -12,6 +12,7 @@
 #import "TSLWebViewController.h"
 #import <UMShare/UMShare.h>
 #import "CZBindingController.h"
+#import "CZUpdataView.h"
 
 @interface CZLoginController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -112,7 +113,13 @@ static id instancet_;
             [CZSaveTool setObject:userDic[@"token"] forKey:@"token"];
             // 存储用户信息, 都TM存储上了
             [CZSaveTool setObject:userDic forKey:@"user"];
-            
+            if (![result[@"data"][@"addPoint"] isEqual:@(0)]) {
+                CZUpdataView *backView = [CZUpdataView newUserRegistrationView];
+                backView.userPoint = [NSString stringWithFormat:@"%@", result[@"data"][@"addPoint"]];
+                backView.frame = [UIScreen mainScreen].bounds;
+                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                [[UIApplication sharedApplication].keyWindow addSubview: backView];
+            }
             // 删除账号密码
             self.userTextField.text = nil;
             self.passwordTextField.text = nil;
