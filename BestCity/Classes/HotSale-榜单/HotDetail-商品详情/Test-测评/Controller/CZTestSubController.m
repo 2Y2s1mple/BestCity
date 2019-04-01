@@ -153,9 +153,15 @@
         /**加载开箱测评*/
         //标题
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, SCR_WIDTH - 2 * space, 20)];
+        titleLabel.numberOfLines = 0;
         titleLabel.text = self.model.title;
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
         [self.scrollerView addSubview:titleLabel];
+        CGRect rect = [self.model.title boundingRectWithSize:CGSizeMake(SCR_WIDTH - 2 * space, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : titleLabel.font} context:nil];
+        CGFloat _hei = MAX(20, rect.size.height);
+        titleLabel.height = _hei;
+
+        
         //头像
         UIImageView *iconImage = [[UIImageView alloc] init];
         iconImage.layer.cornerRadius = 25;

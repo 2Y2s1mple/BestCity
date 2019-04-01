@@ -69,7 +69,6 @@
 #pragma mark -控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //line
     CZTOPLINE;
     
@@ -80,21 +79,25 @@
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @(0);
-    param[@"clientVersionCode"] = @"1.2.0";
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    param[@"clientVersionCode"] = curVersion;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSNumber *appVersion1 = result[@"data"][@"open"];
             if (![appVersion1 isEqual:@(0)]) {} else {}
 //            //有新版本
             [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
-//            // 判断是否更新
-            if (![result[@"data"][@"needUpdate"] isEqual:@(0)]) {
-                CZUpdataView *backView = [CZUpdataView updataView];
-                backView.versionMessage = result[@"data"];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-            }
+            //比较
+            if (![curVersion isEqualToString:result[@"data"][@"versionCode"]]) {
+                // 判断是否更新
+                if ([result[@"data"][@"needUpdate"] isEqual:@(1)]) {
+                    CZUpdataView *backView = [CZUpdataView updataView];
+                    backView.versionMessage = result[@"data"];
+                    backView.frame = [UIScreen mainScreen].bounds;
+                    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                    [[UIApplication sharedApplication].keyWindow addSubview: backView];
+                }
+            } 
         }
     } failure:^(NSError *error) {}];
     // 创建刷新控件
@@ -120,7 +123,8 @@
     CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(10, 10, SCR_WIDTH - 20, 157)];
     [backView addSubview:imageView];
     imageView.imgList = self.imageUrlList;
-    [backView addSubview:imageView];     return backView;
+    [backView addSubview:imageView];     
+    return backView;
 }
 
 

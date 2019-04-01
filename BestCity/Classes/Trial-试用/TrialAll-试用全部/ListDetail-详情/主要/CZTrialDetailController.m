@@ -68,12 +68,6 @@ static CGFloat const likeAndShareHeight = 49;
 #pragma mark - 懒加载
 - (UIScrollView *)scrollerView
 {
-    if (@available(iOS 11.0, *)) {
-        UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {    
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    
     if (_scrollerView == nil) {
         _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight))];
         self.scrollerView.delegate = self;
@@ -164,6 +158,11 @@ static CGFloat const likeAndShareHeight = 49;
 #pragma mark - 控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(iOS 11.0, *)) {
+        self.scrollerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {    
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     
     // 创建滚动视图

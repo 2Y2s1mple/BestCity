@@ -14,9 +14,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *chengeContent;
-
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *pointLabel;
+
+/** 删除按钮 */
+@property (nonatomic, weak) IBOutlet UIButton *delectBtn;
 @end
 
 @implementation CZUpdataView
@@ -43,6 +45,9 @@
     _versionMessage = versionMessage;
     self.versionLabel.text = versionMessage[@"versionName"];
     self.chengeContent.text = versionMessage[@"content"];
+    if ([versionMessage[@"needUpdate"] integerValue] == 1) {    
+        self.delectBtn.hidden = YES;
+    }
 }
 
 

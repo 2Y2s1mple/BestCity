@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myPointCollectionCell" id="gTV-IL-0wX" customClass="CZMyPointsCell">
-            <rect key="frame" x="0.0" y="0.0" width="332" height="180"/>
+            <rect key="frame" x="0.0" y="0.0" width="268" height="336"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="332" height="180"/>
+                <rect key="frame" x="0.0" y="0.0" width="268" height="336"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage6" translatesAutoresizingMaskIntoConstraints="NO" id="NWD-nb-2DB">
-                        <rect key="frame" x="0.0" y="0.0" width="332" height="110"/>
+                        <rect key="frame" x="0.0" y="0.0" width="268" height="268"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="110" id="A4F-fD-BUC"/>
+                            <constraint firstAttribute="height" secondItem="NWD-nb-2DB" secondAttribute="width" id="kVs-n0-l55"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="飞利浦HD9103/11双层简洁大容量5升多功能蒸…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcw-6D-vy8">
-                        <rect key="frame" x="0.0" y="120" width="332" height="22"/>
+                        <rect key="frame" x="0.0" y="278" width="268" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="fXg-mh-aBB"/>
                         </constraints>
@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3288积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soc-Fg-eZb">
-                        <rect key="frame" x="0.0" y="152" width="80" height="17"/>
+                        <rect key="frame" x="0.0" y="310" width="80" height="17"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="cLn-is-GON"/>
@@ -55,13 +55,13 @@
                 <constraint firstItem="Soc-Fg-eZb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lo3-1c-3Bd"/>
                 <constraint firstItem="mcw-6D-vy8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nnH-Bd-0bx"/>
             </constraints>
-            <size key="customSize" width="52" height="342"/>
+            <size key="customSize" width="-12" height="498"/>
             <connections>
                 <outlet property="bigImage" destination="NWD-nb-2DB" id="D6K-yP-hf0"/>
                 <outlet property="pointLabel" destination="Soc-Fg-eZb" id="Vi0-Pg-ENb"/>
                 <outlet property="titleLabel" destination="mcw-6D-vy8" id="8y6-6m-Ch7"/>
             </connections>
-            <point key="canvasLocation" x="-403.19999999999999" y="-275.2623688155922"/>
+            <point key="canvasLocation" x="-729.60000000000002" y="-225.78710644677662"/>
         </collectionViewCell>
     </objects>
     <resources>

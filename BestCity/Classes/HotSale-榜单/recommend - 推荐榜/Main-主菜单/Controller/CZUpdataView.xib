@@ -109,6 +109,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="chengeContent" destination="Qsv-2z-6Q5" id="KiK-xU-TT1"/>
+                <outlet property="delectBtn" destination="WCm-YF-oxB" id="BYx-mJ-3pH"/>
                 <outlet property="versionLabel" destination="zZi-7z-xDo" id="mKQ-Kr-gdr"/>
             </connections>
             <point key="canvasLocation" x="-293" y="-47"/>

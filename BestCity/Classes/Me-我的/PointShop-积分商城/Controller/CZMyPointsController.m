@@ -12,7 +12,7 @@
 #import "GXNetTool.h"
 #import "CZMyPointsDetailController.h"
 
-@interface CZMyPointsController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface CZMyPointsController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 /** 积分数 */
 @property (nonatomic, weak) IBOutlet UILabel *pointNum;
@@ -43,6 +43,7 @@ static NSString * const ID = @"myPointCollectionCell";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake((SCR_WIDTH - 48) / 2, 180);
     layout.minimumInteritemSpacing = 20;
+//    layout.minimumLineSpacing = 0;
     layout.sectionInset = UIEdgeInsetsMake(18, 14, 10, 14);
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67.7, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 24 : 0) - 67.7) collectionViewLayout:layout];
@@ -75,6 +76,14 @@ static NSString * const ID = @"myPointCollectionCell";
     vc.pointId = self.dataSource[indexPath.row][@"id"];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake((SCR_WIDTH - 48) / 2, (SCR_WIDTH - 48) / 2 + 62);
+}
+
+
 
 #pragma mark - 获取数据
 - (void)getDataSource

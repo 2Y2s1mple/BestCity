@@ -126,7 +126,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)setupSubViews 
 {
     // 创建轮播图
-    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 250)];
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_WIDTH)];
     [self.scrollerView addSubview:imageView];
     imageView.imgList = self.dataSource[@"imgList"];
     
