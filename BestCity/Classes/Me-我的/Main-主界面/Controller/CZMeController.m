@@ -245,28 +245,8 @@
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        
-    
-    } else {
+    if (indexPath.section == 0) {} else {
         NSDictionary *dic = self.dataSource[1][indexPath.row];
-        if ([dic[@"destinationVC"] isEqualToString:@"CZCollectController"]) {
-            WMPageController *hotVc = (WMPageController *)[[NSClassFromString(dic[@"destinationVC"]) alloc] init];
-            hotVc.selectIndex = 0;
-            hotVc.menuViewStyle = WMMenuViewStyleLine;
-            //        hotVc.progressWidth = 30;
-            hotVc.itemMargin = 10;
-            hotVc.progressHeight = 3;
-            hotVc.automaticallyCalculatesItemWidths = YES;
-            hotVc.titleFontName = @"PingFangSC-Medium";
-            hotVc.titleColorNormal = CZGlobalGray;
-            hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
-            hotVc.titleSizeNormal = 15.0f;
-            hotVc.titleSizeSelected = 15;
-            hotVc.progressColor = CZREDCOLOR;
-            [self.navigationController pushViewController:hotVc animated:YES];
-            return;
-        }
         UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
         [self.navigationController pushViewController:vc animated:YES]; 
     };

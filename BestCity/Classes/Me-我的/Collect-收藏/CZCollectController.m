@@ -14,21 +14,25 @@
 
 @interface CZCollectController ()
 
-@property (nonatomic, strong) NSArray *mainTitles;
-
 @end
 
 @implementation CZCollectController
 
-/**
- 主标题数组
- */
-- (NSArray *)mainTitles
+- (void)loadView
 {
-    if (_mainTitles == nil) {
-        _mainTitles = @[@"我的关注", @"我的粉丝"];
-    }
-    return _mainTitles;
+    [super loadView];
+    self.selectIndex = 0;
+    self.menuViewStyle = WMMenuViewStyleLine;
+    //        self.progressWidth = 30;
+    self.itemMargin = 10;
+    self.progressHeight = 3;
+    self.automaticallyCalculatesItemWidths = YES;
+    self.titleFontName = @"PingFangSC-Medium";
+    self.titleColorNormal = CZGlobalGray;
+    self.titleColorSelected = CZRGBColor(5, 5, 5);
+    self.titleSizeNormal = 15.0f;
+    self.titleSizeSelected = 15;
+    self.progressColor = CZREDCOLOR;
 }
 
 - (void)viewDidLoad {
