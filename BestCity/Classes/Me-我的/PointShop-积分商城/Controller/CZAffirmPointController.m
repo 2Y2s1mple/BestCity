@@ -20,10 +20,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *subTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *moneyLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *bgImage;
-@property (nonatomic, weak) IBOutlet UIView *subtractionBtn;
-@property (nonatomic, weak) IBOutlet UIView *addBtn;
-/** <#注释#> */
-@property (nonatomic, weak) IBOutlet UILabel *numberLabel;
+
 @property (nonatomic, weak) IBOutlet UILabel *moneyLabel1;
 
 /** 姓名 */
@@ -58,13 +55,9 @@
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"确认订单" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
-    
-    UITapGestureRecognizer *subtracttap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(subtracttapAction:)];
-    UITapGestureRecognizer *addtTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addtTapAction:)];
+
     UITapGestureRecognizer *changeAddressViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushAddressView:)];
     
-    [self.subtractionBtn addGestureRecognizer:subtracttap];
-    [self.addBtn addGestureRecognizer:addtTap];
     [self.changeAddressView addGestureRecognizer:changeAddressViewTap];
     
     self.subTitleLabel.text = self.dataSource[@"goodsName"];
@@ -85,31 +78,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-// 减
-- (void)subtracttapAction:(UIGestureRecognizer *)tap
-{
-    NSInteger numnber = [self.numberLabel.text integerValue];
-    if (numnber > 0) {
-        numnber--;
-    } else {
-        return;
-    }
-    self.numberLabel.text = [NSString stringWithFormat:@"%ld", numnber];
-    NSLog(@"%@", tap.view);
-}
-
-//增
-- (void)addtTapAction:(UIGestureRecognizer *)tap
-{
-    NSInteger numnber = [self.numberLabel.text integerValue];
-    if (numnber < [self.dataSource[@"total"] integerValue]) {
-        numnber++;
-    } else {
-        return;
-    }
-    self.numberLabel.text = [NSString stringWithFormat:@"%ld", numnber];
-    NSLog(@"%@", tap.view);
-}
 
 /** 立即兑换 */
 - (IBAction)commit
@@ -124,7 +92,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
     param[@"pointGoodsId"] = self.dataSource[@"id"];
-    param[@"total"] = self.numberLabel.text;
+    param[@"total"] = @(1);
     param[@"addressId"] = self.model.addressId;
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/point/exchange"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
