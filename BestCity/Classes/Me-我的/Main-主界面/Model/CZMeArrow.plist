@@ -17,6 +17,14 @@
 			<key>destinationVC</key>
 			<string>CZSystemMessageController</string>
 		</dict>
+        <dict>
+            <key>title</key>
+            <string>我的订单</string>
+            <key>icon</key>
+            <string>order</string>
+            <key>destinationVC</key>
+            <string>CZOrderController</string>
+        </dict>
 		<dict>
 			<key>title</key>
 			<string>每日奖励</string>

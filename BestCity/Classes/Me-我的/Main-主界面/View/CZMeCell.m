@@ -10,9 +10,10 @@
 
 #import "CZMeController.h"
 #import "CZCoinCenterController.h"
-#import "CZOrderController.h"
+#import "CZOrderController.h" // 
 #import "CZMyWalletController.h"
 #import "CZMyPointsController.h"
+#import "CZMyTrialController.h" // 试用
 
 @interface CZMeCell ()
 /** 总钱数 */
@@ -36,6 +37,7 @@
     CZCoinCenterController *toVc = [[CZCoinCenterController alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
+
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
@@ -44,14 +46,16 @@
     CZMyPointsController *toVc = [[CZMyPointsController alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
+
 - (IBAction)orderAction:(UITapGestureRecognizer *)sender {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 跳订单
-    CZOrderController *toVc = [[CZOrderController alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
+    // 跳试用
+    CZMyTrialController *toVc = [[CZMyTrialController alloc] init];
+     [vc.navigationController pushViewController:toVc animated:YES];
 }
+
 - (IBAction)walletAction:(UITapGestureRecognizer *)sender {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
@@ -61,16 +65,13 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
-
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
     self.layer.cornerRadius = 10;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -95,8 +96,6 @@
     NSString *total = [self changeStr:result[@"total_account"] ? result[@"total_account"] : @""];
     // 已体现
     NSString *afterAccount = [self changeStr:result[@"use_account"]];
-    
-    
 }
 
 - (NSString *)changeStr:(id)value
