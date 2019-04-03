@@ -83,8 +83,6 @@ static NSString * const ID = @"myPointCollectionCell";
     return CGSizeMake((SCR_WIDTH - 48) / 2, (SCR_WIDTH - 48) / 2 + 62);
 }
 
-
-
 #pragma mark - 获取数据
 - (void)getDataSource
 {
@@ -97,6 +95,7 @@ static NSString * const ID = @"myPointCollectionCell";
             self.dataSource = result[@"data"];
             [self.collectionView reloadData];
         }
+        
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
         

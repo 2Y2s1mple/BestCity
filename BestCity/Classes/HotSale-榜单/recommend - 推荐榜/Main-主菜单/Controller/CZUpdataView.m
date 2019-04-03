@@ -27,14 +27,14 @@
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0] ;
 }
 
-/** <#注释#> */
+/** 去App Store */
 - (IBAction)gotoUpdata
 {
     //跳转到App Store
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app//id1450707933?mt=8"]];
 }
 
-/** <#注释#> */
+/** 删除自己 */
 - (IBAction)deleteView
 {
     [self removeFromSuperview];
