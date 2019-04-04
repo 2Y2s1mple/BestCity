@@ -16,6 +16,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 /** 积分数 */
 @property (nonatomic, weak) IBOutlet UILabel *pointLabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIImageView *smallImage;
 
 @end
 
@@ -36,6 +38,13 @@
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:dicData[@"img"]] placeholderImage:[UIImage imageNamed:@"testImage6"]];
     self.titleLabel.text = dicData[@"goodsName"];
     self.pointLabel.text = [NSString stringWithFormat:@"%@极币", dicData[@"exchangePoint"]];
+    // 0普通商品，1限购一次
+    if ([dicData[@"type"]  isEqual: @(1)]) {
+        self.smallImage.hidden = YES;
+    } else {
+        self.smallImage.hidden = NO;
+    }
+    
 //    NSString *otherPrice = [NSString stringWithFormat:@"¥%0.2f", [dicData[@"otherPrice"] floatValue]];
 //    self.priceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
 }

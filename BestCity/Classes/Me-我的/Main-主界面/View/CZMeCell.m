@@ -9,8 +9,13 @@
 #import "CZMeCell.h"
 
 #import "CZMeController.h"
+<<<<<<< HEAD
 #import "CZCoinCenterController.h"
 #import "CZOrderController.h" // 
+=======
+#import "CZInvitationController.h"
+#import "CZOrderController.h"
+>>>>>>> 2.0.1版本
 #import "CZMyWalletController.h"
 #import "CZMyPointsController.h"
 #import "CZMyTrialController.h" // 试用
@@ -35,6 +40,8 @@
     CZMeController *vc = (CZMeController *)nav.topViewController;
     // 跳签到
     CZCoinCenterController *toVc = [[CZCoinCenterController alloc] init];
+    // 跳邀请
+    CZInvitationController *toVc = [[CZInvitationController alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 

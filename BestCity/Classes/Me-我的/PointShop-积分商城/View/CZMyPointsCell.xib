@@ -43,6 +43,9 @@
                         <color key="textColor" red="0.8901960784313725" green="0.078431372549019607" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new" translatesAutoresizingMaskIntoConstraints="NO" id="vAG-3d-JUu">
+                        <rect key="frame" x="4" y="4" width="59.5" height="18.5"/>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
@@ -51,20 +54,24 @@
                 <constraint firstItem="NWD-nb-2DB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="De0-nZ-5Rx"/>
                 <constraint firstAttribute="trailing" secondItem="NWD-nb-2DB" secondAttribute="trailing" id="Dpk-p0-AKy"/>
                 <constraint firstItem="NWD-nb-2DB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="IhX-9a-YT4"/>
+                <constraint firstItem="vAG-3d-JUu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="OEK-l6-b2m"/>
                 <constraint firstItem="mcw-6D-vy8" firstAttribute="top" secondItem="NWD-nb-2DB" secondAttribute="bottom" constant="10" id="dFJ-iJ-bUK"/>
                 <constraint firstItem="Soc-Fg-eZb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lo3-1c-3Bd"/>
+                <constraint firstItem="vAG-3d-JUu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="mxt-kR-tH3"/>
                 <constraint firstItem="mcw-6D-vy8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nnH-Bd-0bx"/>
             </constraints>
             <size key="customSize" width="-12" height="498"/>
             <connections>
                 <outlet property="bigImage" destination="NWD-nb-2DB" id="D6K-yP-hf0"/>
                 <outlet property="pointLabel" destination="Soc-Fg-eZb" id="Vi0-Pg-ENb"/>
+                <outlet property="smallImage" destination="vAG-3d-JUu" id="tyv-om-lt3"/>
                 <outlet property="titleLabel" destination="mcw-6D-vy8" id="8y6-6m-Ch7"/>
             </connections>
-            <point key="canvasLocation" x="-729.60000000000002" y="-225.78710644677662"/>
+            <point key="canvasLocation" x="-1214.4000000000001" y="-230.28485757121442"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="new" width="59.5" height="18.5"/>
         <image name="testImage6" width="403" height="409"/>
     </resources>
 </document>

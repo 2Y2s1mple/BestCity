@@ -62,7 +62,7 @@
         NSDictionary *result = responseObject;
         success([result deleteAllNullValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure(error);
+        failure ? : failure(error);
         NSLog(@"%@", error);
         [CZProgressHUD showProgressHUDWithText:@"网络出错"];
         [CZProgressHUD hideAfterDelay:2];
