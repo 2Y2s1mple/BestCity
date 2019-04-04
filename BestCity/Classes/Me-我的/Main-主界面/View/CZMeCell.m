@@ -9,7 +9,7 @@
 #import "CZMeCell.h"
 
 #import "CZMeController.h"
-#import "CZCoinCenterController.h"
+#import "CZInvitationController.h"
 #import "CZOrderController.h"
 #import "CZMyWalletController.h"
 #import "CZMyPointsController.h"
@@ -32,8 +32,8 @@
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 跳签到
-    CZCoinCenterController *toVc = [[CZCoinCenterController alloc] init];
+    // 跳邀请
+    CZInvitationController *toVc = [[CZInvitationController alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {

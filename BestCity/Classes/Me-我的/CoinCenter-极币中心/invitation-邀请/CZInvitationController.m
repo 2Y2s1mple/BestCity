@@ -17,12 +17,25 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bigImageConstraint;
 /** 后台返回的图片 */
 @property (nonatomic, strong) NSDictionary *shareImageDic;
-/** <#注释#> */
+/** 二维码 */
 @property (nonatomic, weak)IBOutlet UIImageView *QRCodeImage;
+/** 邀请码 */
+@property (nonatomic, weak) IBOutlet UILabel *inviteNumber;
 
 @end
 
 @implementation CZInvitationController
+
+/** 复制到剪切板 */
+- (IBAction)generalPaste
+{
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    posteboard.string = @"哈哈哈哈";
+    [CZProgressHUD showProgressHUDWithText:@"复制成功"];
+    [CZProgressHUD hideAfterDelay:1.5];
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

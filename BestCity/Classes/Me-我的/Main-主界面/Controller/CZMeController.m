@@ -47,6 +47,15 @@
 @end
 
 @implementation CZMeController
+/** 复制到剪切板 */
+- (IBAction)generalPaste
+{
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    posteboard.string = @"哈哈哈哈";
+    [CZProgressHUD showProgressHUDWithText:@"复制成功"];
+    [CZProgressHUD hideAfterDelay:1.5];
+}
+
 #pragma mark - 弹出点赞数
 - (IBAction)voteBtnAction:(UIButton *)sender {
     UIView *backView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];

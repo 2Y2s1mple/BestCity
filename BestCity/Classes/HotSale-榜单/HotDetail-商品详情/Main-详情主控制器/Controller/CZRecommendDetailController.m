@@ -7,9 +7,11 @@
 //
 
 #import "CZRecommendDetailController.h"
+// 视图控制器
 #import "CZCommoditySubController.h" // 商品
 #import "CZTestSubController.h" // 测评
 #import "CZEvaluateSubController.h" // 评论
+#import "CZCommonRecommendController.h" // 推荐文章
 
 #import "CZRecommendNav.h" // 导航
 #import "CZCollectButton.h"
@@ -31,6 +33,10 @@
 @property (nonatomic, strong) CZTestSubController *testVc;
 /** 评价 */
 @property (nonatomic, strong) CZEvaluateSubController *evaluate;
+/** 推荐文章 */
+@property (nonatomic, strong) CZCommonRecommendController *recommen;
+
+
 /** 导航栏 */
 @property (nonatomic, strong) CZRecommendNav *nav;
 /** 分享购买按钮 */
@@ -217,15 +223,24 @@ static NSString * const type = @"1";
     self.evaluate.type = type;
     self.evaluate.targetId = self.detailModel.goodsDetailEntity.goodsId;
     
+    // 推荐文章
+    self.recommen = [[CZCommonRecommendController alloc] init];
+    self.recommen.view.y = self.evaluate.view.y + self.evaluate.scrollerView.height;
+    [self.scrollerView addSubview:self.recommen.view];
+    [self addChildViewController:self.recommen];
+    
+    
     // 设置滚动高度
-    self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
+    self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height + self.recommen.view.height);
 }
 
 #pragma mark - 监听子控件的frame的变化
 - (void)openBoxInspectWebViewHeightChange:(NSNotification *)notfi
 {
     self.evaluate.view.y = self.commendVC.scrollerView.height + self.testVc.scrollerView.height;
-    self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
+    self.recommen.view.y = self.evaluate.view.y + self.evaluate.scrollerView.height;
+    
+    self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height + self.recommen.view.height);
 }
 
 #pragma mark - <CZRecommendNavDelegate>
