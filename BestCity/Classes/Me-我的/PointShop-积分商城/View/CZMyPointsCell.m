@@ -39,7 +39,7 @@
     self.titleLabel.text = dicData[@"goodsName"];
     self.pointLabel.text = [NSString stringWithFormat:@"%@极币", dicData[@"exchangePoint"]];
     // 0普通商品，1限购一次
-    if ([dicData[@"type"]  isEqual: @(1)]) {
+    if ([dicData[@"type"]  isEqual: @(0)]) {
         self.smallImage.hidden = YES;
     } else {
         self.smallImage.hidden = NO;

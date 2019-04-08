@@ -9,8 +9,8 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
-//#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
+//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
+#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
 
 //#ifdef DEBUG
 ////极品城URL
@@ -103,6 +103,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZSaveTool.h" // 自定义的储存
 #import "CZGetJIBITool.h" // 获得极币
 #import "CZJIPINSynthesisTool.h" //综合工具
+#import <UMAnalytics/MobClick.h> // 统计
 
 /************************************************************/
 #endif 

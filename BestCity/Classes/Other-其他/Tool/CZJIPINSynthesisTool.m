@@ -23,7 +23,7 @@
         case CZJIPINModuleEvaluation: //评测
             number = @"2";
             break;
-        case CZJIPINModuleTrail: //试用商品 
+        case CZJIPINModuleTrail: //试用报告  
             number = @"4";
             break;
         case CZJIPINModuleTrailReport: //试用报告 

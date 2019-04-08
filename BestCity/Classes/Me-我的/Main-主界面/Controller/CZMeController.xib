@@ -14,6 +14,7 @@
                 <outlet property="attentionLabel" destination="wyr-cb-5gs" id="muE-f1-40c"/>
                 <outlet property="fansLabel" destination="qes-kj-45g" id="7ks-ir-lxa"/>
                 <outlet property="headImage" destination="XOO-5G-ru1" id="YCq-Mf-Z7d"/>
+                <outlet property="invitationCodeLabel" destination="HB8-9v-bhm" id="KGs-tl-Gxa"/>
                 <outlet property="loginBtn" destination="Q9Y-z1-cIv" id="Apx-Ev-5n5"/>
                 <outlet property="moneyLabel" destination="AdO-yN-bTb" id="Hfz-AE-Eoe"/>
                 <outlet property="scrollerView" destination="D8s-nW-E3e" id="DVG-4N-h2V"/>

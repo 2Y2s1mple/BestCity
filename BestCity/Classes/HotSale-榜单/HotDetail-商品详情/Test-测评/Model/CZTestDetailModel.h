@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *shareImg;
 /** 购买数据 */
 @property (nonatomic, strong) NSArray *relatedGoodsList;
+/** 相关商品 */
+@property (nonatomic, strong) NSArray *relatedArticleList;
 
 @end
 

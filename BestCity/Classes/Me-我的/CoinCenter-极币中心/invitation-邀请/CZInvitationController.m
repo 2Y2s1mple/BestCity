@@ -30,7 +30,7 @@
 - (IBAction)generalPaste
 {
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-    posteboard.string = @"哈哈哈哈";
+    posteboard.string = JPUSERINFO[@"invitationCode"];
     [CZProgressHUD showProgressHUDWithText:@"复制成功"];
     [CZProgressHUD hideAfterDelay:1.5];
 }
@@ -44,6 +44,8 @@
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"邀请好友" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
     self.bigImageConstraint.constant = CZGetY(navigationView);
     self.bottomViewConstraint.constant = (IsiPhoneX ? 34 : 0);
+    self.inviteNumber.text = [NSString stringWithFormat:@"邀请码：%@", JPUSERINFO[@"invitationCode"]];
+    
     
     //导航条
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];

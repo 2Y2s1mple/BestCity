@@ -28,7 +28,7 @@
 /** 当前的类目ID */
 @property (nonatomic, strong) NSString *categoryId;
 /** 记录当前的榜单类型 */
-@property (nonatomic, assign) NSInteger orderbyType; //1热卖榜，2轻奢榜，3新品榜，4性价比榜
+@property (nonatomic, assign) NSInteger orderbyType;
 /** 记录从哪里悬浮标题栏 */
 @property (nonatomic, strong) UIView *contentTitlesView;
 /** 记录原来的contentTitlesViewY值 */
@@ -81,6 +81,7 @@
 #pragma mark - 控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.orderbyType = 1; //榜单代表的类型, 默认是热卖榜
     //line
     CZTOPLINE;
     // 设置tableView
@@ -99,7 +100,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @"0";
     param[@"category2Id"] = categoryId;
-    param[@"orderbyType"] =  orderbyType; //1热卖榜，2轻奢榜，3新品榜，4性价比榜
+    param[@"orderbyType"] =  orderbyType;
     param[@"client"] = @(2);
     self.param = param;
     [CZProgressHUD showProgressHUDWithText:nil];
@@ -131,7 +132,7 @@
     }];
 }
 
-#pragma mark - 初始化视图
+#pragma mark - 初始化二级标题视图
 - (UIView *)setupHeaderView
 {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 90)];
@@ -202,12 +203,11 @@
         }
         
     }
-    
-    
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, lineY, SCR_WIDTH, 6)];
     line.backgroundColor = CZGlobalLightGray; 
     [backView addSubview:line];
     
+    // 初始化三级标题
     UIView *titles = [self contentViewTitles];
     self.contentTitlesView = titles;
     self.contentTitlesViewY = CZGetY(line);
@@ -218,27 +218,27 @@
     return backView;
 }
 
-#pragma mark - headerView事件
+#pragma mark - 二级菜单点击事件
 - (void)headerViewDidClickedBtn:(UIButton *)sender
 {
     if (self.recordMainBtn == sender) return;
     [sender setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
     NSInteger index = sender.tag - 100;
     self.categoryId = self.subTitles.children[index].categoryId;
-    self.orderbyType = 0; // 默认第一个
+    self.orderbyType = 1; // 默认第一个
     [self contentViewDidClickedBtn:[[self.recordBtn superview] viewWithTag:100]];
     
     [self.recordMainBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
     self.recordMainBtn = sender;
 }
 
+#pragma mark - 三级菜单视图
 - (UIView *)contentViewTitles
 {
     UIView *backView = [[UIView alloc] init];
     backView.backgroundColor = [UIColor whiteColor];
     backView.height = 60;
     backView.width = SCR_WIDTH;
-    
     
     NSArray *titles = self.thirdTitles;
     CGFloat space = (SCR_WIDTH - 30 - titles.count * 55) / (titles.count - 1);
@@ -279,7 +279,7 @@
     return backView;
 }
 
-#pragma mark - contentView事件
+#pragma mark - 三级菜单点击事件
 - (void)contentViewDidClickedBtn:(UIButton *)sender
 {
     if (self.recordBtn != sender) {
@@ -299,14 +299,9 @@
         self.recordBtn = sender;
         //获取数据
         self.orderbyType = [self.thirdTitles[sender.tag - 100][@"orderbyType"] integerValue];
-        
     }
-    
-    
-    
     [self getDataSourceWithId:self.categoryId type:@(self.orderbyType)];
 }
-
 
 /**
  * 头部的大图片

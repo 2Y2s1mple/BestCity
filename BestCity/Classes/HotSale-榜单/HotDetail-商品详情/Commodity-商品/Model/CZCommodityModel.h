@@ -31,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *score;
 /** 点赞数量 */
 @property (nonatomic, strong) NSString *voteCount;
-
+/** 相关商品 */
+@property (nonatomic, strong) NSArray *relatedArticleList;
 
 @end
 
