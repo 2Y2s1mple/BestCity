@@ -31,7 +31,6 @@
 {
     if (_scrollerView == nil) {
         UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
-        scrollerView.backgroundColor = CZGlobalWhiteBg;
         self.scrollerView = scrollerView;
     }
     return _scrollerView;
@@ -39,6 +38,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(iOS 11.0, *)) {
+        self.scrollerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     self.view.backgroundColor = CZGlobalWhiteBg;
     //设置scrollerView
     [self.view addSubview:self.scrollerView];
@@ -56,27 +60,34 @@
 
 - (void)createNodataView
 {
+    
+    if ([self.detailTtype isEqualToString:@"1"]) {
+    }
     //设置scrollerView
     CGFloat space = 14.0f;
-    if ([self.detailTtype isEqualToString:@"1"]) {
-        /**加载开箱测评*/
-        //标题
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 0, 150, 20)];
-        titleLabel.text = @"评测报告";
-        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
-        [self.scrollerView addSubview:titleLabel];
-        
-        UILabel *content = [[UILabel alloc] initWithFrame:CGRectMake(space, 0, 150, 20)];
-        content.centerX = self.view.centerX;
-        content.y = CZGetY(titleLabel) + 20;
-        content.text = @"评测进行中......";
-        content.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
-        content.textColor = CZGlobalGray;
-        [self.scrollerView addSubview:content];
-    }
+    /**加载开箱测评*/
+    //标题
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 20, 150, 20)];
+    titleLabel.text = @"评测报告";
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+    [self.scrollerView addSubview:titleLabel];
+    
+    UIView *contentView = [[UIView alloc] init];
+    contentView.x = 0;
+    contentView.y = CZGetY(titleLabel);
+    contentView.width = SCR_WIDTH;
+    contentView.height = 170;
+    [self.scrollerView addSubview:contentView];
+    UILabel *title = [[UILabel alloc] init];
+    title.text = @"评测进行中......";
+    title.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+    title.textColor = CZGlobalGray;
+    [title sizeToFit];
+    title.center = CGPointMake(contentView.width / 2.0, contentView.height / 2.0);
+    [contentView addSubview:title];
     
     //加个分隔线
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 100, SCR_WIDTH, 7)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(contentView), SCR_WIDTH, 7)];
     self.lineView = lineView;
     lineView.backgroundColor = CZGlobalLightGray;
     [self.scrollerView addSubview:lineView];

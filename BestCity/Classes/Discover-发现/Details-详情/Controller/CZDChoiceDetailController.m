@@ -7,24 +7,25 @@
 //
 
 #import "CZDChoiceDetailController.h"
-#import "GXNetTool.h"
-#import "CZRecommendNav.h" // 导航
-#import "CZTestSubController.h" // 测评
-#import "CZEvaluateSubController.h" // 评论
 
-/** 模型 */
-#import "CZTestDetailModel.h"
-#import "CZShareAndlikeView.h" // 分享
-#import "CZBuyView.h"
+// 工具
+#import "GXNetTool.h"
 #import "CZAttentionBtn.h"
 #import "UIImageView+WebCache.h"
 
+// 模型
+#import "CZTestDetailModel.h"
+
+// 视图
+#import "CZRecommendNav.h" // 导航
+#import "CZTestSubController.h" // 测评
+#import "CZEvaluateSubController.h" // 评论
+#import "CZCommonRecommendController.h" // 推荐文章
+#import "CZShareAndlikeView.h" // 分享
+#import "CZBuyView.h"
 
 @interface CZDChoiceDetailController () <CZRecommendNavDelegate, UIScrollViewDelegate>
-/** 分享参数 */
-@property (nonatomic, strong) NSDictionary *shareParam;
-/** 数据 */
-@property (nonatomic, strong) CZTestDetailModel *dicDataModel;
+// 视图
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
 /** 导航栏 */
@@ -33,10 +34,10 @@
 @property (nonatomic, strong) CZTestSubController *testVc;
 /** 评价 */
 @property (nonatomic, strong) CZEvaluateSubController *evaluate;
+/** 推荐文章 */
+@property (nonatomic, strong) CZCommonRecommendController *recommen;
 /** 分享购买按钮 */
 @property (nonatomic, strong) CZShareAndlikeView *likeView;
-/** 记录偏移量 */
-@property (nonatomic, assign) CGFloat recordOffsetY;
 /** 关注按钮 */
 @property (nonatomic, strong) CZAttentionBtn *attentionBtn;
 /** 小头像 */
@@ -44,12 +45,16 @@
 /** 名字 */
 @property (nonatomic, strong) UILabel *nameLabel;
 
-/** <#注释#> */
+// 工具
+/** 记录偏移量 */
+@property (nonatomic, assign) CGFloat recordOffsetY;
+/** 定时器block */
 @property (nonatomic, copy) dispatch_block_t block;
-
+/** 分享参数 */
+@property (nonatomic, strong) NSDictionary *shareParam;
+/** 数据 */
+@property (nonatomic, strong) CZTestDetailModel *dicDataModel;
 @end
-
-
 
 @implementation CZDChoiceDetailController
 /** 分享控件高度 */
@@ -195,6 +200,13 @@ static CGFloat const likeAndShareHeight = 49;
     self.evaluate.type = type;
     self.evaluate.targetId = self.dicDataModel.articleId;
     
+    // 推荐文章
+    self.recommen = [[CZCommonRecommendController alloc] init];
+    self.recommen.view.y = self.evaluate.view.y + self.evaluate.scrollerView.height;
+    self.recommen.articleArr = self.dicDataModel.relatedArticleList;
+    [self.scrollerView addSubview:self.recommen.view];
+    [self addChildViewController:self.recommen];
+    
     // 设置滚动高度
     self.scrollerView.contentSize = CGSizeMake(0, self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
 }
@@ -242,7 +254,9 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)openBoxInspectWebViewHeightChange:(NSNotification *)notfi
 {
     self.evaluate.view.y = self.testVc.scrollerView.height;
-    self.scrollerView.contentSize = CGSizeMake(0, self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
+    self.recommen.view.y = self.evaluate.view.y + self.evaluate.scrollerView.height;
+    
+    self.scrollerView.contentSize = CGSizeMake(0, self.testVc.scrollerView.height + self.evaluate.scrollerView.height + self.recommen.view.height);
 }
 
 #pragma mark - <UIScrollViewDelegate>
@@ -278,7 +292,6 @@ static CGFloat const likeAndShareHeight = 49;
         self.recordOffsetY = offsetY;
     }
 }
-
 
 #pragma mark - 事件
 // 取消关注
@@ -327,5 +340,19 @@ static CGFloat const likeAndShareHeight = 49;
         [CZProgressHUD hideAfterDelay:0];
     }];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end

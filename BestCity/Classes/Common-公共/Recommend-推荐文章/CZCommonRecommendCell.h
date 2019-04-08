@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZCommonRecommendCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+/** 相关文章数据 */
+@property (nonatomic, strong) NSDictionary *dataDic;
 @end
 
 NS_ASSUME_NONNULL_END

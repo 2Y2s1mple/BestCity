@@ -37,18 +37,33 @@
                             <constraint firstAttribute="height" constant="98" id="rdC-Em-CKh"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9PM-kV-uRd">
+                        <rect key="frame" x="0.0" y="146.5" width="442" height="1"/>
+                        <color key="backgroundColor" red="0.96070021390914917" green="0.96083813905715942" blue="0.96067017316818237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="FWV-zx-Waa"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="B4Z-cn-GMI" firstAttribute="leading" secondItem="3bB-nB-hvD" secondAttribute="trailing" constant="14" id="6zT-ty-7p2"/>
                     <constraint firstItem="3bB-nB-hvD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Jve-yI-BO9"/>
                     <constraint firstAttribute="trailing" secondItem="B4Z-cn-GMI" secondAttribute="trailing" id="NC8-ST-JCh"/>
                     <constraint firstItem="B4Z-cn-GMI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="UKw-x3-xkz"/>
+                    <constraint firstAttribute="bottom" secondItem="9PM-kV-uRd" secondAttribute="bottom" id="cL5-aa-T6H"/>
+                    <constraint firstItem="9PM-kV-uRd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="g2p-1I-yto"/>
+                    <constraint firstAttribute="trailing" secondItem="9PM-kV-uRd" secondAttribute="trailing" id="hFa-m4-Vaf"/>
                     <constraint firstAttribute="bottom" secondItem="Qsf-NP-EUB" secondAttribute="bottom" constant="24" id="kk3-6J-iNn"/>
                     <constraint firstItem="Qsf-NP-EUB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nvw-bJ-mws"/>
                     <constraint firstItem="3bB-nB-hvD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="rYz-St-ITq"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-309" y="28"/>
+            <connections>
+                <outlet property="bigImageView" destination="B4Z-cn-GMI" id="HPQ-N9-AFe"/>
+                <outlet property="subTitleLabel" destination="Qsf-NP-EUB" id="r7n-El-Au3"/>
+                <outlet property="titleLabel" destination="3bB-nB-hvD" id="Pmz-dQ-qt2"/>
+            </connections>
+            <point key="canvasLocation" x="-49.275362318840585" y="124.55357142857142"/>
         </tableViewCell>
     </objects>
     <resources>

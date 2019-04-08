@@ -7,6 +7,17 @@
 //
 
 #import "CZCommonRecommendCell.h"
+#import "UIImageView+WebCache.h"
+
+
+@interface CZCommonRecommendCell ()
+/** 标题 */
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+/** subTitle */
+@property (nonatomic, weak) IBOutlet UILabel *subTitleLabel;
+/** 图片 */
+@property (nonatomic, weak) IBOutlet UIImageView *bigImageView;
+@end
 
 @implementation CZCommonRecommendCell
 
@@ -19,6 +30,14 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
     }
     return cell;
+}
+
+- (void)setDataDic:(NSDictionary *)dataDic
+{
+    _dataDic = dataDic;
+    self.titleLabel.text = dataDic[@"title"];
+    self.subTitleLabel.text = dataDic[@"createTime"];
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"img"]]];
 }
 
 - (void)awakeFromNib {

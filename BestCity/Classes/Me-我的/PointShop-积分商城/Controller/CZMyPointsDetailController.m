@@ -191,6 +191,7 @@ static CGFloat const likeAndShareHeight = 49;
         self.buyBtn.enabled = NO;
         [_buyBtn setTitle:@"已售空" forState:UIControlStateNormal];
     }  else if ([self.dataSource[@"hasBuy"] isEqual: @(1)]) { // 0未购买，1已购买
+        [self.buyBtn setBackgroundColor:CZGlobalGray];
         self.buyBtn.enabled = NO;
         [_buyBtn setTitle:@"已兑换" forState:UIControlStateNormal];
     }

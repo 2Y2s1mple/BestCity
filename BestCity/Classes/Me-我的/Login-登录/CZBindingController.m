@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 /** 验证码 */
 @property (weak, nonatomic) IBOutlet UIButton *verificationCodeBtn;
+/** 邀请码 */
+@property (nonatomic, weak) IBOutlet UITextField *invitationCodeTextField;
 /** 登录按钮 */
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 /** 定时器 */
@@ -43,6 +45,7 @@
     param[@"code"] = self.passwordTextField.text;
     param[@"openid"] = self.openid;
     param[@"channel"] = @(1);
+    param[@"invitationCode"] = self.invitationCodeTextField.text;
   
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/bindMobile"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {

@@ -9,6 +9,7 @@
 #import "CZUMConfigure.h"
 #import <UMCommon/UMCommon.h>
 #import <UShareUI/UShareUI.h>
+#import <UMAnalytics/MobClick.h>
 #import "CZGetJIBITool.h"
 
 @implementation CZUMConfigure
@@ -27,6 +28,10 @@ static id _instance;
     [UMConfigure initWithAppkey:@"5b729a75f29d987629000096" channel:@"App Store"];
     // U-Share 平台设置
     [self configUSharePlatforms];
+    
+//    [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
+//    [UMConfigure setEncryptEnabled:YES];//打开加密传输
+//    [UMConfigure setLogEnabled:YES];//设置打开日志
 }
 
 - (void)configUSharePlatforms

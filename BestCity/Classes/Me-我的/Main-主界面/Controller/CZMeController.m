@@ -34,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
 /** 登录按钮加用户名 */
 @property (weak, nonatomic) IBOutlet CZMutContentButton *loginBtn;
+/** 邀请码 */
+@property (nonatomic, weak) IBOutlet UILabel *invitationCodeLabel;
 /** 极币数 */
 @property (nonatomic, weak) IBOutlet UILabel *moneyLabel;
 /** 关注 : follow */
@@ -51,7 +53,7 @@
 - (IBAction)generalPaste
 {
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-    posteboard.string = @"哈哈哈哈";
+    posteboard.string = JPUSERINFO[@"invitationCode"];
     [CZProgressHUD showProgressHUDWithText:@"复制成功"];
     [CZProgressHUD hideAfterDelay:1.5];
 }
@@ -75,6 +77,8 @@
     [backView addSubview:vc];
     
     [self.view addSubview:backView];
+    
+    [MobClick event:@"test123"];
 }
 
 - (void)backViewHidden
@@ -173,7 +177,16 @@
 {
     [super viewWillAppear:animated];
     [self getNetworkUserInfo];
+    [MobClick beginLogPageView:@"我的我的"]; //("Pagename"为页面名称，可自定义)
+    
 }
+
+- (void)viewWillDisappear:(BOOL)animated 
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"我的我的"];
+}
+
 
 #pragma mark - 获取用户信息
 - (void)getNetworkUserInfo
@@ -195,6 +208,9 @@
     [self.loginBtn setTitle:JPUSERINFO[@"nickname"] forState:UIControlStateNormal];
     self.loginBtn.enabled = YES;
     [self.loginBtn setImage:nil forState:UIControlStateNormal];
+    
+    // 邀请码
+    self.invitationCodeLabel.text = [NSString stringWithFormat:@"邀请码：%@", JPUSERINFO[@"invitationCode"]];
     
     // 极币数
     self.moneyLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"point"]];

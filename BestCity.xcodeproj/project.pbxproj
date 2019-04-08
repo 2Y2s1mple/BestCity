@@ -259,6 +259,8 @@
 		97B4A49A2248DBF200E48D93 /* CZTrialTestListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B4A4982248DBF200E48D93 /* CZTrialTestListController.xib */; };
 		97B4A49E22490BB800E48D93 /* CZTrailTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B4A49C22490BB800E48D93 /* CZTrailTestCell.m */; };
 		97B4A49F22490BB800E48D93 /* CZTrailTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B4A49D22490BB800E48D93 /* CZTrailTestCell.xib */; };
+		97B6C55F225AEC480061D9A0 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B6C55E225AEC480061D9A0 /* UMAnalytics.framework */; };
+		97B6C56C225AF3900061D9A0 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B6C56B225AF3900061D9A0 /* UMCommon.framework */; };
 		97B875FC21EDC472001CC393 /* CZVoteShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B875FB21EDC472001CC393 /* CZVoteShowView.m */; };
 		97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B875FD21EDC47D001CC393 /* CZVoteShowView.xib */; };
 		97B8760A21EED78A001CC393 /* CZMainAttentionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B8760921EED78A001CC393 /* CZMainAttentionController.m */; };
@@ -359,7 +361,6 @@
 		97F0EC23212512B6000FE1DC /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F0EC0E212512B6000FE1DC /* libSocialWeChat.a */; };
 		97F0EC24212512B6000FE1DC /* libSocialSina.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F0EC11212512B6000FE1DC /* libSocialSina.a */; };
 		97F0EC25212512B6000FE1DC /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F0EC15212512B6000FE1DC /* libSocialQQ.a */; };
-		97F0EC26212512B6000FE1DC /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F0EC19212512B6000FE1DC /* UMCommon.framework */; };
 		97F0EC27212512B6000FE1DC /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F0EC1C212512B6000FE1DC /* UTDID.framework */; };
 		97F0EC28212512B6000FE1DC /* SecurityEnvSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F0EC1D212512B6000FE1DC /* SecurityEnvSDK.framework */; };
 		97F0EC2E21251CFE000FE1DC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F0EC2D21251CFE000FE1DC /* libsqlite3.tbd */; };
@@ -837,6 +838,8 @@
 		97B4A49B22490BB800E48D93 /* CZTrailTestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrailTestCell.h; sourceTree = "<group>"; };
 		97B4A49C22490BB800E48D93 /* CZTrailTestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrailTestCell.m; sourceTree = "<group>"; };
 		97B4A49D22490BB800E48D93 /* CZTrailTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTrailTestCell.xib; sourceTree = "<group>"; };
+		97B6C55E225AEC480061D9A0 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalytics.framework; sourceTree = "<group>"; };
+		97B6C56B225AF3900061D9A0 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
 		97B875FA21EDC472001CC393 /* CZVoteShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZVoteShowView.h; sourceTree = "<group>"; };
 		97B875FB21EDC472001CC393 /* CZVoteShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZVoteShowView.m; sourceTree = "<group>"; };
 		97B875FD21EDC47D001CC393 /* CZVoteShowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZVoteShowView.xib; sourceTree = "<group>"; };
@@ -1011,7 +1014,6 @@
 		97F0EC12212512B6000FE1DC /* UMSocialSinaHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSinaHandler.h; sourceTree = "<group>"; };
 		97F0EC14212512B6000FE1DC /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
 		97F0EC15212512B6000FE1DC /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
-		97F0EC19212512B6000FE1DC /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
 		97F0EC1C212512B6000FE1DC /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
 		97F0EC1D212512B6000FE1DC /* SecurityEnvSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityEnvSDK.framework; sourceTree = "<group>"; };
 		97F0EC2D21251CFE000FE1DC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -1067,6 +1069,7 @@
 				97F0EC2E21251CFE000FE1DC /* libsqlite3.tbd in Frameworks */,
 				970D0B7D21ACE90D00649FC2 /* CoreMotion.framework in Frameworks */,
 				974C586F21229FAB008B3E6A /* libz.tbd in Frameworks */,
+				97B6C56C225AF3900061D9A0 /* UMCommon.framework in Frameworks */,
 				970D0B7F21ACE96D00649FC2 /* libc++.tbd in Frameworks */,
 				974C586D21229F9F008B3E6A /* Security.framework in Frameworks */,
 				974C586321229F6D008B3E6A /* CFNetwork.framework in Frameworks */,
@@ -1084,6 +1087,7 @@
 				970D0B7321ACE87000649FC2 /* SGMain.framework in Frameworks */,
 				970D0B6D21ACE87000649FC2 /* AlibabaAuthExt.framework in Frameworks */,
 				970D0B6F21ACE87000649FC2 /* AlibabaAuthSDK.framework in Frameworks */,
+				97B6C55F225AEC480061D9A0 /* UMAnalytics.framework in Frameworks */,
 				970D0B6C21ACE87000649FC2 /* UTMini.framework in Frameworks */,
 				970D0B7721ACE87000649FC2 /* AlibcTradeCommon.framework in Frameworks */,
 				97F0EC27212512B6000FE1DC /* UTDID.framework in Frameworks */,
@@ -1097,7 +1101,6 @@
 				970D0B6B21ACE87000649FC2 /* UTDID.framework in Frameworks */,
 				974C587121229FC4008B3E6A /* libresolv.tbd in Frameworks */,
 				97F0EC22212512B6000FE1DC /* UMShare.framework in Frameworks */,
-				97F0EC26212512B6000FE1DC /* UMCommon.framework in Frameworks */,
 				974C586B21229F91008B3E6A /* CoreGraphics.framework in Frameworks */,
 				974C586521229F76008B3E6A /* CoreFoundation.framework in Frameworks */,
 				97F0EC21212512B6000FE1DC /* UShareUI.framework in Frameworks */,
@@ -2625,6 +2628,46 @@
 			path = "试用名单";
 			sourceTree = "<group>";
 		};
+		97B6C55C225AEC470061D9A0 /* analytics */ = {
+			isa = PBXGroup;
+			children = (
+				97B6C55D225AEC480061D9A0 /* analytics_ios_6.0.3 */,
+			);
+			path = analytics;
+			sourceTree = "<group>";
+		};
+		97B6C55D225AEC480061D9A0 /* analytics_ios_6.0.3 */ = {
+			isa = PBXGroup;
+			children = (
+				97B6C55E225AEC480061D9A0 /* UMAnalytics.framework */,
+			);
+			path = analytics_ios_6.0.3;
+			sourceTree = "<group>";
+		};
+		97B6C568225AF3900061D9A0 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				97B6C569225AF3900061D9A0 /* common_ios_2.0.1 */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		97B6C569225AF3900061D9A0 /* common_ios_2.0.1 */ = {
+			isa = PBXGroup;
+			children = (
+				97B6C56A225AF3900061D9A0 /* normal */,
+			);
+			path = common_ios_2.0.1;
+			sourceTree = "<group>";
+		};
+		97B6C56A225AF3900061D9A0 /* normal */ = {
+			isa = PBXGroup;
+			children = (
+				97B6C56B225AF3900061D9A0 /* UMCommon.framework */,
+			);
+			path = normal;
+			sourceTree = "<group>";
+		};
 		97BB48102133DB04006AE982 /* Commodity-商品 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3018,9 +3061,10 @@
 		97F0EC0121251187000FE1DC /* 友盟 */ = {
 			isa = PBXGroup;
 			children = (
+				97B6C568225AF3900061D9A0 /* common */,
+				97B6C55C225AEC470061D9A0 /* analytics */,
 				97F0EC30212529F5000FE1DC /* CZUMConfigure.h */,
 				97F0EC31212529F5000FE1DC /* CZUMConfigure.m */,
-				97F0EC16212512B6000FE1DC /* common */,
 				97F0EC06212512B6000FE1DC /* share */,
 				97F0EC1A212512B6000FE1DC /* thirdparties */,
 				97F0EC02212512B6000FE1DC /* umcommonlog */,
@@ -3107,30 +3151,6 @@
 				97F0EC15212512B6000FE1DC /* libSocialQQ.a */,
 			);
 			path = QQ;
-			sourceTree = "<group>";
-		};
-		97F0EC16212512B6000FE1DC /* common */ = {
-			isa = PBXGroup;
-			children = (
-				97F0EC17212512B6000FE1DC /* common_ios_1.5.2 */,
-			);
-			path = common;
-			sourceTree = "<group>";
-		};
-		97F0EC17212512B6000FE1DC /* common_ios_1.5.2 */ = {
-			isa = PBXGroup;
-			children = (
-				97F0EC18212512B6000FE1DC /* normal */,
-			);
-			path = common_ios_1.5.2;
-			sourceTree = "<group>";
-		};
-		97F0EC18212512B6000FE1DC /* normal */ = {
-			isa = PBXGroup;
-			children = (
-				97F0EC19212512B6000FE1DC /* UMCommon.framework */,
-			);
-			path = normal;
 			sourceTree = "<group>";
 		};
 		97F0EC1A212512B6000FE1DC /* thirdparties */ = {
@@ -3850,6 +3870,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/analytics/analytics_ios_6.0.3",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/common/common_ios_2.0.1/normal",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -3932,6 +3954,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/analytics/analytics_ios_6.0.3",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/common/common_ios_2.0.1/normal",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";

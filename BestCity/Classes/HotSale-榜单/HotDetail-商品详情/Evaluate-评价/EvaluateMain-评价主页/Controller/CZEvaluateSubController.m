@@ -146,7 +146,7 @@
 {
     CGFloat space = 10.0f;
     // 用户评价
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 2 * space, 100, 20)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 2 * space, 100, 20)];
     titleLabel.text = @"用户评价";
     titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
     [self.scrollerView addSubview:titleLabel];

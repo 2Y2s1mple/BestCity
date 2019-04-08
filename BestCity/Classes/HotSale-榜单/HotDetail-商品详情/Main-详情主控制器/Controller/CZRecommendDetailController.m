@@ -35,8 +35,6 @@
 @property (nonatomic, strong) CZEvaluateSubController *evaluate;
 /** 推荐文章 */
 @property (nonatomic, strong) CZCommonRecommendController *recommen;
-
-
 /** 导航栏 */
 @property (nonatomic, strong) CZRecommendNav *nav;
 /** 分享购买按钮 */
@@ -50,6 +48,7 @@
 /** 收藏 */
 @property (nonatomic, strong) CZCollectButton *collectButton;
 @end
+
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
 static NSString * const type = @"1";
@@ -135,6 +134,11 @@ static NSString * const type = @"1";
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(iOS 11.0, *)) {
+        self.scrollerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;        
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     // 获取数据
     [self getSourceData];
@@ -170,7 +174,6 @@ static NSString * const type = @"1";
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"goodsId"] = self.goodsId;
-    
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -203,7 +206,7 @@ static NSString * const type = @"1";
     self.commendVC.detailData = self.detailModel.goodsEntity;
     self.commendVC.commodityDetailData = self.detailModel.goodsDetailEntity;
     self.commendVC.couponData = self.detailModel.goodsCouponsEntity;
-    self.commendVC.view.y = (IsiPhoneX ? -44 : -20);
+    self.commendVC.view.y = 0;
     [self.scrollerView addSubview:self.commendVC.view];
     [self addChildViewController:self.commendVC];
     
@@ -226,6 +229,7 @@ static NSString * const type = @"1";
     // 推荐文章
     self.recommen = [[CZCommonRecommendController alloc] init];
     self.recommen.view.y = self.evaluate.view.y + self.evaluate.scrollerView.height;
+    self.recommen.articleArr = self.detailModel.goodsEntity.relatedArticleList;
     [self.scrollerView addSubview:self.recommen.view];
     [self addChildViewController:self.recommen];
     
@@ -259,7 +263,7 @@ static NSString * const type = @"1";
             point = CGPointMake(0, 0);
             break;
         case 1:
-            point = CGPointMake(0, CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
+            point = CGPointMake(0, CGRectGetMinY(self.testVc.view.frame) - 40 - (IsiPhoneX ? 44 : 20));
             break;
         case 2:
             point = CGPointMake(0, CGRectGetMinY(self.evaluate.view.frame) - 40 - (IsiPhoneX ? 44 : 20));
@@ -285,11 +289,11 @@ static NSString * const type = @"1";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    BOOL offset1 = self.scrollerView.contentOffset.y >= -20 && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
+    BOOL offset1 = self.scrollerView.contentOffset.y >= -20 && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.testVc.view.frame) - 40 - (IsiPhoneX ? 44 : 20));
     
-    BOOL offset2 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.testVc.view.frame) - 60 - (IsiPhoneX ? 44 : 20)) && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.evaluate.view.frame) - 60 - (IsiPhoneX ? 44 : 20));
+    BOOL offset2 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.testVc.view.frame) - 40 - (IsiPhoneX ? 44 : 20)) && self.scrollerView.contentOffset.y < (CGRectGetMinY(self.evaluate.view.frame) - 40 - (IsiPhoneX ? 44 : 20));
     
-    BOOL offset3 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.evaluate.view.frame) - 80 - (IsiPhoneX ? 44 : 20));
+    BOOL offset3 = self.scrollerView.contentOffset.y >= (CGRectGetMinY(self.evaluate.view.frame) - 40 - (IsiPhoneX ? 44 : 20));
     
     if (offset1) {
         self.nav.monitorIndex = 0;
