@@ -195,6 +195,10 @@
 		9779CE882239060F0090303F /* CZTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE872239060F0090303F /* CZTaskView.m */; };
 		9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE8A2239264E0090303F /* CZTaskMainView.m */; };
 		977C33B6218D951000FAA144 /* CZHotSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977C33B5218D951000FAA144 /* CZHotSearchView.m */; };
+		977E8090225B23660041A126 /* CZTrialApplySuccessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E808F225B23660041A126 /* CZTrialApplySuccessModel.m */; };
+		977E8094225B69830041A126 /* CZMyTrialApplyForFailedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E8093225B69830041A126 /* CZMyTrialApplyForFailedController.m */; };
+		977E8098225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E8096225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m */; };
+		977E8099225B6AD30041A126 /* CZMyTrialApplyForFailedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977E8097225B6AD30041A126 /* CZMyTrialApplyForFailedCell.xib */; };
 		977E82D1223C9B4700C8C01B /* CZInvitationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E82CF223C9B4700C8C01B /* CZInvitationController.m */; };
 		977E82D2223C9B4700C8C01B /* CZInvitationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977E82D0223C9B4700C8C01B /* CZInvitationController.xib */; };
 		977E82D5223CA96600C8C01B /* CZGetJIBITool.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E82D4223CA96600C8C01B /* CZGetJIBITool.m */; };
@@ -729,6 +733,13 @@
 		9779CE8A2239264E0090303F /* CZTaskMainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaskMainView.m; sourceTree = "<group>"; };
 		977C33B4218D951000FAA144 /* CZHotSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotSearchView.h; sourceTree = "<group>"; };
 		977C33B5218D951000FAA144 /* CZHotSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSearchView.m; sourceTree = "<group>"; };
+		977E808E225B23660041A126 /* CZTrialApplySuccessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialApplySuccessModel.h; sourceTree = "<group>"; };
+		977E808F225B23660041A126 /* CZTrialApplySuccessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialApplySuccessModel.m; sourceTree = "<group>"; };
+		977E8092225B69830041A126 /* CZMyTrialApplyForFailedController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyTrialApplyForFailedController.h; sourceTree = "<group>"; };
+		977E8093225B69830041A126 /* CZMyTrialApplyForFailedController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyTrialApplyForFailedController.m; sourceTree = "<group>"; };
+		977E8095225B6AD30041A126 /* CZMyTrialApplyForFailedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyTrialApplyForFailedCell.h; sourceTree = "<group>"; };
+		977E8096225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyTrialApplyForFailedCell.m; sourceTree = "<group>"; };
+		977E8097225B6AD30041A126 /* CZMyTrialApplyForFailedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyTrialApplyForFailedCell.xib; sourceTree = "<group>"; };
 		977E82CE223C9B4700C8C01B /* CZInvitationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZInvitationController.h; sourceTree = "<group>"; };
 		977E82CF223C9B4700C8C01B /* CZInvitationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZInvitationController.m; sourceTree = "<group>"; };
 		977E82D0223C9B4700C8C01B /* CZInvitationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZInvitationController.xib; sourceTree = "<group>"; };
@@ -2307,6 +2318,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		977E8091225B693F0041A126 /* Failed-申请失败 */ = {
+			isa = PBXGroup;
+			children = (
+				977E8092225B69830041A126 /* CZMyTrialApplyForFailedController.h */,
+				977E8093225B69830041A126 /* CZMyTrialApplyForFailedController.m */,
+				977E8095225B6AD30041A126 /* CZMyTrialApplyForFailedCell.h */,
+				977E8096225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m */,
+				977E8097225B6AD30041A126 /* CZMyTrialApplyForFailedCell.xib */,
+			);
+			path = "Failed-申请失败";
+			sourceTree = "<group>";
+		};
 		977E82CD223C9B1B00C8C01B /* invitation-邀请 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2545,8 +2568,9 @@
 		97AB0C15225324CB00072426 /* SubController */ = {
 			isa = PBXGroup;
 			children = (
-				97AB0C1F22533BC300072426 /* Succeed-申请成功 */,
+				977E8091225B693F0041A126 /* Failed-申请失败 */,
 				97AB0C1E2253349A00072426 /* ApplyFor-申请中 */,
+				97AB0C1F22533BC300072426 /* Succeed-申请成功 */,
 			);
 			path = SubController;
 			sourceTree = "<group>";
@@ -2568,6 +2592,8 @@
 			children = (
 				97AB0C2022533C2E00072426 /* CZTrialApplySuccessController.h */,
 				97AB0C2122533C2E00072426 /* CZTrialApplySuccessController.m */,
+				977E808E225B23660041A126 /* CZTrialApplySuccessModel.h */,
+				977E808F225B23660041A126 /* CZTrialApplySuccessModel.m */,
 				97AB0C2322533D4900072426 /* CZTrialApplySuccessCell.h */,
 				97AB0C2422533D4900072426 /* CZTrialApplySuccessCell.m */,
 				97AB0C2522533D4900072426 /* CZTrialApplySuccessCell.xib */,
@@ -3369,6 +3395,7 @@
 				972E41B82114636100BC751C /* CZMyPointsCell.xib in Resources */,
 				97F0947A21B8F7C800F550B5 /* wwwipinchengcn.cer in Resources */,
 				97420DD721EC321400FE3D9F /* CZHisSearchCell.xib in Resources */,
+				977E8099225B6AD30041A126 /* CZMyTrialApplyForFailedCell.xib in Resources */,
 				97FF6DD22117FAD800376435 /* backshadow.png in Resources */,
 				97BC05DE2112B122001ED65A /* keyboard.png in Resources */,
 				970D0B6E21ACE87000649FC2 /* AlibabaAuthSDK.bundle in Resources */,
@@ -3502,6 +3529,7 @@
 				973122FA21A405F5007CF64B /* CZSystemMessageModel.m in Sources */,
 				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
 				9785778D21A80B2700E42B29 /* CZTwoController.m in Sources */,
+				977E8090225B23660041A126 /* CZTrialApplySuccessModel.m in Sources */,
 				979B05D3210F07EF0023292D /* CZShareAndlikeView.m in Sources */,
 				97D8FCCB2111A67700D8ED8F /* CZMyProfileController.m in Sources */,
 				9745082F21F807FE006A71EF /* KCUtilMd5.m in Sources */,
@@ -3584,6 +3612,7 @@
 				97705C57210716A300485D64 /* CZHotSaleController.m in Sources */,
 				97BB48092133AB6B006AE982 /* CZCommoditySubController.m in Sources */,
 				97705C6C2107172A00485D64 /* AFURLSessionManager.m in Sources */,
+				977E8098225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m in Sources */,
 				9778649C211A7AD6001B41F1 /* MASConstraintMaker.m in Sources */,
 				97798CCC212D0FC90052CE94 /* SDAnimatedImageRep.m in Sources */,
 				972E41D121147C6F00BC751C /* CZDiscountCouponController.m in Sources */,
@@ -3619,6 +3648,7 @@
 				97CDCB32211D625700521ED5 /* UILabel+CZAdapter.m in Sources */,
 				974F488D21A3B03600E1ED1A /* CZAttentionDetailModel.m in Sources */,
 				97BDB84D21100B8800966FF0 /* CZChoicenessCell.m in Sources */,
+				977E8094225B69830041A126 /* CZMyTrialApplyForFailedController.m in Sources */,
 				970C50A521F17E890091D7FF /* CZCoinCenterController.m in Sources */,
 				97911050222F7F0200C2DE5B /* CZAddressCell.m in Sources */,
 				972E41C621147C2000BC751C /* CZOrderController.m in Sources */,

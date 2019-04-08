@@ -1,17 +1,17 @@
 //
-//  CZTrialApplyForController.m
+//  CZMyTrialApplyForFailedController.m
 //  BestCity
 //
-//  Created by JasonBourne on 2019/4/2.
+//  Created by JasonBourne on 2019/4/8.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import "CZTrialApplyForController.h"
-#import "CZTrialApplyForCell.h"
+#import "CZMyTrialApplyForFailedController.h"
+#import "CZMyTrialApplyForFailedCell.h"
 #import "GXNetTool.h"
 #import "CZTrialDetailController.h"
 
-@interface CZTrialApplyForController () <UITableViewDelegate, UITableViewDataSource>
+@interface CZMyTrialApplyForFailedController () <UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
 @property (nonatomic, strong) UITableView *tableView;
 /** 页数 */
@@ -20,7 +20,8 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
-@implementation CZTrialApplyForController
+@implementation CZMyTrialApplyForFailedController
+
 - (NSMutableArray *)dataSource
 {
     if (_dataSource == nil) {
@@ -71,7 +72,7 @@
     self.page = 1;
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"status"] = @(0);
+    param[@"status"] = @(-1);
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
@@ -96,7 +97,7 @@
     self.page++;
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"status"] = @(0);
+    param[@"status"] = @(-1);
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
@@ -120,13 +121,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 161;
+    return 115;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dic = self.dataSource[indexPath.row];
-    CZTrialApplyForCell *cell = [CZTrialApplyForCell cellWithTableView:tableView];
+    CZMyTrialApplyForFailedCell *cell = [CZMyTrialApplyForFailedCell cellWithTableView:tableView];
     cell.dicData = dic;
     return cell;
 }

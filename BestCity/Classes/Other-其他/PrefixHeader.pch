@@ -9,8 +9,8 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
-#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
+#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
+//#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
 
 //#ifdef DEBUG
 ////极品城URL
@@ -23,11 +23,8 @@
 
 /** 用户信息 */
 #define JPUSERINFO [CZSaveTool objectForKey:@"user"]
-
 /** Token */
 #define JPTOKEN [CZSaveTool objectForKey:@"token"]
-
-
 /** 积分规则web */
 #define POINTSRULE_URL @"https://www.jipincheng.cn/rule.html"
 /** 用户规则web */
@@ -35,7 +32,6 @@
 /** 支付宝提现账号记录 */
 #define ALIPAYPhone [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayPhone"]
 #define ALIPAYPREALNAME [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayRealName"]
-
 
 /************************************************************/
 /**

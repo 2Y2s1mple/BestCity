@@ -17,6 +17,7 @@
 #import "CZTrialApplyForDetailController.h" // 申请流程
 #import "CZTrialTestListController.h" // 试用商品
 #import "CZTestReportController.h" // 使用报告
+
 // 工具
 #import "GXNetTool.h"
 
@@ -25,6 +26,7 @@
 #import "CZOpenAlibcTrade.h" // 淘宝
 #import "CZCoinCenterController.h" // 极币
 #import "CZvoteUserController.h"//使用名单
+#import "CZTrialAllReportHotController.h" // 查看使用报告
 #import "CZShareView.h" // 分享
 #import "CZUserInfoTool.h"
 
@@ -372,8 +374,6 @@ static CGFloat const likeAndShareHeight = 49;
     
     
     [self setupBtn:sender];
-    
-    
 }
 
 - (void)setupBtn:(UIButton *)sender
@@ -564,8 +564,8 @@ static CGFloat const likeAndShareHeight = 49;
         vc.dataSource = self.dataSource;
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([sender.titleLabel.text isEqualToString:@"查看试用报告"]) {
-        CZvoteUserController *vc = [[CZvoteUserController alloc] init];
-        vc.dataSource = self.dataSource;
+        CZTrialAllReportHotController *vc = [[CZTrialAllReportHotController alloc] init];
+        vc.goodsId = self.dataSource[@"goodsId"];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([sender.titleLabel.text isEqualToString:@"分享拉赞"]) {
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];

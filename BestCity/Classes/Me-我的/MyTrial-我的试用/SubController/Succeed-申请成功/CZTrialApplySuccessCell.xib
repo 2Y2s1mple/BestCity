@@ -26,13 +26,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="便携式果蔬榨汁料理机" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kM-RL-ge3">
-                        <rect key="frame" x="116" y="20" width="143" height="17"/>
+                        <rect key="frame" x="116" y="20" width="322" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计2018-08-22 公布名单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3I-kQ-H9K">
-                        <rect key="frame" x="116" y="46.5" width="158" height="16"/>
+                        <rect key="frame" x="116" y="46.5" width="322" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="shareBtnAction" destination="htH-kB-6IA" eventType="touchUpInside" id="wV9-HI-QOI"/>
+                                    <action selector="btnAction:" destination="htH-kB-6IA" eventType="touchUpInside" id="GzA-SO-3OV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -116,6 +116,7 @@
                     <constraint firstItem="l3I-kQ-H9K" firstAttribute="leading" secondItem="5kM-RL-ge3" secondAttribute="leading" id="bYL-of-xJ7"/>
                     <constraint firstItem="5kM-RL-ge3" firstAttribute="leading" secondItem="hDI-Q8-ygX" secondAttribute="trailing" constant="9" id="gnq-jw-tM7"/>
                     <constraint firstItem="OMz-XG-d5l" firstAttribute="bottom" secondItem="hDI-Q8-ygX" secondAttribute="bottom" constant="-8" id="iOE-0t-2iC"/>
+                    <constraint firstAttribute="trailing" secondItem="l3I-kQ-H9K" secondAttribute="trailing" constant="14" id="npw-96-D7x"/>
                     <constraint firstItem="hDI-Q8-ygX" firstAttribute="leading" secondItem="5DQ-FT-sNW" secondAttribute="leading" constant="12" id="on9-Y2-xZm"/>
                     <constraint firstItem="fJm-8c-9SR" firstAttribute="leading" secondItem="5DQ-FT-sNW" secondAttribute="leading" constant="14" id="r1T-Nq-R3e"/>
                     <constraint firstAttribute="trailing" secondItem="mx9-g6-nus" secondAttribute="trailing" id="t42-mo-Oy9"/>
@@ -123,18 +124,23 @@
                     <constraint firstAttribute="trailing" secondItem="fJm-8c-9SR" secondAttribute="trailing" constant="14" id="vUT-Sc-Pyy"/>
                     <constraint firstItem="5kM-RL-ge3" firstAttribute="top" secondItem="hDI-Q8-ygX" secondAttribute="top" constant="8" id="wCq-VZ-DyI"/>
                     <constraint firstAttribute="trailing" secondItem="5WH-AE-OWU" secondAttribute="trailing" constant="14" id="xDk-dr-I45"/>
+                    <constraint firstAttribute="trailing" secondItem="5kM-RL-ge3" secondAttribute="trailing" constant="14" id="xw3-Po-0X3"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="bigImage" destination="hDI-Q8-ygX" id="t5O-ps-gtT"/>
+                <outlet property="bottomLineView" destination="mx9-g6-nus" id="jfH-Zb-pLU"/>
+                <outlet property="bottomLineViewTop" destination="Szu-AL-z6I" id="zoE-3m-exo"/>
+                <outlet property="lineView" destination="fJm-8c-9SR" id="Y2e-mD-17M"/>
+                <outlet property="lineViewTop" destination="tiM-OX-IV8" id="e9K-ZD-qds"/>
                 <outlet property="remarkLabel" destination="UeU-sN-3MP" id="cwU-t7-l3p"/>
                 <outlet property="shareBtn" destination="kda-RI-fJY" id="3RT-Ws-BtD"/>
                 <outlet property="statusLabel" destination="OMz-XG-d5l" id="7Oe-6V-q4i"/>
                 <outlet property="subTitleLabel" destination="l3I-kQ-H9K" id="wVG-H9-6RW"/>
                 <outlet property="titleLabel" destination="5kM-RL-ge3" id="Aga-Rd-yzz"/>
             </connections>
-            <point key="canvasLocation" x="185.50724637681162" y="-33.147321428571431"/>
+            <point key="canvasLocation" x="952" y="-2"/>
         </tableViewCell>
     </objects>
 </document>

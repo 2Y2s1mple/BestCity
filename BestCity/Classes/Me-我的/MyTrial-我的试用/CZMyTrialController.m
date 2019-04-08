@@ -10,6 +10,7 @@
 #import "CZNavigationView.h"
 #import "CZTrialApplyForController.h" // 申请中
 #import "CZTrialApplySuccessController.h" // 申请成功
+#import "CZMyTrialApplyForFailedController.h" // 申请失败
 
 @interface CZMyTrialController ()
 
@@ -69,7 +70,7 @@
             return vc;
         }
         case 2: {
-            UIViewController *vc = [[UIViewController alloc] init];
+            CZMyTrialApplyForFailedController *vc = [[CZMyTrialApplyForFailedController alloc] init];
             return vc;
         }
         default:{

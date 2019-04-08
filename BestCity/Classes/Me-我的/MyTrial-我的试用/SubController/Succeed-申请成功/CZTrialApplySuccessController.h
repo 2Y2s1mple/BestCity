@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZTrialApplySuccessController : UIViewController
+/** 表单 */
+@property (nonatomic, strong) UITableView *tableView;
 
+- (void)reloadNewTrailDataSorce;
 @end
 
 NS_ASSUME_NONNULL_END

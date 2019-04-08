@@ -9,12 +9,14 @@
 #import "CZTrialApplySuccessController.h"
 #import "GXNetTool.h"
 #import "CZTrialApplySuccessCell.h"
+#import "CZTrialApplySuccessModel.h"
+#import "CZTrialDetailController.h"
 
 @interface CZTrialApplySuccessController () <UITableViewDelegate, UITableViewDataSource>
-/** 表单 */
-@property (nonatomic, strong) UITableView *tableView;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
+/** 数据 */
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation CZTrialApplySuccessController
@@ -26,12 +28,21 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.estimatedRowHeight = 0;
+        _tableView.estimatedSectionFooterHeight = 0;
+        _tableView.estimatedSectionHeaderHeight = 0;
     }
     return _tableView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [CZTrialApplySuccessModel setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                 @"ID" : @"id"
+                 }; 
+    }];
+    
     self.view.backgroundColor = [UIColor redColor];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0.7)];
@@ -64,7 +75,7 @@
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            
+            self.dataSource = [CZTrialApplySuccessModel objectArrayWithKeyValuesArray:result[@"data"]];
             
             
             [self.tableView reloadData];
@@ -87,7 +98,8 @@
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            
+            NSArray *freshData = [CZTrialApplySuccessModel objectArrayWithKeyValuesArray:result[@"data"]];
+            [self.dataSource addObjectsFromArray:freshData];
             
             [self.tableView reloadData];
         }
@@ -100,18 +112,29 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 193;
+    CZTrialApplySuccessModel *dic = self.dataSource[indexPath.row];
+    return dic.cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CZTrialApplySuccessModel *dic = self.dataSource[indexPath.row];
     CZTrialApplySuccessCell *cell = [CZTrialApplySuccessCell cellWithTableView:tableView];
+    cell.dicData = dic;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
+    CZTrialApplySuccessModel *dic = self.dataSource[indexPath.row];
+    vc.trialId = dic.ID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

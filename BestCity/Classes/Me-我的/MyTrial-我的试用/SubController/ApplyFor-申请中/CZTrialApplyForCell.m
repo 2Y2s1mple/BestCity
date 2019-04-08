@@ -57,17 +57,12 @@
 - (void)setDicData:(NSDictionary *)dicData
 {
     _dicData = dicData;
-//    [self.bigImage sd_setImageWithURL:dicData[@""]];
-//    self.titleLabel.text = dicData[@""];
-//    self.subTitleLabel.text = dicData[@""];
-//    self.statusLabel.text = dicData[@""];
-//    self.praiseLabel.text = dicData[@""];
+    [self.bigImage sd_setImageWithURL:[NSURL URLWithString:dicData[@"img"]]];
+    self.titleLabel.text = dicData[@"name"];
+    self.subTitleLabel.text = [NSString stringWithFormat:@"预计%@ 公布名单", [dicData[@"reportEndTime"] substringToIndex:10]];
+    self.statusLabel.text = @"审核中";
+    self.praiseLabel.text = [NSString stringWithFormat:@"已获%@个赞", dicData[@"voteCount"]];
     
-    self.bigImage.image = [UIImage imageNamed:@"testImage1"];
-    self.titleLabel.text = @"便携式果蔬榨汁料理机gx";
-    self.subTitleLabel.text = @"预计2018-08-22 公布名单gx";
-    self.statusLabel.text = @"审核中gx";
-    self.praiseLabel.text = @"已获397个赞gx";
     
 }
 
