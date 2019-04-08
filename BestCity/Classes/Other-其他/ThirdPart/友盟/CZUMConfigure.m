@@ -29,9 +29,9 @@ static id _instance;
     // U-Share 平台设置
     [self configUSharePlatforms];
     
-    [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
-    [UMConfigure setEncryptEnabled:YES];//打开加密传输
-    [UMConfigure setLogEnabled:YES];//设置打开日志
+//    [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
+//    [UMConfigure setEncryptEnabled:YES];//打开加密传输
+//    [UMConfigure setLogEnabled:YES];//设置打开日志
 }
 
 - (void)configUSharePlatforms
