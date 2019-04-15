@@ -504,9 +504,9 @@
         commentNameLabel.x = 10;
         commentNameLabel.y = 10 + replyHeight;
         [commentNameLabel sizeToFit];
-        if (commentNameLabel.width > 80) {
-            commentNameLabel.width = 80;
-        }
+//        if (commentNameLabel.width > 120) {
+//            commentNameLabel.width = 120;
+//        }
         
         UILabel *contentLabel = [[UILabel alloc] init];
         contentLabel.text = commentModel.content;

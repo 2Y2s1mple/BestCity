@@ -25,12 +25,13 @@
 @property (nonatomic, strong) CZHotSearchView *search;
 
 /** <#注释#> */
-@property (nonatomic, assign) void (^myBlock)(void);
+@property (nonatomic, assign) void (^myBlock)(NSString *);
 @end
 
 @implementation CZHotSaleController
 
-#pragma mark - 获取标题数据
+#pragma mark - 数据
+// 获取标题数据
 - (CZHotSaleController *(^)(void))obtainTtitles
 {
     return ^ {
@@ -68,7 +69,7 @@
     };
 }
 
-#pragma mark - 获取未读消息
+// 获取未读消息
 - (CZHotSaleController *(^)(void))obtainReadMessage
 {
     return ^ {
@@ -86,11 +87,14 @@
         return self;
     };
 }
+#pragma mark -- end
 
 #pragma mark - 控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    [self obtainTtitles];
+
     // 设置搜索栏 获取未读数 获取标题数据
     self.setupTopView().obtainReadMessage().obtainTtitles();
     
@@ -129,7 +133,7 @@
     return block;
 }
 
-#pragma mark - 响应事件
+#pragma mark - 事件
 - (void)pushSearchController
 {
     if ([JPTOKEN length] <= 0)
@@ -149,6 +153,13 @@
         
     }];
 }
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.obtainTtitles();
+}
+
+#pragma mark -- end
 
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController

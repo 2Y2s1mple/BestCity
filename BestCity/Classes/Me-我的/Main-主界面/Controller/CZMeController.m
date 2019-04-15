@@ -128,11 +128,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 跳转到极币数
+#pragma mark - 跳转到极币中心
 - (IBAction)coinAction:(UIButton *)sender {
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES
-     ];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /** 从plist文件加载数据 */

@@ -46,7 +46,7 @@
     
     UILabel *label = [[UILabel alloc] init];
     [backView addSubview:label];
-    label.text = [NSString stringWithFormat:@"        %@", self.model.content];
+    label.text = [NSString stringWithFormat:@"%@", self.model.content];
     label.font = [UIFont systemFontOfSize:14];
     label.textColor = CZGlobalGray;
     label.numberOfLines = 0;
@@ -69,10 +69,8 @@
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/message/selectById"];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqual: @"success"]) {
-            [CZProgressHUD showProgressHUDWithText:@"已读"];
             [[NSNotificationCenter defaultCenter] postNotificationName:systemMessageDetailControllerMessageRead object:nil];
         }
-        [CZProgressHUD hideAfterDelay:1];
     } failure:^(NSError *error) {
     }];
 }

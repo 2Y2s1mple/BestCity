@@ -13,8 +13,24 @@
 @property (nonatomic, strong) id bodyParam;
 @end
 
-
 @implementation GXNetTool
+
++ (NSDictionary *)setupHeader
+{
+    NSString *CONSTANT_KEY = @"quality-shop";
+    NSString *timestamp = [self getNowTimeTimestamp3];
+    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
+    // 获取UUID
+    NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSDictionary *paramHeader = @{
+                                  @"timestamp" : timestamp,
+                                  @"sign" : MD5string,
+                                  @"token" : JPTOKEN ? JPTOKEN : @"",
+                                  @"uuid" : deviceUUID
+                                  };
+    return paramHeader;
+}
+
 +(AFHTTPSessionManager *)GetNetWithUrl:(NSString *)url
                  body:(id)body
                header:(NSDictionary *)headers
@@ -26,11 +42,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //(2)请求头的设置
-    NSString *CONSTANT_KEY = @"quality-shop";
-    NSString *timestamp = [self getNowTimeTimestamp3];
-    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
-    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
-//    headers = @{@"token" : JPTOKEN ? @"a06531a09c5b4eb7859124d4dfab09ed" : @"a06531a09c5b4eb7859124d4dfab09ed", @"sign" : MD5string, @"timestamp" : timestamp};
+    headers = [self setupHeader];
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -50,6 +62,7 @@
         default:
             break;
     }
+
     //(4)设置数据响应类型
     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css",@"text/plain", @"application/javascript",@"image/jpeg", @"text/vnd.wap.wml", nil]];
     //(5)IOS9--UTF-8转码
@@ -67,7 +80,6 @@
         [CZProgressHUD showProgressHUDWithText:@"网络出错"];
         [CZProgressHUD hideAfterDelay:2];
     }];
-    
     return manager;
 }
 
@@ -102,8 +114,7 @@
 //    如果是需要验证自建证书，需要设置为YES
 //    securityPolicy.allowInvalidCertificates = YES;
 //    manager.securityPolicy = securityPolicy;
-   
-    
+
     //设置body数据类型
     switch (bodyStyle) {
         case GXRequsetStyleBodyJSON:
@@ -123,10 +134,7 @@
     }
     
     //(2)请求头的设置
-    NSString *CONSTANT_KEY = @"quality-shop";
-    NSString *timestamp = [self getNowTimeTimestamp3];
-    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
-    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
+    headers = [self setupHeader];
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -146,6 +154,7 @@
         default:
             break;
     }
+
     //(4)设置数据响应类型
     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css",@"text/plain", @"application/javascript",@"image/jpeg", @"text/vnd.wap.wml",@"application/xml", @"text/xml", nil]];
     //(5)IOS9--UTF-8转码
@@ -176,12 +185,9 @@
 {
     // 获取管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *CONSTANT_KEY = @"quality-shop";
-    NSString *timestamp = [self getNowTimeTimestamp3];
-    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
-    NSDictionary *headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};;
-    for (NSString *key in headers.allKeys) {
-        [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
+
+    for (NSString *key in [self setupHeader].allKeys) {
+        [manager.requestSerializer setValue:[self setupHeader][key] forHTTPHeaderField:key];
     }
     //(3)设置返回数据的类型
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -298,8 +304,8 @@
     }];
 }
 
-+(NSString *)getNowTimeTimestamp3{
-    
++ (NSString *)getNowTimeTimestamp3
+{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     
     [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -319,7 +325,6 @@
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];
     
     return timeSp;
-    
 }
 
 @end

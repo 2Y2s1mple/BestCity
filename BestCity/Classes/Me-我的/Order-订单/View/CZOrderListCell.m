@@ -13,6 +13,8 @@
 
 
 @interface CZOrderListCell ()
+/** 标题 */
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIButton *affirmBtn;
 /** 实付 */
@@ -65,21 +67,27 @@
 - (void)setModel:(CZOrderModel *)model
 {
     _model = model;
-    self.sendTimelabel.hidden = NO;
-    self.sendTimelabel.text = [NSString stringWithFormat:@"发件时间：%@", model.sendTime];
+    
+    
+    if ([model.goodsType  isEqual: @(2)]) {
+        self.titleLabel.text = @"极币商城";
+    } else {
+        self.titleLabel.text = @"免费试用商品";
+    }
     
     NSString *statuslabel;
     switch ([model.status integerValue]) {
         case 2:
             statuslabel = @"待收货";
+            self.sendTimelabel.text = [NSString stringWithFormat:@"发件时间：%@", model.sendTime];
             break;
         case 1:
             statuslabel = @"待发货";
-            self.sendTimelabel.hidden = YES;
+            self.sendTimelabel.text = [NSString stringWithFormat:@"下单时间：%@", model.payTime];
             break;
         case 3:
             statuslabel = @"已完成";
-            self.sendTimelabel.text = [NSString stringWithFormat:@"发件时间：%@", model.finishTime];
+            self.sendTimelabel.text = [NSString stringWithFormat:@"收件时间：%@", model.finishTime];
             break;
         default:
             break;

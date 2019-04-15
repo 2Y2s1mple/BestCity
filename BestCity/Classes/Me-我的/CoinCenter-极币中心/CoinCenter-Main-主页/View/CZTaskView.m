@@ -134,7 +134,7 @@
         self.lineView.y = self.height - 1;
     }
     sender.selected = !sender.selected;
-    !self.delegate ? :[self.delegate updataTaskView:self];    
+    !self.delegate ? : [self.delegate updataTaskView:self];    
 }
 
 

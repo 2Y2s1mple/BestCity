@@ -12,6 +12,7 @@
 #import "CZScollerImageTool.h"
 #import "CZNavigationView.h"
 #import "CZAffirmPointController.h"
+#import "CZCoinCenterController.h"
 
 @interface CZMyPointsDetailController () <UIScrollViewDelegate, UIWebViewDelegate>
 /** 数据 */
@@ -67,7 +68,7 @@ static CGFloat const likeAndShareHeight = 49;
         [_buyBtn setTitle:@"立即兑换" forState:UIControlStateNormal];
         _buyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         [_buyBtn setBackgroundColor:CZREDCOLOR];
-        [_buyBtn addTarget:self action:@selector(buyBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [_buyBtn addTarget:self action:@selector(buyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         _buyBtn.x = 0;
         _buyBtn.y = SCR_HEIGHT - likeAndShareHeight - (IsiPhoneX ? 34 : 0);
         _buyBtn.width = SCR_WIDTH;
@@ -75,14 +76,6 @@ static CGFloat const likeAndShareHeight = 49;
     }
     return _buyBtn;
 }
-
-- (void)buyBtnAction
-{
-    CZAffirmPointController *vc = [[CZAffirmPointController alloc] init];
-    vc.dataSource = self.dataSource;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -168,7 +161,7 @@ static CGFloat const likeAndShareHeight = 49;
     
     //标题
     UILabel *webTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, CZGetY(lineView2) + 38, 150, 20)];
-    webTitleLabel.text = @"商品详情 ";
+    webTitleLabel.text = @"商品详情";
     webTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
     [self.scrollerView addSubview:webTitleLabel];
     
@@ -183,9 +176,8 @@ static CGFloat const likeAndShareHeight = 49;
     [self.webView loadHTMLString:self.dataSource[@"content"] baseURL:nil];
     
     if ([JPUSERINFO[@"point"] integerValue] < [self.dataSource[@"exchangePoint"] integerValue]) {
-        [self.buyBtn setBackgroundColor:CZGlobalGray];
-        [_buyBtn setTitle:@"极币不足" forState:UIControlStateNormal];
-        self.buyBtn.enabled = NO;
+        [self.buyBtn setBackgroundColor:CZREDCOLOR];
+        [_buyBtn setTitle:@"极币不足 去赚取" forState:UIControlStateNormal];
     } else if ([self.dataSource[@"total"] isEqual: @(0)]) {
         [self.buyBtn setBackgroundColor:CZGlobalGray];
         self.buyBtn.enabled = NO;
@@ -193,7 +185,7 @@ static CGFloat const likeAndShareHeight = 49;
     }  else if ([self.dataSource[@"hasBuy"] isEqual: @(1)]) { // 0未购买，1已购买
         [self.buyBtn setBackgroundColor:CZGlobalGray];
         self.buyBtn.enabled = NO;
-        [_buyBtn setTitle:@"已兑换" forState:UIControlStateNormal];
+        [_buyBtn setTitle:@"已兑换（新人仅享兑换一次)" forState:UIControlStateNormal];
     }
     
     
@@ -246,5 +238,17 @@ static CGFloat const likeAndShareHeight = 49;
     }];
 }
 
-
+#pragma mark - 时间
+// 购买按钮事件
+- (void)buyBtnAction:(UIButton *)sender
+{
+    if ([sender.titleLabel.text isEqualToString:@"极币不足 去赚取"]) {
+        CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        CZAffirmPointController *vc = [[CZAffirmPointController alloc] init];
+        vc.dataSource = self.dataSource;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 @end

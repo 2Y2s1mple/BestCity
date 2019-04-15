@@ -44,7 +44,7 @@
 {
     // 添加标题
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"每日任务";
+    titleLabel.text = @"我要赚极币";
     titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     [titleLabel sizeToFit];
     titleLabel.y = 30;

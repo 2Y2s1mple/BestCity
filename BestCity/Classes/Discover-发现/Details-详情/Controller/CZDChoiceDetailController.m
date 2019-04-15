@@ -114,8 +114,7 @@ static CGFloat const likeAndShareHeight = 49;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"articleId"] = self.findgoodsId;
     param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType];
-    
-    [CZProgressHUD showProgressHUDWithText:nil];
+
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/article/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.dicDataModel = [CZTestDetailModel objectWithKeyValues:result[@"data"]];
@@ -130,12 +129,7 @@ static CGFloat const likeAndShareHeight = 49;
             self.shareParam = shareDic;
             [self.view addSubview:self.likeView];
         }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+    } failure:^(NSError *error) {}];
 }
 
 #pragma mark - 初始化视图

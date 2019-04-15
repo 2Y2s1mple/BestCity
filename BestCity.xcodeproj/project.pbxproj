@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		970497C4225F362900CC14FF /* CZOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970497C2225F362900CC14FF /* CZOrderDetailController.m */; };
+		970497C5225F362900CC14FF /* CZOrderDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970497C3225F362900CC14FF /* CZOrderDetailController.xib */; };
 		97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFC2182F46B0008E416 /* CZHotTitleModel.m */; };
 		97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */; };
 		970848FA22432507000D5528 /* CZTrialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970848F822432507000D5528 /* CZTrialController.m */; };
@@ -385,6 +387,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		970497C1225F362900CC14FF /* CZOrderDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZOrderDetailController.h; sourceTree = "<group>"; };
+		970497C2225F362900CC14FF /* CZOrderDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZOrderDetailController.m; sourceTree = "<group>"; };
+		970497C3225F362900CC14FF /* CZOrderDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZOrderDetailController.xib; sourceTree = "<group>"; };
 		97054BFB2182F46B0008E416 /* CZHotTitleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTitleModel.h; sourceTree = "<group>"; };
 		97054BFC2182F46B0008E416 /* CZHotTitleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotTitleModel.m; sourceTree = "<group>"; };
 		97054BFE2182FACC0008E416 /* CZHotSubTilteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotSubTilteModel.h; sourceTree = "<group>"; };
@@ -1092,6 +1097,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		970497BF225F35CF00CC14FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9791105F2230F3A600C2DE5B /* CZOrderListCell.h */,
+				979110602230F3A600C2DE5B /* CZOrderListCell.m */,
+				979110612230F3A600C2DE5B /* CZOrderListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		970497C0225F35ED00CC14FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97D39171223645290081F229 /* CZOrderModel.h */,
+				97D39172223645290081F229 /* CZOrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		97054BF92182F1F60008E416 /* Main-主控制器 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1492,11 +1516,11 @@
 				972E41C321147C2000BC751C /* CZOrderController.h */,
 				972E41C421147C2000BC751C /* CZOrderController.m */,
 				972E41C521147C2000BC751C /* CZOrderController.xib */,
-				9791105F2230F3A600C2DE5B /* CZOrderListCell.h */,
-				979110602230F3A600C2DE5B /* CZOrderListCell.m */,
-				979110612230F3A600C2DE5B /* CZOrderListCell.xib */,
-				97D39171223645290081F229 /* CZOrderModel.h */,
-				97D39172223645290081F229 /* CZOrderModel.m */,
+				970497C0225F35ED00CC14FF /* Model */,
+				970497BF225F35CF00CC14FF /* View */,
+				970497C1225F362900CC14FF /* CZOrderDetailController.h */,
+				970497C2225F362900CC14FF /* CZOrderDetailController.m */,
+				970497C3225F362900CC14FF /* CZOrderDetailController.xib */,
 			);
 			path = "Order-订单";
 			sourceTree = "<group>";
@@ -3331,6 +3355,7 @@
 				9785778821A6E04800E42B29 /* CZPackUpCommentCell.xib in Resources */,
 				972E41C721147C2000BC751C /* CZOrderController.xib in Resources */,
 				97C78FCD21197E9500374CCD /* CZMessageActivityCell.xib in Resources */,
+				970497C5225F362900CC14FF /* CZOrderDetailController.xib in Resources */,
 				97CAE7C321194DF900858749 /* CZMessageData.plist in Resources */,
 				97BDB84E21100B8800966FF0 /* CZChoicenessCell.xib in Resources */,
 				97BC05DB2112B122001ED65A /* key-pressed@2x.png in Resources */,
@@ -3458,6 +3483,7 @@
 				97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */,
 				9729617121B11CB600648940 /* CZJPushHandler.m in Sources */,
 				9708490C2243315D000D5528 /* CZTrialReportDetailController.m in Sources */,
+				970497C4225F362900CC14FF /* CZOrderDetailController.m in Sources */,
 				97705CBC2108230F00485D64 /* WMScrollView.m in Sources */,
 				97798CC7212D0FC90052CE94 /* SDWebImageCoderHelper.m in Sources */,
 				97FF6DDB21182D2E00376435 /* CZPastDueController.m in Sources */,

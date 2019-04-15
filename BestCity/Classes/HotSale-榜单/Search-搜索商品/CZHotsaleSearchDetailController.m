@@ -23,6 +23,20 @@
 @end
 
 @implementation CZHotsaleSearchDetailController
+#pragma mark - 数据
+// 搜索框Y值
+- (CGFloat)searchViewY
+{
+    return (IsiPhoneX ? 54 : 30);
+}
+
+// 搜索框H值
+- (CGFloat)searchHeight
+{
+    return 34;
+}
+#pragma mark -- end
+
 - (CZNoDataView *)noDataView
 {
     if (_noDataView == nil) {
@@ -37,7 +51,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     //设置搜索栏
-    UIView *searchView = [self setupTopViewWithFrame:CGRectMake(0, 30, SCR_WIDTH, 34)];
+    UIView *searchView = [self setupTopViewWithFrame:CGRectMake(0, self.searchViewY, SCR_WIDTH, self.searchHeight)];
     [self.view addSubview:searchView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneControllerScrollViewDidScroll:) name:@"CZSearchSubDetailOneController" object:nil];
 }
@@ -149,12 +163,12 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34, SCR_WIDTH, 50);
+    return CGRectMake(0, self.searchViewY + self.searchHeight, SCR_WIDTH, 50);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     
-    return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84) + 50);
+    return CGRectMake(0, self.searchViewY + self.searchHeight + 50, SCR_WIDTH, SCR_HEIGHT - (self.searchViewY + self.searchHeight + 50));
 }
 
 #pragma mark - 通知: 监听scrollerView的滚动
@@ -165,14 +179,13 @@
     
     if (offsetY > 0 && offsetY < scrollView.contentSize.height - scrollView.height) {
         if (offsetY - self.recordOffsetY >= 0) {
-//            NSLog(@"向上滑动");
+            NSLog(@"向上滑动");
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.frame = CGRectMake(0, -50, SCR_WIDTH, SCR_HEIGHT + 50);
                 self.currentOffsetY = -50;
             }];
         } else {
-//            NSLog(@"向下滑动");
-            
+            NSLog(@"向下滑动");
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT);
                 self.currentOffsetY = 0;

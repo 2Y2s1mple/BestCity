@@ -36,7 +36,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bj-frame" translatesAutoresizingMaskIntoConstraints="NO" id="9ll-KY-QHr">
-                            <rect key="frame" x="54" y="229" width="267" height="53"/>
+                            <rect key="frame" x="33" y="229" width="309" height="53"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="53" id="00P-Vw-3Ub"/>
                             </constraints>
@@ -114,9 +114,7 @@
                         <constraint firstItem="OGR-hI-3eh" firstAttribute="centerX" secondItem="d6M-TS-SOP" secondAttribute="centerX" id="8Gh-R8-Oza"/>
                         <constraint firstItem="anL-Vk-PwZ" firstAttribute="leading" secondItem="d6M-TS-SOP" secondAttribute="leading" id="DF9-rE-pOQ"/>
                         <constraint firstItem="wNS-io-h1Q" firstAttribute="leading" secondItem="hSt-Yk-6XS" secondAttribute="trailing" constant="9" id="Ear-Ab-9fW"/>
-                        <constraint firstItem="9ll-KY-QHr" firstAttribute="leading" secondItem="d6M-TS-SOP" secondAttribute="leading" constant="54" id="MRg-S2-Yu8"/>
                         <constraint firstItem="7xq-v2-Kjt" firstAttribute="leading" secondItem="d6M-TS-SOP" secondAttribute="leading" id="OiD-c4-8mq"/>
-                        <constraint firstAttribute="trailing" secondItem="9ll-KY-QHr" secondAttribute="trailing" constant="54" id="Oz5-EY-qXA"/>
                         <constraint firstItem="hSt-Yk-6XS" firstAttribute="trailing" secondItem="xh7-CF-u4e" secondAttribute="trailing" id="Pbe-DT-Ty1"/>
                         <constraint firstItem="4pS-fw-X9x" firstAttribute="centerX" secondItem="d6M-TS-SOP" secondAttribute="centerX" id="Pus-yA-zRd"/>
                         <constraint firstItem="OVh-8t-4kr" firstAttribute="centerX" secondItem="d6M-TS-SOP" secondAttribute="centerX" id="UeD-e4-ufe"/>
@@ -124,6 +122,7 @@
                         <constraint firstItem="OVh-8t-4kr" firstAttribute="top" secondItem="4pS-fw-X9x" secondAttribute="bottom" id="bJD-ff-2Js"/>
                         <constraint firstItem="anL-Vk-PwZ" firstAttribute="top" secondItem="d6M-TS-SOP" secondAttribute="top" id="d6O-H4-hJP"/>
                         <constraint firstAttribute="trailing" secondItem="anL-Vk-PwZ" secondAttribute="trailing" id="d6c-aD-G7g"/>
+                        <constraint firstItem="9ll-KY-QHr" firstAttribute="centerX" secondItem="d6M-TS-SOP" secondAttribute="centerX" id="ljF-xh-KxQ"/>
                         <constraint firstItem="xh7-CF-u4e" firstAttribute="centerX" secondItem="d6M-TS-SOP" secondAttribute="centerX" id="mfS-ch-VnA"/>
                         <constraint firstItem="4pS-fw-X9x" firstAttribute="top" secondItem="9ll-KY-QHr" secondAttribute="bottom" constant="8" id="t7i-MZ-BPh"/>
                         <constraint firstItem="OGR-hI-3eh" firstAttribute="top" secondItem="OVh-8t-4kr" secondAttribute="bottom" id="uab-Nv-KK7"/>
@@ -187,7 +186,7 @@
     </objects>
     <resources>
         <image name="bj-3" width="375" height="542"/>
-        <image name="bj-frame" width="267.5" height="53"/>
+        <image name="bj-frame" width="309" height="61.5"/>
         <image name="bj-people" width="375" height="189"/>
         <image name="pyq" width="40" height="40"/>
         <image name="wechat" width="40" height="40"/>

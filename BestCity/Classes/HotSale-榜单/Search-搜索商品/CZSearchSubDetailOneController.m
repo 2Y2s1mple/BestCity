@@ -21,6 +21,21 @@
 @end
 
 @implementation CZSearchSubDetailOneController
+
+#pragma mark - 数据
+// 搜索框Y值
+- (CGFloat)searchViewY
+{
+    return (IsiPhoneX ? 54 : 30);
+}
+
+// 搜索框H值
+- (CGFloat)searchHeight
+{
+    return 34;
+}
+#pragma mark -- end
+
 - (CZNoDataView *)noDataView
 {
     if (_noDataView == nil) {
@@ -33,12 +48,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 20)];
+    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, (IsiPhoneX ? 44 : 20))];
     statusView.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication].keyWindow addSubview:statusView];
     self.statusView = statusView;
     CZTOPLINE;
-    self.tableView.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84));
+    self.tableView.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (self.searchViewY + self.searchHeight + 50));
     self.tableView.tableFooterView = nil;
     // 加载刷新数据
     [self setupRefresh];
@@ -131,9 +146,9 @@
 }
 
 #pragma mark - <UIScrollViewDelegate>
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    NSString *OneControllerScrollViewDidScroll = @"CZSearchSubDetailOneController";
-    [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    NSString *OneControllerScrollViewDidScroll = @"CZSearchSubDetailOneController";
+//    [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
+//}
 @end

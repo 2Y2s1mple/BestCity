@@ -19,9 +19,9 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>每日奖励</string>
+			<string>我要赚极币</string>
 			<key>icon</key>
-			<string>list-reward</string>
+			<string>list-jibi</string>
 			<key>destinationVC</key>
 			<string>CZCoinCenterController</string>
 		</dict>
