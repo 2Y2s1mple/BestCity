@@ -17,18 +17,27 @@
 /** 积分数 */
 @property (nonatomic, weak) IBOutlet UILabel *pointNum;
 /** 数据 */
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 /** 表单 */
 @property (nonatomic, strong) UICollectionView *collectionView;
+/** 页数 */
+@property (nonatomic, assign) NSInteger page;
 @end
 
 @implementation CZMyPointsController
 static NSString * const ID = @"myPointCollectionCell";
+
+- (NSMutableArray *)dataSource
+{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 获取数据
-    [self getDataSource];
-    
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"极币商城" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
@@ -36,24 +45,27 @@ static NSString * const ID = @"myPointCollectionCell";
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
     line.backgroundColor = CZGlobalLightGray;
     [self.view addSubview:line];
-    
+
     [self.view addSubview:navigationView];
-    
-    
+
+
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake((SCR_WIDTH - 48) / 2, 180);
     layout.minimumInteritemSpacing = 20;
-//    layout.minimumLineSpacing = 0;
+    //    layout.minimumLineSpacing = 0;
     layout.sectionInset = UIEdgeInsetsMake(18, 14, 10, 14);
-    
+
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67.7, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 24 : 0) - 67.7) collectionViewLayout:layout];
     [self.view addSubview:collectionView];
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.delegate = self;
     collectionView.dataSource = self;
     self.collectionView = collectionView;
-    
+
     [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZMyPointsCell class]) bundle:nil] forCellWithReuseIdentifier:ID];
+
+    // 获取数据
+    [self setupRefresh];
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -86,20 +98,50 @@ static NSString * const ID = @"myPointCollectionCell";
 
 
 #pragma mark - 获取数据
-- (void)getDataSource
+- (void)reloadNewTrailDataSorce
 {
+    // 结束尾部刷新
+    self.page = 1;
+    [self.collectionView.mj_footer endRefreshing];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"page"] = @(0);
+    param[@"page"] = @(self.page);
     [CZProgressHUD showProgressHUDWithText:nil];
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/point/getGoodslist"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.dataSource = result[@"data"];
+            self.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
             [self.collectionView reloadData];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-        
+        // 结束刷新
+        [self.collectionView.mj_header endRefreshing];
+
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+- (void)loadMoreTrailDataSorce
+{
+    // 先结束头部刷新
+    [self.collectionView.mj_header endRefreshing];
+    self.page++;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"page"] = @(self.page);
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/point/getGoodslist"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSArray *data = result[@"data"];
+            [self.dataSource addObjectsFromArray:data];
+            [self.collectionView reloadData];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+        // 结束刷新
+        [self.collectionView.mj_footer endRefreshing];
     } failure:^(NSError *error) {
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -107,8 +149,16 @@ static NSString * const ID = @"myPointCollectionCell";
 }
 
 
+#pragma mark - 获取数据
+- (void)setupRefresh
+{
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
+    [self.collectionView.mj_header beginRefreshing];
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
+}
 
 
 
 
 @end
+
