@@ -41,7 +41,6 @@
 {
     [CZProgressHUD showProgressHUDWithText:nil];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"client"] = @(2);
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getTopGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -78,7 +77,7 @@
     self.tableView.estimatedSectionFooterHeight = 0;
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"type"] = @(0);
+    param[@"type"] = @"0";
     NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     param[@"clientVersionCode"] = curVersion;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -90,12 +89,12 @@
             //比较
             if (![curVersion isEqualToString:result[@"data"][@"versionCode"]]) {
                 // 判断是否更新
+                CZUpdataView *backView = [CZUpdataView updataView];
+                backView.versionMessage = result[@"data"];
+                backView.frame = [UIScreen mainScreen].bounds;
+                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                [[UIApplication sharedApplication].keyWindow addSubview: backView];
                 if ([result[@"data"][@"needUpdate"] isEqual:@(1)]) {
-                    CZUpdataView *backView = [CZUpdataView updataView];
-                    backView.versionMessage = result[@"data"];
-                    backView.frame = [UIScreen mainScreen].bounds;
-                    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                    [[UIApplication sharedApplication].keyWindow addSubview: backView];
                 }
             } 
         }

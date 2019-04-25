@@ -6,6 +6,7 @@
 
 #import "GXNetTool.h"
 #import "KCUtilMd5.h"
+#import "CZUnusualController.h"
 
 @interface GXNetTool()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
@@ -26,7 +27,8 @@
                                   @"timestamp" : timestamp,
                                   @"sign" : MD5string,
                                   @"token" : JPTOKEN ? JPTOKEN : @"",
-                                  @"uuid" : deviceUUID
+                                  @"uuid" : deviceUUID,
+                                  @"client" : @"2"
                                   };
     return paramHeader;
 }
@@ -70,9 +72,17 @@
     
     //(6)发送请求
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
-    param[@"client"] = @(2);
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *result = responseObject;
+        if ([result[@"code"] isEqualToNumber:@(630)]) {
+            CZUnusualController *vc = [[CZUnusualController alloc] init];
+            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:YES];
+            [nav presentViewController:vc animated:YES completion:nil];
+        }
+
         success([result deleteAllNullValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure ? : failure(error);

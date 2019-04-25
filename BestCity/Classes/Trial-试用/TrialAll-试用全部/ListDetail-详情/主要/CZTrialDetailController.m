@@ -171,7 +171,7 @@ static CGFloat const likeAndShareHeight = 49;
     // 加载pop按钮
     [self.view addSubview:self.popButton];
     
-    // 加载收藏按钮
+    // 加载分享按钮
     [self.view addSubview:self.shareButton];
     
     // 获取数据, 加载视图

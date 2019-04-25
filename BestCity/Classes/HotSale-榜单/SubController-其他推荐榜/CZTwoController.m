@@ -101,7 +101,7 @@
     param[@"page"] = @"0";
     param[@"category2Id"] = categoryId;
     param[@"orderbyType"] =  orderbyType;
-    param[@"client"] = @(2);
+    param[@"client"] = @"2";
     self.param = param;
     [CZProgressHUD showProgressHUDWithText:nil];
     //获取数据

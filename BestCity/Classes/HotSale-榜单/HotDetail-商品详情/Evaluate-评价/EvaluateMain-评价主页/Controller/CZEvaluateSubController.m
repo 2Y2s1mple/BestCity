@@ -355,7 +355,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = commentId;
-    param[@"type"] = @(5);
+    param[@"type"] = @"5";
     
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/vote/delete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {

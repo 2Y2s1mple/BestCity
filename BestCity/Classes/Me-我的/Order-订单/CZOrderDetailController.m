@@ -208,6 +208,9 @@ static CGFloat const likeAndShareHeight = 49;
         case 3:
         {
             self.statuslabel.text = @"已完成";
+            [self.buyBtn setTitle:@"已收货" forState:UIControlStateNormal];
+            [self.buyBtn setBackgroundColor:CZGlobalGray];
+            self.buyBtn.enabled = NO;
             NSArray *arr = @[
                              @{
                                  @"title" : @"订单号",
