@@ -125,7 +125,6 @@
 
 - (void)setupTimer
 {
-    
     // 秒
     NSString *seconds1 = [NSString stringWithFormat:@"%.2ld", (self.secondsCount % 60)];
     self.seconds1.text = [seconds1 substringToIndex:1];
@@ -137,6 +136,7 @@
     self.minutes2.text = [minutes1 substringFromIndex:1];
     
     // 时
+    
     NSString *hours1 = [NSString stringWithFormat:@"%.2ld", (self.secondsCount / 60 / 60 % 24)];
     self.hours1.text = [hours1 substringToIndex:1];
     self.hours2.text = [hours1 substringFromIndex:1];

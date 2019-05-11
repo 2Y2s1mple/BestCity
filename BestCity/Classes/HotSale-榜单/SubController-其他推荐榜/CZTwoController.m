@@ -35,9 +35,12 @@
 @property (nonatomic, assign) CGFloat  contentTitlesViewY;
 /** 记录请求参数 */
 @property (nonatomic, strong) NSDictionary *param;
-
 /** 三级标题数组 */
 @property (nonatomic, strong) NSArray *thirdTitles;
+
+/** 辅助: 打点 */
+/** 记录当前的二级菜单名字 */
+@property (nonatomic, strong) NSString *twoTitle;
 @end
 
 @implementation CZTwoController
@@ -166,6 +169,7 @@
         scrollView.height = scrollView.height < CZGetY(btn) ? CZGetY(btn) : scrollView.height;
         if (i == 0) {
             self.recordMainBtn = btn;
+            self.twoTitle = model.categoryName;
             [btn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
         }
     }
@@ -222,6 +226,11 @@
 - (void)headerViewDidClickedBtn:(UIButton *)sender
 {
     if (self.recordMainBtn == sender) return;
+    self.twoTitle = sender.titleLabel.text;
+    NSString *text = [NSString stringWithFormat:@"%@--%@",self.subTitles.categoryName, self.twoTitle];
+    NSDictionary *context = @{@"twoTab" : text};
+    [MobClick event:@"ID1" attributes:context];
+    NSLog(@"%@", text);
     [sender setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
     NSInteger index = sender.tag - 100;
     self.categoryId = self.subTitles.children[index].categoryId;
@@ -283,6 +292,12 @@
 - (void)contentViewDidClickedBtn:(UIButton *)sender
 {
     if (self.recordBtn != sender) {
+
+        NSString *text = [NSString stringWithFormat:@"%@--%@--%@",self.subTitles.categoryName, self.twoTitle, sender.titleLabel.text];
+        NSDictionary *context = @{@"threeTab" : text};
+        [MobClick event:@"ID1" attributes:context];
+        NSLog(@"%@", text);
+
         // 现在的btn
         [sender setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
         sender.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];

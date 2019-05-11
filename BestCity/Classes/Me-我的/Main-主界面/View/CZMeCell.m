@@ -29,6 +29,9 @@
 @implementation CZMeCell
 
 - (IBAction)signInAction:(UITapGestureRecognizer *)sender {
+    NSString *text = @"我的--邀请领奖";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
@@ -37,6 +40,9 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {
+    NSString *text = @"我的--极币商城";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
@@ -45,6 +51,9 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 - (IBAction)orderAction:(UITapGestureRecognizer *)sender {
+    NSString *text = @"我的--我的订单";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
@@ -53,6 +62,9 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 - (IBAction)walletAction:(UITapGestureRecognizer *)sender {
+    NSString *text = @"我的--我的钱包";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
@@ -95,8 +107,6 @@
     NSString *total = [self changeStr:result[@"total_account"] ? result[@"total_account"] : @""];
     // 已体现
     NSString *afterAccount = [self changeStr:result[@"use_account"]];
-    
-    
 }
 
 - (NSString *)changeStr:(id)value

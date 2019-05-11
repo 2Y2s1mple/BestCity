@@ -342,7 +342,7 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)contentViewDidClickedBtn:(UIButton *)sender
 {
-//    self.scrollerView.delegate = nil;r
+//    self.scrollerView.delegate = nil;
     CGPoint point;
     NSInteger tag = sender.tag - 100;
     switch (tag) {
@@ -363,17 +363,12 @@ static CGFloat const likeAndShareHeight = 49;
             point = CGPointMake(0, 0);
             break;
     }
-    
     [UIView animateWithDuration:0.3 animations:^{
         self.scrollerView.contentOffset = point;
     } completion:^(BOOL finished) {
         self.scrollerView.delegate = self;
     }];
-    
-    
     [self setupBtn:sender];
-    
-    
 }
 
 - (void)setupBtn:(UIButton *)sender
@@ -519,12 +514,19 @@ static CGFloat const likeAndShareHeight = 49;
 {
     // 打开淘宝
     [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dataSource[@"goodsBuyLink"] parentController:self];
+    NSString *text = @"试用--商品--优惠购买";
+    NSDictionary *context = @{@"goods" : text};
+    [MobClick event:@"ID4" attributes:context];
+    NSLog(@"----%@", text);
 }
 
 /** 免费申请*/
 - (void)listBtnAction:(UIButton *)sender
 {
     if ([sender.titleLabel.text isEqualToString:@"免费申请"]) {
+        NSString *text = @"试用--商品--申请试用";
+        NSDictionary *context = @{@"goods" : text};
+        [MobClick event:@"ID4" attributes:context];
         NSInteger point = [JPUSERINFO[@"point"] integerValue];
         NSInteger applyPoint = [self.dataSource[@"applyPoint"] integerValue];
         if (point >=  applyPoint) {

@@ -119,7 +119,6 @@
     
     if (model.otherPrice.length > 0 && ![model.actualPrice isEqualToString:model.otherPrice]) {
         self.tmPrice.hidden = NO;
-        NSLog(@"%@--------------%@", model.actualPrice, model.otherPrice);
         status = [status stringByAppendingFormat:@" ¥%@", model.otherPrice];
         self.tmPrice.attributedText = [status addStrikethroughWithRange:[status rangeOfString:[NSString stringWithFormat:@"¥%@", model.otherPrice]]];
     } else {

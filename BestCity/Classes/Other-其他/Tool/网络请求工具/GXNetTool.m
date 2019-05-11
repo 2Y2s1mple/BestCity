@@ -7,6 +7,8 @@
 #import "GXNetTool.h"
 #import "KCUtilMd5.h"
 #import "CZUnusualController.h"
+#import "CZPhoneModelHandle.h"
+#import "CZReachabilityHandle.h"
 
 @interface GXNetTool()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
@@ -18,17 +20,24 @@
 
 + (NSDictionary *)setupHeader
 {
-    NSString *CONSTANT_KEY = @"quality-shop";
-    NSString *timestamp = [self getNowTimeTimestamp3];
-    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
     // 获取UUID
     NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    // 手机系统版本号
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    // 手机型号
+    NSString *phoneModel = [CZPhoneModelHandle phoneModelHandle];
+    //手机系统版本
+    NSString *phoneVersion = [[UIDevice currentDevice] systemVersion];
+    // 获取网络环境
+    NSString *netInfo = [CZReachabilityHandle getNetconnType];
     NSDictionary *paramHeader = @{
-                                  @"timestamp" : timestamp,
-                                  @"sign" : MD5string,
                                   @"token" : JPTOKEN ? JPTOKEN : @"",
                                   @"uuid" : deviceUUID,
-                                  @"client" : @"2"
+                                  @"client" : @"iOS",
+                                  @"sysVersion" : phoneVersion,
+                                  @"model" : phoneModel,
+                                  @"appVersion" : curVersion,
+                                  @"netInfo" : netInfo,
                                   };
     return paramHeader;
 }
@@ -71,7 +80,7 @@
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     //(6)发送请求
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
+    NSMutableDictionary *param = [self signParamdDic:body];;
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *result = responseObject;
         if ([result[@"code"] isEqualToNumber:@(630)]) {
@@ -174,7 +183,7 @@
 //    [CZProgressHUD showProgressHUDWithText:nil];
     //(6)发送请求
     
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
+    NSMutableDictionary *param = [self signParamdDic:body];
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
        
         // 除去NSNUll
@@ -322,19 +331,46 @@
     
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     
-    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
-    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"];
+    // ----设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
     //设置时区,这个对于时间的处理有时很重要
     
-    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     
     [formatter setTimeZone:timeZone];
     
     NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+
+    NSLog(@"%@", datenow);
     
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)([datenow timeIntervalSince1970]*1000)];
     
     return timeSp;
+}
+
++ (NSMutableDictionary *)signParamdDic:(id)paramDic
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:paramDic];
+    param[@"timestamp"] = [self getNowTimeTimestamp3];
+    param[@"accessKey"] = @"quality-shop";
+    if (JPTOKEN) {
+        param[@"token"] = JPTOKEN;
+    }
+    NSArray *keys = [param allKeys];
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    NSArray *sortedArrKeys = [keys sortedArrayUsingDescriptors:@[descriptor]];
+    NSMutableString *signMut = [[NSMutableString alloc] init];
+    for (int i = 0; i < sortedArrKeys.count; i++) {
+        NSString *currentUrl = [[NSString stringWithFormat:@"%@", param[sortedArrKeys[i]]]  stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPasswordAllowedCharacterSet]];
+        [signMut appendFormat:@"%@=%@&", sortedArrKeys[i], currentUrl];
+    }
+    NSString *sign = [signMut substringToIndex:signMut.length - 1];
+    NSString *signMD5 = [[KCUtilMd5 stringToMD5:sign] uppercaseString];
+
+
+    param[@"sign"] = signMD5;
+    [param removeObjectForKey:@"accessKey"];
+    return param;
 }
 
 @end

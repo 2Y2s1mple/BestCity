@@ -87,15 +87,13 @@
 //            //有新版本
             [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
             //比较
-            if (![curVersion isEqualToString:result[@"data"][@"versionCode"]]) {
+            if (![curVersion isEqualToString:result[@"data"][@"versionCode"]] && [result[@"data"][@"open"] isEqualToNumber:@(1)]) {
                 // 判断是否更新
                 CZUpdataView *backView = [CZUpdataView updataView];
                 backView.versionMessage = result[@"data"];
                 backView.frame = [UIScreen mainScreen].bounds;
                 backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
                 [[UIApplication sharedApplication].keyWindow addSubview: backView];
-                if ([result[@"data"][@"needUpdate"] isEqual:@(1)]) {
-                }
             } 
         }
     } failure:^(NSError *error) {}];

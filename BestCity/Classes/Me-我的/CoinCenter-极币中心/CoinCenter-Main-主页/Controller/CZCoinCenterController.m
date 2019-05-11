@@ -203,8 +203,10 @@
 #pragma mark - 签到
 - (IBAction)remarkInsert
 {
+    NSString *text = @"我要赚极币--签到";
+    NSDictionary *context = @{@"sign" : text};
+    [MobClick event:@"ID5" attributes:context];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/signin"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {

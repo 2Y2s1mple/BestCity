@@ -152,11 +152,13 @@
     return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)) + 50);
 }
 
-//- (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
-//{
-//    CZBaseRecommendController *vc = viewController;
-//    self.recordOffsetY = vc.tableView.contentOffset.y;
-//}
+- (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
+{
+    NSString *text = [NSString stringWithFormat:@"发现--%@", info[@"title"]];
+    NSDictionary *context = @{@"oneTab" : text};
+    [MobClick event:@"ID2" attributes:context];
+    NSLog(@"----%@", text);
+}
 
 #pragma mark - 通知: 监听scrollerView的滚动
 - (void)oneControllerScrollViewDidScroll:(NSNotification *)notifx

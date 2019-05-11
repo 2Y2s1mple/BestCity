@@ -53,7 +53,9 @@
 
 - (void)commit
 {
-   [self textFieldControl];
+    if (![self textFieldControl]) {
+        return;
+    }
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"username"] = self.nameLabel.text;
@@ -104,13 +106,13 @@
 
 - (IBAction)pickerView
 {
-    [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:@"450000-450900-450921" title:@"选择地址" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString * _Nullable address, NSString * _Nullable zipcode) {
-        self.addrLabel.text = address;
-        NSLog(@"%@", zipcode);
-        
-    } cancelBlock:^{
-        
-    }];
+//    [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:@"450000-450900-450921" title:@"选择地址" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString * _Nullable address, NSString * _Nullable zipcode) {
+//        self.addrLabel.text = address;
+//        NSLog(@"%@", zipcode);
+//
+//    } cancelBlock:^{
+//
+//    }];
 }
 
 #pragma mark - 非点击事件
@@ -144,6 +146,20 @@
 {
     NSLog(@"---------%@", string);
     if ([string  isEqual: @" "]) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.addrLabel) {
+        [self.view endEditing:YES];
+        [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:@"450000-450900-450921" title:@"选择地址" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString * _Nullable address, NSString * _Nullable zipcode) {
+            self.addrLabel.text = address;
+            NSLog(@"%@", zipcode);
+        } cancelBlock:^{}];
         return NO;
     } else {
         return YES;
