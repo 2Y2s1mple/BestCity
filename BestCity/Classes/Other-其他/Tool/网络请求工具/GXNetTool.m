@@ -215,7 +215,7 @@
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if ([fileSource isKindOfClass:[UIImage class]]) {
-            NSData *imageData = [UIImagePNGRepresentation(fileSource) length] > 102400 ?UIImageJPEGRepresentation(fileSource, 0.7) : UIImagePNGRepresentation(fileSource);
+            NSData *imageData = [UIImagePNGRepresentation(fileSource) length] > 102400 ? UIImageJPEGRepresentation(fileSource, 0.7) : UIImagePNGRepresentation(fileSource);
             [formData appendPartWithFileData:imageData name:@"imageFile" fileName:@"imageFile.png" mimeType:@"image/png"];
         }
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
