@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -113,14 +113,17 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择收货地址" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Et-ig-8tz">
-                            <rect key="frame" x="86" y="13" width="249" height="18"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择收货地址" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Et-ig-8tz">
+                            <rect key="frame" x="86" y="13" width="269" height="18"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" notEnabled="YES"/>
                             </accessibility>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="ZrP-jr-hQa"/>
+                            </connections>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cxu-4T-xPK">
                             <rect key="frame" x="14" y="43" width="347" height="1"/>
@@ -129,8 +132,8 @@
                                 <constraint firstAttribute="height" constant="1" id="7tq-XS-GfR"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUA-1j-iSi">
-                            <rect key="frame" x="335" y="0.0" width="40" height="43"/>
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUA-1j-iSi">
+                            <rect key="frame" x="355" y="0.0" width="20" height="43"/>
                             <state key="normal" image="setting-right"/>
                             <connections>
                                 <action selector="pickerView" destination="-1" eventType="touchUpInside" id="BQS-Aq-4hs"/>
@@ -147,7 +150,7 @@
                         <constraint firstItem="2Et-ig-8tz" firstAttribute="leading" secondItem="l3t-47-JIZ" secondAttribute="trailing" constant="10" id="EaM-al-wU2"/>
                         <constraint firstAttribute="trailing" secondItem="AUA-1j-iSi" secondAttribute="trailing" id="NAw-nF-cPs"/>
                         <constraint firstAttribute="trailing" secondItem="Cxu-4T-xPK" secondAttribute="trailing" constant="14" id="TsX-lF-leT"/>
-                        <constraint firstAttribute="trailing" secondItem="2Et-ig-8tz" secondAttribute="trailing" constant="40" id="eEJ-0N-hRT"/>
+                        <constraint firstAttribute="trailing" secondItem="2Et-ig-8tz" secondAttribute="trailing" constant="20" id="eEJ-0N-hRT"/>
                         <constraint firstItem="AUA-1j-iSi" firstAttribute="leading" secondItem="2Et-ig-8tz" secondAttribute="trailing" id="gU2-0l-lz8"/>
                         <constraint firstItem="Cxu-4T-xPK" firstAttribute="top" secondItem="AUA-1j-iSi" secondAttribute="bottom" id="lRF-mK-5x6"/>
                         <constraint firstAttribute="bottom" secondItem="Cxu-4T-xPK" secondAttribute="bottom" id="rRG-CS-jt2"/>
@@ -171,6 +174,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="afd-WA-zVh"/>
+                            </connections>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="639-mw-om9">
                             <rect key="frame" x="14" y="43" width="347" height="1"/>
@@ -209,7 +215,7 @@
                 <constraint firstItem="iCQ-Va-aKH" firstAttribute="top" secondItem="cpH-FQ-Ggl" secondAttribute="bottom" id="pqq-rI-a88"/>
                 <constraint firstItem="cpH-FQ-Ggl" firstAttribute="top" secondItem="IZq-G6-FfV" secondAttribute="bottom" id="waJ-Ql-Qoj"/>
             </constraints>
-            <point key="canvasLocation" x="61.600000000000001" y="-401.64917541229386"/>
+            <point key="canvasLocation" x="10" y="-438"/>
         </view>
     </objects>
     <resources>

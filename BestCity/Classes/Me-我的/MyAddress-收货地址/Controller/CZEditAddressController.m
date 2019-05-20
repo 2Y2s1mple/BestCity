@@ -11,7 +11,7 @@
 #import "GXNetTool.h"
 #import "MOFSPickerManager.h"
 
-@interface CZEditAddressController ()
+@interface CZEditAddressController ()<UITextFieldDelegate>
 /** 姓名 */
 @property (nonatomic, weak) IBOutlet UITextField *nameLabel;
 /** 电话号码 */
@@ -43,6 +43,7 @@
     self.numberLabel.text = self.addressModel.mobile;
     self.addrLabel.text = self.addressModel.area;
     self.contentAddressLabel.text = self.addressModel.address;
+
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -52,7 +53,9 @@
 
 - (void)commit
 {
-   [self textFieldControl];
+    if (![self textFieldControl]) {
+        return;
+    }
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"username"] = self.nameLabel.text;
@@ -76,8 +79,10 @@
 
 - (void)changeCommit
 {
-    [self textFieldControl];
-    
+    if (![self textFieldControl]) {
+        return;
+    }
+
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"addressId"] = self.addressModel.addressId;
     param[@"username"] = self.nameLabel.text;
@@ -99,36 +104,66 @@
     }];
 }
 
-- (void)textFieldControl
+- (IBAction)pickerView
+{
+//    [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:@"450000-450900-450921" title:@"选择地址" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString * _Nullable address, NSString * _Nullable zipcode) {
+//        self.addrLabel.text = address;
+//        NSLog(@"%@", zipcode);
+//
+//    } cancelBlock:^{
+//
+//    }];
+}
+
+#pragma mark - 非点击事件
+- (BOOL)textFieldControl
 {
     if (self.nameLabel.text.length == 0) {
         [CZProgressHUD showProgressHUDWithText:@"请输入收件人名称"];
         [CZProgressHUD hideAfterDelay:1.5];
-        return;
-    } else if (self.numberLabel.text.length == 0) {
-        [CZProgressHUD showProgressHUDWithText:@"请输入收件人手机号"];
+        return NO;
+    } else if (self.numberLabel.text.length != 11) {
+        [CZProgressHUD showProgressHUDWithText:@"请正确输入收件人手机号"];
         [CZProgressHUD hideAfterDelay:1.5];
-        return;
+        return NO;
     } else if (self.contentAddressLabel.text.length == 0) {
         [CZProgressHUD showProgressHUDWithText:@"请输入详细地址"];
         [CZProgressHUD hideAfterDelay:1.5];
-        return;
+        return NO;
     } else if (self.addrLabel.text.length == 0) {
         [CZProgressHUD showProgressHUDWithText:@"请输入地区"];
         [CZProgressHUD hideAfterDelay:1.5];
-        return;
+        return NO;
+    } else {
+        return YES;
     }
 }
 
-- (IBAction)pickerView
+#pragma mark -- end
+
+#pragma mark -- 代理
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:@"450000-450900-450921" title:@"选择地址" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString * _Nullable address, NSString * _Nullable zipcode) {
-        self.addrLabel.text = address;
-        NSLog(@"%@", zipcode);
-        
-    } cancelBlock:^{
-        
-    }];
+    NSLog(@"---------%@", string);
+    if ([string  isEqual: @" "]) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.addrLabel) {
+        [self.view endEditing:YES];
+        [[MOFSPickerManager shareManger] showMOFSAddressPickerWithDefaultZipcode:@"450000-450900-450921" title:@"选择地址" cancelTitle:@"取消" commitTitle:@"确定" commitBlock:^(NSString * _Nullable address, NSString * _Nullable zipcode) {
+            self.addrLabel.text = address;
+            NSLog(@"%@", zipcode);
+        } cancelBlock:^{}];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 @end

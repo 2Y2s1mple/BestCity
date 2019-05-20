@@ -7,10 +7,24 @@
 //
 
 #import "CZOpenAlibcTrade.h"
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
 
 @implementation CZOpenAlibcTrade
+#pragma mark - 初始化
++ (void)shareConfigure
+{
+    // 百川平台基础SDK初始化，加载并初始化各个业务能力插件
+    [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
+        NSLog(@" 百川平台基础SDK初始化，加载并初始化各个业务能力插件");
+    } failure:^(NSError *error) {
+        NSLog(@"Init failed: %@", error.description);
+    }];
+    // 设置全局配置，是否强制使用h5
+    [[AlibcTradeSDK sharedInstance] setIsForceH5:NO];
+    //默认调试模式打开日志,release关闭,可以不调用下面的函数
+    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:YES];
+}
+
 #pragma mark - 跳转到淘宝
 + (void)openAlibcTradeWithUrlString:(NSString *)urlStr parentController:(UIViewController *)parentController
 {

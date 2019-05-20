@@ -68,7 +68,6 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZHotSaleCell class]) owner:nil options:nil] lastObject];
     }
-    
     CZRecommendListModel *model = self.dataSource[indexPath.row];
     model.indexNumber = [NSString stringWithFormat:@"%ld", indexPath.row];
     cell.model = model;

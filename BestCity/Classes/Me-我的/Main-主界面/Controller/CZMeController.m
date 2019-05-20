@@ -52,6 +52,10 @@
 /** 复制到剪切板 */
 - (IBAction)generalPaste
 {
+    NSString *text = @"我的--点击复制（邀请码）";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
+
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
     posteboard.string = JPUSERINFO[@"invitationCode"];
     [CZProgressHUD showProgressHUDWithText:@"复制成功"];
@@ -60,6 +64,10 @@
 
 #pragma mark - 弹出点赞数
 - (IBAction)voteBtnAction:(UIButton *)sender {
+    NSString *text = @"我的--点赞";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
+
     UIView *backView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     backView.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backViewHidden)];
@@ -77,8 +85,6 @@
     [backView addSubview:vc];
     
     [self.view addSubview:backView];
-    
-    [MobClick event:@"test123"];
 }
 
 - (void)backViewHidden
@@ -88,6 +94,9 @@
 
 #pragma mark - 跳关注
 - (IBAction)AttentionAction:(UIButton *)sender {
+    NSString *text = @"我的--关注";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
     WMPageController *hotVc = [[CZMainAttentionController alloc] init];
     hotVc.selectIndex = 0;
     hotVc.menuViewStyle = WMMenuViewStyleLine;
@@ -104,8 +113,11 @@
     [self.navigationController pushViewController:hotVc animated:YES];
 }
 
-#pragma mark - 跳关注
+#pragma mark - 跳粉丝
 - (IBAction)fansAction:(UIButton *)sender {
+    NSString *text = @"我的--粉丝";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
     WMPageController *hotVc = [[CZMainAttentionController alloc] init];
     hotVc.selectIndex = 1;
     hotVc.menuViewStyle = WMMenuViewStyleLine;
@@ -124,15 +136,21 @@
 
 #pragma mark - 跳我的资料
 - (IBAction)loginAction:(UIButton *)sender {
+    NSString *text = @"我的--点赞";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
+
     CZMyProfileController *vc = [[CZMyProfileController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 跳转到极币数
+#pragma mark - 跳转到极币中心
 - (IBAction)coinAction:(UIButton *)sender {
+    NSString *text = @"我的--极币数";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES
-     ];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /** 从plist文件加载数据 */
@@ -178,13 +196,13 @@
     [super viewWillAppear:animated];
     [self getNetworkUserInfo];
     [MobClick beginLogPageView:@"我的我的"]; //("Pagename"为页面名称，可自定义)
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated 
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我的我的"];
+
 }
 
 
@@ -270,8 +288,29 @@
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {} else {
+    if (indexPath.section == 1) {
         NSDictionary *dic = self.dataSource[1][indexPath.row];
+        NSString *text = [NSString stringWithFormat:@"我的--%@",  dic[@"title"]];
+        NSDictionary *context = @{@"mine" : text};
+        [MobClick event:@"ID5" attributes:context];
+
+        if ([dic[@"destinationVC"] isEqualToString:@"CZCollectController"]) {
+            WMPageController *hotVc = (WMPageController *)[[NSClassFromString(dic[@"destinationVC"]) alloc] init];
+            hotVc.selectIndex = 0;
+            hotVc.menuViewStyle = WMMenuViewStyleLine;
+            //        hotVc.progressWidth = 30;
+            hotVc.itemMargin = 10;
+            hotVc.progressHeight = 3;
+            hotVc.automaticallyCalculatesItemWidths = YES;
+            hotVc.titleFontName = @"PingFangSC-Medium";
+            hotVc.titleColorNormal = CZGlobalGray;
+            hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
+            hotVc.titleSizeNormal = 15.0f;
+            hotVc.titleSizeSelected = 15;
+            hotVc.progressColor = CZREDCOLOR;
+            [self.navigationController pushViewController:hotVc animated:YES];
+            return;
+        }
         UIViewController *vc = [[NSClassFromString(dic[@"destinationVC"]) alloc] init];
         [self.navigationController pushViewController:vc animated:YES]; 
     };

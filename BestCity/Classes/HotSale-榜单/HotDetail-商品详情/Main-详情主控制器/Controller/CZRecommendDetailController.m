@@ -70,8 +70,10 @@ static NSString * const type = @"1";
     if (_likeView == nil) {
         __weak typeof(self) weakSelf = self;
         _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
-            if ([JPTOKEN length] <= 0)
-            {
+            NSString *text = @"榜单--商品详情--分享给好友";
+            NSDictionary *context = @{@"mine" : text};
+            [MobClick event:@"ID5" attributes:context];
+            if ([JPTOKEN length] <= 0) {
                 CZLoginController *vc = [CZLoginController shareLoginController];
                 [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
                 return;
@@ -80,9 +82,11 @@ static NSString * const type = @"1";
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
+            NSString *text = @"榜单--商品详情--立即购买";
+            NSDictionary *context = @{@"mine" : text};
+            [MobClick event:@"ID5" attributes:context];
             // 打开淘宝
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
-            
         }];
     }
     return _likeView;

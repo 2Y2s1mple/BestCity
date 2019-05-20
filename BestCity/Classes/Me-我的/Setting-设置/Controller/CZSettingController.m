@@ -13,6 +13,7 @@
 #import "TSLWebViewController.h"
 #import "SDImageCache.h"
 #import "CZAlertViewTool.h"
+#import "GXNetTool.h"
 
 @interface CZSettingController ()<UITableViewDelegate, UITableViewDataSource>
 /** 标题数组 */
@@ -66,7 +67,12 @@
 /** 退出登录 */
 - (void)loginOutAction
 {
+
     [CZAlertViewTool showAlertWithTitle:@"确认退出" action:^{
+        // 参数
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/logout"];
+        // 请求
+        [GXNetTool PostNetWithUrl:url body:@{} bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {} failure:^(NSError *error) {}];
         // 删除用户信息
         [[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"user"];
         // 删除token

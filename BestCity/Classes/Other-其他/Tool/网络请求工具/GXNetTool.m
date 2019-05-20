@@ -6,6 +6,9 @@
 
 #import "GXNetTool.h"
 #import "KCUtilMd5.h"
+#import "CZUnusualController.h"
+#import "CZPhoneModelHandle.h"
+#import "CZReachabilityHandle.h"
 
 @interface GXNetTool()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
@@ -13,8 +16,32 @@
 @property (nonatomic, strong) id bodyParam;
 @end
 
-
 @implementation GXNetTool
+
++ (NSDictionary *)setupHeader
+{
+    // 获取UUID
+    NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    // 手机系统版本号
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    // 手机型号
+    NSString *phoneModel = [CZPhoneModelHandle phoneModelHandle];
+    //手机系统版本
+    NSString *phoneVersion = [[UIDevice currentDevice] systemVersion];
+    // 获取网络环境
+    NSString *netInfo = [CZReachabilityHandle getNetconnType];
+    NSDictionary *paramHeader = @{
+                                  @"token" : JPTOKEN ? JPTOKEN : @"",
+                                  @"uuid" : deviceUUID,
+                                  @"client" : @"iOS",
+                                  @"sysVersion" : phoneVersion,
+                                  @"model" : phoneModel,
+                                  @"appVersion" : curVersion,
+                                  @"netInfo" : netInfo,
+                                  };
+    return paramHeader;
+}
+
 +(AFHTTPSessionManager *)GetNetWithUrl:(NSString *)url
                  body:(id)body
                header:(NSDictionary *)headers
@@ -26,11 +53,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     //(2)请求头的设置
-    NSString *CONSTANT_KEY = @"quality-shop";
-    NSString *timestamp = [self getNowTimeTimestamp3];
-    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
-    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
-//    headers = @{@"token" : @"f96fb72c40164f57810242e7a8800fb2", @"sign" : MD5string, @"timestamp" : timestamp};
+    headers = [self setupHeader];
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -50,16 +73,25 @@
         default:
             break;
     }
+
     //(4)设置数据响应类型
     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css",@"text/plain", @"application/javascript",@"image/jpeg", @"text/vnd.wap.wml", nil]];
     //(5)IOS9--UTF-8转码
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     //(6)发送请求
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
-    param[@"client"] = @(2);
+    NSMutableDictionary *param = [self signParamdDic:body];;
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *result = responseObject;
+        if ([result[@"code"] isEqualToNumber:@(630)]) {
+            CZUnusualController *vc = [[CZUnusualController alloc] init];
+            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:YES];
+            [nav presentViewController:vc animated:YES completion:nil];
+        }
+
         success([result deleteAllNullValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure ? : failure(error);
@@ -67,7 +99,6 @@
         [CZProgressHUD showProgressHUDWithText:@"网络出错"];
         [CZProgressHUD hideAfterDelay:2];
     }];
-    
     return manager;
 }
 
@@ -102,8 +133,7 @@
 //    如果是需要验证自建证书，需要设置为YES
 //    securityPolicy.allowInvalidCertificates = YES;
 //    manager.securityPolicy = securityPolicy;
-   
-    
+
     //设置body数据类型
     switch (bodyStyle) {
         case GXRequsetStyleBodyJSON:
@@ -123,11 +153,7 @@
     }
     
     //(2)请求头的设置
-    NSString *CONSTANT_KEY = @"quality-shop";
-    NSString *timestamp = [self getNowTimeTimestamp3];
-    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
-    headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};
-//    headers = @{@"token" : @"f96fb72c40164f57810242e7a8800fb2", @"sign" : MD5string, @"timestamp" : timestamp};
+    headers = [self setupHeader];
     for (NSString *key in headers.allKeys) {
         [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
     }
@@ -147,6 +173,7 @@
         default:
             break;
     }
+
     //(4)设置数据响应类型
     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css",@"text/plain", @"application/javascript",@"image/jpeg", @"text/vnd.wap.wml",@"application/xml", @"text/xml", nil]];
     //(5)IOS9--UTF-8转码
@@ -156,7 +183,7 @@
 //    [CZProgressHUD showProgressHUDWithText:nil];
     //(6)发送请求
     
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:body];
+    NSMutableDictionary *param = [self signParamdDic:body];
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
        
         // 除去NSNUll
@@ -177,12 +204,9 @@
 {
     // 获取管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *CONSTANT_KEY = @"quality-shop";
-    NSString *timestamp = [self getNowTimeTimestamp3];
-    NSString *MD5string = [KCUtilMd5 stringToMD5:[NSString stringWithFormat:@"%@%@", CONSTANT_KEY, timestamp]];
-    NSDictionary *headers = @{@"token" : JPTOKEN ? JPTOKEN : @"", @"sign" : MD5string, @"timestamp" : timestamp};;
-    for (NSString *key in headers.allKeys) {
-        [manager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
+
+    for (NSString *key in [self setupHeader].allKeys) {
+        [manager.requestSerializer setValue:[self setupHeader][key] forHTTPHeaderField:key];
     }
     //(3)设置返回数据的类型
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -191,7 +215,7 @@
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if ([fileSource isKindOfClass:[UIImage class]]) {
-            NSData *imageData = [UIImagePNGRepresentation(fileSource) length] > 102400 ?UIImageJPEGRepresentation(fileSource, 0.7) : UIImagePNGRepresentation(fileSource);
+            NSData *imageData = [UIImagePNGRepresentation(fileSource) length] > 102400 ? UIImageJPEGRepresentation(fileSource, 0.7) : UIImagePNGRepresentation(fileSource);
             [formData appendPartWithFileData:imageData name:@"imageFile" fileName:@"imageFile.png" mimeType:@"image/png"];
         }
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -299,28 +323,54 @@
     }];
 }
 
-+(NSString *)getNowTimeTimestamp3{
-    
++ (NSString *)getNowTimeTimestamp3
+{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     
-    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
-    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"];
+    // ----设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
     //设置时区,这个对于时间的处理有时很重要
     
-    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     
     [formatter setTimeZone:timeZone];
     
     NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+
+    NSLog(@"%@", datenow);
     
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)([datenow timeIntervalSince1970]*1000)];
     
     return timeSp;
-    
+}
+
++ (NSMutableDictionary *)signParamdDic:(id)paramDic
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:paramDic];
+    param[@"timestamp"] = [self getNowTimeTimestamp3];
+    param[@"accessKey"] = @"quality-shop";
+    if (JPTOKEN) {
+        param[@"token"] = JPTOKEN;
+    }
+    NSArray *keys = [param allKeys];
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES];
+    NSArray *sortedArrKeys = [keys sortedArrayUsingDescriptors:@[descriptor]];
+    NSMutableString *signMut = [[NSMutableString alloc] init];
+    for (int i = 0; i < sortedArrKeys.count; i++) {
+        NSString *currentUrl = [[NSString stringWithFormat:@"%@", param[sortedArrKeys[i]]]  stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPasswordAllowedCharacterSet]];
+        [signMut appendFormat:@"%@=%@&", sortedArrKeys[i], currentUrl];
+    }
+    NSString *sign = [signMut substringToIndex:signMut.length - 1];
+    NSString *signMD5 = [[KCUtilMd5 stringToMD5:sign] uppercaseString];
+
+
+    param[@"sign"] = signMD5;
+    [param removeObjectForKey:@"accessKey"];
+    return param;
 }
 
 @end

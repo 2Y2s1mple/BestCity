@@ -104,10 +104,10 @@
     self.replyNameLabel.x = 10;
     self.replyNameLabel.y = 10;
     [self.replyNameLabel sizeToFit];
-    if (self.replyNameLabel.width > 80) {
-        self.replyNameLabel.width = 80;
-    }
-    
+//    if (self.replyNameLabel.width > 80) {
+//        self.replyNameLabel.width = 80;
+//    }
+
     // 更新一下
 //    [self layoutIfNeeded];
     self.replyContentLabel.text = contentDic[@"content"]; //@"与水直接接触的内胆、不锈钢材质安全放心";

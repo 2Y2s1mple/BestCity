@@ -27,6 +27,20 @@
 @end
 
 @implementation CZSearchSubDetailTwoController
+#pragma mark - 数据
+// 搜索框Y值
+- (CGFloat)searchViewY
+{
+    return (IsiPhoneX ? 54 : 30);
+}
+
+// 搜索框H值
+- (CGFloat)searchHeight
+{
+    return 34;
+}
+#pragma mark -- end
+
 #pragma mark - 懒加载
 - (CZNoDataView *)noDataView
 {
@@ -48,7 +62,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 20)];
+    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, (IsiPhoneX ? 44 : 20))];
     statusView.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication].keyWindow addSubview:statusView];
     self.statusView = statusView;
@@ -56,16 +70,17 @@
     self.view.backgroundColor = CZGlobalWhiteBg;
     //line
     CZTOPLINE;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, 0) style:UITableViewStylePlain];
-    if (self.type == CZJIPINModuleDiscover) {
-        self.tableView.height = SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)) + 50;
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (self.searchViewY + self.searchHeight + 50)) style:UITableViewStylePlain];
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
-        self.tableView.height = SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49);
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    self.tableView.tableFooterView = nil;
     
     //创建刷新控件
     [self setupRefresh];
@@ -208,11 +223,9 @@
 }
 
 #pragma mark - <UIScrollViewDelegate>
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (self.type == CZJIPINModuleDiscover) {
-        NSString *OneControllerScrollViewDidScroll = @"CZSearchSubDetailOneController";
-        [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    NSString *OneControllerScrollViewDidScroll = @"CZSearchSubDetailOneController";
+//    [[NSNotificationCenter defaultCenter] postNotificationName:OneControllerScrollViewDidScroll object:nil userInfo:@{@"scrollView" : scrollView}];
+//}
 @end

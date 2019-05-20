@@ -134,13 +134,46 @@
         self.lineView.y = self.height - 1;
     }
     sender.selected = !sender.selected;
-    !self.delegate ? :[self.delegate updataTaskView:self];    
+    !self.delegate ? : [self.delegate updataTaskView:self];    
 }
 
 
 - (void)itemBtnAction:(UIButton *)sender
 {
+    NSString *text;
+    NSDictionary *context;
+    switch ([self.taskData[@"type"] integerValue]) {
+        case 1: {
+            text = @"我要赚极币--立即邀请";
+            context = @{@"sign" : text};
+            break;
+        }
+        case 4: {
+            text = @"我要赚极币--立即点赞";
+            context = @{@"sign" : text};
+            break;
+        }
+        case 5: {
+            text = @"我要赚极币--立即分享";
+            context = @{@"sign" : text};
+            break;
+        }
+        case 6: {
+            text = @"我要赚极币--立即阅读";
+            context = @{@"sign" : text};
+            break;
+        }
+        case 7: {
+            text = @"我要赚极币--立即评论";
+            context = @{@"sign" : text};
+        }
+        default:
+            break;
+    }
+    [MobClick event:@"ID5" attributes:context];
+
 //    1首页，2发现，3评测，4邀请页面，5.认证页面
+    NSLog(@"%@", text);
     switch ([self.taskData[@"location"] integerValue]) {
         case 1:
         {

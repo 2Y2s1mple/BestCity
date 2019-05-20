@@ -32,6 +32,20 @@
 @end
 
 @implementation CZHotsaleSearchController
+#pragma mark - 数据
+// 搜索框Y值
+- (CGFloat)searchViewY
+{
+    return (IsiPhoneX ? 54 : 30);
+}
+
+// 搜索框H值
+- (CGFloat)searchHeight
+{
+    return 34;
+}
+#pragma mark -- end
+
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +94,7 @@
 - (void)setupSearchView
 {
     __weak typeof(self) weakSelf = self;
-    self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, 30, SCR_WIDTH, 34) msgAction:^(NSString *rightBtnText){
+    self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, self.searchViewY, SCR_WIDTH, self.searchHeight) msgAction:^(NSString *rightBtnText){
         if ([rightBtnText isEqualToString:@"搜索"]) {
             [weakSelf pushSearchDetail];
             // 添加到历史搜索
@@ -206,6 +220,16 @@
 // 点击事件 <CZHotTagsViewDelegate>
 - (void)hotTagsView:(CZHotTagsView *)tagsView didSelectedTag:(CZHotTagLabel *)tagLabel
 {
+    NSInteger index = arc4random_uniform(100) % 2;
+    NSString *text;
+    if (index == 0) {
+        text = @"首页搜索框--大家都在搜--第一位置";
+    } else {
+        text = @"首页搜索框--大家都在搜--第二位置";
+    }
+    NSLog(@"%@", text);
+    NSDictionary *context = @{@"message" : text};
+    [MobClick event:@"ID1" attributes:context];
     self.searchView.searchText = tagLabel.text;
     [self pushSearchDetail];
 }

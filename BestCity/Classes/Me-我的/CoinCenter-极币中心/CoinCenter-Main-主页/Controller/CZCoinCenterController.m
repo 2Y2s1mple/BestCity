@@ -15,9 +15,6 @@
 @interface CZCoinCenterController () <CZTaskMainViewDelegate>
 /** 顶部的隐藏的导航栏 */
 @property (nonatomic, strong) UIView *navView;
-/** 总极币 */
-@property (nonatomic, weak) IBOutlet UILabel *totalPointLabel;
-@property (nonatomic, weak) IBOutlet UILabel *totalPointNumber;
 
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *todayPointLabel;
@@ -27,8 +24,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *usablePointLabel;
 @property (nonatomic, weak) IBOutlet UILabel *usablePointNumber;
 
-/** 连续签到 */
-@property (nonatomic, weak) IBOutlet UILabel *daysCountNumber;
+/** 连续签到天数 */
+@property (nonatomic, assign) NSInteger daysCountNumber;
 
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *remarkView;
@@ -38,9 +35,6 @@
 
 /** 数据 */
 @property (nonatomic, strong) NSDictionary *dataSource;
-
-/** 飘飞的label */
-@property (nonatomic, weak) IBOutlet UILabel *piaopiaoLabel;
 
 /** 每日任务视图 */
 @property (nonatomic, strong) CZTaskMainView *taskView;
@@ -57,10 +51,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.piaopiaoLabel.hidden = YES;
     [self getDataSource];
     [self createNav];
-    self.totalPointLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     self.todayPointLabel.font= [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     self.usablePointLabel.font = self.todayPointLabel.font;
     self.backView.layer.cornerRadius = 10;
@@ -110,7 +102,7 @@
     [self.navView addSubview:leftBtn];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
-    titleLabel.text = @"极币中心 ";
+    titleLabel.text = @"极币中心";
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.center = CGPointMake(SCR_WIDTH / 2, leftBtn.center.y);
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -142,7 +134,6 @@
     }
 }
 
-
 #pragma mark - 获取数据
 - (void)getDataSource
 {
@@ -160,10 +151,9 @@
 
 - (void)update
 {
-    self.totalPointNumber.text = [NSString stringWithFormat:@"%@", self.dataSource[@"pointAccount"][@"totalPoint"]];
     self.todayPointNumber.text = [NSString stringWithFormat:@"%@", self.dataSource[@"pointAccount"][@"todayPoint"]];
     self.usablePointNumber.text = [NSString stringWithFormat:@"%@", self.dataSource[@"pointAccount"][@"usablePoint"]];
-    self.daysCountNumber.text = [NSString stringWithFormat:@"%@",self.dataSource[@"daysCount"]];
+    self.daysCountNumber = [self.dataSource[@"daysCount"] integerValue];
     
     for (int i = 0; i < 7; i++) {
         UIImageView *coinImage =  self.remarkView.subviews[i];
@@ -186,7 +176,7 @@
     
     for (int i = 0; i < 7; i++) {
         UIImageView *coinImage =  self.remarkView.subviews[i];
-        if (i < [self.daysCountNumber.text integerValue]) {        
+        if (i < self.daysCountNumber) {        
             coinImage.highlighted = YES;
             [[coinImage viewWithTag:105] removeFromSuperview];
         } else {
@@ -213,20 +203,14 @@
 #pragma mark - 签到
 - (IBAction)remarkInsert
 {
+    NSString *text = @"我要赚极币--签到";
+    NSDictionary *context = @{@"sign" : text};
+    [MobClick event:@"ID5" attributes:context];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/signin"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
             [CZProgressHUD showProgressHUDWithText:@"签到成功"];
-            self.piaopiaoLabel.text = [NSString stringWithFormat:@"+%@极币", result[@"addPoint"]];
-            self.piaopiaoLabel.hidden = NO;
-            [UIView animateWithDuration:0.5 animations:^{
-                self.piaopiaoLabel.transform = CGAffineTransformMakeTranslation(0, -50);
-            } completion:^(BOOL finished) {
-                self.piaopiaoLabel.hidden = YES;
-                self.piaopiaoLabel.transform = CGAffineTransformIdentity;
-            }];
             [self getDataSource];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];

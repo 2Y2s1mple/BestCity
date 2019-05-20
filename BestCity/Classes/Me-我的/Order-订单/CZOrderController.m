@@ -12,6 +12,7 @@
 #import "GXNetTool.h"
 #import "CZOrderModel.h"
 #import "CZMeController.h"
+#import "CZOrderDetailController.h" //详情
 
 
 
@@ -120,6 +121,14 @@
     CZOrderModel *model = self.roderArray[indexPath.row];
     
     return model.heightCell;;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CZOrderModel *model = self.roderArray[indexPath.row];
+    CZOrderDetailController *vc = [[CZOrderDetailController alloc] init];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -56,6 +56,12 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
+
+    NSArray *configureList = @[ @"tab栏榜单", @"tab栏发现", @"tab栏评测", @"tab栏试用", @"tab栏我的"];
+    NSString *ID = [NSString stringWithFormat:@"ID%ld", (tabBarController.selectedIndex + 1)];
+    NSDictionary *context = configureList[tabBarController.selectedIndex];
+    [MobClick event:ID attributes:@{@"Tab" : context}];
+
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
     if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 4) {
         CZLoginController *vc = [CZLoginController shareLoginController];

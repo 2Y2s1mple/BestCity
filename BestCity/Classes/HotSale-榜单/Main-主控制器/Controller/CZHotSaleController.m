@@ -25,12 +25,13 @@
 @property (nonatomic, strong) CZHotSearchView *search;
 
 /** <#注释#> */
-@property (nonatomic, assign) void (^myBlock)(void);
+@property (nonatomic, assign) void (^myBlock)(NSString *);
 @end
 
 @implementation CZHotSaleController
 
-#pragma mark - 获取标题数据
+#pragma mark - 数据
+// 获取标题数据
 - (CZHotSaleController *(^)(void))obtainTtitles
 {
     return ^ {
@@ -68,7 +69,7 @@
     };
 }
 
-#pragma mark - 获取未读消息
+// 获取未读消息
 - (CZHotSaleController *(^)(void))obtainReadMessage
 {
     return ^ {
@@ -86,11 +87,14 @@
         return self;
     };
 }
+#pragma mark -- end
 
 #pragma mark - 控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    [self obtainTtitles];
+
     // 设置搜索栏 获取未读数 获取标题数据
     self.setupTopView().obtainReadMessage().obtainTtitles();
     
@@ -109,12 +113,15 @@
 - (CZHotSaleController * (^)(void))setupTopView
 {
     CZHotSaleController * (^block)(void) = ^ {
-        self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, IsiPhoneX ? 54 : 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title){
+        self.search = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, IsiPhoneX ? 54 : 30, SCR_WIDTH - 20, 34) msgAction:^(NSString *title) {
             if ([JPTOKEN length] <= 0)
             {
                 CZLoginController *vc = [CZLoginController shareLoginController];
                 [self presentViewController:vc animated:YES completion:nil];
             } else {
+                NSString *text = @"首页消息按钮";
+                NSDictionary *context = @{@"message" : text};
+                [MobClick event:@"ID1" attributes:context];
                 CZSystemMessageController *vc = [[CZSystemMessageController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -129,7 +136,7 @@
     return block;
 }
 
-#pragma mark - 响应事件
+#pragma mark - 事件
 - (void)pushSearchController
 {
     if ([JPTOKEN length] <= 0)
@@ -137,6 +144,9 @@
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
     } else {
+        NSString *text = @"首页搜索框";
+        NSDictionary *context = @{@"message" : text};
+        [MobClick event:@"ID1" attributes:context];
         CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -149,6 +159,13 @@
         
     }];
 }
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.obtainTtitles();
+}
+
+#pragma mark -- end
 
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController
@@ -187,5 +204,12 @@
     return CGRectMake(0, (IsiPhoneX ? 54 : 30) + 34 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 54 : 30) + 84 + (IsiPhoneX ? 83 : 49)));
 }
 
+- (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
+{
+    NSString *text = [NSString stringWithFormat:@"榜单--%@", info[@"title"]];
+    NSDictionary *context = @{@"oneTab" : text};
+    [MobClick event:@"ID1" attributes:context];
+    NSLog(@"%@----%@", viewController, context);
+}
 
 @end

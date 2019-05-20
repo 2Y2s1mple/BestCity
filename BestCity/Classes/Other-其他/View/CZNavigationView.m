@@ -46,7 +46,7 @@
         [leftBtn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:leftBtn];
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH - 100, 20)];
         titleLabel.text = title;
         titleLabel.textColor = textColor;
         titleLabel.center = CGPointMake(self.width / 2, leftBtn.center.y);

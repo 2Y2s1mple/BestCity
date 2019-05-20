@@ -144,6 +144,9 @@
 
 - (void)moreTrialReport:(UIButton *)sender
 {
+    NSString *text = @"试用--试用报告--查看更多";
+    NSDictionary *context = @{@"oneTab" : text};
+    [MobClick event:@"ID4" attributes:context];
     CZTrialReportController *hotVc = [[CZTrialReportController alloc] init];
     hotVc.menuViewStyle = WMMenuViewStyleLine;
             hotVc.progressWidth = 60;

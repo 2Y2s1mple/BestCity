@@ -43,7 +43,7 @@
 {
     if (_rightTitles == nil) {
         // 用户信息
-        NSDictionary *userInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
+        NSDictionary *userInfo = JPUSERINFO;
         _rightTitles = [NSMutableArray arrayWithArray:@[
                                                         userInfo[@"avatar"],
                                                         userInfo[@"nickname"], 
@@ -53,6 +53,14 @@
                                                         ]];
     }
     return _rightTitles;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.rightTitles = nil;
+    [self.tableView reloadData];
+
 }
 
 - (void)viewDidLoad {
@@ -85,6 +93,10 @@
 - (void)loginOutAction
 {
     [CZAlertViewTool showAlertWithTitle:@"确认退出" action:^{
+        // 参数
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/logout"];
+        // 请求
+        [GXNetTool PostNetWithUrl:url body:@{} bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {} failure:^(NSError *error) {}];
         // 删除用户信息
         [[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"user"];
         // 删除token
@@ -226,9 +238,6 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
     [self presentViewController:alert animated:YES completion:nil];
-    
-    
-    
 }
 
 #pragma mark -<UIImagePickerControllerDelegate> 拍照完成回调
@@ -239,8 +248,9 @@
         NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/uploadImage"];
         [GXNetTool uploadNetWithUrl:url fileSource:image success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
-               [self changeUserInfo:@{@"avatar" : result[@"data"]}];
-               [self getUserInfo];
+                NSString *url = result[@"data"];
+               [self changeUserInfo:@{@"avatar" : url}];
+//               [self getUserInfo];
             } else {
                 [CZProgressHUD showProgressHUDWithText:@"修改失败"];
                 [CZProgressHUD hideAfterDelay:1];

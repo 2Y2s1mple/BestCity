@@ -41,8 +41,8 @@
                             <color key="textColor" red="0.42003583908081055" green="0.42346090078353882" blue="0.42767727375030518" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.UI交互体验升级" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsv-2z-6Q5">
-                            <rect key="frame" x="16" y="172" width="109" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.UI交互体验升级" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsv-2z-6Q5">
+                            <rect key="frame" x="16" y="172" width="210" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.42003583909999997" green="0.42346090079999998" blue="0.42767727379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -83,6 +83,7 @@
                         <constraint firstAttribute="height" constant="334" id="ZQG-bO-zRa"/>
                         <constraint firstItem="sMS-HW-g4D" firstAttribute="top" secondItem="JnO-7H-Ygh" secondAttribute="top" id="fLN-aO-Yyp"/>
                         <constraint firstAttribute="bottom" secondItem="ASo-GL-f1S" secondAttribute="bottom" constant="28" id="la9-57-af5"/>
+                        <constraint firstAttribute="trailing" secondItem="Qsv-2z-6Q5" secondAttribute="trailing" constant="14" id="mfF-pg-ieq"/>
                         <constraint firstItem="zZi-7z-xDo" firstAttribute="top" secondItem="MfQ-LB-CAu" secondAttribute="bottom" id="qBj-2e-tVT"/>
                         <constraint firstItem="Qsv-2z-6Q5" firstAttribute="leading" secondItem="lgp-U1-NDB" secondAttribute="leading" id="saS-Du-i2A"/>
                         <constraint firstItem="MfQ-LB-CAu" firstAttribute="top" secondItem="JnO-7H-Ygh" secondAttribute="top" constant="59" id="u2m-lB-V5M"/>
@@ -112,7 +113,7 @@
                 <outlet property="delectBtn" destination="WCm-YF-oxB" id="BYx-mJ-3pH"/>
                 <outlet property="versionLabel" destination="zZi-7z-xDo" id="mKQ-Kr-gdr"/>
             </connections>
-            <point key="canvasLocation" x="-293" y="-47"/>
+            <point key="canvasLocation" x="-509" y="-53"/>
         </view>
         <view contentMode="scaleToFill" id="es1-yx-xhX" customClass="CZUpdataView">
             <rect key="frame" x="0.0" y="0.0" width="364" height="539"/>

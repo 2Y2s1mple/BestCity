@@ -82,4 +82,12 @@
     return CGRectMake(0, (IsiPhoneX ? 44 : 20) + HOTTitleH, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49));
 }
 
+- (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
+{
+    NSString *text = [NSString stringWithFormat:@"测评--%@", info[@"title"]];
+    NSDictionary *context = @{@"oneTab" : text};
+    [MobClick event:@"ID3" attributes:context];
+    NSLog(@"----%@", text);
+}
+
 @end

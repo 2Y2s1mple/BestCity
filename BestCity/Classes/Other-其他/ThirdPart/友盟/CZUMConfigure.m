@@ -29,9 +29,9 @@ static id _instance;
     // U-Share 平台设置
     [self configUSharePlatforms];
     
-//    [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
+    [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
 //    [UMConfigure setEncryptEnabled:YES];//打开加密传输
-//    [UMConfigure setLogEnabled:YES];//设置打开日志
+    [UMConfigure setLogEnabled:YES];//设置打开日志
 }
 
 - (void)configUSharePlatforms
@@ -61,7 +61,6 @@ static id _instance;
     //设置网页地址
     shareUrlObject.webpageUrl = webUrl;
     
-    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //分享消息对象设置分享内容对象
@@ -79,8 +78,4 @@ static id _instance;
         
     }];
 }
-
-
-
-
 @end

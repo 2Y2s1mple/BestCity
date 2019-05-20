@@ -146,7 +146,7 @@
         url = [JPSERVER_URL stringByAppendingPathComponent:@"api/fans/list"];
     };
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"list"] count] != 0)
+        if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0)
         {
             // 字典转模型
             NSArray *attentions = [CZAttentionsModel objectArrayWithKeyValuesArray:result[@"data"]];
