@@ -1,17 +1,16 @@
 //
-//  CZTrialApplyForController.m
+//  CZTrialSuccessReportController.m
 //  BestCity
 //
-//  Created by JasonBourne on 2019/4/2.
+//  Created by JasonBourne on 2019/5/21.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import "CZTrialApplyForController.h"
-#import "CZTrialApplyForCell.h"
+#import "CZTrialSuccessReportController.h"
 #import "GXNetTool.h"
-#import "CZTrialDetailController.h"
+#import "CZTrialApplyForCell.h"
 
-@interface CZTrialApplyForController () <UITableViewDelegate, UITableViewDataSource>
+@interface CZTrialSuccessReportController ()<UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
 @property (nonatomic, strong) UITableView *tableView;
 /** 页数 */
@@ -20,10 +19,10 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
+
 @end
 
-@implementation CZTrialApplyForController
-#pragma mark - 视图
+@implementation CZTrialSuccessReportController
 - (CZNoDataView *)noDataView
 {
     if (_noDataView == nil) {
@@ -42,7 +41,6 @@
     return _dataSource;
 }
 
-
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
@@ -56,15 +54,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
-    
+
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0.7)];
     line.backgroundColor = CZGlobalLightGray;
     [self.view addSubview:line];
-    
+
     // 创建表
     [self.view addSubview:self.tableView];
-    
+
     [self setupRefresh];
 }
 
@@ -76,7 +75,6 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
 }
 
-#pragma mark - 获取数据
 - (void)reloadNewTrailDataSorce
 {
     // 结束尾部刷新
@@ -96,7 +94,7 @@
                 [self.tableView addSubview:self.noDataView];
             }
             self.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
-            
+
             [self.tableView reloadData];
         }
         // 结束刷新
@@ -163,10 +161,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
-    NSDictionary *dic = self.dataSource[indexPath.row];
-    vc.trialId = dic[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
+//    CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
+//    NSDictionary *dic = self.dataSource[indexPath.row];
+//    vc.trialId = dic[@"id"];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 @end

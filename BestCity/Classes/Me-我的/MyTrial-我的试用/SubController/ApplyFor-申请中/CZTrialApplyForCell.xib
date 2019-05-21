@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="452" height="167.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Abg-SQ-0oy">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Abg-SQ-0oy">
                         <rect key="frame" x="12" y="12" width="95" height="85"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="95" id="3S3-Hd-nyY"/>
@@ -59,7 +59,7 @@
                                 <color key="textColor" red="0.19260779023170471" green="0.1959976851940155" blue="0.20025002956390381" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPa-8u-Fff">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPa-8u-Fff">
                                 <rect key="frame" x="345" y="12" width="79" height="26"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -72,7 +72,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
+                                        <real key="value" value="0.5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
                                         <color key="value" red="0.88860207796096802" green="0.079048879444599152" blue="0.21190962195396423" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,7 +80,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="shareBtnAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CIp-Gd-YrS"/>
@@ -135,7 +135,7 @@
                 <outlet property="subTitleLabel" destination="nid-Ll-Prz" id="kAJ-15-7qy"/>
                 <outlet property="titleLabel" destination="gQS-DM-a4F" id="UM7-8I-kYi"/>
             </connections>
-            <point key="canvasLocation" x="346" y="-211"/>
+            <point key="canvasLocation" x="-88" y="-303"/>
         </tableViewCell>
     </objects>
 </document>

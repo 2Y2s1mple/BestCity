@@ -240,6 +240,7 @@
 		9794FC5C2193E761003C6AA6 /* CZBaseRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9794FC5B2193E761003C6AA6 /* CZBaseRecommendController.m */; };
 		9794FC5F21940660003C6AA6 /* CZRecommendDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9794FC5E21940660003C6AA6 /* CZRecommendDetailController.m */; };
 		9794FC6821945F55003C6AA6 /* CZRecommendDetailPointModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9794FC6721945F55003C6AA6 /* CZRecommendDetailPointModel.m */; };
+		979585262293DF5A005FC54D /* CZTrialSuccessReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 979585252293DF5A005FC54D /* CZTrialSuccessReportController.m */; };
 		9799933721A67B1A0000D42B /* CZCommentDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799933521A67B1A0000D42B /* CZCommentDetailCell.m */; };
 		9799933821A67B1A0000D42B /* CZCommentDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799933621A67B1A0000D42B /* CZCommentDetailCell.xib */; };
 		979B05C7210E9CC70023292D /* CZRecommendNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 979B05C6210E9CC70023292D /* CZRecommendNav.m */; };
@@ -817,6 +818,8 @@
 		9794FC5E21940660003C6AA6 /* CZRecommendDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRecommendDetailController.m; sourceTree = "<group>"; };
 		9794FC6621945F55003C6AA6 /* CZRecommendDetailPointModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRecommendDetailPointModel.h; sourceTree = "<group>"; };
 		9794FC6721945F55003C6AA6 /* CZRecommendDetailPointModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRecommendDetailPointModel.m; sourceTree = "<group>"; };
+		979585242293DF5A005FC54D /* CZTrialSuccessReportController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialSuccessReportController.h; sourceTree = "<group>"; };
+		979585252293DF5A005FC54D /* CZTrialSuccessReportController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialSuccessReportController.m; sourceTree = "<group>"; };
 		9799933421A67B1A0000D42B /* CZCommentDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommentDetailCell.h; sourceTree = "<group>"; };
 		9799933521A67B1A0000D42B /* CZCommentDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommentDetailCell.m; sourceTree = "<group>"; };
 		9799933621A67B1A0000D42B /* CZCommentDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCommentDetailCell.xib; sourceTree = "<group>"; };
@@ -2568,6 +2571,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		979585232293D6B2005FC54D /* SucceeReport-成功报告 */ = {
+			isa = PBXGroup;
+			children = (
+				979585242293DF5A005FC54D /* CZTrialSuccessReportController.h */,
+				979585252293DF5A005FC54D /* CZTrialSuccessReportController.m */,
+			);
+			path = "SucceeReport-成功报告";
+			sourceTree = "<group>";
+		};
 		979B05DC210F218A0023292D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2612,9 +2624,10 @@
 		97AB0C15225324CB00072426 /* SubController */ = {
 			isa = PBXGroup;
 			children = (
-				977E8091225B693F0041A126 /* Failed-申请失败 */,
+				979585232293D6B2005FC54D /* SucceeReport-成功报告 */,
 				97AB0C1E2253349A00072426 /* ApplyFor-申请中 */,
 				97AB0C1F22533BC300072426 /* Succeed-申请成功 */,
+				977E8091225B693F0041A126 /* Failed-申请失败 */,
 			);
 			path = SubController;
 			sourceTree = "<group>";
@@ -3046,12 +3059,12 @@
 			children = (
 				97C7FF2E216DDDB50091DC07 /* MJRefreshFooter.m */,
 				97C7FF2F216DDDB50091DC07 /* MJRefreshComponent.h */,
+				97C7FF35216DDDB50091DC07 /* MJRefreshComponent.m */,
 				97C7FF30216DDDB50091DC07 /* MJRefreshHeader.m */,
 				97C7FF31216DDDB50091DC07 /* MJRefreshAutoFooter.h */,
 				97C7FF32216DDDB50091DC07 /* MJRefreshBackFooter.m */,
 				97C7FF33216DDDB50091DC07 /* MJRefreshAutoFooter.m */,
 				97C7FF34216DDDB50091DC07 /* MJRefreshHeader.h */,
-				97C7FF35216DDDB50091DC07 /* MJRefreshComponent.m */,
 				97C7FF36216DDDB50091DC07 /* MJRefreshFooter.h */,
 				97C7FF37216DDDB50091DC07 /* MJRefreshBackFooter.h */,
 			);
@@ -3682,6 +3695,7 @@
 				979B05C7210E9CC70023292D /* CZRecommendNav.m in Sources */,
 				97705CBD2108230F00485D64 /* WMMenuView.m in Sources */,
 				9765649921A53BF2008A0293 /* CZCollectButton.m in Sources */,
+				979585262293DF5A005FC54D /* CZTrialSuccessReportController.m in Sources */,
 				9723F28E21B263E2006E18D2 /* TSLWebViewController.m in Sources */,
 				97705CE92108733F00485D64 /* CZNavigationController.m in Sources */,
 				97420DDA21EC918800FE3D9F /* CZSearchSubDetailOneController.m in Sources */,

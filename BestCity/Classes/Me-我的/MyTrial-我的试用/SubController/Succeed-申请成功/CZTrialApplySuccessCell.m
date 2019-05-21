@@ -32,6 +32,7 @@
 /** 最下面的横线 */
 @property (nonatomic, weak) IBOutlet UIView *bottomLineView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLineViewTop;
+
 @end
 
 @implementation CZTrialApplySuccessCell
@@ -61,7 +62,6 @@
             [CZProgressHUD hideAfterDelay:0];
         }];
     }
-    
 }
 
 // 调用参与接口
@@ -73,15 +73,9 @@
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/confirm"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-            UINavigationController *nav = tabbar.selectedViewController;
-            CZMyTrialController *vc = (CZMyTrialController *)nav.topViewController;
-            CZTrialApplySuccessController *currentVc = (CZTrialApplySuccessController *)vc.currentViewController;
-            [currentVc reloadNewTrailDataSorce];
-//            [currentVc.tableView scrollToRowAtIndexPath:[currentVc.tableView indexPathForCell:self] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-            
+            !self.block ? :self.block();
         } else {
-            
+
         }
         [CZProgressHUD showProgressHUDWithText:@"已提交成功"];
         //隐藏菊花
@@ -93,8 +87,6 @@
     }];
 }
 
-
-
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"CZTrialApplySuccessCell";
@@ -104,8 +96,6 @@
     }
     return cell;
 }
-
-
 
 - (void)setDicData:(CZTrialApplySuccessModel *)dicData
 {
@@ -120,29 +110,45 @@
     self.titleLabel.text = dicData.name;
     self.subTitleLabel.text = [NSString stringWithFormat:@"请在%@前确认", [dicData.reportEndTime substringToIndex:10]];
     
-    if ([dicData.status isEqualToNumber: @(1)]) { 
+    if ([dicData.status isEqualToNumber: @(1)]) { // 1申请成功
         self.statusLabel.text = @"申请成功";
         [self.shareBtn setTitle:@"确认参与" forState:UIControlStateNormal];
-    } else {
+    } else if ([dicData.status isEqualToNumber: @(2)]) { // 2确认参与
         self.subTitleLabel.text = [NSString stringWithFormat:@"请在%@前提交试用报告", dicData.activitiesEndTime];
-        if ([dicData.reportStatus isEqualToNumber: @(0)]) { //reportStatus 状态 0:草稿箱 1:审核中 2:已发布 -1：未通过 -2 未提交
-            self.statusLabel.text = @"未提交报告";
-            [self.shareBtn setTitle:@"继续编辑报告" forState:UIControlStateNormal];
-        } else if ([dicData.reportStatus  isEqualToNumber: @(-2)]) {
-            self.statusLabel.text = @"未提交报告";
-            [self.shareBtn setTitle:@"撰写试用报告" forState:UIControlStateNormal];
-        } else if ([dicData.reportStatus  isEqualToNumber: @(-1)]) {
-            self.statusLabel.text = @"报告审核未通过";
-            [self.shareBtn setTitle:@"重新撰写报告" forState:UIControlStateNormal];
-            self.remarkLabel.hidden = NO;
-            self.lineViewTop.constant = 12;
-            self.remarkLabel.text = [NSString stringWithFormat:@"失败原因：%@",  dicData.remark]; // 被拒信息
-        } else if ([dicData.reportStatus  isEqualToNumber: @(2)]) {
-            self.statusLabel.text = @"报告审核通过 ";
-            self.shareBtn.hidden = YES;
-            self.remarkLabel.hidden = YES;
-            self.lineView.hidden = YES;
-            self.bottomLineViewTop.constant = -50;
+        switch ([dicData.reportStatus integerValue]) {
+                //reportStatus 状态 0:草稿箱 1:审核中 2:已发布 -1：未通过 -2 未提交
+            case 0: // 草稿箱
+                self.statusLabel.text = @"未提交报告";
+                [self.shareBtn setTitle:@"继续编辑报告" forState:UIControlStateNormal];
+                break;
+            case 1: // 审核中
+                self.statusLabel.text = @"审核中";
+                self.shareBtn.hidden = YES;
+                self.remarkLabel.hidden = YES;
+                self.lineView.hidden = YES;
+                self.bottomLineViewTop.constant = -50;
+                break;
+            case 2: // 已发布
+                self.statusLabel.text = @"报告审核通过";
+                self.shareBtn.hidden = YES;
+                self.remarkLabel.hidden = YES;
+                self.lineView.hidden = YES;
+                self.bottomLineViewTop.constant = -50;
+                break;
+            case -1: // 未通过
+                self.statusLabel.text = @"报告审核未通过";
+                [self.shareBtn setTitle:@"重新撰写报告" forState:UIControlStateNormal];
+                self.remarkLabel.hidden = NO;
+                self.lineViewTop.constant = 12;
+                self.remarkLabel.text = [NSString stringWithFormat:@"失败原因：%@",  dicData.remark]; // 被拒信息
+                break;
+            case -2: // 未提交
+                self.statusLabel.text = @"未提交报告";
+                [self.shareBtn setTitle:@"撰写试用报告" forState:UIControlStateNormal];
+                break;
+
+            default:
+                break;
         }
     }
     [self layoutIfNeeded];

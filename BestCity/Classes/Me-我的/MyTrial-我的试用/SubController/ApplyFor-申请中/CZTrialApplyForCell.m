@@ -59,17 +59,17 @@
     _dicData = dicData;
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:dicData[@"img"]]];
     self.titleLabel.text = dicData[@"name"];
-    self.subTitleLabel.text = [NSString stringWithFormat:@"预计%@ 公布名单", [dicData[@"reportEndTime"] substringToIndex:10]];
+    self.subTitleLabel.text = [NSString stringWithFormat:@"预计%@ 公布名单", [dicData[@"activitiesEndTime"] substringToIndex:10]];
     self.statusLabel.text = @"审核中";
     self.praiseLabel.text = [NSString stringWithFormat:@"已获%@个赞", dicData[@"voteCount"]];
-    
-    
+
 }
 
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.shareBtn.layer.borderWidth = 0.6;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

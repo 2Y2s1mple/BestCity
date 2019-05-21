@@ -66,7 +66,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
+                                        <real key="value" value="0.5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
                                         <color key="value" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -140,7 +140,7 @@
                 <outlet property="subTitleLabel" destination="l3I-kQ-H9K" id="wVG-H9-6RW"/>
                 <outlet property="titleLabel" destination="5kM-RL-ge3" id="Aga-Rd-yzz"/>
             </connections>
-            <point key="canvasLocation" x="952" y="-2"/>
+            <point key="canvasLocation" x="735" y="-8"/>
         </tableViewCell>
     </objects>
 </document>

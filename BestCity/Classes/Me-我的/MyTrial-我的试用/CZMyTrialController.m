@@ -11,6 +11,7 @@
 #import "CZTrialApplyForController.h" // 申请中
 #import "CZTrialApplySuccessController.h" // 申请成功
 #import "CZMyTrialApplyForFailedController.h" // 申请失败
+#import "CZTrialSuccessReportController.h" // 成功报告
 
 @interface CZMyTrialController ()
 
@@ -71,6 +72,10 @@
         }
         case 2: {
             CZMyTrialApplyForFailedController *vc = [[CZMyTrialApplyForFailedController alloc] init];
+            return vc;
+        }
+        case 3: {
+            CZTrialSuccessReportController *vc = [[CZTrialSuccessReportController alloc] init];
             return vc;
         }
         default:{

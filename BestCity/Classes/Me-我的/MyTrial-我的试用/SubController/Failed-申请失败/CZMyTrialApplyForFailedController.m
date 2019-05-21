@@ -18,9 +18,21 @@
 @property (nonatomic, assign) NSInteger page;
 /** 数据 */
 @property (nonatomic, strong) NSMutableArray *dataSource;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZMyTrialApplyForFailedController
+#pragma mark - 视图
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 200;
+    }
+    return _noDataView;
+}
 
 - (NSMutableArray *)dataSource
 {
@@ -76,6 +88,13 @@
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0) {
+                // 删除noData图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 加载NnoData图片
+                [self.tableView addSubview:self.noDataView];
+            }
             self.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
             
             [self.tableView reloadData];
@@ -101,6 +120,10 @@
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0) {
+                // 删除noData图片
+                [self.noDataView removeFromSuperview];
+            }
             NSArray *freshData = result[@"data"];
             [self.dataSource addObjectsFromArray:freshData];
             [self.tableView reloadData];

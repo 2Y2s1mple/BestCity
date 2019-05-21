@@ -28,7 +28,9 @@
             UIImageView *bigImage = [self setupImageView];
             [self.view addSubview:bigImage];
             [bigImage sd_setImageWithURL:[NSURL URLWithString:dic[@"value"]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                
+                if (image == nil) {
+                    return ;
+                };
                 CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
                 bigImage.height = imageHeight;
                 
