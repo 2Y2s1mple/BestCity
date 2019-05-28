@@ -26,6 +26,8 @@
     NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     // 手机型号
     NSString *phoneModel = [CZPhoneModelHandle phoneModelHandle];
+    // 手机分辨率
+    NSString *resolution = [NSString stringWithFormat:@"%.0lf x %.0lf", SCR_HEIGHT * [UIScreen mainScreen].scale, SCR_WIDTH * [UIScreen mainScreen].scale];
     //手机系统版本
     NSString *phoneVersion = [[UIDevice currentDevice] systemVersion];
     // 获取网络环境
@@ -38,6 +40,7 @@
                                   @"model" : phoneModel,
                                   @"appVersion" : curVersion,
                                   @"netInfo" : netInfo,
+                                  @"res" : resolution
                                   };
     return paramHeader;
 }

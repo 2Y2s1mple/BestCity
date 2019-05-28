@@ -73,9 +73,7 @@
     self.statusView = statusView;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneControllerScrollViewDidScroll:) name:@"CZOneControllerScrollViewDidScroll" object:nil];
-    
     self.scrollView.scrollEnabled = YES;
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,7 +82,6 @@
     self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
     self.statusView.hidden = NO;
 }
-
 
 //- (void)viewWillLayoutSubviews
 //{

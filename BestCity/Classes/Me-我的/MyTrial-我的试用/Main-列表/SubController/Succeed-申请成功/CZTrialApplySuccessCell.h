@@ -19,6 +19,8 @@ typedef void(^cellBlock)(void);
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 /** 刷新cell */
 @property (nonatomic, copy) cellBlock block;
+/** 跳转到报告编辑器 */
+@property (nonatomic, copy) void (^gotoEditorBlock) (NSString *);
 @end
 
 NS_ASSUME_NONNULL_END

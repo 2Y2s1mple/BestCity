@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** 创建时间 */
 @property (nonatomic, strong) NSString *createTime;
 @property (nonatomic, strong) NSString *createTimeStr;
+/** 判断内容是否HTML 1: html 3: json */ 
+@property (nonatomic, assign) NSInteger contentType;
 /** 内容HTML */
 @property (nonatomic, strong) NSString *content;
 /** 当前的ID */

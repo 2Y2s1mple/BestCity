@@ -87,6 +87,13 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    
+    NSLog(@"%@", request.URL);
+    return YES;
+}
+
 - (void)dealloc
 {
     [CZProgressHUD hideAfterDelay:0];

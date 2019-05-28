@@ -9,6 +9,8 @@
 #import "CZTrialSuccessReportController.h"
 #import "GXNetTool.h"
 #import "CZTrialApplyForCell.h"
+#import "CZDChoiceDetailController.h"
+#import "CZChoicenessCell.h"
 
 @interface CZTrialSuccessReportController ()<UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
@@ -82,9 +84,8 @@
     self.page = 1;
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"status"] = @(0);
     param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/reportList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             if ([result[@"data"] count] > 0) {
                 // 删除noData图片
@@ -93,7 +94,8 @@
                 // 加载NnoData图片
                 [self.tableView addSubview:self.noDataView];
             }
-            self.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
+            self.dataSource = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"data"]];
+
 
             [self.tableView reloadData];
         }
@@ -114,11 +116,11 @@
     self.page++;
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"status"] = @(0);
     param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/reportList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            NSArray *freshData = result[@"data"];
+
+            NSArray *freshData = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"data"]];;
             if ([result[@"data"] count] > 0) {
                 // 删除noData图片
                 [self.noDataView removeFromSuperview];
@@ -148,23 +150,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 161;
+    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
+    return model.cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dic = self.dataSource[indexPath.row];
-    CZTrialApplyForCell *cell = [CZTrialApplyForCell cellWithTableView:tableView];
-    cell.dicData = dic;
+    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
+    static NSString *ID1 = @"choiceCell1";
+    CZChoicenessCell *cell = [tableView dequeueReusableCellWithIdentifier:ID1];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZChoicenessCell class]) owner:nil options:nil] lastObject];
+    }
+    cell.model = model;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
-//    NSDictionary *dic = self.dataSource[indexPath.row];
-//    vc.trialId = dic[@"id"];
-//    [self.navigationController pushViewController:vc animated:YES];
+    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
+    CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+    vc.detailType = CZJIPINModuleTrail;
+    vc.findgoodsId = model.articleId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

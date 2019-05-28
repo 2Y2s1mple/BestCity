@@ -39,29 +39,38 @@
 
 - (IBAction)btnAction:(UIButton *)sender {
     if ([sender.titleLabel.text  isEqual: @"确认参与"]) {
-        //获取详情数据
-        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/address/default"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-            if ([result[@"msg"] isEqualToString:@"success"]) {
-                if ([result[@"data"] isKindOfClass:[NSDictionary class]]) {
-                    [self invokingConfirm];
-                } else {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:[NSString stringWithFormat:@"请先选择默认地址后才能确认参与"] preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"填写地址" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { 
-                        CZAddressController *vc = [[CZAddressController alloc] init];
-                        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-                        UINavigationController *nav = tabbar.selectedViewController;
-                        [nav pushViewController:vc animated:YES
-                         ];
-                    }]];
-                    [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:alert animated:NO completion:nil];
-                }
-            }
-        } failure:^(NSError *error) {
-            //隐藏菊花
-            [CZProgressHUD hideAfterDelay:0];
-        }];
+        //确认参与
+        [self defaultAddress];
+    } else {
+        !self.gotoEditorBlock ? :self.gotoEditorBlock(self.dicData.ID);
     }
+}
+
+
+// 获取默认地址接口
+- (void)defaultAddress
+{
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/address/default"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            if ([result[@"data"] isKindOfClass:[NSDictionary class]]) {
+                [self invokingConfirm];
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:[NSString stringWithFormat:@"请先选择默认地址后才能确认参与"] preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                [alert addAction:[UIAlertAction actionWithTitle:@"填写地址" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    CZAddressController *vc = [[CZAddressController alloc] init];
+                    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                    UINavigationController *nav = tabbar.selectedViewController;
+                    [nav pushViewController:vc animated:YES
+                     ];
+                }]];
+                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:alert animated:NO completion:nil];
+            }
+        }
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
 }
 
 // 调用参与接口

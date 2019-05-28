@@ -11,6 +11,7 @@
 #import "CZTrialApplySuccessCell.h"
 #import "CZTrialApplySuccessModel.h"
 #import "CZTrialDetailController.h"
+#import "CZReportEditorController.h" // 编辑器
 
 @interface CZTrialApplySuccessController () <UITableViewDelegate, UITableViewDataSource>
 /** 页数 */
@@ -67,7 +68,7 @@
     
     // 创建表
     [self.view addSubview:self.tableView];
-    
+
     [self setupRefresh];
 }
 
@@ -157,6 +158,11 @@
     CZTrialApplySuccessCell *cell = [CZTrialApplySuccessCell cellWithTableView:tableView];
     cell.block = ^{
         [self.tableView.mj_header beginRefreshing];
+    };
+    cell.gotoEditorBlock = ^(NSString *ID){
+        CZReportEditorController *vc = [[CZReportEditorController alloc] init];
+        vc.trialId = ID;
+        [self.navigationController pushViewController:vc animated:YES];
     };
     cell.dicData = dic;
     return cell;

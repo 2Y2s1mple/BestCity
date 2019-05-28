@@ -22,6 +22,8 @@
 #import "UIButton+CZExtension.h" // 按钮扩展
 #import "CZHotSaleDetailModel.h" // 当前数据模型
 
+#import "TSLWebViewController.h"
+
 @interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
@@ -87,6 +89,10 @@ static NSString * const type = @"1";
             [MobClick event:@"ID5" attributes:context];
             // 打开淘宝
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
+
+//            TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobaoLogin?token=%@", JPSERVER_URL, JPTOKEN]]];
+//
+//            [self presentViewController:webVc animated:YES completion:nil];
         }];
     }
     return _likeView;

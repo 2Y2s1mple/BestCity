@@ -102,7 +102,7 @@
     if ([self.detailTtype isEqualToString:@"1"]) {
         /**加载开箱测评*/
         //标题
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 0, 150, 20)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, 20, 150, 20)];
         titleLabel.text = @"评测报告";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
         [self.scrollerView addSubview:titleLabel];
@@ -160,6 +160,8 @@
         [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
         self.webView.scrollView.scrollEnabled = NO;
         [self.webView loadHTMLString:self.model.content baseURL:nil];
+    } else if ([self.detailTtype isEqualToString:@"4"]) {
+
     } else {
         /**加载开箱测评*/
         //标题
@@ -210,14 +212,58 @@
             }
         }];
         [self.scrollerView addSubview:self.attentionBtn];
-        
-        self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(4, CZGetY(iconImage) + space, SCR_WIDTH - 8, 100)];
-        self.webView.backgroundColor = [UIColor whiteColor];
-        [self.scrollerView addSubview:self.webView];
-        self.webView.delegate = self;
-        [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-        self.webView.scrollView.scrollEnabled = NO;
-        [self.webView loadHTMLString:self.model.content baseURL:nil];
+
+        NSLog(@"-----%ld", self.model.contentType);
+        if (self.model.contentType == 3) {
+            NSData *jsonData = [self.model.content dataUsingEncoding:NSUTF8StringEncoding];
+
+            NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+            CGFloat recordY = CZGetY(iconImage);
+            for (NSDictionary *dic in dataArr) {
+                if ([dic[@"type"]  isEqual: @"1"]) { // 文字
+                    UILabel *label = [self setupTitleView];
+                    label.text = dic[@"value"];
+                    [label sizeToFit];
+                    label.y = recordY + 20;
+                    recordY += label.height + 20;
+                    [self.scrollerView addSubview:label];
+                } else {
+                    UIImageView *bigImage = [self setupImageView];
+                    CGFloat imageHeight = bigImage.width * [dic[@"height"] floatValue] / [dic[@"width"] floatValue];
+                    bigImage.height = imageHeight;
+                    bigImage.y = recordY + 20;
+                    recordY += bigImage.height + 20;
+                    [self.scrollerView addSubview:bigImage];
+                    [bigImage sd_setImageWithURL:[NSURL URLWithString:dic[@"value"]] completed:nil];
+                }
+            }
+            /** 点赞 */
+            //加载点赞小手
+            CZGiveLikeView *likeView = [[CZGiveLikeView alloc] initWithFrame:CGRectMake(0, recordY + 49, 115, 36)];
+            likeView.centerX = self.view.centerX;
+            likeView.type = self.detailTtype;
+            likeView.currentID = self.model.articleId;
+            [self.scrollerView addSubview:likeView];
+            self.likeView = likeView;
+
+            //加个分隔线
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.likeView.frame) + 49, SCR_WIDTH, 7)];
+            self.lineView = lineView;
+            lineView.backgroundColor = CZGlobalLightGray;
+            [self.scrollerView addSubview:lineView];
+
+            self.scrollerView.height = CGRectGetMaxY(lineView.frame);
+            return;
+
+        } else {
+            self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(4, CZGetY(iconImage) + space, SCR_WIDTH - 8, 100)];
+            self.webView.backgroundColor = [UIColor whiteColor];
+            [self.scrollerView addSubview:self.webView];
+            self.webView.delegate = self;
+            [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+            self.webView.scrollView.scrollEnabled = NO;
+            [self.webView loadHTMLString:self.model.content baseURL:nil];
+        }
     }
     
     /** 点赞 */
@@ -236,6 +282,26 @@
     [self.scrollerView addSubview:lineView];
     
     self.scrollerView.height = CGRectGetMaxY(lineView.frame);
+}
+
+- (UILabel *)setupTitleView
+{
+    UILabel *label = [[UILabel alloc] init];
+    label.x = 14;
+    label.width = SCR_WIDTH - 24;
+    label.textColor = CZBLACKCOLOR;
+    label.numberOfLines = 0;
+    label.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
+    return label;
+}
+
+- (UIImageView *)setupImageView
+{
+    UIImageView *bigImage = [[UIImageView alloc] init];
+    bigImage.x = 14;
+    bigImage.width = SCR_WIDTH - 24;
+    bigImage.height = 200;
+    return bigImage;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
