@@ -35,7 +35,9 @@
     _dicData = dicData;
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:dicData[@"img"]]];
     self.titleLabel.text = dicData[@"name"];
-    self.subTitleLabel.text = dicData[@"remark"];
+    if (dicData[@"remark"]) {
+        self.subTitleLabel.text = dicData[@"remark"];
+    }
 }
 
 - (void)awakeFromNib {

@@ -349,6 +349,8 @@
 		97CDCB32211D625700521ED5 /* UILabel+CZAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB31211D625700521ED5 /* UILabel+CZAdapter.m */; };
 		97CDCB35211D76CC00521ED5 /* UIFont+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */; };
 		97D39173223645290081F229 /* CZOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D39172223645290081F229 /* CZOrderModel.m */; };
+		97D489CD22A647C300FD4EC7 /* CZMyWalletDepositController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D489CB22A647C300FD4EC7 /* CZMyWalletDepositController.m */; };
+		97D489CE22A647C300FD4EC7 /* CZMyWalletDepositController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D489CC22A647C300FD4EC7 /* CZMyWalletDepositController.xib */; };
 		97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D68C67219054E000802B30 /* CZHotTagLabel.m */; };
 		97D8FCBC2111504000D8ED8F /* CZMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCBB2111504000D8ED8F /* CZMeCell.m */; };
 		97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D8FCBD2111505000D8ED8F /* CZMeCell.xib */; };
@@ -1015,6 +1017,9 @@
 		97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CZExtension.m"; sourceTree = "<group>"; };
 		97D39171223645290081F229 /* CZOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZOrderModel.h; sourceTree = "<group>"; };
 		97D39172223645290081F229 /* CZOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZOrderModel.m; sourceTree = "<group>"; };
+		97D489CA22A647C300FD4EC7 /* CZMyWalletDepositController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletDepositController.h; sourceTree = "<group>"; };
+		97D489CB22A647C300FD4EC7 /* CZMyWalletDepositController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyWalletDepositController.m; sourceTree = "<group>"; };
+		97D489CC22A647C300FD4EC7 /* CZMyWalletDepositController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyWalletDepositController.xib; sourceTree = "<group>"; };
 		97D68C66219054E000802B30 /* CZHotTagLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTagLabel.h; sourceTree = "<group>"; };
 		97D68C67219054E000802B30 /* CZHotTagLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotTagLabel.m; sourceTree = "<group>"; };
 		97D8FCBA2111504000D8ED8F /* CZMeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeCell.h; sourceTree = "<group>"; };
@@ -2471,6 +2476,9 @@
 				97911042222F6A2100C2DE5B /* CZMyWalletController.h */,
 				97911043222F6A2100C2DE5B /* CZMyWalletController.m */,
 				97911044222F6A2100C2DE5B /* CZMyWalletController.xib */,
+				97D489CA22A647C300FD4EC7 /* CZMyWalletDepositController.h */,
+				97D489CB22A647C300FD4EC7 /* CZMyWalletDepositController.m */,
+				97D489CC22A647C300FD4EC7 /* CZMyWalletDepositController.xib */,
 			);
 			path = "MyWallet-钱包";
 			sourceTree = "<group>";
@@ -3563,6 +3571,7 @@
 				972E41CC21147C3A00BC751C /* CZAttentionController.xib in Resources */,
 				97F4D487224A127300A82B14 /* CZvoteUserController.xib in Resources */,
 				97705CD52108495D00485D64 /* CZHotSaleCell.xib in Resources */,
+				97D489CE22A647C300FD4EC7 /* CZMyWalletDepositController.xib in Resources */,
 				97911059222FAE3B00C2DE5B /* CZEditAddressController.xib in Resources */,
 				97BDB85F211077D800966FF0 /* CZMeController.xib in Resources */,
 				9786FF182255973E0007021C /* CZCommonRecommendCell.xib in Resources */,
@@ -3747,6 +3756,7 @@
 				97643485221BF31000EB0291 /* CZSubButton.m in Sources */,
 				97798CC6212D0FC90052CE94 /* UIImage+MultiFormat.m in Sources */,
 				97F4D4812249BD7600A82B14 /* CZTestReportController.m in Sources */,
+				97D489CD22A647C300FD4EC7 /* CZMyWalletDepositController.m in Sources */,
 				97F152FF21097A24009F7922 /* CZCommodityView.m in Sources */,
 				97C8513B211C1BDC005540D8 /* CZProgressHUD.m in Sources */,
 				97C7FF3E216DDDB50091DC07 /* MJRefreshBackGifFooter.m in Sources */,

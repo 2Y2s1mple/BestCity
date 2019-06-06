@@ -45,12 +45,12 @@
     UIViewController *vc = nav.topViewController;
     
     CZShareView *share = [[CZShareView alloc] initWithFrame:vc.view.frame];
-//    share.param = @{
-//                    @"shareUrl" : self.dataSource[@"shareUrl"], 
-//                    @"shareTitle" : self.dataSource[@"shareTitle"],
-//                    @"shareContent" : self.dataSource[@"shareContent"],
-//                    @"shareImg" : self.dataSource[@"shareImg"],
-//                    };
+    share.param = @{
+                    @"shareUrl" : self.dicData[@"voteShareUrl"],
+                    @"shareTitle" : self.dicData[@"voteShareTitle"],
+                    @"shareContent" : self.dicData[@"voteShareContent"],
+                    @"shareImg" : self.dicData[@"voteShareImg"],
+                    };
     [vc.view addSubview:share];
 }
 

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^textBlock) (NSString *, CGFloat);
 /** <#注释#> */
 @property (nonatomic, strong) NSString *placeHolder;
+/** 默认文字 */
+@property (nonatomic, strong) NSString *defaultText;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *status;
 @property (nonatomic, strong) NSNumber *reportStatus;
 @property (nonatomic, strong) NSString *reportEndTime;
+@property (nonatomic, strong) NSString *confirmTime;
 @property (nonatomic, strong) NSString *activitiesEndTime;
 @property (nonatomic, strong) NSString *voteShareTitle;
 @property (nonatomic, strong) NSString *voteShareContent;

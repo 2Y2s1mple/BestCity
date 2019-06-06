@@ -569,7 +569,7 @@ static CGFloat const likeAndShareHeight = 49;
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([sender.titleLabel.text isEqualToString:@"查看试用报告"]) {
         CZTrialAllReportHotController *vc = [[CZTrialAllReportHotController alloc] init];
-        vc.goodsId = self.dataSource[@"goodsId"];
+        vc.goodsId = self.trialId;
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([sender.titleLabel.text isEqualToString:@"分享拉赞"]) {
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];

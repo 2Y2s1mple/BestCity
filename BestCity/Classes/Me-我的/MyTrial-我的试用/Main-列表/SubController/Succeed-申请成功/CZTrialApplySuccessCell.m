@@ -121,6 +121,7 @@
     
     if ([dicData.status isEqualToNumber: @(1)]) { // 1申请成功
         self.statusLabel.text = @"申请成功";
+        self.subTitleLabel.text = [NSString stringWithFormat:@"请在%@前确认", [dicData.confirmTime substringToIndex:10]];
         [self.shareBtn setTitle:@"确认参与" forState:UIControlStateNormal];
     } else if ([dicData.status isEqualToNumber: @(2)]) { // 2确认参与
         self.subTitleLabel.text = [NSString stringWithFormat:@"请在%@前提交试用报告", dicData.activitiesEndTime];

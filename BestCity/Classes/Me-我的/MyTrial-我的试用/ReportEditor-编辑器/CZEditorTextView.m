@@ -19,7 +19,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.delegate = self;
-//        self.scrollEnabled = NO;
     }
     return self;
 }
@@ -58,13 +57,12 @@
     !self.textBlock ? : self.textBlock(string, rect.size.height);
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    NSLog(@"%@-----%@", text, textView.text);
-    NSString *string = [NSString stringWithFormat:@"%@%@", textView.text, text];
-    !self.titleTextBlock ? : self.titleTextBlock(string);
-    return YES;
-}
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+//{
+//    NSLog(@"%@-----%@", text, textView.text);
+//    NSString *string = [NSString stringWithFormat:@"%@%@", textView.text, text];
+//    return !self.titleTextBlock ? : self.titleTextBlock(textView.text);;
+//}
 
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -73,6 +71,7 @@
     } else {
         self.label.hidden = NO;
     }
+    !self.titleTextBlock ? : self.titleTextBlock(textView.text);
 }
 
 - (void)setPlaceHolder:(NSString *)placeHolder
@@ -82,12 +81,12 @@
     [self.label sizeToFit];
 }
 
-- (void)setText:(NSString *)text
+- (void)setDefaultText:(NSString *)defaultText
 {
-    [super setText:text];
+    _defaultText = defaultText;
+    self.text = defaultText;
     [self textViewDidChange:self];
     [self textViewDidEndEditing:self];
-    !self.titleTextBlock ? : self.titleTextBlock(text);
-
+//    [self textView:self shouldChangeTextInRange:NSMakeRange(0, 0) replacementText:@""];
 }
 @end

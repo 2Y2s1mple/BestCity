@@ -42,6 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"所有试用报告" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
     [self.view addSubview:navigationView];
@@ -83,7 +84,7 @@
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"goodsId"] = self.goodsId;
+    param[@"trialId"] = self.goodsId;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/reportAllList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             if ([result[@"data"] count] > 0) {
@@ -113,7 +114,7 @@
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"goodsId"] = self.goodsId;
+    param[@"trialId"] = self.goodsId;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/reportAllList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             if ([result[@"data"] count] > 0) {

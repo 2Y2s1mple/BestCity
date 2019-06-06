@@ -62,6 +62,15 @@
     model.cellHeight = CZGetY(self.lineView);
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    if (selected) {
+        self.model.pv = [NSString stringWithFormat:@"%ld", [self.model.pv integerValue] + 1];
+        [self.visitLabel setTitle:[NSString stringWithFormat:@"%@阅读", self.model.pv] forState:UIControlStateNormal];
+    }
+}
+
+
 // 我的界面数据
 //- (void)setAttentionModel:(CZAttentionDetailModel *)attentionModel
 //{

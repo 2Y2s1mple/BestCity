@@ -95,8 +95,8 @@
                             <constraint firstAttribute="height" constant="5" id="uhN-0b-mqn"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="失败原因：文章与商品不符" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UeU-sN-3MP">
-                        <rect key="frame" x="14" y="109" width="160" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="失败原因：文章与商品不符" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UeU-sN-3MP">
+                        <rect key="frame" x="14" y="109" width="159.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.29017603397369385" green="0.56432265043258667" blue="0.88652592897415161" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -140,7 +140,7 @@
                 <outlet property="subTitleLabel" destination="l3I-kQ-H9K" id="wVG-H9-6RW"/>
                 <outlet property="titleLabel" destination="5kM-RL-ge3" id="Aga-Rd-yzz"/>
             </connections>
-            <point key="canvasLocation" x="735" y="-8"/>
+            <point key="canvasLocation" x="390" y="-10"/>
         </tableViewCell>
     </objects>
 </document>

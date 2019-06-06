@@ -67,7 +67,6 @@ static CGFloat cellHeight = 124;
             self.view.height = tableViewHeight;
         } else {
             self.view.height = CZGetY([self.view.subviews lastObject]);
-            
         }
     }
     

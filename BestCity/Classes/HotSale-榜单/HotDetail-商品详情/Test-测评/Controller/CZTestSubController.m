@@ -253,6 +253,7 @@
             [self.scrollerView addSubview:lineView];
 
             self.scrollerView.height = CGRectGetMaxY(lineView.frame);
+            self.view.height = self.scrollerView.height;
             return;
 
         } else {

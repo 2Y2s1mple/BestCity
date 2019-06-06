@@ -55,7 +55,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor  = [UIColor whiteColor];
-
     // 从草稿箱获取数据
     [self getDataSource];
 
@@ -112,8 +111,8 @@
     label.numberOfLines = 1;
     [label sizeToFit];
     __block CZEditorTextView *blockTextView = textView;
-    textView.titleTextBlock = ^(NSString * text) {
-        if (text.length <= 36) {
+    textView.titleTextBlock = ^(NSString *text) {
+        if (blockTextView.text.length <= 36) {
             label.text = [NSString stringWithFormat:@"%ld/36", text.length];
             [label sizeToFit];
             self.recordText = text;
@@ -179,7 +178,7 @@
     [view addSubview:textView];
     __block UIView *blockView = view;
     __block CZEditorTextView *blockTextView = textView;
-    textView.textBlock = ^(NSString * text, CGFloat height) {
+    textView.textBlock = ^(NSString *text, CGFloat height) {
         NSLog(@"%f", height);
         blockTextView.height = MAX(height + 10, 57);
         blockView.height = CZGetY(blockTextView);
@@ -207,7 +206,7 @@
     imageView.y = originY + 10;
     imageView.x = 10;
     imageView.width = SCR_WIDTH - 20;
-    if (imageView.image) {
+    if (imageView.image ) {
         imageView.height = imageView.image.size.height * imageView.width / imageView.image.size.width;
     }
     NSLog(@"%@", NSStringFromCGSize(imageView.size));
@@ -325,18 +324,17 @@
                                   @"value" : imageView.urlPath
                                   };
             [contentArr addObject:dic];
-        }
+        }   
     }
 
     NSMutableString *string = [[NSMutableString alloc] init];
     for (CZEditorTextView *textView in textArray) {
         [string appendString:textView.text];
     }
-
-    if (string.length < 5) {
+    if (string.length < 500) {
         [CZProgressHUD showProgressHUDWithText:@"正文文字不得小于500字"];
         [CZProgressHUD hideAfterDelay:1.5];
-    } else if (imagesArray.count < 1) {
+    } else if (imagesArray.count < 5) {
         [CZProgressHUD showProgressHUDWithText:@"正文图片不得小于5张"];
         [CZProgressHUD hideAfterDelay:1.5];
     } else if (self.recordText.length < 1) {
@@ -403,12 +401,13 @@
         NSData *jsonData = [context[@"content"] dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *dataArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
     
-    self.textView.text = context[@"title"];
+    self.textView.defaultText = context[@"title"];
+    self.recordText = self.textView.defaultText;
 
     for (NSDictionary *dic in dataArr) {
         if ([dic[@"type"]  isEqual: @"1"] || [dic[@"type"]  isEqual: @(1)]) {
             CZEditorTextView *textView = [self addTextView:nil];
-            textView.text = dic[@"value"];
+            textView.defaultText = dic[@"value"];
         } else {
             CZEditorImageView *imageView = [[CZEditorImageView alloc] init];
             imageView.width = SCR_WIDTH - 20;
