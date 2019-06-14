@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "CZBuyViewCell.h"
 #import "CZOpenAlibcTrade.h"
+#import "TSLWebViewController.h"
 
 @interface CZBuyView () <UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
@@ -118,8 +119,19 @@
 {
     NSDictionary *dic = self.buyDataList[indexPath.row];
     UIViewController *vc = [[UIApplication sharedApplication].keyWindow rootViewController];
-    // 打开淘宝
-    [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:vc];
+
+    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    if (specialId.length == 0) {
+        TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
+            // 打开淘宝
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:vc];
+        }];
+        [vc presentViewController:webVc animated:YES completion:nil];
+    } else {
+        // 打开淘宝
+        [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:vc];
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

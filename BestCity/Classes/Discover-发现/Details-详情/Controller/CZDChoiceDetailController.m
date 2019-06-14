@@ -54,6 +54,8 @@
 @property (nonatomic, strong) NSDictionary *shareParam;
 /** 数据 */
 @property (nonatomic, strong) CZTestDetailModel *dicDataModel;
+/** 分享按钮数据 */
+@property (nonatomic, strong) NSDictionary *dataDic;
 @end
 
 @implementation CZDChoiceDetailController
@@ -100,7 +102,7 @@ static CGFloat const likeAndShareHeight = 49;
             }
         }];
         if (self.dicDataModel.relatedGoodsList.count != 0) {
-            _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
+            _likeView.titleData = @{@"left" : @"分享", @"right" : self.dataDic[@"btnTxt"]};
         } else {
             _likeView.titleData = @{@"left" : @"分享", @"right" : @"暂无商品"};
         }
@@ -118,6 +120,7 @@ static CGFloat const likeAndShareHeight = 49;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/article/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.dicDataModel = [CZTestDetailModel objectWithKeyValues:result[@"data"]];
+            self.dataDic = result;
             // 创建内容视图
             [self createSubViews];
             // 创建分享购买视图

@@ -74,6 +74,15 @@
 		972E41D721147CAE00BC751C /* CZCollectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41D521147CAE00BC751C /* CZCollectController.m */; };
 		972E41DC21147CDD00BC751C /* CZMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41DA21147CDD00BC751C /* CZMessageController.m */; };
 		972E41E321147D2400BC751C /* CZSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41E121147D2400BC751C /* CZSettingController.m */; };
+		972F4B9F22AE316300F30F6B /* CZMyWalletDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4B9E22AE316300F30F6B /* CZMyWalletDetailController.m */; };
+		972F4BA422AE447200F30F6B /* CZMyWalletDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4BA222AE447200F30F6B /* CZMyWalletDetailCell.m */; };
+		972F4BA522AE447200F30F6B /* CZMyWalletDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972F4BA322AE447200F30F6B /* CZMyWalletDetailCell.xib */; };
+		972F4BA922AE53C200F30F6B /* CZMeTeamMembersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4BA822AE53C200F30F6B /* CZMeTeamMembersController.m */; };
+		972F4BAD22AE5AAE00F30F6B /* CZTeamMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4BAB22AE5AAE00F30F6B /* CZTeamMembersCell.m */; };
+		972F4BAE22AE5AAE00F30F6B /* CZTeamMembersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972F4BAC22AE5AAE00F30F6B /* CZTeamMembersCell.xib */; };
+		972F4BB222AF56BA00F30F6B /* GXLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4BB122AF56BA00F30F6B /* GXLineLayout.m */; };
+		972F4BB622AF5A5F00F30F6B /* GXPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972F4BB322AF5A5E00F30F6B /* GXPhotoCell.xib */; };
+		972F4BB722AF5A5F00F30F6B /* GXPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4BB522AF5A5F00F30F6B /* GXPhotoCell.m */; };
 		973122FA21A405F5007CF64B /* CZSystemMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 973122F921A405F5007CF64B /* CZSystemMessageModel.m */; };
 		97418DC221B11F39001F4E92 /* jpush-extension-ios-1.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DBD21B11F39001F4E92 /* jpush-extension-ios-1.1.1.a */; };
 		97418DC321B11F39001F4E92 /* jpush-ios-3.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DC021B11F39001F4E92 /* jpush-ios-3.1.0.a */; };
@@ -199,6 +208,12 @@
 		9779CE882239060F0090303F /* CZTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE872239060F0090303F /* CZTaskView.m */; };
 		9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE8A2239264E0090303F /* CZTaskMainView.m */; };
 		977C33B6218D951000FAA144 /* CZHotSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977C33B5218D951000FAA144 /* CZHotSearchView.m */; };
+		977D8CFC22ACEB4F005E7ACB /* CZMyWalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D8CFA22ACEB4F005E7ACB /* CZMyWalletCell.m */; };
+		977D8CFD22ACEB4F005E7ACB /* CZMyWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977D8CFB22ACEB4F005E7ACB /* CZMyWalletCell.xib */; };
+		977D8D0122ACFC6C005E7ACB /* CZMyWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D8D0022ACFC6C005E7ACB /* CZMyWalletModel.m */; };
+		977D8D0522AD475D005E7ACB /* CZMyWalletWithdrawCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D8D0322AD475D005E7ACB /* CZMyWalletWithdrawCell.m */; };
+		977D8D0622AD475D005E7ACB /* CZMyWalletWithdrawCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977D8D0422AD475D005E7ACB /* CZMyWalletWithdrawCell.xib */; };
+		977D8D0C22AD4AF0005E7ACB /* CZWithdrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D8D0B22AD4AF0005E7ACB /* CZWithdrawModel.m */; };
 		977E8090225B23660041A126 /* CZTrialApplySuccessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E808F225B23660041A126 /* CZTrialApplySuccessModel.m */; };
 		977E8094225B69830041A126 /* CZMyTrialApplyForFailedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E8093225B69830041A126 /* CZMyTrialApplyForFailedController.m */; };
 		977E8098225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977E8096225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m */; };
@@ -515,6 +530,21 @@
 		972E41DA21147CDD00BC751C /* CZMessageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMessageController.m; sourceTree = "<group>"; };
 		972E41E021147D2400BC751C /* CZSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSettingController.h; sourceTree = "<group>"; };
 		972E41E121147D2400BC751C /* CZSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSettingController.m; sourceTree = "<group>"; };
+		972F4B9D22AE316300F30F6B /* CZMyWalletDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletDetailController.h; sourceTree = "<group>"; };
+		972F4B9E22AE316300F30F6B /* CZMyWalletDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyWalletDetailController.m; sourceTree = "<group>"; };
+		972F4BA122AE447200F30F6B /* CZMyWalletDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletDetailCell.h; sourceTree = "<group>"; };
+		972F4BA222AE447200F30F6B /* CZMyWalletDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyWalletDetailCell.m; sourceTree = "<group>"; };
+		972F4BA322AE447200F30F6B /* CZMyWalletDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyWalletDetailCell.xib; sourceTree = "<group>"; };
+		972F4BA722AE53C200F30F6B /* CZMeTeamMembersController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeTeamMembersController.h; sourceTree = "<group>"; };
+		972F4BA822AE53C200F30F6B /* CZMeTeamMembersController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMeTeamMembersController.m; sourceTree = "<group>"; };
+		972F4BAA22AE5AAE00F30F6B /* CZTeamMembersCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTeamMembersCell.h; sourceTree = "<group>"; };
+		972F4BAB22AE5AAE00F30F6B /* CZTeamMembersCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTeamMembersCell.m; sourceTree = "<group>"; };
+		972F4BAC22AE5AAE00F30F6B /* CZTeamMembersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTeamMembersCell.xib; sourceTree = "<group>"; };
+		972F4BB022AF56BA00F30F6B /* GXLineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXLineLayout.h; sourceTree = "<group>"; };
+		972F4BB122AF56BA00F30F6B /* GXLineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXLineLayout.m; sourceTree = "<group>"; };
+		972F4BB322AF5A5E00F30F6B /* GXPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXPhotoCell.xib; sourceTree = "<group>"; };
+		972F4BB422AF5A5E00F30F6B /* GXPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXPhotoCell.h; sourceTree = "<group>"; };
+		972F4BB522AF5A5F00F30F6B /* GXPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXPhotoCell.m; sourceTree = "<group>"; };
 		973122F821A405F5007CF64B /* CZSystemMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSystemMessageModel.h; sourceTree = "<group>"; };
 		973122F921A405F5007CF64B /* CZSystemMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSystemMessageModel.m; sourceTree = "<group>"; };
 		97418DBD21B11F39001F4E92 /* jpush-extension-ios-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-extension-ios-1.1.1.a"; sourceTree = "<group>"; };
@@ -754,6 +784,16 @@
 		9779CE8A2239264E0090303F /* CZTaskMainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaskMainView.m; sourceTree = "<group>"; };
 		977C33B4218D951000FAA144 /* CZHotSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotSearchView.h; sourceTree = "<group>"; };
 		977C33B5218D951000FAA144 /* CZHotSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSearchView.m; sourceTree = "<group>"; };
+		977D8CF922ACEB4F005E7ACB /* CZMyWalletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletCell.h; sourceTree = "<group>"; };
+		977D8CFA22ACEB4F005E7ACB /* CZMyWalletCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyWalletCell.m; sourceTree = "<group>"; };
+		977D8CFB22ACEB4F005E7ACB /* CZMyWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyWalletCell.xib; sourceTree = "<group>"; };
+		977D8CFF22ACFC6C005E7ACB /* CZMyWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletModel.h; sourceTree = "<group>"; };
+		977D8D0022ACFC6C005E7ACB /* CZMyWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyWalletModel.m; sourceTree = "<group>"; };
+		977D8D0222AD475D005E7ACB /* CZMyWalletWithdrawCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletWithdrawCell.h; sourceTree = "<group>"; };
+		977D8D0322AD475D005E7ACB /* CZMyWalletWithdrawCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyWalletWithdrawCell.m; sourceTree = "<group>"; };
+		977D8D0422AD475D005E7ACB /* CZMyWalletWithdrawCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyWalletWithdrawCell.xib; sourceTree = "<group>"; };
+		977D8D0A22AD4AF0005E7ACB /* CZWithdrawModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZWithdrawModel.h; sourceTree = "<group>"; };
+		977D8D0B22AD4AF0005E7ACB /* CZWithdrawModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZWithdrawModel.m; sourceTree = "<group>"; };
 		977E808E225B23660041A126 /* CZTrialApplySuccessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialApplySuccessModel.h; sourceTree = "<group>"; };
 		977E808F225B23660041A126 /* CZTrialApplySuccessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialApplySuccessModel.m; sourceTree = "<group>"; };
 		977E8092225B69830041A126 /* CZMyTrialApplyForFailedController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyTrialApplyForFailedController.h; sourceTree = "<group>"; };
@@ -1653,6 +1693,30 @@
 			path = "Setting-设置";
 			sourceTree = "<group>";
 		};
+		972F4B9C22AE310D00F30F6B /* 收入明细详情 */ = {
+			isa = PBXGroup;
+			children = (
+				972F4B9D22AE316300F30F6B /* CZMyWalletDetailController.h */,
+				972F4B9E22AE316300F30F6B /* CZMyWalletDetailController.m */,
+				972F4BA122AE447200F30F6B /* CZMyWalletDetailCell.h */,
+				972F4BA222AE447200F30F6B /* CZMyWalletDetailCell.m */,
+				972F4BA322AE447200F30F6B /* CZMyWalletDetailCell.xib */,
+			);
+			path = "收入明细详情";
+			sourceTree = "<group>";
+		};
+		972F4BA622AE536400F30F6B /*  TeamMembers-团队成员 */ = {
+			isa = PBXGroup;
+			children = (
+				972F4BA722AE53C200F30F6B /* CZMeTeamMembersController.h */,
+				972F4BA822AE53C200F30F6B /* CZMeTeamMembersController.m */,
+				972F4BAA22AE5AAE00F30F6B /* CZTeamMembersCell.h */,
+				972F4BAB22AE5AAE00F30F6B /* CZTeamMembersCell.m */,
+				972F4BAC22AE5AAE00F30F6B /* CZTeamMembersCell.xib */,
+			);
+			path = " TeamMembers-团队成员";
+			sourceTree = "<group>";
+		};
 		973122F521A40311007CF64B /* 2.0版本 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1996,6 +2060,7 @@
 			isa = PBXGroup;
 			children = (
 				97CF34282177397100DA9198 /* Main-主界面 */,
+				972F4BA622AE536400F30F6B /*  TeamMembers-团队成员 */,
 				9763A1EE225225AA00F1A8FF /* MyTrial-我的试用 */,
 				972E41C121147B8000BC751C /* Order-订单 */,
 				97911047222F6B5800C2DE5B /* MyAddress-收货地址 */,
@@ -2384,6 +2449,53 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		977D8CFE22ACEBE9005E7ACB /* Main-主页 */ = {
+			isa = PBXGroup;
+			children = (
+				97911042222F6A2100C2DE5B /* CZMyWalletController.h */,
+				97911043222F6A2100C2DE5B /* CZMyWalletController.m */,
+				97911044222F6A2100C2DE5B /* CZMyWalletController.xib */,
+				977D8D0822AD4A53005E7ACB /* 提现明细 */,
+				977D8D0722AD4A2F005E7ACB /* 收入明细 */,
+			);
+			path = "Main-主页";
+			sourceTree = "<group>";
+		};
+		977D8D0722AD4A2F005E7ACB /* 收入明细 */ = {
+			isa = PBXGroup;
+			children = (
+				972F4B9C22AE310D00F30F6B /* 收入明细详情 */,
+				977D8CF922ACEB4F005E7ACB /* CZMyWalletCell.h */,
+				977D8CFA22ACEB4F005E7ACB /* CZMyWalletCell.m */,
+				977D8CFB22ACEB4F005E7ACB /* CZMyWalletCell.xib */,
+				977D8CFF22ACFC6C005E7ACB /* CZMyWalletModel.h */,
+				977D8D0022ACFC6C005E7ACB /* CZMyWalletModel.m */,
+			);
+			path = "收入明细";
+			sourceTree = "<group>";
+		};
+		977D8D0822AD4A53005E7ACB /* 提现明细 */ = {
+			isa = PBXGroup;
+			children = (
+				977D8D0222AD475D005E7ACB /* CZMyWalletWithdrawCell.h */,
+				977D8D0322AD475D005E7ACB /* CZMyWalletWithdrawCell.m */,
+				977D8D0422AD475D005E7ACB /* CZMyWalletWithdrawCell.xib */,
+				977D8D0A22AD4AF0005E7ACB /* CZWithdrawModel.h */,
+				977D8D0B22AD4AF0005E7ACB /* CZWithdrawModel.m */,
+			);
+			path = "提现明细";
+			sourceTree = "<group>";
+		};
+		977D8D0922AD4A7B005E7ACB /* GoDeposit-去提现 */ = {
+			isa = PBXGroup;
+			children = (
+				97D489CA22A647C300FD4EC7 /* CZMyWalletDepositController.h */,
+				97D489CB22A647C300FD4EC7 /* CZMyWalletDepositController.m */,
+				97D489CC22A647C300FD4EC7 /* CZMyWalletDepositController.xib */,
+			);
+			path = "GoDeposit-去提现";
+			sourceTree = "<group>";
+		};
 		977E8091225B693F0041A126 /* Failed-申请失败 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2399,6 +2511,11 @@
 		977E82CD223C9B1B00C8C01B /* invitation-邀请 */ = {
 			isa = PBXGroup;
 			children = (
+				972F4BB422AF5A5E00F30F6B /* GXPhotoCell.h */,
+				972F4BB522AF5A5F00F30F6B /* GXPhotoCell.m */,
+				972F4BB322AF5A5E00F30F6B /* GXPhotoCell.xib */,
+				972F4BB022AF56BA00F30F6B /* GXLineLayout.h */,
+				972F4BB122AF56BA00F30F6B /* GXLineLayout.m */,
 				977E82CE223C9B4700C8C01B /* CZInvitationController.h */,
 				977E82CF223C9B4700C8C01B /* CZInvitationController.m */,
 				977E82D0223C9B4700C8C01B /* CZInvitationController.xib */,
@@ -2473,12 +2590,8 @@
 		97911041222F69F700C2DE5B /* MyWallet-钱包 */ = {
 			isa = PBXGroup;
 			children = (
-				97911042222F6A2100C2DE5B /* CZMyWalletController.h */,
-				97911043222F6A2100C2DE5B /* CZMyWalletController.m */,
-				97911044222F6A2100C2DE5B /* CZMyWalletController.xib */,
-				97D489CA22A647C300FD4EC7 /* CZMyWalletDepositController.h */,
-				97D489CB22A647C300FD4EC7 /* CZMyWalletDepositController.m */,
-				97D489CC22A647C300FD4EC7 /* CZMyWalletDepositController.xib */,
+				977D8CFE22ACEBE9005E7ACB /* Main-主页 */,
+				977D8D0922AD4A7B005E7ACB /* GoDeposit-去提现 */,
 			);
 			path = "MyWallet-钱包";
 			sourceTree = "<group>";
@@ -3523,12 +3636,14 @@
 				9708492B22447771000D5528 /* CZTrialDetailTopController.xib in Resources */,
 				97ED11F3211582910003E0F7 /* CZAttentionCell.xib in Resources */,
 				97FF6DE021182FF900376435 /* CZDiscountCouponCell.xib in Resources */,
+				972F4BAE22AE5AAE00F30F6B /* CZTeamMembersCell.xib in Resources */,
 				97B30CFF21F30CA000B8427E /* CZBindingController.xib in Resources */,
 				97798C7C212CF4430052CE94 /* SVProgressHUD.bundle in Resources */,
 				974F489221A3B5BE00E1ED1A /* CZAttentionDetailCell.xib in Resources */,
 				9799933821A67B1A0000D42B /* CZCommentDetailCell.xib in Resources */,
 				97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */,
 				97A41B0021FC330200719AAA /* yw_1222.jpg in Resources */,
+				972F4BA522AE447200F30F6B /* CZMyWalletDetailCell.xib in Resources */,
 				97FF6DF9211862EF00376435 /* CZfeedbackController.xib in Resources */,
 				97911046222F6A2200C2DE5B /* CZMyWalletController.xib in Resources */,
 				97AB0C2722533D4900072426 /* CZTrialApplySuccessCell.xib in Resources */,
@@ -3546,8 +3661,10 @@
 				97BDB84E21100B8800966FF0 /* CZChoicenessCell.xib in Resources */,
 				97BC05DB2112B122001ED65A /* key-pressed@2x.png in Resources */,
 				97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */,
+				972F4BB622AF5A5F00F30F6B /* GXPhotoCell.xib in Resources */,
 				97643482221AB2FD00EB0291 /* CZCZChangeMobileController.xib in Resources */,
 				97C78FC621196C6F00374CCD /* CZSystemMessageCell.xib in Resources */,
+				977D8CFD22ACEB4F005E7ACB /* CZMyWalletCell.xib in Resources */,
 				9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
 				970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */,
@@ -3561,6 +3678,7 @@
 				9708492222434239000D5528 /* CZTrialReportMainCell.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97BC394A223BB0F800DC4D67 /* CZAffirmPointController.xib in Resources */,
+				977D8D0622AD475D005E7ACB /* CZMyWalletWithdrawCell.xib in Resources */,
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
 				97B4A49F22490BB800E48D93 /* CZTrailTestCell.xib in Resources */,
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
@@ -3634,6 +3752,7 @@
 				97F4D485224A0CA600A82B14 /* CZvoteUserController.m in Sources */,
 				977E82D1223C9B4700C8C01B /* CZInvitationController.m in Sources */,
 				978EC63C224B21BB005D98EE /* CZTrialAllReportHotController.m in Sources */,
+				972F4BAD22AE5AAE00F30F6B /* CZTeamMembersCell.m in Sources */,
 				97C7FF38216DDDB50091DC07 /* UIScrollView+MJRefresh.m in Sources */,
 				97C7FF47216DDDB50091DC07 /* MJRefreshFooter.m in Sources */,
 				97705C59210716A300485D64 /* CZDiscoverController.m in Sources */,
@@ -3690,6 +3809,7 @@
 				9708492522438C5B000D5528 /* CZJIPINSynthesisTool.m in Sources */,
 				97705CD42108495D00485D64 /* CZHotSaleCell.m in Sources */,
 				977C33B6218D951000FAA144 /* CZHotSearchView.m in Sources */,
+				977D8D0C22AD4AF0005E7ACB /* CZWithdrawModel.m in Sources */,
 				9794FC6821945F55003C6AA6 /* CZRecommendDetailPointModel.m in Sources */,
 				97D8FCC22111612200D8ED8F /* CZMeArrowCell.m in Sources */,
 				972E41DC21147CDD00BC751C /* CZMessageController.m in Sources */,
@@ -3782,6 +3902,7 @@
 				97911050222F7F0200C2DE5B /* CZAddressCell.m in Sources */,
 				972E41C621147C2000BC751C /* CZOrderController.m in Sources */,
 				97705C77210729BA00485D64 /* CZTextField.m in Sources */,
+				972F4BA922AE53C200F30F6B /* CZMeTeamMembersController.m in Sources */,
 				97C7FF07216DDDAB0091DC07 /* NSString+MJExtension.m in Sources */,
 				97705C53210716A300485D64 /* CZTabBarController.m in Sources */,
 				977E82D8223CD3CA00C8C01B /* CZUpdataView.m in Sources */,
@@ -3809,6 +3930,7 @@
 				977E82D5223CA96600C8C01B /* CZGetJIBITool.m in Sources */,
 				979B05D6210F0D270023292D /* CZAllCriticalController.m in Sources */,
 				975DB215217B14FA00A062AB /* CZUserInfoTool.m in Sources */,
+				977D8CFC22ACEB4F005E7ACB /* CZMyWalletCell.m in Sources */,
 				975B85A4219FB84D00525198 /* CZDiscoverDetailModel.m in Sources */,
 				972E41D721147CAE00BC751C /* CZCollectController.m in Sources */,
 				9778649B211A7AD6001B41F1 /* MASCompositeConstraint.m in Sources */,
@@ -3835,15 +3957,18 @@
 				97798CD9212D0FC90052CE94 /* SDWebImageWebPCoder.m in Sources */,
 				97798CC8212D0FC90052CE94 /* SDWebImageCompat.m in Sources */,
 				97911045222F6A2100C2DE5B /* CZMyWalletController.m in Sources */,
+				972F4BB722AF5A5F00F30F6B /* GXPhotoCell.m in Sources */,
 				9708492122434239000D5528 /* CZTrialReportMainCell.m in Sources */,
 				97BC3949223BB0F800DC4D67 /* CZAffirmPointController.m in Sources */,
 				97084917224339D7000D5528 /* CZTrailModel.m in Sources */,
+				972F4BB222AF56BA00F30F6B /* GXLineLayout.m in Sources */,
 				975B85A1219FB12C00525198 /* CZDiscoverTitleModel.m in Sources */,
 				97FF6DF321184F5A00376435 /* CZSettingCell.m in Sources */,
 				97C7FF4E216DE0130091DC07 /* CZAttentionsModel.m in Sources */,
 				97798CDC212D2D3E0052CE94 /* CZRecommendListModel.m in Sources */,
 				97FF6DD821182D0800376435 /* CZUseController.m in Sources */,
 				97798CCA212D0FC90052CE94 /* SDWebImageCoder.m in Sources */,
+				977D8D0522AD475D005E7ACB /* CZMyWalletWithdrawCell.m in Sources */,
 				9778649A211A7AD6001B41F1 /* ViewController+MASAdditions.m in Sources */,
 				9799933721A67B1A0000D42B /* CZCommentDetailCell.m in Sources */,
 				97420DCA21E9985100FE3D9F /* CZBuyView.m in Sources */,
@@ -3855,6 +3980,7 @@
 				972E41BF211473B100BC751C /* CZMyPointDetailCell.m in Sources */,
 				97B4A49E22490BB800E48D93 /* CZTrailTestCell.m in Sources */,
 				97084912224335A9000D5528 /* CZTrialReportHotController.m in Sources */,
+				972F4BA422AE447200F30F6B /* CZMyWalletDetailCell.m in Sources */,
 				97BB481A2133E56E006AE982 /* CZGiveLikeView.m in Sources */,
 				9708491A22433AFB000D5528 /* CZTrailReportModel.m in Sources */,
 				97C7FF4B216DDDB50091DC07 /* MJRefreshComponent.m in Sources */,
@@ -3872,8 +3998,10 @@
 				97C7FF45216DDDB50091DC07 /* MJRefreshStateHeader.m in Sources */,
 				979EFD8521E085B5000FE466 /* CZHotSaleDetailModel.m in Sources */,
 				970D0AE721AB981500649FC2 /* CZGuideController.m in Sources */,
+				977D8D0122ACFC6C005E7ACB /* CZMyWalletModel.m in Sources */,
 				97643481221AB2FD00EB0291 /* CZCZChangeMobileController.m in Sources */,
 				97C7FF48216DDDB50091DC07 /* MJRefreshHeader.m in Sources */,
+				972F4B9F22AE316300F30F6B /* CZMyWalletDetailController.m in Sources */,
 				97F0EC32212529F5000FE1DC /* CZUMConfigure.m in Sources */,
 				97C7FF03216DDDAB0091DC07 /* MJType.m in Sources */,
 				972E41B0211450ED00BC751C /* CZMyPointsController.m in Sources */,

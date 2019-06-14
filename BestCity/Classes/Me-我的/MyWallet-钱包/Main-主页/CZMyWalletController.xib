@@ -11,10 +11,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZMyWalletController">
             <connections>
+                <outlet property="currentLabel" destination="8cU-T3-Yyf" id="ZGu-nL-Wu4"/>
                 <outlet property="leftLabel" destination="4EK-0l-fh3" id="O9K-QN-oqC"/>
                 <outlet property="lineView" destination="gRl-87-HJT" id="TuY-Au-0sj"/>
+                <outlet property="nextLabel" destination="gYn-1o-jNz" id="O5P-DH-WOZ"/>
                 <outlet property="rightLabel" destination="419-2f-Hum" id="b6r-F3-iNn"/>
+                <outlet property="totalPrice" destination="F4D-gs-zkM" id="x5N-Tx-pSI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="withdrawLabel" destination="Wrf-Mf-pQM" id="ql1-MN-LIk"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -67,13 +71,23 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pmi-0u-8KO">
+                                            <rect key="frame" x="137" y="16" width="1" height="20"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="LTs-zt-Wxs"/>
+                                                <constraint firstAttribute="width" constant="1" id="Nh0-oI-PKD"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="Lcv-km-cLt" secondAttribute="bottom" constant="12" id="Nj1-k9-pyP"/>
                                         <constraint firstItem="gYn-1o-jNz" firstAttribute="top" secondItem="nnJ-1G-jvb" secondAttribute="top" constant="3" id="WGi-K3-D7u"/>
+                                        <constraint firstAttribute="trailing" secondItem="Pmi-0u-8KO" secondAttribute="trailing" id="YJy-Eg-ZWd"/>
                                         <constraint firstItem="gYn-1o-jNz" firstAttribute="centerX" secondItem="nnJ-1G-jvb" secondAttribute="centerX" id="bJu-XC-m3j"/>
                                         <constraint firstItem="Lcv-km-cLt" firstAttribute="centerX" secondItem="nnJ-1G-jvb" secondAttribute="centerX" id="hEf-gD-d2T"/>
+                                        <constraint firstItem="Pmi-0u-8KO" firstAttribute="centerY" secondItem="nnJ-1G-jvb" secondAttribute="centerY" id="u8t-W2-HRS"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0lF-PW-HrD">
@@ -115,9 +129,19 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVz-7O-0rG">
+                                            <rect key="frame" x="0.0" y="16" width="1" height="20"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="WAn-Dd-CeH"/>
+                                                <constraint firstAttribute="width" constant="1" id="tZV-bK-Ajt"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="oVz-7O-0rG" firstAttribute="leading" secondItem="YTd-un-rlE" secondAttribute="leading" id="5Fy-Vm-S7t"/>
+                                        <constraint firstItem="oVz-7O-0rG" firstAttribute="centerY" secondItem="YTd-un-rlE" secondAttribute="centerY" id="6A2-eJ-7Zc"/>
                                         <constraint firstItem="Wrf-Mf-pQM" firstAttribute="centerX" secondItem="YTd-un-rlE" secondAttribute="centerX" id="6Ji-aM-ajB"/>
                                         <constraint firstItem="O3a-bH-Tbw" firstAttribute="centerX" secondItem="YTd-un-rlE" secondAttribute="centerX" id="AuD-DZ-r72"/>
                                         <constraint firstItem="Wrf-Mf-pQM" firstAttribute="top" secondItem="YTd-un-rlE" secondAttribute="top" constant="3" id="R3Z-SW-VyR"/>
@@ -224,7 +248,7 @@
                 <constraint firstItem="419-2f-Hum" firstAttribute="centerY" secondItem="4EK-0l-fh3" secondAttribute="centerY" id="fA8-Qt-vzi"/>
                 <constraint firstItem="4EK-0l-fh3" firstAttribute="top" secondItem="DPi-Dt-M2b" secondAttribute="bottom" constant="21" id="jVC-uj-cJQ"/>
             </constraints>
-            <point key="canvasLocation" x="64" y="-1417"/>
+            <point key="canvasLocation" x="-177" y="-1418"/>
         </view>
         <tapGestureRecognizer id="Fjm-b7-ucT">
             <connections>

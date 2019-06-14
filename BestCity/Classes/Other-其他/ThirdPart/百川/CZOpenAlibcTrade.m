@@ -47,8 +47,8 @@
 //        [CZProgressHUD hideAfterDelay:1.5];
 //        return;
 //    }
-    
-    
+
+
     //根据链接打开页面
     id<AlibcTradePage> page = [AlibcTradePageFactory page:urlStr];
     

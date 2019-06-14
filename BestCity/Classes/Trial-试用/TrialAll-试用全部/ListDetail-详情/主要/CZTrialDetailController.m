@@ -29,6 +29,7 @@
 #import "CZTrialAllReportHotController.h" // 查看使用报告
 #import "CZShareView.h" // 分享
 #import "CZUserInfoTool.h"
+#import "TSLWebViewController.h"
 
 
 @interface CZTrialDetailController () <UIScrollViewDelegate>
@@ -514,8 +515,18 @@ static CGFloat const likeAndShareHeight = 49;
 /** 优惠购买*/
 - (void)buyBtnAction:(UIButton *)sender
 {
-    // 打开淘宝
-    [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dataSource[@"goodsBuyLink"] parentController:self];
+    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    if (specialId.length == 0) {
+        TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
+            // 打开淘宝
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dataSource[@"goodsBuyLink"] parentController:self];
+        }];
+        [self presentViewController:webVc animated:YES completion:nil];
+    } else {
+        // 打开淘宝
+        [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dataSource[@"goodsBuyLink"] parentController:self];
+    }
+
     NSString *text = @"试用--商品--优惠购买";
     NSDictionary *context = @{@"goods" : text};
     [MobClick event:@"ID4" attributes:context];
@@ -574,7 +585,7 @@ static CGFloat const likeAndShareHeight = 49;
     } else if ([sender.titleLabel.text isEqualToString:@"分享拉赞"]) {
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
         share.param = @{
-                        @"shareUrl" : self.voteShareUrl, 
+                        @"shareUrl" : self.voteShareUrl,
                         @"shareTitle" : self.dataSource[@"voteShareTitle"],
                         @"shareContent" : self.dataSource[@"voteShareContent"],
                         @"shareImg" : self.dataSource[@"voteShareImg"],

@@ -87,12 +87,18 @@ static NSString * const type = @"1";
             NSString *text = @"榜单--商品详情--立即购买";
             NSDictionary *context = @{@"mine" : text};
             [MobClick event:@"ID5" attributes:context];
-            // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
 
-//            TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobaoLogin?token=%@", JPSERVER_URL, JPTOKEN]]];
-//
-//            [self presentViewController:webVc animated:YES completion:nil];
+            NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+            if (specialId.length == 0) {
+                TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
+                    // 打开淘宝
+                    [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
+                }];
+                [self presentViewController:webVc animated:YES completion:nil];
+            } else {
+                // 打开淘宝
+                [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
+            }
         }];
     }
     return _likeView;
@@ -198,9 +204,9 @@ static NSString * const type = @"1";
             shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
             self.shareParam = shareDic;
             if ([self.detailModel.goodsCouponsEntity.dataFlag isEqual:@(-1)]) {
-                self.likeView.titleData = @{@"left" : @"分享给好友", @"right" : @"立即购买"};
+                self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
             } else {
-                self.likeView.titleData = @{@"left" : @"分享给好友", @"right" : @"领券并购买"};
+                self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
             };
             [self.view addSubview:self.likeView];
         }

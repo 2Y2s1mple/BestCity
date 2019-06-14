@@ -11,6 +11,7 @@
 #import "CZCommodityDetailModel.h"
 #import "CZTestDetailModel.h"
 #import "CZCouponsModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 @interface CZHotSaleDetailModel : NSObject
 /** 商品介绍 */

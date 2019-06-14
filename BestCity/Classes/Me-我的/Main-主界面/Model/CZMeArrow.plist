@@ -17,14 +17,22 @@
 			<key>destinationVC</key>
 			<string>CZSystemMessageController</string>
 		</dict>
-        <dict>
-            <key>title</key>
-            <string>我的订单</string>
-            <key>icon</key>
-            <string>order</string>
-            <key>destinationVC</key>
-            <string>CZOrderController</string>
-        </dict>
+		<dict>
+			<key>title</key>
+			<string>团队成员</string>
+			<key>icon</key>
+			<string>message</string>
+			<key>destinationVC</key>
+			<string>CZMeTeamMembersController</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>我的订单</string>
+			<key>icon</key>
+			<string>order</string>
+			<key>destinationVC</key>
+			<string>CZOrderController</string>
+		</dict>
 		<dict>
 			<key>title</key>
 			<string>我要赚极币</string>

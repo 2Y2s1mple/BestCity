@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMyWalletDepositController : UIViewController
-
+@property (nonatomic, strong) NSString *amount;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -37,7 +37,7 @@
         maskLayer.frame = cell.bounds;
         maskLayer.path = maskPath.CGPath;
         cell.layer.mask = maskLayer;
-    } else if (indexPath.row == 4) {
+    } else if (indexPath.row == 6) {
         UIBezierPath *bezierPath = [UIBezierPath  bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
         CAShapeLayer *mask = [[CAShapeLayer alloc] init];
         mask.frame = cell.bounds;
