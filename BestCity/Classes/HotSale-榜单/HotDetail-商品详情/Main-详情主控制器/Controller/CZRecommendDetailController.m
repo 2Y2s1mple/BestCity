@@ -18,6 +18,7 @@
 #import "CZShareAndlikeView.h" // 分享
 
 #import "GXNetTool.h" // 网络请求
+#import "CZUserInfoTool.h"
 
 #import "UIButton+CZExtension.h" // 按钮扩展
 #import "CZHotSaleDetailModel.h" // 当前数据模型
@@ -49,6 +50,11 @@
 @property (nonatomic, strong) UIButton *popButton;
 /** 收藏 */
 @property (nonatomic, strong) CZCollectButton *collectButton;
+
+/** 分享里面文字 */
+@property (nonatomic, strong) NSDictionary *shareDic;
+/** 购买URL */
+@property (nonatomic, strong) NSString *bugLinkUrl;
 @end
 
 /** 分享控件高度 */
@@ -81,6 +87,7 @@ static NSString * const type = @"1";
                 return;
             }
             CZShareView *share = [[CZShareView alloc] initWithFrame:weakSelf.view.frame];
+            share.cententDic = weakSelf.shareDic;
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
@@ -90,14 +97,15 @@ static NSString * const type = @"1";
 
             NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
             if (specialId.length == 0) {
-                TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
-                    // 打开淘宝
-                    [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
+              __block TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
+                    [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+                    [CZProgressHUD hideAfterDelay:1.5];
+                    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
                 }];
-                [self presentViewController:webVc animated:YES completion:nil];
+                [weakSelf presentViewController:webVc animated:YES completion:nil];
             } else {
                 // 打开淘宝
-                [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.detailModel.goodsDetailEntity.goodsBuyLink parentController:weakSelf];
+                [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.bugLinkUrl parentController:weakSelf];
             }
         }];
     }
@@ -158,6 +166,7 @@ static NSString * const type = @"1";
     self.view.backgroundColor = [UIColor whiteColor];
     // 获取数据
     [self getSourceData];
+    [self getGoodsURl];
      
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
@@ -186,6 +195,23 @@ static NSString * const type = @"1";
 }
 
 #pragma mark - 获取数据
+// 获取购买的URL
+- (void)getGoodsURl
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"goodsId"] = self.goodsId;
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            self.bugLinkUrl = result[@"data"];
+        } else {
+            self.bugLinkUrl = @"";
+        }
+    } failure:^(NSError *error) {
+
+    }];
+}
+
 - (void)getSourceData
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -193,6 +219,8 @@ static NSString * const type = @"1";
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
+            self.shareDic = result;
+
             self.detailModel = [CZHotSaleDetailModel objectWithKeyValues:result[@"data"]];
             [self createSubViews];
             
@@ -204,15 +232,18 @@ static NSString * const type = @"1";
             shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
             self.shareParam = shareDic;
             if ([self.detailModel.goodsCouponsEntity.dataFlag isEqual:@(-1)]) {
-                self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
+
+               NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
+                 if ( [result[@"data"][@"open"] isEqualToNumber:@(1)]) {
+                     self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
+                 }
+
             } else {
                 self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
             };
             [self.view addSubview:self.likeView];
         }
-    } failure:^(NSError *error) {
-        
-    }];
+    } failure:^(NSError *error) {}];
 }
 
 - (void)createSubViews

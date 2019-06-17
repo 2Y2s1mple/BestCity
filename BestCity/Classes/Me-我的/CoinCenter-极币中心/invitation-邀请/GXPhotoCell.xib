@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="270" height="279"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="5"/>
+                                <integer key="value" value="8"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -39,7 +39,7 @@
             <connections>
                 <outlet property="imageView" destination="Jhd-fH-C0I" id="5BN-JX-vbe"/>
             </connections>
-            <point key="canvasLocation" x="-66" y="118"/>
+            <point key="canvasLocation" x="-437" y="92"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -12,4 +12,6 @@
 @interface CZShareView : UIView
 /** 分享的数据 */
 @property (nonatomic, strong) NSDictionary *param;
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *cententDic;
 @end

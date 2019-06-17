@@ -18,11 +18,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupSubView];
+
     }
     return self;
 }
 
+- (void)setParam:(NSDictionary *)param
+{
+    _param = param;
+    [self setupSubView];
+}
 
 - (void)setupSubView
 {
@@ -46,8 +51,10 @@
         make.centerX.equalTo(shareView);
     }];
     UILabel *subTitleLabel = [[UILabel alloc] init];
+    subTitleLabel.text = self.cententDic[@"content"];
 //    subTitleLabel.text = @"如果好友通过您分享的链接完成购买，您即可获得10%的佣金，并可提现到支付宝账户。";
     subTitleLabel.numberOfLines = 2;
+    subTitleLabel.textAlignment = NSTextAlignmentCenter;
     subTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
     subTitleLabel.textColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.87];
     [shareView addSubview:subTitleLabel];
@@ -103,7 +110,6 @@
             type = UMSocialPlatformType_Qzone;//QQ空间
             break;
         default:
-            
             break;
     }
     

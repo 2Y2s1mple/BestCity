@@ -61,6 +61,9 @@
 @property (nonatomic, strong) UIButton *listBtn;
 /** 分享拉赞URL */
 @property (nonatomic, strong) NSString *voteShareUrl;
+
+/** 分享 */
+@property (nonatomic, strong) NSDictionary *shareDic;
 @end
 
 /** 最下面控件高度 */
@@ -149,8 +152,9 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)shareButtonAction
 {
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    share.cententDic =  self.shareDic[@"content"];
     share.param = @{
-                    @"shareUrl" : self.dataSource[@"shareUrl"], 
+                    @"shareUrl" : self.dataSource[@"shareUrl"],
                     @"shareTitle" : self.dataSource[@"shareTitle"],
                     @"shareContent" : self.dataSource[@"shareContent"],
                     @"shareImg" : self.dataSource[@"shareImg"],
@@ -217,6 +221,7 @@ static CGFloat const likeAndShareHeight = 49;
     param[@"trialId"] = self.trialId;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            self.shareDic = result;
             self.dataSource = result[@"data"];
             self.voteShareUrl = self.dataSource[@"voteShareUrl"];
             [self setupSubViews]; 
@@ -519,18 +524,34 @@ static CGFloat const likeAndShareHeight = 49;
     if (specialId.length == 0) {
         TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dataSource[@"goodsBuyLink"] parentController:self];
+            [self openAlibcTradeWithId:self.dataSource[@"goodsId"]];
+            [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
         }];
         [self presentViewController:webVc animated:YES completion:nil];
     } else {
         // 打开淘宝
-        [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.dataSource[@"goodsBuyLink"] parentController:self];
+        [self openAlibcTradeWithId:self.dataSource[@"goodsId"]];
     }
 
     NSString *text = @"试用--商品--优惠购买";
     NSDictionary *context = @{@"goods" : text};
     [MobClick event:@"ID4" attributes:context];
     NSLog(@"----%@", text);
+}
+
+- (void)openAlibcTradeWithId:(NSString *)ID
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"goodsId"] = ID;
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:self];
+        } else {
+        }
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 /** 免费申请*/

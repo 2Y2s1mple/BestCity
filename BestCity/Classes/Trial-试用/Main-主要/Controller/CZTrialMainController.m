@@ -100,6 +100,12 @@
     [self setupRefresh];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.tableView.mj_header endRefreshing];
+}
+
 #pragma mark - 视图初始化
 - (UIView *)setupTopNavView:(NSString *)title
 {

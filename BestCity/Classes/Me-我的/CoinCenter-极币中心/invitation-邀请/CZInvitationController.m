@@ -53,7 +53,7 @@ static NSString *ID = @"PhotoCell";
 {
     
     GXLineLayout *flowLayout = [[GXLineLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(210, self.collectView.height - 40); // 小格子的大小
+    flowLayout.itemSize = CGSizeMake(210, 375); // 小格子的大小
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectView.collectionViewLayout = flowLayout;
 

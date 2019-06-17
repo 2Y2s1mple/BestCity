@@ -120,16 +120,15 @@
     param[@"code"] = code;
     param[@"state"] = state;
 
-    //获取详情数据
+    //获取授权成功与否详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/taobao/returnUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            [CZProgressHUD showProgressHUDWithText:@"授权成功"];
-            [CZProgressHUD hideAfterDelay:1.5];
             self.block();
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             [CZProgressHUD hideAfterDelay:1.5];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     } failure:^(NSError *error) {
 

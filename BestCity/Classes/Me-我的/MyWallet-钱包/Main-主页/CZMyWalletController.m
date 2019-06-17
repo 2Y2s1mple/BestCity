@@ -18,6 +18,7 @@
 
 // 跳转
 #import "CZMyWalletDetailController.h"
+#import "TSLWebViewController.h"
 
 
 @interface CZMyWalletController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
@@ -51,11 +52,23 @@
 
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
-
-
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
+@property (nonatomic, strong) CZNoDataView *noDataView1;
 @end
 
 @implementation CZMyWalletController
+#pragma mark - 懒加载
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.backgroundColor = [UIColor clearColor];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = self.scrollerView.height / 2.0;
+    }
+    return _noDataView;
+}
 #pragma mark - 获取数据
 // 获取收入明细
 - (void)getIncomeDataSource
@@ -66,7 +79,19 @@
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getCommssionDetail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if (([result[@"code"] isEqual:@(0)])) {
+            if ([result[@"data"] count] > 0) {
+                // 删除noData图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 加载NnoData图片
+                self.noDataView1 = [CZNoDataView noDataView];
+                self.noDataView1.center = self.leftTableView.center;
+                self.noDataView1.backgroundColor = [UIColor clearColor];
+                [self.scrollerView addSubview:self.noDataView1];
+            }
+
             self.detailList = [CZMyWalletModel objectArrayWithKeyValuesArray:result[@"data"]];
+            
 
             [self.leftTableView reloadData];
         }
@@ -191,6 +216,16 @@
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getWithdrawDetail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0) {
+                // 删除noData图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 加载NnoData图片
+                self.noDataView.center = self.rightTableView.center;
+                [self.scrollerView addSubview:self.noDataView];
+            }
+
+
             self.rightList = [CZWithdrawModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.rightTableView reloadData];
         }
@@ -227,6 +262,13 @@
 
 
 #pragma mark - 点击事件
+
+- (IBAction)gotoHtml:(UIButton *)sender {
+    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/commission-rule.html"]];
+    webVc.titleName = @"规则说明";
+    [self presentViewController:webVc animated:YES completion:nil];
+}
+
 - (IBAction)popAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

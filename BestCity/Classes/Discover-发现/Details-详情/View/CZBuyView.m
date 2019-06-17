@@ -11,6 +11,8 @@
 #import "CZBuyViewCell.h"
 #import "CZOpenAlibcTrade.h"
 #import "TSLWebViewController.h"
+#import "CZUserInfoTool.h"
+#import "GXNetTool.h"
 
 @interface CZBuyView () <UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
@@ -124,15 +126,33 @@
     if (specialId.length == 0) {
         TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:vc];
+            [self openAlibcTradeWithId:dic[@"goodsId"]];
+            [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
         }];
         [vc presentViewController:webVc animated:YES completion:nil];
     } else {
         // 打开淘宝
-        [CZOpenAlibcTrade openAlibcTradeWithUrlString:dic[@"goodsBuyLink"] parentController:vc];
+        [self openAlibcTradeWithId:dic[@"goodsId"]];
     }
-
 }
+
+- (void)openAlibcTradeWithId:(NSString *)ID
+{
+    UIViewController *vc = [[UIApplication sharedApplication].keyWindow rootViewController];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"goodsId"] = ID;
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:vc];
+        } else {
+        }
+    } failure:^(NSError *error) {
+
+    }];
+}
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
