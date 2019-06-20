@@ -115,8 +115,6 @@ static CGFloat const likeAndShareHeight = 49;
         UIButton *btn = [self.menusView viewWithTag:103];
         [self setupBtn:btn];
     }
-   
-    
 }
 
 - (UIButton *)popButton
@@ -152,7 +150,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)shareButtonAction
 {
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-    share.cententDic =  self.shareDic[@"content"];
+    share.cententDic =  self.shareDic;
     share.param = @{
                     @"shareUrl" : self.dataSource[@"shareUrl"],
                     @"shareTitle" : self.dataSource[@"shareTitle"],
@@ -523,8 +521,8 @@ static CGFloat const likeAndShareHeight = 49;
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
     if (specialId.length == 0) {
         TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
-            // 打开淘宝
-            [self openAlibcTradeWithId:self.dataSource[@"goodsId"]];
+            [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+            [CZProgressHUD hideAfterDelay:1.5];
             [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
         }];
         [self presentViewController:webVc animated:YES completion:nil];

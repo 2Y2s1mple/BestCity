@@ -19,9 +19,9 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>团队成员</string>
+			<string>我的团队</string>
 			<key>icon</key>
-			<string>message</string>
+			<string>我的团队</string>
 			<key>destinationVC</key>
 			<string>CZMeTeamMembersController</string>
 		</dict>

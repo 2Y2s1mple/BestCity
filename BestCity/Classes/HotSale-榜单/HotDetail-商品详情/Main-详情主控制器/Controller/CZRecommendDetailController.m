@@ -105,7 +105,7 @@ static NSString * const type = @"1";
                 [weakSelf presentViewController:webVc animated:YES completion:nil];
             } else {
                 // 打开淘宝
-                [CZOpenAlibcTrade openAlibcTradeWithUrlString:weakSelf.bugLinkUrl parentController:weakSelf];
+                [weakSelf getGoodsURl];
             }
         }];
     }
@@ -166,7 +166,6 @@ static NSString * const type = @"1";
     self.view.backgroundColor = [UIColor whiteColor];
     // 获取数据
     [self getSourceData];
-    [self getGoodsURl];
      
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
@@ -204,8 +203,12 @@ static NSString * const type = @"1";
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.bugLinkUrl = result[@"data"];
+            // 打开淘宝
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:self];
         } else {
             self.bugLinkUrl = @"";
+            [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
+            [CZProgressHUD hideAfterDelay:1.5];
         }
     } failure:^(NSError *error) {
 
@@ -231,15 +234,19 @@ static NSString * const type = @"1";
             shareDic[@"shareUrl"] = self.detailModel.goodsDetailEntity.shareUrl;
             shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
             self.shareParam = shareDic;
+            NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
             if ([self.detailModel.goodsCouponsEntity.dataFlag isEqual:@(-1)]) {
-
-               NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
-                 if ( [result[@"data"][@"open"] isEqualToNumber:@(1)]) {
+                 if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
                      self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
+                 } else {
+                     self.likeView.titleData = @{@"left" : @"分享", @"right" : @"立即购买"};
                  }
-
             } else {
-                self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
+                if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
+                    self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
+                } else {
+                    self.likeView.titleData = @{@"left" : @"分享", @"right" : @"立即购买"};
+                }
             };
             [self.view addSubview:self.likeView];
         }

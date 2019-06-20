@@ -9,6 +9,7 @@
 #import "CZCommodityView.h"
 #import "CZOpenAlibcTrade.h"
 #import "Masonry.h"
+#import "GXNetTool.h"
 
 @interface CZCommodityView ()
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
@@ -100,8 +101,7 @@
     } else {
         self.otherPrice.hidden = YES;
     }
-    
-    
+
     UIView *line = [[UIView alloc] init];
     if (![self.couponModel.dataFlag  isEqual: @(-1)]) {
         line.hidden = YES;
@@ -122,7 +122,6 @@
             make.height.equalTo(@(0));
         }];
     }
-    
     
     // 综合评分
     if (model.scoreOptionsList.count >= 4 && ![model.scoreOptionsList[0][@"name"]  isEqual: @""]) {
@@ -177,12 +176,30 @@
         [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
         return;
     }
+    // 打开淘宝
+    [self getGoodsURl];
+}
+
+// 获取购买的URL
+- (void)getGoodsURl
+{
     UITabBarController *tabVc = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabVc.selectedViewController;
     UIViewController *vc = nav.topViewController;
-    
-    // 打开淘宝
-    [CZOpenAlibcTrade openAlibcTradeWithUrlString:self.couponModel.couponsUrl parentController:vc];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"goodsId"] = self.model.goodsId;
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            // 打开淘宝
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:vc];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 - (NSString *)platfromNameWithNumber:(NSNumber *)platformNumber

@@ -72,7 +72,7 @@
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
-    if (![vc isKindOfClass:[CZMeController class]] && ![vc isKindOfClass:[CZTrialMainController class]]) {
+    if (![vc isKindOfClass:[CZMeController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;
         hotVc.menuViewStyle = WMMenuViewStyleLine;
@@ -85,8 +85,19 @@
         hotVc.titleColorSelected = [UIColor blackColor];
         hotVc.titleSizeNormal = 15.0f;
         hotVc.titleSizeSelected = 16;
-        
         hotVc.progressColor = [UIColor redColor];
+    }
+    if ([vc isKindOfClass:[CZTrialMainController class]]) {
+        WMPageController *hotVc = (WMPageController *)vc;
+        hotVc.selectIndex = 0;
+        hotVc.menuViewStyle = WMMenuViewStyleDefault;
+        hotVc.itemMargin = 10;
+        hotVc.automaticallyCalculatesItemWidths = YES;
+        hotVc.titleFontName = @"PingFangSC-Medium";
+        hotVc.titleColorNormal = CZGlobalGray;
+        hotVc.titleColorSelected = [UIColor blackColor];
+        hotVc.titleSizeNormal = 18;
+        hotVc.titleSizeSelected = 18;
     }
     vc.tabBarItem.title = title;
     vc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

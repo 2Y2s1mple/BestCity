@@ -38,15 +38,16 @@
 {
     _model = model;
     self.priceLabel.text = [NSString stringWithFormat:@"¥%.2lf", [model.amount floatValue]];
-    self.priceLabel.textColor = CZREDCOLOR;
     self.timeLabel.text = model.createTime;
     NSString *statuString;
     switch ([model.status integerValue]) {
         case -1:
             statuString = @"提现失败";
+            self.priceLabel.textColor = CZREDCOLOR;
             break;
         case 0:
             statuString = @"审核中";
+            self.priceLabel.textColor = UIColorFromRGB(0x9D9D9D);
             break;
         case 1:
             statuString = @"提现成功";

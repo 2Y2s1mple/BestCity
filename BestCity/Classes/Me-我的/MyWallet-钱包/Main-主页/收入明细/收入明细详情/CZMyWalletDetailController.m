@@ -63,11 +63,12 @@
     label.x = 14;
     label.centerY = 43 / 2.0;
     [view addSubview:label];
+
     UILabel *label2 = [[UILabel alloc] init];
     label2.text = [NSString stringWithFormat:@"¥%.2lf", [model.totalPreFee floatValue]];;
     label2.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
-    label2.textColor = CZREDCOLOR;
     [label2 sizeToFit];
+    label2.textColor = CZREDCOLOR;
     label2.x = view.width - 14 - label2.width;
     label2.centerY = label.centerY;
     [view addSubview:label2];
@@ -77,7 +78,7 @@
     label1.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
     label1.textColor = [UIColor blackColor];
     [label1 sizeToFit];
-    label1.x = view.width - label1.width - label1.width - 14;
+    label1.x = view.width - label1.width - label2.width - 16;
     label1.centerY = label.centerY;
     [view addSubview:label1];
     return view;

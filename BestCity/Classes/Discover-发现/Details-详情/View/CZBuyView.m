@@ -125,8 +125,8 @@
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
     if (specialId.length == 0) {
         TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
-            // 打开淘宝
-            [self openAlibcTradeWithId:dic[@"goodsId"]];
+            [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+            [CZProgressHUD hideAfterDelay:1.5];
             [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
         }];
         [vc presentViewController:webVc animated:YES completion:nil];

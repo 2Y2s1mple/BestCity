@@ -9,6 +9,8 @@
 #import "CZBindingController.h"
 #import "GXNetTool.h"
 #import "CZUpdataView.h"
+// 工具
+#import <TCWebCodesSDK/TCWebCodesBridge.h> // 腾讯验证码
 
 @interface CZBindingController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -79,19 +81,42 @@
 
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
+    NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
+    if ([versionParam[@"needVerify"] isEqualToNumber:@(1)]) {
+        [self.view endEditing:YES];
+        // 加载腾讯验证码
+        [[TCWebCodesBridge sharedBridge] loadTencentCaptcha:self.view appid:@"2087266956" callback:^(NSDictionary *resultJSON) {
+            if (0 == [resultJSON[@"ret"] intValue]) {
+                [self setupTencentCaptcha:resultJSON];
+            } else {
+                [CZProgressHUD showProgressHUDWithText:@"验证失败"];
+                [CZProgressHUD hideAfterDelay:1.5];
+            }
+        }];
+    } else {
+        [self setupTencentCaptcha:@{}];
+    }
+
+}
+
+// 获取验证码
+- (void)setupTencentCaptcha:(NSDictionary *)paramDic
+{
     [self disabledAndGrayColor:self.verificationCodeBtn];
     self.count = 60;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
-    
+
     // 发送验证码
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"mobile"] = self.userTextField.text;
     param[@"type"] = @(1); // 1代表登录验证码
-    
+    param[@"ticket"] = paramDic[@"ticket"];
+    param[@"randstr"] = paramDic[@"randstr"];
+
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/sendMessage"];
-    
+
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        
+
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"验证码发送成功"];
         } else {
@@ -99,9 +124,10 @@
         }
         [CZProgressHUD hideAfterDelay:2];
     } failure:^(NSError *error) {
-        
+
     }];
 }
+
 
  - (void)timeDown
 {

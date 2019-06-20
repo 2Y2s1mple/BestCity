@@ -10,6 +10,8 @@
 #import "CZNavigationView.h"
 #import "GXNetTool.h"
 #import "CZMyProfileController.h"
+// 工具
+#import <TCWebCodesSDK/TCWebCodesBridge.h> // 腾讯验证码
 
 @interface CZBindingMobileController ()
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -74,6 +76,26 @@
 
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
+    NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
+    if ([versionParam[@"needVerify"] isEqualToNumber:@(1)]) {
+        [self.view endEditing:YES];
+        // 加载腾讯验证码
+        [[TCWebCodesBridge sharedBridge] loadTencentCaptcha:self.view appid:@"2087266956" callback:^(NSDictionary *resultJSON) {
+            if (0 == [resultJSON[@"ret"] intValue]) {
+                [self setupTencentCaptcha:resultJSON];
+            } else {
+                [CZProgressHUD showProgressHUDWithText:@"验证失败"];
+                [CZProgressHUD hideAfterDelay:1.5];
+            }
+        }];
+    } else {
+        [self setupTencentCaptcha:@{}];
+    }
+}
+
+// 获取验证码
+- (void)setupTencentCaptcha:(NSDictionary *)paramDic
+{
     [self disabledAndGrayColor:self.verificationCodeBtn];
     //将用户text失效
     self.userTextField.enabled = NO;
@@ -83,9 +105,11 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"mobile"] = self.userTextField.text;
     param[@"type"] = @(3); // 3更换手机号
-    
+    param[@"ticket"] = paramDic[@"ticket"];
+    param[@"randstr"] = paramDic[@"randstr"];
+
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/sendMessage"];
-    
+
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"验证码发送成功"];
@@ -94,7 +118,7 @@
         }
         [CZProgressHUD hideAfterDelay:2];
     } failure:^(NSError *error) {
-        
+
     }];
 }
 

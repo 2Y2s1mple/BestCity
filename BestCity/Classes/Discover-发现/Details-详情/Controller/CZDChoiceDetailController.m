@@ -103,7 +103,12 @@ static CGFloat const likeAndShareHeight = 49;
             }
         }];
         if (self.dicDataModel.relatedGoodsList.count != 0) {
-            _likeView.titleData = @{@"left" : self.dataDic[@"btnTxt"], @"right" : @"相关商品"};
+            NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
+              if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
+                  _likeView.titleData = @{@"left" : self.dataDic[@"btnTxt"], @"right" : @"相关商品"};
+              } else {
+                  _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
+              }
         } else {
             _likeView.titleData = @{@"left" : @"分享", @"right" : @"暂无商品"};
         }
