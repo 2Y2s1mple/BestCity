@@ -42,10 +42,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NX1-nd-flp">
                                                 <rect key="frame" x="0.0" y="0.0" width="381" height="6"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZV-tT-24E">
-                                                        <rect key="frame" x="0.0" y="0.0" width="203" height="6"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZV-tT-24E" userLabel="redView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="6"/>
                                                         <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="100" id="wZK-XB-Ar0"/>
+                                                        </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="3"/>
@@ -56,7 +58,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="fZV-tT-24E" firstAttribute="top" secondItem="NX1-nd-flp" secondAttribute="top" id="ReR-ye-R9z"/>
+                                                    <constraint firstItem="fZV-tT-24E" firstAttribute="leading" secondItem="NX1-nd-flp" secondAttribute="leading" id="SqD-IF-ZfF"/>
                                                     <constraint firstAttribute="height" constant="6" id="b1y-Ed-AgV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="fZV-tT-24E" secondAttribute="bottom" id="rBa-nM-SV4"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -68,13 +73,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已抢198件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikf-TT-ZbD">
                                                 <rect key="frame" x="0.0" y="14" width="63" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共300件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k24-mh-2E4">
                                                 <rect key="frame" x="330" y="14" width="51" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -173,15 +178,21 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backView" destination="Q0r-z4-nf4" id="eTc-TN-tHu"/>
+                <outlet property="bigImageView" destination="1gx-2U-G5I" id="zUf-re-UPe"/>
                 <outlet property="bigView" destination="eSU-hj-oiW" id="U1e-dG-NxE"/>
+                <outlet property="btn" destination="hdO-bD-Bv2" id="DdX-Ap-wST"/>
+                <outlet property="goryBackView" destination="NX1-nd-flp" id="iAf-xc-dse"/>
                 <outlet property="jibiLabel" destination="XZR-0X-0A7" id="kYJ-MH-zsL"/>
+                <outlet property="jibiTopMargin" destination="sQq-sJ-6Dh" id="boc-zU-XdZ"/>
+                <outlet property="lineView" destination="GJc-Z0-aAJ" id="FTV-3V-LG1"/>
                 <outlet property="oldPriceLabel" destination="kzw-6B-qqv" id="iE0-xs-Acm"/>
                 <outlet property="priceLabel" destination="a0Q-kl-lC9" id="03O-rP-SDL"/>
+                <outlet property="redViewWidth" destination="wZK-XB-Ar0" id="iF8-Pc-USh"/>
                 <outlet property="residueLabel" destination="ikf-TT-ZbD" id="ec0-D6-KXt"/>
                 <outlet property="titleLabel" destination="Ko6-m5-MTQ" id="cN5-KT-CNi"/>
                 <outlet property="totalLabel" destination="k24-mh-2E4" id="ci9-Vu-SpQ"/>
             </connections>
-            <point key="canvasLocation" x="-144" y="-496"/>
+            <point key="canvasLocation" x="196" y="-595"/>
         </tableViewCell>
     </objects>
     <resources>

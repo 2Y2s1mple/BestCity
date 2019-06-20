@@ -74,13 +74,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已抢198件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3di-Lc-xKX">
                                                 <rect key="frame" x="0.0" y="14" width="63" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共300件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rb7-zi-LPW">
                                                 <rect key="frame" x="300" y="14" width="51" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -105,13 +105,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥399.60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENu-vG-Ucw">
                                         <rect key="frame" x="66" y="323.5" width="52" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.6744493842124939" green="0.6745484471321106" blue="0.67442780733108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥399.60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGl-1U-g21">
                                         <rect key="frame" x="128" y="323.5" width="52" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.6744493842124939" green="0.6745484471321106" blue="0.67442780733108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b27-9u-OSM">
@@ -182,8 +182,17 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backView" destination="cME-Iy-uNV" id="g1b-hd-r36"/>
+                <outlet property="bigImageView" destination="ISz-0O-NSF" id="J6j-8N-LYz"/>
                 <outlet property="bigView" destination="ZV3-xd-lS6" id="9uq-Qk-Yjz"/>
+                <outlet property="btn" destination="b27-9u-OSM" id="sET-jd-a6e"/>
                 <outlet property="jibiLabel" destination="1yl-91-Onb" id="UF1-IV-pWW"/>
+                <outlet property="jibiTopMargin" destination="oQL-OW-sYQ" id="SCE-6m-7d0"/>
+                <outlet property="lineView" destination="yrM-kr-yfD" id="ich-aG-cVC"/>
+                <outlet property="oldPriceLabel" destination="xGl-1U-g21" id="drw-XB-UIC"/>
+                <outlet property="priceLabel" destination="ENu-vG-Ucw" id="nyJ-CQ-JVD"/>
+                <outlet property="residueLabel" destination="3di-Lc-xKX" id="MP7-Jr-ln7"/>
+                <outlet property="titleLabel" destination="pgT-N3-6xb" id="g4i-Fd-GUv"/>
+                <outlet property="totalLabel" destination="Rb7-zi-LPW" id="oMb-9m-qix"/>
             </connections>
             <point key="canvasLocation" x="86.231884057971016" y="176.11607142857142"/>
         </tableViewCell>

@@ -7,16 +7,95 @@
 //
 
 #import "CZFreeChargeCell.h"
+#import "UIImageView+WebCache.h"
+
+
 @interface CZFreeChargeCell ()
 /** 背景视图View */
 @property (nonatomic, weak) IBOutlet UIView *bigView;
 /** 图片的View */
 @property (nonatomic, weak) IBOutlet UIView *backView;
+/** 大图片 */
+@property (nonatomic, weak) IBOutlet UIImageView *bigImageView;
+/** 标题 */
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 /** 极币数 */
 @property (nonatomic, weak) IBOutlet UILabel *jibiLabel;
+/** 现价 */
+@property (nonatomic, weak) IBOutlet UILabel *priceLabel;
+/** 原价 */
+@property (nonatomic, weak) IBOutlet UILabel *oldPriceLabel;
+
+/** lineView */
+@property (nonatomic, weak) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *jibiTopMargin;
+
+
+/** 即将开启 */
+@property (nonatomic, weak) IBOutlet UIButton *btn;
+/** 一共 */
+@property (nonatomic, weak) IBOutlet UILabel *totalLabel;
+/** 剩余 */
+@property (nonatomic, weak) IBOutlet UILabel *residueLabel;
 @end
 
 @implementation CZFreeChargeCell
+- (void)setModel:(CZFreeChargeModel *)model
+{
+    _model = model;
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:model.img]];
+    self.titleLabel.text = model.name;
+    self.jibiLabel.text = [NSString stringWithFormat:@"%@极币", model.point];
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%.2lf", [model.actualPrice floatValue]];
+    NSString *otherPrice = [NSString stringWithFormat:@"¥%.2lf", [model.otherPrice floatValue]];
+    self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
+
+    // 条
+    self.lineView.hidden = NO;
+    self.jibiTopMargin.constant = 28;
+
+
+    switch ([model.status integerValue]) {// （0即将开始，1进行中，2已结束）
+        case 0:
+            [self.btn setTitle:@"即将开始" forState:UIControlStateNormal];
+            [self.btn setBackgroundColor:[UIColor whiteColor]];
+            [self.btn setTitleColor:UIColorFromRGB(0xF76B1C) forState:UIControlStateNormal];
+            self.btn.layer.borderColor = UIColorFromRGB(0xF76B1C).CGColor;
+            self.lineView.hidden = YES;
+            self.jibiTopMargin.constant = -30;
+            break;
+        case 1:
+        {
+            [self.btn setTitle:@"立即抢购" forState:UIControlStateNormal];
+            [self.btn setBackgroundColor:UIColorFromRGB(0xE31B3C)];
+            [self.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.btn.layer.borderColor = UIColorFromRGB(0xE31B3C).CGColor;
+            self.totalLabel.text = [NSString stringWithFormat:@"共%@件", model.count];
+            NSString *residueStr = [NSString stringWithFormat:@"已抢%@件", model.userCount];
+            self.residueLabel.attributedText = [residueStr addAttributeColor:CZREDCOLOR Range:[residueStr rangeOfString:model.userCount]];
+            break;
+        }
+        case 2:
+        {
+            [self.btn setTitle:@"已售罄" forState:UIControlStateNormal];
+            [self.btn setBackgroundColor:UIColorFromRGB(0xACACAC)];
+            [self.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.btn.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor;
+            self.totalLabel.text = [NSString stringWithFormat:@"共%@件", model.count];
+            NSString *residueStr = [NSString stringWithFormat:@"已抢%@件", model.userCount];
+            self.residueLabel.attributedText = [residueStr addAttributeColor:CZREDCOLOR Range:[residueStr rangeOfString:model.userCount]];
+            break;
+        }
+
+        default:
+            break;
+    }
+
+
+    [self layoutIfNeeded];
+    model.cellHeight = CZGetY(self.bigView);
+}
+
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"CZFreeChargeCell";
@@ -27,20 +106,21 @@
     return cell;
 }
 
-- (void)setModel:(CZFreeChargeModel *)model
-{
-    _model = model;
-    self.jibiLabel.text = [NSString stringWithFormat:@"%@极币", @"50"];
 
-    [self layoutIfNeeded];
-    model.cellHeight = CZGetY(self.bigView);
-}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.jibiLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+    self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
 
+    self.totalLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];
+    self.residueLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];
+
+
+    self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    self.jibiLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+    self.priceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];
     // 设置阴影
     self.backView.layer.cornerRadius = 5;
     self.backView.layer.masksToBounds = YES;

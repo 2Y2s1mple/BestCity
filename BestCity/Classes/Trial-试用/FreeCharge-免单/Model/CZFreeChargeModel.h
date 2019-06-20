@@ -14,9 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *point;
 @property (nonatomic, strong) NSString *count;
+@property (nonatomic, strong) NSString *userCount;
 @property (nonatomic, strong) NSString *actualPrice;
-@property (nonatomic, strong) NSString *trialId;
+@property (nonatomic, strong) NSString *otherPrice;
 @property (nonatomic, strong) NSString *status;
 
 // 辅助

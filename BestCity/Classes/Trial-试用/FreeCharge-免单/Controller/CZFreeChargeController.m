@@ -20,6 +20,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 /** 试用数据 */
 @property (nonatomic, strong) NSMutableArray *freeChargeDatas;
+/** 页数 */
+@property (nonatomic, assign) NSInteger page;
 @end
 
 @implementation CZFreeChargeController
@@ -39,6 +41,7 @@
     return _tableView;
 }
 
+#pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -48,23 +51,34 @@
     [self setupRefresh];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.tableView.mj_header endRefreshing];
+}
+
 #pragma mark - 获取数据
 - (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
     [self.tableView.mj_header beginRefreshing];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadMoreTrailDataSorce)];
 
-    //    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDiscover)];
 }
 
 - (void)reloadNewTrailDataSorce
 {
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
+    self.page = 0;
+
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"page"] = @( self.page);
+
     //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/trial/index"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            self.freeChargeDatas = [CZFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"][@"trialList"]];
+            self.freeChargeDatas = [CZFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
             // 结束刷新
         }
@@ -75,6 +89,11 @@
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
     }];
+}
+
+- (void)reloadMoreTrailDataSorce
+{
+
 }
 
 #pragma mark - 代理
