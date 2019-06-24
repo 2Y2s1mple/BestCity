@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFreeChargeModel : NSObject
-
+/** <#注释#> */
+@property (nonatomic, strong) NSString *Id;
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *point;
@@ -20,9 +21,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *actualPrice;
 @property (nonatomic, strong) NSString *otherPrice;
 @property (nonatomic, strong) NSString *status;
-
+/** 开始时间 */
+@property (nonatomic, strong) NSString *activitiesStartTime;
 // 辅助
 @property (nonatomic, assign) CGFloat cellHeight;
+
+
+// 详情
+@property (nonatomic, strong) NSArray *imgList;
+/** -1未申请，0申请成功未付款，1已付款 */
+@property (nonatomic, strong) NSString *applyStatus;
+/** 免单金额 */
+@property (nonatomic, strong) NSString *freePrice;
+/** 付款剩余时间 */
+@property (nonatomic, strong) NSString *dendlineTime;
+/** 淘宝需要 */
+@property (nonatomic, strong) NSString *goodsId;
+/** 详情界面 */
+@property (nonatomic, strong) NSArray *goodsContentList;
 @end
 
 NS_ASSUME_NONNULL_END

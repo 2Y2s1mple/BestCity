@@ -60,6 +60,7 @@
     showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
     
     [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
+        NSLog(@"-----AlibcTradeSDK------");
             if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){
                 NSLog(@"交易成功");
             } else if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){

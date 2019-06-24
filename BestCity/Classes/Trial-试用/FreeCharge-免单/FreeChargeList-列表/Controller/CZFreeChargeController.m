@@ -15,6 +15,8 @@
 #import "GXNetTool.h"
 // 模型
 #import "CZFreeChargeModel.h"
+// 跳转
+#import "CZFreeChargeDetailController.h"
 
 @interface CZFreeChargeController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -44,6 +46,11 @@
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [CZFreeChargeModel setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                 @"Id" : @"id"
+                 };
+    }];
     self.view.backgroundColor = [UIColor whiteColor];
     // 表
     [self.view addSubview:self.tableView];
@@ -93,7 +100,25 @@
 
 - (void)reloadMoreTrailDataSorce
 {
+    // 结束尾部刷新
+    [self.tableView.mj_header endRefreshing];
+    self.page++;
 
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"page"] = @(self.page);
+
+    //获取数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            NSArray *arr = [CZFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"]];
+            [self.freeChargeDatas addObjectsFromArray:arr];
+            [self.tableView reloadData];
+        }
+        [self.tableView.mj_footer endRefreshing];
+    } failure:^(NSError *error) {
+        // 结束刷新
+        [self.tableView.mj_footer endRefreshing];
+    }];
 }
 
 #pragma mark - 代理
@@ -122,15 +147,13 @@
     return model.cellHeight + 1;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     CZFreeChargeModel *model = self.freeChargeDatas[indexPath.row];
+    CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
+    vc.Id = model.Id;
+    [self.navigationController pushViewController:vc animated:YES];
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end

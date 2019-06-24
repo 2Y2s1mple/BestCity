@@ -89,7 +89,7 @@
     }
     if ([vc isKindOfClass:[CZTrialMainController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
-        hotVc.selectIndex = 0;
+        hotVc.selectIndex = 1;
         hotVc.menuViewStyle = WMMenuViewStyleDefault;
         hotVc.itemMargin = 10;
         hotVc.automaticallyCalculatesItemWidths = YES;

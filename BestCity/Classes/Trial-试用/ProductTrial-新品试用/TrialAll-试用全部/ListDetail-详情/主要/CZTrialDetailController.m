@@ -422,9 +422,7 @@ static CGFloat const likeAndShareHeight = 49;
     lineView.width = commentBtn.width;
     lineView.height = 1;
     [bottomView addSubview:lineView];
-    
-    
-    
+
     UIButton *buyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     buyBtn.frame = CGRectMake(commentBtn.width, commentBtn.y, (SCR_WIDTH - commentBtn.width) / 2.0, commentBtn.height);
     buyBtn.titleLabel.font = commentBtn.titleLabel.font;

@@ -326,7 +326,7 @@
 
 + (NSString *)getNowTimeTimestamp3
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     
