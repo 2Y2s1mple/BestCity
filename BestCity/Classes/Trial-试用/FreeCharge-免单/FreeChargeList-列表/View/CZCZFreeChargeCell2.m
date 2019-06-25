@@ -49,6 +49,8 @@
 @property (nonatomic, strong) NSTimer *timer;
 /** 时间间隔 */
 @property (nonatomic, assign) NSInteger interval;
+/** 蒙版 */
+@property (nonatomic, weak) IBOutlet UIImageView *mengbanImageView;
 @end
 
 @implementation CZCZFreeChargeCell2
@@ -56,6 +58,7 @@
 {
     _model = model;
 
+    self.mengbanImageView.hidden = YES;
     [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:model.img]];
     self.titleLabel.text = model.name;
     self.jibiLabel.text = [NSString stringWithFormat:@"%@极币", model.point];
@@ -112,6 +115,7 @@
         }
         case 2:
         {
+            self.mengbanImageView.hidden = NO;
             [self.btn setTitle:@"已售罄" forState:UIControlStateNormal];
             [self.btn setBackgroundColor:UIColorFromRGB(0xACACAC)];
             [self.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

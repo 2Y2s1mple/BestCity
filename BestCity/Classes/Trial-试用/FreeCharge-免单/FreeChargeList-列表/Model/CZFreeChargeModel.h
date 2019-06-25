@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *goodsId;
 /** 详情界面 */
 @property (nonatomic, strong) NSArray *goodsContentList;
+/** 规则 */
+@property (nonatomic, strong) NSString *freeGuide;
 @end
 
 NS_ASSUME_NONNULL_END

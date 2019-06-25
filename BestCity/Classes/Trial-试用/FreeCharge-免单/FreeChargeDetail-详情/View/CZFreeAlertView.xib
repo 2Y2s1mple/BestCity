@@ -90,7 +90,90 @@
                 <outlet property="leftBtn" destination="2MJ-Af-fc7" id="zYc-DS-Ru9"/>
                 <outlet property="titleLabel" destination="J4L-gI-9qq" id="kr9-cg-jEb"/>
             </connections>
-            <point key="canvasLocation" x="162" y="-128"/>
+            <point key="canvasLocation" x="18" y="-563"/>
+        </view>
+        <view contentMode="scaleToFill" id="l2Y-E1-wbd" customClass="CZFreeAlertView2">
+            <rect key="frame" x="0.0" y="0.0" width="415" height="255"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="形状结合" translatesAutoresizingMaskIntoConstraints="NO" id="ju9-VJ-vV3">
+                    <rect key="frame" x="0.0" y="0.0" width="415" height="255"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhh-vg-5Ok">
+                    <rect key="frame" x="192.5" y="20" width="30" height="30"/>
+                    <state key="normal" image="guanbi"/>
+                    <connections>
+                        <action selector="leftBtnAction:" destination="l2Y-E1-wbd" eventType="touchUpInside" id="tjG-On-27x"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="极币数不足，请前往“每日任务”赚取极币" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkU-9B-cZx">
+                    <rect key="frame" x="52" y="74" width="311" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.35290741920471191" green="0.35296279191970825" blue="0.35289531946182251" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现有极币：50个" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQN-zm-0Kf">
+                    <rect key="frame" x="156" y="114" width="103" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.6744493842124939" green="0.6745484471321106" blue="0.67442780733108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="所需极币：200个" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJh-TM-jb9">
+                    <rect key="frame" x="152" y="136" width="111.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8X-zl-5I6">
+                    <rect key="frame" x="107.5" y="180" width="200" height="55"/>
+                    <color key="backgroundColor" red="0.88123279809999999" green="0.1038993672" blue="0.23317024110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="JFg-F9-9fw"/>
+                        <constraint firstAttribute="height" constant="55" id="bOm-bW-1Pq"/>
+                    </constraints>
+                    <state key="normal" title="去赚取极币">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="rightBtnAction:" destination="l2Y-E1-wbd" eventType="touchUpInside" id="cmX-WX-fIu"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="AQN-zm-0Kf" firstAttribute="top" secondItem="bkU-9B-cZx" secondAttribute="bottom" constant="19" id="1Kh-1z-yPw"/>
+                <constraint firstItem="sJh-TM-jb9" firstAttribute="top" secondItem="AQN-zm-0Kf" secondAttribute="bottom" constant="5" id="DdC-87-jY2"/>
+                <constraint firstItem="bkU-9B-cZx" firstAttribute="centerX" secondItem="l2Y-E1-wbd" secondAttribute="centerX" id="EAV-RA-ZYE"/>
+                <constraint firstItem="dhh-vg-5Ok" firstAttribute="centerX" secondItem="l2Y-E1-wbd" secondAttribute="centerX" id="JDR-hK-TCu"/>
+                <constraint firstAttribute="bottom" secondItem="ju9-VJ-vV3" secondAttribute="bottom" id="Kxg-zg-hYI"/>
+                <constraint firstItem="sJh-TM-jb9" firstAttribute="centerX" secondItem="l2Y-E1-wbd" secondAttribute="centerX" id="N35-9Z-dhU"/>
+                <constraint firstItem="ju9-VJ-vV3" firstAttribute="leading" secondItem="l2Y-E1-wbd" secondAttribute="leading" id="OQp-L3-7mx"/>
+                <constraint firstItem="ju9-VJ-vV3" firstAttribute="top" secondItem="l2Y-E1-wbd" secondAttribute="top" id="QHV-zc-9XZ"/>
+                <constraint firstItem="AQN-zm-0Kf" firstAttribute="centerX" secondItem="l2Y-E1-wbd" secondAttribute="centerX" id="S0X-wu-AoP"/>
+                <constraint firstAttribute="bottom" secondItem="D8X-zl-5I6" secondAttribute="bottom" constant="20" id="SRr-WL-rHA"/>
+                <constraint firstItem="D8X-zl-5I6" firstAttribute="centerX" secondItem="l2Y-E1-wbd" secondAttribute="centerX" id="SqS-sy-A00"/>
+                <constraint firstAttribute="trailing" secondItem="ju9-VJ-vV3" secondAttribute="trailing" id="c1E-I3-l0A"/>
+                <constraint firstItem="dhh-vg-5Ok" firstAttribute="top" secondItem="l2Y-E1-wbd" secondAttribute="top" constant="20" id="hVi-8N-gGN"/>
+                <constraint firstItem="bkU-9B-cZx" firstAttribute="top" secondItem="dhh-vg-5Ok" secondAttribute="bottom" constant="24" id="zKQ-Vd-5z2"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bottomLabel" destination="sJh-TM-jb9" id="Ies-sF-PlL"/>
+                <outlet property="topLabel" destination="AQN-zm-0Kf" id="zj9-uB-M4v"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="-265"/>
         </view>
     </objects>
+    <resources>
+        <image name="guanbi" width="30" height="30"/>
+        <image name="形状结合" width="375" height="248"/>
+    </resources>
 </document>

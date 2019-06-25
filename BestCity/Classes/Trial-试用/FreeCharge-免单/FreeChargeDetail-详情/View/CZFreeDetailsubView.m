@@ -32,7 +32,7 @@
 /** 现价 */
 @property (nonatomic, weak) IBOutlet UILabel *priceLabel;
 /** 原价 */
-@property (nonatomic, weak) IBOutlet UILabel *oldPriceLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *oldPriceLabel;
 /** 开抢 */
 @property (nonatomic, weak) IBOutlet UILabel *activitiesStartsTimeLabel;
 
@@ -109,7 +109,7 @@
             return (NSInteger)[date timeIntervalSinceNow];
         }];
         self.countDownLabel1.text = [NSString stringWithFormat:@"距离结束购买时间仅剩：%@", [self setupTimer]];
-        self.backgroundColor = CZGlobalLightGray;
+//        self.backgroundColor = CZGlobalLightGray;
         [self layoutIfNeeded];
         self.height = CZGetY(self.titleLabel1) + 24;
     } else if([model.applyStatus integerValue] == 1) { // 1申请成功已付款,还可以继续购买
@@ -131,9 +131,10 @@
     }  else { // -1未申请
         self.titleLabel.text = model.name;
         self.jibiLabel.text = [NSString stringWithFormat:@"%@极币", model.point];
-        self.priceLabel.text = [NSString stringWithFormat:@"¥%.2lf", [model.actualPrice floatValue]];
-        NSString *otherPrice = [NSString stringWithFormat:@"¥%.2lf", [model.otherPrice floatValue]];
-        self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
+
+        NSString *otherPrice = [NSString stringWithFormat:@"¥%.2lf", [model.actualPrice floatValue]];
+        self.priceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
+
         self.activitiesStartsTimeLabel.text = [NSString stringWithFormat:@"¥%.2lf", [model.otherPrice floatValue]];
 
         self.activitiesStartsTimeLabel.text = [self dateFormatterHandle:^{

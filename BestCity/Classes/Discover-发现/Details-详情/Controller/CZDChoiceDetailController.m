@@ -92,7 +92,7 @@ static CGFloat const likeAndShareHeight = 49;
         __weak typeof(self) weakSelf = self;
         _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
             CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-            share.cententDic =  self.dataDic[@"content"];
+            share.cententText =  self.dataDic[@"content"];
             share.param = self.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
@@ -105,7 +105,7 @@ static CGFloat const likeAndShareHeight = 49;
         if (self.dicDataModel.relatedGoodsList.count != 0) {
             NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
               if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
-                  _likeView.titleData = @{@"left" : self.dataDic[@"btnTxt"], @"right" : @"相关商品"};
+                  _likeView.titleData = @{@"left" : self.dataDic[@"btnTxt"], @"right" : self.dataDic[@"btnTxt2"]};
               } else {
                   _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
               }

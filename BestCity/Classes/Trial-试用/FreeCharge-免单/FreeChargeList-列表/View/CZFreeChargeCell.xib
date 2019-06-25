@@ -167,6 +167,9 @@
                                             <constraint firstItem="7eu-at-s8g" firstAttribute="leading" secondItem="g8h-Tn-pLx" secondAttribute="leading" constant="10" id="r7r-N8-nYT"/>
                                         </constraints>
                                     </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商品2备份 2" translatesAutoresizingMaskIntoConstraints="NO" id="MTJ-Ay-b7L">
+                                        <rect key="frame" x="0.0" y="0.0" width="395" height="200"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -176,9 +179,11 @@
                                     <constraint firstItem="ENu-vG-Ucw" firstAttribute="centerY" secondItem="1yl-91-Onb" secondAttribute="centerY" id="CWW-Nb-9fe"/>
                                     <constraint firstAttribute="trailing" secondItem="pgT-N3-6xb" secondAttribute="trailing" constant="10" id="HdY-F3-UXH"/>
                                     <constraint firstAttribute="trailing" secondItem="b27-9u-OSM" secondAttribute="trailing" constant="14" id="J0h-wR-cJ9"/>
+                                    <constraint firstItem="MTJ-Ay-b7L" firstAttribute="width" secondItem="ISz-0O-NSF" secondAttribute="width" id="KxJ-yG-wI0"/>
                                     <constraint firstItem="g8h-Tn-pLx" firstAttribute="width" secondItem="ISz-0O-NSF" secondAttribute="width" id="Q2r-a4-Gc0"/>
                                     <constraint firstItem="g8h-Tn-pLx" firstAttribute="centerX" secondItem="cME-Iy-uNV" secondAttribute="centerX" id="RS6-Ez-emr"/>
                                     <constraint firstItem="xGl-1U-g21" firstAttribute="centerY" secondItem="ENu-vG-Ucw" secondAttribute="centerY" id="SxI-Bg-chm"/>
+                                    <constraint firstItem="MTJ-Ay-b7L" firstAttribute="height" secondItem="ISz-0O-NSF" secondAttribute="height" id="Uul-hc-mc0"/>
                                     <constraint firstItem="g8h-Tn-pLx" firstAttribute="bottom" secondItem="ISz-0O-NSF" secondAttribute="bottom" id="XLK-Al-ARR"/>
                                     <constraint firstItem="b27-9u-OSM" firstAttribute="centerY" secondItem="xGl-1U-g21" secondAttribute="centerY" id="YTQ-IA-PeO"/>
                                     <constraint firstAttribute="trailing" secondItem="ISz-0O-NSF" secondAttribute="trailing" id="bPJ-I7-47p"/>
@@ -189,8 +194,10 @@
                                     <constraint firstItem="ISz-0O-NSF" firstAttribute="top" secondItem="cME-Iy-uNV" secondAttribute="top" id="ltY-xZ-C7R"/>
                                     <constraint firstItem="ENu-vG-Ucw" firstAttribute="leading" secondItem="1yl-91-Onb" secondAttribute="trailing" constant="10" id="mJd-F3-wgN"/>
                                     <constraint firstItem="1yl-91-Onb" firstAttribute="top" secondItem="yrM-kr-yfD" secondAttribute="bottom" constant="28" id="oQL-OW-sYQ"/>
+                                    <constraint firstItem="MTJ-Ay-b7L" firstAttribute="top" secondItem="ISz-0O-NSF" secondAttribute="top" id="v9Z-yP-Jbo"/>
                                     <constraint firstAttribute="trailing" secondItem="yrM-kr-yfD" secondAttribute="trailing" constant="34" id="vwf-ui-JHU"/>
                                     <constraint firstItem="1yl-91-Onb" firstAttribute="leading" secondItem="cME-Iy-uNV" secondAttribute="leading" constant="10" id="ywR-DX-PoZ"/>
+                                    <constraint firstItem="MTJ-Ay-b7L" firstAttribute="centerX" secondItem="cME-Iy-uNV" secondAttribute="centerX" id="ywd-DW-0va"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -225,6 +232,7 @@
                 <outlet property="jibiLabel" destination="1yl-91-Onb" id="UF1-IV-pWW"/>
                 <outlet property="jibiTopMargin" destination="oQL-OW-sYQ" id="SCE-6m-7d0"/>
                 <outlet property="lineView" destination="yrM-kr-yfD" id="ich-aG-cVC"/>
+                <outlet property="mengbanImageView" destination="MTJ-Ay-b7L" id="IEG-Tq-9Sx"/>
                 <outlet property="oldPriceLabel" destination="xGl-1U-g21" id="drw-XB-UIC"/>
                 <outlet property="priceLabel" destination="ENu-vG-Ucw" id="nyJ-CQ-JVD"/>
                 <outlet property="redViewWidth" destination="h3A-5n-IGI" id="16i-T9-9Gb"/>
@@ -238,5 +246,6 @@
     <resources>
         <image name="testImage7" width="407" height="409"/>
         <image name="位图" width="375" height="180"/>
+        <image name="商品2备份 2" width="347.5" height="200"/>
     </resources>
 </document>

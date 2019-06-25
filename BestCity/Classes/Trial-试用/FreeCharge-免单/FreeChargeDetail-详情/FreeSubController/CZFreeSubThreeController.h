@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFreeSubThreeController : UIViewController
-
+@property (nonatomic, strong, readonly) UIWebView *webView;
+/** html */
+@property (nonatomic, strong) NSString *stringHtml;
 @end
 
 NS_ASSUME_NONNULL_END

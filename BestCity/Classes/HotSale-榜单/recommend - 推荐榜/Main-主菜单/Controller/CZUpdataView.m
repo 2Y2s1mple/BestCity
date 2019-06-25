@@ -72,8 +72,7 @@
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     
-    [nav pushViewController:vc animated:YES
-     ];
+    [nav pushViewController:vc animated:YES];
 }
 
 @end

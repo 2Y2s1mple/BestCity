@@ -171,6 +171,9 @@
 		97705CE92108733F00485D64 /* CZNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CE82108733F00485D64 /* CZNavigationController.m */; };
 		97731C3222424AC700826F8E /* CZTrialMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97731C2F22424AC700826F8E /* CZTrialMainCell.m */; };
 		97731C3322424AC700826F8E /* CZTrialMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97731C3022424AC700826F8E /* CZTrialMainCell.xib */; };
+		97773A7622C1DBBB00314E42 /* CZFreeTakePartInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97773A7422C1DBBB00314E42 /* CZFreeTakePartInCell.m */; };
+		97773A7722C1DBBB00314E42 /* CZFreeTakePartInCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97773A7522C1DBBB00314E42 /* CZFreeTakePartInCell.xib */; };
+		97773A7A22C217FC00314E42 /* CZFreeAlertView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 97773A7922C217FC00314E42 /* CZFreeAlertView2.m */; };
 		97786499211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 97786481211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		9778649A211A7AD6001B41F1 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9778648A211A7AD6001B41F1 /* ViewController+MASAdditions.m */; };
 		9778649B211A7AD6001B41F1 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9778648E211A7AD6001B41F1 /* MASCompositeConstraint.m */; };
@@ -717,6 +720,11 @@
 		97731C2F22424AC700826F8E /* CZTrialMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZTrialMainCell.m; sourceTree = "<group>"; };
 		97731C3022424AC700826F8E /* CZTrialMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CZTrialMainCell.xib; sourceTree = "<group>"; };
 		97731C3122424AC700826F8E /* CZTrialMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZTrialMainCell.h; sourceTree = "<group>"; };
+		97773A7322C1DBBB00314E42 /* CZFreeTakePartInCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeTakePartInCell.h; sourceTree = "<group>"; };
+		97773A7422C1DBBB00314E42 /* CZFreeTakePartInCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeTakePartInCell.m; sourceTree = "<group>"; };
+		97773A7522C1DBBB00314E42 /* CZFreeTakePartInCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZFreeTakePartInCell.xib; sourceTree = "<group>"; };
+		97773A7822C217FC00314E42 /* CZFreeAlertView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeAlertView2.h; sourceTree = "<group>"; };
+		97773A7922C217FC00314E42 /* CZFreeAlertView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeAlertView2.m; sourceTree = "<group>"; };
 		97786480211A7AD6001B41F1 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		97786481211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		97786482211A7AD6001B41F1 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -1905,6 +1913,11 @@
 				9779470C22BCD38A00DA3948 /* CZFreeDetailsubView.h */,
 				9779470D22BCD38A00DA3948 /* CZFreeDetailsubView.m */,
 				9779470F22BCD39900DA3948 /* CZFreeDetailsubView.xib */,
+				97773A7322C1DBBB00314E42 /* CZFreeTakePartInCell.h */,
+				97773A7422C1DBBB00314E42 /* CZFreeTakePartInCell.m */,
+				97773A7522C1DBBB00314E42 /* CZFreeTakePartInCell.xib */,
+				97773A7822C217FC00314E42 /* CZFreeAlertView2.h */,
+				97773A7922C217FC00314E42 /* CZFreeAlertView2.m */,
 				974C559222C070C9001A1E1C /* CZFreeAlertView.h */,
 				974C559322C070C9001A1E1C /* CZFreeAlertView.m */,
 				974C559522C070DA001A1E1C /* CZFreeAlertView.xib */,
@@ -3837,6 +3850,7 @@
 				97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */,
 				977E82DA223CD3D600C8C01B /* CZUpdataView.xib in Resources */,
 				97B4A4942248BE7B00E48D93 /* CZTrialApplyForDetailController.xib in Resources */,
+				97773A7722C1DBBB00314E42 /* CZFreeTakePartInCell.xib in Resources */,
 				9708492222434239000D5528 /* CZTrialReportMainCell.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97BC394A223BB0F800DC4D67 /* CZAffirmPointController.xib in Resources */,
@@ -3910,6 +3924,7 @@
 				97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */,
 				97798C7A212CF4430052CE94 /* SVProgressHUD.m in Sources */,
 				97C7FF4A216DDDB50091DC07 /* MJRefreshAutoFooter.m in Sources */,
+				97773A7A22C217FC00314E42 /* CZFreeAlertView2.m in Sources */,
 				97705CD82108595600485D64 /* CALayer+LayerColor.m in Sources */,
 				9723075A21AD50D50004C00C /* NSDictionary+CZExtension.m in Sources */,
 				97F0EC392125692B000FE1DC /* CZGuideTool.m in Sources */,
@@ -4152,6 +4167,7 @@
 				97C7FF39216DDDB50091DC07 /* MJRefreshConst.m in Sources */,
 				972E41BF211473B100BC751C /* CZMyPointDetailCell.m in Sources */,
 				97B4A49E22490BB800E48D93 /* CZTrailTestCell.m in Sources */,
+				97773A7622C1DBBB00314E42 /* CZFreeTakePartInCell.m in Sources */,
 				97084912224335A9000D5528 /* CZTrialReportHotController.m in Sources */,
 				972F4BA422AE447200F30F6B /* CZMyWalletDetailCell.m in Sources */,
 				97BB481A2133E56E006AE982 /* CZGiveLikeView.m in Sources */,

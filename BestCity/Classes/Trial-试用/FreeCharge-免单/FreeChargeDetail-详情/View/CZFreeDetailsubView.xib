@@ -111,7 +111,7 @@
                     <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥399.60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAu-aB-XC1">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥399.60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAu-aB-XC1">
                     <rect key="frame" x="132" y="152" width="52" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.6744493842" green="0.67454844709999995" blue="0.67442780729999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -187,7 +187,6 @@
                 <outlet property="jibiLabel" destination="I7v-le-43Q" id="grV-CV-V3Z"/>
                 <outlet property="jibiTopMargin" destination="wsa-Qs-6iy" id="omt-JZ-hjP"/>
                 <outlet property="lineView" destination="rDV-Tw-H67" id="zj7-FL-mLC"/>
-                <outlet property="oldPriceLabel" destination="AAu-aB-XC1" id="pIq-NN-J1V"/>
                 <outlet property="pinkBackView" destination="T6j-Xm-s00" id="0ci-wc-YBD"/>
                 <outlet property="pinkLabel" destination="1GF-TN-dhp" id="if8-k3-hUI"/>
                 <outlet property="priceLabel" destination="eCd-hD-geS" id="y4L-lM-muV"/>

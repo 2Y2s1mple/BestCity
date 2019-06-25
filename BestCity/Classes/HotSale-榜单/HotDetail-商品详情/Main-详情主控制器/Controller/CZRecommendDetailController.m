@@ -87,7 +87,7 @@ static NSString * const type = @"1";
                 return;
             }
             CZShareView *share = [[CZShareView alloc] initWithFrame:weakSelf.view.frame];
-            share.cententDic = weakSelf.shareDic;
+            share.cententText = weakSelf.shareDic[@"content"];
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{

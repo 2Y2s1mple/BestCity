@@ -49,6 +49,9 @@
 @property (nonatomic, strong) NSTimer *timer;
 /** 时间间隔 */
 @property (nonatomic, assign) NSInteger interval;
+
+/** 蒙版 */
+@property (nonatomic, weak) IBOutlet UIImageView *mengbanImageView;
 @end
 
 @implementation CZFreeChargeCell
@@ -56,6 +59,7 @@
 {
     _model = model;
 
+    self.mengbanImageView.hidden = YES;
     [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:model.img]];
     self.titleLabel.text = model.name;
     self.jibiLabel.text = [NSString stringWithFormat:@"%@极币", model.point];
@@ -67,10 +71,8 @@
     self.lineView.hidden = NO;
     self.jibiTopMargin.constant = 28;
 
-
     // 开启定时器
     self.countDownView.hidden = YES;
-
 
     switch ([model.status integerValue]) {// （0即将开始，1进行中，2已结束）
         case 0:
@@ -103,15 +105,13 @@
             // residueLabel  xxx
             // totalLabel goryBackView.width
             [self layoutIfNeeded];
-
             CGFloat scale = [model.userCount floatValue] / [model.count floatValue];
-
             self.redViewWidth.constant = scale * (SCR_WIDTH - 44 - 28);
-
             break;
         }
         case 2:
         {
+            self.mengbanImageView.hidden = NO;
             [self.btn setTitle:@"已售罄" forState:UIControlStateNormal];
             [self.btn setBackgroundColor:UIColorFromRGB(0xACACAC)];
             [self.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -121,7 +121,6 @@
             self.residueLabel.attributedText = [residueStr addAttributeColor:CZREDCOLOR Range:[residueStr rangeOfString:model.userCount]];
             [self layoutIfNeeded];
             CGFloat scale = [model.userCount floatValue] / [model.count floatValue];
-
             self.redViewWidth.constant = scale * (SCR_WIDTH - 44 - 28);
             break;
         }
@@ -136,7 +135,6 @@
             self.residueLabel.attributedText = [residueStr addAttributeColor:CZREDCOLOR Range:[residueStr rangeOfString:model.userCount]];
             [self layoutIfNeeded];
             CGFloat scale = [model.userCount floatValue] / [model.count floatValue];
-
             self.redViewWidth.constant = scale * (SCR_WIDTH - 44 - 28);
             break;
         }

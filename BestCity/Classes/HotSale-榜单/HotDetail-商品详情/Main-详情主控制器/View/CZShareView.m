@@ -51,7 +51,7 @@
         make.centerX.equalTo(shareView);
     }];
     UILabel *subTitleLabel = [[UILabel alloc] init];
-    subTitleLabel.text = self.cententDic[@"content"] ? self.cententDic[@"content"] : @"";
+    subTitleLabel.text = [self.cententText isKindOfClass:[NSString class]] ? self.cententText : @"";
 //    subTitleLabel.text = @"如果好友通过您分享的链接完成购买，您即可获得10%的佣金，并可提现到支付宝账户。";
     subTitleLabel.numberOfLines = 2;
     subTitleLabel.textAlignment = NSTextAlignmentCenter;

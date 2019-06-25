@@ -16,10 +16,13 @@
 // 视图
 #import "CZFreeDetailsubView.h"
 #import "CZFreeAlertView.h"
+#import "CZFreeAlertView2.h"
 #import "CZOpenAlibcTrade.h"
 #import "CZFreeSubOneController.h"
 #import "CZFreeSubTwoController.h"
 #import "CZFreeSubThreeController.h"
+#import "CZCoinCenterController.h"
+#import "CZShareView.h"
 
 // 跳转
 #import "TSLWebViewController.h"
@@ -49,6 +52,12 @@
 @property (nonatomic, strong) UIButton *recordBtn;
 /** 内容 */
 @property (nonatomic, strong) UIScrollView *contentScrollView;
+
+/** 菜单按钮 */
+@property (nonatomic, strong) UIButton *menusbtn;
+
+/** 分享 */
+@property (nonatomic, strong) NSDictionary *shareDic;
 @end
 
 @implementation CZFreeChargeDetailController
@@ -58,9 +67,10 @@
     if (_scrollerView == nil) {
         _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : 49))];
         self.scrollerView.delegate = self;
-        _scrollerView.backgroundColor = [UIColor whiteColor];
+        _scrollerView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         _scrollerView.showsVerticalScrollIndicator = NO;
         _scrollerView.showsHorizontalScrollIndicator = NO;
+        _scrollerView.bounces = NO;
     }
     return _scrollerView;
 }
@@ -89,6 +99,19 @@
         _shareButton.layer.masksToBounds = YES;
     }
     return _shareButton;
+}
+
+- (void)shareButtonAction
+{
+    CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    share.cententText =  self.shareDic[@"shareContent"];
+    share.param = @{
+                    @"shareUrl" : self.shareDic[@"shareUrl"],
+                    @"shareTitle" : self.shareDic[@"shareTitle"],
+                    @"shareContent" : self.shareDic[@"shareContent"],
+                    @"shareImg" : self.shareDic[@"shareImg"],
+                    };
+    [self.view addSubview:share];
 }
 
 // 初始化底部菜单
@@ -155,7 +178,7 @@ static BOOL isCountDownAction;
 
     // 加载下部滑动视图
     self.menusView = [self setupMenus];
-    self.menusView.y = CZGetY(self.topContent);
+    self.menusView.y = CZGetY(self.topContent) + 10;
     [self.scrollerView addSubview:self.menusView];
 
     // 创建底部视图
@@ -163,132 +186,8 @@ static BOOL isCountDownAction;
 
 
 
-    UIView *lastView = [self.scrollerView.subviews lastObject];
-    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(lastView));
-}
 
-#pragma mark - 生命周期
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    isCountDownAction = NO;
-    self.view.backgroundColor = CZGlobalWhiteBg;
-    if (@available(iOS 11.0, *)) {
-        self.scrollerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    // 创建滚动视图
-    [self.view addSubview:self.scrollerView];
-
-    //获取数据
-    [self reloadNewDataSorce];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    // 加载pop按钮
-    [self.scrollerView addSubview:self.popButton];
-
-}
-
-#pragma mark - 获取数据模型
-- (void)reloadNewDataSorce
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"freeId"] = self.Id;
-
-    //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
-            self.dataSource = [CZFreeChargeModel objectWithKeyValues:result[@"data"]];
-            // 创建上部内容
-            if (!self.imageView) {
-                [self setupContentView];
-            }
-            [self assignmentWithModule];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {}];
-}
-
-#pragma mark - 赋值
-- (void)assignmentWithModule
-{
-    switch ([self.dataSource.status integerValue]) { // （0即将开始，1进行中，2已售罄，3已结束）
-        case 0:
-            [_rightBtn setTitle:@"即将开始" forState:UIControlStateNormal];
-            _rightBtn.enabled = NO;
-            _rightBtn.backgroundColor = UIColorFromRGB(0xF76D20);
-            break;
-        case 1: //  -1未申请，0申请成功未付款，1已付款 applyStatus;
-            if ([self.dataSource.applyStatus integerValue] == 0) {
-                if (isCountDownAction) return;
-                NSString *title = [NSString stringWithFormat:@"前往购买 (可返回%@元)", self.dataSource.freePrice];
-                NSMutableAttributedString *attriStr = [title addAttributeFont:[UIFont systemFontOfSize:13] Range:[title rangeOfString:[NSString stringWithFormat:@"(可返回%@元)", self.dataSource.freePrice]]];
-                [attriStr addAttribute:NSForegroundColorAttributeName value:CZGlobalWhiteBg range:NSMakeRange(0, attriStr.length)];
-
-                [_rightBtn setAttributedTitle:attriStr forState:UIControlStateNormal];
-                _rightBtn.enabled = YES;
-                _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
-            } else if ([self.dataSource.applyStatus integerValue] == 1) {
-                [_rightBtn setTitle:@"前往购买" forState:UIControlStateNormal];
-                _rightBtn.enabled = YES;
-                _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
-            } else {
-                [_rightBtn setTitle:@"免费抢购" forState:UIControlStateNormal];
-                _rightBtn.enabled = YES;
-                _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
-            }
-
-            break;
-        case 2:
-            [_rightBtn setTitle:@"已售罄" forState:UIControlStateNormal];
-            _rightBtn.enabled = NO;
-            _rightBtn.backgroundColor = UIColorFromRGB(0xFFD8D8D8);
-            break;
-
-        default:
-            break;
-    }
-}
-
-#pragma mark - 事件
-// 返回
-- (void)popAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)rightBtnAction:(UIButton *)btn
-{
-    if ([btn.titleLabel.text  isEqual: @"免费抢购"]) {
-        CZFreeAlertView *vc = [CZFreeAlertView freeAlertView:^(CZFreeAlertView *alert){
-            NSMutableDictionary *param = [NSMutableDictionary dictionary];
-            param[@"freeId"] = self.Id;
-            //获取详情数据
-            [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-                if ([result[@"code"] isEqual:@(0)]) {
-                    [self refreshDataSource];
-
-                    [CZProgressHUD showProgressHUDWithText:@"参与成功"];
-                    [CZProgressHUD hideAfterDelay:1.5];
-                    [alert hide];
-                } else {
-                    [CZProgressHUD showProgressHUDWithText:@"请求错误, 请刷新界面"];
-                    [CZProgressHUD hideAfterDelay:1.5];
-                    [alert hide];
-                }
-            } failure:^(NSError *error) {}];
-        }];
-        vc.point = self.dataSource.point;
-        [vc show];
-    } else {
-        [self buyBtnAction];
-    }
+    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.topContent) + SCR_HEIGHT - 49);
 }
 
 // 刷新视图
@@ -321,18 +220,27 @@ static BOOL isCountDownAction;
 
     [self.scrollerView addSubview:self.topContent];
 
-    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.topContent));
+    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.topContent) + SCR_HEIGHT - 49);
+
+    self.menusView.y = CZGetY(self.topContent) + 10;
+
+    self.contentScrollView.y = CGRectGetMaxY(self.menusView.frame);
 
     return self.topContent;
 }
 
+// 创建标题菜单
 - (UIView *)setupMenus
 {
     UIView *backView = [[UIView alloc] init];
     backView.backgroundColor = [UIColor whiteColor];
-    backView.height = 60;
+    backView.height = 50;
     backView.width = SCR_WIDTH;
 
+    UIButton *menusbtn = [UIButton buttonWithFrame:CGRectMake(0, 0, 35, backView.height) backImage:@"nav-back" target:self action:@selector(popAction)];
+    _menusbtn = menusbtn;
+    [backView addSubview:menusbtn];
+    _menusbtn.hidden = YES;
 
     NSInteger count = self.childViewControllers.count;
     CGFloat space = (SCR_WIDTH - 70 - count * 55) / (count - 1);
@@ -346,7 +254,7 @@ static BOOL isCountDownAction;
         btn.centerY = backView.height / 2.0;
         btn.x = 35 + i * (space + 55);
         [backView addSubview:btn];
-        [btn addTarget:self action:@selector(contentViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(menuDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
 
         UIView *view = [[UIView alloc] init];
         view.tag = i + 200;
@@ -373,34 +281,208 @@ static BOOL isCountDownAction;
     return backView;
 }
 
-- (void)contentViewDidClickedBtn:(UIButton *)sender
+- (void)setupChildVc
 {
-    //    self.scrollerView.delegate = nil;
-//    CGPoint point;
-//    NSInteger tag = sender.tag - 100;
-//    switch (tag) {
-//        case 0:
-//            point = CGPointMake(0, 0);
-//            break;
-//        case 1:
-//            point = CGPointMake(0, self.applyFor.view.y - (self.navView.height + self.menusView.height));
-//            break;
-//        case 2:
-//            point = CGPointMake(0, self.test.view.y - (self.navView.height + self.menusView.height));
-//            break;
-//        case 3:
-//            point = CGPointMake(0, self.testReport.view.y - (self.navView.height + self.menusView.height));
-//            break;
-//
-//        default:
-//            point = CGPointMake(0, 0);
-//            break;
-//    }
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.scrollerView.contentOffset = point;
-//    } completion:^(BOOL finished) {
-//        self.scrollerView.delegate = self;
-//    }];
+    CZFreeSubOneController *social0 = [[CZFreeSubOneController alloc] init];
+    social0.title = @"商品介绍";
+    social0.goodsContentList = self.dataSource.goodsContentList;
+    social0.view.backgroundColor = [UIColor whiteColor];
+    [self addChildViewController:social0];
+
+    CZFreeSubTwoController *social1 = [[CZFreeSubTwoController alloc] init];
+    social1.title = @"参与名单";
+    social1.freeID = self.Id;
+    social1.view.backgroundColor = [UIColor whiteColor];
+    [self addChildViewController:social1];
+
+    CZFreeSubThreeController *social2 = [[CZFreeSubThreeController alloc] init];
+    social2.title = @"规则说明";
+    social2.stringHtml = self.dataSource.freeGuide;
+    social2.view.backgroundColor = [UIColor whiteColor];
+    [self addChildViewController:social2];
+}
+
+// 创建底部视图
+- (void)setupBottomContentView
+{
+    self.contentScrollView = [[UIScrollView alloc] init];
+    self.contentScrollView.backgroundColor = [UIColor whiteColor];
+    self.contentScrollView.x = 0;
+    self.contentScrollView.y = CGRectGetMaxY(self.menusView.frame);
+    self.contentScrollView.width = SCR_WIDTH;
+    self.contentScrollView.height = SCR_HEIGHT - self.menusView.height - 49;
+    self.contentScrollView.delegate = self; // 只有内容设置代理
+    self.contentScrollView.pagingEnabled = YES;
+    self.contentScrollView.bounces = NO;
+    [self.scrollerView addSubview:self.contentScrollView];
+    NSInteger count = self.childViewControllers.count;
+    self.contentScrollView.contentSize = CGSizeMake(SCR_WIDTH * count, 0);
+
+    // 默认显示第一个
+    [self scrollViewDidEndScrollingAnimation:self.contentScrollView];
+}
+
+#pragma mark - 生命周期
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    isCountDownAction = NO;
+    self.view.backgroundColor = CZGlobalWhiteBg;
+    if (@available(iOS 11.0, *)) {
+        self.scrollerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    // 创建滚动视图
+    [self.view addSubview:self.scrollerView];
+
+    //获取数据
+    [self reloadNewDataSorce];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeSubOneControllerNoti" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 加载pop按钮
+    [self.scrollerView addSubview:self.popButton];
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
+
+}
+
+#pragma mark - 通知
+- (void)currentViewIsScroll:(NSNotification *)noti
+{
+    NSLog(@"%@", noti.userInfo[@"isScroller"]);
+    if ([noti.userInfo[@"isScroller"]  isEqual: @(1)]) {
+        _scrollerView.scrollEnabled = YES;
+    } else {
+        _scrollerView.scrollEnabled = NO;;
+    }
+}
+
+#pragma mark - 获取数据
+- (void)reloadNewDataSorce
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"freeId"] = self.Id;
+
+    //获取数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            self.shareDic = result[@"data"];
+            self.dataSource = [CZFreeChargeModel objectWithKeyValues:result[@"data"]];
+            // 创建上部内容
+            if (!self.imageView) {
+                [self setupContentView];
+            }
+            [self assignmentWithModule];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {}];
+}
+
+#pragma mark - 赋值
+- (void)assignmentWithModule
+{
+    if ([self.dataSource.applyStatus integerValue] == -1) { // 未申请
+        switch ([self.dataSource.status integerValue]) { // （0即将开始，1进行中，2已售罄，3已结束）
+            case 0:
+                [_rightBtn setTitle:@"即将开始" forState:UIControlStateNormal];
+                _rightBtn.enabled = YES;
+                _rightBtn.backgroundColor = UIColorFromRGB(0xF76D20);
+                break;
+            case 1: //  -1未申请，0申请成功未付款，1已付款 applyStatus;
+                [_rightBtn setTitle:@"免费抢购" forState:UIControlStateNormal];
+                _rightBtn.enabled = YES;
+                _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
+                break;
+            case 2:
+                [_rightBtn setTitle:@"已售罄" forState:UIControlStateNormal];
+                _rightBtn.enabled = NO;
+                _rightBtn.backgroundColor = UIColorFromRGB(0xFFD8D8D8);
+                break;
+
+            default:
+                break;
+        }
+    } else { // 已申请
+        //  -1未申请，0申请成功未付款，1已付款 applyStatus;
+        if ([self.dataSource.applyStatus integerValue] == 0) {
+            if (isCountDownAction) return;
+            NSString *title = [NSString stringWithFormat:@"前往购买 (可返回%@元)", self.dataSource.freePrice];
+            NSMutableAttributedString *attriStr = [title addAttributeFont:[UIFont systemFontOfSize:13] Range:[title rangeOfString:[NSString stringWithFormat:@"(可返回%@元)", self.dataSource.freePrice]]];
+            [attriStr addAttribute:NSForegroundColorAttributeName value:CZGlobalWhiteBg range:NSMakeRange(0, attriStr.length)];
+
+            [_rightBtn setAttributedTitle:attriStr forState:UIControlStateNormal];
+            _rightBtn.enabled = YES;
+            _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
+        } else if ([self.dataSource.applyStatus integerValue] == 1) {
+            [_rightBtn setTitle:@"前往购买" forState:UIControlStateNormal];
+            _rightBtn.enabled = YES;
+            _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
+        }
+    }
+}
+
+#pragma mark - 事件
+// 返回
+- (void)popAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+// 免费抢购
+- (void)rightBtnAction:(UIButton *)btn
+{
+    if ([btn.titleLabel.text isEqual:@"即将开始"]) {
+        [CZProgressHUD showProgressHUDWithText:@"活动暂未开始!"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    }
+
+    if ([JPUSERINFO[@"point"] integerValue] < [self.dataSource.point integerValue]) {
+        CZFreeAlertView2 *vc = [CZFreeAlertView2 freeAlertView:^(CZFreeAlertView2 *alert){
+            CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        vc.point = self.dataSource.point;
+        [vc show];
+        return;
+    }
+
+
+    if ([btn.titleLabel.text  isEqual: @"免费抢购"]) {
+        CZFreeAlertView *vc = [CZFreeAlertView freeAlertView:^(CZFreeAlertView *alert){
+            NSMutableDictionary *param = [NSMutableDictionary dictionary];
+            param[@"freeId"] = self.Id;
+            //获取详情数据
+            [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+                if ([result[@"code"] isEqual:@(0)]) {
+                    [self refreshDataSource];
+
+                    [CZProgressHUD showProgressHUDWithText:@"参与成功"];
+                    [CZProgressHUD hideAfterDelay:1.5];
+                    [alert hide];
+                } else {
+                    [CZProgressHUD showProgressHUDWithText:@"请求错误, 请刷新界面"];
+                    [CZProgressHUD hideAfterDelay:1.5];
+                    [alert hide];
+                }
+            } failure:^(NSError *error) {}];
+        }];
+        vc.point = self.dataSource.point;
+        [vc show];
+    } else {
+        [self buyBtnAction];
+    }
+}
+
+
+- (void)menuDidClickedBtn:(UIButton *)sender
+{
     NSLog(@"%@", sender);
     NSInteger index = sender.tag - 100;
     [self.contentScrollView setContentOffset:CGPointMake(index * SCR_WIDTH, 0) animated:YES];
@@ -425,40 +507,6 @@ static BOOL isCountDownAction;
         self.recordBtn = sender;
     }
 }
-
-- (void)setupChildVc
-{
-    CZFreeSubOneController *social0 = [[CZFreeSubOneController alloc] init];
-    social0.title = @"商品介绍";
-    social0.goodsContentList = self.dataSource.goodsContentList;
-    social0.view.backgroundColor = [UIColor whiteColor];
-    [self addChildViewController:social0];
-
-    CZFreeSubTwoController *social1 = [[CZFreeSubTwoController alloc] init];
-    social1.title = @"参与名单";
-    [self addChildViewController:social1];
-
-    CZFreeSubThreeController *social2 = [[CZFreeSubThreeController alloc] init];
-    social2.title = @"规则说明";
-    [self addChildViewController:social2];
-}
-
-// 创建底部视图
-- (void)setupBottomContentView
-{
-    self.contentScrollView = [[UIScrollView alloc] init];
-    self.contentScrollView.backgroundColor = [UIColor blueColor];
-    self.contentScrollView.x = 0;
-    self.contentScrollView.y = CGRectGetMaxY(self.menusView.frame);
-    self.contentScrollView.width = SCR_WIDTH;
-    self.contentScrollView.height = SCR_HEIGHT;
-    self.contentScrollView.delegate = self; // 只有内容设置代理
-    self.contentScrollView.pagingEnabled = YES;
-    [self.scrollerView addSubview:self.contentScrollView];
-    NSInteger count = self.childViewControllers.count;
-    self.contentScrollView.contentSize = CGSizeMake(SCR_WIDTH * count, 0);
-}
-
 
 // 刷新数据
 - (void)refreshDataSource
@@ -519,21 +567,70 @@ static BOOL isCountDownAction;
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    CGFloat x = scrollView.contentOffset.x;
-    CGFloat y = 0;
-    CGFloat width = scrollView.width;
-    NSInteger index = scrollView.contentOffset.x / scrollView.width;
-
-    UIViewController *showVc = self.childViewControllers[index];
-    showVc.view.frame = CGRectMake(x, y, width, showVc.view.height);
-    [scrollView addSubview:showVc.view];
-
-    self.contentScrollView.height = showVc.view.height;
-
-    UIView *lastView = [self.scrollerView.subviews lastObject];
-    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(lastView));
-
+    if (scrollView == self.contentScrollView) {
+        CGFloat x = scrollView.contentOffset.x;
+        CGFloat y = 0;
+        CGFloat width = scrollView.width;
+        CGFloat height = scrollView.height;
+        NSInteger index = scrollView.contentOffset.x / scrollView.width;
+        UIViewController *showVc = self.childViewControllers[index];
+//        [showVc performSelector:@selector(scrollTop) withObject:nil afterDelay:0];
+        showVc.view.frame = CGRectMake(x, y, width, height);
+        [scrollView addSubview:showVc.view];
+    }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.scrollerView) {
+        NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
+        NSLog(@"%lf", (CGRectGetMinY(self.menusView.frame) - 10));
+        if (scrollView.contentOffset.y >= (CGRectGetMinY(self.menusView.frame) - 10))
+        {
+            self.scrollerView.backgroundColor = CZGlobalWhiteBg;
+            _menusbtn.hidden = NO;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
+            self.scrollerView.scrollEnabled = NO; // 不动
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(NO)}];
+            self.scrollerView.scrollEnabled = YES; // 不动
+            self.scrollerView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+            _menusbtn.hidden = YES;
+        }
+    }
+
+    if (scrollView == self.contentScrollView) {
+        NSInteger index = scrollView.contentOffset.x / SCR_WIDTH;
+        NSLog(@"contentScrollView - %ld", index);
+        switch (index) {
+            case 0:
+            {
+                UIButton *btn = [self.menusView viewWithTag:100];
+                [self setupBtn:btn];
+                break;
+            }
+            case 1:
+            {
+                UIButton *btn = [self.menusView viewWithTag:101];
+                [self setupBtn:btn];
+                break;
+            }
+            case 2:
+            {
+                UIButton *btn = [self.menusView viewWithTag:102];
+                [self setupBtn:btn];
+                break;
+            }
+            default:
+                break;
+        }
+
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self scrollViewDidEndScrollingAnimation:scrollView];
+}
 
 @end

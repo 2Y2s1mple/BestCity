@@ -9,11 +9,26 @@
 #import "CZFreeSubOneController.h"
 #import "UIImageView+WebCache.h"
 
-@interface CZFreeSubOneController ()
+@interface CZFreeSubOneController () <UIScrollViewDelegate>
+/** 滚动视图 */
+@property (nonatomic, strong) UIScrollView *scrollerView;
 
 @end
 
 @implementation CZFreeSubOneController
+- (UIScrollView *)scrollerView
+{
+    if (_scrollerView == nil) {
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : 49) - 60)];
+        self.scrollerView.delegate = self;
+        _scrollerView.backgroundColor = [UIColor whiteColor];
+        _scrollerView.showsVerticalScrollIndicator = NO;
+        _scrollerView.showsHorizontalScrollIndicator = NO;
+        _scrollerView.scrollEnabled = NO;
+//        _scrollerView.bounces = NO;
+    }
+    return _scrollerView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,17 +37,21 @@
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    self.view.autoresizingMask = UIViewAutoresizingNone;
     self.view.backgroundColor = CZREDCOLOR;
+    [self.view addSubview:self.scrollerView];
+
+
     for (NSDictionary *dic in self.goodsContentList) {
         if ([dic[@"type"]  isEqual: @"1"]) { // 文字
             UILabel *label = [self setupTitleView];
             label.text = dic[@"value"];
             [label sizeToFit];
-            label.y = CZGetY([self.view.subviews lastObject]) + 20;
-            [self.view addSubview:label];
+            label.y = CZGetY([self.scrollerView.subviews lastObject]) + 20;
+            [self.scrollerView addSubview:label];
         } else {
             UIImageView *bigImage = [self setupImageView];
-            [self.view addSubview:bigImage];
+            [self.scrollerView addSubview:bigImage];
             [bigImage sd_setImageWithURL:[NSURL URLWithString:dic[@"value"]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 if (image == nil) {
                     return ;
@@ -40,31 +59,39 @@
                 CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
                 bigImage.height = imageHeight;
 
-                for (int i = 0; i < self.view.subviews.count; i++) {
-                    UIView *view = self.view.subviews[i];
+                for (int i = 0; i < self.scrollerView.subviews.count; i++) {
+                    UIView *view = self.scrollerView.subviews[i];
                     if (i == 0) {
                         view.y = 20;
                         continue;
                     }
-                    view.y = CZGetY(self.view.subviews[i - 1]) + 20;
+                    view.y = CZGetY(self.scrollerView.subviews[i - 1]) + 20;
                 }
-                self.view.height = CZGetY([self.view.subviews lastObject]);
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"CZTrialCommodityDetailControllerNoti" object:nil userInfo:@{@"height" : @(self.view.height)}];
+                self.scrollerView.contentSize = CGSizeMake(0, CZGetY([self.scrollerView.subviews lastObject]));
             }];
 
         }
     }
 
     UIView *lineView = [[UIView alloc] init];
-    lineView.y = CZGetY([self.view.subviews lastObject]) + 20;
+    lineView.y = CZGetY([self.scrollerView.subviews lastObject]) + 20;
     lineView.height = 6;
     lineView.width = SCR_WIDTH;
-    [self.view addSubview:lineView];
+    [self.scrollerView addSubview:lineView];
     lineView.backgroundColor = CZGlobalLightGray;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeDetailsubViewNoti" object:nil];
 
-    self.view.width = SCR_WIDTH;
-    self.view.height = CZGetY(lineView);
+}
+
+- (void)currentViewIsScroll:(NSNotification *)noti
+{
+    NSLog(@"%@", noti.userInfo[@"isScroller"]);
+    if ([noti.userInfo[@"isScroller"]  isEqual: @(1)]) {
+        _scrollerView.scrollEnabled = YES;
+    } else {
+        _scrollerView.scrollEnabled = NO;
+    }
 }
 
 - (UIImageView *)setupImageView
@@ -87,14 +114,29 @@
     return label;
 }
 
-/*
-#pragma mark - Navigation
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y <= 0)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
+        _scrollerView.scrollEnabled = NO; // 不动
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(NO)}];
+        _scrollerView.scrollEnabled = YES; // 不动
+    }
 }
-*/
+
+- (void)scrollTop
+{
+    [self.scrollerView setContentOffset:CGPointMake(0, 0) animated:NO];
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self scrollTop];
+}
 
 @end

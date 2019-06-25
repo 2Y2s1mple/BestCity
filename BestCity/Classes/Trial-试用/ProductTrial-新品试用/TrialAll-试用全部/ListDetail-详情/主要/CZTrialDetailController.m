@@ -150,7 +150,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)shareButtonAction
 {
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-    share.cententDic =  self.shareDic;
+    share.cententText =  self.shareDic;
     share.param = @{
                     @"shareUrl" : self.dataSource[@"shareUrl"],
                     @"shareTitle" : self.dataSource[@"shareTitle"],

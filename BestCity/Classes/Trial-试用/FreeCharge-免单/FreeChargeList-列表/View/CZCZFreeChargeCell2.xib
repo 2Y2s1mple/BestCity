@@ -161,12 +161,18 @@
                                             <constraint firstAttribute="height" constant="30" id="h2I-Nc-5VX"/>
                                         </constraints>
                                     </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商品2备份 2" translatesAutoresizingMaskIntoConstraints="NO" id="Tbz-dh-86w">
+                                        <rect key="frame" x="0.0" y="0.0" width="425" height="200"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="hdO-bD-Bv2" secondAttribute="trailing" constant="14" id="1ld-Qs-nWG"/>
                                     <constraint firstItem="1gx-2U-G5I" firstAttribute="leading" secondItem="Q0r-z4-nf4" secondAttribute="leading" id="40D-WX-up9"/>
                                     <constraint firstAttribute="trailing" secondItem="GJc-Z0-aAJ" secondAttribute="trailing" constant="34" id="CbB-41-3rm"/>
+                                    <constraint firstItem="Tbz-dh-86w" firstAttribute="height" secondItem="1gx-2U-G5I" secondAttribute="height" id="JFK-wr-1mR"/>
+                                    <constraint firstItem="Tbz-dh-86w" firstAttribute="centerX" secondItem="Q0r-z4-nf4" secondAttribute="centerX" id="KPO-xn-lMi"/>
+                                    <constraint firstItem="Tbz-dh-86w" firstAttribute="width" secondItem="1gx-2U-G5I" secondAttribute="width" id="Lwv-V8-xzO"/>
                                     <constraint firstItem="XZR-0X-0A7" firstAttribute="leading" secondItem="Q0r-z4-nf4" secondAttribute="leading" constant="10" id="NAW-im-J7O"/>
                                     <constraint firstItem="kzw-6B-qqv" firstAttribute="centerY" secondItem="a0Q-kl-lC9" secondAttribute="centerY" id="Okh-W9-GLE"/>
                                     <constraint firstItem="Ko6-m5-MTQ" firstAttribute="leading" secondItem="Q0r-z4-nf4" secondAttribute="leading" constant="10" id="QbQ-4Y-LWH"/>
@@ -179,6 +185,7 @@
                                     <constraint firstItem="GJc-Z0-aAJ" firstAttribute="leading" secondItem="Q0r-z4-nf4" secondAttribute="leading" constant="10" id="kfw-6H-8x5"/>
                                     <constraint firstItem="kzw-6B-qqv" firstAttribute="leading" secondItem="a0Q-kl-lC9" secondAttribute="trailing" constant="10" id="ouq-d4-jtp"/>
                                     <constraint firstAttribute="trailing" secondItem="Ko6-m5-MTQ" secondAttribute="trailing" constant="10" id="pEQ-po-f4c"/>
+                                    <constraint firstItem="Tbz-dh-86w" firstAttribute="top" secondItem="1gx-2U-G5I" secondAttribute="top" id="paF-NM-8qI"/>
                                     <constraint firstItem="1gx-2U-G5I" firstAttribute="bottom" secondItem="E9i-eh-nH2" secondAttribute="bottom" id="pye-6U-d4g"/>
                                     <constraint firstItem="XZR-0X-0A7" firstAttribute="top" secondItem="GJc-Z0-aAJ" secondAttribute="bottom" constant="28" id="sQq-sJ-6Dh"/>
                                     <constraint firstItem="hdO-bD-Bv2" firstAttribute="centerY" secondItem="kzw-6B-qqv" secondAttribute="centerY" id="tZ6-LQ-Lh1"/>
@@ -216,6 +223,7 @@
                 <outlet property="jibiLabel" destination="XZR-0X-0A7" id="kYJ-MH-zsL"/>
                 <outlet property="jibiTopMargin" destination="sQq-sJ-6Dh" id="boc-zU-XdZ"/>
                 <outlet property="lineView" destination="GJc-Z0-aAJ" id="FTV-3V-LG1"/>
+                <outlet property="mengbanImageView" destination="Tbz-dh-86w" id="bdU-JE-AL7"/>
                 <outlet property="oldPriceLabel" destination="kzw-6B-qqv" id="iE0-xs-Acm"/>
                 <outlet property="priceLabel" destination="a0Q-kl-lC9" id="03O-rP-SDL"/>
                 <outlet property="redViewWidth" destination="wZK-XB-Ar0" id="iF8-Pc-USh"/>
@@ -228,5 +236,6 @@
     </objects>
     <resources>
         <image name="testImage7" width="407" height="409"/>
+        <image name="商品2备份 2" width="347.5" height="200"/>
     </resources>
 </document>

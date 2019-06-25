@@ -50,7 +50,7 @@
     [self setupWithController:[[CZTrialMainController alloc] init] title:@"试用" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
     
-    self.selectedIndex = 3;
+    self.selectedIndex = 0;
     self.tabBar.clipsToBounds = YES;
 }
 
@@ -89,7 +89,7 @@
     }
     if ([vc isKindOfClass:[CZTrialMainController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
-        hotVc.selectIndex = 1;
+        hotVc.selectIndex = 0;
         hotVc.menuViewStyle = WMMenuViewStyleDefault;
         hotVc.itemMargin = 10;
         hotVc.automaticallyCalculatesItemWidths = YES;

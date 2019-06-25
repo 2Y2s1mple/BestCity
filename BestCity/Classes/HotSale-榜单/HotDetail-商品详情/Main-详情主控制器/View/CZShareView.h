@@ -13,5 +13,5 @@
 /** 分享的数据 */
 @property (nonatomic, strong) NSDictionary *param;
 /** <#注释#> */
-@property (nonatomic, strong) NSDictionary *cententDic;
+@property (nonatomic, strong) NSString *cententText;
 @end
