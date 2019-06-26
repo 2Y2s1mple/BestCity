@@ -58,6 +58,8 @@
 
 /** 分享 */
 @property (nonatomic, strong) NSDictionary *shareDic;
+/** statusView */
+@property (nonatomic, strong) UIView *statusView;
 @end
 
 @implementation CZFreeChargeDetailController
@@ -171,23 +173,18 @@ static BOOL isCountDownAction;
     // 加载分享按钮
     [self.scrollerView addSubview:self.shareButton];
 
-
-
     // 添加子控制器
     [self setupChildVc];
 
-    // 加载下部滑动视图
+    // 添加菜单视图
     self.menusView = [self setupMenus];
     self.menusView.y = CZGetY(self.topContent) + 10;
     [self.scrollerView addSubview:self.menusView];
 
-    // 创建底部视图
+    // 添加承载菜单内容的父视图
     [self setupBottomContentView];
 
-
-
-
-    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.topContent) + SCR_HEIGHT - 49);
+    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.menusView) + SCR_HEIGHT - (IsiPhoneX ? 83 : 49) - 50 - (IsiPhoneX ? 44 : 20));
 }
 
 // 刷新视图
@@ -220,7 +217,7 @@ static BOOL isCountDownAction;
 
     [self.scrollerView addSubview:self.topContent];
 
-    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.topContent) + SCR_HEIGHT - 49);
+    self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.menusView) + SCR_HEIGHT - (IsiPhoneX ? 83 : 49) - 50 - (IsiPhoneX ? 44 : 20));
 
     self.menusView.y = CZGetY(self.topContent) + 10;
 
@@ -310,7 +307,7 @@ static BOOL isCountDownAction;
     self.contentScrollView.x = 0;
     self.contentScrollView.y = CGRectGetMaxY(self.menusView.frame);
     self.contentScrollView.width = SCR_WIDTH;
-    self.contentScrollView.height = SCR_HEIGHT - self.menusView.height - 49;
+    self.contentScrollView.height = SCR_HEIGHT - self.menusView.height - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20);
     self.contentScrollView.delegate = self; // 只有内容设置代理
     self.contentScrollView.pagingEnabled = YES;
     self.contentScrollView.bounces = NO;
@@ -339,7 +336,13 @@ static BOOL isCountDownAction;
     //获取数据
     [self reloadNewDataSorce];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeSubOneControllerNoti" object:nil];
+    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, (IsiPhoneX ? 44 : 20))];
+    statusView.backgroundColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication].keyWindow addSubview:statusView];
+    self.statusView = statusView;
+    self.statusView.hidden = YES;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeChargeDetailControllerNoti" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -349,6 +352,12 @@ static BOOL isCountDownAction;
     [self.scrollerView addSubview:self.popButton];
     [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
 
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.statusView removeFromSuperview];
 }
 
 #pragma mark - 通知
@@ -574,7 +583,13 @@ static BOOL isCountDownAction;
         CGFloat height = scrollView.height;
         NSInteger index = scrollView.contentOffset.x / scrollView.width;
         UIViewController *showVc = self.childViewControllers[index];
-//        [showVc performSelector:@selector(scrollTop) withObject:nil afterDelay:0];
+        if (self.scrollerView.contentOffset.y < (CGRectGetMinY(self.menusView.frame) - (IsiPhoneX ? 44 : 20))) {
+            self.scrollerView.scrollEnabled = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(NO)}]; //不滚
+        } else { // 显示导航栏的时候
+            self.scrollerView.scrollEnabled = NO; // 大view不能滑
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(YES)}]; // 小view能滑
+        }
         showVc.view.frame = CGRectMake(x, y, width, height);
         [scrollView addSubview:showVc.view];
     }
@@ -583,19 +598,18 @@ static BOOL isCountDownAction;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView == self.scrollerView) {
-        NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
-        NSLog(@"%lf", (CGRectGetMinY(self.menusView.frame) - 10));
-        if (scrollView.contentOffset.y >= (CGRectGetMinY(self.menusView.frame) - 10))
-        {
-            self.scrollerView.backgroundColor = CZGlobalWhiteBg;
-            _menusbtn.hidden = NO;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
-            self.scrollerView.scrollEnabled = NO; // 不动
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(NO)}];
-            self.scrollerView.scrollEnabled = YES; // 不动
-            self.scrollerView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        if (self.scrollerView.contentOffset.y < (CGRectGetMinY(self.menusView.frame) - (IsiPhoneX ? 44 : 20))) {
             _menusbtn.hidden = YES;
+            self.statusView.hidden = YES;
+            self.scrollerView.scrollEnabled = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(NO)}]; //不滚
+
+        } else { // 显示导航栏的时候
+            _menusbtn.hidden = NO;
+            self.statusView.hidden = NO;
+            
+            self.scrollerView.scrollEnabled = NO; // 大view不能滑
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];// 小view能滑
         }
     }
 

@@ -46,7 +46,7 @@
     self.view.backgroundColor = CZGlobalLightGray;
     self.view.autoresizingMask = UIViewAutoresizingNone;
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : 49) - 60) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20)) style:UITableViewStylePlain];
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
@@ -162,15 +162,18 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    static CGFloat scrollOffsetY = 0.0;
     NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y <= 0)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
-        scrollView.scrollEnabled = NO;
+    if (scrollOffsetY > scrollView.contentOffset.y) {
+        NSLog(@"向下");
+        if (scrollView.contentOffset.y <= 0) {
+            scrollView.scrollEnabled = NO; // 不滚
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
+        }
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(NO)}];
-        scrollView.scrollEnabled = YES;
+        NSLog(@"向上");
     }
+    scrollOffsetY = scrollView.contentOffset.y;
 }
 
 - (void)scrollTop

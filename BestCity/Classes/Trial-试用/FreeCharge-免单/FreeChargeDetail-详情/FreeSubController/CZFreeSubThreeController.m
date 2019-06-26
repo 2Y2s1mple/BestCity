@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.autoresizingMask = UIViewAutoresizingNone;
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : 49) - 60)];
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20))];
 //    _webView.scrollView.scrollEnabled = NO;
     _webView.backgroundColor = CZGlobalWhiteBg;
     [self.view addSubview:_webView];
@@ -43,15 +43,18 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    static CGFloat scrollOffsetY = 0.0;
     NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y <= 0)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
-        scrollView.scrollEnabled = NO;
+    if (scrollOffsetY > scrollView.contentOffset.y) {
+        NSLog(@"向下");
+        if (scrollView.contentOffset.y <= 0) {
+            scrollView.scrollEnabled = NO; // 不滚
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
+        }
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(NO)}];
-        scrollView.scrollEnabled = YES;
+        NSLog(@"向上");
     }
+    scrollOffsetY = scrollView.contentOffset.y;
 }
 
 - (void)scrollTop

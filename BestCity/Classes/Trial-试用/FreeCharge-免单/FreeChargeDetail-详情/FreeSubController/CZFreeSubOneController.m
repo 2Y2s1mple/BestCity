@@ -10,8 +10,6 @@
 #import "UIImageView+WebCache.h"
 
 @interface CZFreeSubOneController () <UIScrollViewDelegate>
-/** 滚动视图 */
-@property (nonatomic, strong) UIScrollView *scrollerView;
 
 @end
 
@@ -19,7 +17,7 @@
 - (UIScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : 49) - 60)];
+        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20))];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = [UIColor whiteColor];
         _scrollerView.showsVerticalScrollIndicator = NO;
@@ -116,16 +114,20 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-
+    static CGFloat scrollOffsetY = 0.0;
     NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y <= 0)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
-        _scrollerView.scrollEnabled = NO; // 不动
+    if (scrollOffsetY > self.scrollerView.contentOffset.y) {
+        NSLog(@"向下");
+        if (scrollView.contentOffset.y <= 0) {
+            _scrollerView.scrollEnabled = NO; // 不滚
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
+        }
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeSubOneControllerNoti" object:nil userInfo:@{@"isScroller" : @(NO)}];
-        _scrollerView.scrollEnabled = YES; // 不动
+        NSLog(@"向上");
     }
+    scrollOffsetY = self.scrollerView.contentOffset.y;
+
+
 }
 
 - (void)scrollTop

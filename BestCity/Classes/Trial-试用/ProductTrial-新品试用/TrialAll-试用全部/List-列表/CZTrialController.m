@@ -134,10 +134,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
-     CZTrailModel *model = self.trialDatasArr[indexPath.row];
-    vc.trialId = model.trialId;
-    [self.navigationController pushViewController:vc animated:YES];
+    //push到详情
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
+        CZTrailModel *model = self.trialDatasArr[indexPath.row];
+        vc.trialId = model.trialId;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

@@ -149,10 +149,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     CZFreeChargeModel *model = self.freeChargeDatas[indexPath.row];
-    CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
-    vc.Id = model.Id;
-    [self.navigationController pushViewController:vc animated:YES];
+    //push到详情
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        CZFreeChargeModel *model = self.freeChargeDatas[indexPath.row];
+        CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
+        vc.Id = model.Id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 
 }
 
