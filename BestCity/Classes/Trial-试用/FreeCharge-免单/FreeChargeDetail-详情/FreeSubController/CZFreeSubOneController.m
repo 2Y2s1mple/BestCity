@@ -23,6 +23,7 @@
         _scrollerView.showsVerticalScrollIndicator = NO;
         _scrollerView.showsHorizontalScrollIndicator = NO;
         _scrollerView.scrollEnabled = NO;
+        _scrollerView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
 //        _scrollerView.bounces = NO;
     }
     return _scrollerView;

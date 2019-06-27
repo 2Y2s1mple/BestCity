@@ -53,13 +53,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     [self.view addSubview:self.tableView];
+
+    
 
     [self reloadNewTrailDataSorce];
     [self setupRefresh];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeDetailsubViewNoti" object:nil];
-
 }
 
 - (void)currentViewIsScroll:(NSNotification *)noti

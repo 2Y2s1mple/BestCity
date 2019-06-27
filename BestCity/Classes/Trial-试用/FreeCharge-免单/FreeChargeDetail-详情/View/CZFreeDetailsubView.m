@@ -13,6 +13,8 @@
 @property (nonatomic, weak) IBOutlet UIView *pinkBackView;
 /** 粉色文字 */
 @property (nonatomic, weak) IBOutlet UILabel *pinkLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pinkLabelHeight;
+
 /** 倒计时 */
 @property (nonatomic, weak) IBOutlet UILabel *countDownLabel;
 /** 倒计时背景图 */
@@ -95,6 +97,8 @@
 {
     _model = model;
     [self setupPorperty];
+    self.pinkLabel.text = model.freeNote;
+
     if ([model.applyStatus integerValue] == 0) { // 0申请成功未付款
         self.titleLabel1.text = model.name;
         self.priceLabel1.text = [NSString stringWithFormat:@"%.2lf", [model.actualPrice floatValue]];
@@ -192,7 +196,7 @@
             default:
                 break;
         }
-
+        self.pinkLabel.text = model.freeNote;
         [self layoutIfNeeded];
         self.height = CZGetY(self.pinkBackView);
     }

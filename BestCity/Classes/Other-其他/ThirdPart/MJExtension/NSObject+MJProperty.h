@@ -24,7 +24,7 @@ typedef void (^MJClassesEnumeration)(Class c, BOOL *stop);
 typedef void (^MJPropertiesEnumeration)(MJProperty *property, BOOL *stop);
 
 /** 将属性名换为其他key去字典中取值 */
-typedef NSDictionary * (^MJReplacedKeyFromPropertyName)();
+typedef NSDictionary * (^MJReplacedKeyFromPropertyName)(void);
 typedef NSString * (^MJReplacedKeyFromPropertyName121)(NSString *propertyName);
 /** 数组中需要转换的模型类 */
 typedef NSDictionary * (^MJObjectClassInArray)();

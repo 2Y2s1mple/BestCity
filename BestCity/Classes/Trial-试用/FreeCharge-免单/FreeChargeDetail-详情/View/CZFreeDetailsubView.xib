@@ -118,10 +118,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6j-Xm-s00">
-                    <rect key="frame" x="0.0" y="212.5" width="379" height="50"/>
+                    <rect key="frame" x="0.0" y="212.5" width="379" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前10名100%免单，11-20名免80%金额，21-30名免50%金额, 31-40名免40金额，以此类推。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1GF-TN-dhp">
-                            <rect key="frame" x="18" y="10.5" width="343" height="29"/>
+                            <rect key="frame" x="18" y="15.5" width="343" height="29"/>
                             <color key="backgroundColor" red="0.99059861900000001" green="0.86021691560000002" blue="0.85773652789999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.88123279809999999" green="0.1038993672" blue="0.23317024110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -133,7 +133,7 @@
                         <constraint firstItem="1GF-TN-dhp" firstAttribute="centerY" secondItem="T6j-Xm-s00" secondAttribute="centerY" id="3e3-Nt-BjP"/>
                         <constraint firstItem="1GF-TN-dhp" firstAttribute="leading" secondItem="T6j-Xm-s00" secondAttribute="leading" constant="18" id="Xv4-Ht-d8m"/>
                         <constraint firstAttribute="trailing" secondItem="1GF-TN-dhp" secondAttribute="trailing" constant="18" id="dnU-Q5-AI4"/>
-                        <constraint firstAttribute="height" constant="50" id="ymu-cm-BH7"/>
+                        <constraint firstAttribute="height" constant="60" id="ymu-cm-BH7"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6月25日20:00开抢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="065-uK-iVr">
@@ -189,6 +189,7 @@
                 <outlet property="lineView" destination="rDV-Tw-H67" id="zj7-FL-mLC"/>
                 <outlet property="pinkBackView" destination="T6j-Xm-s00" id="0ci-wc-YBD"/>
                 <outlet property="pinkLabel" destination="1GF-TN-dhp" id="if8-k3-hUI"/>
+                <outlet property="pinkLabelHeight" destination="ymu-cm-BH7" id="Ggn-JM-vra"/>
                 <outlet property="priceLabel" destination="eCd-hD-geS" id="y4L-lM-muV"/>
                 <outlet property="redViewWidth" destination="Vq8-aB-dDR" id="y2r-mh-fZj"/>
                 <outlet property="residueLabel" destination="jkf-DU-qFq" id="3j6-yC-xOJ"/>

@@ -22,6 +22,7 @@
     _webView.backgroundColor = CZGlobalWhiteBg;
     [self.view addSubview:_webView];
     _webView.scrollView.delegate = self;
+    _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
 
     [_webView loadHTMLString:self.stringHtml baseURL:nil];
 

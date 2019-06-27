@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *goodsContentList;
 /** 规则 */
 @property (nonatomic, strong) NSString *freeGuide;
+/** 免单粉色提示 */
+@property (nonatomic, strong) NSString *freeNote;
 @end
 
 NS_ASSUME_NONNULL_END
