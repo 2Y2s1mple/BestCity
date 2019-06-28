@@ -77,7 +77,7 @@
 {
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
-    self.page = 0;
+    self.page = 1;
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @( self.page);
@@ -113,8 +113,15 @@
             NSArray *arr = [CZFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.freeChargeDatas addObjectsFromArray:arr];
             [self.tableView reloadData];
+            if (arr.count == 0) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            } else {
+                [self.tableView.mj_footer endRefreshing];
+            }
+        } else {
+            [self.tableView.mj_footer endRefreshing];
         }
-        [self.tableView.mj_footer endRefreshing];
+
     } failure:^(NSError *error) {
         // 结束刷新
         [self.tableView.mj_footer endRefreshing];

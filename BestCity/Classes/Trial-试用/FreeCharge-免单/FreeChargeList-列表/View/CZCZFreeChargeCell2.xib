@@ -155,14 +155,14 @@
                                             <constraint firstAttribute="height" constant="30" id="h2I-Nc-5VX"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商品2备份 2" translatesAutoresizingMaskIntoConstraints="NO" id="Tbz-dh-86w">
-                                        <rect key="frame" x="0.0" y="0.0" width="425" height="200"/>
-                                    </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage7" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-2U-G5I">
                                         <rect key="frame" x="0.0" y="0.0" width="425" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="W5a-IR-fSZ"/>
                                         </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商品2备份 2" translatesAutoresizingMaskIntoConstraints="NO" id="Tbz-dh-86w">
+                                        <rect key="frame" x="0.0" y="0.0" width="425" height="200"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

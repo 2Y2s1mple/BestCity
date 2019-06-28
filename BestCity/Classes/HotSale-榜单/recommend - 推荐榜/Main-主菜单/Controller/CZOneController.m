@@ -87,7 +87,7 @@
 //            //有新版本
             [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
             //比较
-            if (![curVersion isEqualToString:result[@"data"][@"versionCode"]] && [result[@"data"][@"open"] isEqualToNumber:@(1)]) {
+            if ([curVersion compare:result[@"data"][@"versionCode"]] == NSOrderedAscending && [result[@"data"][@"open"] isEqualToNumber:@(1)]) {
                 // 判断是否更新
                 CZUpdataView *backView = [CZUpdataView updataView];
                 backView.versionMessage = result[@"data"];
