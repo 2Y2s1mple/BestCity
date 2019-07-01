@@ -12,7 +12,7 @@
 #import "GXNetTool.h"
 
 @interface CZFreeSubTwoController () <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, strong) UITableView *tableView;
+
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
 /** 拉赞数据 */
@@ -46,7 +46,7 @@
     self.view.backgroundColor = CZGlobalLightGray;
     self.view.autoresizingMask = UIViewAutoresizingNone;
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20)) style:UITableViewStylePlain];
+    self.tableView = [[CZTableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20)) style:UITableViewStylePlain];
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
@@ -56,23 +56,12 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     [self.view addSubview:self.tableView];
 
-    
-
     [self reloadNewTrailDataSorce];
     [self setupRefresh];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeDetailsubViewNoti" object:nil];
 }
 
-- (void)currentViewIsScroll:(NSNotification *)noti
-{
-    NSLog(@"%@", noti.userInfo[@"isScroller"]);
-    if ([noti.userInfo[@"isScroller"]  isEqual: @(1)]) {
-        self.tableView.scrollEnabled = YES;
-    } else {
-        self.tableView.scrollEnabled = NO;
-    }
-}
+
 
 #pragma mark - 获取数据
 - (void)setupRefresh
@@ -164,22 +153,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    static CGFloat scrollOffsetY = 0.0;
-    NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
-    if (scrollOffsetY > scrollView.contentOffset.y) {
-        NSLog(@"向下");
-        if (scrollView.contentOffset.y <= 0) {
-            scrollView.scrollEnabled = NO; // 不滚
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
-        }
-    } else {
-        NSLog(@"向上");
-    }
-    scrollOffsetY = scrollView.contentOffset.y;
+    NSLog(@"%s", __func__);
+   [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : scrollView}];
 }
 
-- (void)scrollTop
-{
-    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
-}
 @end

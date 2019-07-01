@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZScrollView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 商品详情 */
 @property (nonatomic, strong) NSArray *goodsContentList;
 /** 滚动视图 */
-@property (nonatomic, strong) UIScrollView *scrollerView;
+@property (nonatomic, strong) CZScrollView *scrollerView;
 @end
 
 NS_ASSUME_NONNULL_END

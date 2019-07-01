@@ -14,15 +14,16 @@
 @end
 
 @implementation CZFreeSubOneController
-- (UIScrollView *)scrollerView
+- (CZScrollView *)scrollerView
 {
     if (_scrollerView == nil) {
-        _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20))];
+        _scrollerView = [[CZScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20))];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = [UIColor whiteColor];
         _scrollerView.showsVerticalScrollIndicator = NO;
         _scrollerView.showsHorizontalScrollIndicator = NO;
-        _scrollerView.scrollEnabled = NO;
+        _scrollerView.panGestureRecognizer.cancelsTouchesInView = NO;
+//        _scrollerView.scrollEnabled = NO;
         _scrollerView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
 //        _scrollerView.bounces = NO;
     }
@@ -78,19 +79,6 @@
     lineView.width = SCR_WIDTH;
     [self.scrollerView addSubview:lineView];
     lineView.backgroundColor = CZGlobalLightGray;
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeDetailsubViewNoti" object:nil];
-
-}
-
-- (void)currentViewIsScroll:(NSNotification *)noti
-{
-    NSLog(@"%@", noti.userInfo[@"isScroller"]);
-    if ([noti.userInfo[@"isScroller"]  isEqual: @(1)]) {
-        _scrollerView.scrollEnabled = YES;
-    } else {
-        _scrollerView.scrollEnabled = NO;
-    }
 }
 
 - (UIImageView *)setupImageView
@@ -115,31 +103,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    static CGFloat scrollOffsetY = 0.0;
-    NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
-    if (scrollOffsetY > self.scrollerView.contentOffset.y) {
-        NSLog(@"向下");
-        if (scrollView.contentOffset.y <= 0) {
-            _scrollerView.scrollEnabled = NO; // 不滚
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
-        }
-    } else {
-        NSLog(@"向上");
-    }
-    scrollOffsetY = self.scrollerView.contentOffset.y;
-
-
+    NSLog(@"%s", __func__);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : scrollView}];
 }
 
-- (void)scrollTop
-{
-    [self.scrollerView setContentOffset:CGPointMake(0, 0) animated:NO];
-    
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self scrollTop];
-}
 
 @end

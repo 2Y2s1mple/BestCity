@@ -13,53 +13,46 @@
 @end
 
 @implementation CZFreeSubThreeController
+- (CZScrollView *)scrollerView
+{
+    if (_scrollerView == nil) {
+        _scrollerView = [[CZScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20))];
+        self.scrollerView.delegate = self;
+        _scrollerView.backgroundColor = [UIColor whiteColor];
+        _scrollerView.showsVerticalScrollIndicator = NO;
+        _scrollerView.showsHorizontalScrollIndicator = NO;
+        _scrollerView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
+    }
+    return _scrollerView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.autoresizingMask = UIViewAutoresizingNone;
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - 50 - (IsiPhoneX ? 83 : 49) - (IsiPhoneX ? 44 : 20))];
-//    _webView.scrollView.scrollEnabled = NO;
+    [self.view addSubview:self.scrollerView];
+
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, self.scrollerView.height)];
     _webView.backgroundColor = CZGlobalWhiteBg;
-    [self.view addSubview:_webView];
-    _webView.scrollView.delegate = self;
-    _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
-
+    [self.scrollerView addSubview:_webView];
+    _webView.delegate = self;
     [_webView loadHTMLString:self.stringHtml baseURL:nil];
-
-    self.view.width = SCR_WIDTH;
-    self.view.height = CZGetY(_webView);
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeDetailsubViewNoti" object:nil];
+    _webView.scrollView.scrollEnabled = NO;
+    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
 
 }
 
-- (void)currentViewIsScroll:(NSNotification *)noti
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    NSLog(@"%@", noti.userInfo[@"isScroller"]);
-    if ([noti.userInfo[@"isScroller"]  isEqual: @(1)]) {
-        _webView.scrollView.scrollEnabled = YES;
-    } else {
-        _webView.scrollView.scrollEnabled = NO;
-    }
+    CGSize size =  [change[@"new"] CGSizeValue];
+    self.webView.height = size.height;
+    self.scrollerView.contentSize = size;
+
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    static CGFloat scrollOffsetY = 0.0;
-    NSLog(@"%s %lf", __func__, scrollView.contentOffset.y);
-    if (scrollOffsetY > scrollView.contentOffset.y) {
-        NSLog(@"向下");
-        if (scrollView.contentOffset.y <= 0) {
-            scrollView.scrollEnabled = NO; // 不滚
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];
-        }
-    } else {
-        NSLog(@"向上");
-    }
-    scrollOffsetY = scrollView.contentOffset.y;
+    NSLog(@"%s", __func__);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeChargeDetailControllerNoti" object:nil userInfo:@{@"isScroller" : scrollView}];
 }
 
-- (void)scrollTop
-{
-    [_webView.scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
-}
 @end

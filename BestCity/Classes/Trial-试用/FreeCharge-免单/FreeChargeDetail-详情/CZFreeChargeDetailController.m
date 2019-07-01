@@ -62,6 +62,10 @@
 @property (nonatomic, strong) UIView *statusView;
 /** 提示文字 */
 @property (nonatomic, strong) UIView *noteView;
+/**x是否悬停了*/
+@property (nonatomic , assign) BOOL  isHover;
+/** <#注释#> */
+@property (nonatomic, assign) CGFloat headerViewHeight;
 @end
 
 // 购买时间是否到时
@@ -326,7 +330,7 @@ static BOOL isBuyTime;
     self.contentScrollView.bounces = NO;
     [self.scrollerView addSubview:self.contentScrollView];
     NSInteger count = self.childViewControllers.count;
-    self.contentScrollView.contentSize = CGSizeMake(SCR_WIDTH * count, 0);
+    self.contentScrollView.contentSize = CGSizeMake(count * SCR_WIDTH, 0);
 
     // 默认显示第一个
     [self scrollViewDidEndScrollingAnimation:self.contentScrollView];
@@ -408,16 +412,6 @@ static BOOL isBuyTime;
     [self.statusView removeFromSuperview];
 }
 
-#pragma mark - 通知
-- (void)currentViewIsScroll:(NSNotification *)noti
-{
-    NSLog(@"%@", noti.userInfo[@"isScroller"]);
-    if ([noti.userInfo[@"isScroller"]  isEqual: @(1)]) {
-        _scrollerView.scrollEnabled = YES;
-    } else {
-        _scrollerView.scrollEnabled = NO;;
-    }
-}
 
 #pragma mark - 获取数据
 - (void)reloadNewDataSorce
@@ -587,65 +581,68 @@ static BOOL isBuyTime;
         CGFloat width = scrollView.width;
         CGFloat height = scrollView.height;
         NSInteger index = scrollView.contentOffset.x / scrollView.width;
-        UIViewController *showVc = self.childViewControllers[index];
-        if (self.scrollerView.contentOffset.y < (CGRectGetMinY(self.menusView.frame) - (IsiPhoneX ? 44 : 20))) {
-            self.scrollerView.scrollEnabled = YES;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(NO)}]; //不滚
-        } else { // 显示导航栏的时候
-            self.scrollerView.scrollEnabled = NO; // 大view不能滑
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(YES)}]; // 小view能滑
-        }
-        showVc.view.frame = CGRectMake(x, y, width, height);
+        UIViewController *showVc = self.childViewControllers[index];        showVc.view.frame = CGRectMake(x, y, width, height);
         [scrollView addSubview:showVc.view];
     }
 }
 
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    self.headerViewHeight = (CGRectGetMinY(self.menusView.frame) - (IsiPhoneX ? 44 : 20));
+
     if (scrollView == self.scrollerView) {
-        if (self.scrollerView.contentOffset.y < (CGRectGetMinY(self.menusView.frame) - (IsiPhoneX ? 44 : 20))) {
+        if (self.scrollerView.contentOffset.y < self.headerViewHeight) {
             _menusbtn.hidden = YES;
             self.statusView.hidden = YES;
-            self.scrollerView.scrollEnabled = YES;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(NO)}]; //不滚
-
+            if (self.isHover) {
+                self.scrollerView.contentOffset = CGPointMake(0, _headerViewHeight);
+            }
         } else { // 显示导航栏的时候
             _menusbtn.hidden = NO;
             self.statusView.hidden = NO;
-            
-            self.scrollerView.scrollEnabled = NO; // 大view不能滑
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZFreeDetailsubViewNoti" object:nil userInfo:@{@"isScroller" : @(YES)}];// 小view能滑
+            self.isHover = YES;
+            self.scrollerView.contentOffset = CGPointMake(0, self.headerViewHeight);
         }
     }
 
     if (scrollView == self.contentScrollView) {
-        NSInteger index = scrollView.contentOffset.x / SCR_WIDTH;
-        NSLog(@"contentScrollView - %ld", index);
-        switch (index) {
-            case 0:
-            {
-                UIButton *btn = [self.menusView viewWithTag:100];
-                [self setupBtn:btn];
-                break;
+        self.selectedMenuItem(scrollView.contentOffset.x);
+    }
+}
+
+#pragma mark - 通知
+- (void)currentViewIsScroll:(NSNotification *)noti
+{
+    UIScrollView *scrollView = noti.userInfo[@"isScroller"];
+    if (scrollView.contentOffset.y <= 0) {
+        self.isHover = NO;
+        scrollView.contentOffset = CGPointZero;
+        NSArray *tem  = self.childViewControllers;
+        for (UIViewController *subV in tem) {
+            for (UIScrollView *view in subV.view.subviews) {
+                if ([view isKindOfClass:[UIScrollView class]]) {
+                    view.contentOffset = CGPointZero;
+                }
             }
-            case 1:
-            {
-                UIButton *btn = [self.menusView viewWithTag:101];
-                [self setupBtn:btn];
-                break;
-            }
-            case 2:
-            {
-                UIButton *btn = [self.menusView viewWithTag:102];
-                [self setupBtn:btn];
-                break;
-            }
-            default:
-                break;
         }
+    } else {
+        if (!self.isHover) {
+            scrollView.contentOffset = CGPointZero;
+            NSArray *tem  = self.childViewControllers;
+            for (UIViewController *subV in tem) {
+                for (UIScrollView *view in subV.view.subviews) {
+                    if ([view isKindOfClass:[UIScrollView class]]) {
+                        view.contentOffset = CGPointZero;
+                    }
+                }
+            }
+        }
+
 
     }
 }
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -680,6 +677,37 @@ static BOOL isBuyTime;
     } else {
         return @"不知道";
     }
+}
+
+// 返回选中菜单按钮的样式
+- (void (^)(CGFloat))selectedMenuItem
+{
+    return ^(CGFloat x){
+        NSInteger index = x / SCR_WIDTH;
+        switch (index) {
+            case 0:
+            {
+                UIButton *btn = [self.menusView viewWithTag:100];
+                [self setupBtn:btn];
+                break;
+            }
+            case 1:
+            {
+                UIButton *btn = [self.menusView viewWithTag:101];
+                [self setupBtn:btn];
+                break;
+            }
+            case 2:
+            {
+                UIButton *btn = [self.menusView viewWithTag:102];
+                [self setupBtn:btn];
+                break;
+            }
+            default:
+                break;
+        }
+
+    };
 }
 
 
