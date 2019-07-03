@@ -84,7 +84,7 @@
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSNumber *appVersion1 = result[@"data"][@"open"];
             if (![appVersion1 isEqual:@(0)]) {} else {}
-//            //有新版本
+            //有新版本
             [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
             //比较
             if ([curVersion compare:result[@"data"][@"versionCode"]] == NSOrderedAscending && [result[@"data"][@"open"] isEqualToNumber:@(1)]) {

@@ -143,6 +143,7 @@
     {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
+        return;
     } else {
         NSString *text = @"首页搜索框";
         NSDictionary *context = @{@"message" : text};

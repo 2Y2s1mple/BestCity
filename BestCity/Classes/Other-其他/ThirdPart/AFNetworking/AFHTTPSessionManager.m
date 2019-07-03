@@ -246,9 +246,7 @@
                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     NSURLSessionDataTask *dataTask = [self dataTaskWithHTTPMethod:@"PATCH" URLString:URLString parameters:parameters uploadProgress:nil downloadProgress:nil success:success failure:failure];
-
     [dataTask resume];
-
     return dataTask;
 }
 
@@ -304,7 +302,6 @@
 }
 
 #pragma mark - NSObject
-
 - (NSString *)description {
     return [NSString stringWithFormat:@"<%@: %p, baseURL: %@, session: %@, operationQueue: %@>", NSStringFromClass([self class]), self, [self.baseURL absoluteString], self.session, self.operationQueue];
 }

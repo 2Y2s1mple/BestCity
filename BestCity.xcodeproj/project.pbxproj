@@ -275,6 +275,8 @@
 		9795852E2294EA58005FC54D /* CZReportEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9795852D2294EA58005FC54D /* CZReportEditorController.m */; };
 		9795853122951AA0005FC54D /* CZEditorTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9795853022951AA0005FC54D /* CZEditorTextView.m */; };
 		97958534229539F9005FC54D /* CZEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97958533229539F9005FC54D /* CZEditorView.m */; };
+		97965B7722CC4DAD00372DB5 /* CZMainHotSaleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97965B7622CC4DAD00372DB5 /* CZMainHotSaleHeaderView.m */; };
+		97965B7A22CCB39A00372DB5 /* CZMainHotSaleCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97965B7922CCB39A00372DB5 /* CZMainHotSaleCategoryView.m */; };
 		9799933721A67B1A0000D42B /* CZCommentDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9799933521A67B1A0000D42B /* CZCommentDetailCell.m */; };
 		9799933821A67B1A0000D42B /* CZCommentDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9799933621A67B1A0000D42B /* CZCommentDetailCell.xib */; };
 		979B05C7210E9CC70023292D /* CZRecommendNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 979B05C6210E9CC70023292D /* CZRecommendNav.m */; };
@@ -397,6 +399,8 @@
 		97D8FCCE2111ABA000D8ED8F /* CZNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCCD2111ABA000D8ED8F /* CZNavigationView.m */; };
 		97D8FCD52111BA2A00D8ED8F /* CZMyProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCD32111BA2A00D8ED8F /* CZMyProfileCell.m */; };
 		97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D8FCD42111BA2A00D8ED8F /* CZMyProfileCell.xib */; };
+		97E90C1D22CC4010001437A7 /* CZMainHotSaleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E90C1C22CC4010001437A7 /* CZMainHotSaleController.m */; };
+		97E90C2022CC4933001437A7 /* CZBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E90C1F22CC4933001437A7 /* CZBaseViewController.m */; };
 		97ECD7752121276800D07ABE /* CZHotsaleSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ECD7742121276800D07ABE /* CZHotsaleSearchController.m */; };
 		97ECD778212190C900D07ABE /* CZHotsaleSearchDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ECD777212190C900D07ABE /* CZHotsaleSearchDetailController.m */; };
 		97ED11F2211582910003E0F7 /* CZAttentionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED11F0211582910003E0F7 /* CZAttentionCell.m */; };
@@ -920,6 +924,10 @@
 		9795853022951AA0005FC54D /* CZEditorTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEditorTextView.m; sourceTree = "<group>"; };
 		97958532229539F9005FC54D /* CZEditorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEditorView.h; sourceTree = "<group>"; };
 		97958533229539F9005FC54D /* CZEditorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEditorView.m; sourceTree = "<group>"; };
+		97965B7522CC4DAD00372DB5 /* CZMainHotSaleHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleHeaderView.h; sourceTree = "<group>"; };
+		97965B7622CC4DAD00372DB5 /* CZMainHotSaleHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleHeaderView.m; sourceTree = "<group>"; };
+		97965B7822CCB39A00372DB5 /* CZMainHotSaleCategoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleCategoryView.h; sourceTree = "<group>"; };
+		97965B7922CCB39A00372DB5 /* CZMainHotSaleCategoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleCategoryView.m; sourceTree = "<group>"; };
 		9799933421A67B1A0000D42B /* CZCommentDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommentDetailCell.h; sourceTree = "<group>"; };
 		9799933521A67B1A0000D42B /* CZCommentDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommentDetailCell.m; sourceTree = "<group>"; };
 		9799933621A67B1A0000D42B /* CZCommentDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCommentDetailCell.xib; sourceTree = "<group>"; };
@@ -1133,6 +1141,10 @@
 		97D8FCD22111BA2A00D8ED8F /* CZMyProfileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyProfileCell.h; sourceTree = "<group>"; };
 		97D8FCD32111BA2A00D8ED8F /* CZMyProfileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyProfileCell.m; sourceTree = "<group>"; };
 		97D8FCD42111BA2A00D8ED8F /* CZMyProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyProfileCell.xib; sourceTree = "<group>"; };
+		97E90C1B22CC4010001437A7 /* CZMainHotSaleController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleController.h; sourceTree = "<group>"; };
+		97E90C1C22CC4010001437A7 /* CZMainHotSaleController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleController.m; sourceTree = "<group>"; };
+		97E90C1E22CC4933001437A7 /* CZBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZBaseViewController.h; sourceTree = "<group>"; };
+		97E90C1F22CC4933001437A7 /* CZBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZBaseViewController.m; sourceTree = "<group>"; };
 		97ECD7732121276800D07ABE /* CZHotsaleSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotsaleSearchController.h; sourceTree = "<group>"; };
 		97ECD7742121276800D07ABE /* CZHotsaleSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotsaleSearchController.m; sourceTree = "<group>"; };
 		97ECD776212190C900D07ABE /* CZHotsaleSearchDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotsaleSearchDetailController.h; sourceTree = "<group>"; };
@@ -2169,6 +2181,8 @@
 		97705C33210716A300485D64 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				97E90C1E22CC4933001437A7 /* CZBaseViewController.h */,
+				97E90C1F22CC4933001437A7 /* CZBaseViewController.m */,
 				97705C35210716A300485D64 /* CZTabBarController.h */,
 				97705C34210716A300485D64 /* CZTabBarController.m */,
 				97705CE72108733F00485D64 /* CZNavigationController.h */,
@@ -2270,8 +2284,8 @@
 		97705C42210716A300485D64 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				97705C44210716A300485D64 /* CZHotSaleController.h */,
-				97705C43210716A300485D64 /* CZHotSaleController.m */,
+				97E90C1B22CC4010001437A7 /* CZMainHotSaleController.h */,
+				97E90C1C22CC4010001437A7 /* CZMainHotSaleController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2290,8 +2304,14 @@
 		97705C46210716A300485D64 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				97705C44210716A300485D64 /* CZHotSaleController.h */,
+				97705C43210716A300485D64 /* CZHotSaleController.m */,
 				977C33B4218D951000FAA144 /* CZHotSearchView.h */,
 				977C33B5218D951000FAA144 /* CZHotSearchView.m */,
+				97965B7522CC4DAD00372DB5 /* CZMainHotSaleHeaderView.h */,
+				97965B7622CC4DAD00372DB5 /* CZMainHotSaleHeaderView.m */,
+				97965B7822CCB39A00372DB5 /* CZMainHotSaleCategoryView.h */,
+				97965B7922CCB39A00372DB5 /* CZMainHotSaleCategoryView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2368,20 +2388,20 @@
 		97705C5B2107172A00485D64 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				97705C5C2107172A00485D64 /* AFSecurityPolicy.h */,
-				97705C5D2107172A00485D64 /* AFNetworkReachabilityManager.h */,
-				97705C5E2107172A00485D64 /* AFURLSessionManager.h */,
-				97705C5F2107172A00485D64 /* AFURLRequestSerialization.h */,
-				97705C602107172A00485D64 /* AFURLResponseSerialization.m */,
-				97705C612107172A00485D64 /* AFHTTPSessionManager.m */,
-				97705C622107172A00485D64 /* AFURLResponseSerialization.h */,
-				97705C632107172A00485D64 /* AFURLSessionManager.m */,
-				97705C642107172A00485D64 /* AFURLRequestSerialization.m */,
 				97705C652107172A00485D64 /* AFNetworking.h */,
-				97705C662107172A00485D64 /* AFNetworkReachabilityManager.m */,
+				97705C5C2107172A00485D64 /* AFSecurityPolicy.h */,
 				97705C672107172A00485D64 /* AFSecurityPolicy.m */,
-				97705C682107172A00485D64 /* AFCompatibilityMacros.h */,
+				97705C5D2107172A00485D64 /* AFNetworkReachabilityManager.h */,
+				97705C5F2107172A00485D64 /* AFURLRequestSerialization.h */,
+				97705C642107172A00485D64 /* AFURLRequestSerialization.m */,
+				97705C622107172A00485D64 /* AFURLResponseSerialization.h */,
+				97705C602107172A00485D64 /* AFURLResponseSerialization.m */,
+				97705C5E2107172A00485D64 /* AFURLSessionManager.h */,
+				97705C632107172A00485D64 /* AFURLSessionManager.m */,
 				97705C692107172A00485D64 /* AFHTTPSessionManager.h */,
+				97705C682107172A00485D64 /* AFCompatibilityMacros.h */,
+				97705C612107172A00485D64 /* AFHTTPSessionManager.m */,
+				97705C662107172A00485D64 /* AFNetworkReachabilityManager.m */,
 			);
 			path = AFNetworking;
 			sourceTree = "<group>";
@@ -3912,6 +3932,7 @@
 				9778649E211A7AD6001B41F1 /* NSArray+MASAdditions.m in Sources */,
 				978D25A6219993C4004040DD /* CZReplyButton.m in Sources */,
 				9778649F211A7AD6001B41F1 /* View+MASAdditions.m in Sources */,
+				97965B7722CC4DAD00372DB5 /* CZMainHotSaleHeaderView.m in Sources */,
 				97786499211A7AD6001B41F1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				97D39173223645290081F229 /* CZOrderModel.m in Sources */,
 				97705C9D2108225A00485D64 /* UIButton+CZExtension.m in Sources */,
@@ -4028,6 +4049,7 @@
 				97798CD8212D0FC90052CE94 /* UIButton+WebCache.m in Sources */,
 				97643476221AA27100EB0291 /* CZAdministratorAccountController.m in Sources */,
 				97B4A48D2248A2DB00E48D93 /* CZTrialCommodityDetailController.m in Sources */,
+				97E90C1D22CC4010001437A7 /* CZMainHotSaleController.m in Sources */,
 				97798CCF212D0FC90052CE94 /* SDWebImageTransition.m in Sources */,
 				970848FE22432969000D5528 /* CZTrialReportController.m in Sources */,
 				97B875FC21EDC472001CC393 /* CZVoteShowView.m in Sources */,
@@ -4104,11 +4126,13 @@
 				9721CE0121E2FE82007F9208 /* CZCommodityDetailModel.m in Sources */,
 				975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */,
 				97705C6D2107172A00485D64 /* AFURLRequestSerialization.m in Sources */,
+				97E90C2022CC4933001437A7 /* CZBaseViewController.m in Sources */,
 				97420DD621EC321400FE3D9F /* CZHisSearchCell.m in Sources */,
 				979110622230F3A600C2DE5B /* CZOrderListCell.m in Sources */,
 				970E618422B9DCD000E68BE3 /* CZFreeChargeController.m in Sources */,
 				97C85134211C07EA005540D8 /* MBProgressHUD.m in Sources */,
 				977864A0211A7AD6001B41F1 /* MASConstraint.m in Sources */,
+				97965B7A22CCB39A00372DB5 /* CZMainHotSaleCategoryView.m in Sources */,
 				97958534229539F9005FC54D /* CZEditorView.m in Sources */,
 				97798CBD212D0FC90052CE94 /* MKAnnotationView+WebCache.m in Sources */,
 				97C7FF46216DDDB50091DC07 /* MJRefreshGifHeader.m in Sources */,

@@ -7,7 +7,10 @@
 //
 
 #import "CZTabBarController.h"
-#import "CZHotSaleController.h"
+
+#import "CZMainHotSaleController.h"
+//#import "CZHotSaleController.h"
+
 #import "CZDiscoverController.h"
 #import "CZEvaluationController.h"
 #import "CZTrialMainController.h"
@@ -44,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
-    [self setupWithController:[[CZHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
+    [self setupWithController:[[CZMainHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
     [self setupWithController:[[CZDiscoverController alloc] init] title:@"发现" image:@"tab-discover-nor" selectedImage:@"tab-discover-sel"];
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
     [self setupWithController:[[CZTrialMainController alloc] init] title:@"试用" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
@@ -72,7 +75,7 @@
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
-    if (![vc isKindOfClass:[CZMeController class]]) {
+    if (![vc isKindOfClass:[CZMeController class]] && ![vc isKindOfClass:[CZMainHotSaleController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;
         hotVc.menuViewStyle = WMMenuViewStyleLine;

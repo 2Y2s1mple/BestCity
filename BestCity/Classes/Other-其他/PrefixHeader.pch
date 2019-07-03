@@ -10,8 +10,8 @@
 #define PrefixHeader_pch
 
 //极品城URL
-//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
-#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
+#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
+//#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
 
 #ifdef DEBUG
 
@@ -87,6 +87,13 @@ UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 1)]; \
 line.backgroundColor = CZGlobalLightGray; \
 [self.view addSubview:line]
 
+#define ISPUSHLOGIN if ([JPTOKEN length] <= 0) \
+{ \
+    CZLoginController *vc = [CZLoginController shareLoginController]; \
+    [self presentViewController:vc animated:YES completion:nil]; \
+    return; \
+}
+
 #import "UIView+GXExtension.h"//为了view.width
 #import "UIImage+CZExtension.h"
 #import "NSString+CZExtension.h" // 为了获取文字高度
@@ -94,7 +101,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "MBProgressHUD.h"
 #import "CZProgressHUD.h"
 #import "CZConst.h"
-#import "CZLoginController.h"
+#import "CZLoginController.h" // 登录页面
 #import "CZNoDataView.h" // 没有数据的view
 #import "CZSaveTool.h" // 自定义的储存
 #import "CZGetJIBITool.h" // 获得极币
