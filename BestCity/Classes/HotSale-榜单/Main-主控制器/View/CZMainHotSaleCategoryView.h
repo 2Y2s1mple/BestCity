@@ -11,8 +11,10 @@
 #import "CZHotTitleModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^BtnActionBlock)(CGFloat);
 
 @interface CZMainHotSaleCategoryView : UIView
+- (instancetype)initWithFrame:(CGRect)frame action:(BtnActionBlock)block;
 @property (nonatomic, strong) NSArray <CZHotTitleModel *> *dataSource;
 @end
 

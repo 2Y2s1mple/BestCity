@@ -63,6 +63,9 @@
 		9723F28E21B263E2006E18D2 /* TSLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723F28C21B263E2006E18D2 /* TSLWebViewController.m */; };
 		97243A1121B5555200EBFFCE /* CZEndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97243A1021B5555200EBFFCE /* CZEndLineView.m */; };
 		97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97243A1221B5555C00EBFFCE /* CZEndLineView.xib */; };
+		9726336D22CDA51E00995341 /* CZMainHotSaleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726336B22CDA51E00995341 /* CZMainHotSaleCell.m */; };
+		9726336E22CDA51E00995341 /* CZMainHotSaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9726336C22CDA51E00995341 /* CZMainHotSaleCell.xib */; };
+		9726337422CDCBB800995341 /* UITableViewCell+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726337322CDCBB800995341 /* UITableViewCell+CZExtension.m */; };
 		9729617121B11CB600648940 /* CZJPushHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9729616F21B11CB600648940 /* CZJPushHandler.m */; };
 		972E419E2113FC7A00BC751C /* UIImage+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E419D2113FC7A00BC751C /* UIImage+CZExtension.m */; };
 		972E41B0211450ED00BC751C /* CZMyPointsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972E41AF211450ED00BC751C /* CZMyPointsController.m */; };
@@ -536,6 +539,11 @@
 		97243A0F21B5555200EBFFCE /* CZEndLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEndLineView.h; sourceTree = "<group>"; };
 		97243A1021B5555200EBFFCE /* CZEndLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEndLineView.m; sourceTree = "<group>"; };
 		97243A1221B5555C00EBFFCE /* CZEndLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEndLineView.xib; sourceTree = "<group>"; };
+		9726336A22CDA51E00995341 /* CZMainHotSaleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleCell.h; sourceTree = "<group>"; };
+		9726336B22CDA51E00995341 /* CZMainHotSaleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleCell.m; sourceTree = "<group>"; };
+		9726336C22CDA51E00995341 /* CZMainHotSaleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMainHotSaleCell.xib; sourceTree = "<group>"; };
+		9726337222CDCBB800995341 /* UITableViewCell+CZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+CZExtension.h"; sourceTree = "<group>"; };
+		9726337322CDCBB800995341 /* UITableViewCell+CZExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+CZExtension.m"; sourceTree = "<group>"; };
 		9729616F21B11CB600648940 /* CZJPushHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZJPushHandler.m; sourceTree = "<group>"; };
 		9729617021B11CB600648940 /* CZJPushHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZJPushHandler.h; sourceTree = "<group>"; };
 		972E419C2113FC7A00BC751C /* UIImage+CZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CZExtension.h"; sourceTree = "<group>"; };
@@ -2181,8 +2189,6 @@
 		97705C33210716A300485D64 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				97E90C1E22CC4933001437A7 /* CZBaseViewController.h */,
-				97E90C1F22CC4933001437A7 /* CZBaseViewController.m */,
 				97705C35210716A300485D64 /* CZTabBarController.h */,
 				97705C34210716A300485D64 /* CZTabBarController.m */,
 				97705CE72108733F00485D64 /* CZNavigationController.h */,
@@ -2312,6 +2318,9 @@
 				97965B7622CC4DAD00372DB5 /* CZMainHotSaleHeaderView.m */,
 				97965B7822CCB39A00372DB5 /* CZMainHotSaleCategoryView.h */,
 				97965B7922CCB39A00372DB5 /* CZMainHotSaleCategoryView.m */,
+				9726336A22CDA51E00995341 /* CZMainHotSaleCell.h */,
+				9726336B22CDA51E00995341 /* CZMainHotSaleCell.m */,
+				9726336C22CDA51E00995341 /* CZMainHotSaleCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2425,6 +2434,8 @@
 				97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */,
 				9723075821AD50D50004C00C /* NSDictionary+CZExtension.h */,
 				9723075921AD50D50004C00C /* NSDictionary+CZExtension.m */,
+				9726337222CDCBB800995341 /* UITableViewCell+CZExtension.h */,
+				9726337322CDCBB800995341 /* UITableViewCell+CZExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3204,6 +3215,8 @@
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
+				97E90C1E22CC4933001437A7 /* CZBaseViewController.h */,
+				97E90C1F22CC4933001437A7 /* CZBaseViewController.m */,
 				97C52A702254B92C00787BC5 /* Recommend-推荐文章 */,
 				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
 				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
@@ -3908,6 +3921,7 @@
 				97731C3322424AC700826F8E /* CZTrialMainCell.xib in Resources */,
 				97F0EC1F212512B6000FE1DC /* UMCommonLog.bundle in Resources */,
 				972E41B2211455C500BC751C /* CZMyPointsController.xib in Resources */,
+				9726336E22CDA51E00995341 /* CZMainHotSaleCell.xib in Resources */,
 				97C85131211AFAA9005540D8 /* CZBindingMobileController.xib in Resources */,
 				97B30CFA21F2FEF900B8427E /* launchLogo.png in Resources */,
 				97C7FF3A216DDDB50091DC07 /* MJRefresh.bundle in Resources */,
@@ -3979,6 +3993,7 @@
 				9723075D21AD73850004C00C /* CZOpenAlibcTrade.m in Sources */,
 				97FF6DDF21182FF900376435 /* CZDiscountCouponCell.m in Sources */,
 				97AC559122C9D3C100D7F2DA /* CZTableView.m in Sources */,
+				9726336D22CDA51E00995341 /* CZMainHotSaleCell.m in Sources */,
 				97FD7E192276B0DC00F5DFFC /* Reachability.m in Sources */,
 				973122FA21A405F5007CF64B /* CZSystemMessageModel.m in Sources */,
 				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
@@ -4015,6 +4030,7 @@
 				97C7FF08216DDDAB0091DC07 /* MJFoundation.m in Sources */,
 				97F0EC35212559A3000FE1DC /* CZShareView.m in Sources */,
 				97420DCE21E9BE5100FE3D9F /* CZBuyViewCell.m in Sources */,
+				9726337422CDCBB800995341 /* UITableViewCell+CZExtension.m in Sources */,
 				97798CD0212D0FC90052CE94 /* NSData+ImageContentType.m in Sources */,
 				9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */,
 				97798CCE212D0FC90052CE94 /* SDWebImageDownloaderOperation.m in Sources */,

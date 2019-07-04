@@ -98,6 +98,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "UIImage+CZExtension.h"
 #import "NSString+CZExtension.h" // 为了获取文字高度
 #import "NSDictionary+CZExtension.h" // 出去字典NSNull
+#import "UITableViewCell+CZExtension.h"
 #import "MBProgressHUD.h"
 #import "CZProgressHUD.h"
 #import "CZConst.h"

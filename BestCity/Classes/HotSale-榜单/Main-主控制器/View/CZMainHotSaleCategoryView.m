@@ -11,18 +11,23 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 
+
+
 @interface CZMainHotSaleCategoryView ()
 /** 记录btn */
 @property (nonatomic, strong) UIButton *recordBtn;
+/** 点击标题响应 */
+@property (nonatomic, strong) BtnActionBlock btnBlock;
 @end
 
 @implementation CZMainHotSaleCategoryView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame action:(BtnActionBlock)block
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
+        [self setBtnBlock:block];
     }
     return self;
 }
@@ -127,8 +132,9 @@
         contentView.y = CZGetY([self.subviews firstObject]);
         [self addSubview:contentView];
         self.height = CZGetY(contentView);
+        NSLog(@"%lf", self.height);
+        self.btnBlock(self.height);
     }
-
 }
 
 - (UIView *)createContentViewWithData:(NSArray <CZHotSubTilteModel *> *)datas
