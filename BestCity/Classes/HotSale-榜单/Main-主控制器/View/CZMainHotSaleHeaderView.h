@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMainHotSaleHeaderView : UIView
 - (instancetype)initWithFrame:(CGRect)frame action:(void (^)(void))action;
+- (instancetype)initWithFrame:(CGRect)frame pushAction:(void (^)(void))action;
 @end
 
 NS_ASSUME_NONNULL_END

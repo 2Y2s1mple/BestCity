@@ -19,7 +19,7 @@
 @interface CZDiscoverController ()
 @property (nonatomic, strong) NSArray *mainTitles;
 /** 搜索框 */
-@property (nonatomic, strong) CZHotSearchView *search;
+//@property (nonatomic, strong) CZHotSearchView *search;
 /** 当前的偏移量 */
 @property (nonatomic, assign) CGFloat currentOffsetY;
 /** 记录偏移量 */
@@ -91,7 +91,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.search.hidden = NO;
+//    self.search.hidden = NO;
     self.statusView.hidden = YES;
 }
 

@@ -73,6 +73,48 @@
     [searchView addSubview:sImage];
 }
 
+- (instancetype)initWithFrame:(CGRect)frame pushAction:(void (^)(void))action
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.actionBlock = action;
+        self.size = CGSizeMake(SCR_WIDTH, (IsiPhoneX ? 44 : 20) + 10 + 35);
+        self.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        [self createNavigation];
+    }
+    return self;
+}
+
+- (void)createNavigation
+{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action:)];
+    self.userInteractionEnabled = YES;
+    [self addGestureRecognizer:tap];
+
+    UIView *searchView = [[UIView alloc] init];
+    searchView.backgroundColor = CZGlobalWhiteBg;
+    searchView.x = 14;
+    searchView.y = (IsiPhoneX ? 44 : 20) + 5;
+    searchView.size = CGSizeMake(SCR_WIDTH - searchView.x * 2, 35);
+    [self addSubview:searchView];
+
+    UILabel *sLabel = [[UILabel alloc] init];
+    sLabel.text = @"输入查询商品名称";
+    sLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+    sLabel.textColor = UIColorFromRGB(0xD8D8D8);
+    [sLabel sizeToFit];
+    sLabel.x = 10;
+    sLabel.centerY = searchView.height / 2.0;
+    [searchView addSubview:sLabel];
+
+    UIImageView *sImage = [[UIImageView alloc] init];
+    sImage.image = [UIImage imageNamed:@"search"];
+    [sImage sizeToFit];
+    sImage.centerY = sLabel.centerY;
+    sImage.x = searchView.width - 20 - sImage.size.width;
+    [searchView addSubview:sImage];
+}
+
 - (void)action:(UITapGestureRecognizer *)tap
 {
     NSLog(@"%s", __func__);

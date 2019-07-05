@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,6 +50,12 @@
                             <constraint firstItem="dck-xI-h0d" firstAttribute="centerY" secondItem="jT6-NM-BzA" secondAttribute="centerY" id="mje-Uc-hlR"/>
                             <constraint firstAttribute="bottom" secondItem="HN9-rn-DXg" secondAttribute="bottom" id="ycc-NU-0pK"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
@@ -60,12 +65,12 @@
                     <constraint firstItem="7Fx-0t-Wva" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7.5" id="xHr-3q-JFT"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="digImageView" destination="HN9-rn-DXg" id="ZmT-Ed-kSk"/>
+                <outlet property="squareView" destination="jT6-NM-BzA" id="toF-r2-17f"/>
                 <outlet property="titleLabel" destination="dck-xI-h0d" id="tki-tt-AAV"/>
             </connections>
-            <point key="canvasLocation" x="-61.594202898550726" y="120.20089285714285"/>
+            <point key="canvasLocation" x="-112" y="92"/>
         </tableViewCell>
     </objects>
     <resources>

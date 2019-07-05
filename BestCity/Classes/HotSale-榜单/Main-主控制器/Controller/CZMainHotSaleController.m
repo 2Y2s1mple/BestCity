@@ -7,24 +7,19 @@
 //
 
 #import "CZMainHotSaleController.h"
-
 // 工具
 #import "GXNetTool.h"
-
 // 视图
 #import "CZMainHotSaleHeaderView.h"
 #import "CZMainHotSaleCategoryView.h"
 #import "CZMainHotSaleCell.h"
-
 // 模型
 #import "CZHotTitleModel.h"
-
 // 跳转
 #import "CZHotsaleSearchController.h"
+#import "CZMainHotSaleDetailController.h"
 
 @interface CZMainHotSaleController () <UITableViewDelegate, UITableViewDataSource>
-/** 滚动 */
-@property (nonatomic, strong) UIScrollView *scrollView;
 /** 记录btn */
 @property (nonatomic, strong) UIButton *recordBtn;
 /** 表单 */
@@ -32,7 +27,9 @@
 /** 数据 */
 @property (nonatomic, strong) NSMutableArray *dataSource;
 /** 新品专区 */
-@property (nonatomic, strong) NSDictionary *listNew;
+@property (nonatomic, strong) NSDictionary *adDic;
+/** 显示的导航栏 */
+@property (nonatomic, strong) UIView *navTopView;
 @end
 
 @implementation CZMainHotSaleController
@@ -53,13 +50,19 @@
 {
     CZMainHotSaleHeaderView *headerView = [[CZMainHotSaleHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 209) action:^{
         ISPUSHLOGIN
-        NSString *text = @"首页搜索框";
-        NSDictionary *context = @{@"message" : text};
-        [MobClick event:@"ID1" attributes:context];
-        CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self pushSearchView];
     }];
     return headerView;
+}
+
+- (UIView *)navTopView
+{
+    if (_navTopView == nil) {
+        _navTopView = [[CZMainHotSaleHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0) pushAction:^{
+            [self pushSearchView];
+        }];
+    }
+    return _navTopView;
 }
 
 - (UIView * (^)(NSArray *))createCategoryView
@@ -105,9 +108,12 @@
     [self getCategoryListData:^(NSArray<CZHotTitleModel *> *modelList) {
         weakself.tableView.tableHeaderView = weakself.createTableViewHeaderView(modelList);
     }];
+    // 隐藏和显示的头部view
+    [self.view addSubview:self.navTopView];
+    self.navTopView.hidden = YES;
 }
 
-#pragma mark - 数据
+#pragma mark - 网络请求
 - (instancetype)getCategoryListData:(void (^)(NSArray <CZHotTitleModel *> *))categoryList
 {
     [CZHotTitleModel setupObjectClassInArray:^NSDictionary *{
@@ -141,6 +147,72 @@
     return self;
 }
 
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        return 195;
+    } else {
+        return 228;
+    }
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataSource.count + 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    CZMainHotSaleCell *cell = [CZMainHotSaleCell cellwithTableView:tableView];
+    if (indexPath.row == 0) {
+        cell.adDic = self.adDic;
+    } else {
+        cell.data = self.dataSource[indexPath.row - 1];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+
+    } else {
+        NSDictionary *model = self.dataSource[indexPath.row];
+        CZMainHotSaleDetailController *vc = [[CZMainHotSaleDetailController alloc] init];
+        vc.ID = model[@"categoryId"];
+        vc.titleText = model[@"topTitle"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y >= (209 - (IsiPhoneX ? 44 : 20) - 45)) {
+        NSLog(@"显示");
+        self.navTopView.hidden = NO;
+    } else {
+        NSLog(@"不显示");
+        self.navTopView.hidden = YES;
+    }
+}
+
+#pragma mark - 事件
+// 跳转到搜索页面
+- (void)pushSearchView
+{
+    NSString *text = @"首页搜索框";
+    NSDictionary *context = @{@"message" : text};
+    [MobClick event:@"ID1" attributes:context];
+    CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+// 下拉加载
 static NSInteger page_ = 1;
 - (void)reloadNewDataSorce
 {
@@ -149,47 +221,28 @@ static NSInteger page_ = 1;
     WS(weakself);
     page_ = 1;
     [self getListData:^(NSDictionary *data) {
-       weakself.dataSource = [NSMutableArray arrayWithArray:data[@"data"]];
-        self.listNew = data[@"ad"];
+        weakself.dataSource = [NSMutableArray arrayWithArray:data[@"data"]];
+        self.adDic = data[@"ad"];
         [weakself.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     }];
 }
 
+// 上拉刷新
 - (void)loadMoreDataSorce
 {
     [self.tableView.mj_header endRefreshing];
     WS(weakself);
     page_++;
     [self getListData:^(NSDictionary *data) {
+        if ([data[@"data"] count] == 0) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            return;
+        }
         [weakself.dataSource addObjectsFromArray:data[@"data"]];
         [weakself.tableView reloadData];
         [self.tableView.mj_footer endRefreshing];
     }];
 }
 
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 228;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.dataSource.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CZMainHotSaleCell *cell = [CZMainHotSaleCell cellwithTableView:tableView];
-    cell.data = self.dataSource[indexPath.row];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-   
-}
 @end

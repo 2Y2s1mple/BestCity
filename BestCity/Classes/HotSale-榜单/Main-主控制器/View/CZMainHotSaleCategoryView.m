@@ -43,13 +43,7 @@
     [self setupCategoryView:^UIView *{
         return [self createTitlesViewWithData:modelList];
     } andContentView:^UIView *{
-        NSMutableArray *arr = [NSMutableArray array];
-        [arr addObjectsFromArray:modelList[1].children];
-        [arr addObjectsFromArray:modelList[1].children];
-        [arr addObjectsFromArray:modelList[1].children];
-        [arr addObjectsFromArray:modelList[1].children];
-        [arr addObjectsFromArray:modelList[1].children];
-        return [self createContentViewWithData:arr];
+        return [self createContentViewWithData:[modelList firstObject].children];
     }];
 }
 

@@ -14,6 +14,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *digImageView;
 /** 标题 */
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIView *squareView;
 @end
 
 @implementation CZMainHotSaleCell
@@ -21,8 +23,18 @@
 - (void)setData:(NSDictionary *)data
 {
     _data = data;
+    self.titleLabel.hidden = NO;
+    self.squareView.hidden = NO;
     [self.digImageView sd_setImageWithURL:[NSURL URLWithString:data[@"topImg"]]];
     self.titleLabel.text = data[@"topTitle"];
+}
+
+- (void)setAdDic:(NSDictionary *)adDic
+{
+    _adDic = adDic;
+    self.titleLabel.hidden = YES;
+    self.squareView.hidden = YES;
+    [self.digImageView sd_setImageWithURL:[NSURL URLWithString:adDic[@"img"]]];
 }
 
 - (void)awakeFromNib {

@@ -51,6 +51,7 @@
 		970E618C22BA1D6A00E68BE3 /* CZFreeChargeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618B22BA1D6A00E68BE3 /* CZFreeChargeModel.m */; };
 		970E619022BA20A100E68BE3 /* CZCZFreeChargeCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618E22BA20A100E68BE3 /* CZCZFreeChargeCell2.m */; };
 		970E619122BA20A100E68BE3 /* CZCZFreeChargeCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */; };
+		9712727022CF1D47009EB40F /* CZMainHotSaleDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */; };
 		971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C19EC21706B1400E6D864 /* CZPointDetailModel.m */; };
 		971CBEC821917B6300E4590B /* CZHotTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 971CBEC721917B6300E4590B /* CZHotTagsView.m */; };
 		9721CE0121E2FE82007F9208 /* CZCommodityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9721CE0021E2FE82007F9208 /* CZCommodityDetailModel.m */; };
@@ -61,8 +62,6 @@
 		9723076021AD76F80004C00C /* CZNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723075F21AD76F80004C00C /* CZNoDataView.m */; };
 		9723076221AD77000004C00C /* CZNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9723076121AD77000004C00C /* CZNoDataView.xib */; };
 		9723F28E21B263E2006E18D2 /* TSLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723F28C21B263E2006E18D2 /* TSLWebViewController.m */; };
-		97243A1121B5555200EBFFCE /* CZEndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97243A1021B5555200EBFFCE /* CZEndLineView.m */; };
-		97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97243A1221B5555C00EBFFCE /* CZEndLineView.xib */; };
 		9726336D22CDA51E00995341 /* CZMainHotSaleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726336B22CDA51E00995341 /* CZMainHotSaleCell.m */; };
 		9726336E22CDA51E00995341 /* CZMainHotSaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9726336C22CDA51E00995341 /* CZMainHotSaleCell.xib */; };
 		9726337422CDCBB800995341 /* UITableViewCell+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9726337322CDCBB800995341 /* UITableViewCell+CZExtension.m */; };
@@ -149,7 +148,6 @@
 		97705C54210716A300485D64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C36210716A300485D64 /* main.m */; };
 		97705C55210716A300485D64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C39210716A300485D64 /* AppDelegate.m */; };
 		97705C56210716A300485D64 /* CZMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C3D210716A300485D64 /* CZMeController.m */; };
-		97705C57210716A300485D64 /* CZHotSaleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C43210716A300485D64 /* CZHotSaleController.m */; };
 		97705C58210716A300485D64 /* CZEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C49210716A300485D64 /* CZEvaluationController.m */; };
 		97705C59210716A300485D64 /* CZDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C4F210716A300485D64 /* CZDiscoverController.m */; };
 		97705C6A2107172A00485D64 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C602107172A00485D64 /* AFURLResponseSerialization.m */; };
@@ -166,7 +164,6 @@
 		97705CBC2108230F00485D64 /* WMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CB42108230F00485D64 /* WMScrollView.m */; };
 		97705CBD2108230F00485D64 /* WMMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CB52108230F00485D64 /* WMMenuView.m */; };
 		97705CBE2108230F00485D64 /* WMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CB62108230F00485D64 /* WMProgressView.m */; };
-		97705CC12108250000485D64 /* CZOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CC02108250000485D64 /* CZOneController.m */; };
 		97705CD021082A2000485D64 /* UIView+GXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CCE21082A2000485D64 /* UIView+GXExtension.m */; };
 		97705CD42108495D00485D64 /* CZHotSaleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CD22108495D00485D64 /* CZHotSaleCell.m */; };
 		97705CD52108495D00485D64 /* CZHotSaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97705CD32108495D00485D64 /* CZHotSaleCell.xib */; };
@@ -246,7 +243,6 @@
 		9785778721A6E04800E42B29 /* CZPackUpCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778521A6E04800E42B29 /* CZPackUpCommentCell.m */; };
 		9785778821A6E04800E42B29 /* CZPackUpCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9785778621A6E04800E42B29 /* CZPackUpCommentCell.xib */; };
 		9785778D21A80B2700E42B29 /* CZTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778C21A80B2700E42B29 /* CZTwoController.m */; };
-		9785779021A80B4100E42B29 /* CZSubTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785778E21A80B4100E42B29 /* CZSubTitleButton.m */; };
 		9785779821A8374800E42B29 /* CZCommentBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 9785779721A8374800E42B29 /* CZCommentBtn.m */; };
 		9786FF172255973E0007021C /* CZCommonRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9786FF152255973E0007021C /* CZCommonRecommendCell.m */; };
 		9786FF182255973E0007021C /* CZCommonRecommendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9786FF162255973E0007021C /* CZCommonRecommendCell.xib */; };
@@ -517,6 +513,8 @@
 		970E618D22BA20A100E68BE3 /* CZCZFreeChargeCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCZFreeChargeCell2.h; sourceTree = "<group>"; };
 		970E618E22BA20A100E68BE3 /* CZCZFreeChargeCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCZFreeChargeCell2.m; sourceTree = "<group>"; };
 		970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCZFreeChargeCell2.xib; sourceTree = "<group>"; };
+		9712726E22CF1D47009EB40F /* CZMainHotSaleDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleDetailController.h; sourceTree = "<group>"; };
+		9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleDetailController.m; sourceTree = "<group>"; };
 		971C19EB21706B1400E6D864 /* CZPointDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointDetailModel.h; sourceTree = "<group>"; };
 		971C19EC21706B1400E6D864 /* CZPointDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZPointDetailModel.m; sourceTree = "<group>"; };
 		971CBEC621917B6300E4590B /* CZHotTagsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTagsView.h; sourceTree = "<group>"; };
@@ -536,9 +534,6 @@
 		9723076121AD77000004C00C /* CZNoDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZNoDataView.xib; sourceTree = "<group>"; };
 		9723F28C21B263E2006E18D2 /* TSLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLWebViewController.m; sourceTree = "<group>"; };
 		9723F28D21B263E2006E18D2 /* TSLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLWebViewController.h; sourceTree = "<group>"; };
-		97243A0F21B5555200EBFFCE /* CZEndLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEndLineView.h; sourceTree = "<group>"; };
-		97243A1021B5555200EBFFCE /* CZEndLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEndLineView.m; sourceTree = "<group>"; };
-		97243A1221B5555C00EBFFCE /* CZEndLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEndLineView.xib; sourceTree = "<group>"; };
 		9726336A22CDA51E00995341 /* CZMainHotSaleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleCell.h; sourceTree = "<group>"; };
 		9726336B22CDA51E00995341 /* CZMainHotSaleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleCell.m; sourceTree = "<group>"; };
 		9726336C22CDA51E00995341 /* CZMainHotSaleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMainHotSaleCell.xib; sourceTree = "<group>"; };
@@ -684,8 +679,6 @@
 		97705C3A210716A300485D64 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		97705C3D210716A300485D64 /* CZMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZMeController.m; sourceTree = "<group>"; };
 		97705C3E210716A300485D64 /* CZMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZMeController.h; sourceTree = "<group>"; };
-		97705C43210716A300485D64 /* CZHotSaleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHotSaleController.m; sourceTree = "<group>"; };
-		97705C44210716A300485D64 /* CZHotSaleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHotSaleController.h; sourceTree = "<group>"; };
 		97705C49210716A300485D64 /* CZEvaluationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZEvaluationController.m; sourceTree = "<group>"; };
 		97705C4A210716A300485D64 /* CZEvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZEvaluationController.h; sourceTree = "<group>"; };
 		97705C4F210716A300485D64 /* CZDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZDiscoverController.m; sourceTree = "<group>"; };
@@ -720,8 +713,6 @@
 		97705CB62108230F00485D64 /* WMProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMProgressView.m; sourceTree = "<group>"; };
 		97705CB72108230F00485D64 /* WMPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMPageController.h; sourceTree = "<group>"; };
 		97705CB82108230F00485D64 /* UIViewController+WMPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WMPageController.h"; sourceTree = "<group>"; };
-		97705CBF2108250000485D64 /* CZOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZOneController.h; sourceTree = "<group>"; };
-		97705CC02108250000485D64 /* CZOneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZOneController.m; sourceTree = "<group>"; };
 		97705CCE21082A2000485D64 /* UIView+GXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GXExtension.m"; sourceTree = "<group>"; };
 		97705CCF21082A2000485D64 /* UIView+GXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GXExtension.h"; sourceTree = "<group>"; };
 		97705CD12108495D00485D64 /* CZHotSaleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotSaleCell.h; sourceTree = "<group>"; };
@@ -875,8 +866,6 @@
 		9785778621A6E04800E42B29 /* CZPackUpCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZPackUpCommentCell.xib; sourceTree = "<group>"; };
 		9785778B21A80B2700E42B29 /* CZTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZTwoController.h; sourceTree = "<group>"; };
 		9785778C21A80B2700E42B29 /* CZTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZTwoController.m; sourceTree = "<group>"; };
-		9785778E21A80B4100E42B29 /* CZSubTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZSubTitleButton.m; sourceTree = "<group>"; };
-		9785778F21A80B4100E42B29 /* CZSubTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZSubTitleButton.h; sourceTree = "<group>"; };
 		9785779621A8374800E42B29 /* CZCommentBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommentBtn.h; sourceTree = "<group>"; };
 		9785779721A8374800E42B29 /* CZCommentBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommentBtn.m; sourceTree = "<group>"; };
 		9786FF142255973E0007021C /* CZCommonRecommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommonRecommendCell.h; sourceTree = "<group>"; };
@@ -1314,14 +1303,8 @@
 		97054BFA2182F26F0008E416 /* Search-搜索商品 */ = {
 			isa = PBXGroup;
 			children = (
-				97ECD7732121276800D07ABE /* CZHotsaleSearchController.h */,
-				97ECD7742121276800D07ABE /* CZHotsaleSearchController.m */,
-				97ECD776212190C900D07ABE /* CZHotsaleSearchDetailController.h */,
-				97ECD777212190C900D07ABE /* CZHotsaleSearchDetailController.m */,
-				97420DD821EC918800FE3D9F /* CZSearchSubDetailOneController.h */,
-				97420DD921EC918800FE3D9F /* CZSearchSubDetailOneController.m */,
-				97420DDB21ECB1B200FE3D9F /* CZSearchSubDetailTwoController.h */,
-				97420DDC21ECB1B200FE3D9F /* CZSearchSubDetailTwoController.m */,
+				9712726D22CF1B09009EB40F /* ViewController */,
+				979B05DC210F218A0023292D /* Model */,
 				971CBEC92191B43300E4590B /* View */,
 			);
 			path = "Search-搜索商品";
@@ -1358,6 +1341,8 @@
 			children = (
 				9794FC5D21940660003C6AA6 /* CZRecommendDetailController.h */,
 				9794FC5E21940660003C6AA6 /* CZRecommendDetailController.m */,
+				9712726E22CF1D47009EB40F /* CZMainHotSaleDetailController.h */,
+				9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1480,41 +1465,6 @@
 				9708492922447771000D5528 /* CZTrialDetailTopController.xib */,
 			);
 			path = "顶部";
-			sourceTree = "<group>";
-		};
-		970B668A210ABE1B003EC382 /* recommend - 推荐榜 */ = {
-			isa = PBXGroup;
-			children = (
-				9791105E2230E44900C2DE5B /* Main-主菜单 */,
-			);
-			path = "recommend - 推荐榜";
-			sourceTree = "<group>";
-		};
-		970B668C210ABEBA003EC382 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				97705CD12108495D00485D64 /* CZHotSaleCell.h */,
-				97705CD22108495D00485D64 /* CZHotSaleCell.m */,
-				97705CD32108495D00485D64 /* CZHotSaleCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		970B668D210ABEDD003EC382 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				9794FC5A2193E761003C6AA6 /* CZBaseRecommendController.h */,
-				9794FC5B2193E761003C6AA6 /* CZBaseRecommendController.m */,
-				97243A0F21B5555200EBFFCE /* CZEndLineView.h */,
-				97243A1021B5555200EBFFCE /* CZEndLineView.m */,
-				97243A1221B5555C00EBFFCE /* CZEndLineView.xib */,
-				97705CBF2108250000485D64 /* CZOneController.h */,
-				97705CC02108250000485D64 /* CZOneController.m */,
-				977E82D6223CD3CA00C8C01B /* CZUpdataView.h */,
-				977E82D7223CD3CA00C8C01B /* CZUpdataView.m */,
-				977E82D9223CD3D600C8C01B /* CZUpdataView.xib */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		970C50A121F17E350091D7FF /* CoinCenter-极币中心 */ = {
@@ -1661,6 +1611,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9712726D22CF1B09009EB40F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9794FC5A2193E761003C6AA6 /* CZBaseRecommendController.h */,
+				9794FC5B2193E761003C6AA6 /* CZBaseRecommendController.m */,
+				97ECD7732121276800D07ABE /* CZHotsaleSearchController.h */,
+				97ECD7742121276800D07ABE /* CZHotsaleSearchController.m */,
+				97ECD776212190C900D07ABE /* CZHotsaleSearchDetailController.h */,
+				97ECD777212190C900D07ABE /* CZHotsaleSearchDetailController.m */,
+				97420DD821EC918800FE3D9F /* CZSearchSubDetailOneController.h */,
+				97420DD921EC918800FE3D9F /* CZSearchSubDetailOneController.m */,
+				97420DDB21ECB1B200FE3D9F /* CZSearchSubDetailTwoController.h */,
+				97420DDC21ECB1B200FE3D9F /* CZSearchSubDetailTwoController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		971C19EA21706AE800E6D864 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1673,6 +1640,11 @@
 		971CBEC92191B43300E4590B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				97705CD12108495D00485D64 /* CZHotSaleCell.h */,
+				97705CD22108495D00485D64 /* CZHotSaleCell.m */,
+				97705CD32108495D00485D64 /* CZHotSaleCell.xib */,
+				977C33B4218D951000FAA144 /* CZHotSearchView.h */,
+				977C33B5218D951000FAA144 /* CZHotSearchView.m */,
 				971CBEC621917B6300E4590B /* CZHotTagsView.h */,
 				971CBEC721917B6300E4590B /* CZHotTagsView.m */,
 				97D68C66219054E000802B30 /* CZHotTagLabel.h */,
@@ -2279,7 +2251,6 @@
 			isa = PBXGroup;
 			children = (
 				97054BF92182F1F60008E416 /* Main-主控制器 */,
-				970B668A210ABE1B003EC382 /* recommend - 推荐榜 */,
 				9785778A21A80B1C00E42B29 /* SubController-其他推荐榜 */,
 				97054C02218315180008E416 /* HotDetail-商品详情 */,
 				97054BFA2182F26F0008E416 /* Search-搜索商品 */,
@@ -2310,10 +2281,6 @@
 		97705C46210716A300485D64 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97705C44210716A300485D64 /* CZHotSaleController.h */,
-				97705C43210716A300485D64 /* CZHotSaleController.m */,
-				977C33B4218D951000FAA144 /* CZHotSearchView.h */,
-				977C33B5218D951000FAA144 /* CZHotSearchView.m */,
 				97965B7522CC4DAD00372DB5 /* CZMainHotSaleHeaderView.h */,
 				97965B7622CC4DAD00372DB5 /* CZMainHotSaleHeaderView.m */,
 				97965B7822CCB39A00372DB5 /* CZMainHotSaleCategoryView.h */,
@@ -2737,8 +2704,6 @@
 		9785778A21A80B1C00E42B29 /* SubController-其他推荐榜 */ = {
 			isa = PBXGroup;
 			children = (
-				9785778F21A80B4100E42B29 /* CZSubTitleButton.h */,
-				9785778E21A80B4100E42B29 /* CZSubTitleButton.m */,
 				9785778B21A80B2700E42B29 /* CZTwoController.h */,
 				9785778C21A80B2700E42B29 /* CZTwoController.m */,
 			);
@@ -2832,16 +2797,6 @@
 				97911053222FA4D000C2DE5B /* CZAddressModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		9791105E2230E44900C2DE5B /* Main-主菜单 */ = {
-			isa = PBXGroup;
-			children = (
-				970B668D210ABEDD003EC382 /* Controller */,
-				979B05DC210F218A0023292D /* Model */,
-				970B668C210ABEBA003EC382 /* View */,
-			);
-			path = "Main-主菜单";
 			sourceTree = "<group>";
 		};
 		979110642231130800C2DE5B /* 省市区 */ = {
@@ -3215,6 +3170,9 @@
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
+				977E82D6223CD3CA00C8C01B /* CZUpdataView.h */,
+				977E82D7223CD3CA00C8C01B /* CZUpdataView.m */,
+				977E82D9223CD3D600C8C01B /* CZUpdataView.xib */,
 				97E90C1E22CC4933001437A7 /* CZBaseViewController.h */,
 				97E90C1F22CC4933001437A7 /* CZBaseViewController.m */,
 				97C52A702254B92C00787BC5 /* Recommend-推荐文章 */,
@@ -3890,7 +3848,6 @@
 				97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */,
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
 				97911051222F7F0200C2DE5B /* CZAddressCell.xib in Resources */,
-				97243A1321B5555C00EBFFCE /* CZEndLineView.xib in Resources */,
 				977E82DA223CD3D600C8C01B /* CZUpdataView.xib in Resources */,
 				97B4A4942248BE7B00E48D93 /* CZTrialApplyForDetailController.xib in Resources */,
 				97773A7722C1DBBB00314E42 /* CZFreeTakePartInCell.xib in Resources */,
@@ -4018,6 +3975,7 @@
 				97705CD021082A2000485D64 /* UIView+GXExtension.m in Sources */,
 				97BDB8492110072100966FF0 /* CZDChoicenessController.m in Sources */,
 				9795852E2294EA58005FC54D /* CZReportEditorController.m in Sources */,
+				9712727022CF1D47009EB40F /* CZMainHotSaleDetailController.m in Sources */,
 				9785778221A6B82400E42B29 /* CZSubOneCommentCell.m in Sources */,
 				97BDB8512110124200966FF0 /* CZDChoiceDetailController.m in Sources */,
 				97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */,
@@ -4072,7 +4030,6 @@
 				97798CD1212D0FC90052CE94 /* UIImageView+WebCache.m in Sources */,
 				97C7FF06216DDDAB0091DC07 /* NSObject+MJProperty.m in Sources */,
 				9723075721AD3ABB0004C00C /* CZCommentModel.m in Sources */,
-				97705CC12108250000485D64 /* CZOneController.m in Sources */,
 				97798CD7212D0FC90052CE94 /* SDWebImageImageIOCoder.m in Sources */,
 				971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */,
 				9721CE0421E30805007F9208 /* CZTestDetailModel.m in Sources */,
@@ -4086,7 +4043,6 @@
 				97C78FC521196C6F00374CCD /* CZSystemMessageCell.m in Sources */,
 				97F4D48C224A1D4000A82B14 /* CZReportAllListController.m in Sources */,
 				97705C6B2107172A00485D64 /* AFHTTPSessionManager.m in Sources */,
-				97705C57210716A300485D64 /* CZHotSaleController.m in Sources */,
 				97BB48092133AB6B006AE982 /* CZCommoditySubController.m in Sources */,
 				97705C6C2107172A00485D64 /* AFURLSessionManager.m in Sources */,
 				977E8098225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m in Sources */,
@@ -4159,7 +4115,6 @@
 				9744821221B7CDFA00F1639B /* CZShareItemButton.m in Sources */,
 				97D8FCBC2111504000D8ED8F /* CZMeCell.m in Sources */,
 				97FF6DD521182CE100376435 /* CZUnusedController.m in Sources */,
-				9785779021A80B4100E42B29 /* CZSubTitleButton.m in Sources */,
 				974F489121A3B5BE00E1ED1A /* CZAttentionDetailCell.m in Sources */,
 				97705C56210716A300485D64 /* CZMeController.m in Sources */,
 				97FD66D12297CEBE0053AAE9 /* CZEditorImageView.m in Sources */,
@@ -4187,7 +4142,6 @@
 				97705C6A2107172A00485D64 /* AFURLResponseSerialization.m in Sources */,
 				9779470E22BCD38A00DA3948 /* CZFreeDetailsubView.m in Sources */,
 				97C52A6F2254B8DC00787BC5 /* CZCommonRecommendController.m in Sources */,
-				97243A1121B5555200EBFFCE /* CZEndLineView.m in Sources */,
 				97B4A4922248BDB800E48D93 /* CZTrialApplyForDetailController.m in Sources */,
 				97AB0C182253254D00072426 /* CZTrialApplyForController.m in Sources */,
 				97705C6E2107172A00485D64 /* AFNetworkReachabilityManager.m in Sources */,

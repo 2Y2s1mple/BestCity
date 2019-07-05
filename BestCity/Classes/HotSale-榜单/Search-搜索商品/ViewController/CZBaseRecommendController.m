@@ -9,7 +9,7 @@
 #import "CZBaseRecommendController.h"
 #import "CZHotSaleCell.h"
 #import "CZRecommendDetailController.h"
-#import "CZEndLineView.h"
+
 
 @interface CZBaseRecommendController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -39,15 +39,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
-    tableView.tableFooterView = [self creatFooterView];
     self.tableView = tableView;
-}
-
-- (UIView *)creatFooterView
-{
-    CZEndLineView *footer = [CZEndLineView endLineView];
-    footer.autoresizingMask = UIViewAutoresizingNone;
-    return footer;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

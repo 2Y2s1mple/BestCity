@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZMainHotSaleCell : UITableViewCell
 /** <#注释#> */
 @property (nonatomic, strong) NSDictionary *data;
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *adDic;
 @end
 
 NS_ASSUME_NONNULL_END

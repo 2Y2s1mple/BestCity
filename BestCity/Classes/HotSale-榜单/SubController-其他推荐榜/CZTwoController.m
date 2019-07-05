@@ -115,7 +115,6 @@
             if ([result[@"data"] count] > 0) {
                 // 删除noData图片
                 [self.noDataView removeFromSuperview];
-                self.tableView.tableFooterView = [self creatFooterView];;
             } else {
                 // 加载NnoData图片
                 [self.tableView addSubview:self.noDataView];
