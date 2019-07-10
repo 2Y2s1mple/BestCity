@@ -40,6 +40,15 @@
     [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"img"]]];
 }
 
+- (void)setArticleDic:(NSDictionary *)articleDic
+{
+    _articleDic = articleDic;
+    self.titleLabel.text = articleDic[@"title"];
+    self.subTitleLabel.text = [NSString stringWithFormat:@"%@阅读", articleDic[@"pv"]];
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:articleDic[@"img"]]];
+
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;

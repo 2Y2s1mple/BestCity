@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZJIPINSynthesisTool : NSObject
 
 + (NSString *)getModuleTypeNumber:(CZJIPINModuleType)type;
-
++ (CZJIPINModuleType)getModuleType:(NSInteger)typeNumber;
 @end
 
 NS_ASSUME_NONNULL_END

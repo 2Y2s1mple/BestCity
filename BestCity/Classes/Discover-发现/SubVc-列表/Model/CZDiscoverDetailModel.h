@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSDictionary *user;
 /** 访问量 */
 @property (nonatomic, strong) NSString *pv;
+/** 跳转类型 1商品，2评测, 3发现，4试用 */
+@property (nonatomic, strong) NSString *type;
 
 /** 辅助 */
 /** cell的高度 */

@@ -185,7 +185,7 @@ static CGFloat const likeAndShareHeight = 49;
     self.attentionBtn.hidden = YES;
     
     /** 文章的类型: 1商品，2评测, 3发现，4试用 */
-    NSString *type  = (self.detailType == CZJIPINModuleDiscover) ? [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType] : [CZJIPINSynthesisTool getModuleTypeNumber:CZJIPINModuleEvaluation];
+    NSString *type  = (self.detailType == CZJIPINModuleDiscover || self.detailType == CZJIPINModuleRelationBK) ? [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType] : [CZJIPINSynthesisTool getModuleTypeNumber:CZJIPINModuleEvaluation];
     
     // 测评
     self.testVc = [[CZTestSubController alloc] init];

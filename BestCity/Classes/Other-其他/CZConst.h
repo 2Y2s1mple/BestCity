@@ -22,5 +22,7 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
     CZJIPINModuleEvaluation,
     CZJIPINModuleTrail,
     CZJIPINModuleTrailReport,
+    CZJIPINModuleBK,
+    CZJIPINModuleRelationBK,
     CZJIPINModuleMe,
 };

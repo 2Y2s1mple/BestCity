@@ -1,8 +1,8 @@
 //
-//  CZCommonRecommendCell.h
+//  CZMHSDCommodityCell2.h
 //  BestCity
 //
-//  Created by JasonBourne on 2019/4/4.
+//  Created by JasonBourne on 2019/7/9.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZCommonRecommendCell : UITableViewCell
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
-/** 相关文章数据 */
+@interface CZMHSDCommodityCell2 : UITableViewCell
+/** 数据 */
 @property (nonatomic, strong) NSDictionary *dataDic;
 @end
 

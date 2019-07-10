@@ -18,6 +18,7 @@
 // 跳转
 #import "CZHotsaleSearchController.h"
 #import "CZMainHotSaleDetailController.h"
+#import "CZMHSDListNewController.h"
 
 @interface CZMainHotSaleController () <UITableViewDelegate, UITableViewDataSource>
 /** 记录btn */
@@ -138,7 +139,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(page_);
     //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getTopCategorysList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getTopCategorysList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
             listData(result);
 
@@ -180,12 +181,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-
+        CZMHSDListNewController *vc = [[CZMHSDListNewController alloc] init];
+        vc.imageUrl = self.adDic[@"img"];
+        [self.navigationController pushViewController:vc animated:YES];
     } else {
-        NSDictionary *model = self.dataSource[indexPath.row];
+        NSDictionary *model = self.dataSource[indexPath.row - 1];
         CZMainHotSaleDetailController *vc = [[CZMainHotSaleDetailController alloc] init];
         vc.ID = model[@"categoryId"];
-        vc.titleText = model[@"topTitle"];
+        vc.titleText = [NSString stringWithFormat:@"%@榜单", model[@"categoryName"]];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

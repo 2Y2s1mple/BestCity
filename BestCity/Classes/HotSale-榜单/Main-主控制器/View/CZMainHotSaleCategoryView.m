@@ -11,6 +11,9 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 
+// 跳转
+#import "CZMainHotSaleDetailController.h"
+
 
 
 @interface CZMainHotSaleCategoryView ()
@@ -151,6 +154,7 @@
 
         // 创建按钮
         CZSubButton *btn = [CZSubButton buttonWithType:UIButtonTypeCustom];
+        btn.model = model;
         btn.tag = i + 100;
         btn.width = width;
         btn.height = height;
@@ -202,9 +206,16 @@
 }
 
 #pragma mark - 二级菜单点击事件
-- (void)headerViewDidClickedBtn:(UIButton *)sender
+- (void)headerViewDidClickedBtn:(CZSubButton *)sender
 {
-
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *vc = nav.topViewController;
+    // 更多
+    CZMainHotSaleDetailController *toVc = [[CZMainHotSaleDetailController alloc] init];
+    toVc.ID = sender.model.categoryId;
+    toVc.titleText = [NSString stringWithFormat:@"%@榜单", sender.model.categoryName];
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 @end
