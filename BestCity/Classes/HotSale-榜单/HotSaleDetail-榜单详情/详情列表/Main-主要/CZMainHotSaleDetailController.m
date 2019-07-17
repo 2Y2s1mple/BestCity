@@ -39,7 +39,7 @@
         [navigationView addSubview:line];
         self.calculateHeight += navigationView.height;
         return navigationView;
-    };
+    } ;
 }
 
 - (CZScrollMenuModule * (^)(NSArray *titles))createMenuView

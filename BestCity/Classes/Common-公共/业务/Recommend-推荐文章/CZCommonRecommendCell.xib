@@ -36,6 +36,12 @@
                             <constraint firstAttribute="width" constant="131" id="6sh-La-cf5"/>
                             <constraint firstAttribute="height" constant="98" id="rdC-Em-CKh"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                <integer key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9PM-kV-uRd">
                         <rect key="frame" x="0.0" y="146.5" width="442" height="1"/>

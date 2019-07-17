@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** 数据 */
 @property (nonatomic, strong) NSDictionary *bkDataDic;
 @property (nonatomic, strong) NSString *titleText;
+
+@property (nonatomic, strong) NSString *ID;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -174,7 +174,6 @@
         CGFloat _hei = MAX(20, rect.size.height);
         titleLabel.height = _hei;
 
-        
         //头像
         UIImageView *iconImage = [[UIImageView alloc] init];
         iconImage.layer.cornerRadius = 25;
@@ -182,6 +181,7 @@
         [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.user[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
         iconImage.frame = CGRectMake(space, CZGetY(titleLabel) + (2 * space), 50, 50);
         [self.scrollerView addSubview:iconImage];
+
         //名字
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y + 15, 100, 20)];
         nameLabel.text = self.model.user[@"nickname"];

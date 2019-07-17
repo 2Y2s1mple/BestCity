@@ -19,9 +19,19 @@
 
 /** 删除按钮 */
 @property (nonatomic, weak) IBOutlet UIButton *delectBtn;
+
+/** 发布成功 */
+@property (nonatomic, weak) IBOutlet UILabel *IKnowLabel;
+
 @end
 
 @implementation CZUpdataView
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.IKnowLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+}
+
 + (instancetype)updataView
 {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0] ;
@@ -74,5 +84,12 @@
     
     [nav pushViewController:vc animated:YES];
 }
+
++ (instancetype)reviewView
+{
+    return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
+}
+
+
 
 @end

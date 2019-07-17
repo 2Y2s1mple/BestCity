@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 新用户给积分 */
 @property (nonatomic, strong) NSString *userPoint;
 + (instancetype)newUserRegistrationView;
+
+/** 审核中 */
++ (instancetype)reviewView;
 @end
 
 NS_ASSUME_NONNULL_END

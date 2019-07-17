@@ -159,25 +159,14 @@ static CGFloat const likeAndShareHeight = 49;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"articleId"] = self.dataDic[@"articleId"];
     param[@"type"] = @"5";
-
+    [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/article/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.dataSource = result[@"data"];
             [self createWebView];
             [self setup];
-//            self.dicDataModel = [CZTestDetailModel objectWithKeyValues:result[@"data"]];
-//            self.dataDic = result;
-            // 创建内容视图
-//            [self createSubViews];
-            // 创建分享购买视图
-//            NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
-//            shareDic[@"shareTitle"] =  self.dicDataModel.shareTitle;
-//            shareDic[@"shareContent"] = self.dicDataModel.shareContent;
-//            shareDic[@"shareUrl"] = self.dicDataModel.shareUrl;
-//            shareDic[@"shareImg"] = self.dicDataModel.shareImg;
-//            self.shareParam = shareDic;
-//            [self.view addSubview:self.likeView];
         }
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
 }
 

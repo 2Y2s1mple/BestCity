@@ -37,7 +37,6 @@
     NSString *therPrice = [NSString stringWithFormat:@"您还可以输入%ld个字", number];
     self.label.attributedText = [therPrice addAttributeColor:CZREDCOLOR Range:[therPrice rangeOfString:[NSString stringWithFormat:@"%ld", number]]];
     
-    
     // 底部退出按钮
     UIButton *loginOut = [UIButton buttonWithType:UIButtonTypeCustom];
     loginOut.frame = CGRectMake(0, SCR_HEIGHT - 50, SCR_WIDTH, 50);

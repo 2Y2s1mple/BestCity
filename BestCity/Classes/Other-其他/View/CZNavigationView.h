@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, CZNavigationViewType) {
 };
 
 @interface CZNavigationView : UIView
-- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(NSString *)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction navigationViewType:(CZNavigationViewType)type;
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(id)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction navigationViewType:(CZNavigationViewType)type;
 
 @property (nonatomic, assign) id <CZNavigationViewDelegate> delegate;
 @end

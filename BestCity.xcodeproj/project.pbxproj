@@ -51,8 +51,12 @@
 		970E618C22BA1D6A00E68BE3 /* CZFreeChargeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618B22BA1D6A00E68BE3 /* CZFreeChargeModel.m */; };
 		970E619022BA20A100E68BE3 /* CZCZFreeChargeCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618E22BA20A100E68BE3 /* CZCZFreeChargeCell2.m */; };
 		970E619122BA20A100E68BE3 /* CZCZFreeChargeCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */; };
+		9710E61222D8789600AA5D87 /* CZMHSAskQuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9710E61122D8789600AA5D87 /* CZMHSAskQuestionController.m */; };
 		9712727022CF1D47009EB40F /* CZMainHotSaleDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */; };
 		9712727B22CF3AC2009EB40F /* CZScrollMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */; };
+		97159B1522D6DB14008DC859 /* CZMHSDQuestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97159B1322D6DB14008DC859 /* CZMHSDQuestCell.m */; };
+		97159B1622D6DB14008DC859 /* CZMHSDQuestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97159B1422D6DB14008DC859 /* CZMHSDQuestCell.xib */; };
+		97159B1922D6E91D008DC859 /* CZMHSDQuestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97159B1822D6E91D008DC859 /* CZMHSDQuestModel.m */; };
 		971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C19EC21706B1400E6D864 /* CZPointDetailModel.m */; };
 		971CBEC821917B6300E4590B /* CZHotTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 971CBEC721917B6300E4590B /* CZHotTagsView.m */; };
 		9721CE0121E2FE82007F9208 /* CZCommodityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9721CE0021E2FE82007F9208 /* CZCommodityDetailModel.m */; };
@@ -128,6 +132,10 @@
 		97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97572A8B21198F7F00FB42DE /* CZLoginController.xib */; };
 		975B85A1219FB12C00525198 /* CZDiscoverTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 975B85A0219FB12C00525198 /* CZDiscoverTitleModel.m */; };
 		975B85A4219FB84D00525198 /* CZDiscoverDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 975B85A3219FB84D00525198 /* CZDiscoverDetailModel.m */; };
+		975BCF1122D81C1A0031F3AC /* CZMHSDQDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 975BCF1022D81C1A0031F3AC /* CZMHSDQDetailController.m */; };
+		975BCF1822D85A3A0031F3AC /* CZMHSDQDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 975BCF1622D85A3A0031F3AC /* CZMHSDQDetailCell.m */; };
+		975BCF1922D85A3A0031F3AC /* CZMHSDQDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 975BCF1722D85A3A0031F3AC /* CZMHSDQDetailCell.xib */; };
+		975BCF2222D85F3E0031F3AC /* CZMHSDQDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 975BCF2122D85F3E0031F3AC /* CZMHSDQDetailModel.m */; };
 		975D683222B7663E00F70951 /* TCWebCodesSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975D683122B7663E00F70951 /* TCWebCodesSDK.framework */; };
 		975D683522B8A93100F70951 /* CZNewProductTrialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 975D683422B8A93100F70951 /* CZNewProductTrialController.m */; };
 		975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DB211217AFF1100A062AB /* CZAlertViewTool.m */; };
@@ -384,6 +392,7 @@
 		97CAE7C021194C5D00858749 /* CZMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CAE7BE21194C5D00858749 /* CZMessageCell.m */; };
 		97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CAE7BF21194C5D00858749 /* CZMessageCell.xib */; };
 		97CAE7C321194DF900858749 /* CZMessageData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97CAE7C221194DF900858749 /* CZMessageData.plist */; };
+		97CC633522D6D00E0054CFEE /* CZMHSDQuestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC633422D6D00E0054CFEE /* CZMHSDQuestController.m */; };
 		97CDCB32211D625700521ED5 /* UILabel+CZAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB31211D625700521ED5 /* UILabel+CZAdapter.m */; };
 		97CDCB35211D76CC00521ED5 /* UIFont+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CDCB34211D76CC00521ED5 /* UIFont+CZExtension.m */; };
 		97D39173223645290081F229 /* CZOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D39172223645290081F229 /* CZOrderModel.m */; };
@@ -530,10 +539,17 @@
 		970E618D22BA20A100E68BE3 /* CZCZFreeChargeCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCZFreeChargeCell2.h; sourceTree = "<group>"; };
 		970E618E22BA20A100E68BE3 /* CZCZFreeChargeCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCZFreeChargeCell2.m; sourceTree = "<group>"; };
 		970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCZFreeChargeCell2.xib; sourceTree = "<group>"; };
+		9710E61022D8789600AA5D87 /* CZMHSAskQuestionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSAskQuestionController.h; sourceTree = "<group>"; };
+		9710E61122D8789600AA5D87 /* CZMHSAskQuestionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSAskQuestionController.m; sourceTree = "<group>"; };
 		9712726E22CF1D47009EB40F /* CZMainHotSaleDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleDetailController.h; sourceTree = "<group>"; };
 		9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleDetailController.m; sourceTree = "<group>"; };
 		9712727922CF3AC2009EB40F /* CZScrollMenuModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZScrollMenuModule.h; sourceTree = "<group>"; };
 		9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZScrollMenuModule.m; sourceTree = "<group>"; };
+		97159B1222D6DB14008DC859 /* CZMHSDQuestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQuestCell.h; sourceTree = "<group>"; };
+		97159B1322D6DB14008DC859 /* CZMHSDQuestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQuestCell.m; sourceTree = "<group>"; };
+		97159B1422D6DB14008DC859 /* CZMHSDQuestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMHSDQuestCell.xib; sourceTree = "<group>"; };
+		97159B1722D6E91D008DC859 /* CZMHSDQuestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQuestModel.h; sourceTree = "<group>"; };
+		97159B1822D6E91D008DC859 /* CZMHSDQuestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQuestModel.m; sourceTree = "<group>"; };
 		971C19EB21706B1400E6D864 /* CZPointDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointDetailModel.h; sourceTree = "<group>"; };
 		971C19EC21706B1400E6D864 /* CZPointDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZPointDetailModel.m; sourceTree = "<group>"; };
 		971CBEC621917B6300E4590B /* CZHotTagsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTagsView.h; sourceTree = "<group>"; };
@@ -660,6 +676,13 @@
 		975B85A0219FB12C00525198 /* CZDiscoverTitleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZDiscoverTitleModel.m; sourceTree = "<group>"; };
 		975B85A2219FB84D00525198 /* CZDiscoverDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZDiscoverDetailModel.h; sourceTree = "<group>"; };
 		975B85A3219FB84D00525198 /* CZDiscoverDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZDiscoverDetailModel.m; sourceTree = "<group>"; };
+		975BCF0F22D81C1A0031F3AC /* CZMHSDQDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQDetailController.h; sourceTree = "<group>"; };
+		975BCF1022D81C1A0031F3AC /* CZMHSDQDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQDetailController.m; sourceTree = "<group>"; };
+		975BCF1522D85A3A0031F3AC /* CZMHSDQDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQDetailCell.h; sourceTree = "<group>"; };
+		975BCF1622D85A3A0031F3AC /* CZMHSDQDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQDetailCell.m; sourceTree = "<group>"; };
+		975BCF1722D85A3A0031F3AC /* CZMHSDQDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMHSDQDetailCell.xib; sourceTree = "<group>"; };
+		975BCF2022D85F3E0031F3AC /* CZMHSDQDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQDetailModel.h; sourceTree = "<group>"; };
+		975BCF2122D85F3E0031F3AC /* CZMHSDQDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQDetailModel.m; sourceTree = "<group>"; };
 		975D683122B7663E00F70951 /* TCWebCodesSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TCWebCodesSDK.framework; sourceTree = "<group>"; };
 		975D683322B8A93100F70951 /* CZNewProductTrialController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZNewProductTrialController.h; sourceTree = "<group>"; };
 		975D683422B8A93100F70951 /* CZNewProductTrialController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZNewProductTrialController.m; sourceTree = "<group>"; };
@@ -1131,6 +1154,8 @@
 		97CAE7BE21194C5D00858749 /* CZMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMessageCell.m; sourceTree = "<group>"; };
 		97CAE7BF21194C5D00858749 /* CZMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMessageCell.xib; sourceTree = "<group>"; };
 		97CAE7C221194DF900858749 /* CZMessageData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CZMessageData.plist; sourceTree = "<group>"; };
+		97CC633322D6D00E0054CFEE /* CZMHSDQuestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQuestController.h; sourceTree = "<group>"; };
+		97CC633422D6D00E0054CFEE /* CZMHSDQuestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQuestController.m; sourceTree = "<group>"; };
 		97CDCB30211D625700521ED5 /* UILabel+CZAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+CZAdapter.h"; sourceTree = "<group>"; };
 		97CDCB31211D625700521ED5 /* UILabel+CZAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CZAdapter.m"; sourceTree = "<group>"; };
 		97CDCB33211D76CC00521ED5 /* UIFont+CZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+CZExtension.h"; sourceTree = "<group>"; };
@@ -1653,6 +1678,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9710E61322D87CF600AA5D87 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				97E90C1E22CC4933001437A7 /* CZBaseViewController.h */,
+				97E90C1F22CC4933001437A7 /* CZBaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		9712726D22CF1B09009EB40F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1674,9 +1708,10 @@
 			isa = PBXGroup;
 			children = (
 				977607C822D5731100F846BE /* 详情列表 */,
-				972953A522D5BE1F00B2973F /* 评测推荐 */,
-				972953A622D5D82F00B2973F /* 百科 */,
 				977607C922D5732D00F846BE /* 新品专区 */,
+				972953A622D5D82F00B2973F /* 百科 */,
+				97CC633222D6CDAB0054CFEE /* 问答 */,
+				972953A522D5BE1F00B2973F /* 评测推荐 */,
 			);
 			path = "HotSaleDetail-榜单详情";
 			sourceTree = "<group>";
@@ -1697,8 +1732,6 @@
 				977E82D6223CD3CA00C8C01B /* CZUpdataView.h */,
 				977E82D7223CD3CA00C8C01B /* CZUpdataView.m */,
 				977E82D9223CD3D600C8C01B /* CZUpdataView.xib */,
-				97E90C1E22CC4933001437A7 /* CZBaseViewController.h */,
-				97E90C1F22CC4933001437A7 /* CZBaseViewController.m */,
 				97C52A702254B92C00787BC5 /* Recommend-推荐文章 */,
 				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
 				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
@@ -2093,6 +2126,43 @@
 			children = (
 				979182AD219E6FED0011133E /* CZEvaluationTitleModel.h */,
 				979182AE219E6FED0011133E /* CZEvaluationTitleModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		975BCF1222D859A20031F3AC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				97CC633322D6D00E0054CFEE /* CZMHSDQuestController.h */,
+				97CC633422D6D00E0054CFEE /* CZMHSDQuestController.m */,
+				975BCF0F22D81C1A0031F3AC /* CZMHSDQDetailController.h */,
+				975BCF1022D81C1A0031F3AC /* CZMHSDQDetailController.m */,
+				9710E61022D8789600AA5D87 /* CZMHSAskQuestionController.h */,
+				9710E61122D8789600AA5D87 /* CZMHSAskQuestionController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		975BCF1322D859B70031F3AC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97159B1222D6DB14008DC859 /* CZMHSDQuestCell.h */,
+				97159B1322D6DB14008DC859 /* CZMHSDQuestCell.m */,
+				97159B1422D6DB14008DC859 /* CZMHSDQuestCell.xib */,
+				975BCF1522D85A3A0031F3AC /* CZMHSDQDetailCell.h */,
+				975BCF1622D85A3A0031F3AC /* CZMHSDQDetailCell.m */,
+				975BCF1722D85A3A0031F3AC /* CZMHSDQDetailCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		975BCF1422D859C10031F3AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97159B1722D6E91D008DC859 /* CZMHSDQuestModel.h */,
+				97159B1822D6E91D008DC859 /* CZMHSDQuestModel.m */,
+				975BCF2022D85F3E0031F3AC /* CZMHSDQDetailModel.h */,
+				975BCF2122D85F3E0031F3AC /* CZMHSDQDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3289,6 +3359,7 @@
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
+				9710E61322D87CF600AA5D87 /* Base */,
 				9712727422CF386D009EB40F /* Module */,
 				9712727322CF3855009EB40F /* 业务 */,
 			);
@@ -3506,6 +3577,16 @@
 				97C85133211C07EA005540D8 /* MBProgressHUD.m */,
 			);
 			path = MBProgress;
+			sourceTree = "<group>";
+		};
+		97CC633222D6CDAB0054CFEE /* 问答 */ = {
+			isa = PBXGroup;
+			children = (
+				975BCF1222D859A20031F3AC /* Controller */,
+				975BCF1422D859C10031F3AC /* Model */,
+				975BCF1322D859B70031F3AC /* View */,
+			);
+			path = "问答";
 			sourceTree = "<group>";
 		};
 		97CF34272177393900DA9198 /* Login-登录 */ = {
@@ -4027,6 +4108,7 @@
 				977607D122D5892E00F846BE /* CZMHSDListNewCell.xib in Resources */,
 				9723076221AD77000004C00C /* CZNoDataView.xib in Resources */,
 				97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */,
+				97159B1622D6DB14008DC859 /* CZMHSDQuestCell.xib in Resources */,
 				97FEBF2C22D490BC007BF592 /* CZMHSDCommodityCell3.xib in Resources */,
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
 				97911051222F7F0200C2DE5B /* CZAddressCell.xib in Resources */,
@@ -4042,6 +4124,7 @@
 				97B4A49F22490BB800E48D93 /* CZTrailTestCell.xib in Resources */,
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
 				9779471022BCD39900DA3948 /* CZFreeDetailsubView.xib in Resources */,
+				975BCF1922D85A3A0031F3AC /* CZMHSDQDetailCell.xib in Resources */,
 				97BC05DC2112B122001ED65A /* key-blue.png in Resources */,
 				979110732231131400C2DE5B /* province_data.xml in Resources */,
 				97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */,
@@ -4112,6 +4195,7 @@
 				97C7FF4A216DDDB50091DC07 /* MJRefreshAutoFooter.m in Sources */,
 				97773A7A22C217FC00314E42 /* CZFreeAlertView2.m in Sources */,
 				97705CD82108595600485D64 /* CALayer+LayerColor.m in Sources */,
+				975BCF2222D85F3E0031F3AC /* CZMHSDQDetailModel.m in Sources */,
 				9723075A21AD50D50004C00C /* NSDictionary+CZExtension.m in Sources */,
 				97F0EC392125692B000FE1DC /* CZGuideTool.m in Sources */,
 				97798C7B212CF4430052CE94 /* SVIndefiniteAnimatedView.m in Sources */,
@@ -4120,11 +4204,14 @@
 				977E82D1223C9B4700C8C01B /* CZInvitationController.m in Sources */,
 				978EC63C224B21BB005D98EE /* CZTrialAllReportHotController.m in Sources */,
 				972F4BAD22AE5AAE00F30F6B /* CZTeamMembersCell.m in Sources */,
+				97159B1522D6DB14008DC859 /* CZMHSDQuestCell.m in Sources */,
+				97159B1922D6E91D008DC859 /* CZMHSDQuestModel.m in Sources */,
 				97C7FF38216DDDB50091DC07 /* UIScrollView+MJRefresh.m in Sources */,
 				97C7FF47216DDDB50091DC07 /* MJRefreshFooter.m in Sources */,
 				97705C59210716A300485D64 /* CZDiscoverController.m in Sources */,
 				97C8513E211C3B1B005540D8 /* NSString+CZExtension.m in Sources */,
 				9785778721A6E04800E42B29 /* CZPackUpCommentCell.m in Sources */,
+				97CC633522D6D00E0054CFEE /* CZMHSDQuestController.m in Sources */,
 				97C78FB821196A6A00374CCD /* CZMessageActivityController.m in Sources */,
 				972E41E321147D2400BC751C /* CZSettingController.m in Sources */,
 				97798CCB212D0FC90052CE94 /* NSButton+WebCache.m in Sources */,
@@ -4145,6 +4232,7 @@
 				979110782231131400C2DE5B /* AddressModel.m in Sources */,
 				97BC05DA2112B122001ED65A /* DLIDEKeyboardView.m in Sources */,
 				97C7FF04216DDDAB0091DC07 /* MJConst.m in Sources */,
+				975BCF1122D81C1A0031F3AC /* CZMHSDQDetailController.m in Sources */,
 				97F0EC3C212569C4000FE1DC /* CZSaveTool.m in Sources */,
 				97FEBF2B22D490BC007BF592 /* CZMHSDCommodityCell3.m in Sources */,
 				97C7FF02216DDDAB0091DC07 /* MJProperty.m in Sources */,
@@ -4324,6 +4412,7 @@
 				97705C6F2107172A00485D64 /* AFSecurityPolicy.m in Sources */,
 				97420DDD21ECB1B200FE3D9F /* CZSearchSubDetailTwoController.m in Sources */,
 				974A3426212C30EA009192E3 /* GXNetTool.m in Sources */,
+				9710E61222D8789600AA5D87 /* CZMHSAskQuestionController.m in Sources */,
 				97F71BA021AD21A7005BCAC3 /* PlanADScrollView.m in Sources */,
 				97ED11F2211582910003E0F7 /* CZAttentionCell.m in Sources */,
 				979110742231131400C2DE5B /* MOFSDatePicker.m in Sources */,
@@ -4339,6 +4428,7 @@
 				97705C6E2107172A00485D64 /* AFNetworkReachabilityManager.m in Sources */,
 				9763A1F1225225F200F1A8FF /* CZMyTrialController.m in Sources */,
 				97798CD9212D0FC90052CE94 /* SDWebImageWebPCoder.m in Sources */,
+				975BCF1822D85A3A0031F3AC /* CZMHSDQDetailCell.m in Sources */,
 				97798CC8212D0FC90052CE94 /* SDWebImageCompat.m in Sources */,
 				97911045222F6A2100C2DE5B /* CZMyWalletController.m in Sources */,
 				972F4BB722AF5A5F00F30F6B /* GXPhotoCell.m in Sources */,

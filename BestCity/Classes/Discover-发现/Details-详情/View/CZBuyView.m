@@ -142,10 +142,13 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"goodsId"] = ID;
     //获取详情数据
+    [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:vc];
         } else {
+            [CZProgressHUD showProgressHUDWithText:@"接口错误"];
+            [CZProgressHUD hideAfterDelay:1.5];
         }
     } failure:^(NSError *error) {
 

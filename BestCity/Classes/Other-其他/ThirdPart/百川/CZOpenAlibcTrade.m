@@ -58,7 +58,8 @@
     showParam.backUrl = @"tbopen25025861";
     showParam.isNeedPush = YES;
     showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
-    
+
+    [CZProgressHUD hideAfterDelay:1.5];
     [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
         NSLog(@"-----AlibcTradeSDK------");
             if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){

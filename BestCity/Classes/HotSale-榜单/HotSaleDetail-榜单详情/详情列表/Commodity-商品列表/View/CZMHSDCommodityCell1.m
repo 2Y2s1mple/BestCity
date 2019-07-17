@@ -8,7 +8,8 @@
 
 #import "CZMHSDCommodityCell1.h"
 // 跳转
-#import "CZMHSDetailBkController.h"
+#import "CZMHSDetailBkController.h" // 百科
+#import "CZMHSDQuestController.h" // 问答
 
 
 @interface CZMHSDCommodityCell1 ()
@@ -122,7 +123,14 @@
 }
 
 - (IBAction)questionAction:(UITapGestureRecognizer *)sender {
-     NSLog(@"questionAction");
+    CZMHSDQuestController *toVc = [[CZMHSDQuestController alloc] init];
+    toVc.titleText = [NSString stringWithFormat:@"%@问答区", self.titleText];
+    toVc.dataArr = self.dataList;
+    toVc.ID = self.ID;
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *vc = nav.topViewController;
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 

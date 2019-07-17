@@ -167,7 +167,6 @@
         vc.Id = model.Id;
         [self.navigationController pushViewController:vc animated:YES];
     }
-
 }
 
 @end

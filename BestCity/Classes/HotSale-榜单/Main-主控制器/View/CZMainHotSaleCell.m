@@ -39,6 +39,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 21];
 }
 

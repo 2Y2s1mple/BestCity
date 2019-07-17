@@ -107,6 +107,7 @@
         return cell;
     } else if (indexPath.section == 1) {
         CZMHSDCommodityCell1 *cell = [CZMHSDCommodityCell1 cellwithTableView:tableView];
+        cell.ID = self.ID;
         cell.titleText = self.model.categoryName;
         cell.dataList = self.model.relatedQuestionList;
         cell.bkDataDic = self.model.relatedPedia;

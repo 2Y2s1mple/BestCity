@@ -17,7 +17,7 @@
 
 @implementation CZNavigationView
 
-- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(NSString *)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction navigationViewType:(CZNavigationViewType)type
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(id)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction navigationViewType:(CZNavigationViewType)type
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -54,13 +54,22 @@
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         [self addSubview:titleLabel];
         
-        if (rightBtnTitle) {
+        if ([rightBtnTitle isKindOfClass:[NSString class]]) {
             self.rightBlock = rightBtnAction;
             UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             rightBtn.frame = CGRectMake(SCR_WIDTH - 100, titleLabel.y, 80, 20);
             [rightBtn setTitle:rightBtnTitle forState:UIControlStateNormal];
             [rightBtn setTitleColor:textColor forState:UIControlStateNormal];
             rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+            rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            [self addSubview:rightBtn];
+            [rightBtn addTarget:self action:@selector(didClickedRightBtn) forControlEvents:UIControlEventTouchUpInside];
+        } else if ([rightBtnTitle isKindOfClass:[UIImage class]]){
+            self.rightBlock = rightBtnAction;
+            UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            rightBtn.frame = CGRectMake(SCR_WIDTH - 100, 20, 80, 40);
+            rightBtn.centerY = leftBtn.centerY;
+            [rightBtn setImage:(UIImage *)rightBtnTitle forState:UIControlStateNormal];
             rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             [self addSubview:rightBtn];
             [rightBtn addTarget:self action:@selector(didClickedRightBtn) forControlEvents:UIControlEventTouchUpInside];
