@@ -116,6 +116,16 @@
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
         }];
+    } else if (type == CZJIPINModuleRelationBK) {
+        UILabel *titleLabel = [[UILabel alloc] init];
+        self.titleLabel = titleLabel;
+        titleLabel.text = @"报告详情";
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.textColor = [UIColor blackColor];
+        [self addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self);
+        }];
     } else {
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;

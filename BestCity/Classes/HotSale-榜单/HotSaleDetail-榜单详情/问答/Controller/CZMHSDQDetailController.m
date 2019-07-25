@@ -81,7 +81,8 @@
         label.centerY = view.height / 2.0;
         [view addSubview:label];
 
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment-2"]];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-favor"]];
+        imageView.highlightedImage = [UIImage imageNamed:@"nav-favor-sel"];
         imageView.x = SCR_WIDTH - 42;
         imageView.y = 12;
         [_bottomView addSubview:imageView];

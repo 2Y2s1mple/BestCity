@@ -346,6 +346,7 @@
 		97BDB8512110124200966FF0 /* CZDChoiceDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BDB8502110124200966FF0 /* CZDChoiceDetailController.m */; };
 		97BDB85F211077D800966FF0 /* CZMeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97BDB85E211077D800966FF0 /* CZMeController.xib */; };
 		97BDE5CB2195B232005FB405 /* CZConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BDE5CA2195B232005FB405 /* CZConst.m */; };
+		97BF266E22E568070064B20C /* CZUpdataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF266D22E568070064B20C /* CZUpdataManger.m */; };
 		97C52A6F2254B8DC00787BC5 /* CZCommonRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C52A6E2254B8DC00787BC5 /* CZCommonRecommendController.m */; };
 		97C78FB521196A2A00374CCD /* CZSystemMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C78FB421196A2A00374CCD /* CZSystemMessageController.m */; };
 		97C78FB821196A6A00374CCD /* CZMessageActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C78FB721196A6A00374CCD /* CZMessageActivityController.m */; };
@@ -1066,6 +1067,9 @@
 		97BDB85E211077D800966FF0 /* CZMeController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMeController.xib; sourceTree = "<group>"; };
 		97BDE5C92195B232005FB405 /* CZConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZConst.h; sourceTree = "<group>"; };
 		97BDE5CA2195B232005FB405 /* CZConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZConst.m; sourceTree = "<group>"; };
+		97BF266C22E568070064B20C /* CZUpdataManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUpdataManger.h; sourceTree = "<group>"; };
+		97BF266D22E568070064B20C /* CZUpdataManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZUpdataManger.m; sourceTree = "<group>"; };
+		97BF266F22E592B10064B20C /* CZUpdataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUpdataProtocol.h; sourceTree = "<group>"; };
 		97C52A6D2254B8DC00787BC5 /* CZCommonRecommendController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommonRecommendController.h; sourceTree = "<group>"; };
 		97C52A6E2254B8DC00787BC5 /* CZCommonRecommendController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommonRecommendController.m; sourceTree = "<group>"; };
 		97C78FB321196A2A00374CCD /* CZSystemMessageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSystemMessageController.h; sourceTree = "<group>"; };
@@ -1729,9 +1733,6 @@
 		9712727322CF3855009EB40F /* 业务 */ = {
 			isa = PBXGroup;
 			children = (
-				977E82D6223CD3CA00C8C01B /* CZUpdataView.h */,
-				977E82D7223CD3CA00C8C01B /* CZUpdataView.m */,
-				977E82D9223CD3D600C8C01B /* CZUpdataView.xib */,
 				97C52A702254B92C00787BC5 /* Recommend-推荐文章 */,
 				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
 				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
@@ -1745,6 +1746,7 @@
 		9712727422CF386D009EB40F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				97BF266B22E566CC0064B20C /* 弹框 */,
 				9712727922CF3AC2009EB40F /* CZScrollMenuModule.h */,
 				9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */,
 			);
@@ -3356,6 +3358,19 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		97BF266B22E566CC0064B20C /* 弹框 */ = {
+			isa = PBXGroup;
+			children = (
+				97BF266F22E592B10064B20C /* CZUpdataProtocol.h */,
+				977E82D6223CD3CA00C8C01B /* CZUpdataView.h */,
+				977E82D7223CD3CA00C8C01B /* CZUpdataView.m */,
+				977E82D9223CD3D600C8C01B /* CZUpdataView.xib */,
+				97BF266C22E568070064B20C /* CZUpdataManger.h */,
+				97BF266D22E568070064B20C /* CZUpdataManger.m */,
+			);
+			path = "弹框";
+			sourceTree = "<group>";
+		};
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4391,6 +4406,7 @@
 				9708490922433143000D5528 /* CZTrialDetailController.m in Sources */,
 				97FD7E162276ADEE00F5DFFC /* CZPhoneModelHandle.m in Sources */,
 				97B4A4992248DBF200E48D93 /* CZTrialTestListController.m in Sources */,
+				97BF266E22E568070064B20C /* CZUpdataManger.m in Sources */,
 				9744821221B7CDFA00F1639B /* CZShareItemButton.m in Sources */,
 				97D8FCBC2111504000D8ED8F /* CZMeCell.m in Sources */,
 				97FF6DD521182CE100376435 /* CZUnusedController.m in Sources */,

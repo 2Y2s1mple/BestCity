@@ -22,19 +22,28 @@
 
 /** 发布成功 */
 @property (nonatomic, weak) IBOutlet UILabel *IKnowLabel;
-
+/** <#注释#> */
+@property (nonatomic, strong) CZUpdataView *updataView;
 @end
 
 @implementation CZUpdataView
+@synthesize versionMessage = _versionMessage;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     self.IKnowLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
 }
 
-+ (instancetype)updataView
++ (instancetype)updataViewWithFrame:(CGRect)frame
 {
-    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0] ;
+    CZUpdataView *view = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0];
+    view.frame = frame;
+    return view;
+}
+
+- (UIView *)getView
+{
+    return self;
 }
 
 /** 去App Store */
@@ -60,7 +69,6 @@
     }
 }
 
-
 + (instancetype)newUserRegistrationView
 {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][1] ;
@@ -78,10 +86,8 @@
     [self removeFromSuperview];
     NSLog(@"------");
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
-    
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
-    
     [nav pushViewController:vc animated:YES];
 }
 

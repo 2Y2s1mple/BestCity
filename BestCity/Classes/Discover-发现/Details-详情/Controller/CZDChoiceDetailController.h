@@ -13,5 +13,7 @@
 @property (nonatomic, strong) NSString *findgoodsId;
 /** 详情的类型 */
 @property (nonatomic, assign) CZJIPINModuleType detailType;
+/** 显示的标题 */
+@property (nonatomic, strong) NSString *TitleText;
 
 @end

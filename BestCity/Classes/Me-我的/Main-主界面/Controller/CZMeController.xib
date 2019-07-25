@@ -38,7 +38,7 @@
                             </constraints>
                         </imageView>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headDefault" translatesAutoresizingMaskIntoConstraints="NO" id="XOO-5G-ru1">
-                            <rect key="frame" x="20" y="60" width="60" height="60"/>
+                            <rect key="frame" x="20" y="65" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="8Cf-Z5-qze"/>
                                 <constraint firstAttribute="height" constant="60" id="ttq-bf-LaM"/>
@@ -51,7 +51,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Y-z1-cIv" customClass="CZMutContentButton">
-                            <rect key="frame" x="99" y="60" width="30" height="38"/>
+                            <rect key="frame" x="99" y="65" width="30" height="38"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="Aoe-LN-5nq"/>
                             </constraints>
@@ -65,7 +65,7 @@
                             </connections>
                         </button>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
-                            <rect key="frame" x="20" y="220" width="335" height="600"/>
+                            <rect key="frame" x="20" y="225" width="335" height="600"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="600" id="nbk-yn-gRV"/>
@@ -76,7 +76,7 @@
                             </connections>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LaF-gn-9r4">
-                            <rect key="frame" x="0.0" y="148" width="375" height="60"/>
+                            <rect key="frame" x="0.0" y="153" width="375" height="60"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fw1-09-kap">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="60"/>
@@ -232,13 +232,13 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请码：37ER80" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB8-9v-bhm">
-                            <rect key="frame" x="99" y="103" width="108.5" height="17"/>
+                            <rect key="frame" x="99" y="108" width="108.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMu-OY-okU">
-                            <rect key="frame" x="219.5" y="99.5" width="70" height="24"/>
+                            <rect key="frame" x="219.5" y="104.5" width="70" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="PSG-qV-qrS"/>
                                 <constraint firstAttribute="height" constant="24" id="ifg-YN-x7P"/>
@@ -282,7 +282,7 @@
                         <constraint firstAttribute="trailing" secondItem="LaF-gn-9r4" secondAttribute="trailing" id="o1v-km-U2K"/>
                         <constraint firstItem="Q9Y-z1-cIv" firstAttribute="top" secondItem="XOO-5G-ru1" secondAttribute="top" id="oN4-ac-ntz"/>
                         <constraint firstItem="fc7-il-25H" firstAttribute="leading" secondItem="D8s-nW-E3e" secondAttribute="leading" id="oQ2-nc-aqQ"/>
-                        <constraint firstItem="XOO-5G-ru1" firstAttribute="top" secondItem="D8s-nW-E3e" secondAttribute="top" constant="60" id="tbi-h5-1Rs"/>
+                        <constraint firstItem="XOO-5G-ru1" firstAttribute="top" secondItem="D8s-nW-E3e" secondAttribute="top" constant="65" id="tbi-h5-1Rs"/>
                         <constraint firstItem="fc7-il-25H" firstAttribute="top" secondItem="D8s-nW-E3e" secondAttribute="top" constant="-44" id="x9t-Ta-ndi"/>
                     </constraints>
                     <connections>

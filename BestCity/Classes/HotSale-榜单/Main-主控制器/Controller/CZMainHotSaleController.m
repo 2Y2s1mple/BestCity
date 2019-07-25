@@ -13,6 +13,7 @@
 #import "CZMainHotSaleHeaderView.h"
 #import "CZMainHotSaleCategoryView.h"
 #import "CZMainHotSaleCell.h"
+#import "CZUpdataManger.h"
 // 模型
 #import "CZHotTitleModel.h"
 // 跳转
@@ -104,6 +105,7 @@
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     [self setupRefresh];
+
     // 获取数据
     WS(weakself);
     [self getCategoryListData:^(NSArray<CZHotTitleModel *> *modelList) {
@@ -112,6 +114,9 @@
     // 隐藏和显示的头部view
     [self.view addSubview:self.navTopView];
     self.navTopView.hidden = YES;
+
+    // 显示版本更新
+     [CZUpdataManger ShowUpdataViewWithNetworkService];
 }
 
 #pragma mark - 网络请求

@@ -90,7 +90,7 @@
     if (section == 0) {
         return self.model.relatedGoodsList.count;;
     } else if (section == 1) {
-        return 1;
+        return self.model.relatedQuestionList.count > 0 ? 1 : 0;
     } else if (section == 2)  {
         return self.model.relatedItemCategotyList.count;
     } else {

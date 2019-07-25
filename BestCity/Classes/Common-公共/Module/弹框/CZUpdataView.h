@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZUpdataProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZUpdataView : UIView
-+ (instancetype)updataView;
-/** 更新数据 */
-@property (nonatomic, strong) NSDictionary *versionMessage;
+@interface CZUpdataView : UIView <CZUpdataProtocol>
+
+
 
 /** 新用户给积分 */
 @property (nonatomic, strong) NSString *userPoint;
+
 + (instancetype)newUserRegistrationView;
 
 /** 审核中 */

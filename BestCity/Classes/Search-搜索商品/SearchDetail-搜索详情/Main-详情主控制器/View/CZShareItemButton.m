@@ -25,7 +25,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     self.imageView.x = 5;
     self.imageView.y = 0;
     self.imageView.width = self.width - 10;
@@ -34,7 +33,6 @@
     self.titleLabel.y = self.imageView.height + 10;
     self.titleLabel.width = self.width;
     self.titleLabel.height = self.height - self.width;
-    
 }
 
 @end

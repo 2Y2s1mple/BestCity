@@ -148,6 +148,7 @@ static CGFloat const likeAndShareHeight = 49;
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
         vc.detailType = CZJIPINModuleRelationBK;
         vc.findgoodsId = model[@"articleId"];
+        vc.TitleText = self.titleText;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

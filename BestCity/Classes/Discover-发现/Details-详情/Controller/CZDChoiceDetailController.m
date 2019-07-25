@@ -68,6 +68,9 @@ static CGFloat const likeAndShareHeight = 49;
     if (_scrollerView == nil) {
         CGFloat originY = (IsiPhoneX ? 44 : 20) + 40;
         _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, originY, SCR_WIDTH, SCR_HEIGHT - originY - (IsiPhoneX ? 83 : likeAndShareHeight))];
+        if (self.detailType == CZJIPINModuleRelationBK) {
+            _scrollerView.frame = CGRectMake(0, originY, SCR_WIDTH, SCR_HEIGHT - originY);
+        }
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
     }
@@ -136,7 +139,9 @@ static CGFloat const likeAndShareHeight = 49;
             shareDic[@"shareUrl"] = self.dicDataModel.shareUrl;
             shareDic[@"shareImg"] = self.dicDataModel.shareImg;
             self.shareParam = shareDic;
-            [self.view addSubview:self.likeView];
+            if (self.detailType != CZJIPINModuleRelationBK) {
+                [self.view addSubview:self.likeView];
+            }
         }
     } failure:^(NSError *error) {}];
 }
@@ -204,11 +209,13 @@ static CGFloat const likeAndShareHeight = 49;
     self.evaluate.targetId = self.dicDataModel.articleId;
     
     // 推荐文章
-    self.recommen = [[CZCommonRecommendController alloc] init];
-    self.recommen.view.y = self.evaluate.view.y + self.evaluate.scrollerView.height;
-    self.recommen.articleArr = self.dicDataModel.relatedArticleList;
-    [self.scrollerView addSubview:self.recommen.view];
-    [self addChildViewController:self.recommen];
+    if (self.detailType != CZJIPINModuleRelationBK) {
+        self.recommen = [[CZCommonRecommendController alloc] init];
+        self.recommen.view.y = self.evaluate.view.y + self.evaluate.scrollerView.height;
+        self.recommen.articleArr = self.dicDataModel.relatedArticleList;
+        [self.scrollerView addSubview:self.recommen.view];
+        [self addChildViewController:self.recommen];
+    }
     
     // 设置滚动高度
     self.scrollerView.contentSize = CGSizeMake(0, self.testVc.scrollerView.height + self.evaluate.scrollerView.height);
