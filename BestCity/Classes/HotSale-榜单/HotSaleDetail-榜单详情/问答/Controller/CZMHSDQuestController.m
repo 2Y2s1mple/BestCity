@@ -33,7 +33,7 @@
 - (CZNavigationView *)navigationView
 {
     if (_navigationView == nil) {
-        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:[UIImage imageNamed:@"Forward"] rightBtnAction:^{
+        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:[UIImage imageNamed:@"publish"] rightBtnAction:^{
             CZMHSAskQuestionController *vc = [[CZMHSAskQuestionController alloc] init];
             vc.goodsCategoryId = self.ID;
             [self.navigationController pushViewController:vc animated:YES];

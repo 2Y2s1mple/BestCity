@@ -85,6 +85,7 @@ static CGFloat const likeAndShareHeight = 49;
         self.nav.type = [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType];
         self.nav.projectId = self.findgoodsId;
         self.nav.delegate = self;
+        self.nav.titleText = self.TitleText;
     }
     return _nav;
 }
@@ -281,6 +282,20 @@ static CGFloat const likeAndShareHeight = 49;
 {
     [CZProgressHUD hideAfterDelay:0];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)didClickedTitleWithIndex:(NSInteger)index
+{
+    CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    share.cententText =  self.dataDic[@"content"];
+    NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
+    share.param = @{
+                    @"shareUrl" : [NSString stringWithFormat:@"https://www.jipincheng.cn/share/bkDetail.html?id=%@", self.findgoodsId],
+                    @"shareTitle" : self.dicDataModel.shareTitle,
+                    @"shareContent" : self.dicDataModel.shareContent,
+                    @"shareImg" : [UIImage imageNamed:@"headDefault"],
+                    };
+    [self.view addSubview:share];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

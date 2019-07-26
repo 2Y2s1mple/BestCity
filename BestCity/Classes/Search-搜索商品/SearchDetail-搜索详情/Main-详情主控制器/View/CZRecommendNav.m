@@ -33,6 +33,12 @@
     return _mainTitles;
 }
 
+- (void)setTitleText:(NSString *)titleText
+{
+    _titleText = titleText;
+    self.titleLabel.text = titleText;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame type:(CZJIPINModuleType)type
 {
     self = [super initWithFrame:frame];
@@ -119,7 +125,7 @@
     } else if (type == CZJIPINModuleRelationBK) {
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
-        titleLabel.text = @"报告详情";
+        titleLabel.text = self.titleText;
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
@@ -137,14 +143,20 @@
             make.center.equalTo(self);
         }];
     }
-    
+
+
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightBtn = rightBtn;
-    [rightBtn setImage:[UIImage imageNamed:@"nav-favor"] forState:UIControlStateNormal];
-    [rightBtn setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
-    
-    
-    [rightBtn addTarget:self action:@selector(clickedRight:) forControlEvents:UIControlEventTouchUpInside];
+    if (type == CZJIPINModuleRelationBK) {
+        [rightBtn setImage:[UIImage imageNamed:@"Trail-share-black"] forState:UIControlStateNormal];
+        [rightBtn setImage:[UIImage imageNamed:@"Trail-share-black"] forState:UIControlStateSelected];
+        [rightBtn addTarget:self action:@selector(shareBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+    } else {
+        [rightBtn setImage:[UIImage imageNamed:@"nav-favor"] forState:UIControlStateNormal];
+        [rightBtn setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
+        [rightBtn addTarget:self action:@selector(clickedRight:) forControlEvents:UIControlEventTouchUpInside];
+    }
     rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     rightBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
     [self addSubview:rightBtn];
@@ -154,6 +166,13 @@
         make.width.equalTo(@(40));
         make.height.equalTo(@(20));
     }];
+
+
+}
+
+- (void)shareBtnDidClicked:(UIButton *)sender
+{
+    [self.delegate didClickedTitleWithIndex:0];
 }
 
 - (void)clickedRight:(UIButton *)sender

@@ -12,6 +12,7 @@
 #import "CZScrollMenuModule.h"
 // 视图
 #import "CZMHSDetailCommodity.h"
+#import "CZNoDataView.h"
 // 数据
 #import "ZMHSDetailModel.h"
 
@@ -23,10 +24,21 @@
 @property (nonatomic, assign) CGFloat calculateHeight;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *orderbyCategoryId;
+/** 没有数据视图 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZMainHotSaleDetailController
 #pragma mark - 创建视图
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
 // 导航条
 - ( CZNavigationView * (^)(void))createNavView
 {
@@ -76,16 +88,21 @@
     // 获取数据
     [self getData:^(NSDictionary *data) {
         // 菜单
-        [weakself.view addSubview:weakself.createMenuView(data[@"relatedItemList"])];
-        // 榜单列表
-        CZMHSDetailCommodity *commodity = [[CZMHSDetailCommodity alloc] init];
-        [weakself addChildViewController:commodity];
-        commodity.model = [ZMHSDetailModel objectWithKeyValues:data];
-        commodity.ID = weakself.ID;
-        commodity.view.frame = CGRectMake(0, weakself.calculateHeight, SCR_WIDTH, SCR_HEIGHT - weakself.calculateHeight);
-        weakself.commodity = commodity;
-        // 榜单列表
-        [weakself.view addSubview:commodity.view];
+        ZMHSDetailModel *model = [ZMHSDetailModel objectWithKeyValues:data];
+        if (model.relatedItemList.count > 0) {
+            [weakself.view addSubview:weakself.createMenuView(model.relatedItemList)];
+            // 榜单列表
+            CZMHSDetailCommodity *commodity = [[CZMHSDetailCommodity alloc] init];
+            [weakself addChildViewController:commodity];
+            commodity.model = [ZMHSDetailModel objectWithKeyValues:data];
+            commodity.ID = weakself.ID;
+            commodity.view.frame = CGRectMake(0, weakself.calculateHeight, SCR_WIDTH, SCR_HEIGHT - weakself.calculateHeight);
+            weakself.commodity = commodity;
+            // 榜单列表
+            [weakself.view addSubview:commodity.view];
+        } else {
+            [weakself.view addSubview:weakself.noDataView];
+        }
     }];
 }
 

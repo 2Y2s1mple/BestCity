@@ -105,7 +105,7 @@ static CGFloat const likeAndShareHeight = 49;
         CGFloat space = 14.0f;
         //标题
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(space, SCR_HEIGHT, 150, 20)];
-        titleLabel.text = @"相关推荐";
+        titleLabel.text = @"相关文章";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
         self.titleLabel = titleLabel;
         [self.scrollerView addSubview:titleLabel];

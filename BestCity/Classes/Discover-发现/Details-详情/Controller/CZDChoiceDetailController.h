@@ -15,5 +15,5 @@
 @property (nonatomic, assign) CZJIPINModuleType detailType;
 /** 显示的标题 */
 @property (nonatomic, strong) NSString *TitleText;
-
+//CZDChoiceDetailController
 @end

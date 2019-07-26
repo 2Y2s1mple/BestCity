@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZMHSDetailModel : NSObject
+/** 菜单数据 */
+@property (nonatomic, strong) NSArray *relatedItemList;
 /** 列表 */
 @property (nonatomic, strong) NSArray *relatedGoodsList;
 /** 百科 */

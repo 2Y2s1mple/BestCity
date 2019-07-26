@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *projectId;
 /** 收藏的类型 */
 @property (nonatomic, strong) NSString *type;
+/** 传过来的标题 */
+@property (nonatomic, strong) NSString *titleText;
 /** 隐藏标题 */
 - (void)hiddenTitle;
 - (void)showTitle;

@@ -2498,13 +2498,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		97705C51210716A300485D64 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		97705C52210716A300485D64 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2933,7 +2926,6 @@
 			isa = PBXGroup;
 			children = (
 				97705C4E210716A300485D64 /* Controller */,
-				97705C51210716A300485D64 /* Model */,
 				97705C52210716A300485D64 /* View */,
 			);
 			path = "Details-详情";

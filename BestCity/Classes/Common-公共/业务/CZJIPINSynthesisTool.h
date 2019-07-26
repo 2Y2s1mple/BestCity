@@ -9,6 +9,16 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, CZJIPINModuleType){
+    CZJIPINModuleHotSale,
+    CZJIPINModuleDiscover,
+    CZJIPINModuleEvaluation,
+    CZJIPINModuleTrail,
+    CZJIPINModuleTrailReport,
+    CZJIPINModuleBK,
+    CZJIPINModuleRelationBK,
+    CZJIPINModuleMe,
+};
 
 @interface CZJIPINSynthesisTool : NSObject
 

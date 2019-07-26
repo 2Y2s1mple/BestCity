@@ -59,7 +59,7 @@
     if (sender.isSelected) {
         sender.selected = NO;
         [self snapDelete:self.model.ID];
-        [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1) == 0 ? 0 : ([sender.titleLabel.text integerValue] - 1)] forState:UIControlStateNormal];
+        [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1) <= 0 ? 0 : ([sender.titleLabel.text integerValue] - 1)] forState:UIControlStateNormal];
         self.model.voteCount = @([sender.titleLabel.text integerValue]);
     } else {
         sender.selected = YES;

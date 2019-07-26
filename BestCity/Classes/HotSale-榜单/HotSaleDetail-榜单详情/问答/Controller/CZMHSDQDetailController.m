@@ -16,6 +16,7 @@
 #import "CZMHSDQDetailModel.h"
 // 视图
 #import "CZMHSDQDetailCell.h"
+#import "CZShareView.h"
 /// 跳转
 #import "CZMHSAskQuestionController.h"
 
@@ -34,6 +35,8 @@
 
 /** 底部视图 */
 @property (nonatomic, strong) UIView *bottomView;
+/** 底部视图右面星星点击事件 */
+@property (nonatomic, strong) UIButton *rightBtn;
 /** 输入框 */
 @property (nonatomic, strong) UITextView *textView;
 /** 键盘视图 */
@@ -81,11 +84,16 @@
         label.centerY = view.height / 2.0;
         [view addSubview:label];
 
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-favor"]];
-        imageView.highlightedImage = [UIImage imageNamed:@"nav-favor-sel"];
-        imageView.x = SCR_WIDTH - 42;
-        imageView.y = 12;
-        [_bottomView addSubview:imageView];
+
+        UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];;
+        [rightBtn setImage:[UIImage imageNamed:@"nav-favor"] forState:UIControlStateNormal];
+        [rightBtn setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
+        [rightBtn sizeToFit];
+        rightBtn.x = SCR_WIDTH - 42;
+        rightBtn.centerY = _bottomView.height / 2.0;
+        [_bottomView addSubview:rightBtn];
+        [rightBtn addTarget:self action:@selector(clickedRight:) forControlEvents:UIControlEventTouchUpInside];
+        self.rightBtn = rightBtn;
     }
     return _bottomView;
 }
@@ -111,9 +119,16 @@
 {
     if (_navigationView == nil) {
         _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"" rightBtnTitle:[UIImage imageNamed:@"Forward"] rightBtnAction:^{
-            CZMHSAskQuestionController *vc = [[CZMHSAskQuestionController alloc] init];
-            vc.goodsCategoryId = self.ID;
-            [self.navigationController pushViewController:vc animated:YES];
+           // 分享
+            CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+            share.cententText = @"";
+            share.param = @{
+                            @"shareUrl" : [NSString stringWithFormat:@"https://www.jipincheng.cn/share/question.html?id=%@", self.model.ID],
+                            @"shareTitle" : self.model.title,
+                            @"shareContent" : [[self.dataSource firstObject] content],
+                            @"shareImg" : [UIImage imageNamed:@"headDefault"],
+                            };
+            [self.view addSubview:share];
         } navigationViewType  :CZNavigationViewTypeBlack];
         _navigationView.backgroundColor = CZGlobalWhiteBg;
         [self.view addSubview:_navigationView];
@@ -321,6 +336,8 @@
     [self.view addSubview:self.keyboardAccessoryView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+
+    [self isCollectDetail];
 }
 
 - (void)keyboardWillChangeFrame:(NSNotification *)note
@@ -343,6 +360,92 @@
 }
 
 #pragma mark - 事件
+- (void)clickedRight:(UIButton *)sender
+{
+    if (sender.selected) {
+        // 取消收藏
+        [self collectDelete];
+    } else {
+        // 收藏
+        [self collectInsert];
+    }
+}
+
+#pragma mark - 判断是否收藏了此文章
+- (void)isCollectDetail
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"targetId"] = self.model.ID;
+    param[@"type"] = @"4";
+
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/view/status"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"collect"] isEqualToNumber:@(1)]) {
+            self.rightBtn.selected = YES;
+        } else {
+            self.rightBtn.selected = NO;
+        }
+    } failure:^(NSError *error) {}];
+}
+
+#pragma mark - 取消收藏
+- (void)collectDelete
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"targetId"] = self.model.ID;
+    param[@"type"] = @"4";
+
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"/api/collect/delete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已取消"]) {
+            [CZProgressHUD showProgressHUDWithText:@"取消收藏"];
+            self.rightBtn.selected = NO;
+            [[NSNotificationCenter defaultCenter] postNotificationName:collectNotification object:nil];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"取消收藏失败"];
+            self.rightBtn.selected = YES;
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+#pragma mark - 收藏
+- (void)collectInsert
+{
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"targetId"] = self.model.ID;
+    param[@"type"] = @"4";
+
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已收藏"]) {
+            [CZProgressHUD showProgressHUDWithText:@"收藏成功"];
+            self.rightBtn.selected = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:collectNotification object:nil];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"收藏失败"];
+            self.rightBtn.selected = NO;
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:1];
+
+    } failure:^(NSError *error) {
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
 // 取消关注
 - (void)deleteAttention
 {
