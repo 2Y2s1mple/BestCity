@@ -64,11 +64,11 @@
                 self.tag4.hidden = YES;
                 break;
             case 3:
-                [self.tag4 setTitle:tagsArr[i][@"name"] forState:UIControlStateNormal];
-                self.tag1.hidden = NO;
-                self.tag2.hidden = NO;
-                self.tag3.hidden = NO;
-                self.tag4.hidden = NO;
+//                [self.tag4 setTitle:tagsArr[i][@"name"] forState:UIControlStateNormal];
+//                self.tag1.hidden = NO;
+//                self.tag2.hidden = NO;
+//                self.tag3.hidden = NO;
+//                self.tag4.hidden = NO;
                 break;
             default:
                 break;

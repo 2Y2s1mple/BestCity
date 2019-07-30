@@ -91,6 +91,11 @@ static NSString * const type = @"1";
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
+            if ([JPTOKEN length] <= 0) {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+                return;
+            }
             NSString *text = @"榜单--商品详情--立即购买";
             NSDictionary *context = @{@"mine" : text};
             [MobClick event:@"ID5" attributes:context];

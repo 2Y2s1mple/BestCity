@@ -68,10 +68,14 @@
 #pragma mark - 点击方法
 - (void)action
 {
-    if ([JPTOKEN length] <= 0)
-    {
+    if ([JPTOKEN length] <= 0) {
         CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:^{
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
         return;
     }
     self.imageBackView.userInteractionEnabled = NO;

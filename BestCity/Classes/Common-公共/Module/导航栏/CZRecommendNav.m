@@ -240,10 +240,18 @@
 #pragma mark - 收藏
 - (void)collectInsert
 {
+
+
+
     if ([JPTOKEN length] <= 0)
     {
         CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:^{
+            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
         return;
     }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];

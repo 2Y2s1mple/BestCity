@@ -336,8 +336,13 @@
     [self.view addSubview:self.keyboardAccessoryView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self isCollectDetail];
+
 }
 
 - (void)keyboardWillChangeFrame:(NSNotification *)note
@@ -391,6 +396,12 @@
 #pragma mark - 取消收藏
 - (void)collectDelete
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.model.ID;
     param[@"type"] = @"4";
@@ -449,6 +460,16 @@
 // 取消关注
 - (void)deleteAttention
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:^{
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
     param[@"attentionUserId"] = self.model.user[@"userId"];
@@ -472,6 +493,16 @@
 // 新增关注
 - (void)addAttention
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:^{
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
     param[@"attentionUserId"] = self.model.user[@"userId"];
@@ -506,9 +537,14 @@
 - (void)obtainDetailData
 {
     [self.view endEditing:YES];
-
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"content"] = self.textView.text;
+    param[@"content"] = [self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     param[@"questionId"] = self.model.ID;
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/question/addAnswer"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {

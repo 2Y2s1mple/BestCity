@@ -53,7 +53,7 @@ static id instancet_;
 #pragma mark - POP到前一页
 - (IBAction)popAction:(id)sender {
     UITabBarController *vc = (UITabBarController *)self.nextResponder;
-    if (!_isLogin) {
+    if (!_isLogin && vc.selectedIndex == 4) {
         vc.selectedIndex = 0;
     }
     [self dismissViewControllerAnimated:YES completion:nil];

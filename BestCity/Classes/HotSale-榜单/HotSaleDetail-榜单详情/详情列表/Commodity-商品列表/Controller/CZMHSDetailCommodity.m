@@ -90,8 +90,8 @@
     if (section == 0) {
         return self.model.relatedGoodsList.count;;
     } else if (section == 1) {
-        return self.model.relatedQuestionList.count > 0 ? 1 : 0;
-    } else if (section == 2)  {
+        return 1;
+    } else if (section == 2) {
         return self.model.relatedItemCategotyList.count;
     } else {
         return self.model.relatedArticleList.count;
@@ -132,7 +132,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ISPUSHLOGIN;
+//    ISPUSHLOGIN;
     if (indexPath.section == 0) {
         NSDictionary *model = self.model.relatedGoodsList[indexPath.row];
         CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];

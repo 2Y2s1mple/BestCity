@@ -342,6 +342,16 @@
 #pragma mark - 取消关注
 - (void)deleteAttention
 {
+    if ([JPTOKEN length] <= 0) {
+    CZLoginController *vc = [CZLoginController shareLoginController];
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    [tabbar presentViewController:vc animated:NO completion:^{
+        UINavigationController *nav = tabbar.selectedViewController;
+        UIViewController *currentVc = nav.topViewController;
+        [currentVc.navigationController popViewControllerAnimated:nil];
+    }];
+    return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
     param[@"attentionUserId"] = self.model.user[@"userId"];
@@ -366,6 +376,17 @@
 #pragma mark - 新增关注
 - (void)addAttention
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:^{
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
     param[@"attentionUserId"] = self.model.user[@"userId"];

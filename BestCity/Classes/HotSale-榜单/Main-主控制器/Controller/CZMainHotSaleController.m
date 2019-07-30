@@ -51,7 +51,6 @@
 - (UIView *)setupHeaderView
 {
     CZMainHotSaleHeaderView *headerView = [[CZMainHotSaleHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 209) action:^{
-        ISPUSHLOGIN
         [self pushSearchView];
     }];
     return headerView;
@@ -80,6 +79,7 @@
     };
 }
 
+// tableView的头部视图
 - (UIView * (^)(NSArray *))createTableViewHeaderView
 {
     return ^(NSArray *data) {
@@ -224,9 +224,15 @@
 static NSInteger page_ = 1;
 - (void)reloadNewDataSorce
 {
+    WS(weakself);
+    if (self.tableView.tableHeaderView == nil) {
+        [self getCategoryListData:^(NSArray<CZHotTitleModel *> *modelList) {
+            weakself.tableView.tableHeaderView = weakself.createTableViewHeaderView(modelList);
+        }];
+    }
+
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
-    WS(weakself);
     page_ = 1;
     [self getListData:^(NSDictionary *data) {
         weakself.dataSource = [NSMutableArray arrayWithArray:data[@"data"]];

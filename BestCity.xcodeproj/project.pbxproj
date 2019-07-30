@@ -52,6 +52,7 @@
 		970E619022BA20A100E68BE3 /* CZCZFreeChargeCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618E22BA20A100E68BE3 /* CZCZFreeChargeCell2.m */; };
 		970E619122BA20A100E68BE3 /* CZCZFreeChargeCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */; };
 		9710E61222D8789600AA5D87 /* CZMHSAskQuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9710E61122D8789600AA5D87 /* CZMHSAskQuestionController.m */; };
+		97115C9322EFE71B00C45665 /* CZNavigationViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 97115C9222EFE71B00C45665 /* CZNavigationViewFactory.m */; };
 		9712727022CF1D47009EB40F /* CZMainHotSaleDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */; };
 		9712727B22CF3AC2009EB40F /* CZScrollMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */; };
 		97159B1522D6DB14008DC859 /* CZMHSDQuestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97159B1322D6DB14008DC859 /* CZMHSDQuestCell.m */; };
@@ -542,6 +543,8 @@
 		970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCZFreeChargeCell2.xib; sourceTree = "<group>"; };
 		9710E61022D8789600AA5D87 /* CZMHSAskQuestionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSAskQuestionController.h; sourceTree = "<group>"; };
 		9710E61122D8789600AA5D87 /* CZMHSAskQuestionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSAskQuestionController.m; sourceTree = "<group>"; };
+		97115C9122EFE71B00C45665 /* CZNavigationViewFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZNavigationViewFactory.h; sourceTree = "<group>"; };
+		97115C9222EFE71B00C45665 /* CZNavigationViewFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZNavigationViewFactory.m; sourceTree = "<group>"; };
 		9712726E22CF1D47009EB40F /* CZMainHotSaleDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleDetailController.h; sourceTree = "<group>"; };
 		9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleDetailController.m; sourceTree = "<group>"; };
 		9712727922CF3AC2009EB40F /* CZScrollMenuModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZScrollMenuModule.h; sourceTree = "<group>"; };
@@ -1403,8 +1406,6 @@
 				9744821121B7CDFA00F1639B /* CZShareItemButton.m */,
 				979B05D1210F07EF0023292D /* CZShareAndlikeView.h */,
 				979B05D2210F07EF0023292D /* CZShareAndlikeView.m */,
-				979B05C5210E9CC70023292D /* CZRecommendNav.h */,
-				979B05C6210E9CC70023292D /* CZRecommendNav.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1746,6 +1747,7 @@
 		9712727422CF386D009EB40F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				97D5E20422EF1EA000DA8034 /* 导航栏 */,
 				97BF266B22E566CC0064B20C /* 弹框 */,
 				9712727922CF3AC2009EB40F /* CZScrollMenuModule.h */,
 				9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */,
@@ -2360,8 +2362,6 @@
 		97705C38210716A300485D64 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97D8FCCC2111ABA000D8ED8F /* CZNavigationView.h */,
-				97D8FCCD2111ABA000D8ED8F /* CZNavigationView.m */,
 				97ED11FC211598210003E0F7 /* CZAttentionBtn.h */,
 				97ED11FD211598210003E0F7 /* CZAttentionBtn.m */,
 				977864A9211AC0A0001B41F1 /* CZDatePickView.h */,
@@ -3636,6 +3636,19 @@
 			path = FreeSubController;
 			sourceTree = "<group>";
 		};
+		97D5E20422EF1EA000DA8034 /* 导航栏 */ = {
+			isa = PBXGroup;
+			children = (
+				979B05C5210E9CC70023292D /* CZRecommendNav.h */,
+				979B05C6210E9CC70023292D /* CZRecommendNav.m */,
+				97D8FCCC2111ABA000D8ED8F /* CZNavigationView.h */,
+				97D8FCCD2111ABA000D8ED8F /* CZNavigationView.m */,
+				97115C9122EFE71B00C45665 /* CZNavigationViewFactory.h */,
+				97115C9222EFE71B00C45665 /* CZNavigationViewFactory.m */,
+			);
+			path = "导航栏";
+			sourceTree = "<group>";
+		};
 		97D8FCCF2111B9D700D8ED8F /* MyProfile-我的资料 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4342,6 +4355,7 @@
 				97705CBD2108230F00485D64 /* WMMenuView.m in Sources */,
 				9765649921A53BF2008A0293 /* CZCollectButton.m in Sources */,
 				979585262293DF5A005FC54D /* CZTrialSuccessReportController.m in Sources */,
+				97115C9322EFE71B00C45665 /* CZNavigationViewFactory.m in Sources */,
 				9723F28E21B263E2006E18D2 /* TSLWebViewController.m in Sources */,
 				97705CE92108733F00485D64 /* CZNavigationController.m in Sources */,
 				97FEBF2022D47BAE007BF592 /* CZMHSDCommodityCell2.m in Sources */,

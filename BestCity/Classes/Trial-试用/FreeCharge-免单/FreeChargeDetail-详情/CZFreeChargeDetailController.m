@@ -115,6 +115,12 @@ static BOOL isBuyTime;
 
 - (void)shareButtonAction
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
     share.cententText =  self.shareDic[@"shareContent"];
     share.param = @{
@@ -445,6 +451,13 @@ static BOOL isBuyTime;
 // 免费抢购
 - (void)rightBtnAction:(UIButton *)btn
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+
     if ([btn.titleLabel.text isEqual:@"即将开始"]) {
         [CZProgressHUD showProgressHUDWithText:@"活动暂未开始!"];
         [CZProgressHUD hideAfterDelay:1.5];
@@ -538,6 +551,13 @@ static BOOL isBuyTime;
 // 购买
 - (void)buyBtnAction
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
     if (specialId.length == 0) {
         TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{

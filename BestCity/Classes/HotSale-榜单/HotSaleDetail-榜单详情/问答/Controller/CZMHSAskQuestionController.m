@@ -140,6 +140,7 @@
 - (void)issueBtnAction:(UIButton *)sender
 {
     NSLog(@"--------------");
+    self.issueBtn.enabled = NO;
     [self obtainDetailData];
 }
 
@@ -149,7 +150,7 @@
     [self.view endEditing:YES];
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"title"] = self.textView.text;
+    param[@"title"] = [self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     param[@"goodsCategoryId"] = self.goodsCategoryId;
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/question/addQuestion"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
@@ -163,6 +164,7 @@
             [CZProgressHUD showProgressHUDWithText:@"提交失败"];
             [CZProgressHUD hideAfterDelay:1.5];
         }
+        self.issueBtn.enabled = YES;
     } failure:^(NSError *error) {}];
 }
 @end

@@ -34,6 +34,11 @@
 {
     if (_navigationView == nil) {
         _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:[UIImage imageNamed:@"publish"] rightBtnAction:^{
+            if ([JPTOKEN length] <= 0) {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+                return;
+            }
             CZMHSAskQuestionController *vc = [[CZMHSAskQuestionController alloc] init];
             vc.goodsCategoryId = self.ID;
             [self.navigationController pushViewController:vc animated:YES];

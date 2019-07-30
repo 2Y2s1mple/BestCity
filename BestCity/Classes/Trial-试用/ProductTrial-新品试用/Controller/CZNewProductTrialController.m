@@ -324,32 +324,20 @@
         case 0:
         {
             //push到详情
-            if ([JPTOKEN length] <= 0)
-            {
-                CZLoginController *vc = [CZLoginController shareLoginController];
-                [self presentViewController:vc animated:YES completion:nil];
-            } else {
-                CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
-                CZTrailModel *model = self.trialDatasArr[indexPath.row];
-                vc.trialId = model.trialId;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+            CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
+            CZTrailModel *model = self.trialDatasArr[indexPath.row];
+            vc.trialId = model.trialId;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 1 :
         {
             //push到详情
-            if ([JPTOKEN length] <= 0)
-            {
-                CZLoginController *vc = [CZLoginController shareLoginController];
-                [self presentViewController:vc animated:YES completion:nil];
-            } else {
-                CZTrailReportModel *model = self.reportDatasArr[indexPath.row];
-                CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-                vc.detailType = CZJIPINModuleTrail;
-                vc.findgoodsId = model.articleId;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+            CZTrailReportModel *model = self.reportDatasArr[indexPath.row];
+            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+            vc.detailType = CZJIPINModuleTrail;
+            vc.findgoodsId = model.articleId;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         default:

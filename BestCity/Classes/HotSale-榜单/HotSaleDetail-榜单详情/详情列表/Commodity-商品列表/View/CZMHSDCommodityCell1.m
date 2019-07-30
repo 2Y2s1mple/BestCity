@@ -112,25 +112,28 @@
 }
 
 - (IBAction)bkAction:(UITapGestureRecognizer *)sender {
-    
-    CZMHSDetailBkController *toVc = [[CZMHSDetailBkController alloc] init];
-    toVc.titleText = [NSString stringWithFormat:@"%@百科", self.titleText];
-    toVc.dataDic = self.bkDataDic;
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    UIViewController *vc = nav.topViewController;
-    [vc.navigationController pushViewController:toVc animated:YES];
+    if (self.bkDataDic[@"articleId"]) {
+        CZMHSDetailBkController *toVc = [[CZMHSDetailBkController alloc] init];
+        toVc.titleText = [NSString stringWithFormat:@"%@百科", self.titleText];
+        toVc.dataDic = self.bkDataDic;
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        UINavigationController *nav = tabbar.selectedViewController;
+        UIViewController *vc = nav.topViewController;
+        [vc.navigationController pushViewController:toVc animated:YES];
+    }
 }
 
 - (IBAction)questionAction:(UITapGestureRecognizer *)sender {
-    CZMHSDQuestController *toVc = [[CZMHSDQuestController alloc] init];
-    toVc.titleText = [NSString stringWithFormat:@"%@问答区", self.titleText];
-    toVc.dataArr = self.dataList;
-    toVc.ID = self.ID;
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    UIViewController *vc = nav.topViewController;
-    [vc.navigationController pushViewController:toVc animated:YES];
+    if (self.dataList.count != 0) {
+        CZMHSDQuestController *toVc = [[CZMHSDQuestController alloc] init];
+        toVc.titleText = [NSString stringWithFormat:@"%@问答区", self.titleText];
+        toVc.dataArr = self.dataList;
+        toVc.ID = self.ID;
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        UINavigationController *nav = tabbar.selectedViewController;
+        UIViewController *vc = nav.topViewController;
+        [vc.navigationController pushViewController:toVc animated:YES];
+    }
 }
 
 

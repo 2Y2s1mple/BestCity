@@ -24,10 +24,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    
+
     // 设置引导页
     [CZGuideTool chooseRootViewController:self.window];
-    
+
     [self.window makeKeyAndVisible];
     
     // 加载极光推送

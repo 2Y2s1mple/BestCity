@@ -95,11 +95,31 @@ static CGFloat const likeAndShareHeight = 49;
     if (_likeView == nil) {
         __weak typeof(self) weakSelf = self;
         _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
+            if ([JPTOKEN length] <= 0) {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                [tabbar presentViewController:vc animated:NO completion:^{
+                    UINavigationController *nav = tabbar.selectedViewController;
+                    UIViewController *currentVc = nav.topViewController;
+                    [currentVc.navigationController popViewControllerAnimated:nil];
+                }];
+                return;
+            }
             CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
             share.cententText =  self.dataDic[@"content"];
             share.param = self.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
+            if ([JPTOKEN length] <= 0) {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                [tabbar presentViewController:vc animated:NO completion:^{
+                    UINavigationController *nav = tabbar.selectedViewController;
+                    UIViewController *currentVc = nav.topViewController;
+                    [currentVc.navigationController popViewControllerAnimated:nil];
+                }];
+                return;
+            }
             if (self.dicDataModel.relatedGoodsList.count != 0) {
                 CZBuyView *buyView = [[CZBuyView alloc] initWithFrame:self.view.frame];
                 buyView.buyDataList = self.dicDataModel.relatedGoodsList;
@@ -322,6 +342,16 @@ static CGFloat const likeAndShareHeight = 49;
 // 取消关注
 - (void)deleteAttention
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:^{
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
     param[@"attentionUserId"] = self.dicDataModel.user[@"userId"];
@@ -346,6 +376,16 @@ static CGFloat const likeAndShareHeight = 49;
 //新增关注
 - (void)addAttention
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:^{
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
     param[@"attentionUserId"] = self.dicDataModel.user[@"userId"];

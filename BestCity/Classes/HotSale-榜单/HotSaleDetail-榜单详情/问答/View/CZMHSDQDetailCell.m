@@ -41,6 +41,7 @@
     self.answerNameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
     self.timerLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     self.answerLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size: 16];
+    self.answerLabel.preferredMaxLayoutWidth = SCR_WIDTH - 28;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

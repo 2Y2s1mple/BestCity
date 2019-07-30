@@ -18,7 +18,6 @@ typedef void(^rightBtnBlock)(void);
 
 typedef NS_ENUM(NSUInteger, CZNavigationViewType) {
     CZNavigationViewTypeBlack,
-    CZNavigationViewTypeWhite,
 };
 
 @interface CZNavigationView : UIView

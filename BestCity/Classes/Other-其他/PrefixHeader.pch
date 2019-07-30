@@ -11,8 +11,8 @@
 
 //极品城URL
 //#define JPSERVER_URL @"http://192.168.3.152:8081/qualityshop-api/" // 测试
-#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
-//#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
+//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
+#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
 
 #ifdef DEBUG
 
@@ -88,11 +88,12 @@ UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 1)]; \
 line.backgroundColor = CZGlobalLightGray; \
 [self.view addSubview:line]
 
-#define ISPUSHLOGIN if ([JPTOKEN length] <= 0) \
-{ \
-    CZLoginController *vc = [CZLoginController shareLoginController]; \
-    [self presentViewController:vc animated:YES completion:nil]; \
-    return; \
+#define ISPUSHLOGIN if ([JPTOKEN length] <= 0)\
+{\
+    CZLoginController *vc = [CZLoginController shareLoginController];\
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication\ sharedApplication].keyWindow rootViewController];\
+    [tabbar presentViewController:vc animated:NO completion:nil];\
+    return;\
 }
 
 

@@ -146,11 +146,17 @@ static CGFloat const likeAndShareHeight = 49;
     }
     return _shareButton;
 }
-
 - (void)shareButtonAction
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-    share.cententText =  self.shareDic;
+    share.cententText =  self.shareDic[@"content"];
     share.param = @{
                     @"shareUrl" : self.dataSource[@"shareUrl"],
                     @"shareTitle" : self.dataSource[@"shareTitle"],
@@ -537,6 +543,12 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)openAlibcTradeWithId:(NSString *)ID
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"goodsId"] = ID;
     //获取详情数据
@@ -553,6 +565,12 @@ static CGFloat const likeAndShareHeight = 49;
 /** 免费申请*/
 - (void)listBtnAction:(UIButton *)sender
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     if ([sender.titleLabel.text isEqualToString:@"免费申请"]) {
         NSString *text = @"试用--商品--申请试用";
         NSDictionary *context = @{@"goods" : text};
