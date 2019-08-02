@@ -1367,14 +1367,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		97054BF92182F1F60008E416 /* Main-主控制器 */ = {
+		97054BF92182F1F60008E416 /* Main-榜单首页 */ = {
 			isa = PBXGroup;
 			children = (
 				97705C42210716A300485D64 /* Controller */,
 				97705C45210716A300485D64 /* Model */,
 				97705C46210716A300485D64 /* View */,
 			);
-			path = "Main-主控制器";
+			path = "Main-榜单首页";
 			sourceTree = "<group>";
 		};
 		97054BFA2182F26F0008E416 /* Search-搜索商品 */ = {
@@ -1692,6 +1692,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		97115C9422EFF5A600C45665 /* 菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				9712727922CF3AC2009EB40F /* CZScrollMenuModule.h */,
+				9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */,
+			);
+			path = "菜单";
+			sourceTree = "<group>";
+		};
 		9712726D22CF1B09009EB40F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1731,26 +1740,21 @@
 			path = "SearchList-搜索列表";
 			sourceTree = "<group>";
 		};
-		9712727322CF3855009EB40F /* 业务 */ = {
+		9712727322CF3855009EB40F /* 公共界面 */ = {
 			isa = PBXGroup;
 			children = (
+				97B65D5822F19A880064E99F /* 异常账号界面 */,
 				97C52A702254B92C00787BC5 /* Recommend-推荐文章 */,
-				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
-				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
-				97421B5C2271A718007E5A72 /* CZUnusualController.h */,
-				97421B5D2271A718007E5A72 /* CZUnusualController.m */,
-				97421B5E2271A718007E5A72 /* CZUnusualController.xib */,
 			);
-			path = "业务";
+			path = "公共界面";
 			sourceTree = "<group>";
 		};
 		9712727422CF386D009EB40F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				97115C9422EFF5A600C45665 /* 菜单 */,
 				97D5E20422EF1EA000DA8034 /* 导航栏 */,
 				97BF266B22E566CC0064B20C /* 弹框 */,
-				9712727922CF3AC2009EB40F /* CZScrollMenuModule.h */,
-				9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -2431,7 +2435,7 @@
 		97705C41210716A300485D64 /* HotSale-榜单 */ = {
 			isa = PBXGroup;
 			children = (
-				97054BF92182F1F60008E416 /* Main-主控制器 */,
+				97054BF92182F1F60008E416 /* Main-榜单首页 */,
 				9712727122CF2CA6009EB40F /* HotSaleDetail-榜单详情 */,
 			);
 			path = "HotSale-榜单";
@@ -3207,6 +3211,26 @@
 			path = "试用名单";
 			sourceTree = "<group>";
 		};
+		97B65D5722F19A750064E99F /* Handle */ = {
+			isa = PBXGroup;
+			children = (
+				971CDFF521E44A0B00DE3883 /* 网络请求工具 */,
+				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
+				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
+			);
+			path = Handle;
+			sourceTree = "<group>";
+		};
+		97B65D5822F19A880064E99F /* 异常账号界面 */ = {
+			isa = PBXGroup;
+			children = (
+				97421B5C2271A718007E5A72 /* CZUnusualController.h */,
+				97421B5D2271A718007E5A72 /* CZUnusualController.m */,
+				97421B5E2271A718007E5A72 /* CZUnusualController.xib */,
+			);
+			path = "异常账号界面";
+			sourceTree = "<group>";
+		};
 		97B6C55C225AEC470061D9A0 /* analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -3367,8 +3391,9 @@
 			isa = PBXGroup;
 			children = (
 				9710E61322D87CF600AA5D87 /* Base */,
+				97B65D5722F19A750064E99F /* Handle */,
 				9712727422CF386D009EB40F /* Module */,
-				9712727322CF3855009EB40F /* 业务 */,
+				9712727322CF3855009EB40F /* 公共界面 */,
 			);
 			path = "Common-公共";
 			sourceTree = "<group>";
@@ -3856,7 +3881,6 @@
 				979110642231130800C2DE5B /* 省市区 */,
 				975E760E21E71DB700B0819B /* 轮播图工具 */,
 				971CDFF621E44A3A00DE3883 /* 收藏工具 */,
-				971CDFF521E44A0B00DE3883 /* 网络请求工具 */,
 				971CDFF421E449E600DE3883 /* 引导页工具 */,
 				9723075E21AD76F80004C00C /* CZNoDataView.h */,
 				9723075F21AD76F80004C00C /* CZNoDataView.m */,

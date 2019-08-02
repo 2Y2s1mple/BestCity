@@ -34,16 +34,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"拉赞排行" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"拉赞排行" rightBtnTitle:nil rightBtnAction:nil ];
     [self.view addSubview:navigationView];
     
-    //导航条
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
     
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CZGetY(line), SCR_WIDTH, SCR_HEIGHT - line.y) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CZGetY(navigationView), SCR_WIDTH, SCR_HEIGHT - CZGetY(navigationView)) style:UITableViewStylePlain];
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
@@ -53,7 +48,6 @@
     [self.view addSubview:self.tableView];
     
     [self setupRefresh];
-    
 }
 
 #pragma mark - 获取数据

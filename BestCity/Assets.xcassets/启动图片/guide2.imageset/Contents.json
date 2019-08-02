@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "guide2.png",
+      "filename" : "试用.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "guide2@2x.png",
+      "filename" : "试用@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "guide2@3x.png",
+      "filename" : "试用@3x.png",
       "scale" : "3x"
     }
   ],

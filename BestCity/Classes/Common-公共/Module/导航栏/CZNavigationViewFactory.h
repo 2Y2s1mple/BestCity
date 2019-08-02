@@ -11,8 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZNavigationViewFactory : NSObject
-+ (CZNavigationView *)navigationViewWithTitle:(NSString *)title rightBtn:(id)subTitle rightBtnAction:(void (^)(void))sender;
+@interface CZNavigationViewFactory : NSObject 
++ (CZNavigationView *)navigationViewWithTitle:(NSString *)title rightBtn:(id)subTitle rightBtnAction:(void (^)(void))sender delegate:(id <CZNavigationViewDelegate>) delegate;
 @end
 
 NS_ASSUME_NONNULL_END

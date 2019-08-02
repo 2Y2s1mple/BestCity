@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -52,7 +51,7 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vH-2q-Vm0">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vH-2q-Vm0">
                         <rect key="frame" x="190" y="69" width="248" height="36"/>
                         <string key="text">榨汁机注重品牌还是颜值，
 8款1000元测评告诉你</string>
@@ -93,7 +92,6 @@
                     <constraint firstItem="2vH-2q-Vm0" firstAttribute="top" secondItem="B8L-9l-Wmq" secondAttribute="top" constant="10" id="zz7-6v-HaB"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="bigImageView" destination="B8L-9l-Wmq" id="pvM-nd-bsi"/>
                 <outlet property="moreBtn" destination="9ec-bB-yJ3" id="XVT-dy-yfd"/>
@@ -102,7 +100,7 @@
                 <outlet property="titleSubLabel" destination="2vH-2q-Vm0" id="cxy-D6-eOb"/>
                 <outlet property="topMargin" destination="dvG-Bh-wUP" id="5DU-lC-cUy"/>
             </connections>
-            <point key="canvasLocation" x="33" y="-6"/>
+            <point key="canvasLocation" x="-25" y="-24"/>
         </tableViewCell>
     </objects>
     <resources>

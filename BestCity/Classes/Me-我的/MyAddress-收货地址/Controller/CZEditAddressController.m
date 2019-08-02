@@ -36,7 +36,7 @@
         } else {        
             [self commit];
         }
-    } navigationViewType:CZNavigationViewTypeBlack];
+    } ];
     [self.view addSubview:navigationView];
     
     self.nameLabel.text = self.addressModel.username;

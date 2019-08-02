@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *orderbyCategoryId;
 /** 没有数据视图 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
+/** 记录请求参数 */
+@property (nonatomic, strong) NSDictionary *param;
 @end
 
 @implementation CZMainHotSaleDetailController
@@ -39,17 +41,14 @@
     }
     return _noDataView;
 }
+
 // 导航条
 - ( CZNavigationView * (^)(void))createNavView
 {
     return ^ {
-        CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil navigationViewType  :CZNavigationViewTypeBlack];
+        CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil ];
         [self.view addSubview:navigationView];
-        //导航条
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, navigationView.height - 0.7, navigationView.width, 0.7)];
-        line.backgroundColor = CZGlobalLightGray;
-        [navigationView addSubview:line];
-        self.calculateHeight += navigationView.height;
+        self.calculateHeight = CZGetY(navigationView);
         return navigationView;
     } ;
 }
@@ -127,9 +126,12 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"orderbyCategoryId"] = self.orderbyCategoryId;
     param[@"client"] = @(2);
+    self.param = param;
 
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/goodsListByOrderbyCategoryId"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (self.param != param) return;
+        NSLog(@"--------");
         if ([result[@"code"] isEqualToNumber:@(0)]) {
             listData(result);
         }

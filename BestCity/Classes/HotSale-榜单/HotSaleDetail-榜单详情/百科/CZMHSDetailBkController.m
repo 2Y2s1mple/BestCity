@@ -36,12 +36,8 @@ static CGFloat const likeAndShareHeight = 49;
 - (CZNavigationView *)navigationView
 {
     if (_navigationView == nil) {
-        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil navigationViewType  :CZNavigationViewTypeBlack];
+        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil ];
         _navigationView.backgroundColor = CZGlobalWhiteBg;
-        //导航条
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _navigationView.height - 0.7, _navigationView.width, 0.7)];
-        line.backgroundColor = CZGlobalLightGray;
-        [_navigationView addSubview:line];
     }
     return _navigationView;
 }
@@ -60,7 +56,7 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = CZGlobalGray;
+    self.view.backgroundColor = [UIColor whiteColor];
 
     [self.view addSubview:self.navigationView];
 

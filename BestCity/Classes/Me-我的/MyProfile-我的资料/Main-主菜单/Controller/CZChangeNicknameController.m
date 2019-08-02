@@ -34,8 +34,7 @@
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"昵称" rightBtnTitle:@"保存" rightBtnAction:^{
         // 保存用户信息
         [self saveUserInfo];
-
-    } navigationViewType:CZNavigationViewTypeBlack];
+    } ];
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
     

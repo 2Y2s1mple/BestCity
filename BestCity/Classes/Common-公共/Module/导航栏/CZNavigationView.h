@@ -16,12 +16,8 @@
 
 typedef void(^rightBtnBlock)(void);
 
-typedef NS_ENUM(NSUInteger, CZNavigationViewType) {
-    CZNavigationViewTypeBlack,
-};
-
 @interface CZNavigationView : UIView
-- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(id)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction navigationViewType:(CZNavigationViewType)type;
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(id)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction;
 
 @property (nonatomic, assign) id <CZNavigationViewDelegate> delegate;
 @end

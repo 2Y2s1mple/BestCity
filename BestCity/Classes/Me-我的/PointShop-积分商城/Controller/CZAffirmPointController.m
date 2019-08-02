@@ -52,7 +52,7 @@
     [super viewDidLoad];
     [self getAddress];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"确认订单" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"确认订单" rightBtnTitle:nil rightBtnAction:nil ];
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
 

@@ -54,7 +54,10 @@
 {
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+//    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+//    manager.requestSerializer.timeoutInterval = 2.f;
+//    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+
     //(2)请求头的设置
     headers = [self setupHeader];
     for (NSString *key in headers.allKeys) {
@@ -97,7 +100,7 @@
 
         success([result deleteAllNullValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure ? : failure(error);
+        !failure ? : failure(error);
         NSLog(@"%@", error);
         [CZProgressHUD showProgressHUDWithText:@"网络出错"];
         [CZProgressHUD hideAfterDelay:2];
@@ -116,7 +119,11 @@
 {
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager  manager] initWithBaseURL:[NSURL URLWithString:url]];
-    
+    // 设置超时时间
+//    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+//    manager.requestSerializer.timeoutInterval = 2.f;
+//    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+
 //    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"apijipinchengcn" ofType:@"cer"];
 //    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
     //AFSSLPinningModeNone 这个模式表示不做 SSL pinning，只跟浏览器一样在系统的信任机构列表里验证服务端返回的证书。若证书是信任机构签发的就会通过，若是自己服务器生成的证书，这里是不会通过的。

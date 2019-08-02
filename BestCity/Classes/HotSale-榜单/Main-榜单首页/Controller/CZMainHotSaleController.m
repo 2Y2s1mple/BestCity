@@ -135,6 +135,8 @@
             categoryList([CZHotTitleModel objectArrayWithKeyValuesArray:list]);
         }
     } failure:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     }];
     return self;
 }
@@ -147,9 +149,10 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getTopCategorysList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
             listData(result);
-
         }
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+
+    }];
     return self;
 }
 
@@ -187,7 +190,7 @@
 {
     if (indexPath.row == 0) {
         CZMHSDListNewController *vc = [[CZMHSDListNewController alloc] init];
-        vc.imageUrl = self.adDic[@"img"];
+        vc.data = self.adDic;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         NSDictionary *model = self.dataSource[indexPath.row - 1];

@@ -76,6 +76,10 @@
 
 - (void)contentViewDidClickedBtn:(UIButton *)sender
 {
+    sender.enabled = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        sender.enabled = YES;
+    });
     if (_recordBtn != sender) {
         // 现在的btn
         [sender setTitleColor:self.selectColor forState:UIControlStateNormal];

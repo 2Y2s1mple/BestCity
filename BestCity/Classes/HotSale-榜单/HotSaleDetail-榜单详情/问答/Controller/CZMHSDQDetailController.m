@@ -129,13 +129,9 @@
                             @"shareImg" : [UIImage imageNamed:@"headDefault"],
                             };
             [self.view addSubview:share];
-        } navigationViewType  :CZNavigationViewTypeBlack];
+        }];
         _navigationView.backgroundColor = CZGlobalWhiteBg;
         [self.view addSubview:_navigationView];
-        //导航条
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _navigationView.height - 0.7, _navigationView.width, 0.7)];
-        line.backgroundColor = CZGlobalLightGray;
-        [_navigationView addSubview:line];
     }
     return _navigationView;
 }

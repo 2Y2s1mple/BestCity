@@ -93,7 +93,7 @@ static CGFloat const likeAndShareHeight = 49;
     //导航条
     UIView *navigationBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67 + (IsiPhoneX ? 24 : 0))];
     navigationBackView.backgroundColor = [UIColor whiteColor];
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"商品详情" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"商品详情" rightBtnTitle:nil rightBtnAction:nil ];
     navigationView.backgroundColor = [UIColor whiteColor];
     [navigationBackView addSubview:navigationView];
     [self.view addSubview:navigationBackView];

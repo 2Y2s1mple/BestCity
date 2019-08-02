@@ -32,7 +32,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalLightGray;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我要提现" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我要提现" rightBtnTitle:nil rightBtnAction:nil ];
     [self.view addSubview:navigationView];
 
     self.topView.layer.cornerRadius = 5;

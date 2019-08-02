@@ -31,13 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"全部报告" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"全部报告" rightBtnTitle:nil rightBtnAction:nil ];
     [self.view addSubview:navigationView];
-    
-    //导航条
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
 }
 
 #pragma mark - Datasource & Delegate

@@ -63,17 +63,12 @@
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"试用报告" rightBtnTitle:@"下一步" rightBtnAction:^{
         // 跳转报告封面
         [self isCompliance];
-    } navigationViewType:CZNavigationViewTypeBlack];
+    } ];
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
 
-    //导航条
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
-
     // 顶部标题
-    [self setupTitle:CZGetY(line)];
+    [self setupTitle:CZGetY(navigationView)];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];

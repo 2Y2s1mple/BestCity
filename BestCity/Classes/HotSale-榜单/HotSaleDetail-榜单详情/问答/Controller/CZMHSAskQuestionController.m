@@ -45,13 +45,9 @@
 - (CZNavigationView *)navigationView
 {
     if (_navigationView == nil) {
-        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"发起问题" rightBtnTitle:nil rightBtnAction:nil navigationViewType  :CZNavigationViewTypeBlack];
+        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"发起问题" rightBtnTitle:nil rightBtnAction:nil ];
         _navigationView.backgroundColor = CZGlobalWhiteBg;
         [self.view addSubview:_navigationView];
-        //导航条
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _navigationView.height - 0.7, _navigationView.width, 0.7)];
-        line.backgroundColor = CZGlobalLightGray;
-        [_navigationView addSubview:line];
 
         [_navigationView addSubview:self.issueBtn];
         self.issueBtn.centerY = _navigationView.height / 2.0 + 10;
@@ -142,6 +138,11 @@
     NSLog(@"--------------");
     self.issueBtn.enabled = NO;
     [self obtainDetailData];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - 网络请求

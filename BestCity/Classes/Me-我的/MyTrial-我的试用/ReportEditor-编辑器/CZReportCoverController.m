@@ -27,21 +27,16 @@
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"试用报告" rightBtnTitle:@"保存" rightBtnAction:^{
         [self save];
-    } navigationViewType:CZNavigationViewTypeBlack];
+    } ];
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
-
-    //导航条
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
 
     // 添加封面按钮
     UIButton *imageBtn = [[UIButton alloc] init];
     [imageBtn setBackgroundImage:[UIImage imageNamed:@"addImage"] forState:UIControlStateNormal];
     imageBtn.adjustsImageWhenHighlighted = NO;
     imageBtn.x = 10;
-    imageBtn.y = 10 + CZGetY(line);
+    imageBtn.y = 10 + CZGetY(navigationView);
     imageBtn.size = CGSizeMake(135, 135);
     [self.view addSubview:imageBtn];
     [imageBtn addTarget:self action:@selector(addCoverImage:) forControlEvents:UIControlEventTouchUpInside];

@@ -35,15 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"申请成功名单" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"申请成功名单" rightBtnTitle:nil rightBtnAction:nil ];
     [self.view addSubview:navigationView];
     
-    //导航条
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
-    
-    self.topY.constant = CZGetY(line);
+    self.topY.constant = CZGetY(navigationView);
     
     
     NSString *text = [NSString stringWithFormat:@"请以下用户于 %@ 前完成众测报告", self.dataSource[@"reportEndTime"]];

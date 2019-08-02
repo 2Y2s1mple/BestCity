@@ -45,13 +45,9 @@
 - (CZNavigationView *)navigationView
 {
     if (_navigationView == nil) {
-        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"新品专区" rightBtnTitle:nil rightBtnAction:nil navigationViewType  :CZNavigationViewTypeBlack];
+        _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"新品专区" rightBtnTitle:nil rightBtnAction:nil ];
         _navigationView.backgroundColor = CZGlobalWhiteBg;
         [self.view addSubview:_navigationView];
-        //导航条
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _navigationView.height - 0.7, _navigationView.width, 0.7)];
-        line.backgroundColor = CZGlobalLightGray;
-        [_navigationView addSubview:line];
     }
     return _navigationView;
 }
@@ -80,7 +76,7 @@
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.height = 200;
     imageView.width = SCR_WIDTH;
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrl]];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:self.data[@"img"]]];
     [headerView addSubview:imageView];
 
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -126,7 +122,7 @@
     self.page = 1;
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"categoryId"] = @"";
+    param[@"categoryId"] = self.data[@"objectId"];
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/listnew"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {

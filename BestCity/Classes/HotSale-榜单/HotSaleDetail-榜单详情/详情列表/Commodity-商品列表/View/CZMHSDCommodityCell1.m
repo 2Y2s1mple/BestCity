@@ -124,16 +124,14 @@
 }
 
 - (IBAction)questionAction:(UITapGestureRecognizer *)sender {
-    if (self.dataList.count != 0) {
-        CZMHSDQuestController *toVc = [[CZMHSDQuestController alloc] init];
-        toVc.titleText = [NSString stringWithFormat:@"%@问答区", self.titleText];
-        toVc.dataArr = self.dataList;
-        toVc.ID = self.ID;
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        UINavigationController *nav = tabbar.selectedViewController;
-        UIViewController *vc = nav.topViewController;
-        [vc.navigationController pushViewController:toVc animated:YES];
-    }
+    CZMHSDQuestController *toVc = [[CZMHSDQuestController alloc] init];
+    toVc.titleText = [NSString stringWithFormat:@"%@问答区", self.titleText];
+    toVc.dataArr = self.dataList;
+    toVc.ID = self.ID;
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *vc = nav.topViewController;
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 

@@ -42,7 +42,6 @@
         if ([result[@"msg"] isEqualToString:@"success"]) {
             //标题的数据
             self.mainTitles = [CZDiscoverTitleModel objectArrayWithKeyValuesArray:result[@"data"]];
-            
             //刷新WMPage控件
             [self reloadData];
         }
@@ -82,11 +81,6 @@
     self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
     self.statusView.hidden = NO;
 }
-
-//- (void)viewWillLayoutSubviews
-//{
-//    self.view.frame = CGRectMake(0, self.currentOffsetY, SCR_WIDTH, SCR_HEIGHT + 50);
-//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {

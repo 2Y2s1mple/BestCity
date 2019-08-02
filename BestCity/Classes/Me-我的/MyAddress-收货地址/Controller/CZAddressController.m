@@ -66,7 +66,7 @@
         CZEditAddressController *vc = [[CZEditAddressController alloc] init];
         vc.currnetTitle = @"新增地址";
         [self.navigationController pushViewController:vc animated:YES];
-    } navigationViewType:CZNavigationViewTypeBlack];
+    } ];
     [self.view addSubview:navigationView];
     
     // 添加列表

@@ -39,6 +39,8 @@
     self.tag3.hidden = YES;
     self.tag4.hidden = YES;
 
+    CGFloat maxWidth = SCR_WIDTH;
+
     NSArray *tagsArr = dataDic[@"goodsTagsList"];
     for (int i = 0; i < tagsArr.count; i++) {
         switch (i) {
@@ -51,6 +53,10 @@
                 break;
             case 1:
                 [self.tag2 setTitle:tagsArr[i][@"name"] forState:UIControlStateNormal];
+                [self layoutIfNeeded];
+                if (CGRectGetMaxX(self.tag2.frame) > SCR_WIDTH) {
+                    break;
+                }
                 self.tag1.hidden = NO;
                 self.tag2.hidden = NO;
                 self.tag3.hidden = YES;
@@ -58,6 +64,10 @@
                 break;
             case 2:
                 [self.tag3 setTitle:tagsArr[i][@"name"] forState:UIControlStateNormal];
+                [self layoutIfNeeded];
+                if (CGRectGetMaxX(self.tag3.frame) > SCR_WIDTH) {
+                    break;
+                }
                 self.tag1.hidden = NO;
                 self.tag2.hidden = NO;
                 self.tag3.hidden = NO;

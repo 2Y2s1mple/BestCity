@@ -36,13 +36,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"优惠券" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"优惠券" rightBtnTitle:nil rightBtnAction:nil];
     [self.view addSubview:navigationView];
-    
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 50 + 68, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
-    
 }
 
 #pragma mark - Datasource & Delegate

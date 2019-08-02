@@ -26,9 +26,22 @@
 @property (nonatomic, assign) NSInteger page;
 /** <#注释#> */
 @property (nonatomic, strong) NSMutableArray *dataSource;
+/** 没有数据视图 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZMHSDQuestController
+#pragma mark - 视图
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
+
 // 导航条
 - (CZNavigationView *)navigationView
 {
@@ -42,13 +55,9 @@
             CZMHSAskQuestionController *vc = [[CZMHSAskQuestionController alloc] init];
             vc.goodsCategoryId = self.ID;
             [self.navigationController pushViewController:vc animated:YES];
-        } navigationViewType  :CZNavigationViewTypeBlack];
+        } ];
         _navigationView.backgroundColor = CZGlobalWhiteBg;
         [self.view addSubview:_navigationView];
-        //导航条
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _navigationView.height - 0.7, _navigationView.width, 0.7)];
-        line.backgroundColor = CZGlobalLightGray;
-        [_navigationView addSubview:line];
     }
     return _navigationView;
 }
@@ -112,6 +121,13 @@
             self.dataSource = [CZMHSDQuestModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
+        if ([result[@"data"] count] > 0) {
+            // 没有数据图片
+            [self.noDataView removeFromSuperview];
+        } else {
+            // 没有数据图片
+            [self.tableView addSubview:self.noDataView];
+        }
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
         //隐藏菊花
@@ -133,6 +149,13 @@
             NSArray *arr = [CZMHSDQuestModel objectArrayWithKeyValuesArray:result[@"data"]] ;
             [self.dataSource addObjectsFromArray:arr];
             [self.tableView reloadData];
+        }
+        if ([self.dataSource count] > 0) {
+            // 没有数据图片
+            [self.noDataView removeFromSuperview];
+        } else {
+            // 没有数据图片
+            [self.tableView addSubview:self.noDataView];
         }
         // 结束刷新
         [self.tableView.mj_footer endRefreshing];

@@ -7,15 +7,17 @@
 //
 
 #import "CZAllCriticalController.h"
-#import "CZNavigationView.h"
+
+// 工具
 #import "GXNetTool.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
 
+// 视图
 #import "CZCommentDetailCell.h"
 #import "CZSubOneCommentCell.h" // 纯代码
 #import "CZPackUpCommentCell.h" // 按钮
-
+#import "CZNavigationViewFactory.h"
 #import "CZEvaluateToolBar.h"
 
 @interface CZAllCriticalController ()<UITableViewDelegate, UITableViewDataSource>
@@ -80,7 +82,7 @@
     if (_nav == nil) {
         self.view.backgroundColor = CZGlobalWhiteBg;
         NSString *title = [NSString stringWithFormat:@"所有评论(%@)", self.totalCommentCount];
-        self.nav = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:title rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+       self.nav = [CZNavigationViewFactory navigationViewWithTitle:title rightBtn:nil rightBtnAction:nil delegate:nil];
     }
     return _nav;
 }

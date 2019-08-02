@@ -37,16 +37,10 @@ static NSString *ID = @"PhotoCell";
     [super viewDidLoad];
     [self getShareImage];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"邀请好友" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"邀请好友" rightBtnTitle:nil rightBtnAction:nil ];
     self.bigImageConstraint.constant = CZGetY(navigationView);
     self.bottomViewConstraint.constant = (IsiPhoneX ? 34 : 0);
-
-    //导航条
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
     [self.view addSubview:navigationView];
-
 }
 
 - (void)setupUI

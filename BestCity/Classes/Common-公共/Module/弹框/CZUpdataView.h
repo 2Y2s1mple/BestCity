@@ -12,9 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZUpdataView : UIView <CZUpdataProtocol>
-
-
-
 /** 新用户给积分 */
 @property (nonatomic, strong) NSString *userPoint;
 

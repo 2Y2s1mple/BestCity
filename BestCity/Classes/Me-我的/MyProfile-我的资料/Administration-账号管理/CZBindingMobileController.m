@@ -32,7 +32,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"绑定手机" rightBtnTitle:nil rightBtnAction:nil navigationViewType:CZNavigationViewTypeBlack];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 67) title:@"绑定手机" rightBtnTitle:nil rightBtnAction:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
     

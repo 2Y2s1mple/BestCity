@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMHSDListNewController : UIViewController
 /** <#注释#> */
-@property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) NSDictionary *data;
 @end
 
 NS_ASSUME_NONNULL_END

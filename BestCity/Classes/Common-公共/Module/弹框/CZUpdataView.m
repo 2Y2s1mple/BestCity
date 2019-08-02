@@ -69,6 +69,8 @@
     }
 }
 
+
+
 + (instancetype)newUserRegistrationView
 {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][1] ;
@@ -90,6 +92,7 @@
     UINavigationController *nav = tabbar.selectedViewController;
     [nav pushViewController:vc animated:YES];
 }
+
 
 + (instancetype)reviewView
 {

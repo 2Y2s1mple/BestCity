@@ -40,14 +40,8 @@ static NSString * const ID = @"myPointCollectionCell";
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"极币商城" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
-    //导航条
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
-
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"极币商城" rightBtnTitle:nil rightBtnAction:nil ];
     [self.view addSubview:navigationView];
-
 
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake((SCR_WIDTH - 48) / 2, 180);

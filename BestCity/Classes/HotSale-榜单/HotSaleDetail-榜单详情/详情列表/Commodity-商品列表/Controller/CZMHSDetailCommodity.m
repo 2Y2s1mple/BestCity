@@ -42,10 +42,8 @@
     _topDataList = topDataList;
     self.model.relatedGoodsList = topDataList;
     [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSIndexSet *set = [NSIndexSet indexSetWithIndex:0];
-        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
-    });
+    NSIndexSet *set = [NSIndexSet indexSetWithIndex:0];
+    [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
 }
 
 

@@ -108,7 +108,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"订单详情" rightBtnTitle:nil rightBtnAction:nil navigationViewType:nil];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"订单详情" rightBtnTitle:nil rightBtnAction:nil ];
     [self.view addSubview:navigationView];
     self.topRadY.constant = CZGetY(navigationView);
     

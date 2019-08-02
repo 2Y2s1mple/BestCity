@@ -38,12 +38,8 @@
 - ( CZNavigationView * (^)(void))createNavView
 {
     return ^ {
-        CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil navigationViewType  :CZNavigationViewTypeBlack];
+        CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil ];
         [self.view addSubview:navigationView];
-        //导航条
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, navigationView.height - 0.7, navigationView.width, 0.7)];
-        line.backgroundColor = CZGlobalLightGray;
-        [navigationView addSubview:line];
         return navigationView;
     };
 }
