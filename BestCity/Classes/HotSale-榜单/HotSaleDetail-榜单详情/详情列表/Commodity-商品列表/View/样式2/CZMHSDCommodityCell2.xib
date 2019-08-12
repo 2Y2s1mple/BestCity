@@ -50,7 +50,7 @@
                 <outlet property="collectionView" destination="pmp-vb-PHp" id="sK2-ml-kxh"/>
                 <outlet property="titleLabel" destination="gPB-6m-vMf" id="jKt-Bs-MCK"/>
             </connections>
-            <point key="canvasLocation" x="-191.30434782608697" y="129.91071428571428"/>
+            <point key="canvasLocation" x="-504" y="110"/>
         </tableViewCell>
     </objects>
 </document>

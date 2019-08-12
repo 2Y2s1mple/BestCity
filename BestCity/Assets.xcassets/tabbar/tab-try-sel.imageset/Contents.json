@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "tab-try-sel.png",
+      "filename" : "tab-try-nor.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tab-try-sel@2x.png",
+      "filename" : "tab-try-nor@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tab-try-sel@3x.png",
+      "filename" : "tab-try-nor@3x.png",
       "scale" : "3x"
     }
   ],

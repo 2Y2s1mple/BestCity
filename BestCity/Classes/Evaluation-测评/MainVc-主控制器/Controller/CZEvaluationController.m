@@ -11,75 +11,78 @@
 #import "CZDChoicenessController.h"
 #import "CZDiscoverTitleModel.h"
 
-@interface CZEvaluationController ()
+// 子控制器
+#import "CZEAttentionController.h"
 
-@property (nonatomic, strong) NSArray <CZDiscoverTitleModel *> *mainTitles;
+// 视图
+#import "CZEvaluationSearchView.h"
+
+// 视图模型
+#import "CZEvaluationViewModel.h"
+
+@interface CZEvaluationController ()
+/** viewModel */
+@property (nonatomic, strong) CZEvaluationViewModel *viewModel;
+/** 顶部搜索栏 */
+@property (nonatomic, strong) CZEvaluationSearchView *searchView;
+
 @end
 
 @implementation CZEvaluationController
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+#pragma mark - viewModel
+- (CZEvaluationViewModel *)viewModel
 {
-    [self obtainTtitles];
+    if (_viewModel == nil) {
+        _viewModel = [[CZEvaluationViewModel alloc] init];
+    }
+    return _viewModel;
 }
 
-- (void)obtainTtitles
+
+#pragma mark - 视图
+- (CZEvaluationSearchView *)searchView
 {
-    //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/evaluation/categoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            //标题的数据
-            self.mainTitles = [CZDiscoverTitleModel objectArrayWithKeyValuesArray:result[@"data"]];
-            
-            //刷新WMPage控件
-            [self reloadData];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
+    if (_searchView == nil) {
+        CZEvaluationSearchView *search = [[CZEvaluationSearchView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 54 : 30), SCR_WIDTH, 40)];
+        search.didClickedSearchView = ^{
+            NSLog(@"点击了-- CZEvaluationSearchView");
+        };
+        _searchView = search;
+    }
+    return _searchView;
 }
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
-    // 获取数据
-    [self obtainTtitles];
-    
+    // 创建视图
+    [self.view addSubview:self.searchView];
+
 }
 
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
-    return self.mainTitles.count;
+    return self.viewModel.titlesText.count;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index
 {
-    CZDiscoverTitleModel *model = self.mainTitles[index];
-    NSMutableArray *imageList = [NSMutableArray array];
-    for (NSDictionary *dic in model.adList) {
-        [imageList addObject:dic[@"img"]];
-    }
-    CZDChoicenessController *vc = [[CZDChoicenessController alloc] init];
-    vc.type = CZJIPINModuleEvaluation;
-    vc.titleID = model.categoryId;
-    vc.imageUrlList = imageList;
+    CZEAttentionController *vc = [[CZEAttentionController alloc] init];
     return vc;        
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    CZDiscoverTitleModel *model = self.mainTitles[index];
-    return model.categoryName;
+    return self.viewModel.titlesText[index];
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, HOTTitleH);
+    return CGRectMake(0, CZGetY(self.searchView) + 18, SCR_WIDTH, 26);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, (IsiPhoneX ? 44 : 20) + HOTTitleH, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 44 : 20) + HOTTitleH) - (IsiPhoneX ? 83 : 49));
+    return CGRectMake(0, CZGetY(self.searchView) + 18 + 26 + 18, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.searchView) + 18 + 26 + 18 + (IsiPhoneX ? 83 : 49)));
 }
 
 - (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
@@ -90,4 +93,29 @@
     NSLog(@"----%@", text);
 }
 
+
+
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    [self obtainTtitles];
+//}
+//
+//- (void)obtainTtitles
+//{
+//    //获取数据
+//    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/evaluation/categoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+//        if ([result[@"msg"] isEqualToString:@"success"]) {
+//            //标题的数据
+//            [CZDiscoverTitleModel objectArrayWithKeyValuesArray:result[@"data"]];
+//
+//            //刷新WMPage控件
+//            [self reloadData];
+//        }
+//        //隐藏菊花
+//        [CZProgressHUD hideAfterDelay:0];
+//    } failure:^(NSError *error) {
+//        //隐藏菊花
+//        [CZProgressHUD hideAfterDelay:0];
+//    }];
+//}
 @end

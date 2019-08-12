@@ -53,7 +53,7 @@
     [self setupWithController:[[CZTrialMainController alloc] init] title:@"试用" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
     
-    self.selectedIndex = 0;
+    self.selectedIndex = 2;
     self.tabBar.clipsToBounds = YES;
 }
 
@@ -78,17 +78,15 @@
     if (![vc isKindOfClass:[CZMeController class]] && ![vc isKindOfClass:[CZMainHotSaleController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;
-        hotVc.menuViewStyle = WMMenuViewStyleLine;
-//        hotVc.progressWidth = 30;
-        hotVc.itemMargin = 10;
-        hotVc.progressHeight = 3;
-        hotVc.automaticallyCalculatesItemWidths = YES;
+        hotVc.menuViewStyle = WMMenuViewStyleDefault;
+        hotVc.menuItemWidth = 40;
+        NSString *margin = [NSString stringWithFormat:@"%lf", (SCR_WIDTH - 160 - 44) / 3.0];
+        hotVc.itemsMargins = @[@"22", margin, margin, margin, @"22"];
         hotVc.titleFontName = @"PingFangSC-Medium";
         hotVc.titleColorNormal = CZGlobalGray;
         hotVc.titleColorSelected = [UIColor blackColor];
-        hotVc.titleSizeNormal = 15.0f;
-        hotVc.titleSizeSelected = 16;
-        hotVc.progressColor = [UIColor redColor];
+        hotVc.titleSizeNormal = 18;
+        hotVc.titleSizeSelected = 18;
     }
     if ([vc isKindOfClass:[CZTrialMainController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;

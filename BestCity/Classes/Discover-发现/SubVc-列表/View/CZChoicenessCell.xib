@@ -38,13 +38,6 @@
                             <constraint firstAttribute="height" constant="230" id="vdc-DA-Oa2"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head3" translatesAutoresizingMaskIntoConstraints="NO" id="KLF-pd-rzW">
-                        <rect key="frame" x="14" y="326.5" width="38" height="38"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="38" id="NzK-rq-qbN"/>
-                            <constraint firstAttribute="width" constant="38" id="lTg-uQ-nZU"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资深编辑" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ip4-Bd-vdw">
                         <rect key="frame" x="64" y="336.5" width="61.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -58,6 +51,13 @@
                             <constraint firstAttribute="height" constant="6" id="KVC-Ww-3yJ"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head3" translatesAutoresizingMaskIntoConstraints="NO" id="KLF-pd-rzW">
+                        <rect key="frame" x="14" y="326.5" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="NzK-rq-qbN"/>
+                            <constraint firstAttribute="width" constant="38" id="lTg-uQ-nZU"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="hKL-an-TeU" firstAttribute="top" secondItem="77L-us-PdY" secondAttribute="bottom" constant="16" id="3JS-KW-Hc1"/>
