@@ -29,6 +29,15 @@
 @end
 
 @implementation CZMHSDCommodityCell
++ (instancetype)cellwithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"CZMHSDCommodityCell";
+    CZMHSDCommodityCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
+    }
+    return cell;
+}
 - (void)setDataDic:(NSDictionary *)dataDic
 {
     _dataDic = dataDic;

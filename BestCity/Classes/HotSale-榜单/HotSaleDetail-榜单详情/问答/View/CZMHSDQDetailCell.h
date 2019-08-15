@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMHSDQDetailCell : UITableViewCell
++ (instancetype)cellwithTableView:(UITableView *)tableView;
 @property (nonatomic, strong) CZMHSDQDetailModel *model;
 @end
 

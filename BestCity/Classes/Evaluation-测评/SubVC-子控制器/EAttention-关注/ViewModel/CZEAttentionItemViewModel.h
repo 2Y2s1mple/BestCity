@@ -11,12 +11,8 @@
 #import "CZEAttentionModel.h"
 #import "CZEAttentionUserModel.h"
 
-@class CZEAttentionItemViewModel;
+
 NS_ASSUME_NONNULL_BEGIN
-@protocol CZEAttentionItemViewModelProtocol <NSObject>
-@optional
-- (void)bindViewModel:(CZEAttentionItemViewModel *)viewModel;
-@end
 
 @interface CZEAttentionItemViewModel : NSObject
 /** 数据模型 */
@@ -29,10 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** cell高度 */
 @property (nonatomic, assign) CGFloat cellHeight;
 
-/** 删除关注 */
-+ (void)deleteAttentionWithID:(NSString *)attentionUserId action:(void (^)(void))action;
-/** 新增关注 */
-+ (void)addAttentionWithID:(NSString *)attentionUserId action:(void (^)(void))action;
 @end
 
 NS_ASSUME_NONNULL_END

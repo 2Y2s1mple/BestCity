@@ -95,11 +95,11 @@
 - (IBAction)attentionAction:(UIButton *)sender
 {
     if (!sender.isSelected) {
-        [CZEAttentionItemViewModel addAttentionWithID:self.model.userId action:^{
+        [CZJIPINSynthesisTool addAttentionWithID:self.model.userId action:^{
             [self attentionBtnStyle:self.attentionBtn];
         }];
     } else {
-        [CZEAttentionItemViewModel deleteAttentionWithID:self.model.userId action:^{
+        [CZJIPINSynthesisTool deleteAttentionWithID:self.model.userId action:^{
             [self notAttentionBtnStyle:self.attentionBtn];
         }];
     }

@@ -22,7 +22,15 @@
 @end
 
 @implementation CZMHSDQuestCell
-
++ (instancetype)cellwithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"CZMHSDQuestCell";
+    CZMHSDQuestCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
+    }
+    return cell;
+}
 - (void)setModel:(CZMHSDQuestModel *)model
 {
     _model = model;

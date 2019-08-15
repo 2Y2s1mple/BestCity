@@ -18,8 +18,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="372" height="433.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage1" translatesAutoresizingMaskIntoConstraints="NO" id="Vyl-7Z-6eC">
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage1" translatesAutoresizingMaskIntoConstraints="NO" id="Vyl-7Z-6eC">
                         <rect key="frame" x="15" y="25" width="56" height="56"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="56" id="lUX-gF-IcH"/>
                             <constraint firstAttribute="height" constant="56" id="oXS-gH-6cd"/>
@@ -30,6 +31,9 @@
                                 <integer key="value" value="28"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ua9-h2-ntW" appends="YES" id="XYJ-TZ-x0b"/>
+                        </connections>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="雨女无瓜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ao-rT-kFX">
                         <rect key="frame" x="81" y="33" width="65.5" height="19.5"/>
@@ -38,7 +42,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生活的评论家，吃货届的专家！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyw-bU-SWT">
-                        <rect key="frame" x="81" y="56.5" width="276" height="16"/>
+                        <rect key="frame" x="81" y="56.5" width="291" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -77,10 +81,10 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHD-5v-DbL">
-                        <rect key="frame" x="292" y="30" width="65" height="26"/>
+                        <rect key="frame" x="292" y="31" width="65" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65" id="M1P-Bw-QN4"/>
-                            <constraint firstAttribute="height" constant="26" id="Z36-nW-7me"/>
+                            <constraint firstAttribute="height" constant="24" id="Z36-nW-7me"/>
                         </constraints>
                         <state key="normal" title="关 注">
                             <color key="titleColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,7 +92,7 @@
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="13"/>
+                                <integer key="value" value="12"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                 <integer key="value" value="1"/>
@@ -97,9 +101,6 @@
                                 <color key="value" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <connections>
-                            <action selector="attentionAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5BO-7V-3ib"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -112,7 +113,7 @@
                     <constraint firstItem="1hQ-Lc-5AT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="QlY-dO-X7O"/>
                     <constraint firstItem="Vyl-7Z-6eC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="TC1-QZ-Pht"/>
                     <constraint firstItem="Vyl-7Z-6eC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="aXg-du-jXb"/>
-                    <constraint firstAttribute="trailing" secondItem="oyw-bU-SWT" secondAttribute="trailing" constant="15" id="ab7-Iu-BBS"/>
+                    <constraint firstAttribute="trailing" secondItem="oyw-bU-SWT" secondAttribute="trailing" id="ab7-Iu-BBS"/>
                     <constraint firstAttribute="trailing" secondItem="tHD-5v-DbL" secondAttribute="trailing" constant="15" id="buZ-um-HHS"/>
                     <constraint firstItem="1hQ-Lc-5AT" firstAttribute="top" secondItem="Ghb-zv-OI9" secondAttribute="bottom" constant="15" id="bvu-u6-fhF"/>
                     <constraint firstItem="oyw-bU-SWT" firstAttribute="top" secondItem="6Ao-rT-kFX" secondAttribute="bottom" constant="4" id="e6o-Ar-w5M"/>
@@ -135,8 +136,13 @@
                 <outlet property="signatureLabel" destination="oyw-bU-SWT" id="KQL-je-d3P"/>
                 <outlet property="visitLabel" destination="7bb-vO-qEE" id="ws6-rV-fte"/>
             </connections>
-            <point key="canvasLocation" x="-472" y="45"/>
+            <point key="canvasLocation" x="-687" y="17"/>
         </tableViewCell>
+        <tapGestureRecognizer id="ua9-h2-ntW">
+            <connections>
+                <action selector="iconAction:" destination="KGk-i7-Jjw" id="Jb3-6R-Mrq"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="testImage1" width="391" height="393"/>

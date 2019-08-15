@@ -8,10 +8,14 @@
 
 #import "CZEAttentionController.h"
 #import "CZEAttentionViewModel.h"
+#import "CZEAttentionItemViewModel.h"
 
 // 视图
 #import "CZEAttentionCommendCell.h"
 #import "CZEAttentionArticleCell.h"
+
+// 跳转
+#import "CZDChoiceDetailController.h"
 
 @interface CZEAttentionController () <UITableViewDelegate, UITableViewDataSource>
 /** tabelview */
@@ -96,6 +100,20 @@
         return 427;
     } else {
         return viewModel.cellHeight;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
+    CZEAttentionItemViewModel *viewModel = self.viewModel.dataSource[indexPath.row];
+    if ([viewModel.model.type isEqual: @"2"]) {
+      
+    } else {
+        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+        vc.detailType = [CZJIPINSynthesisTool getModuleType:[viewModel.model.article[@"type"] integerValue]];
+        vc.findgoodsId = viewModel.model.article[@"articleId"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

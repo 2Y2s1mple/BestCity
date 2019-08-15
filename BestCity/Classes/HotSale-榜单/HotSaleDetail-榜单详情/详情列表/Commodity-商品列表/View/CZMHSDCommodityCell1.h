@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMHSDCommodityCell1 : UITableViewCell
++ (instancetype)cellwithTableView:(UITableView *)tableView;
 /** 数据 */
 @property (nonatomic, strong) NSArray *dataList;
 /** 数据 */

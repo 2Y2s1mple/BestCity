@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMHSDQuestCell : UITableViewCell
++ (instancetype)cellwithTableView:(UITableView *)tableView;
 @property (nonatomic, strong) CZMHSDQuestModel *model;
 @end
 

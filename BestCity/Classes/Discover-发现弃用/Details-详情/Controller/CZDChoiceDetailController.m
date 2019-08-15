@@ -85,7 +85,9 @@ static CGFloat const likeAndShareHeight = 49;
         self.nav.type = [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType];
         self.nav.projectId = self.findgoodsId;
         self.nav.delegate = self;
-        self.nav.titleText = self.TitleText;
+        if (self.TitleText.length > 0) {
+            self.nav.titleText = self.TitleText;
+        }
     }
     return _nav;
 }

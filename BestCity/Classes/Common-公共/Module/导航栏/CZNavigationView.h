@@ -20,4 +20,7 @@ typedef void(^rightBtnBlock)(void);
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(id)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction;
 
 @property (nonatomic, assign) id <CZNavigationViewDelegate> delegate;
+
+/** 右边的按钮颜色 */
+@property (nonatomic, strong) UIColor *rightBtnTextColor;
 @end

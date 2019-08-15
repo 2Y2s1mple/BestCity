@@ -18,6 +18,9 @@
 #import "CZLoginController.h"
 
 
+#import "CZEInventoryEditorController.h"
+
+
 @interface CZTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -48,19 +51,18 @@
     self.delegate = self;
 
     [self setupWithController:[[CZMainHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
-    [self setupWithController:[[CZDiscoverController alloc] init] title:@"发现" image:@"tab-discover-nor" selectedImage:@"tab-discover-sel"];
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
     [self setupWithController:[[CZTrialMainController alloc] init] title:@"试用" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
     
-    self.selectedIndex = 2;
+    self.selectedIndex = 0;
     self.tabBar.clipsToBounds = YES;
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
 
-    NSArray *configureList = @[ @"tab栏榜单", @"tab栏发现", @"tab栏评测", @"tab栏试用", @"tab栏我的"];
+    NSArray *configureList = @[@"tab栏榜单", @"tab栏发现", @"tab栏评测", @"tab栏试用", @"tab栏我的"];
     NSString *ID = [NSString stringWithFormat:@"ID%ld", (tabBarController.selectedIndex + 1)];
     NSDictionary *context = configureList[tabBarController.selectedIndex];
     [MobClick event:ID attributes:@{@"Tab" : context}];

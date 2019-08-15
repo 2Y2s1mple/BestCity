@@ -14,7 +14,6 @@
 #import "CZEditorImageView.h"
 #import "UIImageView+WebCache.h"
 
-
 @interface CZReportEditorController () <UITextViewDelegate>
 /** <#注释#> */
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -83,7 +82,7 @@
 {
     CZEditorTextView *textView = [[CZEditorTextView alloc] init];
     self.textView = textView;
-    textView.placeHolder = @"输入标题，20字左右阅读体验最佳。输入标题，20字左右阅读体验最佳。";
+    textView.placeHolder = @"输入标题，20字左右阅读体验最佳";
     textView.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     textView.x = 10;
     textView.y = Y + 10;

@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UIButton *popBtn;
 /** 主标题 */
 @property (nonatomic, strong) UILabel *centerTitle;
+/** 右边的按钮 */
+@property (nonatomic, strong) UIButton *rightBtn;
 /** 保存Block */
 @property (nonatomic, copy) rightBtnBlock rightBlock;
 @end
@@ -46,6 +48,13 @@
     return _centerTitle;
 }
 
+- (void)setRightBtnTextColor:(UIColor *)rightBtnTextColor
+{
+    _rightBtnTextColor = rightBtnTextColor;
+    [self.rightBtn setTitleColor:rightBtnTextColor forState:UIControlStateNormal];
+
+}
+
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title rightBtnTitle:(id)rightBtnTitle rightBtnAction:(rightBtnBlock)rightBtnAction
 {
     self = [super initWithFrame:frame];
@@ -55,6 +64,7 @@
         [self addSubview:self.centerTitle];
 
         UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.rightBtn = rightBtn;
         rightBtn.frame = CGRectMake(SCR_WIDTH - 100, 20, 80, 40);
         rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [self addSubview:rightBtn];

@@ -8,6 +8,8 @@
 
 #import "CZEAttentionCommendCell.h"
 #import "CZEACCollectionCell.h"
+//数据模型
+#import "CZEAttentionItemViewModel.h"
 
 @interface CZEAttentionCommendCell ()<UICollectionViewDelegate, UICollectionViewDataSource>
 /** 标示图 */

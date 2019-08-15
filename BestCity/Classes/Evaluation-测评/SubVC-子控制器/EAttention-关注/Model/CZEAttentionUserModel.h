@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *detail;
 /** 里面的文章图片 */
 @property (nonatomic, strong) NSArray *imgs;
+/** 关注 */
+@property (nonatomic, strong) NSString *follow;
 @end
 
 NS_ASSUME_NONNULL_END

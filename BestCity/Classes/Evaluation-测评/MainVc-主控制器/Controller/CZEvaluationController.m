@@ -12,13 +12,19 @@
 #import "CZDiscoverTitleModel.h"
 
 // 子控制器
-#import "CZEAttentionController.h"
+#import "CZEAttentionController.h" // 关注
+#import "CZERecommendController.h" // 推荐
+#import "CZETestController.h" // 评测
+#import "CZEInventoryController.h" //清单
 
 // 视图
 #import "CZEvaluationSearchView.h"
 
 // 视图模型
 #import "CZEvaluationViewModel.h"
+
+// 跳转
+#import "CZHotsaleSearchController.h"
 
 @interface CZEvaluationController ()
 /** viewModel */
@@ -45,11 +51,21 @@
     if (_searchView == nil) {
         CZEvaluationSearchView *search = [[CZEvaluationSearchView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 54 : 30), SCR_WIDTH, 40)];
         search.didClickedSearchView = ^{
-            NSLog(@"点击了-- CZEvaluationSearchView");
+            [self pushSearchView];
         };
         _searchView = search;
     }
     return _searchView;
+}
+
+// 跳转到搜索页面
+- (void)pushSearchView
+{
+    NSString *text = @"首页搜索框";
+    NSDictionary *context = @{@"message" : text};
+    [MobClick event:@"ID1" attributes:context];
+    CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -69,8 +85,32 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index
 {
-    CZEAttentionController *vc = [[CZEAttentionController alloc] init];
-    return vc;        
+    switch (index) {
+        case 0:
+        {
+            CZEAttentionController *vc = [[CZEAttentionController alloc] init];
+            return vc;
+        }
+        case 1:
+        {
+            CZERecommendController *vc = [[CZERecommendController alloc] init];
+            return vc;
+        }
+        case 2:
+        {
+            CZETestController *vc = [[CZETestController alloc] init];
+            return vc;
+        }
+        case 3:
+        {
+            CZEInventoryController *vc = [[CZEInventoryController alloc] init];
+            return vc;
+        }
+        default:
+        {
+            return [[UIViewController alloc] init];
+        }
+    }
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {

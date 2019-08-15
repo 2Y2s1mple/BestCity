@@ -85,7 +85,7 @@
                 <outlet property="nameLabel" destination="Ip4-Bd-vdw" id="EtO-L7-hXZ"/>
                 <outlet property="visitLabel" destination="F4Z-hV-f4V" id="Fxc-1a-Z58"/>
             </connections>
-            <point key="canvasLocation" x="-473" y="-1251"/>
+            <point key="canvasLocation" x="-474" y="-1271"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="choiceCell" rowHeight="444" id="ZuU-wj-b7y" customClass="CZChoicenessCell">
             <rect key="frame" x="0.0" y="0.0" width="373" height="444"/>

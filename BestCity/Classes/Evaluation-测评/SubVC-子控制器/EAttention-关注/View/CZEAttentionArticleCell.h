@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-//数据模型
-#import "CZEAttentionItemViewModel.h"
-
+#import "CZEvaluationProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface CZEAttentionArticleCell : UITableViewCell <CZEAttentionItemViewModelProtocol>
+@interface CZEAttentionArticleCell : UITableViewCell <CZEvaluationProtocol>
 + (instancetype)cellwithTableView:(UITableView *)tableView;
 
+- (void)attentionAction:(UIButton *)sender;
+// 未关注样式
+- (void)notAttentionBtnStyle:(UIButton *)sender;
+// 已关注样式
+- (void)attentionBtnStyle:(UIButton *)sender;
 @end
-
 NS_ASSUME_NONNULL_END

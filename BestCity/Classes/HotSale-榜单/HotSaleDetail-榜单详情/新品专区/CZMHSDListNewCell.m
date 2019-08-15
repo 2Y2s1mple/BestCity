@@ -24,6 +24,15 @@
 @end
 
 @implementation CZMHSDListNewCell
++ (instancetype)cellwithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"CZMHSDListNewCell";
+    CZMHSDListNewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
+    }
+    return cell;
+}
 
 - (void)setModel:(CZDiscoverDetailModel *)model
 {

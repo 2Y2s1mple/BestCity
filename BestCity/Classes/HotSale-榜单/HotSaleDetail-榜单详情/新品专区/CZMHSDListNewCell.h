@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMHSDListNewCell : UITableViewCell
++ (instancetype)cellwithTableView:(UITableView *)tableView;
 /** 数据模型 */
 @property (nonatomic, strong) CZDiscoverDetailModel *model;
 @end

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMHSDCommodityCell3 : UITableViewCell
++ (instancetype)cellwithTableView:(UITableView *)tableVie;
 /** 数据 */
 @property (nonatomic, strong) NSDictionary *dataDic;
 /** 是否是第一个 */

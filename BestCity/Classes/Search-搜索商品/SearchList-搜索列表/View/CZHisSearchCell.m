@@ -59,8 +59,6 @@
             [CZProgressHUD hideAfterDelay:1];
         }        
     } failure:^(NSError *error) {}];
-
-    
 }
 
 

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZBaseEvaluationController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZETestController : UIViewController
+@interface CZETestController : CZBaseEvaluationController
 
 @end
 

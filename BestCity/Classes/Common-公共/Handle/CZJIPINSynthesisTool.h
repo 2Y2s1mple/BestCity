@@ -24,6 +24,10 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 
 + (NSString *)getModuleTypeNumber:(CZJIPINModuleType)type;
 + (CZJIPINModuleType)getModuleType:(NSInteger)typeNumber;
+/** 删除关注 */
++ (void)deleteAttentionWithID:(NSString *)attentionUserId action:(void (^)(void))action;
+/** 新增关注 */
++ (void)addAttentionWithID:(NSString *)attentionUserId action:(void (^)(void))action;
 @end
 
 NS_ASSUME_NONNULL_END

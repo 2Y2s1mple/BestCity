@@ -8,6 +8,8 @@
 
 #import "CZEAttentionArticleCell.h"
 #import "UIImageView+WebCache.h"
+//数据模型
+#import "CZEAttentionItemViewModel.h"
 
 @interface CZEAttentionArticleCell ()
 /** 主标题 */
@@ -26,7 +28,6 @@
 @property (nonatomic, weak) IBOutlet UIView *lineView;
 /** 关注按钮 */
 @property (nonatomic, weak) IBOutlet UIButton *attentionBtn;
-
 /** 数据模型 */
 @property (nonatomic, strong) CZEAttentionItemViewModel *viewModel;
 @end
@@ -38,12 +39,12 @@
     static NSString *ID = @"CZEAttentionArticleCell";
     CZEAttentionArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZEAttentionArticleCell class]) owner:nil options:nil] firstObject];
     }
     return cell;
 }
 
-- (void)bindViewModel:(CZEAttentionItemViewModel *)viewModel
+- (void)bindViewModel:(NSObject *)viewModel
 {
     self.viewModel = viewModel;
     /** 主标题 */
@@ -70,18 +71,22 @@
 
 
 /** 关注按钮响应方法 */
-- (IBAction)attentionAction:(UIButton *)sender
+- (void)attentionAction:(UIButton *)sender
 {
     if (!sender.isSelected) {
-        [CZEAttentionItemViewModel addAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
+        [CZJIPINSynthesisTool addAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
            [self attentionBtnStyle:self.attentionBtn];
         }];
     } else {
-        [CZEAttentionItemViewModel deleteAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
+        [CZJIPINSynthesisTool deleteAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
              [self notAttentionBtnStyle:self.attentionBtn];
         }];
     }
     sender.selected = !sender.isSelected;
+}
+
+- (IBAction)iconAction:(UITapGestureRecognizer *)sender {
+    NSLog(@"跳转到个人主页");
 }
 
 - (void)awakeFromNib {
@@ -90,6 +95,7 @@
     self.nameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     self.mainTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
     self.attentionBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    [self.attentionBtn addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -109,8 +115,7 @@
 // 已关注样式
 - (void)attentionBtnStyle:(UIButton *)sender
 {
-    sender.backgroundColor = CZGlobalLightGray;
-    sender.layer.borderColor = CZGlobalLightGray.CGColor;
+    sender.layer.borderColor = CZGlobalGray.CGColor;
     [sender setTitle:@"已关注" forState:UIControlStateNormal];
     [sender setTitleColor:CZGlobalGray forState:UIControlStateNormal];
 }

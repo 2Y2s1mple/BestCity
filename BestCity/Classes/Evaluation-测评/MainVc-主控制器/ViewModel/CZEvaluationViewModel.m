@@ -20,5 +20,10 @@
 }
 
 
+- (void)bindViewModel:(NSObject *)viewModel
+{
+    
+}
+
 
 @end

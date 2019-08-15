@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-//数据模型
-#import "CZEAttentionItemViewModel.h"
+#import "CZEvaluationProtocol.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
+@interface CZEAttentionCommendCell : UITableViewCell <CZEvaluationProtocol>
 
-@interface CZEAttentionCommendCell : UITableViewCell <CZEAttentionItemViewModelProtocol>
 + (instancetype)cellwithTableView:(UITableView *)tableView;
 
 @end
-
 NS_ASSUME_NONNULL_END

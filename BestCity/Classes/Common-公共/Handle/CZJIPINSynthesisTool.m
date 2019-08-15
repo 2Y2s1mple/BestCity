@@ -7,6 +7,7 @@
 //
 
 #import "CZJIPINSynthesisTool.h"
+#import "GXNetTool.h"
 
 @implementation CZJIPINSynthesisTool
 + (NSString *)getModuleTypeNumber:(CZJIPINModuleType)type
@@ -42,6 +43,7 @@
 + (CZJIPINModuleType)getModuleType:(NSInteger)typeNumber
 {
     /** 1商品，2评测, 3发现，4试用 */
+    //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
     CZJIPINModuleType type;
     switch (typeNumber) {
         case 1: //商品
@@ -62,10 +64,58 @@
         case 6: // 相关百科
             type = CZJIPINModuleRelationBK;
             break;
+        case 7: // 清单详情
+            type = CZJIPINModuleTrail;
+            break;
         default:
             type = 0;
             break;
     }
     return type;
+}
+
+// 取消关注
++ (void)deleteAttentionWithID:(NSString *)attentionUserId action:(void (^)(void))action
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    // 要关注对象ID
+    param[@"attentionUserId"] = attentionUserId;
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/follow/delete"];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"已取消"]) {
+            // 关注
+            [CZProgressHUD showProgressHUDWithText:@"取关成功"];
+            action();
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:1.5];
+    } failure:^(NSError *error) {
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+// 新增关注
++ (void)addAttentionWithID:(NSString *)attentionUserId action:(void (^)(void))action
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    // 要关注对象ID
+    param[@"attentionUserId"] = attentionUserId;
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/follow"];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"关注成功"]) {
+            [CZProgressHUD showProgressHUDWithText:@"关注成功"];
+            action();
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:1.5];
+    } failure:^(NSError *error) {
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:0];
+    }];
 }
 @end
