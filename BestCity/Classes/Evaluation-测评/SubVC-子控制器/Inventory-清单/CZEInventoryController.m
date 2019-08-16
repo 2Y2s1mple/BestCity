@@ -278,7 +278,6 @@
         self.categoryParam = self.categoryList[sender.tag - 100];
         self.categoryId = self.categoryParam[@"categoryId"];
         [self reloadNewDataSorce:self.categoryId];
-
     }
 }
 

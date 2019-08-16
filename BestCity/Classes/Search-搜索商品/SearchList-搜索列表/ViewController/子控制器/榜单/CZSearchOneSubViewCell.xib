@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CZSearchOneSubViewCell" rowHeight="142" id="BpV-HB-7zu" customClass="CZSearchOneSubViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="482" height="142"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BpV-HB-7zu" id="eRh-yk-L2y">
+                <rect key="frame" x="0.0" y="0.0" width="482" height="141.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEW-9u-GOK">
+                        <rect key="frame" x="286" y="44.5" width="36" height="21"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <state key="normal" title="小资">
+                            <color key="titleColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                <color key="value" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8E-0r-6cB">
+                        <rect key="frame" x="240" y="44.5" width="36" height="21"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <state key="normal" title="小资">
+                            <color key="titleColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                <color key="value" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEE-GY-Cmi">
+                        <rect key="frame" x="194" y="44.5" width="36" height="21"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <state key="normal" title="小资">
+                            <color key="titleColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                <color key="value" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9L-EQ-c8V">
+                        <rect key="frame" x="148" y="44.5" width="36" height="21"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <state key="normal" title="小资">
+                            <color key="titleColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                <color key="value" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nkq-E7-Qj6">
+                        <rect key="frame" x="15" y="15" width="110" height="110"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage1" translatesAutoresizingMaskIntoConstraints="NO" id="SCY-TS-D8X">
+                                <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="110" id="0Rr-zr-qYc"/>
+                            <constraint firstAttribute="bottom" secondItem="SCY-TS-D8X" secondAttribute="bottom" id="Hb9-yZ-4tg"/>
+                            <constraint firstItem="SCY-TS-D8X" firstAttribute="top" secondItem="Nkq-E7-Qj6" secondAttribute="top" id="ITC-98-KeJ"/>
+                            <constraint firstItem="SCY-TS-D8X" firstAttribute="leading" secondItem="Nkq-E7-Qj6" secondAttribute="leading" id="T0x-Y6-tIL"/>
+                            <constraint firstAttribute="trailing" secondItem="SCY-TS-D8X" secondAttribute="trailing" id="XLB-ig-NI6"/>
+                            <constraint firstAttribute="height" constant="110" id="gfO-hT-T15"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充电便携式迷你榨汁机小型…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APW-bB-RWV">
+                        <rect key="frame" x="148" y="15" width="319" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ls-ue-xSa">
+                        <rect key="frame" x="15" y="140.5" width="452" height="1"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="cCa-Tu-45v"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥199.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJ2-ot-XBi">
+                        <rect key="frame" x="148" y="105" width="51.5" height="20"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                        <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Nkq-E7-Qj6" firstAttribute="top" secondItem="eRh-yk-L2y" secondAttribute="top" constant="15" id="3wH-r8-YFn"/>
+                    <constraint firstItem="j8E-0r-6cB" firstAttribute="leading" secondItem="WEE-GY-Cmi" secondAttribute="trailing" constant="10" id="5vn-Ue-wdX"/>
+                    <constraint firstItem="R9L-EQ-c8V" firstAttribute="leading" secondItem="APW-bB-RWV" secondAttribute="leading" id="7TN-nN-82M"/>
+                    <constraint firstItem="j8E-0r-6cB" firstAttribute="centerY" secondItem="WEE-GY-Cmi" secondAttribute="centerY" id="9pd-mT-8Ai"/>
+                    <constraint firstItem="Nkq-E7-Qj6" firstAttribute="leading" secondItem="eRh-yk-L2y" secondAttribute="leading" constant="15" id="Blu-Zu-7Yw"/>
+                    <constraint firstItem="xJ2-ot-XBi" firstAttribute="leading" secondItem="APW-bB-RWV" secondAttribute="leading" id="Ejd-6s-KPa"/>
+                    <constraint firstAttribute="trailing" secondItem="5ls-ue-xSa" secondAttribute="trailing" constant="15" id="PM0-dU-XVu"/>
+                    <constraint firstAttribute="trailing" secondItem="APW-bB-RWV" secondAttribute="trailing" constant="15" id="QnI-lH-19e"/>
+                    <constraint firstItem="WEE-GY-Cmi" firstAttribute="leading" secondItem="R9L-EQ-c8V" secondAttribute="trailing" constant="10" id="WeH-1A-O4B"/>
+                    <constraint firstItem="xJ2-ot-XBi" firstAttribute="bottom" secondItem="SCY-TS-D8X" secondAttribute="bottom" id="Xzh-yF-hfH"/>
+                    <constraint firstItem="R9L-EQ-c8V" firstAttribute="top" secondItem="APW-bB-RWV" secondAttribute="bottom" constant="10" id="ch9-j2-RYz"/>
+                    <constraint firstItem="pEW-9u-GOK" firstAttribute="leading" secondItem="j8E-0r-6cB" secondAttribute="trailing" constant="10" id="kcq-iC-6NS"/>
+                    <constraint firstItem="5ls-ue-xSa" firstAttribute="leading" secondItem="eRh-yk-L2y" secondAttribute="leading" constant="15" id="lI1-jM-2Bv"/>
+                    <constraint firstItem="APW-bB-RWV" firstAttribute="leading" secondItem="Nkq-E7-Qj6" secondAttribute="trailing" constant="23" id="rbv-af-lDb"/>
+                    <constraint firstItem="pEW-9u-GOK" firstAttribute="centerY" secondItem="j8E-0r-6cB" secondAttribute="centerY" id="tsX-ER-Fiu"/>
+                    <constraint firstItem="WEE-GY-Cmi" firstAttribute="centerY" secondItem="R9L-EQ-c8V" secondAttribute="centerY" id="uC4-Dv-2AO"/>
+                    <constraint firstAttribute="bottom" secondItem="5ls-ue-xSa" secondAttribute="bottom" id="wKg-pj-Qwf"/>
+                    <constraint firstItem="APW-bB-RWV" firstAttribute="top" secondItem="eRh-yk-L2y" secondAttribute="top" constant="15" id="z6M-NG-x1d"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="actualPriceLabel" destination="xJ2-ot-XBi" id="Xih-tq-hSk"/>
+                <outlet property="bigImageView" destination="SCY-TS-D8X" id="BsT-yZ-qdZ"/>
+                <outlet property="tag1" destination="R9L-EQ-c8V" id="Ao8-2s-gM3"/>
+                <outlet property="tag2" destination="WEE-GY-Cmi" id="a9f-80-4y9"/>
+                <outlet property="tag3" destination="j8E-0r-6cB" id="8wE-N2-4WU"/>
+                <outlet property="tag4" destination="pEW-9u-GOK" id="ffk-lY-PfY"/>
+                <outlet property="titleLabel" destination="APW-bB-RWV" id="iXV-6g-ktk"/>
+            </connections>
+            <point key="canvasLocation" x="-1342" y="-547"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="testImage1" width="391" height="393"/>
+    </resources>
+</document>

@@ -97,10 +97,6 @@
     self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, self.searchViewY, SCR_WIDTH, self.searchHeight) msgAction:^(NSString *rightBtnText){
         if ([rightBtnText isEqualToString:@"搜索"]) {
             [weakSelf pushSearchDetail];
-            // 添加到历史搜索
-//            [weakSelf.hisView createTagLabelWithTitle:weakSelf.searchView.searchText withEventType:CZHotTagLabelTypeDefault];
-            // 更新热门的尺寸
-//            weakSelf.hotView.frame = CGRectMake(0, CZGetY(weakSelf.hisView) + 20, SCR_WIDTH, 300);
         } else {
             [self.navigationController popViewControllerAnimated:YES];
         }

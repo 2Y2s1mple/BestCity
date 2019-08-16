@@ -12,6 +12,12 @@
 #import "GXNetTool.h"
 #import "CZSearchSubDetailOneController.h"
 #import "CZSearchSubDetailTwoController.h"
+// 子控制
+#import "CZSearchOneSubView.h"
+#import "CZSearchTwoSubView.h"
+#import "CZSearchThreeSubView.h"
+
+#import "CZSearchFiveSubView.h"
 
 @interface CZHotsaleSearchDetailController ()<UITextFieldDelegate>
 /** 没有数据图片 */
@@ -20,9 +26,16 @@
 @property (nonatomic, assign) CGFloat currentOffsetY;
 /** 记录偏移量 */
 @property (nonatomic, assign) CGFloat recordOffsetY;
+/** <#注释#> */
+@property (nonatomic, strong) NSArray *titleList;
 @end
 
 @implementation CZHotsaleSearchDetailController
+- (NSArray *)titleList
+{
+    return @[@"榜单", @"清单", @"问答", @"评测", @"试用报告"];
+}
+
 #pragma mark - 数据
 // 搜索框Y值
 - (CGFloat)searchViewY
@@ -124,31 +137,40 @@
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController
 {
-    return 4;
+    return self.titleList.count;
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    NSArray *titles = @[@"商品", @"发现", @"评测", @"试用报告"];
-    return titles[index];
+    return self.titleList[index];
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    
+    //    （1商品，2清单，3问答，4评测，5试用报告）
     switch (index) {
         case 0: {
-            CZSearchSubDetailOneController *vc = [[CZSearchSubDetailOneController alloc] init];
+            CZSearchOneSubView *vc = [[CZSearchOneSubView alloc] init];
             vc.textSearch = self.textTitle;
             return vc;
         }
         case 1: {
-            CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
-            vc.type = CZJIPINModuleDiscover;
+            CZSearchTwoSubView *vc = [[CZSearchTwoSubView alloc] init];
+            vc.type = @"2";
             vc.textSearch = self.textTitle;
             return vc;
         }
         case 2: {
-            CZSearchSubDetailTwoController *vc = [[CZSearchSubDetailTwoController alloc] init];
-            vc.type = CZJIPINModuleEvaluation;
+            CZSearchThreeSubView *vc = [[CZSearchThreeSubView alloc] init];
+            vc.textSearch = self.textTitle;
+            return vc;
+        }
+        case 3: {
+            CZSearchTwoSubView *vc = [[CZSearchTwoSubView alloc] init];
+            vc.type = @"4";
+            vc.textSearch = self.textTitle;
+            return vc;
+        }
+        case 4: {
+            CZSearchFiveSubView *vc = [[CZSearchFiveSubView alloc] init];
             vc.textSearch = self.textTitle;
             return vc;
         }
