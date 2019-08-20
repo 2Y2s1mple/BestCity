@@ -13,7 +13,7 @@
 			<key>title</key>
 			<string>消息通知</string>
 			<key>icon</key>
-			<string>message</string>
+			<string>news</string>
 			<key>destinationVC</key>
 			<string>CZSystemMessageController</string>
 		</dict>
@@ -21,7 +21,7 @@
 			<key>title</key>
 			<string>我的团队</string>
 			<key>icon</key>
-			<string>我的团队</string>
+			<string>Order</string>
 			<key>destinationVC</key>
 			<string>CZMeTeamMembersController</string>
 		</dict>
@@ -29,15 +29,23 @@
 			<key>title</key>
 			<string>我的订单</string>
 			<key>icon</key>
-			<string>order</string>
+			<string>Order-1</string>
 			<key>destinationVC</key>
 			<string>CZOrderController</string>
 		</dict>
+        <dict>
+            <key>title</key>
+            <string>极币商城</string>
+            <key>icon</key>
+            <string>store</string>
+            <key>destinationVC</key>
+            <string>CZMyPointsController</string>
+        </dict>
 		<dict>
 			<key>title</key>
-			<string>我要赚极币</string>
+			<string>极币任务</string>
 			<key>icon</key>
-			<string>list-jibi</string>
+			<string>mission</string>
 			<key>destinationVC</key>
 			<string>CZCoinCenterController</string>
 		</dict>
@@ -45,7 +53,7 @@
 			<key>title</key>
 			<string>我的收藏</string>
 			<key>icon</key>
-			<string>favor</string>
+			<string>Collection</string>
 			<key>destinationVC</key>
 			<string>CZCollectController</string>
 		</dict>
@@ -53,7 +61,7 @@
 			<key>title</key>
 			<string>收货地址</string>
 			<key>icon</key>
-			<string>favor-1</string>
+			<string>address</string>
 			<key>destinationVC</key>
 			<string>CZAddressController</string>
 		</dict>
@@ -61,7 +69,7 @@
 			<key>title</key>
 			<string>设置</string>
 			<key>icon</key>
-			<string>setting</string>
+			<string>address-1</string>
 			<key>destinationVC</key>
 			<string>CZSettingController</string>
 		</dict>

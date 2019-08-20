@@ -11,55 +11,61 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="meCell" rowHeight="114" id="Uye-y0-lGa" customClass="CZMeCell">
-            <rect key="frame" x="0.0" y="0.0" width="407" height="114"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="meCell" rowHeight="82" id="Uye-y0-lGa" customClass="CZMeCell">
+            <rect key="frame" x="0.0" y="0.0" width="407" height="82"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uye-y0-lGa" id="Qwj-qW-q1W">
-                <rect key="frame" x="0.0" y="0.0" width="407" height="113.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="407" height="81.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ec-1H-FUw" userLabel="签到">
-                        <rect key="frame" x="0.0" y="0.0" width="102" height="113.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="102" height="81.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-sign in" translatesAutoresizingMaskIntoConstraints="NO" id="KW3-A5-roN">
-                                <rect key="frame" x="38.5" y="34.5" width="25" height="25"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-sign in1" translatesAutoresizingMaskIntoConstraints="NO" id="KW3-A5-roN">
+                                <rect key="frame" x="36" y="15" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="HIh-wp-5Vr"/>
+                                    <constraint firstAttribute="height" constant="30" id="YEp-MI-y70"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请领奖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdU-9a-Y4d">
-                                <rect key="frame" x="22" y="66.5" width="57.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.56073331832885742" green="0.56081694364547729" blue="0.56071501970291138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="24" y="52" width="53.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fdU-9a-Y4d" firstAttribute="top" secondItem="KW3-A5-roN" secondAttribute="bottom" constant="7" id="5Bu-rS-KCP"/>
-                            <constraint firstItem="KW3-A5-roN" firstAttribute="centerY" secondItem="2ec-1H-FUw" secondAttribute="centerY" constant="-10" id="ANv-vw-ml9"/>
                             <constraint firstItem="fdU-9a-Y4d" firstAttribute="centerX" secondItem="2ec-1H-FUw" secondAttribute="centerX" id="On3-bb-6Jf"/>
                             <constraint firstItem="KW3-A5-roN" firstAttribute="centerX" secondItem="2ec-1H-FUw" secondAttribute="centerX" id="VOq-ff-lwm"/>
+                            <constraint firstItem="KW3-A5-roN" firstAttribute="top" secondItem="2ec-1H-FUw" secondAttribute="top" constant="15" id="Y5s-0c-Jjn"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="0i8-Dw-ZjR" appends="YES" id="8WU-x4-PFZ"/>
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ry8-Oc-3yV" userLabel="极币">
-                        <rect key="frame" x="102" y="0.0" width="101.5" height="113.5"/>
+                        <rect key="frame" x="102" y="0.0" width="101.5" height="81.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-jibi" translatesAutoresizingMaskIntoConstraints="NO" id="h61-UZ-XWr">
-                                <rect key="frame" x="38" y="34.5" width="25" height="25"/>
+                                <rect key="frame" x="35.5" y="15" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="82s-yv-uHX"/>
+                                    <constraint firstAttribute="height" constant="30" id="Pse-fL-ViK"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="极币商城 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRD-Cw-ap9">
-                                <rect key="frame" x="20" y="67" width="61" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.56073331829999995" green="0.56081694360000001" blue="0.56071501970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的试用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRD-Cw-ap9">
+                                <rect key="frame" x="24" y="52.5" width="53.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="h61-UZ-XWr" firstAttribute="centerX" secondItem="ry8-Oc-3yV" secondAttribute="centerX" id="890-6G-MyP"/>
+                            <constraint firstItem="h61-UZ-XWr" firstAttribute="top" secondItem="ry8-Oc-3yV" secondAttribute="top" constant="15" id="8ZS-6h-waH"/>
                             <constraint firstItem="HRD-Cw-ap9" firstAttribute="centerX" secondItem="ry8-Oc-3yV" secondAttribute="centerX" id="So4-KW-b6p"/>
-                            <constraint firstItem="h61-UZ-XWr" firstAttribute="centerY" secondItem="ry8-Oc-3yV" secondAttribute="centerY" constant="-10" id="cXS-N4-qHI"/>
                             <constraint firstItem="HRD-Cw-ap9" firstAttribute="top" secondItem="h61-UZ-XWr" secondAttribute="bottom" constant="7.5" id="wND-d7-OJ0"/>
                         </constraints>
                         <connections>
@@ -67,22 +73,25 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XuV-WW-kR9" userLabel="订单">
-                        <rect key="frame" x="203.5" y="0.0" width="102" height="113.5"/>
+                        <rect key="frame" x="203.5" y="0.0" width="102" height="81.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-trial" translatesAutoresizingMaskIntoConstraints="NO" id="KzV-Yq-SI6">
-                                <rect key="frame" x="38.5" y="34.5" width="25" height="25"/>
+                                <rect key="frame" x="36" y="15" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Ru3-CP-XMa"/>
+                                    <constraint firstAttribute="width" constant="30" id="vyd-h2-XTc"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的试用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqm-Jq-cbK">
-                                <rect key="frame" x="22" y="66.5" width="57.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.56073331829999995" green="0.56081694360000001" blue="0.56071501970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的发布" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqm-Jq-cbK">
+                                <rect key="frame" x="24" y="52" width="53.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KzV-Yq-SI6" firstAttribute="centerY" secondItem="XuV-WW-kR9" secondAttribute="centerY" constant="-10" id="E6o-y5-wP0"/>
                             <constraint firstItem="Cqm-Jq-cbK" firstAttribute="centerX" secondItem="XuV-WW-kR9" secondAttribute="centerX" id="ELY-HS-yUY"/>
+                            <constraint firstItem="KzV-Yq-SI6" firstAttribute="top" secondItem="XuV-WW-kR9" secondAttribute="top" constant="15" id="SyB-Px-NLn"/>
                             <constraint firstItem="KzV-Yq-SI6" firstAttribute="centerX" secondItem="XuV-WW-kR9" secondAttribute="centerX" id="Xua-xO-7Fs"/>
                             <constraint firstItem="Cqm-Jq-cbK" firstAttribute="top" secondItem="KzV-Yq-SI6" secondAttribute="bottom" constant="7" id="jjg-lI-C3r"/>
                         </constraints>
@@ -91,24 +100,28 @@
                         </connections>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SrC-oX-lyu" userLabel="钱包">
-                        <rect key="frame" x="305.5" y="0.0" width="101.5" height="113.5"/>
+                        <rect key="frame" x="305.5" y="0.0" width="101.5" height="81.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-wallet" translatesAutoresizingMaskIntoConstraints="NO" id="hTP-e3-034">
-                                <rect key="frame" x="38" y="34.5" width="25" height="25"/>
+                                <rect key="frame" x="35.5" y="15" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Hxl-gw-KjU"/>
+                                    <constraint firstAttribute="height" constant="30" id="XIf-pM-LmV"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4o-Dn-HH6">
-                                <rect key="frame" x="22" y="66.5" width="57.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.56073331829999995" green="0.56081694360000001" blue="0.56071501970000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="24" y="52" width="53.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="e4o-Dn-HH6" firstAttribute="centerX" secondItem="SrC-oX-lyu" secondAttribute="centerX" id="2Ky-Zn-eyV"/>
+                            <constraint firstItem="hTP-e3-034" firstAttribute="top" secondItem="SrC-oX-lyu" secondAttribute="top" constant="15" id="6Dl-D5-65z"/>
                             <constraint firstItem="hTP-e3-034" firstAttribute="centerX" secondItem="SrC-oX-lyu" secondAttribute="centerX" id="FDr-ah-lOX"/>
                             <constraint firstItem="e4o-Dn-HH6" firstAttribute="top" secondItem="hTP-e3-034" secondAttribute="bottom" constant="7" id="WWy-o1-e1W"/>
-                            <constraint firstItem="hTP-e3-034" firstAttribute="centerY" secondItem="SrC-oX-lyu" secondAttribute="centerY" constant="-10" id="qTh-s3-a3G"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="SqX-DM-hl6" appends="YES" id="dlc-yk-6HJ"/>
@@ -138,7 +151,13 @@
                 </constraints>
             </tableViewCellContentView>
             <gestureRecognizers/>
-            <point key="canvasLocation" x="-1196" y="-557"/>
+            <connections>
+                <outlet property="inviteLabel" destination="fdU-9a-Y4d" id="ZYw-Og-1O5"/>
+                <outlet property="issueLabel" destination="Cqm-Jq-cbK" id="xuu-mN-Rre"/>
+                <outlet property="tryOutlabel" destination="HRD-Cw-ap9" id="uxp-m6-Mnd"/>
+                <outlet property="walletLabel" destination="e4o-Dn-HH6" id="dHj-LO-Vwp"/>
+            </connections>
+            <point key="canvasLocation" x="-1564" y="-604"/>
         </tableViewCell>
         <tapGestureRecognizer id="0i8-Dw-ZjR" userLabel="签到点击">
             <connections>
@@ -162,9 +181,9 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="icon-jibi" width="25" height="25"/>
-        <image name="icon-sign in" width="25" height="25"/>
-        <image name="icon-trial" width="25" height="25"/>
-        <image name="icon-wallet" width="25" height="25"/>
+        <image name="icon-jibi" width="30" height="30"/>
+        <image name="icon-sign in1" width="30" height="30.5"/>
+        <image name="icon-trial" width="30.5" height="30"/>
+        <image name="icon-wallet" width="30" height="30.5"/>
     </resources>
 </document>

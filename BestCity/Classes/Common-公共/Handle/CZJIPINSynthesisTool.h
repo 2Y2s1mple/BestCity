@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
     CZJIPINModuleBK,
     CZJIPINModuleRelationBK,
     CZJIPINModuleMe,
+    CZJIPINModuleQingDan,
 };
 
 @interface CZJIPINSynthesisTool : NSObject

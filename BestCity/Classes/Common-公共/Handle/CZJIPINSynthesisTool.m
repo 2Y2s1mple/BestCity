@@ -32,6 +32,8 @@
             break;
         case CZJIPINModuleRelationBK: //相关百科
             number = @"6";
+        case CZJIPINModuleQingDan: //相关百科
+            number = @"7";
             break;
         default:
             number = @"";
@@ -65,7 +67,7 @@
             type = CZJIPINModuleRelationBK;
             break;
         case 7: // 清单详情
-            type = CZJIPINModuleTrail;
+            type = CZJIPINModuleQingDan;
             break;
         default:
             type = 0;

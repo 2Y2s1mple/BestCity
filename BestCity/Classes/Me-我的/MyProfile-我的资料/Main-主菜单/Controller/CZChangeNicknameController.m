@@ -70,8 +70,8 @@
     NSDictionary *param = @{@"nickname" : self.textfield.text};
     [CZUserInfoTool changeUserInfo:param callbackAction:^(NSDictionary *param) {
         // 代理方法更新上一页的用户信息
-        [self.delegate updateUserInfo];
-        
+//        [self.delegate updateUserInfo];
+
         // 返回上一页
         [self.navigationController popViewControllerAnimated:YES];
     }];

@@ -103,7 +103,8 @@
         self.yearLabel.text = [NSString stringWithFormat:@"%@-%@", model.year, model.month];
         self.priceLabel.text = [NSString stringWithFormat:@"¥%.2lf", [model.totalPreFee floatValue]];
 
-        [self.itemImg sd_setImageWithURL:[NSURL URLWithString:dic[@"itemImg"]]];
+        NSString *itemImg = [dic[@"itemImg"] isKindOfClass:[NSNull class]] ? @"" : dic[@"itemImg"];
+        [self.itemImg sd_setImageWithURL:[NSURL URLWithString:itemImg]];
         self.titleLabel.text = dic[@"itemTitle"];
         self.timeLabel.text = dic[@"tkPaidTime"];
         self.preFeeLabel.text = [NSString stringWithFormat:@"+¥%.2lf", [dic[@"preFee"] floatValue]];
@@ -145,7 +146,8 @@
             default:
                 break;
         }
-        [self.itemImg1 sd_setImageWithURL:[NSURL URLWithString:dic1[@"itemImg"]]];
+        NSString *itemImg1 = [dic1[@"itemImg"] isKindOfClass:[NSNull class]] ? @"" : dic1[@"itemImg"];
+        [self.itemImg1 sd_setImageWithURL:[NSURL URLWithString:itemImg1]];
         self.titleLabel1.text = dic1[@"itemTitle"];
         self.timeLabel1.text = dic1[@"tkPaidTime"];
         self.preFeeLabel1.text = [NSString stringWithFormat:@"+¥%.2lf", [dic[@"preFee"] floatValue]];

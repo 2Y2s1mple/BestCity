@@ -21,6 +21,7 @@
 #import "CZMainAttentionController.h"
 #import "CZCoinCenterController.h"
 #import "CZUserInfoTool.h"
+#import "CZMeIntelligentController.h"// 达人主页
 
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -46,9 +47,19 @@
 @property (nonatomic, weak) IBOutlet UILabel *voteLabel;
 /** 弹出点赞数 */
 @property (nonatomic, strong) UIView *backView;
+/** 背景图 */
+@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @end
 
 @implementation CZMeController
+/** 达人页面 */
+- (IBAction)pushIntelligen
+{
+    CZMeIntelligentController *vc = [[CZMeIntelligentController alloc] init];
+    vc.freeID = JPUSERINFO[@"userId"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 /** 复制到剪切板 */
 - (IBAction)generalPaste
 {
@@ -165,6 +176,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(iOS 11.0, *)) {
+        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     self.view.backgroundColor = CZGlobalLightGray;
     // 头像的点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginAction:)];
@@ -173,7 +189,8 @@
     self.headImage.layer.borderColor = CZGlobalWhiteBg.CGColor;
     
     // 设置最上面的导航栏, 实现滑动改变透明效果
-    self.navImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+//    self.navImage = [[UIImageView alloc] init];
+    self.navImage.image = [UIImage imageNamed:@"矩形备份 + 矩形蒙版"];
     _navImage.frame = CGRectMake(0, 0, SCR_WIDTH, 64);
     [self.view addSubview:_navImage];
     self.navImage.alpha = 0;
@@ -184,9 +201,7 @@
 //    [self.navImage addSubview:mytitle];
 //    [mytitle sizeToFit];
 //    mytitle.center = CGPointMake(SCR_WIDTH / 2, 44);
-    
-    
-    
+
     // 接收登录时候的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpUserInfo) name:loginChangeUserInfo object:nil];
 }
@@ -205,7 +220,6 @@
 
 }
 
-
 #pragma mark - 获取用户信息
 - (void)getNetworkUserInfo
 {
@@ -219,6 +233,13 @@
 - (void)setUpUserInfo
 {
     // 给用户信息赋值
+    // 背景图
+    if ([JPUSERINFO[@"bgImg"] length] > 10) {
+        [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:JPUSERINFO[@"bgImg"]]];
+    } else {
+        self.backgroundImageView.image = [UIImage imageNamed:@"矩形备份 + 矩形蒙版"];
+    }
+
     // 头像
     [self.headImage sd_setImageWithURL:[NSURL URLWithString:JPUSERINFO[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
     
@@ -319,13 +340,13 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    if (offsetY >= -20 && offsetY <= 0) {
-        self.navImage.alpha = (20 - (-offsetY)) / 20.0;
-    }
-    if (offsetY > 0) {
+//    if (offsetY >= 10 && offsetY <= 0) {
+//        self.navImage.alpha = (20 - (-offsetY)) / 20.0;
+//    }
+    if (offsetY > 10) {
         self.navImage.alpha = 1;
     }
-    if (offsetY < -20) {
+    if (offsetY <= 0) {
         self.navImage.alpha = 0;
     }
 }

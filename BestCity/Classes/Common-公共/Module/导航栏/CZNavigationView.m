@@ -75,6 +75,7 @@
             [rightBtn setTitle:rightBtnTitle forState:UIControlStateNormal];
             [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+            [rightBtn setTitleColor:UIColorFromRGB(0xE25838) forState:UIControlStateNormal];
             [rightBtn addTarget:self action:@selector(didClickedRightBtn) forControlEvents:UIControlEventTouchUpInside];
         } else if ([rightBtnTitle isKindOfClass:[UIImage class]]){
             [rightBtn setImage:(UIImage *)rightBtnTitle forState:UIControlStateNormal];

@@ -18,14 +18,14 @@
 #import "CZMyTrialController.h" // 试用
 
 @interface CZMeCell ()
-/** 总钱数 */
-@property (weak, nonatomic) IBOutlet UIView *signInView;
-/** 处理中 */
-@property (weak, nonatomic) IBOutlet UIView *coinView;
-/** 可提现 */
-@property (weak, nonatomic) IBOutlet UIView *orderView;
-/** 待结算 */
-@property (weak, nonatomic) IBOutlet UIView *walletView;
+/** 邀请 */
+@property (weak, nonatomic) IBOutlet UILabel *inviteLabel;
+/** 试用 */
+@property (weak, nonatomic) IBOutlet UILabel *tryOutlabel;
+/** 发布 */
+@property (weak, nonatomic) IBOutlet UILabel *issueLabel;
+/** 钱包 */
+@property (weak, nonatomic) IBOutlet UILabel *walletLabel;
 
 @end
 
@@ -44,19 +44,7 @@
 }
 
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {
-    NSString *text = @"我的--极币商城";
-    NSDictionary *context = @{@"mine" : text};
-    [MobClick event:@"ID5" attributes:context];
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 跳商城
-    CZMyPointsController *toVc = [[CZMyPointsController alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
-}
-
-- (IBAction)orderAction:(UITapGestureRecognizer *)sender {
-    NSString *text = @"我的--我的订单";
+    NSString *text = @"我的--我的试用";
     NSDictionary *context = @{@"mine" : text};
     [MobClick event:@"ID5" attributes:context];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
@@ -64,7 +52,19 @@
     CZMeController *vc = (CZMeController *)nav.topViewController;
     // 跳试用
     CZMyTrialController *toVc = [[CZMyTrialController alloc] init];
-     [vc.navigationController pushViewController:toVc animated:YES];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+- (IBAction)orderAction:(UITapGestureRecognizer *)sender {
+    NSString *text = @"我的--我的发布";
+    NSDictionary *context = @{@"mine" : text};
+//    [MobClick event:@"ID5" attributes:context];
+//    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+//    UINavigationController *nav = tabbar.selectedViewController;
+//    CZMeController *vc = (CZMeController *)nav.topViewController;
+//    // 跳试用
+//    CZMyTrialController *toVc = [[CZMyTrialController alloc] init];
+//     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 - (IBAction)walletAction:(UITapGestureRecognizer *)sender {
@@ -81,12 +81,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.layer.cornerRadius = 10;
+//    self.layer.cornerRadius = 10;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
+
 }
 
 + (instancetype)cellWithTabelView:(UITableView *)tableView

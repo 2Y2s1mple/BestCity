@@ -8,23 +8,33 @@
 
 #import "CZSubCollectTwoController.h"
 #import "GXNetTool.h"
-#import "CZDiscoverDetailModel.h"
-#import "CZDChoiceDetailController.h" 
-#import "CZChoicenessCell.h"
+// 视图
+#import "CZMHSDQuestCell.h"
+// 模型
+#import "CZMHSDQuestModel.h"
+// 跳转
+#import "CZMHSDQDetailController.h"
 
-@interface CZSubCollectTwoController ()<UITableViewDelegate, UITableViewDataSource>
+@interface CZSubCollectTwoController () <UITableViewDelegate, UITableViewDataSource>
+/** 表单 */
+@property (nonatomic, strong) UITableView *tableView;
+/** 页数 */
+@property (nonatomic, assign) NSInteger page;
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
 /** 数据 */
 @property (nonatomic, strong) NSMutableArray *dataSource;
-/** tabelview */
-@property (nonatomic, strong) UITableView *tableView;
-/** 页数 */
-@property (nonatomic, assign) NSInteger page;
 @end
 
 @implementation CZSubCollectTwoController
-#pragma mark - 懒加载
+- (NSMutableArray *)dataSource
+{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
+
 - (CZNoDataView *)noDataView
 {
     if (_noDataView == nil) {
@@ -35,35 +45,44 @@
     return _noDataView;
 }
 
-- (NSMutableArray *)dataSource
+- (UITableView *)tableView
 {
-    if (_dataSource == nil) {
-        _dataSource = [NSMutableArray array];
+    if (_tableView == nil) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0) style:UITableViewStylePlain];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
-    return _dataSource;
+    return _tableView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 24 : 0) + 67.7) - 50 - 1) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [CZMHSDQuestModel setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                 @"ID" : @"id"
+                 };
+    }];
+
+    CZTOPLINE;
     [self.view addSubview:self.tableView];
-    
-    //创建刷新控件
+
+    // 加载刷新数据
     [self setupRefresh];
 }
 
-#pragma mark - 初始化刷新控件
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tableView.frame = CGRectMake(0, 0, SCR_WIDTH, self.view.height);
+}
+
+#pragma mark - 获取数据
 - (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewDiscover)];
     [self.tableView.mj_header beginRefreshing];
-    
+
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDiscover)];
 }
 
@@ -73,12 +92,14 @@
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
     self.page = 1;
+    //    1商品，2评测，4试用,5问答，7清单
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.type];
-    
+    param[@"type"] = @(5);
+
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+
         if ([result[@"msg"] isEqualToString:@"success"]) {
             if ([result[@"data"] count] > 0) {
                 // 没有数据图片
@@ -87,7 +108,7 @@
                 // 没有数据图片
                 [self.tableView addSubview:self.noDataView];
             }
-            self.dataSource = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"data"]];
+            self.dataSource = [CZMHSDQuestModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
         // 结束刷新
@@ -106,16 +127,15 @@
     // 先结束头部刷新
     [self.tableView.mj_header endRefreshing];
     self.page++;
-    
+    //    1商品，2评测，4试用,5问答，7清单
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"type"] = [CZJIPINSynthesisTool getModuleTypeNumber:self.type];
-   
+    param[@"type"] = @(5);
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
-            NSArray *newArr = [CZDiscoverDetailModel objectArrayWithKeyValuesArray:result[@"data"]];
-            [self.dataSource addObjectsFromArray:newArr];
+            NSArray *list = [CZMHSDQuestModel objectArrayWithKeyValuesArray:result[@"data"]];
+            [self.dataSource addObjectsFromArray:list];
             [self.tableView reloadData];
             // 结束刷新
             [self.tableView.mj_footer endRefreshing];
@@ -132,53 +152,32 @@
     }];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.dataSource.count;
-}
-
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
+    CZMHSDQuestModel *model = self.dataSource[indexPath.row];
     return model.cellHeight;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.dataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
-    if (self.type == CZJIPINModuleDiscover) {
-        static NSString *ID = @"choiceCell";
-        CZChoicenessCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZChoicenessCell class]) owner:nil options:nil] firstObject];
-        }
-        cell.model = model;
-        return cell;
-    } else {
-        static NSString *ID1 = @"choiceCell1";
-        CZChoicenessCell *cell = [tableView dequeueReusableCellWithIdentifier:ID1];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZChoicenessCell class]) owner:nil options:nil] lastObject];
-        }
-        cell.model = model;
-        return cell;
-    }
+    CZMHSDQuestModel *model = self.dataSource[indexPath.row];
+    CZMHSDQuestCell *cell = [CZMHSDQuestCell cellwithTableView:tableView];
+    cell.model = model;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //push到详情
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [self presentViewController:vc animated:YES completion:nil];
-    } else {
-        CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
-        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        vc.detailType = self.type;
-        vc.findgoodsId = model.articleId;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    CZMHSDQuestModel *model = self.dataSource[indexPath.row];
+    CZMHSDQDetailController *vc = [[CZMHSDQDetailController alloc] init];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

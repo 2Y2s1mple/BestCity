@@ -80,6 +80,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (CZRecommendNav *)nav
 {
     /** 文章的类型: 1商品，2评测, 3发现，4试用 */
+    //    1商品，2评测，4试用, 5问答，7清单
     if (_nav == nil) {
         self.nav = [[CZRecommendNav alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 44 : 20), SCR_WIDTH, 40) type:self.detailType];
         self.nav.type = [CZJIPINSynthesisTool getModuleTypeNumber:self.detailType];

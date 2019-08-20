@@ -37,8 +37,6 @@
     [self setupRefresh];
 }
 
-
-
 #pragma mark - 视图
 - (UITableView *)tableView
 {
@@ -64,7 +62,6 @@
 }
 
 
-#pragma mark - 获取数据
 #pragma mark - 获取数据
 - (void)reloadNewTrailDataSorce
 {

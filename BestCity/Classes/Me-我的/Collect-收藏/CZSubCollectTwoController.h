@@ -11,8 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZSubCollectTwoController : UIViewController
-/** 类型 */
-@property (nonatomic, assign) CZJIPINModuleType type; // 
 @end
 
 NS_ASSUME_NONNULL_END

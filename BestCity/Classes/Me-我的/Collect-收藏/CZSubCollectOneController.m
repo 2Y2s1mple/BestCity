@@ -8,13 +8,20 @@
 
 #import "CZSubCollectOneController.h"
 #import "GXNetTool.h"
-#import "CZRecommendListModel.h"
 
-@interface CZSubCollectOneController ()
+#import "CZSearchOneSubViewCell.h"
+// 跳转
+#import "CZRecommendDetailController.h"
+
+@interface CZSubCollectOneController () <UITableViewDelegate, UITableViewDataSource>
+/** 表单 */
+@property (nonatomic, strong) UITableView *tableView;
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
+/** 数据 */
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation CZSubCollectOneController
@@ -28,15 +35,37 @@
     return _noDataView;
 }
 
+- (NSMutableArray *)dataSource
+{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
+
+- (UITableView *)tableView
+{
+    if (_tableView == nil) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0) style:UITableViewStylePlain];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _tableView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0.7)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
-    self.tableView.frame = CGRectMake(0, 1, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 24 : 0) + 67.7) - 50 - 1);
-    self.tableView.tableFooterView = nil;
+    [self.view addSubview:self.tableView];
+
     // 加载刷新数据
     [self setupRefresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tableView.frame = CGRectMake(0, 0, SCR_WIDTH, self.view.height);
 }
 
 - (void)setupRefresh
@@ -49,7 +78,7 @@
 
 #pragma mark - 加载第一页
 - (void)reloadNewDiscover
-{
+{//    1商品，2评测，4试用,5问答，7清单
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
     self.page = 1;
@@ -58,7 +87,7 @@
     param[@"type"] = @(1);
     
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             if ([result[@"data"] count] > 0) {
                 // 没有数据图片
@@ -67,7 +96,8 @@
                 // 没有数据图片
                 [self.tableView addSubview:self.noDataView];
             }
-            self.dataSource = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"data"]];
+            [self.dataSource removeAllObjects];
+            [self.dataSource addObjectsFromArray:result[@"data"]];
             [self.tableView reloadData];
         }
         // 结束刷新
@@ -83,6 +113,7 @@
 #pragma mark - 加载更多数据
 - (void)loadMoreDiscover
 {
+    //    1商品，2评测，4试用,5问答，7清单
     // 先结束头部刷新
     [self.tableView.mj_header endRefreshing];
     self.page++;
@@ -91,10 +122,9 @@
     param[@"page"] = @(self.page);
     param[@"type"] = @(1); 
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
-            NSArray *newArr = [CZRecommendListModel objectArrayWithKeyValuesArray:result[@"data"]];
-            [self.dataSource addObjectsFromArray:newArr];
+            [self.dataSource addObjectsFromArray:result[@"data"]];
             [self.tableView reloadData];
             // 结束刷新
             [self.tableView.mj_footer endRefreshing];
@@ -109,6 +139,38 @@
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
+}
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 140;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 45;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dic = self.dataSource[indexPath.row];
+    CZSearchOneSubViewCell *cell = [CZSearchOneSubViewCell cellwithTableView:tableView];
+    cell.dataDic = dic;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *model = self.dataSource[indexPath.row];
+    CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
+    vc.goodsId = model[@"goodsId"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

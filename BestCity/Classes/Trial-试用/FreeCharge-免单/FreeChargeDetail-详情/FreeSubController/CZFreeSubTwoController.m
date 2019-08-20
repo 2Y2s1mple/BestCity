@@ -12,7 +12,6 @@
 #import "GXNetTool.h"
 
 @interface CZFreeSubTwoController () <UITableViewDelegate, UITableViewDataSource>
-
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
 /** 拉赞数据 */
@@ -33,6 +32,7 @@
     }
     return _noDataView;
 }
+
 - (NSMutableArray *)DatasArr
 {
     if (_DatasArr == nil) {
@@ -58,7 +58,6 @@
 
     [self reloadNewTrailDataSorce];
     [self setupRefresh];
-
 }
 
 
@@ -128,7 +127,6 @@
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {}];
-
 }
 
 // <UITableViewDataSource>

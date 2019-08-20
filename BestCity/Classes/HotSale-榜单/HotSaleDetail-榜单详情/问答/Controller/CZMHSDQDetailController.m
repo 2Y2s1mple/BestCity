@@ -380,7 +380,7 @@
     param[@"type"] = @"4";
 
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/view/status"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/view/status"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"collect"] isEqualToNumber:@(1)]) {
             self.rightBtn.selected = YES;
         } else {
@@ -400,7 +400,7 @@
     }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.model.ID;
-    param[@"type"] = @"4";
+    param[@"type"] = @"5";
 
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"/api/collect/delete"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -432,7 +432,7 @@
     }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.model.ID;
-    param[@"type"] = @"4";
+    param[@"type"] = @"5";
 
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/collect/add"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {

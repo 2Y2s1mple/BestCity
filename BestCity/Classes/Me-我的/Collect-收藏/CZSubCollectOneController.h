@@ -6,11 +6,11 @@
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import "CZBaseRecommendController.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZSubCollectOneController : CZBaseRecommendController
+@interface CZSubCollectOneController : UIViewController
 
 @end
 

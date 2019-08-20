@@ -16,7 +16,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -32,17 +32,17 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeArrowCell class]) owner:nil options:nil] lastObject];
     }
     if (indexPath.row == 0) {
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer  alloc]  init];
-        maskLayer.frame = cell.bounds;
-        maskLayer.path = maskPath.CGPath;
-        cell.layer.mask = maskLayer;
+//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
+//        CAShapeLayer *maskLayer = [[CAShapeLayer  alloc]  init];
+//        maskLayer.frame = cell.bounds;
+//        maskLayer.path = maskPath.CGPath;
+//        cell.layer.mask = maskLayer;
     } else if (indexPath.row == 6) {
-        UIBezierPath *bezierPath = [UIBezierPath  bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
-        CAShapeLayer *mask = [[CAShapeLayer alloc] init];
-        mask.frame = cell.bounds;
-        mask.path = bezierPath.CGPath;
-        cell.layer.mask = mask;
+//        UIBezierPath *bezierPath = [UIBezierPath  bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
+//        CAShapeLayer *mask = [[CAShapeLayer alloc] init];
+//        mask.frame = cell.bounds;
+//        mask.path = bezierPath.CGPath;
+//        cell.layer.mask = mask;
     }
     return cell;
 }

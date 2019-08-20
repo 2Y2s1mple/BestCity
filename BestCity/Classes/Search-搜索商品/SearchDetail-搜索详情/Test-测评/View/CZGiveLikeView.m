@@ -149,7 +149,7 @@
     param[@"type"] = self.type;
     
     // 获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/view/status"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/view/status"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"vote"] isEqualToNumber:@(1)]) {
             self.likeBtn.selected = YES;
         } else {

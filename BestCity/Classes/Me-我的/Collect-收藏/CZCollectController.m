@@ -10,6 +10,9 @@
 #import "CZNavigationView.h"
 #import "CZSubCollectOneController.h"
 #import "CZSubCollectTwoController.h"
+#import "CZSubCollectThreeController.h"
+#import "CZSubCollectFourController.h"
+#import "CZSubCollectFiveController.h"
 
 
 @interface CZCollectController ()
@@ -53,16 +56,19 @@
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController
 {
-    return 4;
+    return 5;
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    NSArray *titles = @[@"商品", @"发现", @"评测", @"试用报告"];
+//    NSArray *titles = @[@"商品", @"发现", @"评测", @"试用报告"];
+    NSArray *titles = @[@"榜单", @"问答", @"评测", @"清单", @"试用报告"];
     return titles[index];
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    
+    CZSubCollectFiveController *vc = [[CZSubCollectFiveController alloc] init];
+    return vc;
+//    1商品，2评测，4试用,5问答，7清单
     switch (index) {
         case 0: {
             CZSubCollectOneController *vc = [[CZSubCollectOneController alloc] init];
@@ -70,17 +76,25 @@
         }
         case 1: {
             CZSubCollectTwoController *vc = [[CZSubCollectTwoController alloc] init];
-            vc.type = CZJIPINModuleDiscover;
             return vc;
         }
         case 2: {
-            CZSubCollectTwoController *vc = [[CZSubCollectTwoController alloc] init];
-            vc.type = CZJIPINModuleEvaluation;
+            CZSubCollectThreeController *vc = [[CZSubCollectThreeController alloc] init];
+
+            return vc;
+        }
+        case 3: {
+            CZSubCollectFourController *vc = [[CZSubCollectFourController alloc] init];
+
+            return vc;
+        }
+        case 4: {
+            CZSubCollectFiveController *vc = [[CZSubCollectFiveController alloc] init];
+
             return vc;
         }
         default:{
             CZSubCollectTwoController *vc = [[CZSubCollectTwoController alloc] init];
-            vc.type = CZJIPINModuleTrail;
             return vc;
         };
     }
@@ -92,6 +106,6 @@
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     
-    return CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67.7 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 24 : 0) + 67.7) + 50);
+    return CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67.7 + 50, SCR_WIDTH, SCR_HEIGHT - ((IsiPhoneX ? 24 : 0) + 67.7) - 50);
 }
 @end

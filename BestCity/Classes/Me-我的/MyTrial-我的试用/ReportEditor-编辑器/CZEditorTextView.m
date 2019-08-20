@@ -50,6 +50,8 @@
     [self.label sizeToFit];
 }
 
+
+
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     NSString *string = [NSString stringWithFormat:@"%@", textView.text];
