@@ -289,11 +289,11 @@
                                 <constraint firstAttribute="trailing" secondItem="LaF-gn-9r4" secondAttribute="trailing" id="v2A-yC-YDS"/>
                             </constraints>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
-                            <rect key="frame" x="0.0" y="225" width="375" height="600"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
+                            <rect key="frame" x="0.0" y="225" width="375" height="650"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="600" id="nbk-yn-gRV"/>
+                                <constraint firstAttribute="height" constant="650" id="nbk-yn-gRV"/>
                             </constraints>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="iG4-fn-ILy"/>
@@ -324,7 +324,7 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-5911.1999999999998" y="-2222.3388305847079"/>
+            <point key="canvasLocation" x="-6817" y="-2296"/>
         </view>
     </objects>
     <resources>

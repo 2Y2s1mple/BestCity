@@ -11,8 +11,8 @@
 
 //极品城URL
 //#define JPSERVER_URL @"http://192.168.3.152:8081/qualityshop-api/" // 测试
-#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
-//#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
+//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
+#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
 
 #ifdef DEBUG
 
@@ -24,6 +24,9 @@
 
 /** 用户信息 */
 #define JPUSERINFO [CZSaveTool objectForKey:@"user"]
+/** 其他信息 */
+#define JPOTHERUSERINFO [CZSaveTool objectForKey:@"ByUserId"]
+
 /** Token */
 #define JPTOKEN [CZSaveTool objectForKey:@"token"]
 /** 积分规则web */
@@ -51,7 +54,7 @@
 /** 全局浅灰色*/
 #define CZGlobalGray CZRGBColor(172, 172, 172)
 /** 红色 */
-#define CZREDCOLOR CZRGBColor(227, 20, 54)
+#define CZREDCOLOR UIColorFromRGB(0xE25838)
 /** 全局黑色 */
 #define CZBLACKCOLOR CZRGBColor(21, 21, 21)
 /** 按钮灰 */

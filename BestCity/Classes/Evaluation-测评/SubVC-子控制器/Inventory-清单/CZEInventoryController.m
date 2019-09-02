@@ -33,6 +33,8 @@
 @property (nonatomic, strong) NSDictionary *categoryParam;
 /** <#注释#> */
 @property (nonatomic, strong) UIButton *editorBtn;
+/** <#注释#> */
+@property (nonatomic, strong) NSMutableDictionary *recordParam;
 @end
 
 @implementation CZEInventoryController
@@ -77,6 +79,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.noDataView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.tableView];
     // 获取类目
     [self getCategoryList];
@@ -84,6 +87,13 @@
 
 - (void)pushEditorController
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     CZEInventoryEditorController *vc = [[CZEInventoryEditorController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -142,9 +152,18 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"categoryId"] = categoryId;
     param[@"page"] = @(self.page);
+    self.recordParam = param;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/listingList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
+        if (self.recordParam != param) return;
 
+        if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             self.dataSource = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
 
             [self.tableView reloadData];
@@ -165,11 +184,23 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"categoryId"] = categoryId;
     param[@"page"] = @(self.page);
+    self.recordParam = param;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/listingList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (self.recordParam != param) return;
         if ([result[@"code"] isEqual:@(0)]) {
+
+
             NSArray *list = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.dataSource addObjectsFromArray:list];
             [self.tableView reloadData];
+
+            if ([self.dataSource count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
         }
         // 结束刷新
         [self.tableView.mj_footer endRefreshing];

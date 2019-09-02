@@ -115,13 +115,32 @@
                                 <color key="textColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1233" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6un-wU-IFL">
+                                <rect key="frame" x="46.5" y="17" width="22" height="14"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="GFN-Y3-xPB"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="hTi-6t-DtZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="e4o-Dn-HH6" firstAttribute="centerX" secondItem="SrC-oX-lyu" secondAttribute="centerX" id="2Ky-Zn-eyV"/>
                             <constraint firstItem="hTP-e3-034" firstAttribute="top" secondItem="SrC-oX-lyu" secondAttribute="top" constant="15" id="6Dl-D5-65z"/>
+                            <constraint firstItem="6un-wU-IFL" firstAttribute="centerX" secondItem="SrC-oX-lyu" secondAttribute="centerX" constant="7" id="EyW-sW-VFs"/>
                             <constraint firstItem="hTP-e3-034" firstAttribute="centerX" secondItem="SrC-oX-lyu" secondAttribute="centerX" id="FDr-ah-lOX"/>
                             <constraint firstItem="e4o-Dn-HH6" firstAttribute="top" secondItem="hTP-e3-034" secondAttribute="bottom" constant="7" id="WWy-o1-e1W"/>
+                            <constraint firstItem="6un-wU-IFL" firstAttribute="top" secondItem="SrC-oX-lyu" secondAttribute="top" constant="17" id="cqG-Xs-zqf"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="SqX-DM-hl6" appends="YES" id="dlc-yk-6HJ"/>
@@ -154,10 +173,11 @@
             <connections>
                 <outlet property="inviteLabel" destination="fdU-9a-Y4d" id="ZYw-Og-1O5"/>
                 <outlet property="issueLabel" destination="Cqm-Jq-cbK" id="xuu-mN-Rre"/>
+                <outlet property="messageCountLabel" destination="6un-wU-IFL" id="BgQ-Qs-ZEx"/>
                 <outlet property="tryOutlabel" destination="HRD-Cw-ap9" id="uxp-m6-Mnd"/>
                 <outlet property="walletLabel" destination="e4o-Dn-HH6" id="dHj-LO-Vwp"/>
             </connections>
-            <point key="canvasLocation" x="-1564" y="-604"/>
+            <point key="canvasLocation" x="-1663" y="-618"/>
         </tableViewCell>
         <tapGestureRecognizer id="0i8-Dw-ZjR" userLabel="签到点击">
             <connections>

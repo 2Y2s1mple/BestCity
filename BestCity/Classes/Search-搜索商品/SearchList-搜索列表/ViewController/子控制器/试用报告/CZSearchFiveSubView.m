@@ -62,11 +62,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CZTOPLINE;
     [self.view addSubview:self.tableView];
-
+    
     // 加载刷新数据
     [self setupRefresh];
+
+    CZTOPLINE;
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -130,7 +130,7 @@
                 <outlet property="partInLabel" destination="9Kl-RB-Q6c" id="fia-NX-nc3"/>
                 <outlet property="questionLabel" destination="hwP-Kn-7RY" id="dQL-Sv-Nxv"/>
             </connections>
-            <point key="canvasLocation" x="-340.57971014492756" y="31.138392857142854"/>
+            <point key="canvasLocation" x="-357" y="-24"/>
         </tableViewCell>
     </objects>
     <resources>

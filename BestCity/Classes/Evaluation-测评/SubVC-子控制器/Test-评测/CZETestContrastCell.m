@@ -8,6 +8,7 @@
 
 #import "CZETestContrastCell.h"
 #import "UIImageView+WebCache.h"
+#import "CZMeIntelligentController.h"
 
 @interface CZETestContrastCell ()
 /** 大图片 */
@@ -48,13 +49,36 @@
     [self.visitLabel setTitle:[NSString stringWithFormat:@"%@阅读", model.pv] forState:UIControlStateNormal];
 
     [self layoutIfNeeded];
-    model.cellHeight = CZGetY(self.visitLabel) + 20;
+    model.cellHeight = CZGetY(self.visitLabel) + 25;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.mainTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerImageAction)];
+    self.avatarImageView.userInteractionEnabled = YES;
+    [self.avatarImageView addGestureRecognizer:tap];
+}
+
+
+- (void)headerImageAction
+{
+    NSLog(@"-------------%@", self.model.user[@"userId"]);
+    CZMeIntelligentController *vc = [[CZMeIntelligentController alloc] init];
+    vc.freeID = self.model.user[@"userId"];
+    [[self viewController].navigationController pushViewController:vc animated:YES];
+}
+
+// 找到父控制器
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

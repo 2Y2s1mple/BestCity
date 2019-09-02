@@ -15,6 +15,8 @@
 #import "UIImageView+WebCache.h"
 
 @interface CZEInventoryEditorController () <UITextViewDelegate>
+/** 顶部按钮 */
+@property (nonatomic, strong) UIButton *topBtn;
 /** <#注释#> */
 @property (nonatomic, strong) UIScrollView *scrollView;
 /** <#注释#> */
@@ -53,6 +55,22 @@
     return _param;
 }
 
+- (UIButton *)topBtn
+{
+    if (_topBtn == nil) {
+        CGFloat space = 14.0f;
+        _topBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 40)];
+        _topBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        CGRect rect = [self.remarkStr boundingRectWithSize:CGSizeMake(SCR_WIDTH - 2 * space, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _topBtn.titleLabel.font} context:nil];
+        CGFloat _hei = MAX(40, rect.size.height + 20);
+        _topBtn.height = _hei;
+        [_topBtn setTitle:self.remarkStr forState:UIControlStateNormal];
+        _topBtn.backgroundColor = UIColorFromRGB(0xE25838);
+        [_topBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    return _topBtn;
+}
+
 - (UIScrollView *)scrollView
 {
     if (_scrollView == nil) {
@@ -70,7 +88,6 @@
     // 从草稿箱获取数据
     [self getDataSource];
 
-    [self.view addSubview:self.scrollView];
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"清单编辑" rightBtnTitle:@"下一步" rightBtnAction:^{
         if (!self.isManyTimesClick) {
@@ -81,9 +98,19 @@
     navigationView.rightBtnTextColor = UIColorFromRGB(0xE25838);
     navigationView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationView];
+    if (self.remarkStr.length > 3) {
+        [self.view addSubview:self.topBtn];
+        self.topBtn.y = CZGetY(navigationView);
+        self.scrollView.y = CZGetY(self.topBtn);
+    } else {
+        self.scrollView.y = CZGetY(navigationView);
+    }
+
+    self.scrollView.height = SCR_HEIGHT - CZGetY(navigationView);
+    [self.view addSubview:self.scrollView];
 
     // 顶部标题
-    [self setupTitle:CZGetY(navigationView)];
+    [self setupTitle:0];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -356,7 +383,13 @@
         self.param[@"title"] = self.recordText;
         self.param[@"content"] = string;
         self.param[@"img"] = self.coverUrl;
-        [self save:self.param];
+        if ([self.param[@"articleId"] length] < 1) {
+            [self save:self.param];
+        } else {
+            CZEInventoryCoverController *vc = [[CZEInventoryCoverController alloc] init];
+            vc.param = self.param;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
@@ -403,19 +436,23 @@
     }
 }
 
+#pragma mark - 获取数据
+
 // 获取数据
 - (void)getDataSource
 {
     [CZProgressHUD showProgressHUDWithText:nil];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"trialId"] = self.trialId;
+    param[@"articleId"] = self.trialId;
+    param[@"type"] = @"7";
     //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/reportInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/article/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSLog(@"------%@ -----%@", [result[@"data"] class], [@"33" class]);
             if (![result[@"data"] isKindOfClass:[NSString class]]) {
                 [self relaodAllView:result[@"data"]];
                 self.coverUrl = result[@"data"][@"img"];
+                self.param[@"articleId"] = result[@"data"][@"articleId"];
             }
         }
         //隐藏菊花

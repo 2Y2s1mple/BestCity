@@ -16,6 +16,7 @@
 #import "CZMyWalletController.h"
 #import "CZMyPointsController.h"
 #import "CZMyTrialController.h" // 试用
+#import "CZMePublishController.h" // 发布
 
 @interface CZMeCell ()
 /** 邀请 */
@@ -58,13 +59,14 @@
 - (IBAction)orderAction:(UITapGestureRecognizer *)sender {
     NSString *text = @"我的--我的发布";
     NSDictionary *context = @{@"mine" : text};
-//    [MobClick event:@"ID5" attributes:context];
-//    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-//    UINavigationController *nav = tabbar.selectedViewController;
-//    CZMeController *vc = (CZMeController *)nav.topViewController;
-//    // 跳试用
-//    CZMyTrialController *toVc = [[CZMyTrialController alloc] init];
-//     [vc.navigationController pushViewController:toVc animated:YES];
+    [MobClick event:@"ID5" attributes:context];
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    // 跳发布
+    CZMePublishController *toVc = [[CZMePublishController alloc] init];
+    toVc.isQingDan = YES;
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 - (IBAction)walletAction:(UITapGestureRecognizer *)sender {

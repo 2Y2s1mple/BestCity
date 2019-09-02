@@ -30,11 +30,11 @@
 +(void)initialize
 {
     NSMutableDictionary *normalAttr = [NSMutableDictionary dictionary];
-    normalAttr[NSForegroundColorAttributeName] = CZRGBColor(40, 40, 40);
+    normalAttr[NSForegroundColorAttributeName] = UIColorFromRGB(0x282828);
     normalAttr[NSFontAttributeName] = [UIFont systemFontOfSize:12];
     
     NSMutableDictionary *selectedAttr = [NSMutableDictionary dictionary];
-    selectedAttr[NSForegroundColorAttributeName] = CZRGBColor(277, 20, 54);
+    selectedAttr[NSForegroundColorAttributeName] = CZREDCOLOR;
     selectedAttr[NSFontAttributeName] = [UIFont systemFontOfSize:12];
     
     [[UITabBarItem appearance] setTitleTextAttributes:normalAttr forState:UIControlStateNormal];
@@ -68,11 +68,10 @@
     [MobClick event:ID attributes:@{@"Tab" : context}];
 
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
-    if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 4) {
+    if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 3) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
     } else {}
-    ;
 }
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage

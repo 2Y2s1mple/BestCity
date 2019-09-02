@@ -31,7 +31,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.88123279809951782" green="0.10389936715364456" blue="0.23317024111747742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="eUh-KD-oY0" firstAttribute="centerY" secondItem="FSE-sU-qKP" secondAttribute="centerY" id="2fa-Hj-V9t"/>
                         <constraint firstItem="eUh-KD-oY0" firstAttribute="leading" secondItem="FSE-sU-qKP" secondAttribute="leading" constant="10" id="3Us-Vg-2kC"/>
@@ -48,7 +48,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqR-m4-gZm" userLabel="redView">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="6"/>
-                                    <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="Vq8-aB-dDR"/>
                                     </constraints>
@@ -252,7 +252,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.88123279809999999" green="0.1038993672" blue="0.23317024110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="sXu-bl-IdI" secondAttribute="trailing" id="5Kp-go-GgO"/>
                         <constraint firstItem="sXu-bl-IdI" firstAttribute="top" secondItem="oVf-G3-bWJ" secondAttribute="top" id="5XQ-hj-Pfw"/>
@@ -305,7 +305,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NB5-5Y-Ltb" userLabel="redView">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="6"/>
-                                    <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="WLQ-pE-GIF"/>
                                     </constraints>
@@ -391,7 +391,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.88123279809999999" green="0.1038993672" blue="0.23317024110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="scN-TZ-zWk" firstAttribute="leading" secondItem="ejJ-e2-Bok" secondAttribute="leading" constant="15" id="CfP-DC-eyO"/>
                         <constraint firstItem="lpe-6e-kQm" firstAttribute="leading" secondItem="4Mm-Lp-zVM" secondAttribute="trailing" constant="10" id="EWp-3I-4HE"/>

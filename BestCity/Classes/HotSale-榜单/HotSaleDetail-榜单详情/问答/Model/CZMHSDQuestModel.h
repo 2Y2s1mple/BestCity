@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *ID;
 /** 回答 */
 @property (nonatomic, strong) NSDictionary *answer;
+/** 被拒原因 */
+@property (nonatomic, strong) NSString *remark;
 
 // 辅助
 @property (nonatomic, assign) CGFloat cellHeight;

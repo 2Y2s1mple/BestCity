@@ -23,19 +23,17 @@
 
 - (void)loadView
 {
-    [super loadView];
     self.selectIndex = 0;
-    self.menuViewStyle = WMMenuViewStyleLine;
-    //        self.progressWidth = 30;
-    self.itemMargin = 10;
-    self.progressHeight = 3;
-    self.automaticallyCalculatesItemWidths = YES;
+    self.menuViewStyle = WMMenuViewStyleDefault;
+    self.itemsWidths = @[@"35", @"35", @"35", @"35", @"65"];
+    NSString *margin = [NSString stringWithFormat:@"%lf", (SCR_WIDTH - 35 * 4 - 65 - 30) / 4.0];
+    self.itemsMargins = @[@"15", margin, margin, margin, margin, @"15"];
     self.titleFontName = @"PingFangSC-Medium";
     self.titleColorNormal = CZGlobalGray;
-    self.titleColorSelected = CZRGBColor(5, 5, 5);
-    self.titleSizeNormal = 15.0f;
-    self.titleSizeSelected = 15;
-    self.progressColor = CZREDCOLOR;
+    self.titleColorSelected = [UIColor blackColor];
+    self.titleSizeNormal = 16;
+    self.titleSizeSelected = 16;
+    [super loadView];
 }
 
 - (void)viewDidLoad {
@@ -66,8 +64,6 @@
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    CZSubCollectFiveController *vc = [[CZSubCollectFiveController alloc] init];
-    return vc;
 //    1商品，2评测，4试用,5问答，7清单
     switch (index) {
         case 0: {

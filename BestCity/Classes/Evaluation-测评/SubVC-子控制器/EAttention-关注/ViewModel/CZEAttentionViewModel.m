@@ -56,7 +56,9 @@
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 // 加载更多时候调用
@@ -77,7 +79,9 @@
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 @end

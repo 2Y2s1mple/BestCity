@@ -10,6 +10,7 @@
 #import "CZEACCollectionCell.h"
 //数据模型
 #import "CZEAttentionItemViewModel.h"
+#import "CZMeIntelligentController.h"
 
 @interface CZEAttentionCommendCell ()<UICollectionViewDelegate, UICollectionViewDataSource>
 /** 标示图 */
@@ -66,4 +67,23 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CZEAttentionUserModel *model = self.viewModel.model.userList[indexPath.row];
+    NSLog(@"-------------%@", model.userId);
+    CZMeIntelligentController *vc = [[CZMeIntelligentController alloc] init];
+    vc.freeID = model.userId;
+    [[self viewController].navigationController pushViewController:vc animated:YES];
+}
+
+// 找到父控制器
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
 @end

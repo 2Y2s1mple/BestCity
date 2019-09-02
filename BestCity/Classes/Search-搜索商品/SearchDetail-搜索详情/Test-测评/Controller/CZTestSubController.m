@@ -183,7 +183,7 @@
         [self.scrollerView addSubview:iconImage];
 
         //名字
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y + 15, 100, 20)];
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(iconImage) + space, iconImage.y + 8, 100, 20)];
         nameLabel.text = self.model.user[@"nickname"];
         nameLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
         [nameLabel sizeToFit];
@@ -191,7 +191,7 @@
         [self.scrollerView addSubview:nameLabel];
 
         //时间
-        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CZGetX(nameLabel) + space, nameLabel.y, 160, 20)];
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CZGetY(nameLabel), 160, 20)];
         timeLabel.text = self.model.createTimeStr;
         timeLabel.textColor = CZGlobalGray;
         timeLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];

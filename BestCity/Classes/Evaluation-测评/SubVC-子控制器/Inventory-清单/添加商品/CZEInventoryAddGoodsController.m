@@ -86,7 +86,7 @@ int addGoodsNumber = 0;
 
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    [btn setTitle:@"保存" forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:16];
     [btn setTitleColor: UIColorFromRGB(0x2B2B2B) forState:UIControlStateNormal];
     btn.x = SCR_WIDTH - 15 - 40;

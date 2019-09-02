@@ -53,8 +53,8 @@
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.userInteractionEnabled = NO;
-    [btn setImage:[UIImage imageNamed:@"like-nor-1"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"like-sel"] forState:UIControlStateSelected];
+    [btn setImage:[UIImage imageNamed:@"Likes-1"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"Likes"] forState:UIControlStateSelected];
     [btn setTitleColor:CZREDCOLOR forState:UIControlStateSelected];
     [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];

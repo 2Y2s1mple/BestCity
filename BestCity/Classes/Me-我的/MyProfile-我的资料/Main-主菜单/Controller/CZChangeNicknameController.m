@@ -54,7 +54,6 @@
     [DLIDEKeyboardView attachToTextView:textfield];
     [textBackView addSubview:textfield];
     self.textfield = textfield;
-
 }
 
 - (void)textFieldChange:(UITextField *)textField
@@ -63,7 +62,6 @@
         textField.text = [textField.text substringToIndex:16];
     }
 }
-
 
 - (void)saveUserInfo
 {

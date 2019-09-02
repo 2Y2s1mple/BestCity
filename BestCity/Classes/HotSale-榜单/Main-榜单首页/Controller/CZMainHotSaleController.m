@@ -151,7 +151,9 @@
             listData(result);
         }
     } failure:^(NSError *error) {
-
+        NSLog(@"%@", error);
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
     }];
     return self;
 }

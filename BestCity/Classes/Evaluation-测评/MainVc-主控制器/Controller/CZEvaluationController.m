@@ -68,14 +68,11 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     // 创建视图
     [self.view addSubview:self.searchView];
-
 }
 
 #pragma mark - Datasource & Delegate

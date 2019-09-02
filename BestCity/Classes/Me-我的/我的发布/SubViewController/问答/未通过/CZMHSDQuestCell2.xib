@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CZMHSDQuestCell2" rowHeight="154" id="KGk-i7-Jjw" customClass="CZMHSDQuestCell2">
+            <rect key="frame" x="0.0" y="0.0" width="432" height="154"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="432" height="153.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment" translatesAutoresizingMaskIntoConstraints="NO" id="rcZ-Ta-84B">
+                        <rect key="frame" x="15" y="17" width="29" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="9sA-CY-mGs"/>
+                            <constraint firstAttribute="width" constant="29" id="aWy-e9-gOF"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="榨汁机在使用过程中有哪些注意事项？清洗时要注意哪些？" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggt-J5-UIF">
+                        <rect key="frame" x="54" y="17" width="363" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原因：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnR-PJ-UQi">
+                        <rect key="frame" x="54" y="78" width="40" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDh-3O-NSK">
+                        <rect key="frame" x="97" y="78" width="265.5" height="16"/>
+                        <string key="text">问题中含有违禁词问题与类目不符有错别字有
+         错别字</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFE-Gz-aek">
+                        <rect key="frame" x="387" y="104" width="30" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="删除">
+                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Fku-h7-fVK"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEQ-gc-tKW">
+                        <rect key="frame" x="15" y="144" width="402" height="1"/>
+                        <color key="backgroundColor" red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Jvm-e7-WLN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ggt-J5-UIF" firstAttribute="top" secondItem="rcZ-Ta-84B" secondAttribute="top" id="0TY-Hk-0Bb"/>
+                    <constraint firstAttribute="trailing" secondItem="GEQ-gc-tKW" secondAttribute="trailing" constant="15" id="4Ry-nU-bc4"/>
+                    <constraint firstItem="ggt-J5-UIF" firstAttribute="leading" secondItem="rcZ-Ta-84B" secondAttribute="trailing" constant="10" id="5m6-5C-4KC"/>
+                    <constraint firstItem="DFE-Gz-aek" firstAttribute="top" secondItem="nDh-3O-NSK" secondAttribute="bottom" constant="10" id="FQB-Fd-5Pn"/>
+                    <constraint firstAttribute="trailing" secondItem="DFE-Gz-aek" secondAttribute="trailing" constant="15" id="H1i-t9-gnz"/>
+                    <constraint firstItem="rcZ-Ta-84B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="HuA-Qx-Ysh"/>
+                    <constraint firstItem="nDh-3O-NSK" firstAttribute="top" secondItem="QnR-PJ-UQi" secondAttribute="top" id="Swb-If-WJS"/>
+                    <constraint firstItem="QnR-PJ-UQi" firstAttribute="top" secondItem="ggt-J5-UIF" secondAttribute="bottom" constant="18" id="ZPM-wl-Zds"/>
+                    <constraint firstAttribute="trailing" secondItem="ggt-J5-UIF" secondAttribute="trailing" constant="15" id="bld-Hm-fws"/>
+                    <constraint firstItem="QnR-PJ-UQi" firstAttribute="leading" secondItem="ggt-J5-UIF" secondAttribute="leading" id="nPi-Y1-HGE"/>
+                    <constraint firstItem="nDh-3O-NSK" firstAttribute="leading" secondItem="QnR-PJ-UQi" secondAttribute="trailing" constant="3" id="ojc-5L-Dpi"/>
+                    <constraint firstItem="GEQ-gc-tKW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="spo-2N-zYN"/>
+                    <constraint firstItem="GEQ-gc-tKW" firstAttribute="top" secondItem="DFE-Gz-aek" secondAttribute="bottom" constant="12" id="xcj-3H-QYd"/>
+                    <constraint firstItem="rcZ-Ta-84B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="xu2-wS-lWV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="answerLabel" destination="ggt-J5-UIF" id="2QM-xR-g0g"/>
+                <outlet property="lineView" destination="GEQ-gc-tKW" id="Lqo-0U-B0v"/>
+                <outlet property="reviewLabel" destination="nDh-3O-NSK" id="aCz-IF-cbR"/>
+            </connections>
+            <point key="canvasLocation" x="-201.44927536231884" y="44.196428571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="comment" width="29" height="29"/>
+    </resources>
+</document>

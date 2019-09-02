@@ -10,6 +10,8 @@
 #import "CZMeIntelligentView.h"
 #import "UIButton+CZExtension.h" // 按钮扩展
 
+#import "GXNetTool.h"
+
 #import "CZMeIntelligentSubController.h"
 
 @interface CZMeIntelligentController ()<UIScrollViewDelegate>
@@ -31,6 +33,9 @@
 @property (nonatomic , assign) BOOL  isHover;
 @end
 
+// 判断是否是自己
+BOOL isUserInfo;
+
 @implementation CZMeIntelligentController
 #pragma mark - 创建视图
 - (UIScrollView *)scrollerView
@@ -50,7 +55,7 @@
 - (void)setupBottomContentView
 {
     self.contentScrollView = [[UIScrollView alloc] init];
-    self.contentScrollView.backgroundColor = [UIColor greenColor];
+    self.contentScrollView.backgroundColor = [UIColor whiteColor];
     self.contentScrollView.x = 0;
     self.contentScrollView.y = CGRectGetMaxY(self.menusView.frame);
     self.contentScrollView.width = SCR_WIDTH;
@@ -68,6 +73,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isUserInfo = [JPUSERINFO[@"userId"] isEqualToString:self.freeID];
     self.view.backgroundColor = CZGlobalWhiteBg;
     if (@available(iOS 11.0, *)) {
         self.scrollerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -84,6 +90,15 @@
     // 创建滚动视图
     [self.view addSubview:self.scrollerView];
 
+    // 头部视图数据
+    [self loadMoreTrailDataSorce];
+
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeChargeDetailControllerNoti" object:nil];
+}
+
+- (void)setupHeaderView
+{
     // 头部视图
     self.headerView = [[CZMeIntelligentView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0)];
     [self.scrollerView addSubview:self.headerView];
@@ -99,9 +114,24 @@
     [self setupBottomContentView];
 
     self.scrollerView.contentSize = CGSizeMake(0,  CZGetY(self.headerView) + SCR_HEIGHT);
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentViewIsScroll:) name:@"CZFreeChargeDetailControllerNoti" object:nil];
 }
+
+- (void)loadMoreTrailDataSorce
+{
+    //获取数据
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"userId"] = self.freeID;
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/user/getUserByUserId"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            NSDictionary *userDic = [result[@"data"] deleteAllNullValue];
+            [CZSaveTool setObject:userDic forKey:@"ByUserId"];
+            [self setupHeaderView];
+        }
+        //隐藏菊花
+        [CZProgressHUD hideAfterDelay:0];
+    } failure:^(NSError *error) {}];
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -196,7 +226,8 @@
     NSLog(@"%@", sender);
     NSInteger index = sender.tag - 100;
     [self.contentScrollView setContentOffset:CGPointMake(index * SCR_WIDTH, 0) animated:YES];
-    [self setupBtn:sender];
+//    self.selectedMenuItem(index * SCR_WIDTH);
+//    [self setupBtn:sender];
 }
 
 - (void)setupBtn:(UIButton *)sender
@@ -235,11 +266,6 @@
             self.scrollerView.contentOffset = CGPointMake(0, headerViewHeight);
         }
     }
-
-    if (scrollView == self.contentScrollView) {
-        self.selectedMenuItem(scrollView.contentOffset.x);
-    }
-
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
@@ -253,6 +279,9 @@
         CZMeIntelligentSubController *showVc = self.childViewControllers[index];        showVc.view.frame = CGRectMake(x, y, width, height);
         [showVc.tableView reloadData];
         [scrollView addSubview:showVc.view];
+    }
+    if (scrollView == self.contentScrollView) {
+        self.selectedMenuItem(scrollView.contentOffset.x);
     }
 }
 

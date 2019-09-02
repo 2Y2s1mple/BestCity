@@ -18,6 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSDictionary *user;
 @property (nonatomic, strong) NSString *pv;
+/** 内容 */
+@property (nonatomic, strong) NSString *content;
+/** 发布时间 */
+@property (nonatomic, strong) NSString *publishTime;
+@property (nonatomic, strong) NSString *createTime;
+/** 拒绝原因 */
+@property (nonatomic, strong) NSString *remark;
 /** 辅助 */
 /** cell的高度 */
 @property (nonatomic, assign) CGFloat cellHeight;

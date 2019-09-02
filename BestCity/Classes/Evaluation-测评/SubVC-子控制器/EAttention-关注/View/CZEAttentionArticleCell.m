@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 //数据模型
 #import "CZEAttentionItemViewModel.h"
+#import "CZMeIntelligentController.h"
 
 @interface CZEAttentionArticleCell ()
 /** 主标题 */
@@ -73,6 +74,13 @@
 /** 关注按钮响应方法 */
 - (void)attentionAction:(UIButton *)sender
 {
+    if ([JPTOKEN length] <= 0)
+    {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     if (!sender.isSelected) {
         [CZJIPINSynthesisTool addAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
            [self attentionBtnStyle:self.attentionBtn];
@@ -96,6 +104,30 @@
     self.mainTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
     self.attentionBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     [self.attentionBtn addTarget:self action:@selector(attentionAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerImageAction)];
+    self.avatarImageView.userInteractionEnabled = YES;
+    [self.avatarImageView addGestureRecognizer:tap];
+}
+
+
+- (void)headerImageAction
+{
+    NSLog(@"-------------%@", self.viewModel.model.article[@"user"][@"userId"]);
+    CZMeIntelligentController *vc = [[CZMeIntelligentController alloc] init];
+    vc.freeID = self.viewModel.model.article[@"user"][@"userId"];
+    [[self viewController].navigationController pushViewController:vc animated:YES];
+}
+
+// 找到父控制器
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

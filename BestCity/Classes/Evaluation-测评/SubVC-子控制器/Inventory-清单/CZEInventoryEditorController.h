@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZEInventoryEditorController : UIViewController
 /** 文章id */
 @property (nonatomic, strong) NSString *trialId;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *remarkStr;
 @end
 
 NS_ASSUME_NONNULL_END

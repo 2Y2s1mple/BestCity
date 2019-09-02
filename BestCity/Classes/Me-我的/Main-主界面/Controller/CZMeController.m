@@ -7,6 +7,7 @@
 //
 
 #import "CZMeController.h"
+#import "GXNetTool.h"
 
 #import "CZMeCell.h"
 #import "CZMeArrowCell.h"
@@ -22,7 +23,7 @@
 #import "CZCoinCenterController.h"
 #import "CZUserInfoTool.h"
 #import "CZMeIntelligentController.h"// 达人主页
-
+#import "CZMePublishController.h"
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
@@ -49,6 +50,10 @@
 @property (nonatomic, strong) UIView *backView;
 /** 背景图 */
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *messageCount;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *moneyMessageCount;
 @end
 
 @implementation CZMeController
@@ -210,6 +215,7 @@
 {
     [super viewWillAppear:animated];
     [self getNetworkUserInfo];
+    [self getMessageCount];
     [MobClick beginLogPageView:@"我的我的"]; //("Pagename"为页面名称，可自定义)
 }
 
@@ -280,9 +286,27 @@
     NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
     if (indexPath.section == 0) {
         CZMeCell *cell = [CZMeCell cellWithTabelView:tableView];
+        cell.messageCountLabel.text = self.moneyMessageCount;
+        if (![cell.messageCountLabel.text isEqualToString:@"0"]) {
+            cell.messageCountLabel.hidden = NO;
+        } else {
+            cell.messageCountLabel.hidden = YES;
+        }
         return cell;
     } else {
         CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
+        cell.messageCountLabel.text = self.messageCount;
+        cell.messageCountLabel.hidden = YES;
+        cell.lineView.hidden = YES;
+        if (indexPath.row == 0) {
+            if (![cell.messageCountLabel.text isEqualToString:@"0"]) {
+                cell.messageCountLabel.hidden = NO;
+            }
+        }
+
+        if (indexPath.row == 6) {
+            cell.lineView.hidden = NO;
+        }
         cell.dataSource = dic;
         return cell;
     }
@@ -291,7 +315,15 @@
 #pragma mark - <UITableViewDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == 0 ? 82 : 60;
+    if (indexPath.section == 0) {
+        return 82;
+    } else {
+        if (indexPath.row == 6) {
+            return 60 + 20 + 17;
+        } else {
+            return 60;
+        }
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -317,18 +349,6 @@
 
         if ([dic[@"destinationVC"] isEqualToString:@"CZCollectController"]) {
             WMPageController *hotVc = (WMPageController *)[[NSClassFromString(dic[@"destinationVC"]) alloc] init];
-            hotVc.selectIndex = 0;
-            hotVc.menuViewStyle = WMMenuViewStyleLine;
-            //        hotVc.progressWidth = 30;
-            hotVc.itemMargin = 10;
-            hotVc.progressHeight = 3;
-            hotVc.automaticallyCalculatesItemWidths = YES;
-            hotVc.titleFontName = @"PingFangSC-Medium";
-            hotVc.titleColorNormal = CZGlobalGray;
-            hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
-            hotVc.titleSizeNormal = 15.0f;
-            hotVc.titleSizeSelected = 15;
-            hotVc.progressColor = CZREDCOLOR;
             [self.navigationController pushViewController:hotVc animated:YES];
             return;
         }
@@ -354,6 +374,23 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)getMessageCount
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/message/count"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
+            self.messageCount = [NSString stringWithFormat:@"%@", [result[@"data"] integerValue] < 99 ? result[@"data"] : @"99+"];
+            self.moneyMessageCount = [NSString stringWithFormat:@"%@", [result[@"walletCount"] integerValue] < 99 ? result[@"walletCount"] : @"99+"];
+
+
+            [self.tableView reloadData];
+        } else {
+
+        }
+    } failure:^(NSError *error) {}];
 }
 
 @end

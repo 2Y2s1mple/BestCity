@@ -35,7 +35,8 @@
 - (void)setModel:(NSDictionary *)model
 {
     _model = model;
-        NSDictionary *dic = model;
+        NSDictionary *dic = [model deleteAllNullValue];
+
         [self.itemImg sd_setImageWithURL:[NSURL URLWithString:dic[@"itemImg"]]];
         self.titleLabel.text = dic[@"itemTitle"];
         self.timeLabel.text = dic[@"tkPaidTime"];

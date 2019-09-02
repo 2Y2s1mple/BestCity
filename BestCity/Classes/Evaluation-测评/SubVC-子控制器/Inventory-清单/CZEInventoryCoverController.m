@@ -184,11 +184,18 @@
 // 保存草稿箱
 - (void)save
 {
+    if (addGoodsNumber == 0) {
+        [CZProgressHUD showProgressHUDWithText:@"请添加关联商品"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    }
+
     if ([self.param[@"img"] length] < 1) {
         [CZProgressHUD showProgressHUDWithText:@"封面图片不得为空"];
         [CZProgressHUD hideAfterDelay:1.5];
         return;
     }
+
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/saveListing"] body:self.param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
@@ -210,6 +217,12 @@
 // 发布
 - (void)publishAction
 {
+     if (addGoodsNumber == 0) {
+         [CZProgressHUD showProgressHUDWithText:@"请添加关联商品"];
+         [CZProgressHUD hideAfterDelay:1.5];
+         return;
+     }
+
     if ([self.param[@"img"] length] < 1) {
         [CZProgressHUD showProgressHUDWithText:@"封面图片不得为空"];
         [CZProgressHUD hideAfterDelay:1.5];
@@ -335,6 +348,9 @@
                 viewModel.articleId = self.param[@"articleId"];
                 [self.dataSource addObject:viewModel];
             }
+            addGoodsNumber = (int)list.count;
+            self.recordSelecedGoodsLabel.text = [NSString stringWithFormat:@"已选%d件商品（上限5件）", addGoodsNumber];
+            [self.recordSelecedGoodsLabel sizeToFit];
             [self.tableView reloadData];
         }
         //隐藏菊花

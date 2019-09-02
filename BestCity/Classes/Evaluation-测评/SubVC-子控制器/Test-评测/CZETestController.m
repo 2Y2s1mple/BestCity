@@ -35,6 +35,8 @@
 @property (nonatomic, strong) NSString *categoryId;
 /** 记录类目 */
 @property (nonatomic, strong) NSDictionary *categoryParam;
+/** <#注释#> */
+@property (nonatomic, strong) NSMutableDictionary *recordParam;
 
 @end
 
@@ -65,6 +67,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.noDataView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.tableView];
     // 获取类目
     [self getCategoryList];
@@ -104,7 +107,6 @@
     } failure:^(NSError *error) {}];
 }
 
-
 // 获取整体数据
 - (void)reloadNewDataSorce:(NSString *)categoryId
 {
@@ -112,8 +114,18 @@
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"categoryId"] = categoryId;
+    self.recordParam = param;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/indexEvaluationList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (self.recordParam != param) return;
+
         if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0 || [result[@"list2"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             NSArray *list1 = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
             NSArray *list2 = [CZETestModel objectArrayWithKeyValuesArray:result[@"list2"]];
             [self.dataSource addObject:list1];

@@ -86,7 +86,7 @@
             [titleBtn setTitle:self.mainTitles[i] forState:UIControlStateNormal];
             [titleBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
             [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-            titleBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+            titleBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
             if (i == 0) titleBtn.selected = YES;
             titleBtn.tag = i + 100;
             [titleBtn addTarget:self action:@selector(titleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -106,7 +106,7 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
         titleLabel.text = @"发现详情";
-        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,7 +116,7 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
         titleLabel.text = @"评测详情";
-        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,7 +126,7 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
         titleLabel.text = self.titleText;
-        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -136,7 +136,7 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
         titleLabel.text = @"清单详情";
-        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -146,14 +146,13 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
         titleLabel.text = @"报告详情";
-        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+        titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
         }];
     }
-
 
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightBtn = rightBtn;
@@ -176,8 +175,6 @@
         make.width.equalTo(@(40));
         make.height.equalTo(@(20));
     }];
-
-
 }
 
 - (void)shareBtnDidClicked:(UIButton *)sender

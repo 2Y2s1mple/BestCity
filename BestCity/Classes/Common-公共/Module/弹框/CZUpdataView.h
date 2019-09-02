@@ -19,6 +19,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 审核中 */
 + (instancetype)reviewView;
+
+// 提示
++ (instancetype)reminderView;
+
+/** <#注释#> */
+@property (nonatomic, strong) void (^confirmBlock) (void);
+
+/** <#注释#> */
+@property (nonatomic, strong) NSString *textString;
 @end
 
 NS_ASSUME_NONNULL_END

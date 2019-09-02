@@ -55,7 +55,7 @@
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-//    manager.requestSerializer.timeoutInterval = 2.f;
+//    manager.requestSerializer.timeoutInterval = 10.f;
 //    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 
     //(2)请求头的设置
@@ -89,7 +89,7 @@
     NSMutableDictionary *param = [self signParamdDic:body];;
     [manager GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *result = responseObject;
-        if ([result[@"code"] isEqualToNumber:@(630)]) {
+        if ([result[@"code"] isEqualToNumber:@(612)]) {
             CZUnusualController *vc = [[CZUnusualController alloc] init];
             UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
             UINavigationController *nav = tabbar.selectedViewController;
@@ -102,7 +102,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         !failure ? : failure(error);
         NSLog(@"%@", error);
-        [CZProgressHUD showProgressHUDWithText:@"网络出错"];
+        [CZProgressHUD showProgressHUDWithText:@"网络出错! 请查看网络设置!"];
         [CZProgressHUD hideAfterDelay:2];
     }];
     return manager;
@@ -119,6 +119,10 @@
 {
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager  manager] initWithBaseURL:[NSURL URLWithString:url]];
+
+//    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+//    manager.requestSerializer.timeoutInterval = 10.f;
+//    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     // 设置超时时间
 //    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
 //    manager.requestSerializer.timeoutInterval = 2.f;
@@ -202,7 +206,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         !failure ? : failure(error);
         NSLog(@"%@", error);
-        [CZProgressHUD showProgressHUDWithText:@"网络出错"];
+        [CZProgressHUD showProgressHUDWithText:@"网络出错! 请查看网络设置!"];
         [CZProgressHUD hideAfterDelay:2];
     }];
 }

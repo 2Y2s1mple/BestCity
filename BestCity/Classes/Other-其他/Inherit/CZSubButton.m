@@ -13,8 +13,8 @@
 - (void)setup
 {
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self setTitleColor:CZGlobalGray forState:UIControlStateNormal];
-    self.titleLabel.font = [UIFont systemFontOfSize:10];
+    [self setTitleColor:UIColorFromRGB(0x202020) forState:UIControlStateNormal];
+    self.titleLabel.font = [UIFont systemFontOfSize:12];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -37,7 +37,7 @@
     
     // 调整文字
     self.titleLabel.x = 0;
-    self.titleLabel.y = self.imageView.height + 5;
+    self.titleLabel.y = self.imageView.height + 13;
     [self.titleLabel sizeToFit];
     self.titleLabel.centerX = self.width / 2.0;
 }

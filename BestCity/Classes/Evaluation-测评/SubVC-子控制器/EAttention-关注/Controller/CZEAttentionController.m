@@ -123,9 +123,20 @@
     NSLog(@"%s", __func__);
     [self.tableView.mj_footer endRefreshing];
     [self.viewModel reloadNewDataSorce:^ {
+        if ([self.viewModel.dataSource count] > 0) {
+            // 没有数据图片
+            [self.noDataView removeFromSuperview];
+        } else {
+            // 没有数据图片
+            [self.tableView addSubview:self.noDataView];
+        }
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     }];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.mj_header endRefreshing];
+    });
 }
 
 - (void)loadMoreDataSorce
@@ -133,9 +144,19 @@
     NSLog(@"%s", __func__);
     [self.tableView.mj_header endRefreshing];
     [self.viewModel loadMoreDataSorce:^ {
+        if ([self.viewModel.dataSource count] > 0) {
+            // 没有数据图片
+            [self.noDataView removeFromSuperview];
+        } else {
+            // 没有数据图片
+            [self.tableView addSubview:self.noDataView];
+        }
         [self.tableView reloadData];
         [self.tableView.mj_footer endRefreshing];
     }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.mj_footer endRefreshing];
+    });
 }
 
 

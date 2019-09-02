@@ -142,10 +142,10 @@
     scrollView.showsVerticalScrollIndicator = NO;
     NSArray *children = datas;
 
-    CGFloat width = 39;
+    CGFloat width = 50;
     CGFloat leftSpace = 18;
     CGFloat space = (SCR_WIDTH - leftSpace * 2 - 5 * width) / 4;
-    CGFloat height = width + 20;
+    CGFloat height = width + 30;
     NSInteger cols = 5;
     for (int i = 0; i < children.count; i++) {
         CZHotSubTilteModel *model = children[i];

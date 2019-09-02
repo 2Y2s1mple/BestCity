@@ -185,12 +185,13 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, self.searchViewY + self.searchHeight, SCR_WIDTH, 50);
+    return CGRectMake(0, self.searchViewY + self.searchHeight + 10, SCR_WIDTH, 50);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    
-    return CGRectMake(0, self.searchViewY + self.searchHeight + 50, SCR_WIDTH, SCR_HEIGHT - (self.searchViewY + self.searchHeight + 50));
+
+    CGFloat Y = self.searchViewY + self.searchHeight + 50 + 10;
+    return CGRectMake(0, Y, SCR_WIDTH, SCR_HEIGHT - Y);
 }
 
 #pragma mark - 通知: 监听scrollerView的滚动

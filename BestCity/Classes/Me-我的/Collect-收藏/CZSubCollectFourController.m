@@ -63,6 +63,7 @@
 
     // 加载刷新数据
     [self setupRefresh];
+    CZTOPLINE;
 }
 
 - (void)viewWillAppear:(BOOL)animated

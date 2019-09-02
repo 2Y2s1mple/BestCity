@@ -53,12 +53,11 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资深编辑" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpG-Sx-1Xv">
                         <rect key="frame" x="57" y="290.5" width="61.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有了这些变美神器，做永远的元气美少女" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="al3-RE-L0m">
-                        <rect key="frame" x="15" y="239" width="385" height="22.5"/>
-                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="16"/>
+                        <rect key="frame" x="15" y="239" width="385" height="25.5"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -68,7 +67,7 @@
                     <constraint firstItem="al3-RE-L0m" firstAttribute="top" secondItem="RSN-bX-zav" secondAttribute="bottom" constant="16" id="HQf-VJ-hnX"/>
                     <constraint firstItem="al3-RE-L0m" firstAttribute="trailing" secondItem="RSN-bX-zav" secondAttribute="trailing" id="HiE-Nv-0CP"/>
                     <constraint firstItem="KYr-bK-KZ8" firstAttribute="leading" secondItem="RSN-bX-zav" secondAttribute="leading" id="WLY-Pq-MEp"/>
-                    <constraint firstItem="KYr-bK-KZ8" firstAttribute="top" secondItem="al3-RE-L0m" secondAttribute="bottom" constant="23" id="XBg-I1-Epm"/>
+                    <constraint firstItem="KYr-bK-KZ8" firstAttribute="top" secondItem="al3-RE-L0m" secondAttribute="bottom" constant="20" id="XBg-I1-Epm"/>
                     <constraint firstItem="RSN-bX-zav" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="cyA-vb-NdD"/>
                     <constraint firstAttribute="trailing" secondItem="oF6-BN-RT4" secondAttribute="trailing" constant="15" id="d1U-mq-Zdd"/>
                     <constraint firstItem="al3-RE-L0m" firstAttribute="leading" secondItem="RSN-bX-zav" secondAttribute="leading" id="eKX-Z9-rbr"/>

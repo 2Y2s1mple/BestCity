@@ -126,7 +126,7 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8X-zl-5I6">
                     <rect key="frame" x="107.5" y="180" width="200" height="55"/>
-                    <color key="backgroundColor" red="0.88123279809999999" green="0.1038993672" blue="0.23317024110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="JFg-F9-9fw"/>
                         <constraint firstAttribute="height" constant="55" id="bOm-bW-1Pq"/>
@@ -169,7 +169,7 @@
                 <outlet property="bottomLabel" destination="sJh-TM-jb9" id="Ies-sF-PlL"/>
                 <outlet property="topLabel" destination="AQN-zm-0Kf" id="zj9-uB-M4v"/>
             </connections>
-            <point key="canvasLocation" x="34" y="-265"/>
+            <point key="canvasLocation" x="130" y="-206"/>
         </view>
     </objects>
     <resources>

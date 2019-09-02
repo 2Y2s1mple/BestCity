@@ -62,11 +62,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CZTOPLINE;
     [self.view addSubview:self.tableView];
 
     // 加载刷新数据
     [self setupRefresh];
+    CZTOPLINE;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -170,7 +170,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 45;
+    return 50;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

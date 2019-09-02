@@ -86,6 +86,9 @@
 - (void)setDefaultText:(NSString *)defaultText
 {
     _defaultText = defaultText;
+    if ([defaultText isKindOfClass:[NSNull class]]) {
+        return;
+    }
     self.text = defaultText;
     [self textViewDidChange:self];
     [self textViewDidEndEditing:self];

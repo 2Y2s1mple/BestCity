@@ -125,7 +125,7 @@
             share.param = @{
                             @"shareUrl" : [NSString stringWithFormat:@"https://www.jipincheng.cn/share/question.html?id=%@", self.model.ID],
                             @"shareTitle" : self.model.title,
-                            @"shareContent" : [[self.dataSource firstObject] content],
+                            @"shareContent" :self.dataSource.count > 0 ? [[self.dataSource firstObject] content] : @"",
                             @"shareImg" : [UIImage imageNamed:@"headDefault"],
                             };
             [self.view addSubview:share];

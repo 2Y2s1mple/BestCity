@@ -39,7 +39,6 @@
     return _tableView;
 }
 
-
 #pragma mark - 获取数据
 - (void)setupRefresh
 {

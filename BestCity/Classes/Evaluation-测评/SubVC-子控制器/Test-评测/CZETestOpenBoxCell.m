@@ -8,6 +8,8 @@
 
 #import "CZETestOpenBoxCell.h"
 #import "UIImageView+WebCache.h"
+#import "CZMeIntelligentController.h"
+
 @interface CZETestOpenBoxCell ()
 @property (nonatomic, weak) IBOutlet UIImageView *bigImage;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
@@ -41,7 +43,31 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerImageAction)];
+    self.headerImage.userInteractionEnabled = YES;
+    [self.headerImage addGestureRecognizer:tap];
+    self.nameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
 }
+
+- (void)headerImageAction
+{
+    NSLog(@"-------------%@", self.model.user[@"userId"]);
+    CZMeIntelligentController *vc = [[CZMeIntelligentController alloc] init];
+    vc.freeID = self.model.user[@"userId"];
+    [[self viewController].navigationController pushViewController:vc animated:YES];
+}
+
+// 找到父控制器
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

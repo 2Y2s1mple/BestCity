@@ -6,11 +6,11 @@
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CZBaseEvaluationController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZERecommendController : UIViewController
+@interface CZERecommendController : CZBaseEvaluationController
 
 @end
 

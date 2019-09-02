@@ -24,6 +24,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *IKnowLabel;
 /** <#注释#> */
 @property (nonatomic, strong) CZUpdataView *updataView;
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @end
 
 @implementation CZUpdataView
@@ -32,6 +35,7 @@
 {
     [super awakeFromNib];
     self.IKnowLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+    self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 17];
 }
 
 + (instancetype)updataViewWithFrame:(CGRect)frame
@@ -96,9 +100,25 @@
 
 + (instancetype)reviewView
 {
-    return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][2];
 }
 
++ (instancetype)reminderView
+{
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][3];
+}
+
+- (void)setTextString:(NSString *)textString
+{
+    _textString = textString;
+    self.titleLabel.text = textString;
+}
+
+/** <#注释#> */
+- (IBAction)confirmBlockAction
+{
+    self.confirmBlock();
+}
 
 
 @end
