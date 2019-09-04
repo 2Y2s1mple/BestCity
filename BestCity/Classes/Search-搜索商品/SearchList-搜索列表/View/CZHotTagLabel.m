@@ -19,8 +19,9 @@
 #pragma mark - 初始化
 - (void)setup:(CZHotTagLabelType)type
 {
-    self.font = [UIFont systemFontOfSize:13];
+    self.font = [UIFont systemFontOfSize:15];
     self.textAlignment = NSTextAlignmentCenter;
+    self.textColor = UIColorFromRGB(0x565252);
     self.layer.cornerRadius = self.height * 0.5;
     self.layer.masksToBounds = YES;
     self.backgroundColor = CZGlobalLightGray;

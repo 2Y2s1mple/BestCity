@@ -105,7 +105,7 @@
     } else if (type == CZJIPINModuleDiscover){
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
-        titleLabel.text = @"发现详情";
+//        titleLabel.text = @"发现详情";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
@@ -115,7 +115,7 @@
     } else if (type == CZJIPINModuleEvaluation) {
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
-        titleLabel.text = @"评测详情";
+//        titleLabel.text = @"评测详情";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
@@ -135,7 +135,7 @@
     } else if (type == CZJIPINModuleQingDan) {
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
-        titleLabel.text = @"清单详情";
+//        titleLabel.text = @"清单详情";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];
@@ -145,7 +145,7 @@
     } else {
         UILabel *titleLabel = [[UILabel alloc] init];
         self.titleLabel = titleLabel;
-        titleLabel.text = @"报告详情";
+//        titleLabel.text = @"报告详情";
         titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
         titleLabel.textColor = [UIColor blackColor];
         [self addSubview:titleLabel];

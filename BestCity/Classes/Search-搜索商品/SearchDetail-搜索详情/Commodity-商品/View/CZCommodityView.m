@@ -94,10 +94,10 @@
     self.titleName.text = model.goodsName;
     self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]];
     
-    if (model.otherPrice.length > 0 && ![model.actualPrice isEqualToString:model.otherPrice]) {
+    if (model.otherPrice.length > 0 && ![model.actualPrice isEqual:model.otherPrice]) {
         self.otherPrice.hidden = NO;
-        NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%@", [self platfromNameWithNumber:model.source], model.otherPrice];
-        self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%@", model.otherPrice]]];
+        NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%.2f", [self platfromNameWithNumber:model.source], [model.otherPrice floatValue]];
+        self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model.otherPrice floatValue]]]];
     } else {
         self.otherPrice.hidden = YES;
     }

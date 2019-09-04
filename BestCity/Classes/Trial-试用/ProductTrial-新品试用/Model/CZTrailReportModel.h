@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *user;
 @property (nonatomic, strong) NSString *pv;
 @property (nonatomic, strong) NSString *title;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *type;
 /** id */
 @property (nonatomic, strong) NSString *articleId;
 

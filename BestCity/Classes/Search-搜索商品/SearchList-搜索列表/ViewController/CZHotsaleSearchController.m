@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSMutableArray *hisArr;
 /** 历史记录tableView */
 @property (nonatomic, strong) UITableView *tableView;
+/** 分割线 */
+@property (nonatomic, strong) UIView *line;
 @end
 
 @implementation CZHotsaleSearchController
@@ -42,7 +44,7 @@
 // 搜索框H值
 - (CGFloat)searchHeight
 {
-    return 34;
+    return 44;
 }
 #pragma mark -- end
 
@@ -94,56 +96,62 @@
 - (void)setupSearchView
 {
     __weak typeof(self) weakSelf = self;
-    self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(10, self.searchViewY, SCR_WIDTH, self.searchHeight) msgAction:^(NSString *rightBtnText){
-        if ([rightBtnText isEqualToString:@"搜索"]) {
-            [weakSelf pushSearchDetail];
-        } else {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
+    self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(0, self.searchViewY, SCR_WIDTH, self.searchHeight) msgAction:^(NSString *rightBtnText){
+        [weakSelf pushSearchDetail];
     }];
     self.searchView.textFieldBorderColor = CZGlobalGray;
     self.searchView.textFieldActive = YES;
-    self.searchView.msgTitle = @"取消";
+//    self.searchView.msgTitle = @"取消";
     self.searchView.delegate = self;
+    self.searchView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.searchView];
+
+    self.line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.searchView) + 22, SCR_WIDTH, 1)];
+    self.line.backgroundColor = CZGlobalLightGray;
+    [self.view addSubview:self.line];
 }
 
 // <CZHotSearchViewDelegate>
 - (void)hotView:(CZHotSearchView *)hotView didTextFieldChange:(CZTextField *)textField
 {
-    if (textField.text.length == 0) {
-        hotView.msgTitle = @"取消";
-    } else {
-        hotView.msgTitle = @"搜索";
-    }
+//    if (textField.text.length == 0) {
+//        hotView.msgTitle = @"取消";
+//    } else {
+//        hotView.msgTitle = @"搜索";
+//    }
 }
 
 #pragma mark - 创建大家都在搜, 历史搜索及代理方法
 // 大家都在搜
 - (void)createHistorySearchModule
 {
-    self.hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, 100, SCR_WIDTH, 300)];
+    self.hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, CZGetY(self.line) + 22, SCR_WIDTH, 300)];
     self.hisView.type = CZHotTagLabelTypeTapGesture;
     self.hisView.delegate = self;
     self.hisView.title = @"大家都在搜";
     self.hisView.hisArray = [NSMutableArray arrayWithArray:self.searchArr];
     [self.view addSubview:_hisView];
+
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 22, SCR_WIDTH, 10)];
+    line.backgroundColor = CZGlobalLightGray;
+    [self.view addSubview:line];
 }
 
 // 历史搜索
 - (void)createHotSearchModule
 {
-    UIView *historyView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 40, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.hisView) + 40))];
+    UIView *historyView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 32 + 26, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.hisView) + 32 + 26))];
     [self.view addSubview:historyView];
 
     UILabel *hisLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 20)];
-    hisLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+    hisLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 16];
     hisLabel.text = @"历史搜索";
+    hisLabel.textColor = UIColorFromRGB(0x9D9D9D);
     [historyView addSubview:hisLabel];
   
     UIButton *deleteBtn = [[UIButton alloc] init];
-    deleteBtn.frame = CGRectMake(SCR_WIDTH - 14 - 17, hisLabel.y, 17, 17);
-    [deleteBtn setImage:[UIImage imageNamed:@"delete-1"] forState:UIControlStateNormal];
+    deleteBtn.frame = CGRectMake(SCR_WIDTH - 26- 17, hisLabel.y, 26, 25);
+    [deleteBtn setImage:[UIImage imageNamed:@"delete-2"] forState:UIControlStateNormal];
     [deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
     [historyView addSubview:deleteBtn];
     
@@ -189,6 +197,11 @@
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
 
@@ -252,12 +265,11 @@
     } else {
         
     }
-    
-    if (self.searchView.searchText) {
-        self.searchView.msgTitle = @"搜索";
-    } else {
-        self.searchView.msgTitle = @"取消";
-    }
+//    if (self.searchView.searchText) {
+//        self.searchView.msgTitle = @"搜索";
+//    } else {
+//        self.searchView.msgTitle = @"取消";
+//    }
 }
 #pragma mark - 跳转
 - (void)pushSearchDetail

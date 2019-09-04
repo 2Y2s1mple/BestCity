@@ -48,6 +48,7 @@
     _webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 67 + (IsiPhoneX ? 24 : 0), SCR_WIDTH, SCR_HEIGHT - 67 - (IsiPhoneX ? 24 : 0))];
     _webview.delegate = self;
     _webview.backgroundColor = CZGlobalWhiteBg;
+    [_webview setScalesPageToFit:YES];
     [self.view addSubview:_webview];
     
 

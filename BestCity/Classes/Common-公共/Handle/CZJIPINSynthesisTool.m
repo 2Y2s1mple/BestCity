@@ -60,6 +60,9 @@
         case 4: // 试用报告
             type = CZJIPINModuleTrail;
             break;
+        case 41: // 试用报告
+            type = CZJIPINModuleTrail;
+            break;
         case 5: // 百科
             type = CZJIPINModuleBK;
             break;
@@ -67,6 +70,9 @@
             type = CZJIPINModuleRelationBK;
             break;
         case 7: // 清单详情
+            type = CZJIPINModuleQingDan;
+            break;
+        case 71: // 清单详情
             type = CZJIPINModuleQingDan;
             break;
         default:

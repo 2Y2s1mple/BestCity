@@ -99,8 +99,6 @@
 // 发布
 - (IBAction)publishAction
 {
-
-
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"title"] =  self.model.title;
     param[@"content"] =  self.model.content;

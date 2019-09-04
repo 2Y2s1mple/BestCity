@@ -74,6 +74,8 @@ extern BOOL isUserInfo;
     NSString *status = [@"个签: " stringByAppendingFormat:@"%@", JPOTHERUSERINFO[@"detail"]];
     self.detailLabel.attributedText = [status addAttributeColor:UIColorFromRGB(0x9D9D9D) Range:[status rangeOfString:@"个签: "]];
 
+//    self.detailLabel.text = @"个签个签个签个签";
+
     // 关注
     self.attentionLabel.text = [NSString stringWithFormat:@"%@",  JPOTHERUSERINFO[@"followCount"]];
     // 粉丝
@@ -125,7 +127,9 @@ extern BOOL isUserInfo;
             btn.backgroundColor = UIColorFromRGB(0xE25838);
         }
     }
+     [self layoutIfNeeded];
     self.height = CZGetY(self.verticalLine);
+    NSLog(@"----- %lf", self.height);
 }
 
 - (void)attentionAction:(UIButton *)sender
@@ -218,7 +222,8 @@ extern BOOL isUserInfo;
     line.height = 10;
     line.y = CZGetY(intelligentView) + 3;
     [self addSubview:line];
-    
+    NSLog(@"----- %lf", intelligentView.height);
+
     self.height = CZGetY(line);
 }
 

@@ -46,7 +46,7 @@
 // 搜索框H值
 - (CGFloat)searchHeight
 {
-    return 34;
+    return 44;
 }
 #pragma mark -- end
 
@@ -64,56 +64,91 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     //设置搜索栏
-    UIView *searchView = [self setupTopViewWithFrame:CGRectMake(0, self.searchViewY, SCR_WIDTH, self.searchHeight)];
-    [self.view addSubview:searchView];
+    [self setupTopViewWithFrame:CGRectMake(0, self.searchViewY, SCR_WIDTH, self.searchHeight)];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oneControllerScrollViewDidScroll:) name:@"CZSearchSubDetailOneController" object:nil];
 }
 
 #pragma mark - 创建搜索框以及方法
-- (UIView *)setupTopViewWithFrame:(CGRect)frame
+- (void)setupTopViewWithFrame:(CGRect)frame
 {
-    UIView *topView = [[UIView alloc] initWithFrame:frame];
-    [self.view addSubview:topView];
-    
-    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
-    [leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
-    leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    leftBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 10, 10);
-    [topView addSubview:leftBtn];
-    [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(topView).offset(2);
-        make.left.equalTo(topView).offset(0);
-        make.width.equalTo(@(40));
-        make.height.equalTo(@(topView.height));
-    }];
 
-    CZTextField *textField = [[CZTextField alloc] init];
-    textField.backgroundColor = [UIColor whiteColor];
-    textField.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor;
-    textField.layer.borderWidth = 0.5;
-    [topView addSubview:textField];
-    textField.delegate = self;
-    textField.text = self.textTitle;
-    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(topView);
-        make.right.equalTo(topView).offset(-20);
-        make.left.equalTo(leftBtn.mas_right).offset(0);
-        make.height.equalTo(@(topView.height));
-    }];
-    
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
-    textField.leftView = image;
-    textField.leftViewMode = UITextFieldViewModeAlways;
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 20, 20);
-    button.centerY = topView.height / 2.0;
-    [button setImage:[UIImage imageNamed:@"search-close"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(clearBtnaction) forControlEvents:UIControlEventTouchUpInside];
-    textField.rightView = button;
-    textField.rightViewMode = UITextFieldViewModeAlways;
-    return topView;
+    UIButton *popBtn = [[UIButton alloc] init];
+    [popBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
+    popBtn.x = 0;
+    popBtn.y =  self.searchViewY;
+    popBtn.size = CGSizeMake(45, 44);
+    popBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [popBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:popBtn];
+
+    UIView *backView = [[UIView alloc] init];
+    backView.x = 45;
+    backView.y = popBtn.y;
+    backView.width = SCR_WIDTH - 45 - 15;
+    backView.height = 44;
+    backView.backgroundColor = UIColorFromRGB(0xD8D8D8);
+    backView.layer.cornerRadius = 6;
+    backView.layer.masksToBounds = YES;
+    [self.view addSubview:backView];
+
+    CZTextField *textF = [[CZTextField alloc] init];
+    textF.width = backView.width - 48;
+    textF.height = 44;
+    textF.delegate = self;
+    textF.text = self.textTitle;
+    [backView addSubview:textF];
+
+    UIButton *msgBtn = [[UIButton alloc] init];
+    [msgBtn setImage:[UIImage imageNamed:@"搜索"] forState:UIControlStateNormal];
+    msgBtn.x = CGRectGetMaxX(textF.frame);
+    msgBtn.size = CGSizeMake(40, 44);
+    msgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [msgBtn addTarget:self action:@selector(clearBtnaction) forControlEvents:UIControlEventTouchUpInside];
+    [backView addSubview:msgBtn];
+
+
+//    UIView *topView = [[UIView alloc] initWithFrame:frame];
+//    [self.view addSubview:topView];
+//
+//    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
+//    [leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
+//    leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    leftBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 10, 10);
+//    [topView addSubview:leftBtn];
+//    [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(topView).offset(2);
+//        make.left.equalTo(topView).offset(0);
+//        make.width.equalTo(@(40));
+//        make.height.equalTo(@(topView.height));
+//    }];
+//
+//    CZTextField *textField = [[CZTextField alloc] init];
+//    textField.backgroundColor = [UIColor whiteColor];
+//    textField.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor;
+//    textField.layer.borderWidth = 0.5;
+//    [topView addSubview:textField];
+//    textField.delegate = self;
+//    textField.text = self.textTitle;
+//    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(topView);
+//        make.right.equalTo(topView).offset(-20);
+//        make.left.equalTo(leftBtn.mas_right).offset(0);
+//        make.height.equalTo(@(topView.height));
+//    }];
+//
+//    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
+//    textField.leftView = image;
+//    textField.leftViewMode = UITextFieldViewModeAlways;
+//
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.frame = CGRectMake(0, 0, 20, 20);
+//    button.centerY = topView.height / 2.0;
+//    [button setImage:[UIImage imageNamed:@"search-close"] forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(clearBtnaction) forControlEvents:UIControlEventTouchUpInside];
+//    textField.rightView = button;
+//    textField.rightViewMode = UITextFieldViewModeAlways;
+//    return topView;
 }
 
 - (void)clearBtnaction

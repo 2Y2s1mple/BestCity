@@ -14,20 +14,21 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = CZGlobalLightGray;
+        self.backgroundColor = UIColorFromRGB(0xD8D8D8);
         self.font = [UIFont systemFontOfSize:14];
-        self.layer.cornerRadius = 17;
+//        self.layer.cornerRadius = 6;
+        self.textColor = UIColorFromRGB(0x565252);
 //        self.layer.borderWidth = 0.5;
 //        self.layer.borderColor = UIColorFromRGB(0xACACAC).CGColor ;
 //        NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:@"搜索商品榜"];
 //        [placeholder addAttribute:NSFontAttributeName
 //                            value:[UIFont fontWithName:@"PingFangSC-Regular" size: 13]
 //                            range:NSMakeRange(0, 5)];
-        self.placeholder = @"搜索商品榜";
-        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
-        self.leftView = image;
-        self.leftViewMode = UITextFieldViewModeAlways;
-        self.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.placeholder = @"输入查询商品名称";
+//        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
+//        self.leftView = image;
+//        self.leftViewMode = UITextFieldViewModeAlways;
+//        self.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.returnKeyType = UIReturnKeySearch;
     }
     return self;
@@ -48,7 +49,7 @@
  */
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
-    return CGRectInset(bounds, 40, 0);
+    return CGRectInset(bounds, 15, 0);
 }
 
 /**
@@ -57,7 +58,7 @@
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
     
-    return CGRectInset(bounds, 40, 0);
+    return CGRectInset(bounds, 15, 0);
 }
 
 /**

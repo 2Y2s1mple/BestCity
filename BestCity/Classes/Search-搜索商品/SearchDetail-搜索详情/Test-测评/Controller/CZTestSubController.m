@@ -11,6 +11,7 @@
 #import "GXNetTool.h"
 #import "CZAttentionBtn.h"
 #import "CZGiveLikeView.h"
+#import "TSLWebViewController.h"
 
 @interface CZTestSubController () <UIWebViewDelegate>
 /** webView */
@@ -320,6 +321,23 @@
 {
     [CZProgressHUD hideAfterDelay:0];
 }
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //截取URL，这里可以和JS进行交互，但这里没有写，因为会涉及到JS的一些知识，增加复杂性
+    NSString *urlString = [request.URL absoluteString];
+    urlString = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSArray *urlComps = [urlString componentsSeparatedByString:@"://"];
+    NSLog(@"urlString=%@---urlComps=%@",urlString,urlComps);
+    if ([[urlComps firstObject] isEqualToString:@"https"] || [[urlComps firstObject] isEqualToString:@"http"]) {
+        TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:urlString]];
+        [self presentViewController:webVc animated:YES completion:nil];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
