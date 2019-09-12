@@ -64,7 +64,7 @@
     /** 试用数量 */
     self.countLabel.text = [NSString stringWithFormat:@"%@", self.detailData[@"count"]];
     /** 市场价 */
-    self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%@", self.detailData[@"actualPrice"]];
+    self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%0.2lf", [self.detailData[@"actualPrice"] floatValue]];
     /** 申请人数 */
     self.applyUserCountLabel.text = [NSString stringWithFormat:@"%@", self.detailData[@"applyUserCount"]];
     /** 申请条件 */

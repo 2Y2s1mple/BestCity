@@ -128,6 +128,10 @@
     NSDictionary *context = @{@"oneTab" : text};
     [MobClick event:@"ID3" attributes:context];
     NSLog(@"----%@", text);
+    if ([info[@"title"] isEqualToString:@"关注"] || [info[@"title"] isEqualToString:@"推荐"]) {
+//        [viewController performSelector:@selecto r(viewWillAppear:) withObject:nil
+//                             afterDelay:0];
+    }
 }
 
 

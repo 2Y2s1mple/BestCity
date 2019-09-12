@@ -30,18 +30,18 @@
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     switch (index) {
         case 0: {
-            CZNewProductTrialController *vc = [[CZNewProductTrialController alloc] init];
+            CZFreeChargeController *vc = [[CZFreeChargeController alloc] init];
             return vc;
         }
         default: {
-            CZFreeChargeController *vc = [[CZFreeChargeController alloc] init];
+            CZNewProductTrialController *vc = [[CZNewProductTrialController alloc] init];
             return vc;
         }
     }
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    return @[@"新品试用", @"免单购"][index];
+    return @[@"免单购", @"新品试用"][index];
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {

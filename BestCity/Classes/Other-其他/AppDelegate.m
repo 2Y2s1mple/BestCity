@@ -39,7 +39,7 @@
     // 加载阿里百川
     [CZOpenAlibcTrade shareConfigure];
 
-    [NSThread sleepForTimeInterval:1];
+    [NSThread sleepForTimeInterval:1.5];
 
     [self.window makeKeyAndVisible];
 

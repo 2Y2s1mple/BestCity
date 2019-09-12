@@ -119,6 +119,7 @@
 {
     [super viewWillAppear:animated];
     self.tableView.height = self.view.height - 1;
+    [self reloadNewDataSorce];
 }
 
 #pragma mark - 代理方法

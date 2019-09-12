@@ -335,7 +335,6 @@
 		979EFD8521E085B5000FE466 /* CZHotSaleDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8421E085B5000FE466 /* CZHotSaleDetailModel.m */; };
 		979EFD8921E08923000FE466 /* CZCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8821E08923000FE466 /* CZCommodityModel.m */; };
 		979EFD8D21E0AC9B000FE466 /* CZCouponsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */; };
-		97A41B0021FC330200719AAA /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 97A41AFF21FC330200719AAA /* yw_1222.jpg */; };
 		97A5B95F230D17AE00014E90 /* CZMePublishOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A5B95E230D17AE00014E90 /* CZMePublishOneController.m */; };
 		97A5B96A230D1BFB00014E90 /* CZMePublishOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A5B967230D1BFA00014E90 /* CZMePublishOneCell.m */; };
 		97A5B96B230D1BFB00014E90 /* CZMePublishOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A5B969230D1BFB00014E90 /* CZMePublishOneCell.xib */; };
@@ -354,6 +353,7 @@
 		97B30CFA21F2FEF900B8427E /* launchLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 97B30CF921F2FEF900B8427E /* launchLogo.png */; };
 		97B30CFE21F30CA000B8427E /* CZBindingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B30CFB21F30C9F00B8427E /* CZBindingController.m */; };
 		97B30CFF21F30CA000B8427E /* CZBindingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B30CFD21F30CA000B8427E /* CZBindingController.xib */; };
+		97B466A5232A1E9D001316B4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 97B466A4232A1E9D001316B4 /* yw_1222.jpg */; };
 		97B4A48D2248A2DB00E48D93 /* CZTrialCommodityDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B4A48B2248A2DB00E48D93 /* CZTrialCommodityDetailController.m */; };
 		97B4A4922248BDB800E48D93 /* CZTrialApplyForDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B4A4912248BDB800E48D93 /* CZTrialApplyForDetailController.m */; };
 		97B4A4942248BE7B00E48D93 /* CZTrialApplyForDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B4A4932248BE7B00E48D93 /* CZTrialApplyForDetailController.xib */; };
@@ -1124,7 +1124,6 @@
 		979EFD8821E08923000FE466 /* CZCommodityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommodityModel.m; sourceTree = "<group>"; };
 		979EFD8B21E0AC9B000FE466 /* CZCouponsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCouponsModel.h; sourceTree = "<group>"; };
 		979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCouponsModel.m; sourceTree = "<group>"; };
-		97A41AFF21FC330200719AAA /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		97A5B95D230D17AE00014E90 /* CZMePublishOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMePublishOneController.h; sourceTree = "<group>"; };
 		97A5B95E230D17AE00014E90 /* CZMePublishOneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMePublishOneController.m; sourceTree = "<group>"; };
 		97A5B967230D1BFA00014E90 /* CZMePublishOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZMePublishOneCell.m; sourceTree = "<group>"; };
@@ -1156,6 +1155,7 @@
 		97B30CFB21F30C9F00B8427E /* CZBindingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZBindingController.m; sourceTree = "<group>"; };
 		97B30CFC21F30C9F00B8427E /* CZBindingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZBindingController.h; sourceTree = "<group>"; };
 		97B30CFD21F30CA000B8427E /* CZBindingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CZBindingController.xib; sourceTree = "<group>"; };
+		97B466A4232A1E9D001316B4 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		97B4A48A2248A2DB00E48D93 /* CZTrialCommodityDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialCommodityDetailController.h; sourceTree = "<group>"; };
 		97B4A48B2248A2DB00E48D93 /* CZTrialCommodityDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialCommodityDetailController.m; sourceTree = "<group>"; };
 		97B4A4902248BDB800E48D93 /* CZTrialApplyForDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialApplyForDetailController.h; sourceTree = "<group>"; };
@@ -1750,7 +1750,7 @@
 		970D0B5521ACE84900649FC2 /* 百川 */ = {
 			isa = PBXGroup;
 			children = (
-				97A41AFF21FC330200719AAA /* yw_1222.jpg */,
+				97B466A4232A1E9D001316B4 /* yw_1222.jpg */,
 				9723075B21AD73850004C00C /* CZOpenAlibcTrade.h */,
 				9723075C21AD73850004C00C /* CZOpenAlibcTrade.m */,
 				970D0B5621ACE87000649FC2 /* 电商必选组件 */,
@@ -4687,8 +4687,8 @@
 				97798C7C212CF4430052CE94 /* SVProgressHUD.bundle in Resources */,
 				974F489221A3B5BE00E1ED1A /* CZAttentionDetailCell.xib in Resources */,
 				9799933821A67B1A0000D42B /* CZCommentDetailCell.xib in Resources */,
+				97B466A5232A1E9D001316B4 /* yw_1222.jpg in Resources */,
 				97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */,
-				97A41B0021FC330200719AAA /* yw_1222.jpg in Resources */,
 				97EC482722D2DCC6006ACA23 /* CZMHSDCommodityCell.xib in Resources */,
 				972F4BA522AE447200F30F6B /* CZMyWalletDetailCell.xib in Resources */,
 				97FF6DF9211862EF00376435 /* CZfeedbackController.xib in Resources */,

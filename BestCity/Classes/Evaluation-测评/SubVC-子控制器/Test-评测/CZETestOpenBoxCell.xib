@@ -55,7 +55,7 @@
                             <constraint firstAttribute="height" constant="1" id="3c9-Dx-ZBP"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage1" translatesAutoresizingMaskIntoConstraints="NO" id="3kZ-28-arg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage1" translatesAutoresizingMaskIntoConstraints="NO" id="3kZ-28-arg">
                         <rect key="frame" x="15" y="26" width="140" height="140"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="140" id="MAh-Jq-tiL"/>
@@ -93,7 +93,7 @@
                 <outlet property="nameLabel" destination="eEs-Ed-15W" id="q87-wB-xwQ"/>
                 <outlet property="visitName" destination="kGu-9s-HmQ" id="z0f-Xa-2Uf"/>
             </connections>
-            <point key="canvasLocation" x="-806" y="-36"/>
+            <point key="canvasLocation" x="-936" y="-36"/>
         </tableViewCell>
     </objects>
     <resources>

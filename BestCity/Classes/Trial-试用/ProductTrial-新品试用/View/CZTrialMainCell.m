@@ -39,7 +39,7 @@
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:trailModel.img]];
     self.nameLabel.text = trailModel.name;
     self.countLabel.text = trailModel.count;
-    self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%@", trailModel.actualPrice];
+    self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [trailModel.actualPrice floatValue]];
     
     /** （1即将开始，2进行中，3试用中，4 结束 5结束） */
     switch ([trailModel.status integerValue]) {

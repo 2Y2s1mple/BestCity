@@ -604,6 +604,10 @@ static BOOL isBuyTime;
         UIViewController *showVc = self.childViewControllers[index];        showVc.view.frame = CGRectMake(x, y, width, height);
         [scrollView addSubview:showVc.view];
     }
+
+    if (scrollView == self.contentScrollView) {
+        self.selectedMenuItem(scrollView.contentOffset.x);
+    }
 }
 
 
@@ -626,9 +630,9 @@ static BOOL isBuyTime;
         }
     }
 
-    if (scrollView == self.contentScrollView) {
-        self.selectedMenuItem(scrollView.contentOffset.x);
-    }
+//    if (scrollView == self.contentScrollView) {
+//        self.selectedMenuItem(scrollView.contentOffset.x);
+//    }
 }
 
 #pragma mark - 通知

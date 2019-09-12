@@ -311,12 +311,13 @@
     
     //点赞小手
     CZReplyButton *likeBtn = [CZReplyButton buttonWithType:UIButtonTypeCustom];
-    likeBtn.x = backview.width - 40;
+
     likeBtn.y = name.y;
     likeBtn.commentId = model.commentId;
     likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
-    [likeBtn sizeToFit];
     [likeBtn setTitle:[NSString stringWithFormat:@"%@", model.voteCount] forState:UIControlStateNormal];
+    [likeBtn sizeToFit];
+    likeBtn.x = backview.width - likeBtn.width - 15;
     [likeBtn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
     [likeBtn setImage:[UIImage imageNamed:@"appreciate-nor"]
              forState:UIControlStateNormal];
@@ -343,10 +344,12 @@
         sender.selected = NO;
         [self snapDelete:sender.commentId];
         [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] - 1)] forState:UIControlStateNormal];
+        [sender sizeToFit];
     } else {
         sender.selected = YES;
         [self snapInsert:sender.commentId];
         [sender setTitle:[NSString stringWithFormat:@"%ld", ([sender.titleLabel.text integerValue] + 1)] forState:UIControlStateNormal];
+        [sender sizeToFit];
     }
 }
 
@@ -535,9 +538,7 @@
         [moreBtn addTarget:self action:@selector(pushCommentDetail:) forControlEvents:UIControlEventTouchUpInside];
         replyView.height = CZGetY(moreBtn) + 10;
     }
-    
-    
-    
+
     backview.height = replyView.height;
     return backview;
 }

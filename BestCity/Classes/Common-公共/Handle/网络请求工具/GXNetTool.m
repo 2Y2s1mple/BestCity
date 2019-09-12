@@ -94,7 +94,19 @@
             UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
             UINavigationController *nav = tabbar.selectedViewController;
             UIViewController *currentVc = nav.topViewController;
-            [currentVc.navigationController popViewControllerAnimated:YES];
+            if (currentVc.navigationController.viewControllers.count > 1) {
+                [currentVc.navigationController popViewControllerAnimated:YES];
+            }
+            [nav presentViewController:vc animated:YES completion:nil];
+        }
+        if ([result[@"code"] isEqualToNumber:@(602)] && ![url containsString:@"api/user/getUserInfo"]) {
+            CZLoginController *vc = [[CZLoginController alloc] init];
+            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+//            if (currentVc.navigationController.viewControllers.count > 1) {
+//                [currentVc.navigationController popViewControllerAnimated:YES];
+//            }
             [nav presentViewController:vc animated:YES completion:nil];
         }
 
@@ -197,7 +209,16 @@
     
     NSMutableDictionary *param = [self signParamdDic:body];
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-       
+        if ([responseObject[@"code"] isEqualToNumber:@(602)]) {
+            CZLoginController *vc = [[CZLoginController alloc] init];
+            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            //            if (currentVc.navigationController.viewControllers.count > 1) {
+            //                [currentVc.navigationController popViewControllerAnimated:YES];
+            //            }
+            [nav presentViewController:vc animated:YES completion:nil];
+        }
         // 除去NSNUll
         NSDictionary *result = responseObject;
         success([result deleteAllNullValue]);

@@ -195,7 +195,6 @@ static CGFloat const likeAndShareHeight = 49;
     
     // 添加监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(heightChange:) name:@"CZTrialCommodityDetailControllerNoti" object:nil];
-   
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -203,7 +202,6 @@ static CGFloat const likeAndShareHeight = 49;
     [super viewDidAppear:animated];
     [CZUserInfoTool userInfoInformation:nil];
 }
-
 
 #pragma mark - 监听子控件的frame的变化
 - (void)heightChange:(NSNotification *)notfi
@@ -214,7 +212,6 @@ static CGFloat const likeAndShareHeight = 49;
     self.test.view.y = CZGetY(self.applyFor.view);
     self.testReport.view.y = CZGetY(self.test.view);
     self.scrollerView.contentSize = CGSizeMake(SCR_WIDTH, CZGetY(self.testReport.view) + 20);
-    
 }
 
 #pragma mark - 获取数据

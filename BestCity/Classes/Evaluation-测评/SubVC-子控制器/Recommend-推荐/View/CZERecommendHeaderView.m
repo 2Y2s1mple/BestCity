@@ -42,13 +42,14 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(290, 152);
     layout.minimumLineSpacing = 16;
-    layout.sectionInset = UIEdgeInsetsMake(0, 16, 0, -16);
+    layout.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
     UICollectionView *collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, SCR_WIDTH, self.height - 40) collectionViewLayout:layout];
     collection.backgroundColor = UIColorFromRGB(0xF5F5F5);
     [self addSubview:collection];
-
+    collection.showsVerticalScrollIndicator = NO;
+    collection.showsHorizontalScrollIndicator = NO;
     collection.delegate = self;
     collection.dataSource = self;
     [collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CZERecommendHeaderView"];
