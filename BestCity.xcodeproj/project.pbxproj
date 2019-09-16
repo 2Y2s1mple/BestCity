@@ -25,25 +25,30 @@
 		9708492A22447771000D5528 /* CZTrialDetailTopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9708492822447771000D5528 /* CZTrialDetailTopController.m */; };
 		9708492B22447771000D5528 /* CZTrialDetailTopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9708492922447771000D5528 /* CZTrialDetailTopController.xib */; };
 		970959BD230561BC00D2AE67 /* CZSearchOneSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 970959BC230561BC00D2AE67 /* CZSearchOneSubView.m */; };
+		970AD8CC232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970AD8B7232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle */; };
+		970AD8CD232A3BD600CCE9F9 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970AD8B8232A3BD600CCE9F9 /* AlipaySDK.bundle */; };
+		970AD8CE232A3BD600CCE9F9 /* SmartLink.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970AD8B9232A3BD600CCE9F9 /* SmartLink.bundle */; };
+		970AD8CF232A3BD600CCE9F9 /* NBResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970AD8BA232A3BD600CCE9F9 /* NBResource.bundle */; };
+		970AD8D0232A3BD600CCE9F9 /* AlibabaAuthExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8BC232A3BD600CCE9F9 /* AlibabaAuthExt.framework */; };
+		970AD8D1232A3BD600CCE9F9 /* MtopSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8BD232A3BD600CCE9F9 /* MtopSDK.framework */; };
+		970AD8D2232A3BD600CCE9F9 /* mtopext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8BE232A3BD600CCE9F9 /* mtopext.framework */; };
+		970AD8D3232A3BD600CCE9F9 /* AlibabaAuthSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8BF232A3BD600CCE9F9 /* AlibabaAuthSDK.framework */; };
+		970AD8D4232A3BD600CCE9F9 /* AlibcTradeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C0232A3BD600CCE9F9 /* AlibcTradeSDK.framework */; };
+		970AD8D5232A3BD600CCE9F9 /* AlibcLinkPartnerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C1232A3BD600CCE9F9 /* AlibcLinkPartnerSDK.framework */; };
+		970AD8D6232A3BD600CCE9F9 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C2232A3BD600CCE9F9 /* SecurityGuardSDK.framework */; };
+		970AD8D7232A3BD600CCE9F9 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C3232A3BD600CCE9F9 /* UTDID.framework */; };
+		970AD8D8232A3BD600CCE9F9 /* AlibcTradeBiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C4232A3BD600CCE9F9 /* AlibcTradeBiz.framework */; };
+		970AD8D9232A3BD600CCE9F9 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C5232A3BD600CCE9F9 /* SGMain.framework */; };
+		970AD8DA232A3BD600CCE9F9 /* mtopcoreopen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C6232A3BD600CCE9F9 /* mtopcoreopen.framework */; };
+		970AD8DB232A3BD600CCE9F9 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C7232A3BD600CCE9F9 /* UTMini.framework */; };
+		970AD8DC232A3BD600CCE9F9 /* SGAVMP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C8232A3BD600CCE9F9 /* SGAVMP.framework */; };
+		970AD8DD232A3BD600CCE9F9 /* SGMiddleTier.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8C9232A3BD600CCE9F9 /* SGMiddleTier.framework */; };
+		970AD8DE232A3BD600CCE9F9 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8CA232A3BD600CCE9F9 /* AlipaySDK.framework */; };
+		970AD8DF232A3BD600CCE9F9 /* SGSecurityBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970AD8CB232A3BD600CCE9F9 /* SGSecurityBody.framework */; };
 		970C50A521F17E890091D7FF /* CZCoinCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970C50A321F17E890091D7FF /* CZCoinCenterController.m */; };
 		970C50A621F17E890091D7FF /* CZCoinCenterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970C50A421F17E890091D7FF /* CZCoinCenterController.xib */; };
 		970C50A821F17F490091D7FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970C50A721F17F480091D7FF /* Assets.xcassets */; };
 		970D0AE721AB981500649FC2 /* CZGuideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970D0AE621AB981500649FC2 /* CZGuideController.m */; };
-		970D0B6B21ACE87000649FC2 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5821ACE87000649FC2 /* UTDID.framework */; };
-		970D0B6C21ACE87000649FC2 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5921ACE87000649FC2 /* UTMini.framework */; };
-		970D0B6D21ACE87000649FC2 /* AlibabaAuthExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5B21ACE87000649FC2 /* AlibabaAuthExt.framework */; };
-		970D0B6E21ACE87000649FC2 /* AlibabaAuthSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970D0B5C21ACE87000649FC2 /* AlibabaAuthSDK.bundle */; };
-		970D0B6F21ACE87000649FC2 /* AlibabaAuthSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5D21ACE87000649FC2 /* AlibabaAuthSDK.framework */; };
-		970D0B7021ACE87000649FC2 /* OpenMtopSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B5F21ACE87000649FC2 /* OpenMtopSDK.framework */; };
-		970D0B7121ACE87000649FC2 /* OpenMtopExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6021ACE87000649FC2 /* OpenMtopExt.framework */; };
-		970D0B7221ACE87000649FC2 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6221ACE87000649FC2 /* SecurityGuardSDK.framework */; };
-		970D0B7321ACE87000649FC2 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6321ACE87000649FC2 /* SGMain.framework */; };
-		970D0B7421ACE87000649FC2 /* AlibcTradeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6521ACE87000649FC2 /* AlibcTradeSDK.framework */; };
-		970D0B7521ACE87000649FC2 /* AlibcLinkPartnerSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6621ACE87000649FC2 /* AlibcLinkPartnerSDK.framework */; };
-		970D0B7621ACE87000649FC2 /* AlibcTradeBiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6721ACE87000649FC2 /* AlibcTradeBiz.framework */; };
-		970D0B7721ACE87000649FC2 /* AlibcTradeCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */; };
-		970D0B7821ACE87000649FC2 /* TUnionTradeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */; };
-		970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970D0B6A21ACE87000649FC2 /* NBResource.bundle */; };
 		970D0B7D21ACE90D00649FC2 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */; };
 		970D0B7F21ACE96D00649FC2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 970D0B7E21ACE96D00649FC2 /* libc++.tbd */; };
 		970E618422B9DCD000E68BE3 /* CZFreeChargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618322B9DCD000E68BE3 /* CZFreeChargeController.m */; };
@@ -353,7 +358,8 @@
 		97B30CFA21F2FEF900B8427E /* launchLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 97B30CF921F2FEF900B8427E /* launchLogo.png */; };
 		97B30CFE21F30CA000B8427E /* CZBindingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B30CFB21F30C9F00B8427E /* CZBindingController.m */; };
 		97B30CFF21F30CA000B8427E /* CZBindingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B30CFD21F30CA000B8427E /* CZBindingController.xib */; };
-		97B466A5232A1E9D001316B4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 97B466A4232A1E9D001316B4 /* yw_1222.jpg */; };
+		97B466B9232A2539001316B4 /* mtopsdk_configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B466B8232A2539001316B4 /* mtopsdk_configuration.plist */; };
+		97B466BB232A26B9001316B4 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 97B466BA232A26B9001316B4 /* yw_1222.jpg */; };
 		97B4A48D2248A2DB00E48D93 /* CZTrialCommodityDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B4A48B2248A2DB00E48D93 /* CZTrialCommodityDetailController.m */; };
 		97B4A4922248BDB800E48D93 /* CZTrialApplyForDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B4A4912248BDB800E48D93 /* CZTrialApplyForDetailController.m */; };
 		97B4A4942248BE7B00E48D93 /* CZTrialApplyForDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B4A4932248BE7B00E48D93 /* CZTrialApplyForDetailController.xib */; };
@@ -576,27 +582,32 @@
 		9708492922447771000D5528 /* CZTrialDetailTopController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTrialDetailTopController.xib; sourceTree = "<group>"; };
 		970959BB230561BC00D2AE67 /* CZSearchOneSubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSearchOneSubView.h; sourceTree = "<group>"; };
 		970959BC230561BC00D2AE67 /* CZSearchOneSubView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSearchOneSubView.m; sourceTree = "<group>"; };
+		970AD8B7232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlibabaAuthSDK.bundle; sourceTree = "<group>"; };
+		970AD8B8232A3BD600CCE9F9 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		970AD8B9232A3BD600CCE9F9 /* SmartLink.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SmartLink.bundle; sourceTree = "<group>"; };
+		970AD8BA232A3BD600CCE9F9 /* NBResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NBResource.bundle; sourceTree = "<group>"; };
+		970AD8BC232A3BD600CCE9F9 /* AlibabaAuthExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibabaAuthExt.framework; sourceTree = "<group>"; };
+		970AD8BD232A3BD600CCE9F9 /* MtopSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MtopSDK.framework; sourceTree = "<group>"; };
+		970AD8BE232A3BD600CCE9F9 /* mtopext.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mtopext.framework; sourceTree = "<group>"; };
+		970AD8BF232A3BD600CCE9F9 /* AlibabaAuthSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibabaAuthSDK.framework; sourceTree = "<group>"; };
+		970AD8C0232A3BD600CCE9F9 /* AlibcTradeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeSDK.framework; sourceTree = "<group>"; };
+		970AD8C1232A3BD600CCE9F9 /* AlibcLinkPartnerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcLinkPartnerSDK.framework; sourceTree = "<group>"; };
+		970AD8C2232A3BD600CCE9F9 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
+		970AD8C3232A3BD600CCE9F9 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
+		970AD8C4232A3BD600CCE9F9 /* AlibcTradeBiz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeBiz.framework; sourceTree = "<group>"; };
+		970AD8C5232A3BD600CCE9F9 /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
+		970AD8C6232A3BD600CCE9F9 /* mtopcoreopen.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mtopcoreopen.framework; sourceTree = "<group>"; };
+		970AD8C7232A3BD600CCE9F9 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
+		970AD8C8232A3BD600CCE9F9 /* SGAVMP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGAVMP.framework; sourceTree = "<group>"; };
+		970AD8C9232A3BD600CCE9F9 /* SGMiddleTier.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMiddleTier.framework; sourceTree = "<group>"; };
+		970AD8CA232A3BD600CCE9F9 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		970AD8CB232A3BD600CCE9F9 /* SGSecurityBody.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGSecurityBody.framework; sourceTree = "<group>"; };
 		970C50A221F17E890091D7FF /* CZCoinCenterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCoinCenterController.h; sourceTree = "<group>"; };
 		970C50A321F17E890091D7FF /* CZCoinCenterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCoinCenterController.m; sourceTree = "<group>"; };
 		970C50A421F17E890091D7FF /* CZCoinCenterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCoinCenterController.xib; sourceTree = "<group>"; };
 		970C50A721F17F480091D7FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		970D0AE521AB981500649FC2 /* CZGuideController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZGuideController.h; sourceTree = "<group>"; };
 		970D0AE621AB981500649FC2 /* CZGuideController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZGuideController.m; sourceTree = "<group>"; };
-		970D0B5821ACE87000649FC2 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
-		970D0B5921ACE87000649FC2 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
-		970D0B5B21ACE87000649FC2 /* AlibabaAuthExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibabaAuthExt.framework; sourceTree = "<group>"; };
-		970D0B5C21ACE87000649FC2 /* AlibabaAuthSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlibabaAuthSDK.bundle; sourceTree = "<group>"; };
-		970D0B5D21ACE87000649FC2 /* AlibabaAuthSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibabaAuthSDK.framework; sourceTree = "<group>"; };
-		970D0B5F21ACE87000649FC2 /* OpenMtopSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenMtopSDK.framework; sourceTree = "<group>"; };
-		970D0B6021ACE87000649FC2 /* OpenMtopExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenMtopExt.framework; sourceTree = "<group>"; };
-		970D0B6221ACE87000649FC2 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
-		970D0B6321ACE87000649FC2 /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
-		970D0B6521ACE87000649FC2 /* AlibcTradeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeSDK.framework; sourceTree = "<group>"; };
-		970D0B6621ACE87000649FC2 /* AlibcLinkPartnerSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcLinkPartnerSDK.framework; sourceTree = "<group>"; };
-		970D0B6721ACE87000649FC2 /* AlibcTradeBiz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeBiz.framework; sourceTree = "<group>"; };
-		970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlibcTradeCommon.framework; sourceTree = "<group>"; };
-		970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TUnionTradeSDK.framework; sourceTree = "<group>"; };
-		970D0B6A21ACE87000649FC2 /* NBResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NBResource.bundle; sourceTree = "<group>"; };
 		970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		970D0B7E21ACE96D00649FC2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		970E618222B9DCD000E68BE3 /* CZFreeChargeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeChargeController.h; sourceTree = "<group>"; };
@@ -1155,7 +1166,8 @@
 		97B30CFB21F30C9F00B8427E /* CZBindingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZBindingController.m; sourceTree = "<group>"; };
 		97B30CFC21F30C9F00B8427E /* CZBindingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZBindingController.h; sourceTree = "<group>"; };
 		97B30CFD21F30CA000B8427E /* CZBindingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CZBindingController.xib; sourceTree = "<group>"; };
-		97B466A4232A1E9D001316B4 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
+		97B466B8232A2539001316B4 /* mtopsdk_configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mtopsdk_configuration.plist; sourceTree = "<group>"; };
+		97B466BA232A26B9001316B4 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		97B4A48A2248A2DB00E48D93 /* CZTrialCommodityDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialCommodityDetailController.h; sourceTree = "<group>"; };
 		97B4A48B2248A2DB00E48D93 /* CZTrialCommodityDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialCommodityDetailController.m; sourceTree = "<group>"; };
 		97B4A4902248BDB800E48D93 /* CZTrialApplyForDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialApplyForDetailController.h; sourceTree = "<group>"; };
@@ -1488,46 +1500,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970AD8D4232A3BD600CCE9F9 /* AlibcTradeSDK.framework in Frameworks */,
+				970AD8D9232A3BD600CCE9F9 /* SGMain.framework in Frameworks */,
 				97F0EC2E21251CFE000FE1DC /* libsqlite3.tbd in Frameworks */,
 				970D0B7D21ACE90D00649FC2 /* CoreMotion.framework in Frameworks */,
 				974C586F21229FAB008B3E6A /* libz.tbd in Frameworks */,
+				970AD8DD232A3BD600CCE9F9 /* SGMiddleTier.framework in Frameworks */,
 				97B6C56C225AF3900061D9A0 /* UMCommon.framework in Frameworks */,
 				970D0B7F21ACE96D00649FC2 /* libc++.tbd in Frameworks */,
 				974C586D21229F9F008B3E6A /* Security.framework in Frameworks */,
+				970AD8D8232A3BD600CCE9F9 /* AlibcTradeBiz.framework in Frameworks */,
 				974C586321229F6D008B3E6A /* CFNetwork.framework in Frameworks */,
 				974C586721229F7E008B3E6A /* CoreTelephony.framework in Frameworks */,
 				975D683222B7663E00F70951 /* TCWebCodesSDK.framework in Frameworks */,
-				970D0B7521ACE87000649FC2 /* AlibcLinkPartnerSDK.framework in Frameworks */,
 				974C586921229F87008B3E6A /* SystemConfiguration.framework in Frameworks */,
-				970D0B7121ACE87000649FC2 /* OpenMtopExt.framework in Frameworks */,
-				970D0B7421ACE87000649FC2 /* AlibcTradeSDK.framework in Frameworks */,
-				970D0B7621ACE87000649FC2 /* AlibcTradeBiz.framework in Frameworks */,
 				97418DC421B11F39001F4E92 /* jcore-ios-1.2.1.a in Frameworks */,
 				97418DC321B11F39001F4E92 /* jpush-ios-3.1.0.a in Frameworks */,
 				97418DC221B11F39001F4E92 /* jpush-extension-ios-1.1.1.a in Frameworks */,
-				970D0B7221ACE87000649FC2 /* SecurityGuardSDK.framework in Frameworks */,
-				970D0B7021ACE87000649FC2 /* OpenMtopSDK.framework in Frameworks */,
-				970D0B7321ACE87000649FC2 /* SGMain.framework in Frameworks */,
-				970D0B6D21ACE87000649FC2 /* AlibabaAuthExt.framework in Frameworks */,
-				970D0B6F21ACE87000649FC2 /* AlibabaAuthSDK.framework in Frameworks */,
+				970AD8DF232A3BD600CCE9F9 /* SGSecurityBody.framework in Frameworks */,
 				97B6C55F225AEC480061D9A0 /* UMAnalytics.framework in Frameworks */,
-				970D0B6C21ACE87000649FC2 /* UTMini.framework in Frameworks */,
-				970D0B7721ACE87000649FC2 /* AlibcTradeCommon.framework in Frameworks */,
+				970AD8D2232A3BD600CCE9F9 /* mtopext.framework in Frameworks */,
 				97F0EC27212512B6000FE1DC /* UTDID.framework in Frameworks */,
-				970D0B7821ACE87000649FC2 /* TUnionTradeSDK.framework in Frameworks */,
 				97F0EC2F21251E6B000FE1DC /* Photos.framework in Frameworks */,
 				97F0EC24212512B6000FE1DC /* libSocialSina.a in Frameworks */,
+				970AD8D5232A3BD600CCE9F9 /* AlibcLinkPartnerSDK.framework in Frameworks */,
 				97F0EC25212512B6000FE1DC /* libSocialQQ.a in Frameworks */,
 				97F0EC23212512B6000FE1DC /* libSocialWeChat.a in Frameworks */,
+				970AD8D1232A3BD600CCE9F9 /* MtopSDK.framework in Frameworks */,
 				974C587321229FD0008B3E6A /* UserNotifications.framework in Frameworks */,
 				97F0EC28212512B6000FE1DC /* SecurityEnvSDK.framework in Frameworks */,
-				970D0B6B21ACE87000649FC2 /* UTDID.framework in Frameworks */,
 				974C587121229FC4008B3E6A /* libresolv.tbd in Frameworks */,
 				97F0EC22212512B6000FE1DC /* UMShare.framework in Frameworks */,
+				970AD8DB232A3BD600CCE9F9 /* UTMini.framework in Frameworks */,
+				970AD8D0232A3BD600CCE9F9 /* AlibabaAuthExt.framework in Frameworks */,
 				974C586B21229F91008B3E6A /* CoreGraphics.framework in Frameworks */,
 				974C586521229F76008B3E6A /* CoreFoundation.framework in Frameworks */,
 				97F0EC21212512B6000FE1DC /* UShareUI.framework in Frameworks */,
+				970AD8DE232A3BD600CCE9F9 /* AlipaySDK.framework in Frameworks */,
+				970AD8DC232A3BD600CCE9F9 /* SGAVMP.framework in Frameworks */,
+				970AD8D3232A3BD600CCE9F9 /* AlibabaAuthSDK.framework in Frameworks */,
 				97F0EC1E212512B6000FE1DC /* UMCommonLog.framework in Frameworks */,
+				970AD8DA232A3BD600CCE9F9 /* mtopcoreopen.framework in Frameworks */,
+				970AD8D7232A3BD600CCE9F9 /* UTDID.framework in Frameworks */,
+				970AD8D6232A3BD600CCE9F9 /* SecurityGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1737,6 +1752,40 @@
 			path = "子控制器";
 			sourceTree = "<group>";
 		};
+		970AD8B6232A3BD600CCE9F9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				970AD8B7232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle */,
+				970AD8B8232A3BD600CCE9F9 /* AlipaySDK.bundle */,
+				970AD8B9232A3BD600CCE9F9 /* SmartLink.bundle */,
+				970AD8BA232A3BD600CCE9F9 /* NBResource.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		970AD8BB232A3BD600CCE9F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				970AD8BC232A3BD600CCE9F9 /* AlibabaAuthExt.framework */,
+				970AD8BD232A3BD600CCE9F9 /* MtopSDK.framework */,
+				970AD8BE232A3BD600CCE9F9 /* mtopext.framework */,
+				970AD8BF232A3BD600CCE9F9 /* AlibabaAuthSDK.framework */,
+				970AD8C0232A3BD600CCE9F9 /* AlibcTradeSDK.framework */,
+				970AD8C1232A3BD600CCE9F9 /* AlibcLinkPartnerSDK.framework */,
+				970AD8C2232A3BD600CCE9F9 /* SecurityGuardSDK.framework */,
+				970AD8C3232A3BD600CCE9F9 /* UTDID.framework */,
+				970AD8C4232A3BD600CCE9F9 /* AlibcTradeBiz.framework */,
+				970AD8C5232A3BD600CCE9F9 /* SGMain.framework */,
+				970AD8C6232A3BD600CCE9F9 /* mtopcoreopen.framework */,
+				970AD8C7232A3BD600CCE9F9 /* UTMini.framework */,
+				970AD8C8232A3BD600CCE9F9 /* SGAVMP.framework */,
+				970AD8C9232A3BD600CCE9F9 /* SGMiddleTier.framework */,
+				970AD8CA232A3BD600CCE9F9 /* AlipaySDK.framework */,
+				970AD8CB232A3BD600CCE9F9 /* SGSecurityBody.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		970C50A121F17E350091D7FF /* CoinCenter-极币中心 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1750,74 +1799,14 @@
 		970D0B5521ACE84900649FC2 /* 百川 */ = {
 			isa = PBXGroup;
 			children = (
-				97B466A4232A1E9D001316B4 /* yw_1222.jpg */,
+				970AD8BB232A3BD600CCE9F9 /* Frameworks */,
+				970AD8B6232A3BD600CCE9F9 /* Resources */,
+				97B466BA232A26B9001316B4 /* yw_1222.jpg */,
+				97B466B8232A2539001316B4 /* mtopsdk_configuration.plist */,
 				9723075B21AD73850004C00C /* CZOpenAlibcTrade.h */,
 				9723075C21AD73850004C00C /* CZOpenAlibcTrade.m */,
-				970D0B5621ACE87000649FC2 /* 电商必选组件 */,
 			);
 			path = "百川";
-			sourceTree = "<group>";
-		};
-		970D0B5621ACE87000649FC2 /* 电商必选组件 */ = {
-			isa = PBXGroup;
-			children = (
-				970D0B5721ACE87000649FC2 /* UT */,
-				970D0B5A21ACE87000649FC2 /* 登录授权 */,
-				970D0B5E21ACE87000649FC2 /* mtop */,
-				970D0B6121ACE87000649FC2 /* 基础安全组件 */,
-				970D0B6421ACE87000649FC2 /* 电商基础组件 */,
-			);
-			path = "电商必选组件";
-			sourceTree = "<group>";
-		};
-		970D0B5721ACE87000649FC2 /* UT */ = {
-			isa = PBXGroup;
-			children = (
-				970D0B5821ACE87000649FC2 /* UTDID.framework */,
-				970D0B5921ACE87000649FC2 /* UTMini.framework */,
-			);
-			path = UT;
-			sourceTree = "<group>";
-		};
-		970D0B5A21ACE87000649FC2 /* 登录授权 */ = {
-			isa = PBXGroup;
-			children = (
-				970D0B5B21ACE87000649FC2 /* AlibabaAuthExt.framework */,
-				970D0B5C21ACE87000649FC2 /* AlibabaAuthSDK.bundle */,
-				970D0B5D21ACE87000649FC2 /* AlibabaAuthSDK.framework */,
-			);
-			path = "登录授权";
-			sourceTree = "<group>";
-		};
-		970D0B5E21ACE87000649FC2 /* mtop */ = {
-			isa = PBXGroup;
-			children = (
-				970D0B5F21ACE87000649FC2 /* OpenMtopSDK.framework */,
-				970D0B6021ACE87000649FC2 /* OpenMtopExt.framework */,
-			);
-			path = mtop;
-			sourceTree = "<group>";
-		};
-		970D0B6121ACE87000649FC2 /* 基础安全组件 */ = {
-			isa = PBXGroup;
-			children = (
-				970D0B6221ACE87000649FC2 /* SecurityGuardSDK.framework */,
-				970D0B6321ACE87000649FC2 /* SGMain.framework */,
-			);
-			path = "基础安全组件";
-			sourceTree = "<group>";
-		};
-		970D0B6421ACE87000649FC2 /* 电商基础组件 */ = {
-			isa = PBXGroup;
-			children = (
-				970D0B6521ACE87000649FC2 /* AlibcTradeSDK.framework */,
-				970D0B6621ACE87000649FC2 /* AlibcLinkPartnerSDK.framework */,
-				970D0B6721ACE87000649FC2 /* AlibcTradeBiz.framework */,
-				970D0B6821ACE87000649FC2 /* AlibcTradeCommon.framework */,
-				970D0B6921ACE87000649FC2 /* TUnionTradeSDK.framework */,
-				970D0B6A21ACE87000649FC2 /* NBResource.bundle */,
-			);
-			path = "电商基础组件";
 			sourceTree = "<group>";
 		};
 		970E617822B8B1C900E68BE3 /* ProductTrial-新品试用 */ = {
@@ -2576,6 +2565,7 @@
 		97705C30210716A300485D64 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				970D0B5521ACE84900649FC2 /* 百川 */,
 				97C52A6C2254B82A00787BC5 /* Common-公共 */,
 				97054BFA2182F26F0008E416 /* Search-搜索商品 */,
 				97705C41210716A300485D64 /* HotSale-榜单 */,
@@ -2786,7 +2776,6 @@
 			isa = PBXGroup;
 			children = (
 				975D683022B7661E00F70951 /* 腾讯滑块 */,
-				970D0B5521ACE84900649FC2 /* 百川 */,
 				97C7FF09216DDDB50091DC07 /* MJRefresh */,
 				97C7FEEF216DDDAA0091DC07 /* MJExtension */,
 				97798C7D212D0FC90052CE94 /* SDWebImage */,
@@ -4668,15 +4657,16 @@
 				972E41B82114636100BC751C /* CZMyPointsCell.xib in Resources */,
 				97F0947A21B8F7C800F550B5 /* wwwipinchengcn.cer in Resources */,
 				97420DD721EC321400FE3D9F /* CZHisSearchCell.xib in Resources */,
+				970AD8CC232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle in Resources */,
 				977E8099225B6AD30041A126 /* CZMyTrialApplyForFailedCell.xib in Resources */,
 				97FF6DD22117FAD800376435 /* backshadow.png in Resources */,
 				97BC05DE2112B122001ED65A /* keyboard.png in Resources */,
-				970D0B6E21ACE87000649FC2 /* AlibabaAuthSDK.bundle in Resources */,
 				97421B602271A718007E5A72 /* CZUnusualController.xib in Resources */,
 				977E82D2223C9B4700C8C01B /* CZInvitationController.xib in Resources */,
 				97BC05DD2112B122001ED65A /* key.png in Resources */,
 				97FEBF2122D47BAE007BF592 /* CZMHSDCommodityCell2.xib in Resources */,
 				9754C87622FC18FD008C2D98 /* CZEACCollectionCell.xib in Resources */,
+				97B466BB232A26B9001316B4 /* yw_1222.jpg in Resources */,
 				97D8FCC82111796600D8ED8F /* CZMeArrow.plist in Resources */,
 				9708492B22447771000D5528 /* CZTrialDetailTopController.xib in Resources */,
 				97ED11F3211582910003E0F7 /* CZAttentionCell.xib in Resources */,
@@ -4687,7 +4677,6 @@
 				97798C7C212CF4430052CE94 /* SVProgressHUD.bundle in Resources */,
 				974F489221A3B5BE00E1ED1A /* CZAttentionDetailCell.xib in Resources */,
 				9799933821A67B1A0000D42B /* CZCommentDetailCell.xib in Resources */,
-				97B466A5232A1E9D001316B4 /* yw_1222.jpg in Resources */,
 				97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */,
 				97EC482722D2DCC6006ACA23 /* CZMHSDCommodityCell.xib in Resources */,
 				972F4BA522AE447200F30F6B /* CZMyWalletDetailCell.xib in Resources */,
@@ -4719,10 +4708,10 @@
 				9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */,
 				97FEBF1822D46824007BF592 /* CZMHSDCommodityCell1.xib in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
-				970D0B7921ACE87000649FC2 /* NBResource.bundle in Resources */,
 				977607D122D5892E00F846BE /* CZMHSDListNewCell.xib in Resources */,
 				9723076221AD77000004C00C /* CZNoDataView.xib in Resources */,
 				97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */,
+				97B466B9232A2539001316B4 /* mtopsdk_configuration.plist in Resources */,
 				97159B1622D6DB14008DC859 /* CZMHSDQuestCell.xib in Resources */,
 				97FEBF2C22D490BC007BF592 /* CZMHSDCommodityCell3.xib in Resources */,
 				97705C122107068E00485D64 /* Main.storyboard in Resources */,
@@ -4734,6 +4723,7 @@
 				97481ABF2303BC4900230367 /* CZETestOpenBoxCell.xib in Resources */,
 				97FEBF2722D483FD007BF592 /* CZMHSDCell2CollectionCell.xib in Resources */,
 				97773A7722C1DBBB00314E42 /* CZFreeTakePartInCell.xib in Resources */,
+				970AD8CD232A3BD600CCE9F9 /* AlipaySDK.bundle in Resources */,
 				9708492222434239000D5528 /* CZTrialReportMainCell.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97BC394A223BB0F800DC4D67 /* CZAffirmPointController.xib in Resources */,
@@ -4743,10 +4733,12 @@
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
 				9779471022BCD39900DA3948 /* CZFreeDetailsubView.xib in Resources */,
 				975BCF1922D85A3A0031F3AC /* CZMHSDQDetailCell.xib in Resources */,
+				970AD8CF232A3BD600CCE9F9 /* NBResource.bundle in Resources */,
 				97BC05DC2112B122001ED65A /* key-blue.png in Resources */,
 				97A5B96B230D1BFB00014E90 /* CZMePublishOneCell.xib in Resources */,
 				979110732231131400C2DE5B /* province_data.xml in Resources */,
 				97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */,
+				970AD8CE232A3BD600CCE9F9 /* SmartLink.bundle in Resources */,
 				97D8FCC32111612200D8ED8F /* CZMeArrowCell.xib in Resources */,
 				972E41CC21147C3A00BC751C /* CZAttentionController.xib in Resources */,
 				97F4D487224A127300A82B14 /* CZvoteUserController.xib in Resources */,
@@ -5298,6 +5290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -5317,6 +5310,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/analytics/analytics_ios_6.0.3",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/common/common_ios_2.0.1/normal",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/腾讯滑块",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/Frameworks",
+					"$(PROJECT_DIR)/BestCity/Classes/百川/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -5343,31 +5338,37 @@
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ/libSocialQQ.a",
 					"-lstdc++",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTDID.framework/UTDID\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibabaAuthExt.framework/AlibabaAuthExt\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTMini.framework/UTMini\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/MtopSDK.framework/MtopSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthExt.framework/AlibabaAuthExt\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/mtopext.framework/mtopext\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthSDK.framework/AlibabaAuthSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibabaAuthSDK.framework/AlibabaAuthSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopSDK.framework/OpenMtopSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibcTradeSDK.framework/AlibcTradeSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopExt.framework/OpenMtopExt\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibcLinkPartnerSDK.framework/AlibcLinkPartnerSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SecurityGuardSDK.framework/SecurityGuardSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SecurityGuardSDK.framework/SecurityGuardSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SGMain.framework/SGMain\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/UTDID.framework/UTDID\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeSDK.framework/AlibcTradeSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibcTradeBiz.framework/AlibcTradeBiz\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcLinkPartnerSDK.framework/AlibcLinkPartnerSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGMain.framework/SGMain\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeBiz.framework/AlibcTradeBiz\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/mtopcoreopen.framework/mtopcoreopen\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeCommon.framework/AlibcTradeCommon\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/UTMini.framework/UTMini\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/TUnionTradeSDK.framework/TUnionTradeSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGAVMP.framework/SGAVMP\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGMiddleTier.framework/SGMiddleTier\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlipaySDK.framework/AlipaySDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGSecurityBody.framework/SGSecurityBody\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.jipinshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5383,6 +5384,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -5402,6 +5404,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/analytics/analytics_ios_6.0.3",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/common/common_ios_2.0.1/normal",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/腾讯滑块",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/Frameworks",
+					"$(PROJECT_DIR)/BestCity/Classes/百川/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -5428,31 +5432,37 @@
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ/libSocialQQ.a",
 					"-lstdc++",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTDID.framework/UTDID\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibabaAuthExt.framework/AlibabaAuthExt\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/UT/UTMini.framework/UTMini\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/MtopSDK.framework/MtopSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthExt.framework/AlibabaAuthExt\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/mtopext.framework/mtopext\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/登录授权/AlibabaAuthSDK.framework/AlibabaAuthSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibabaAuthSDK.framework/AlibabaAuthSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopSDK.framework/OpenMtopSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibcTradeSDK.framework/AlibcTradeSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/mtop/OpenMtopExt.framework/OpenMtopExt\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibcLinkPartnerSDK.framework/AlibcLinkPartnerSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SecurityGuardSDK.framework/SecurityGuardSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SecurityGuardSDK.framework/SecurityGuardSDK\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/基础安全组件/SGMain.framework/SGMain\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/UTDID.framework/UTDID\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeSDK.framework/AlibcTradeSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlibcTradeBiz.framework/AlibcTradeBiz\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcLinkPartnerSDK.framework/AlibcLinkPartnerSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGMain.framework/SGMain\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeBiz.framework/AlibcTradeBiz\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/mtopcoreopen.framework/mtopcoreopen\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/AlibcTradeCommon.framework/AlibcTradeCommon\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/UTMini.framework/UTMini\"",
 					"-force_load",
-					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/电商基础组件/TUnionTradeSDK.framework/TUnionTradeSDK\"",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGAVMP.framework/SGAVMP\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGMiddleTier.framework/SGMiddleTier\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/AlipaySDK.framework/AlipaySDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGSecurityBody.framework/SGSecurityBody\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.jipinshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
