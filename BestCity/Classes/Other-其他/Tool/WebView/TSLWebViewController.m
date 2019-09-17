@@ -58,6 +58,7 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:self.url];
         [_webview loadRequest:request];
     }
+
 }
 
 - (void)viewDidLayoutSubviews {

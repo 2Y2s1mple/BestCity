@@ -7,6 +7,8 @@
 //
 
 #import "CZOpenAlibcTrade.h"
+#import "TSLWebViewController.h"
+
 
 @implementation CZOpenAlibcTrade
 #pragma mark - 初始化
@@ -44,6 +46,8 @@
 //        return;
 //    }
 
+    TSLWebViewController *webVc = [[TSLWebViewController alloc] init];
+
     //拉起淘宝
     AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
     showParam.openType = AlibcOpenTypeNative;
@@ -56,7 +60,7 @@
     [[AlibcTradeSDK sharedInstance].tradeService
                                     openByUrl:urlStr
                                     identity:@"trade"
-                                    webView:nil
+                                    webView:webVc
                                     parentController:parentController
                                     showParams:showParam
                                     taoKeParams:nil
@@ -82,11 +86,6 @@
 //    } tradeProcessFailedCallback:^(NSError * _Nullable error) {
 //        NSLog(@"----------退出交易流程----------");
 //    }];
-
-
-
-
-
 }
 
 @end

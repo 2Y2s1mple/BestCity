@@ -25,6 +25,9 @@
 
 #import "TSLWebViewController.h"
 
+#import <AlibcTradeSDK/AlibcTradeSDK.h>
+#import <AlibabaAuthSDK/albbsdk.h>
+
 @interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
@@ -100,14 +103,53 @@ static NSString * const type = @"1";
             NSDictionary *context = @{@"mine" : text};
             [MobClick event:@"ID5" attributes:context];
 
+            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+            UINavigationController *naVc = tabbar.selectedViewController;
+            UIViewController *toVC = naVc.topViewController;
             NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
             if (specialId.length == 0) {
-              __block TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/taobao/login?token=%@", JPSERVER_URL, JPTOKEN]] actionblock:^{
-                    [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+                [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
+                [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
+                    NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
+                    NSLog(@"%@", tip);
+                    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
+                        [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+                        [CZProgressHUD hideAfterDelay:1.5];
+                        [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
+                    }];
+                    [tabbar presentViewController:webVc animated:YES completion:nil];
+
+                    //拉起淘宝
+                    AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
+                    showParam.openType = AlibcOpenTypeAuto;
+                    showParam.backUrl = @"tbopen25267281://xx.xx.xx";
+                    showParam.isNeedPush = YES;
+                    showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
+
                     [CZProgressHUD hideAfterDelay:1.5];
-                    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
+
+                    [[AlibcTradeSDK sharedInstance].tradeService
+                     openByUrl:[NSString stringWithFormat:@"https://oauth.m.taobao.com/authorize?response_type=code&client_id=25612235&redirect_uri=https://www.jipincheng.cn/qualityshop-api/api/taobao/returnUrl&state=%@&view=wap", JPTOKEN]
+                     identity:@"trade"
+                     webView:webVc.webView
+                     parentController:tabbar
+                     showParams:showParam
+                     taoKeParams:nil
+                     trackParam:nil
+                     tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
+                         NSLog(@"-----AlibcTradeSDK------");
+                         if(result.result == AlibcTradeResultTypeAddCard){
+                             NSLog(@"交易成功");
+                         } else if(result.result == AlibcTradeResultTypeAddCard){
+                             NSLog(@"加入购物车");
+                         }
+                     } tradeProcessFailedCallback:^(NSError * _Nullable error) {
+                         NSLog(@"----------退出交易流程----------");
+                     }];
+                } failureCallback:^(ALBBSession *session, NSError *error) {
+                    NSString *tip=[NSString stringWithFormat:@"登录失败:%@",@""];
+                    NSLog(@"%@", tip);
                 }];
-                [weakSelf presentViewController:webVc animated:YES completion:nil];
             } else {
                 // 打开淘宝
                 [weakSelf getGoodsURl];
