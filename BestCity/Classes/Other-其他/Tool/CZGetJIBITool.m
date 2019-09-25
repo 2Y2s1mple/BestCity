@@ -19,7 +19,9 @@
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/dailytask/finish"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            if (![result[@"msg"] isEqualToString:@"success"]) {
+                [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            }
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }

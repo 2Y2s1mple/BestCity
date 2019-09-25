@@ -17,6 +17,10 @@
 #import "CZMHSDQDetailController.h"
 #import "CZMHSAskQuestionController.h"
 
+// universal links
+#import <MobLinkPro/MLSDKScene.h>
+#import <MobLinkPro/UIViewController+MLSDKRestore.h>
+
 @interface CZMHSDQuestController () <UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
 @property (nonatomic, strong) UITableView *tableView;
@@ -31,6 +35,16 @@
 @end
 
 @implementation CZMHSDQuestController
+
+//实现带有场景参数的初始化方法，并根据场景参数还原该控制器：
+-(instancetype)initWithMobLinkScene:(MLSDKScene *)scene
+{
+    if (self = [super init]) {
+        self.ID = scene.params[@"id"];
+    }
+    return self;
+}
+
 #pragma mark - 视图
 - (CZNoDataView *)noDataView
 {

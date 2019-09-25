@@ -28,6 +28,10 @@
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
 
+// universal links
+#import <MobLinkPro/MLSDKScene.h>
+#import <MobLinkPro/UIViewController+MLSDKRestore.h>
+
 @interface CZRecommendDetailController ()<CZRecommendNavDelegate, UIScrollViewDelegate>
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
@@ -58,6 +62,8 @@
 @property (nonatomic, strong) NSDictionary *shareDic;
 /** 购买URL */
 @property (nonatomic, strong) NSString *bugLinkUrl;
+
+@property (nonatomic, strong) MLSDKScene *scene;
 @end
 
 /** 分享控件高度 */
@@ -65,6 +71,18 @@ static CGFloat const likeAndShareHeight = 49;
 static NSString * const type = @"1";
 
 @implementation CZRecommendDetailController
+
+//实现带有场景参数的初始化方法，并根据场景参数还原该控制器：
+-(instancetype)initWithMobLinkScene:(MLSDKScene *)scene
+{
+    if (self = [super init]) {
+        self.scene = scene;
+        self.goodsId = scene.params[@"id"];
+        
+    }
+    return self;
+}
+
 #pragma mark - 懒加载
 - (UIScrollView *)scrollerView
 {

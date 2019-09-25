@@ -34,6 +34,10 @@
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
 
+// universal links
+#import <MobLinkPro/MLSDKScene.h>
+#import <MobLinkPro/UIViewController+MLSDKRestore.h>
+
 
 @interface CZTrialDetailController () <UIScrollViewDelegate>
 /** 滚动视图 */
@@ -73,6 +77,15 @@
 static CGFloat const likeAndShareHeight = 49;
 
 @implementation CZTrialDetailController
+
+//实现带有场景参数的初始化方法，并根据场景参数还原该控制器：
+-(instancetype)initWithMobLinkScene:(MLSDKScene *)scene
+{
+    if (self = [super init]) {
+        self.trialId = scene.params[@"id"];
+    }
+    return self;
+}
 
 #pragma mark - 懒加载
 - (UIScrollView *)scrollerView

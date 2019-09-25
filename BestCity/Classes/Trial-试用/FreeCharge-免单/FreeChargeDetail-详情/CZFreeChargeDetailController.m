@@ -73,8 +73,22 @@
 // 购买时间是否到时
 static BOOL isBuyTime;
 
+// universal links
+#import <MobLinkPro/MLSDKScene.h>
+#import <MobLinkPro/UIViewController+MLSDKRestore.h>
+
 
 @implementation CZFreeChargeDetailController
+//实现带有场景参数的初始化方法，并根据场景参数还原该控制器：
+-(instancetype)initWithMobLinkScene:(MLSDKScene *)scene
+{
+    if (self = [super init]) {
+        self.Id = scene.params[@"id"];
+    }
+    return self;
+}
+
+
 #pragma mark - 创建视图
 - (UIScrollView *)scrollerView
 {
@@ -363,8 +377,8 @@ static BOOL isBuyTime;
         _rightBtn.backgroundColor = UIColorFromRGB(0xFFD8D8D8);
     } else if ([statusText isEqualToString:@"抢购成功未付款"]) {
         self.noteView.hidden = NO;
-        NSString *title = [NSString stringWithFormat:@"前往购买 (可返回%@元)", self.dataSource.freePrice];
-        NSMutableAttributedString *attriStr = [title addAttributeFont:[UIFont systemFontOfSize:13] Range:[title rangeOfString:[NSString stringWithFormat:@"(可返回%@元)", self.dataSource.freePrice]]];
+        NSString *title = [NSString stringWithFormat:@"前往购买 (可返回%0.2lf元)", [self.dataSource.freePrice floatValue]];
+        NSMutableAttributedString *attriStr = [title addAttributeFont:[UIFont systemFontOfSize:13] Range:[title rangeOfString:[NSString stringWithFormat:@"(可返回%.2lf元)", [self.dataSource.freePrice floatValue]]]];
         [attriStr addAttribute:NSForegroundColorAttributeName value:CZGlobalWhiteBg range:NSMakeRange(0, attriStr.length)];
         [_rightBtn setAttributedTitle:attriStr forState:UIControlStateNormal];
         _rightBtn.enabled = YES;
@@ -426,6 +440,8 @@ static BOOL isBuyTime;
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"freeId"] = self.Id;
+    param[@"fromType"] = self.fromType;
+    param[@"fromId"] = self.fromId;
 
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -536,6 +552,8 @@ static BOOL isBuyTime;
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"freeId"] = self.Id;
+    param[@"fromType"] = self.fromType;
+    param[@"fromId"] = self.fromId;
     //获取数据
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {

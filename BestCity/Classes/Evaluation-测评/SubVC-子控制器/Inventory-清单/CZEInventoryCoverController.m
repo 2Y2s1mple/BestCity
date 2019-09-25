@@ -217,11 +217,11 @@
 // 发布
 - (void)publishAction
 {
-     if (addGoodsNumber == 0) {
-         [CZProgressHUD showProgressHUDWithText:@"请添加关联商品"];
-         [CZProgressHUD hideAfterDelay:1.5];
-         return;
-     }
+//     if (addGoodsNumber == 0) {
+//         [CZProgressHUD showProgressHUDWithText:@"请添加关联商品"];
+//         [CZProgressHUD hideAfterDelay:1.5];
+//         return;
+//     }
 
     if ([self.param[@"img"] length] < 1) {
         [CZProgressHUD showProgressHUDWithText:@"封面图片不得为空"];

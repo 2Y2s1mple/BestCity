@@ -95,7 +95,7 @@
             UINavigationController *nav = tabbar.selectedViewController;
             UIViewController *currentVc = nav.topViewController;
             if (currentVc.navigationController.viewControllers.count > 1) {
-                [currentVc.navigationController popViewControllerAnimated:YES];
+//                [currentVc.navigationController popViewControllerAnimated:YES];
             }
             [nav presentViewController:vc animated:YES completion:nil];
         }

@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFreeChargeDetailController : UIViewController
 @property (nonatomic, strong) NSString *Id;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *fromType;
+@property (nonatomic, strong) NSString *fromId;
 @end
 
 NS_ASSUME_NONNULL_END

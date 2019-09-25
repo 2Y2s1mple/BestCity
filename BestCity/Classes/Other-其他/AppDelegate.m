@@ -14,8 +14,17 @@
 #import "CZOpenAlibcTrade.h"
 //#import "UMSocialSnsService.h"
 #import "GXNetTool.h"
-@interface AppDelegate ()
 
+#import <MobLinkPro/IMLSDKRestoreDelegate.h>
+#import <MobLinkPro/MobLink.h>
+#import <MobLinkPro/MLSDKScene.h>
+@interface AppDelegate () <IMLSDKRestoreDelegate>
+
+/** <#注释#> */
+@property (nonatomic, strong) MLSDKScene *recordScene;
+@property (nonatomic) dispatch_queue_t guideQueue;
+@property (nonatomic) dispatch_semaphore_t guideSemaphore;
+@property (nonatomic) BOOL isAlreadyRun;
 @end
 
 @implementation AppDelegate
@@ -41,9 +50,56 @@
 
     [NSThread sleepForTimeInterval:1.5];
 
+    // 设置MobLink代理
+    [MobLink setDelegate:self];
+
     [self.window makeKeyAndVisible];
 
+
+
     return YES;
+}
+
+- (void) IMLSDKWillRestoreScene:(MLSDKScene *)scene Restore:(void (^)(BOOL, RestoreStyle))restoreHandler
+{
+    NSLog(@"Will Restore Scene - Path:%@",scene.path);
+    NSLog(@"------%@", self.recordScene.params);
+    NSLog(@"----%@", scene.params);
+    if ([self.recordScene.params isEqualToDictionary:scene.params]) {
+        return;
+    };
+
+
+    NSString *path = scene.path == nil ? @"" : scene.path;
+    NSString *className = scene.className == nil ? @"" : scene.className;
+
+    __block NSMutableString *msg = [NSMutableString stringWithFormat:@"路径path\n%@ \n\n类名\n%@ \n\n参数", path, className];
+
+     restoreHandler(YES, MLPush);
+
+    self.recordScene = scene;
+
+
+//    if (scene.params)
+}
+
+- (void)IMLSDKCompleteRestore:(MLSDKScene *)scene
+{
+    NSLog(@"Complete Restore -Path:%@",scene.path);
+
+}
+
+- (void)IMLSDKNotFoundScene:(MLSDKScene *)scene
+{
+    NSLog(@"Not Found Scene - Path :%@",scene.path);
+
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有找到路径"
+                                                        message:[NSString stringWithFormat:@"Path:%@",scene.path]
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
+
 }
 
 #pragma mark -

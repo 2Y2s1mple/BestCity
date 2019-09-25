@@ -33,7 +33,7 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         self.PlanADimageView = [[UIImageView alloc] init];
-        self.PlanADimageView.contentMode = UIViewContentModeScaleToFill;
+        self.PlanADimageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.PlanADimageView];
         
     }

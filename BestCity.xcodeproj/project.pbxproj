@@ -150,6 +150,9 @@
 		974F488D21A3B03600E1ED1A /* CZAttentionDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 974F488C21A3B03600E1ED1A /* CZAttentionDetailModel.m */; };
 		974F489121A3B5BE00E1ED1A /* CZAttentionDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 974F488F21A3B5BD00E1ED1A /* CZAttentionDetailCell.m */; };
 		974F489221A3B5BE00E1ED1A /* CZAttentionDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974F489021A3B5BD00E1ED1A /* CZAttentionDetailCell.xib */; };
+		97520FF823332FC900469023 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97520FF723332FC900469023 /* libz.1.2.5.tbd */; };
+		975210132333973D00469023 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975210102333973D00469023 /* MOBFoundation.framework */; };
+		975210142333973D00469023 /* MobLinkPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 975210122333973D00469023 /* MobLinkPro.framework */; };
 		97524675230A7DE100A1A334 /* CZMeIntelligentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97524674230A7DE100A1A334 /* CZMeIntelligentController.m */; };
 		97524678230A7FCB00A1A334 /* CZMeIntelligentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97524677230A7FCB00A1A334 /* CZMeIntelligentView.m */; };
 		9752467A230A7FD500A1A334 /* CZMeIntelligentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97524679230A7FD500A1A334 /* CZMeIntelligentView.xib */; };
@@ -778,6 +781,9 @@
 		974F488E21A3B5BD00E1ED1A /* CZAttentionDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZAttentionDetailCell.h; sourceTree = "<group>"; };
 		974F488F21A3B5BD00E1ED1A /* CZAttentionDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZAttentionDetailCell.m; sourceTree = "<group>"; };
 		974F489021A3B5BD00E1ED1A /* CZAttentionDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CZAttentionDetailCell.xib; sourceTree = "<group>"; };
+		97520FF723332FC900469023 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		975210102333973D00469023 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
+		975210122333973D00469023 /* MobLinkPro.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobLinkPro.framework; sourceTree = "<group>"; };
 		97524673230A7DE100A1A334 /* CZMeIntelligentController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeIntelligentController.h; sourceTree = "<group>"; };
 		97524674230A7DE100A1A334 /* CZMeIntelligentController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMeIntelligentController.m; sourceTree = "<group>"; };
 		97524676230A7FCB00A1A334 /* CZMeIntelligentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeIntelligentView.h; sourceTree = "<group>"; };
@@ -1500,6 +1506,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97520FF823332FC900469023 /* libz.1.2.5.tbd in Frameworks */,
 				970AD8D4232A3BD600CCE9F9 /* AlibcTradeSDK.framework in Frameworks */,
 				970AD8D9232A3BD600CCE9F9 /* SGMain.framework in Frameworks */,
 				97F0EC2E21251CFE000FE1DC /* libsqlite3.tbd in Frameworks */,
@@ -1516,6 +1523,7 @@
 				974C586921229F87008B3E6A /* SystemConfiguration.framework in Frameworks */,
 				97418DC421B11F39001F4E92 /* jcore-ios-1.2.1.a in Frameworks */,
 				97418DC321B11F39001F4E92 /* jpush-ios-3.1.0.a in Frameworks */,
+				975210142333973D00469023 /* MobLinkPro.framework in Frameworks */,
 				97418DC221B11F39001F4E92 /* jpush-extension-ios-1.1.1.a in Frameworks */,
 				970AD8DF232A3BD600CCE9F9 /* SGSecurityBody.framework in Frameworks */,
 				97B6C55F225AEC480061D9A0 /* UMAnalytics.framework in Frameworks */,
@@ -1541,6 +1549,7 @@
 				970AD8D3232A3BD600CCE9F9 /* AlibabaAuthSDK.framework in Frameworks */,
 				97F0EC1E212512B6000FE1DC /* UMCommonLog.framework in Frameworks */,
 				970AD8DA232A3BD600CCE9F9 /* mtopcoreopen.framework in Frameworks */,
+				975210132333973D00469023 /* MOBFoundation.framework in Frameworks */,
 				970AD8D7232A3BD600CCE9F9 /* UTDID.framework in Frameworks */,
 				970AD8D6232A3BD600CCE9F9 /* SecurityGuardSDK.framework in Frameworks */,
 			);
@@ -2304,6 +2313,7 @@
 		974C586121229F6C008B3E6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				97520FF723332FC900469023 /* libz.1.2.5.tbd */,
 				970D0B7E21ACE96D00649FC2 /* libc++.tbd */,
 				970D0B7C21ACE90C00649FC2 /* CoreMotion.framework */,
 				97F0EC2D21251CFE000FE1DC /* libsqlite3.tbd */,
@@ -2339,6 +2349,39 @@
 				97705C49210716A300485D64 /* CZEvaluationController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		97520FEF23332E2200469023 /* MobLink */ = {
+			isa = PBXGroup;
+			children = (
+				9752100E2333973D00469023 /* SDK */,
+			);
+			path = MobLink;
+			sourceTree = "<group>";
+		};
+		9752100E2333973D00469023 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				9752100F2333973D00469023 /* Required */,
+				975210112333973D00469023 /* MobLinkPro */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
+		9752100F2333973D00469023 /* Required */ = {
+			isa = PBXGroup;
+			children = (
+				975210102333973D00469023 /* MOBFoundation.framework */,
+			);
+			path = Required;
+			sourceTree = "<group>";
+		};
+		975210112333973D00469023 /* MobLinkPro */ = {
+			isa = PBXGroup;
+			children = (
+				975210122333973D00469023 /* MobLinkPro.framework */,
+			);
+			path = MobLinkPro;
 			sourceTree = "<group>";
 		};
 		9752466F230A7BA900A1A334 /* 达人主页 */ = {
@@ -2775,6 +2818,7 @@
 		97705C5A2107170F00485D64 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				97520FEF23332E2200469023 /* MobLink */,
 				975D683022B7661E00F70951 /* 腾讯滑块 */,
 				97C7FF09216DDDB50091DC07 /* MJRefresh */,
 				97C7FEEF216DDDAA0091DC07 /* MJExtension */,
@@ -4617,6 +4661,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -5312,6 +5359,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/腾讯滑块",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/Frameworks",
 					"$(PROJECT_DIR)/BestCity/Classes/百川/Frameworks",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/Required",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/MobLinkPro",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -5406,6 +5455,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/腾讯滑块",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/百川/电商必选组件/Frameworks",
 					"$(PROJECT_DIR)/BestCity/Classes/百川/Frameworks",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/Required",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/MobLinkPro",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";

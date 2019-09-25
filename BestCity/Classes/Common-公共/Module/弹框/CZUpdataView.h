@@ -28,6 +28,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** <#注释#> */
 @property (nonatomic, strong) NSString *textString;
+
+/** 新人专享 */
++ (instancetype)peopleOfNewView;
+
+/** 抢购 */
++ (instancetype)buyingView;
+
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *paramDic;
+
+/** 商品 */
++ (instancetype)goodsView;
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *goodsViewParamDic;
 @end
 
 NS_ASSUME_NONNULL_END
