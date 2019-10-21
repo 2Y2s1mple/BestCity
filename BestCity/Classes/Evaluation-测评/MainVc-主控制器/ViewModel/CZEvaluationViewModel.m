@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-        _titlesText = @[@"关注", @"推荐", @"评测", @"清单"];
+        _titlesText = @[@"关注", @"推荐", @"开箱", @"横评"];
     }
     return self;
 }

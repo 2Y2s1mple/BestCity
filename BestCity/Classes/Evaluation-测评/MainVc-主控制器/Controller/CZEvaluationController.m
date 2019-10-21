@@ -14,8 +14,9 @@
 // 子控制器
 #import "CZEAttentionController.h" // 关注
 #import "CZERecommendController.h" // 推荐
-#import "CZETestController.h" // 评测
-#import "CZEInventoryController.h" //清单
+//#import "CZETestController.h" // 评测
+#import "CZETestAllOpenBoxController.h" // 开箱
+#import "CZETestAllContrastController.h" //横屏
 
 // 视图
 #import "CZEvaluationSearchView.h"
@@ -95,12 +96,12 @@
         }
         case 2:
         {
-            CZETestController *vc = [[CZETestController alloc] init];
+            CZETestAllOpenBoxController *vc = [[CZETestAllOpenBoxController alloc] init];
             return vc;
         }
         case 3:
         {
-            CZEInventoryController *vc = [[CZEInventoryController alloc] init];
+            CZETestAllContrastController *vc = [[CZETestAllContrastController alloc] init];
             return vc;
         }
         default:

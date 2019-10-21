@@ -41,12 +41,20 @@
 @end
 
 @implementation CZETestController
-- (NSMutableArray *)dataSource
+
+#pragma mark -- 生命周期
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.noDataView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.tableView];
+    // 获取类目
+    [self getCategoryList];
+}
+
+- (void)viewWillAppear:(BOOL)animated
 {
-    if (_dataSource == nil) {
-        _dataSource = [NSMutableArray array];
-    }
-    return _dataSource;
+    [super viewWillAppear:animated];
+    self.tableView.height = self.view.height - 1 - 45;
 }
 
 #pragma mark - 视图
@@ -65,20 +73,6 @@
     return _tableView;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.noDataView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.tableView];
-    // 获取类目
-    [self getCategoryList];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.tableView.height = self.view.height - 1 - 45;
-}
-
 // 上拉加载, 下拉刷新
 - (void)setupRefresh
 {
@@ -91,6 +85,15 @@
 }
 
 #pragma mark - 获取数据
+// 数据
+- (NSMutableArray *)dataSource
+{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
+
 // 获取类目
 - (void)getCategoryList
 {

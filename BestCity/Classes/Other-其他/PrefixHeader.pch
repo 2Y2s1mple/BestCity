@@ -114,6 +114,8 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZGetJIBITool.h" // 获得极币
 #import "CZJIPINSynthesisTool.h" //综合工具
 #import <UMAnalytics/MobClick.h> // 统计
+#import "CZCustomGifHeader.h"
+
 
 /************************************************************/
 #endif 

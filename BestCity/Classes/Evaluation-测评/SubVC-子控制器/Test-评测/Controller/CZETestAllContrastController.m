@@ -30,18 +30,24 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil ];
-    [self.view addSubview:navigationView];
+//    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil ];
+//    [self.view addSubview:navigationView];
 
     [self.view addSubview:self.tableView];
     [self setupRefresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tableView.height = self.view.height - 1;
 }
 
 #pragma mark - 视图
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0) + 67, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 24 : 0) - 67) style:UITableViewStylePlain];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 1, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 24 : 0) - 67) style:UITableViewStylePlain];
         self.tableView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         self.tableView.estimatedRowHeight = 0;
         self.tableView.estimatedSectionHeaderHeight = 0;
@@ -70,7 +76,7 @@
     self.page = 1;
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"categoryId"] = self.categoryId;
+//    param[@"categoryId"] = self.categoryId;
     param[@"evaluationType"] = @(2);
     param[@"page"] = @(self.page);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/evaluationList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {

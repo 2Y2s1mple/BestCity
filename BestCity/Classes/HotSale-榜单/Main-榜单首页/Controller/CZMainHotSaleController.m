@@ -17,6 +17,7 @@
 #import "CZMainHotSaleCell.h"
 #import "CZUpdataManger.h"
 #import "CZUpdataView.h"
+#import "CZCustomGifHeader.h"
 
 // 模型
 #import "CZHotTitleModel.h"
@@ -108,7 +109,10 @@
 
 - (void)setupRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewDataSorce)];
+
+    self.tableView.mj_header = [CZCustomGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewDataSorce)];
+
+
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDataSorce)];
 }
