@@ -76,12 +76,17 @@
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
     __weak typeof(self) weakSelf = self;
-    [self.viewModel reloadNewTrailDataSorce:^{
+    [self.viewModel reloadNewTrailDataSorce:^(NSDictionary *data){
         [weakSelf.tableView reloadData];
         // 结束刷新
         [weakSelf.tableView.mj_header endRefreshing];
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
+        if ([data[@"count"] integerValue] > 0) {
+            //隐藏菊花
+            [CZProgressHUD showOrangeProgressHUDWithText:[NSString stringWithFormat:@"为您更新%@篇文章", data[@"count"]]];
+        } else {
+             [CZProgressHUD showOrangeProgressHUDWithText:@"刷新成功"];
+        }
+        [CZProgressHUD hideAfterDelay:1.5];
     }];
 }
 
@@ -90,7 +95,7 @@
     // 先结束头部刷新
     [self.tableView.mj_header endRefreshing];
     __weak typeof(self) weakSelf = self;
-    [self.viewModel loadMoreTrailDataSorce:^{
+    [self.viewModel loadMoreTrailDataSorce:^(NSDictionary *data){
         [weakSelf.tableView reloadData];
         // 结束刷新
         [weakSelf.tableView.mj_footer endRefreshing];

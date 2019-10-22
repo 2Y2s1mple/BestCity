@@ -84,10 +84,15 @@
             self.dataSource = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.tableView reloadData];
         }
+        if ([result[@"count"] integerValue] > 0) {
+            //隐藏菊花
+            [CZProgressHUD showOrangeProgressHUDWithText:[NSString stringWithFormat:@"为您更新%@篇文章", result[@"count"]]];
+        } else {
+             [CZProgressHUD showOrangeProgressHUDWithText:@"刷新成功"];
+        }
+        [CZProgressHUD hideAfterDelay:1.5];
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {}];
 }
 

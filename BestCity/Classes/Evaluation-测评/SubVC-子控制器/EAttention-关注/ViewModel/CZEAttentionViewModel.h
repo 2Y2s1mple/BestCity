@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** 数据 */
 @property (nonatomic, strong) NSMutableArray *dataSource;
 // 方法
-- (void)reloadNewDataSorce:(void (^)(void))block;
-- (void)loadMoreDataSorce:(void (^)(void))block;
+- (void)reloadNewDataSorce:(void (^)(NSDictionary *))block;
+- (void)loadMoreDataSorce:(void (^)(NSDictionary *))block;
 @end
 
 NS_ASSUME_NONNULL_END

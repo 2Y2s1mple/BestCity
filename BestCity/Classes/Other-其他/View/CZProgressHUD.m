@@ -58,14 +58,35 @@ static id _instance;
         
         [hud addSubview:hud.textLabel];
         hud.textLabel.text = [NSString stringWithFormat:@"　%@　", text];
-        [hud.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        hud.textLabel.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.87];
+        [hud.textLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(hud);
             make.height.equalTo(@(26));
         }];
         return hud;
         
     }
-    
+}
+
++ (instancetype)showOrangeProgressHUDWithText:(NSString *)text
+{
+    CZProgressHUD *hud = [self shareProgress];
+    hud.backgroundColor = [UIColor clearColor];
+    [[UIApplication sharedApplication].keyWindow addSubview: hud];
+
+    [hud addSubview:hud.textLabel];
+    hud.textLabel.text = [NSString stringWithFormat:@"　%@　", text];
+    hud.textLabel.backgroundColor = UIColorFromRGB(0xE25838);
+    [hud.textLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        if (IsiPhoneX) {
+            make.top.mas_offset(@142);
+        } else {
+            make.top.mas_offset(@120);
+        }
+        make.centerX.equalTo(hud);
+        make.height.equalTo(@(26));
+    }];
+    return hud;
 }
 
 + (void)hideAfterDelay:(NSTimeInterval)delay

@@ -11,6 +11,7 @@
 @interface CZProgressHUD : UIView
 
 + (instancetype)showProgressHUDWithText:(NSString *)text;
++ (instancetype)showOrangeProgressHUDWithText:(NSString *)text;
 + (void)hideAfterDelay:(NSTimeInterval)delay;
 
 @end

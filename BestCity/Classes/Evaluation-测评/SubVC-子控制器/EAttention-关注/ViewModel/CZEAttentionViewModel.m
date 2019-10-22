@@ -36,7 +36,7 @@
 
 #pragma mark - 获取数据
 // 刷新时候调用
-- (void)reloadNewDataSorce:(void (^)(void))block
+- (void)reloadNewDataSorce:(void (^)(NSDictionary *))block
 {
     self.page = 1;
     //获取数据
@@ -52,7 +52,7 @@
                 [dataSource addObject:viewModel];
             }
             self.dataSource = dataSource;
-            block();
+            block(result);
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -62,7 +62,7 @@
 }
 
 // 加载更多时候调用
-- (void)loadMoreDataSorce:(void (^)(void))block
+- (void)loadMoreDataSorce:(void (^)(NSDictionary *))block
 {
     self.page++;
     //获取数据
@@ -75,7 +75,7 @@
                 viewModel.isShowAttention = [result[@"follow"] boolValue];
                 [self.dataSource addObject:viewModel];
             }
-            block();
+            block(result);
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];

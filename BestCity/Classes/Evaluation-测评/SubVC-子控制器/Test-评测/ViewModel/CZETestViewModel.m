@@ -17,7 +17,7 @@
 
 @implementation CZETestViewModel
 #pragma mark - 获取数据
-- (void)reloadNewTrailDataSorce:(void (^)(void))successData
+- (void)reloadNewTrailDataSorce:(void (^)(NSDictionary *))successData
 {
     self.page = 1;
     //获取数据
@@ -27,12 +27,12 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/evaluationList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
-            !successData ? : successData();
+            !successData ? : successData(result);
         }
     } failure:^(NSError *error) {}];
 }
 
-- (void)loadMoreTrailDataSorce:(void (^)(void))successData
+- (void)loadMoreTrailDataSorce:(void (^)(NSDictionary *))successData
 {
     self.page++;
     //获取数据
@@ -44,7 +44,7 @@
            NSArray *list = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
             [self.dataSource addObjectsFromArray:list];
         }
-        !successData ? : successData();
+        !successData ? : successData(result);
     } failure:^(NSError *error) {}];
 }
 
