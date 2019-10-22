@@ -12,16 +12,26 @@
 #import "CZETestModel.h"
 #import "CZETestOpenBoxCell.h"
 #import "CZDChoiceDetailController.h"
+#import "CZETestViewModel.h"
 
 @interface CZETestAllOpenBoxController ()<UITableViewDelegate, UITableViewDataSource>
 /** tabelview */
 @property (nonatomic, strong) UITableView *tableView;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
-@property (nonatomic, strong) NSMutableArray *dataSource;
+/** <#注释#> */
+@property (nonatomic, strong) CZETestViewModel *viewModel;
 @end
 
 @implementation CZETestAllOpenBoxController
+
+- (CZETestViewModel *)viewModel
+{
+    if (_viewModel == nil) {
+        _viewModel = [[CZETestViewModel alloc] init];
+    }
+    return _viewModel;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,15 +44,6 @@
     [super viewWillAppear:animated];
     self.tableView.height = self.view.height - 1;
 }
-
-- (NSMutableArray *)dataSource
-{
-    if (_dataSource == nil) {
-        _dataSource = [NSMutableArray array];
-    }
-    return _dataSource;
-}
-
 
 #pragma mark - 视图
 - (UITableView *)tableView
@@ -63,68 +64,50 @@
 // 上拉加载, 下拉刷新
 - (void)setupRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
+    self.tableView.mj_header = [CZCustomGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
 }
 
 
 #pragma mark - 获取数据
-#pragma mark - 获取数据
 - (void)reloadNewTrailDataSorce
 {
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
-    self.page = 1;
-    //获取数据
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"categoryId"] = @"";
-    param[@"evaluationType"] = @(1);
-    param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/evaluationList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
-            self.dataSource = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
-            [self.tableView reloadData];
-        }
+    __weak typeof(self) weakSelf = self;
+    [self.viewModel reloadNewTrailDataSorce:^{
+        [weakSelf.tableView reloadData];
         // 结束刷新
-        [self.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {}];
+    }];
 }
 
 - (void)loadMoreTrailDataSorce
 {
     // 先结束头部刷新
     [self.tableView.mj_header endRefreshing];
-    self.page++;
-    //获取数据
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"categoryId"] = self.categoryId;
-    param[@"evaluationType"] = @(1);
-    param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/evaluationList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
-           NSArray *list = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
-            [self.dataSource addObjectsFromArray:list];
-            [self.tableView reloadData];
-        }
+    __weak typeof(self) weakSelf = self;
+    [self.viewModel loadMoreTrailDataSorce:^{
+        [weakSelf.tableView reloadData];
         // 结束刷新
-        [self.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {}];
+    }];
 }
 
 #pragma mark -- UITableViewDataSource代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataSource count];
+    return [self.viewModel.dataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZETestModel *model = self.dataSource[indexPath.row];
+    CZETestModel *model = self.viewModel.dataSource[indexPath.row];
     CZETestOpenBoxCell *cell = [CZETestOpenBoxCell cellwithTableView:tableView];
     cell.model = model;
     return cell;
@@ -137,7 +120,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZETestModel *model = self.dataSource[indexPath.row];
+    CZETestModel *model = self.viewModel.dataSource[indexPath.row];
     //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
     CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
     vc.detailType = [CZJIPINSynthesisTool getModuleType:[model.type integerValue]];

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CZETestModel.h"
+#import "CZEvaluationProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZETestContrastCell : UITableViewCell
+@interface CZETestContrastCell : UITableViewCell <CZEvaluationProtocol>
 + (instancetype)cellwithTableView:(UITableView *)tableView;
 /** <#注释#> */
 @property (nonatomic, strong) CZETestModel *model;

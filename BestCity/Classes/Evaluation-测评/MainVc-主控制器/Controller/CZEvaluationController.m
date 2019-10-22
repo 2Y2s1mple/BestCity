@@ -69,6 +69,13 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - 生命周期
+- (void)loadView
+{
+    [super loadView];
+    self.selectIndex = 1;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;

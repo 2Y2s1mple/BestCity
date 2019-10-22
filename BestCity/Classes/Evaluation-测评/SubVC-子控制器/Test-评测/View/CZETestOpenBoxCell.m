@@ -39,7 +39,6 @@
     self.visitName.text = [NSString stringWithFormat:@"%@阅读", model.pv];;
 }
 
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -67,7 +66,6 @@
     }
     return nil;
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
