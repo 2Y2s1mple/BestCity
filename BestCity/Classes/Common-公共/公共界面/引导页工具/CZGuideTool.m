@@ -9,14 +9,18 @@
 #import "CZGuideTool.h"
 #import "CZSaveTool.h"
 #import "CZTabBarController.h"
-#import "CZGuideController.h"
 #define CZVERSION @"CZVersion"
 #import "GXNetTool.h"
+#import "CZNoviceGuidanceView.h"
+#import "CZUpdataManger.h"
 
+
+BOOL oldUser;
 @implementation CZGuideTool
-+ (void)chooseRootViewController:(UIWindow *)window
++ (void)newpPeopleGuide
 {
     //获取当前的版本号
+
     NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     
     //获取存储的版本号
@@ -24,13 +28,16 @@
     
     //比较
     if ([curVersion isEqualToString:lastVersion]) {
-        //没有新版本
-        window.rootViewController = [[CZTabBarController alloc] init];
+        // 显示版本更新
+        [CZUpdataManger ShowUpdataViewWithNetworkService];
+        oldUser = YES;
     } else {
-        //有新版本
+        // 新人引导
+        CZNoviceGuidanceView *guide = [[CZNoviceGuidanceView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        guide.backgroundColor = [UIColor clearColor];
+        [[UIApplication sharedApplication].keyWindow addSubview: guide];
         [CZSaveTool setObject:curVersion forKey:CZVERSION];
-        CZGuideController *vc = [[CZGuideController alloc] init];
-        window.rootViewController = vc;
+        oldUser = NO;
     }
 }
 

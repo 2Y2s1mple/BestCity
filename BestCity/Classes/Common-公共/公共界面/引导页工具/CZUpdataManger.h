@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZUpdataManger : NSObject
 + (id <CZUpdataProtocol>)createUpdataManger;
 + (void)ShowUpdataViewWithNetworkService;
+/** <#注释#> */
+@property (nonatomic, assign) BOOL oldUser;
 @end
 
 NS_ASSUME_NONNULL_END

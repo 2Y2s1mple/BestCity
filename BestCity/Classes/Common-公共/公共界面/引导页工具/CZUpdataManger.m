@@ -8,7 +8,8 @@
 
 #import "CZUpdataManger.h"
 #import "GXNetTool.h"
-#import "CZUpdataView.h"
+#import "CZUserUpdataView.h"
+#import "CZNotificationAlertView.h"
 
 @implementation CZUpdataManger
 + (void)ShowUpdataViewWithNetworkService
@@ -28,20 +29,19 @@
             BOOL isOpen = [result[@"data"][@"open"] isEqualToNumber:@(1)];
             if (isAscending && isOpen) {
                 // 判断是否更新
-                id<CZUpdataProtocol> backView = [self createUpdataManger];
-                backView.versionMessage = result[@"data"];
-                [[UIApplication sharedApplication].keyWindow addSubview:[backView getView]];
+                CZUserUpdataView *alertView = [CZUserUpdataView userUpdataView];
+                alertView.frame = [UIScreen mainScreen].bounds;
+                alertView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                alertView.versionMessage = result[@"data"];
+                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+            } else {
+                // 推送弹框
+                CZNotificationAlertView *NotiView = [CZNotificationAlertView notificationAlertView];
+                [NotiView checkCurrentNotificationStatus];
             }
         }
     } failure:^(NSError *error) {}];
 }
 
-+ (id<CZUpdataProtocol>)createUpdataManger
-{
-    // 判断是否更新
-    id<CZUpdataProtocol> backView = [CZUpdataView updataViewWithFrame:[UIScreen mainScreen].bounds];
-    [backView getView].backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-    return backView;
-}
 
 @end

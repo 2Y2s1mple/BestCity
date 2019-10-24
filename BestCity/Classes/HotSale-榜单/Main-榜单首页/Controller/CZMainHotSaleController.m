@@ -11,13 +11,17 @@
 #import "GXNetTool.h"
 #import <MobLinkPro/MLSDKScene.h>
 #import <MobLinkPro/UIViewController+MLSDKRestore.h>
+#import "CZGuideTool.h"
+
+
 // 视图
 #import "CZMainHotSaleHeaderView.h"
 #import "CZMainHotSaleCategoryView.h"
 #import "CZMainHotSaleCell.h"
-#import "CZUpdataManger.h"
 #import "CZUpdataView.h"
 #import "CZCustomGifHeader.h"
+
+
 
 // 模型
 #import "CZHotTitleModel.h"
@@ -109,10 +113,7 @@
 
 - (void)setupRefresh
 {
-
     self.tableView.mj_header = [CZCustomGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewDataSorce)];
-
-
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDataSorce)];
 }
@@ -132,40 +133,6 @@
     [self.view addSubview:self.navTopView];
     self.navTopView.hidden = YES;
 
-    // 显示版本更新
-     [CZUpdataManger ShowUpdataViewWithNetworkService];
-
-    //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getPopInfo"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSDictionary *param = result[@"data"][@"data"];
-            NSLog(@"%@----%@", param, [param class]);
-            if ([param isKindOfClass:[NSNull class]])
-            {
-                return;
-            }
-
-            if ([result[@"data"][@"type"] isEqualToNumber:@1]) {
-                CZUpdataView *backView = [CZUpdataView buyingView];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-                backView.paramDic = result[@"data"][@"data"];
-            } else {
-                CZUpdataView *backView = [CZUpdataView goodsView];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-                backView.goodsViewParamDic = result[@"data"][@"data"];
-            }
-        }
-    } failure:^(NSError *error) {
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-    }];
-
-
-//    CZUpdataView *backView = [CZUpdataView peopleOfNewView];
 
 }
 
@@ -274,7 +241,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-// 下拉加载
+#pragma mark - 下拉加载
 static NSInteger page_ = 1;
 - (void)reloadNewDataSorce
 {
@@ -282,6 +249,8 @@ static NSInteger page_ = 1;
     if (self.tableView.tableHeaderView == nil) {
         [self getCategoryListData:^(NSArray<CZHotTitleModel *> *modelList) {
             weakself.tableView.tableHeaderView = weakself.createTableViewHeaderView(modelList);
+            // 新用户指导
+            [CZGuideTool newpPeopleGuide];
         }];
     }
 
@@ -296,7 +265,7 @@ static NSInteger page_ = 1;
     }];
 }
 
-// 上拉刷新
+#pragma mark - 上拉刷新
 - (void)loadMoreDataSorce
 {
     [self.tableView.mj_header endRefreshing];

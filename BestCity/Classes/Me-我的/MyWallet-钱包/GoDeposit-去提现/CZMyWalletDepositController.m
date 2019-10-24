@@ -9,6 +9,7 @@
 #import "CZMyWalletDepositController.h"
 #import "CZNavigationView.h"
 #import "GXNetTool.h"
+#import "CZGotoScoreView.h"
 
 @interface CZMyWalletDepositController ()<UITextFieldDelegate>
 /** 最上面的背景图 */
@@ -54,6 +55,7 @@
 /** 申请提现 */
 - (IBAction)applyDeposit
 {
+
     if (self.realNameTextField.text.length == 0) {
         [CZProgressHUD showProgressHUDWithText:@"请输入真实姓名"];
         [CZProgressHUD hideAfterDelay:1.5];
@@ -65,7 +67,7 @@
         return;
     }
     if (self.withdrawTextField.text.length == 0 ||  [self.withdrawTextField.text floatValue] < 50) {
-        [CZProgressHUD showProgressHUDWithText:@"金额输入有误"];
+        [CZProgressHUD showProgressHUDWithText:@"金额大于50元"];
         [CZProgressHUD hideAfterDelay:1.5];
         return;
     }
@@ -79,7 +81,13 @@
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/withdraw"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             [CZProgressHUD showProgressHUDWithText:@"提现成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 去评分
+                [self gotoScore];
+            });
+
+
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -91,6 +99,46 @@
         [CZProgressHUD hideAfterDelay:0];
     }];
 }
+
+#pragma mark - 去评分
+- (void)gotoScore
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getScoreStatus"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (![result[@"data"] isEqual:@(0)]) {
+            // 未评价
+            UIView *alertView = [[UIView alloc] init];
+            alertView.frame = [UIScreen mainScreen].bounds;
+            alertView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+            [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reclaimerKeyboard:)];
+            [alertView addGestureRecognizer:tap];
+
+
+            CZGotoScoreView *alert = [CZGotoScoreView gotoScoreView];
+            alert.center = CGPointMake(SCR_WIDTH / 2.0, SCR_HEIGHT / 2.0);
+            alert.layer.cornerRadius = 10;
+            alert.layer.masksToBounds = YES;
+            [alertView addSubview:alert];
+
+
+            
+        } else {
+
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+
+- (void)reclaimerKeyboard:(UIGestureRecognizer *)tap
+{
+    NSLog(@"-------");
+    [tap.view endEditing:YES];
+
+}
+
 
 #pragma mark - 控件赋值
 - (void)assignmentWithModule

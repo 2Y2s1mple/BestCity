@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface CZGuideTool : NSObject
-+ (void)chooseRootViewController:(UIWindow *)window;
++ (void)newpPeopleGuide;
 @end

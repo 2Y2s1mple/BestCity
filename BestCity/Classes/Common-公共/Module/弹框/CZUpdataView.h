@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)goodsView;
 /** <#注释#> */
 @property (nonatomic, strong) NSDictionary *goodsViewParamDic;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,16 +16,18 @@
 #import "CZTrialDetailController.h" // 新品试用
 #import "CZFreeChargeDetailController.h"
 
+
 @interface CZUpdataView ()
-/** <#注释#> */
+/** 111111111 */
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
-/** <#注释#> */
+/** 1111111111 */
 @property (nonatomic, weak) IBOutlet UILabel *chengeContent;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *pointLabel;
 
 /** 删除按钮 */
 @property (nonatomic, weak) IBOutlet UIButton *delectBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *delectBtnTopConst;
 
 /** 发布成功 */
 @property (nonatomic, weak) IBOutlet UILabel *IKnowLabel;
@@ -83,7 +85,7 @@
     return self;
 }
 
-/** 去App Store */
+/** 去App Store11111111111 */
 - (IBAction)gotoUpdata
 {
     //跳转到App Store
@@ -106,8 +108,6 @@
         self.delectBtn.hidden = YES;
     }
 }
-
-
 
 + (instancetype)newUserRegistrationView
 {
@@ -180,9 +180,8 @@
     _paramDic = paramDic;
     [self.buyingImage sd_setImageWithURL:[NSURL URLWithString:paramDic[@"img"]]];
 
+
 }
-
-
 
 /** 商品 */
 + (instancetype)goodsView
@@ -210,9 +209,8 @@
         NSDate *date = [formatter dateFromString:goodsViewParamDic[@"dendlineTime"]];
         return (NSInteger)[date timeIntervalSinceNow];
     }];
-
-
 }
+
 - (IBAction)buyGoodsClicked:(id)sender {
     NSLog(@"00000");
     CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
@@ -401,4 +399,10 @@
     return countDownStr;
 
 }
+
+
+
+
+
+
 @end
