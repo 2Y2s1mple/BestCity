@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *ID;
 /** <#注释#> */
 @property (nonatomic, strong) NSArray *topDataList;
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger selectedItemIndex;
 @end
 
 NS_ASSUME_NONNULL_END

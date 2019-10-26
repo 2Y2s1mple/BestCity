@@ -15,6 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 /** 标题 */
 @property (nonatomic, weak) IBOutlet UILabel *titleName;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelTop;
+
+
 /** 券后价 */
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 /**  其他平台价格 */
@@ -29,6 +33,10 @@
 @property (nonatomic, weak) IBOutlet UIImageView *scoreImage;
 /** 功能评分文字 */
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
+/** 极品城补贴 */
+@property (nonatomic, weak) IBOutlet UIView *feeView;
+/** 补贴数 */
+@property (nonatomic, weak) IBOutlet UILabel *feeLabel;
 /** 评分view */
 @property (weak, nonatomic) IBOutlet UIView *pointView;
 /** 综合评分 */
@@ -79,48 +87,52 @@
     self.cscoreLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
 }
 
-- (instancetype)init
++ (instancetype)commodityView
 {
-    self = [super init];
-    if (self) {
-        self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
-    }
-    return self;
+    return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
 }
 
 - (void)setModel:(CZCommodityModel *)model
 {
     _model = model;
-    self.titleName.text = model.goodsName;
-    self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]];
-    
+    NSString *actualPrice = [NSString stringWithFormat:@"到手价 ¥%.2f", [model.actualPrice floatValue]];
+    self.actualPriceLabel.attributedText = [actualPrice addAttributeFont:[UIFont systemFontOfSize:24]  Range:[actualPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]]]];
+
     if (model.otherPrice.length > 0 && ![model.actualPrice isEqual:model.otherPrice]) {
         self.otherPrice.hidden = NO;
-        NSString *therPrice = [NSString stringWithFormat:@"%@ ¥%.2f", [self platfromNameWithNumber:model.source], [model.otherPrice floatValue]];
-        self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model.otherPrice floatValue]]]];
+        NSString *therPrice = [NSString stringWithFormat:@"%@¥%.2f", [self platfromNameWithNumber:model.source], [model.otherPrice floatValue]];
+        self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:therPrice]];
     } else {
         self.otherPrice.hidden = YES;
     }
 
-    UIView *line = [[UIView alloc] init];
-    if (![self.couponModel.dataFlag  isEqual: @(-1)]) {
-        line.hidden = YES;
+    if ([self.fee floatValue] > 0) { // 有极品城补贴
+        self.feeLabel.text = [NSString stringWithFormat:@"¥%.2f", [self.fee floatValue]];
+        self.feeView.hidden = NO;
+    } else { // 无极品城补贴
+        self.feeView.hidden = YES;
+        self.titleLabelTop.constant = - 30;
+        [self layoutIfNeeded];
+    }
+
+    self.titleName.text = model.goodsName;
+
+    if (![self.couponModel.dataFlag  isEqual: @(-1)]) { // 有优惠券
         self.couponView.hidden = NO;
         // 优惠券信息
         self.couponPrice.text = [NSString stringWithFormat:@"%@", self.couponModel.couponMoney];
-        self.bottomLabel.text = [NSString stringWithFormat:@"使用期限%@至%@", self.couponModel.validStartTime, self.couponModel.validEndTime];
-    } else {
-        [self layoutIfNeeded];
-        line.hidden = NO;
-        line.height = 6;
-        line.width = SCR_WIDTH;
-        line.backgroundColor = CZGlobalLightGray;
-        line.y = CZGetY(self.otherPrice) + 13;
-        [self addSubview:line];
+        self.bottomLabel.text = [NSString stringWithFormat:@"%@ - %@", self.couponModel.validStartTime, self.couponModel.validEndTime];
+    } else { // 无优惠券
+        self.titleLabelTop.constant = 15;
         self.couponView.hidden = YES;
         [self.couponView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(0));
         }];
+        // 无券无补贴
+        if ([self.fee floatValue] == 0) {
+            self.titleLabelTop.constant = - 30;
+        }
+        [self layoutIfNeeded];
     }
     
     // 综合评分

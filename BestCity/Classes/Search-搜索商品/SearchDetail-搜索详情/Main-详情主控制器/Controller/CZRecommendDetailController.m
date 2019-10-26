@@ -12,6 +12,7 @@
 #import "CZTestSubController.h" // 测评
 #import "CZEvaluateSubController.h" // 评论
 #import "CZCommonRecommendController.h" // 推荐文章
+#import "CZGoodsDetailGuidanceView.h" // 
 
 #import "CZRecommendNav.h" // 导航
 #import "CZCollectButton.h"
@@ -58,12 +59,15 @@
 /** 收藏 */
 @property (nonatomic, strong) CZCollectButton *collectButton;
 
-/** 分享里面文字 */
+/** 整体数据, 里面有分享的文字 */
 @property (nonatomic, strong) NSDictionary *shareDic;
 /** 购买URL */
 @property (nonatomic, strong) NSString *bugLinkUrl;
 
 @property (nonatomic, strong) MLSDKScene *scene;
+
+UIKIT_EXTERN BOOL oldUser;
+
 @end
 
 /** 分享控件高度 */
@@ -299,20 +303,14 @@ static NSString * const type = @"1";
             shareDic[@"shareUrl"] = self.detailModel.goodsDetailEntity.shareUrl;
             shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
             self.shareParam = shareDic;
+
+            // self.detailModel.goodsCouponsEntity.dataFlag // -1 没有优惠券
             NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
-            if ([self.detailModel.goodsCouponsEntity.dataFlag isEqual:@(-1)]) {
-                 if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
-                     self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
-                 } else {
-                     self.likeView.titleData = @{@"left" : @"分享", @"right" : @"立即购买"};
-                 }
+            if ([versionParam[@"open"] isEqualToNumber:@(1)]) {
+                self.likeView.titleData = @{@"right" : result[@"btnTxt2"]};
             } else {
-                if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
-                    self.likeView.titleData = @{@"left" : result[@"btnTxt1"], @"right" : result[@"btnTxt2"]};
-                } else {
-                    self.likeView.titleData = @{@"left" : @"分享", @"right" : @"立即购买"};
-                }
-            };
+                self.likeView.titleData = @{@"right" : result[@"btnTxt2"]};
+            }
             [self.view addSubview:self.likeView];
         }
     } failure:^(NSError *error) {}];
@@ -322,6 +320,7 @@ static NSString * const type = @"1";
 {
     // 商品
     self.commendVC = [[CZCommoditySubController alloc] init];
+    self.commendVC.fee = self.shareDic[@"fee"];
     self.commendVC.detailData = self.detailModel.goodsEntity;
     self.commendVC.commodityDetailData = self.detailModel.goodsDetailEntity;
     self.commendVC.couponData = self.detailModel.goodsCouponsEntity;
@@ -355,6 +354,15 @@ static NSString * const type = @"1";
     
     // 设置滚动高度
     self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height + self.recommen.view.height);
+
+    // 如果是新用户提示
+    if (!oldUser) {
+        CZGoodsDetailGuidanceView *guide = [CZGoodsDetailGuidanceView goodsDetailGuidanceView];
+        guide.frame = [UIScreen mainScreen].bounds;
+        guide.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+        [[UIApplication sharedApplication].keyWindow addSubview:guide];
+    }
+
 }
 
 #pragma mark - 监听子控件的frame的变化

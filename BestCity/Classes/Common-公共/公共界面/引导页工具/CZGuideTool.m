@@ -28,16 +28,16 @@ BOOL oldUser;
     
     //比较
     if ([curVersion isEqualToString:lastVersion]) {
+        oldUser = YES;
         // 显示版本更新
         [CZUpdataManger ShowUpdataViewWithNetworkService];
-        oldUser = YES;
     } else {
+        oldUser = NO;
         // 新人引导
         CZNoviceGuidanceView *guide = [[CZNoviceGuidanceView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         guide.backgroundColor = [UIColor clearColor];
         [[UIApplication sharedApplication].keyWindow addSubview: guide];
         [CZSaveTool setObject:curVersion forKey:CZVERSION];
-        oldUser = NO;
     }
 }
 

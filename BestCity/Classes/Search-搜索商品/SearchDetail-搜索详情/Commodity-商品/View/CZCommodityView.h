@@ -11,11 +11,15 @@
 #import "CZCouponsModel.h"
 
 @interface CZCommodityView : UIView
++ (instancetype)commodityView;
 /** 记录xib的尺寸 */
 @property (nonatomic, assign) CGFloat commodityH;
 /** 数据 */
 @property (nonatomic, strong) CZCommodityModel *model;
 /** 优惠券信息 */
 @property (nonatomic, strong) CZCouponsModel *couponModel;
+
+/** 极品城补贴 */
+@property (nonatomic, strong) NSString *fee;
 
 @end

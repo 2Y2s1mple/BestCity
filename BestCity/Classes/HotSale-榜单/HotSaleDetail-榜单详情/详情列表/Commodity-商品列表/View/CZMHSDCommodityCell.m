@@ -8,6 +8,7 @@
 
 #import "CZMHSDCommodityCell.h"
 #import "UIImageView+WebCache.h"
+#import "Masonry.h"
 
 @interface CZMHSDCommodityCell ()
 /** 大图片 */
@@ -26,6 +27,13 @@
 @property (nonatomic, weak) IBOutlet UIButton *tag4;
 /** 当前价格 */
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
+
+@property (nonatomic, weak) IBOutlet UILabel *otherPricelabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *couponPriceLabel;
+/**  */
+@property (nonatomic, weak) IBOutlet UILabel *feeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *feeLabelMargin;
 @end
 
 @implementation CZMHSDCommodityCell
@@ -93,9 +101,22 @@
                 break;
         }
     }
-    NSString *actualPrice = [NSString stringWithFormat:@"¥%.2f", [dataDic[@"actualPrice"] floatValue]];
-    self.actualPriceLabel.text = actualPrice;
+    NSDictionary *paramDic = dataDic;
+    self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [paramDic[@"buyPrice"] floatValue]];
+    NSString *other = [NSString stringWithFormat:@"¥%.2f", [paramDic[@"otherPrice"] floatValue]];
+    self.otherPricelabel.attributedText = [other addStrikethroughWithRange:NSMakeRange(0, other.length)];
+    self.couponPriceLabel.text = [NSString stringWithFormat:@"优惠券 ¥%.0f", [paramDic[@"couponPrice"] floatValue]];
+    self.feeLabel.text = [NSString stringWithFormat:@"  补贴 ¥%.2f  ", [paramDic[@"fee"] floatValue]];
 
+    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"]) {
+        [[self.couponPriceLabel superview] setHidden:YES];
+        self.feeLabelMargin.constant = -75;
+        [self layoutIfNeeded];
+    }
+
+    if ([self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+        [self.feeLabel setHidden:YES];
+    }
 }
 
 - (void)setIndexNumber:(NSInteger)indexNumber

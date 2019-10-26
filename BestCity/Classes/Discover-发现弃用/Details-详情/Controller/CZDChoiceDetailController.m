@@ -21,8 +21,9 @@
 #import "CZTestSubController.h" // 测评
 #import "CZEvaluateSubController.h" // 评论
 #import "CZCommonRecommendController.h" // 推荐文章
-#import "CZShareAndlikeView.h" // 分享
 #import "CZBuyView.h"
+#import "CZShareView.h"
+#import "CZEvaluationBottomView.h"
 
 // universal links
 #import <MobLinkPro/MLSDKScene.h>
@@ -46,8 +47,8 @@
 @property (nonatomic, strong) CZEvaluateSubController *evaluate;
 /** 推荐文章 */
 @property (nonatomic, strong) CZCommonRecommendController *recommen;
-/** 分享购买按钮 */
-@property (nonatomic, strong) CZShareAndlikeView *likeView;
+/** 最下面购买条 */
+@property (nonatomic, strong) UIView *bottomView;
 /** 关注按钮 */
 @property (nonatomic, strong) CZAttentionBtn *attentionBtn;
 /** 小头像 */
@@ -72,7 +73,7 @@
 
 @implementation CZDChoiceDetailController
 /** 分享控件高度 */
-static CGFloat const likeAndShareHeight = 49;
+static CGFloat const likeAndShareHeight = 55;
 /** 文章的类型: 1商品，2评测, 3发现，4试用 */
 
 //实现带有场景参数的初始化方法，并根据场景参数还原该控制器：
@@ -122,120 +123,80 @@ static CGFloat const likeAndShareHeight = 49;
         if (self.TitleText.length > 0) {
             self.nav.titleText = self.TitleText;
         }
+
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [shareBtn setBackgroundImage:[UIImage imageNamed:@"Forward-1"] forState:UIControlStateNormal];
+        shareBtn.size = CGSizeMake(20, 20);
+        shareBtn.centerY = 20;
+        shareBtn.x = SCR_WIDTH - 80;
+        [_nav addSubview:shareBtn];
+        [shareBtn addTarget:self action:@selector(createShareAlert) forControlEvents:UIControlEventTouchUpInside];
+
     }
     return _nav;
 }
 
-- (CZShareAndlikeView *)likeView
+#pragma mark - 组下面的购买条
+- (UIView *)bottomView
 {
-    if (_likeView == nil) {
-        __weak typeof(self) weakSelf = self;
-        _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
-            if ([JPTOKEN length] <= 0) {
-                CZLoginController *vc = [CZLoginController shareLoginController];
-                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-                [tabbar presentViewController:vc animated:NO completion:^{
-                    UINavigationController *nav = tabbar.selectedViewController;
-                    UIViewController *currentVc = nav.topViewController;
-                    [currentVc.navigationController popViewControllerAnimated:nil];
-                }];
-                return;
-            }
+    if (_bottomView == nil) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight)];
+        _bottomView.backgroundColor = RANDOMCOLOR;
 
-            UIViewController *vc = [[UIApplication sharedApplication].keyWindow rootViewController];
-
-            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-            UINavigationController *naVc = tabbar.selectedViewController;
-            UIViewController *toVC = naVc.topViewController;
-
-
-
-            NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-
-            if (specialId.length == 0) {
-                [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
-                [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
-                    NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
-                    NSLog(@"%@", tip);
-                    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
-                        [CZProgressHUD showProgressHUDWithText:@"授权成功"];
-                        [CZProgressHUD hideAfterDelay:1.5];
-                        [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
+        if (self.dicDataModel.relatedGoodsList.count == 1) {
+            CZEvaluationBottomView *bottom = [CZEvaluationBottomView evaluationBottomView];
+            bottom.size = _bottomView.size;
+            [_bottomView addSubview:bottom];
+            __weak typeof(self) weakSelf = self;
+            bottom.paramDic = [self.dicDataModel.relatedGoodsList firstObject];
+            [bottom setBugBlock:^{
+                if ([JPTOKEN length] <= 0) {
+                    CZLoginController *vc = [CZLoginController shareLoginController];
+                    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                    [tabbar presentViewController:vc animated:NO completion:^{
+                        UINavigationController *nav = tabbar.selectedViewController;
+                        UIViewController *currentVc = nav.topViewController;
+                        [currentVc.navigationController popViewControllerAnimated:nil];
                     }];
-                    [vc presentViewController:webVc animated:YES completion:nil];
-
-                    //拉起淘宝
-                    AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
-                    showParam.openType = AlibcOpenTypeAuto;
-                    showParam.backUrl = @"tbopen25267281://xx.xx.xx";
-                    showParam.isNeedPush = YES;
-                    showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
-
-                    [CZProgressHUD hideAfterDelay:1.5];
-
-                    [[AlibcTradeSDK sharedInstance].tradeService
-                     openByUrl:[NSString stringWithFormat:@"https://oauth.m.taobao.com/authorize?response_type=code&client_id=25612235&redirect_uri=https://www.jipincheng.cn/qualityshop-api/api/taobao/returnUrl&state=%@&view=wap", JPTOKEN]
-                     identity:@"trade"
-                     webView:webVc.webView
-                     parentController:vc
-                     showParams:showParam
-                     taoKeParams:nil
-                     trackParam:nil
-                     tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
-                         NSLog(@"-----AlibcTradeSDK------");
-                         if(result.result == AlibcTradeResultTypeAddCard){
-                             NSLog(@"交易成功");
-                         } else if(result.result == AlibcTradeResultTypeAddCard){
-                             NSLog(@"加入购物车");
-                         }
-                     } tradeProcessFailedCallback:^(NSError * _Nullable error) {
-                         NSLog(@"----------退出交易流程----------");
-                     }];
-                } failureCallback:^(ALBBSession *session, NSError *error) {
-                    NSString *tip=[NSString stringWithFormat:@"登录失败:%@",@""];
-                    NSLog(@"%@", tip);
-                }];
-            } else {
-                NSLog(@"已经登录了");
-                CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-                share.cententText =  self.dataDic[@"content"];
-                share.param = self.shareParam;
-                [weakSelf.view addSubview:share];
-            }
-
-
-
-
-
-        } rightBtnAction:^{
-            if ([JPTOKEN length] <= 0) {
-                CZLoginController *vc = [CZLoginController shareLoginController];
-                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-                [tabbar presentViewController:vc animated:NO completion:^{
-                    UINavigationController *nav = tabbar.selectedViewController;
-                    UIViewController *currentVc = nav.topViewController;
-                    [currentVc.navigationController popViewControllerAnimated:nil];
-                }];
-                return;
-            }
-            if (self.dicDataModel.relatedGoodsList.count != 0) {
-                CZBuyView *buyView = [[CZBuyView alloc] initWithFrame:self.view.frame];
-                buyView.buyDataList = self.dicDataModel.relatedGoodsList;
-                [weakSelf.view addSubview:buyView];
-            }
-        }];
-        if (self.dicDataModel.relatedGoodsList.count != 0) {
-            NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
-              if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
-                  _likeView.titleData = @{@"left" : self.dataDic[@"btnTxt"], @"right" : self.dataDic[@"btnTxt2"]};
-              } else {
-                  _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
-              }
-        } else {
-            _likeView.titleData = @{@"left" : @"分享", @"right" : @"暂无商品"};
+                    return;
+                }
+                [weakSelf createShareAlert];
+            }];
+            
+        } else if (self.dicDataModel.relatedGoodsList.count > 1) {
+            UIButton *moreGoods = [[UIButton alloc] init];
+            moreGoods.size = _bottomView.size;
+            moreGoods.backgroundColor = UIColorFromRGB(0xE25838);
+            [moreGoods setTitle:@"相关商品" forState:UIControlStateNormal];
+            [moreGoods setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            moreGoods.titleLabel.font = [UIFont fontWithName:@"PingFangSC" size: 18];
+            [_bottomView addSubview:moreGoods];
+            [moreGoods addTarget:self action:@selector(jumpRelatedGoodsList) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-    return _likeView;
+    return _bottomView;
+
+
+//    if (_likeView == nil) {
+//
+//        _likeView = [[CZShareAndlikeView alloc] initWithFrame:CGRectMake(0, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight), SCR_WIDTH, likeAndShareHeight) leftBtnAction:^{
+//
+//        } rightBtnAction:^{
+
+
+//        }];
+//        if (self.dicDataModel.relatedGoodsList.count != 0) {
+//            NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
+//              if ( [versionParam[@"open"] isEqualToNumber:@(1)]) {
+//                  _likeView.titleData = @{@"left" : self.dataDic[@"btnTxt"], @"right" : self.dataDic[@"btnTxt2"]};
+//              } else {
+//                  _likeView.titleData = @{@"left" : @"分享", @"right" : @"相关商品"};
+//              }
+//        } else {
+//            _likeView.titleData = @{@"left" : @"分享", @"right" : @"暂无商品"};
+//        }
+//    }
+//    return _likeView;
 }
 
 #pragma mark - 获取数据
@@ -259,7 +220,7 @@ static CGFloat const likeAndShareHeight = 49;
             shareDic[@"shareImg"] = self.dicDataModel.shareImg;
             self.shareParam = shareDic;
             if (self.detailType != CZJIPINModuleRelationBK) {
-                [self.view addSubview:self.likeView];
+                [self.view addSubview:self.bottomView];
             }
         }
     } failure:^(NSError *error) {}];
@@ -504,7 +465,85 @@ static CGFloat const likeAndShareHeight = 49;
     }];
 }
 
+// 创建分享视图
+- (void)createShareAlert
+{
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:^{
+            UINavigationController *nav = tabbar.selectedViewController;
+            UIViewController *currentVc = nav.topViewController;
+            [currentVc.navigationController popViewControllerAnimated:nil];
+        }];
+        return;
+    }
 
+    UIViewController *vc = [[UIApplication sharedApplication].keyWindow rootViewController];
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *naVc = tabbar.selectedViewController;
+    UIViewController *toVC = naVc.topViewController;
+
+    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+
+    if (specialId.length == 0) {
+        [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
+        [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
+            NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
+            NSLog(@"%@", tip);
+            TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
+                [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+                [CZProgressHUD hideAfterDelay:1.5];
+                [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
+            }];
+            [vc presentViewController:webVc animated:YES completion:nil];
+
+            //拉起淘宝
+            AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
+            showParam.openType = AlibcOpenTypeAuto;
+            showParam.backUrl = @"tbopen25267281://xx.xx.xx";
+            showParam.isNeedPush = YES;
+            showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
+
+            [CZProgressHUD hideAfterDelay:1.5];
+
+            [[AlibcTradeSDK sharedInstance].tradeService
+             openByUrl:[NSString stringWithFormat:@"https://oauth.m.taobao.com/authorize?response_type=code&client_id=25612235&redirect_uri=https://www.jipincheng.cn/qualityshop-api/api/taobao/returnUrl&state=%@&view=wap", JPTOKEN]
+             identity:@"trade"
+             webView:webVc.webView
+             parentController:vc
+             showParams:showParam
+             taoKeParams:nil
+             trackParam:nil
+             tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
+                 NSLog(@"-----AlibcTradeSDK------");
+                 if(result.result == AlibcTradeResultTypeAddCard){
+                     NSLog(@"交易成功");
+                 } else if(result.result == AlibcTradeResultTypeAddCard){
+                     NSLog(@"加入购物车");
+                 }
+             } tradeProcessFailedCallback:^(NSError * _Nullable error) {
+                 NSLog(@"----------退出交易流程----------");
+             }];
+        } failureCallback:^(ALBBSession *session, NSError *error) {
+            NSString *tip=[NSString stringWithFormat:@"登录失败:%@",@""];
+            NSLog(@"%@", tip);
+        }];
+    } else {
+        NSLog(@"已经登录了");
+        CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+        share.cententText =  self.dataDic[@"content"];
+        share.param = self.shareParam;
+        [self.view addSubview:share];
+    }
+}
+
+- (void)jumpRelatedGoodsList
+{
+    CZBuyView *buyView = [[CZBuyView alloc] initWithFrame:self.view.frame];
+    buyView.buyDataList = self.dicDataModel.relatedGoodsList;
+    [self.view addSubview:buyView];
+}
 
 
 

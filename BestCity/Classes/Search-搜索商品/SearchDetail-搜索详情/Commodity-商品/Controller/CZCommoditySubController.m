@@ -52,10 +52,11 @@
     imageView.imgList = self.detailData.imgList;
 
     // 创建标题附标题
-    CZCommodityView *commodity = [[CZCommodityView alloc] init];
-    commodity.frame = CGRectMake(0, 410, SCR_WIDTH, commodity.commodityH);
+    CZCommodityView *commodity = [CZCommodityView commodityView];
+    commodity.fee = self.fee;
     commodity.couponModel = self.couponData;
     commodity.model = self.detailData;
+    commodity.frame = CGRectMake(0, 410, SCR_WIDTH, commodity.commodityH);
     
     [self.scrollerView addSubview:commodity];
     CGFloat originY = 420 + commodity.commodityH;

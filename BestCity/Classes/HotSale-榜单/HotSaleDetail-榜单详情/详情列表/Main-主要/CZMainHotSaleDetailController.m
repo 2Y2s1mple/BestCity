@@ -67,6 +67,7 @@
         menuView.didSelectedTitle = ^(NSInteger index) {
             NSLog(@"%ld", index);
             NSDictionary *dic = titles[index];
+            self.commodity.selectedItemIndex = index;
             self.orderbyCategoryId = dic[@"orderbyCategoryId"];
             [self getTopListData:^(NSDictionary *dic) {
                 self.commodity.topDataList = dic[@"data"];
