@@ -27,6 +27,11 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/evaluationList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
+
+            for (CZETestModel *model in self.dataSource) {
+                model.isRead = [model.articleReadData[@"clickCount"] integerValue] > 0;
+            }
+
             !successData ? : successData(result);
         }
     } failure:^(NSError *error) {}];
@@ -42,6 +47,9 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/evaluationList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
            NSArray *list = [CZETestModel objectArrayWithKeyValuesArray:result[@"data"]];
+            for (CZETestModel *model in list) {
+                model.isRead = [model.articleReadData[@"clickCount"] integerValue] > 0;
+            }
             [self.dataSource addObjectsFromArray:list];
         }
         !successData ? : successData(result);

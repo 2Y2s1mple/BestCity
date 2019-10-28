@@ -25,6 +25,10 @@
 /** 提现金额 */
 @property (nonatomic, weak) IBOutlet UITextField *withdrawTextField;
 
+@property (weak, nonatomic) IBOutlet UILabel *notelabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *maxMoney;
+
 @end
 
 @implementation CZMyWalletDepositController
@@ -32,6 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalLightGray;
+    // 获取数据
+    [self getNoteData];
+    [self getALPayAccount];
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我要提现" rightBtnTitle:nil rightBtnAction:nil ];
     [self.view addSubview:navigationView];
@@ -66,8 +73,8 @@
         [CZProgressHUD hideAfterDelay:1.5];
         return;
     }
-    if (self.withdrawTextField.text.length == 0 ||  [self.withdrawTextField.text floatValue] < 50) {
-        [CZProgressHUD showProgressHUDWithText:@"金额大于50元"];
+    if (self.withdrawTextField.text.length == 0 ||  [self.withdrawTextField.text floatValue] < [self.maxMoney.text integerValue]) {
+        [CZProgressHUD showProgressHUDWithText:[NSString stringWithFormat:@"金额大于%ld元", [self.maxMoney.text integerValue]]];
         [CZProgressHUD hideAfterDelay:1.5];
         return;
     }
@@ -97,6 +104,42 @@
     } failure:^(NSError *error) {
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
+    }];
+}
+
+- (void)getNoteData
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getWithdrawNote"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            self.notelabel.text = result[@"withdrawNote"];
+            self.maxMoney.text = [NSString stringWithFormat:@"%@元", result[@"minWithdraw"]] ;
+        } else {
+
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+
+- (void)getALPayAccount
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getTaobaoAccount"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            self.realNameTextField.text = result[@"data"][@"realname"];
+            self.accountTextField.text = result[@"data"][@"account"];
+            if (self.realNameTextField.text.length > 0) {
+                self.realNamePlaceHolder.hidden = NO;
+            }
+            if (self.accountTextField.text.length > 0) {
+                self.accountPlaceHolder.hidden = NO;
+            }
+        } else {
+
+        }
+    } failure:^(NSError *error) {
     }];
 }
 

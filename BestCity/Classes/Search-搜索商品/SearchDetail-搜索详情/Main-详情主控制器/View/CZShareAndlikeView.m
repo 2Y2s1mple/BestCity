@@ -47,7 +47,15 @@
 
     UIButton *buyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     buyBtn.frame = CGRectMake(shareBtn.width, shareBtn.y, SCR_WIDTH - shareBtn.width, shareBtn.height);
-    [buyBtn setTitle:_titleData[@"right"] forState:UIControlStateNormal];
+
+
+    NSString *buyBtnStr = _titleData[@"right"];
+
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:buyBtnStr];
+    [attrStr addAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} range:NSMakeRange(0, attrStr.length)];
+    [attrStr addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Medium" size: 18]} range:NSMakeRange(0, 4)];
+
+    [buyBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
     [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     buyBtn.backgroundColor = CZREDCOLOR;
     [buyBtn addTarget:self action:@selector(buyBtnAction) forControlEvents:UIControlEventTouchUpInside];

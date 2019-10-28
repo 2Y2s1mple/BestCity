@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeCellModelWithID:(NSString *)ID andIsAttention:(BOOL)isAttention;
 
 /** 获取数据 */
-- (void)reloadNewDataSorce:(void (^)(void))block;
+- (void)reloadNewDataSorce:(void (^)(NSDictionary *))block;
 - (void)loadMoreDataSorce:(void (^)(void))block;
 @end
 

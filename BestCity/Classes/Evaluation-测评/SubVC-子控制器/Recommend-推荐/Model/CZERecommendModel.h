@@ -17,9 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSString *pv;
-/** <#注释#> */
+/** 文章是否已读 */
+@property (nonatomic, strong) NSDictionary *articleReadData;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) CZEAttentionUserModel *user;
+
+/** 文章是否已读 */
+@property (nonatomic, assign) BOOL isRead;
 @end
 
 NS_ASSUME_NONNULL_END

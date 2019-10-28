@@ -361,6 +361,7 @@ static NSString * const type = @"1";
         guide.frame = [UIScreen mainScreen].bounds;
         guide.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
         [[UIApplication sharedApplication].keyWindow addSubview:guide];
+        oldUser = YES;
     }
 
 }

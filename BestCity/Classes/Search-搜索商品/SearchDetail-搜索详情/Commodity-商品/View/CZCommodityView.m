@@ -10,6 +10,7 @@
 #import "CZOpenAlibcTrade.h"
 #import "Masonry.h"
 #import "GXNetTool.h"
+#import "TSLWebViewController.h"
 
 @interface CZCommodityView ()
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
@@ -82,9 +83,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.actualPriceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
     self.titleName.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     self.cscoreLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+    self.feeLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 15];
+    self.couponPrice.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 33];
 }
 
 + (instancetype)commodityView
@@ -95,10 +97,10 @@
 - (void)setModel:(CZCommodityModel *)model
 {
     _model = model;
-    NSString *actualPrice = [NSString stringWithFormat:@"到手价 ¥%.2f", [model.actualPrice floatValue]];
-    self.actualPriceLabel.attributedText = [actualPrice addAttributeFont:[UIFont systemFontOfSize:24]  Range:[actualPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model.actualPrice floatValue]]]];
+    NSString *actualPrice = [NSString stringWithFormat:@"到手价 ¥%.2f", [model.buyPrice floatValue]];
+    self.actualPriceLabel.attributedText = [actualPrice addAttributeFont:[UIFont fontWithName:@"PingFangSC-Semibold" size: 21]  Range:[actualPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model.buyPrice floatValue]]]];
 
-    if (model.otherPrice.length > 0 && ![model.actualPrice isEqual:model.otherPrice]) {
+    if (model.otherPrice.length > 0 && ![model.buyPrice isEqual:model.otherPrice]) {
         self.otherPrice.hidden = NO;
         NSString *therPrice = [NSString stringWithFormat:@"%@¥%.2f", [self platfromNameWithNumber:model.source], [model.otherPrice floatValue]];
         self.otherPrice.attributedText = [therPrice addStrikethroughWithRange:[therPrice rangeOfString:therPrice]];
@@ -237,4 +239,24 @@
     }
     return status;
 }
+
+- (IBAction)feeRule:(UIButton *)sender {
+    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/fee-rule.html"]];
+    webVc.titleName = @"极品城购物补贴说明";
+    [self.viewController presentViewController:webVc animated:YES completion:nil];
+}
+
+// 找到父控制器
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
+
+
 @end

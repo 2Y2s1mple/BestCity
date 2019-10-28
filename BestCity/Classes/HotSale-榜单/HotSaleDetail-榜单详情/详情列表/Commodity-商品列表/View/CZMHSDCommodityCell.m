@@ -27,6 +27,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *tag4;
 /** 当前价格 */
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *actualPriceLabelBottomMragin;
+
 
 @property (nonatomic, weak) IBOutlet UILabel *otherPricelabel;
 /** <#注释#> */
@@ -117,6 +119,11 @@
     if ([self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
         [self.feeLabel setHidden:YES];
     }
+
+    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+        self.actualPriceLabelBottomMragin.constant = -18;
+    }
+
 }
 
 - (void)setIndexNumber:(NSInteger)indexNumber
@@ -128,7 +135,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.actualPriceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+    self.actualPriceLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

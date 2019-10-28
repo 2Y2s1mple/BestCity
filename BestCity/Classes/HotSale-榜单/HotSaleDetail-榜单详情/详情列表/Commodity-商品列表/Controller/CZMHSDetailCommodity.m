@@ -49,10 +49,14 @@
     self.recordIndex = index;
     UIView *backView = [[UIView alloc] init];
     backView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAllTableViewHeaderView)];
+    backView.userInteractionEnabled = YES;
+    [backView addGestureRecognizer:tap];
+
 
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = self.model.relatedItemList[index][@"introductionTitle"];
-    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];
     titleLabel.textColor = [UIColor colorWithRed:86/255.0 green:82/255.0 blue:82/255.0 alpha:1.0];
     [titleLabel sizeToFit];
     titleLabel.x = 15;
@@ -78,7 +82,8 @@
         content.numberOfLines = 3;
         content.height = 3 * content.font.lineHeight;
         UIButton *arrowBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [arrowBtn addTarget:self action:@selector(showAllTableViewHeaderView:) forControlEvents:UIControlEventTouchUpInside];
+        arrowBtn.userInteractionEnabled = NO;
+//        [arrowBtn addTarget:self action:@selector(showAllTableViewHeaderView:) forControlEvents:UIControlEventTouchUpInside];
         [arrowBtn setImage:[UIImage imageNamed:@"list-right-4"] forState:UIControlStateNormal];
         [backView addSubview:arrowBtn];
         [arrowBtn sizeToFit];
@@ -88,7 +93,8 @@
     } else if (count > 3) {
         content.numberOfLines = 0;
         UIButton *arrowBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [arrowBtn addTarget:self action:@selector(showAllTableViewHeaderView:) forControlEvents:UIControlEventTouchUpInside];
+        arrowBtn.userInteractionEnabled = NO;
+//        [arrowBtn addTarget:self action:@selector(showAllTableViewHeaderView:) forControlEvents:UIControlEventTouchUpInside];
         [arrowBtn setImage:[UIImage imageNamed:@"list-right-5"] forState:UIControlStateNormal];
         [backView addSubview:arrowBtn];
         [arrowBtn sizeToFit];
@@ -103,7 +109,7 @@
 }
 
 #pragma mark - 事件
-- (void)showAllTableViewHeaderView:(UIButton *)sender
+- (void)showAllTableViewHeaderView
 {
 
     if (self.isShowAll) {

@@ -131,6 +131,22 @@
     } else {
         CZEAttentionArticleCell *cell = [CZEAttentionArticleCell cellwithTableView:tableView];
         [cell bindViewModel:viewModel];
+        [cell setCellWithBlcok:^(NSString * _Nonnull ID, BOOL isFollow) {
+                if (isFollow) {
+                    for (CZEAttentionItemViewModel *viewModel in self.viewModel.dataSource) {
+                        if ([viewModel.model.article[@"user"][@"userId"] isEqualToString:ID]) {
+                            viewModel.isShowAttention = YES;
+                        }
+                    }
+                } else {
+                    for (CZEAttentionItemViewModel *viewModel in self.viewModel.dataSource) {
+                        if ([viewModel.model.article[@"user"][@"userId"] isEqualToString:ID]) {
+                            viewModel.isShowAttention = NO;
+                        }
+                    }
+                }
+                [self.tableView reloadData];
+            }];
         return cell;
     }
 }
@@ -152,6 +168,7 @@
     if ([viewModel.model.type isEqual: @"2"]) {
       
     } else {
+        
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
         vc.detailType = [CZJIPINSynthesisTool getModuleType:[viewModel.model.article[@"type"] integerValue]];
         vc.findgoodsId = viewModel.model.article[@"articleId"];
@@ -172,6 +189,15 @@
             // 没有数据图片
             [self.tableView addSubview:self.noDataView];
         }
+
+        if ([data[@"count"] integerValue] > 0) {
+            //隐藏菊花
+            [CZProgressHUD showOrangeProgressHUDWithText:[NSString stringWithFormat:@"为您更新%@篇文章", data[@"count"]]];
+        } else {
+             [CZProgressHUD showOrangeProgressHUDWithText:@"刷新成功"];
+        }
+        [CZProgressHUD hideAfterDelay:1.5];
+
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
 

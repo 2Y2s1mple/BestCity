@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *goodsId;
 /** 券后价 */
 @property (nonatomic, strong) NSString *actualPrice;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *buyPrice;
 /** 其他平台 */
 @property (nonatomic, strong) NSNumber *source;
 /** 其他平台价格 */

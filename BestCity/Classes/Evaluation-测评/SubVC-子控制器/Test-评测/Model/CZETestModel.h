@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSDictionary *user;
 @property (nonatomic, strong) NSString *pv;
+/** 文章是否已读 */
+@property (nonatomic, strong) NSDictionary *articleReadData;
 /** 内容 */
 @property (nonatomic, strong) NSString *content;
 /** 发布时间 */
@@ -28,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** 辅助 */
 /** cell的高度 */
 @property (nonatomic, assign) CGFloat cellHeight;
+/** 文章是否已读 */
+@property (nonatomic, assign) BOOL isRead;
 @end
 
 NS_ASSUME_NONNULL_END

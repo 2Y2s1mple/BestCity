@@ -62,6 +62,12 @@
     [self getTaskViewData];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self remarkInsert];
+}
+
 - (void)getTaskViewData
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -91,19 +97,19 @@
     // 设置最上面的导航栏, 实现滑动改变透明效果
     UIView *navView = [[UIView alloc] init];
     navView.frame = CGRectMake(0, 0, SCR_WIDTH, 64);
-    navView.backgroundColor = [UIColor clearColor];
+    navView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navView];
     self.navView = navView;
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [leftBtn setImage:[UIImage imageNamed:@"back-white"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
     leftBtn.frame = CGRectMake(20, 20, 49, navView.height - 20);
     leftBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
     [leftBtn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
     [self.navView addSubview:leftBtn];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
-    titleLabel.text = @"极币中心";
-    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.text = @"任务中心";
+    titleLabel.textColor = [UIColor blackColor];
     titleLabel.center = CGPointMake(SCR_WIDTH / 2, leftBtn.center.y);
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
@@ -112,7 +118,7 @@
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     rightBtn.frame = CGRectMake(SCR_WIDTH - 100, titleLabel.y, 80, 20);
     [rightBtn setTitle:@"规则说明" forState:UIControlStateNormal];
-    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [rightBtn setTitleColor:UIColorFromRGB(0x202020) forState:UIControlStateNormal];
     rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.navView addSubview:rightBtn];
@@ -128,9 +134,9 @@
 {
     CGFloat offsetY = scrollView.contentOffset.y;
     if (offsetY > 20 ) {
-        self.navView.backgroundColor = CZRGBColor(255, 93, 68);;
+        self.navView.backgroundColor = [UIColor whiteColor];
     } else {
-        self.navView.backgroundColor = [UIColor clearColor];
+        self.navView.backgroundColor = [UIColor whiteColor];
     }
 }
 
@@ -151,7 +157,9 @@
 
 - (void)update
 {
-    self.todayPointNumber.text = [NSString stringWithFormat:@"%@", self.dataSource[@"pointAccount"][@"todayPoint"]];
+    // 明日签到极币+15
+    self.todayPointNumber.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    self.todayPointNumber.text = [NSString stringWithFormat:@"明日签到极币+%@", self.dataSource[@"pointArr"][[self.dataSource[@"daysCount"] integerValue]]];
     self.usablePointNumber.text = [NSString stringWithFormat:@"%@", self.dataSource[@"pointAccount"][@"usablePoint"]];
     self.daysCountNumber = [self.dataSource[@"daysCount"] integerValue];
     
@@ -166,14 +174,14 @@
             subLabel.text = [NSString stringWithFormat:@"+%@", self.dataSource[@"pointArr"][i]];
             [subLabel sizeToFit];
             subLabel.textColor = [UIColor whiteColor];
-            subLabel.centerX = 15;
-            subLabel.centerY = 15;
+            subLabel.centerX = 12.5;
+            subLabel.centerY = 12.5;
             [coinImage addSubview:subLabel];
         } else {
             subLabel.text = [NSString stringWithFormat:@"+%@", self.dataSource[@"pointArr"][i]];
         }
     }
-    
+
     for (int i = 0; i < 7; i++) {
         UIImageView *coinImage =  self.remarkView.subviews[i];
         if (i < self.daysCountNumber) {        
@@ -210,10 +218,10 @@
     //获取详情数据
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/signin"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
-            [CZProgressHUD showProgressHUDWithText:@"签到成功"];
+            [CZProgressHUD showProgressHUDWithText:[NSString stringWithFormat:@"签到成功 极币+%ld", self.daysCountNumber]];
             [self getDataSource];
         } else {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+//            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:1];

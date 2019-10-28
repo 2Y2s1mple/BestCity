@@ -64,7 +64,7 @@
 {
     NSLog(@"%s", __func__);
     [self.tableView.mj_footer endRefreshing];
-    [self.viewModel reloadNewDataSorce:^ {
+    [self.viewModel reloadNewDataSorce:^(NSDictionary *data) {
         if ([self.viewModel.dataSource count] > 0) {
             // 没有数据图片
             [self.noDataView removeFromSuperview];
@@ -75,6 +75,13 @@
         if ([self.viewModel.imagesList count] > 0) {
             self.tableView.tableHeaderView = [self createHeaderView];
         }
+        if ([data[@"count"] integerValue] > 0) {
+            //隐藏菊花
+            [CZProgressHUD showOrangeProgressHUDWithText:[NSString stringWithFormat:@"为您更新%@篇文章", data[@"count"]]];
+        } else {
+             [CZProgressHUD showOrangeProgressHUDWithText:@"刷新成功"];
+        }
+        [CZProgressHUD hideAfterDelay:1.5];
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     }];
@@ -119,7 +126,7 @@
 {
     [super viewWillAppear:animated];
     self.tableView.height = self.view.height - 1;
-    [self reloadNewDataSorce];
+//    [self reloadNewDataSorce];
 }
 
 #pragma mark - 代理方法

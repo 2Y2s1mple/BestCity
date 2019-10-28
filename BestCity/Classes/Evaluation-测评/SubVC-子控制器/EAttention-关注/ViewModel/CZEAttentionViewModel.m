@@ -47,6 +47,7 @@
             //type: 1文章 2推荐关注
             NSMutableArray *dataSource = [NSMutableArray array];
             for (CZEAttentionModel *model in [CZEAttentionModel objectArrayWithKeyValuesArray:result[@"data"]]) {
+                model.isRead = [model.article[@"articleReadData"][@"clickCount"] integerValue] > 0;
                 CZEAttentionItemViewModel *viewModel = [[CZEAttentionItemViewModel alloc] initWithAttentionModel:model];
                 viewModel.isShowAttention = [result[@"follow"] boolValue];
                 [dataSource addObject:viewModel];
@@ -54,8 +55,6 @@
             self.dataSource = dataSource;
             block(result);
         }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {
 
     }];
@@ -71,8 +70,10 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/article/myfollowList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             for (CZEAttentionModel *model in [CZEAttentionModel objectArrayWithKeyValuesArray:result[@"data"]]) {
+                model.isRead = [model.article[@"articleReadData"][@"clickCount"] integerValue] > 0;
                 CZEAttentionItemViewModel *viewModel = [[CZEAttentionItemViewModel alloc] initWithAttentionModel:model];
                 viewModel.isShowAttention = [result[@"follow"] boolValue];
+
                 [self.dataSource addObject:viewModel];
             }
             block(result);

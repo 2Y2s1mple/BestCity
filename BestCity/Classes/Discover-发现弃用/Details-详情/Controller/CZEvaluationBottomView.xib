@@ -14,9 +14,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥599.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaY-DT-egA">
-                    <rect key="frame" x="15" y="4.0000000000000018" width="99" height="28.666666666666671"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="15" y="4" width="83" height="24"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                    <color key="textColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSL-s4-dZb">
@@ -66,7 +66,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX6-np-3fJ">
-                    <rect key="frame" x="118.99999999999999" y="11" width="42.333333333333329" height="14.666666666666664"/>
+                    <rect key="frame" x="103" y="8.3333333333333357" width="52" height="15.666666666666664"/>
                     <attributedString key="attributedText">
                         <fragment content="¥699.00">
                             <attributes>
@@ -116,6 +116,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="actualPriceLabelBottomMragin" destination="Iz0-Bv-6kC" id="LiH-xZ-aEl"/>
                 <outlet property="actualPricelabel" destination="ZaY-DT-egA" id="hRB-mb-yuq"/>
                 <outlet property="couponPriceLabel" destination="pkh-z0-5Nq" id="nAG-XY-AEs"/>
                 <outlet property="feeLabel" destination="dyF-qi-Jzj" id="Ewq-eR-3g0"/>

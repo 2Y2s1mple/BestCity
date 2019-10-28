@@ -11,7 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @interface CZEAttentionArticleCell : UITableViewCell <CZEvaluationProtocol>
+/** 关注按钮 */
+@property (nonatomic, weak) IBOutlet UIButton *attentionBtn;
 + (instancetype)cellwithTableView:(UITableView *)tableView;
+/** 刷新列表 */
+@property (nonatomic, strong) void (^cellWithBlcok)(NSString *ID, BOOL isFollow);
 
 - (void)attentionAction:(UIButton *)sender;
 // 未关注样式

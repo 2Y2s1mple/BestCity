@@ -32,6 +32,13 @@
 - (void)setModel:(CZETestModel *)model
 {
     _model = model;
+    if (model.isRead) {
+        self.nameLabel.textColor = UIColorFromRGB(0xACACAC);
+        self.headerName.textColor = UIColorFromRGB(0xACACAC);
+    } else {
+        self.nameLabel.textColor = UIColorFromRGB(0x202020);
+        self.headerName.textColor = UIColorFromRGB(0x202020);
+    }
     [self.bigImage sd_setImageWithURL:[NSURL URLWithString:model.img]];
     self.nameLabel.text = model.title;
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:model.user[@"avatar"]]];
@@ -69,8 +76,11 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    if (selected) {
+        self.model.isRead = YES;
+        self.nameLabel.textColor = UIColorFromRGB(0xACACAC);
+        self.headerName.textColor = UIColorFromRGB(0xACACAC);
+    }
 }
 
 @end

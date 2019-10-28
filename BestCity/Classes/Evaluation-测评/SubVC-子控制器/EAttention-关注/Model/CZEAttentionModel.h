@@ -16,8 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *type;
 /** 推荐文章 */
 @property (nonatomic, strong) NSDictionary *article;
+
 /** 推荐的关注 */
 @property (nonatomic, strong) NSArray <CZEAttentionUserModel *> *userList;
+
+/** 文章是否已读 */
+@property (nonatomic, assign) BOOL isRead;
+
 @end
 
 NS_ASSUME_NONNULL_END

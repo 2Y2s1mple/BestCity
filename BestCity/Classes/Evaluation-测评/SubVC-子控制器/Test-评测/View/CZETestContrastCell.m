@@ -37,6 +37,13 @@
 - (void)setModel:(CZETestModel *)model
 {
     _model = model;
+    if (model.isRead) {
+        self.nameLabel.textColor = UIColorFromRGB(0xACACAC);
+        self.mainTitle.textColor = UIColorFromRGB(0xACACAC);
+    } else {
+        self.nameLabel.textColor = UIColorFromRGB(0x202020);
+        self.mainTitle.textColor = UIColorFromRGB(0x202020);
+    }
     // 主标题
     self.mainTitle.text = model.title;
     // 大图片
@@ -83,8 +90,11 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    if (selected) {
+        self.model.isRead = YES;
+        self.nameLabel.textColor = UIColorFromRGB(0xACACAC);
+        self.mainTitle.textColor = UIColorFromRGB(0xACACAC);
+    }
 }
 
 @end

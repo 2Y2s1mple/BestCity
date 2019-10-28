@@ -27,8 +27,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *visitLabel;
 /** 最下面的line */
 @property (nonatomic, weak) IBOutlet UIView *lineView;
-/** 关注按钮 */
-@property (nonatomic, weak) IBOutlet UIButton *attentionBtn;
 /** 数据模型 */
 @property (nonatomic, strong) CZEAttentionItemViewModel *viewModel;
 @end
@@ -48,6 +46,13 @@
 - (void)bindViewModel:(NSObject *)viewModel
 {
     self.viewModel = viewModel;
+    if (self.viewModel.model.isRead) {
+        self.nameLabel.textColor = UIColorFromRGB(0xACACAC);
+        self.mainTitle.textColor = UIColorFromRGB(0xACACAC);
+    } else {
+        self.nameLabel.textColor = UIColorFromRGB(0x202020);
+        self.mainTitle.textColor = UIColorFromRGB(0x202020);
+    }
     /** 主标题 */
     self.mainTitle.text = self.viewModel.model.article[@"title"];
     /** 大图片 */
@@ -61,9 +66,14 @@
     /** 访问量 */
     self.visitLabel.text = [NSString stringWithFormat:@"%@阅读",  self.viewModel.model.article[@"pv"]];
     // 显示或隐藏关注按钮
-    self.attentionBtn.hidden = self.viewModel.isShowAttention;
+//    self.attentionBtn.hidden = self.viewModel.isShowAttention;
     // 设置关注按钮
-    [self notAttentionBtnStyle:self.attentionBtn];
+    if (self.viewModel.isShowAttention) {
+        [self attentionBtnStyle:self.attentionBtn];
+    } else {
+        [self notAttentionBtnStyle:self.attentionBtn];
+    }
+
 
     [self layoutIfNeeded];
     /** 最下面的line */
@@ -81,16 +91,19 @@
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
     }
-    if (!sender.isSelected) {
+    if (!self.viewModel.isShowAttention) {
         [CZJIPINSynthesisTool addAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
            [self attentionBtnStyle:self.attentionBtn];
+            self.viewModel.isShowAttention = YES;
+            self.cellWithBlcok(self.viewModel.model.article[@"user"][@"userId"], YES);
         }];
     } else {
         [CZJIPINSynthesisTool deleteAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
+            self.viewModel.isShowAttention = NO;
              [self notAttentionBtnStyle:self.attentionBtn];
+            self.cellWithBlcok(self.viewModel.model.article[@"user"][@"userId"], NO);
         }];
     }
-    sender.selected = !sender.isSelected;
 }
 
 - (IBAction)iconAction:(UITapGestureRecognizer *)sender {
@@ -130,11 +143,6 @@
     return nil;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-}
-
 // 未关注样式
 - (void)notAttentionBtnStyle:(UIButton *)sender
 {
@@ -150,6 +158,16 @@
     sender.layer.borderColor = CZGlobalGray.CGColor;
     [sender setTitle:@"已关注" forState:UIControlStateNormal];
     [sender setTitleColor:CZGlobalGray forState:UIControlStateNormal];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    if (selected) {
+           self.nameLabel.textColor = UIColorFromRGB(0xACACAC);
+           self.mainTitle.textColor = UIColorFromRGB(0xACACAC);
+        self.viewModel.model.isRead = YES;
+       }
+
 }
 
 @end

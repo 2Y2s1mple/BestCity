@@ -34,7 +34,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="了解订单最新动态，实时推送" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtz-Bv-qsS">
                             <rect key="frame" x="75" y="141" width="159.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.61563080550000004" green="0.61572188139999995" blue="0.61561095710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notif1-1" translatesAutoresizingMaskIntoConstraints="NO" id="DVy-fW-8pE">
@@ -49,7 +49,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="第一时间抢到促销商品，省钱不能等" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJu-Fx-vz6">
                             <rect key="frame" x="75" y="221" width="196.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.61563080550000004" green="0.61572188139999995" blue="0.61561095710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notif1-2" translatesAutoresizingMaskIntoConstraints="NO" id="kpZ-Fa-ODs">
@@ -64,7 +64,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时为您推荐热门内容，不再错过好货" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Sp-5R-rCr">
                             <rect key="frame" x="75" y="302" width="208.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.61563080550000004" green="0.61572188139999995" blue="0.61561095710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaE-Bw-O5d">

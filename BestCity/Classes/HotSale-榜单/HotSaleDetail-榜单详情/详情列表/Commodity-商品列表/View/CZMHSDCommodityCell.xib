@@ -86,9 +86,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7e-cH-pAM">
-                        <rect key="frame" x="148" y="56" width="36" height="21"/>
+                        <rect key="frame" x="148" y="54" width="36" height="19"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
-                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="1" maxX="6" maxY="1"/>
                         <state key="normal" title="小资">
                             <color key="titleColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
@@ -105,9 +105,9 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjm-zM-9tI">
-                        <rect key="frame" x="194" y="56" width="36" height="21"/>
+                        <rect key="frame" x="194" y="54" width="36" height="19"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
-                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="1" maxX="6" maxY="1"/>
                         <state key="normal" title="小资">
                             <color key="titleColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
@@ -124,9 +124,9 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyq-ID-oCk">
-                        <rect key="frame" x="240" y="56" width="36" height="21"/>
+                        <rect key="frame" x="240" y="54" width="36" height="19"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
-                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="1" maxX="6" maxY="1"/>
                         <state key="normal" title="小资">
                             <color key="titleColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
@@ -143,9 +143,9 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSp-4c-RcM">
-                        <rect key="frame" x="286" y="56" width="36" height="21"/>
+                        <rect key="frame" x="286" y="54" width="36" height="19"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
-                        <inset key="contentEdgeInsets" minX="6" minY="2" maxX="6" maxY="2"/>
+                        <inset key="contentEdgeInsets" minX="6" minY="1" maxX="6" maxY="1"/>
                         <state key="normal" title="小资">
                             <color key="titleColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
@@ -210,12 +210,12 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYW-Mz-SWo">
-                        <rect key="frame" x="273" y="98" width="42.5" height="15"/>
+                        <rect key="frame" x="269" y="99" width="39" height="13.5"/>
                         <attributedString key="attributedText">
                             <fragment content="¥699.00">
                                 <attributes>
                                     <color key="NSColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
-                                    <font key="NSFont" metaFont="system"/>
+                                    <font key="NSFont" metaFont="system" size="12"/>
                                     <integer key="NSStrikethrough" value="1"/>
                                 </attributes>
                             </fragment>
@@ -229,8 +229,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥599.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Toh-YM-ptQ">
-                        <rect key="frame" x="181" y="93" width="87" height="25.5"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                        <rect key="frame" x="181" y="93.5" width="83" height="24"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                         <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -245,7 +245,7 @@
                     <constraint firstAttribute="bottom" secondItem="QRF-uQ-vm5" secondAttribute="bottom" id="AAu-Za-gJe"/>
                     <constraint firstItem="Toh-YM-ptQ" firstAttribute="leading" secondItem="caw-xr-Qoh" secondAttribute="trailing" constant="2" id="G6m-kG-A5L"/>
                     <constraint firstItem="Xjm-zM-9tI" firstAttribute="leading" secondItem="l7e-cH-pAM" secondAttribute="trailing" constant="10" id="GHB-et-Ybi"/>
-                    <constraint firstItem="l7e-cH-pAM" firstAttribute="top" secondItem="68t-CX-USS" secondAttribute="bottom" constant="10" id="Gav-PD-tHA"/>
+                    <constraint firstItem="l7e-cH-pAM" firstAttribute="top" secondItem="68t-CX-USS" secondAttribute="bottom" constant="8" id="Gav-PD-tHA"/>
                     <constraint firstItem="aSp-4c-RcM" firstAttribute="leading" secondItem="Vyq-ID-oCk" secondAttribute="trailing" constant="10" id="H8V-xe-5qw"/>
                     <constraint firstAttribute="trailing" secondItem="68t-CX-USS" secondAttribute="trailing" constant="23" id="TeD-dr-Bsz"/>
                     <constraint firstItem="56b-T3-Or8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cBz-Mr-f3I"/>
@@ -266,6 +266,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="actualPriceLabel" destination="Toh-YM-ptQ" id="63z-bj-tmX"/>
+                <outlet property="actualPriceLabelBottomMragin" destination="rvk-Vc-yy3" id="vc1-9B-DwO"/>
                 <outlet property="bigImageView" destination="JO3-Rg-6EQ" id="oDX-TE-O82"/>
                 <outlet property="couponPriceLabel" destination="cfN-G4-paC" id="0hG-AM-0R4"/>
                 <outlet property="feeLabel" destination="cAN-qB-MuF" id="H3K-ju-PdI"/>
@@ -278,7 +279,7 @@
                 <outlet property="titleLabel" destination="68t-CX-USS" id="nRf-jd-zX7"/>
                 <outlet property="topNumberLabel" destination="fcF-Cf-puG" id="bMx-LW-uvw"/>
             </connections>
-            <point key="canvasLocation" x="-452.17391304347831" y="-135.60267857142856"/>
+            <point key="canvasLocation" x="-817" y="-212"/>
         </tableViewCell>
     </objects>
     <resources>
