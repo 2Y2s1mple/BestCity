@@ -16,6 +16,7 @@
                 <outlet property="realNamePlaceHolder" destination="dOu-Jo-tnd" id="xBo-uu-4fT"/>
                 <outlet property="realNameTextField" destination="j7m-WL-4Sf" id="qgW-Iv-scc"/>
                 <outlet property="topView" destination="RXG-YJ-eFX" id="uZv-Fd-PQd"/>
+                <outlet property="topViewMargin" destination="AMh-Ec-Xi7" id="rkU-Cn-CYB"/>
                 <outlet property="totalPeiceLabel" destination="8pI-jX-1Cp" id="Vmh-Xd-9Te"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="withdrawTextField" destination="8sj-gX-DIk" id="CbP-W0-ctY"/>

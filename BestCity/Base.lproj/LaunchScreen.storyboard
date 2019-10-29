@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,14 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8rP-x1-svD">
-                                <rect key="frame" x="157.5" y="543" width="60" height="60"/>
+                                <rect key="frame" x="157.5" y="514" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="LYA-R8-Hgq"/>
                                     <constraint firstAttribute="height" constant="60" id="dft-zV-TzX"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="淘好物 看评测 上极品城" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHe-0u-VbW">
-                                <rect key="frame" x="112.5" y="615" width="150.5" height="17"/>
+                                <rect key="frame" x="112.5" y="586" width="150.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -39,8 +37,8 @@
                         <constraints>
                             <constraint firstItem="8rP-x1-svD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2a9-nC-oAb"/>
                             <constraint firstItem="VHe-0u-VbW" firstAttribute="top" secondItem="8rP-x1-svD" secondAttribute="bottom" constant="12" id="3Xt-AG-txC"/>
+                            <constraint firstItem="bZE-ED-mn0" firstAttribute="top" secondItem="VHe-0u-VbW" secondAttribute="bottom" constant="64" id="OiV-TO-d0d"/>
                             <constraint firstItem="VHe-0u-VbW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="f1Z-nW-AxF"/>
-                            <constraint firstItem="bZE-ED-mn0" firstAttribute="top" secondItem="8rP-x1-svD" secondAttribute="bottom" constant="64" id="gdq-Ft-DQu"/>
                         </constraints>
                     </view>
                 </viewController>

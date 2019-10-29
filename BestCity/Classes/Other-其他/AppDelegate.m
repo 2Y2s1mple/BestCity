@@ -7,13 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "CZTabBarController.h"
 #import "CZJPushHandler.h"
 #import "CZUMConfigure.h"
 #import "CZGuideTool.h"
 #import "CZOpenAlibcTrade.h"
 //#import "UMSocialSnsService.h"
 #import "GXNetTool.h"
+#import "CZLaunchViewController.h"
 
 #import <MobLinkPro/IMLSDKRestoreDelegate.h>
 #import <MobLinkPro/MobLink.h>
@@ -36,8 +36,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
 
-    // 设置引导页
-    self.window.rootViewController = [[CZTabBarController alloc] init];
+    // 设置跟视图
+    [[CZLaunchViewController alloc] initWithWidow:self.window];
 
     // 加载极光推送
     [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
@@ -48,19 +48,15 @@
     // 加载阿里百川
     [CZOpenAlibcTrade shareConfigure];
 
-    [NSThread sleepForTimeInterval:1.5];
-
     // 设置MobLink代理
     [MobLink setDelegate:self];
 
     [self.window makeKeyAndVisible];
 
-
-
     return YES;
 }
 
-- (void) IMLSDKWillRestoreScene:(MLSDKScene *)scene Restore:(void (^)(BOOL, RestoreStyle))restoreHandler
+- (void)IMLSDKWillRestoreScene:(MLSDKScene *)scene Restore:(void (^)(BOOL, RestoreStyle))restoreHandler
 {
     NSLog(@"Will Restore Scene - Path:%@",scene.path);
     NSLog(@"------%@", self.recordScene.params);
@@ -68,7 +64,6 @@
     if ([self.recordScene.params isEqualToDictionary:scene.params]) {
         return;
     };
-
 
     NSString *path = scene.path == nil ? @"" : scene.path;
     NSString *className = scene.className == nil ? @"" : scene.className;
@@ -78,21 +73,16 @@
      restoreHandler(YES, MLPush);
 
     self.recordScene = scene;
-
-
-//    if (scene.params)
 }
 
 - (void)IMLSDKCompleteRestore:(MLSDKScene *)scene
 {
     NSLog(@"Complete Restore -Path:%@",scene.path);
-
 }
 
 - (void)IMLSDKNotFoundScene:(MLSDKScene *)scene
 {
     NSLog(@"Not Found Scene - Path :%@",scene.path);
-
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有找到路径"
                                                         message:[NSString stringWithFormat:@"Path:%@",scene.path]
                                                        delegate:self
@@ -109,6 +99,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //获取设备号
     [[CZJPushHandler shareJPushManager] registerDeviceToken:deviceToken];
 }
+
 #pragma mark 推送失败回调
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //设备号错误是的回调
@@ -155,16 +146,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"URL query: %@", [url query]);
     return YES;
 }
-
-
-
-
-
-
-
-
-
-
 
 #pragma mark - 系统的方法
 - (void)applicationWillResignActive:(UIApplication *)application {

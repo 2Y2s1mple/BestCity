@@ -14,6 +14,7 @@
 @interface CZMyWalletDepositController ()<UITextFieldDelegate>
 /** 最上面的背景图 */
 @property (nonatomic, weak) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewMargin;
 /** 总金额 */
 @property (nonatomic, weak) IBOutlet UILabel *totalPeiceLabel;
 /** 真实姓名 */
@@ -36,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalLightGray;
+    IsiPhoneX ? (self.topViewMargin.constant = 114) : (self.topViewMargin.constant = 70);
     // 获取数据
     [self getNoteData];
     [self getALPayAccount];

@@ -102,7 +102,12 @@
     self.navView = navView;
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [leftBtn setImage:[UIImage imageNamed:@"nav-back"] forState:UIControlStateNormal];
-    leftBtn.frame = CGRectMake(20, 20, 49, navView.height - 20);
+
+    if (IsiPhoneX) {
+        leftBtn.frame = CGRectMake(20, 26, 49, navView.height - 20);
+    } else {
+        leftBtn.frame = CGRectMake(20, 20, 49, navView.height - 20);
+    }
     leftBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
     [leftBtn addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
     [self.navView addSubview:leftBtn];
