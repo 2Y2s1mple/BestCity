@@ -46,6 +46,7 @@ static id instancet_;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instancet_ = [[CZLoginController alloc] init];
+        [instancet_ setModalPresentationStyle:(UIModalPresentationFullScreen)];
     });
     return instancet_;
 }
@@ -206,6 +207,7 @@ static id instancet_;
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.userTextField.text = @"13841284944";
+
     //代理方法监听时候都会慢一步
     [self.userTextField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];

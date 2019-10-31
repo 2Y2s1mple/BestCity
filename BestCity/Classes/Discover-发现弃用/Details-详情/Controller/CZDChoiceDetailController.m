@@ -173,6 +173,14 @@ static CGFloat const likeAndShareHeight = 55;
             moreGoods.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
             [_bottomView addSubview:moreGoods];
             [moreGoods addTarget:self action:@selector(jumpRelatedGoodsList) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            UIButton *moreGoods = [[UIButton alloc] init];
+            moreGoods.size = _bottomView.size;
+            moreGoods.backgroundColor = UIColorFromRGB(0xE25838);
+            [moreGoods setTitle:@"暂无商品" forState:UIControlStateNormal];
+            [moreGoods setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            moreGoods.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+            [_bottomView addSubview:moreGoods];
         }
     }
     return _bottomView;

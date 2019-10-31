@@ -9,6 +9,10 @@
 #import "CZScollerImageTool.h"
 #import "PlanADScrollView.h"
 
+@interface CZScollerImageTool () <PlanADScrollViewDelegate>
+
+@end
+
 @implementation CZScollerImageTool
 
 - (void)setImgList:(NSArray *)imgList
@@ -32,6 +36,7 @@
         } else {
             // 初始化控件
             PlanADScrollView *ad = [[PlanADScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height) imageUrls:self.imgList placeholderimage:nil];
+            ad.delegate = self;
             [self addSubview:ad];
         }
     } else {
@@ -40,6 +45,19 @@
         imageView.frame = CGRectMake(0, 0, self.width, self.height);
         imageView.image = [UIImage imageNamed:@"headDefault"];
         [self addSubview:imageView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked)];
+        [imageView addGestureRecognizer:tap];
     }
+}
+
+- (void)imageViewClicked
+{
+    [self PlanADScrollViewdidSelectAtIndex:0];
+}
+
+- (void)PlanADScrollViewdidSelectAtIndex:(NSInteger )index
+{
+    NSLog(@"%------ld", index);
+    self.selectedIndexBlock(index);
 }
 @end

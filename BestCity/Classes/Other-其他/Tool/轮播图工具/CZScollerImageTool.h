@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZScollerImageTool : UIView
 /** 图片数组 */
 @property (nonatomic, strong) NSArray *imgList;
+/** <#注释#> */
+@property (nonatomic, strong) void (^selectedIndexBlock)(NSInteger index);
 @end
 
 NS_ASSUME_NONNULL_END

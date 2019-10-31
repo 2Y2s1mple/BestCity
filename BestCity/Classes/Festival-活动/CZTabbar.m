@@ -9,10 +9,11 @@
 #import "CZTabbar.h"
 #import "CZFestivalController.h"
 #import "CZNavigationController.h"
+#import "UIImage+GIF.h"
 
-@interface CZTabbar ()
+@interface CZTabbar () <UITabBarDelegate>
 /** <#注释#> */
-@property (nonatomic, strong) UIButton *festivalButton;
+@property (nonatomic, strong) UIImageView *imageView;
 @end
 
 @implementation CZTabbar
@@ -21,33 +22,38 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"11.11" ofType:@"gif"];
+        NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+        UIImage *image = [UIImage sd_animatedGIFWithData:imageData];
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.image = image;
+        imageView.size = CGSizeMake(80, 46.5);
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
 
-//        // 添加活动按钮
-//        UIButton *festivalButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [festivalButton setBackgroundImage:[UIImage imageNamed:@"festival-tab"] forState:UIControlStateNormal];
-//        [festivalButton setBackgroundImage:[UIImage imageNamed:@"festival-tab"] forState:UIControlStateHighlighted];
-//        festivalButton.size = festivalButton.currentBackgroundImage.size;
-//        [self addSubview:festivalButton];
-//        self.festivalButton = festivalButton;
-//        [festivalButton addTarget:self action:@selector(publishClick) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:imageView];
+        self.imageView = imageView;
 
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideCenterImageView:) name:@"selectedFastival" object:nil];
+        
     }
     return self;
 }
 
-- (void)publishClick
+- (void)hideCenterImageView:(NSNotification *)sender
 {
-//    XMGPublishViewController *publish = [[XMGPublishViewController alloc] init];
-//    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:publish animated:NO completion:nil];
-
-//    CZFestivalController *postWord = [[CZFestivalController alloc] init];
-//    CZNavigationController *nav = [[CZNavigationController alloc] initWithRootViewController:postWord];
-//
-//    // 这里不能使用self来弹出其他控制器, 因为self执行了dismiss操作
-//    UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
-//    [root presentViewController:nav animated:YES completion:nil];
+    if ([sender.userInfo[@"flag"] boolValue]) {
+        self.imageView.size = CGSizeMake(68, 44);
+        self.imageView.image = [UIImage imageNamed:@"festival-tab"];
+        self.imageView.center = CGPointMake(self.width / 2.0, self.height / 2.0);
+    } else {
+        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"11.11" ofType:@"gif"];
+        NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+        UIImage *image = [UIImage sd_animatedGIFWithData:imageData];
+        self.imageView.image = image;
+        self.imageView.size = CGSizeMake(80, 46.5);
+        self.imageView.center = CGPointMake(self.width / 2.0, self.height / 2.0);
+    }
 }
-
 
 - (void)layoutSubviews
 {
@@ -57,6 +63,9 @@
 
     UITabBarItem *barItem = self.items[2];
 
+    self.imageView.center = CGPointMake(self.width / 2.0, self.height / 2.0);
+
+    self.imageView.hidden = YES;
     // 调整其他按钮大小
     NSInteger index = 0;
     for (UIButton *btn in self.subviews) {
@@ -64,9 +73,17 @@
         // 计算按钮的x值
         if (barItem.title.length == 0 && index == 2) {
             btn.center = CGPointMake(width / 2.0, height / 2.0 + 7);
+            self.imageView.hidden = NO;
         }
         // 增加索引
         index++;
     }
+
+
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

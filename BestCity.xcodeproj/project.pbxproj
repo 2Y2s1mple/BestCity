@@ -315,6 +315,10 @@
 		9786FF172255973E0007021C /* CZCommonRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9786FF152255973E0007021C /* CZCommonRecommendCell.m */; };
 		9786FF182255973E0007021C /* CZCommonRecommendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9786FF162255973E0007021C /* CZCommonRecommendCell.xib */; };
 		978D25A6219993C4004040DD /* CZReplyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 978D25A5219993C4004040DD /* CZReplyButton.m */; };
+		978E876C236936D900802E06 /* CZFestivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 978E876A236936D900802E06 /* CZFestivalCell.m */; };
+		978E876D236936D900802E06 /* CZFestivalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978E876B236936D900802E06 /* CZFestivalCell.xib */; };
+		978E877023698F0800802E06 /* CZFestivalTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978E876F23698F0800802E06 /* CZFestivalTwoController.m */; };
+		978E8772236ACA6000802E06 /* 11.11.gif in Resources */ = {isa = PBXBuildFile; fileRef = 978E8771236ACA5F00802E06 /* 11.11.gif */; };
 		978EC63C224B21BB005D98EE /* CZTrialAllReportHotController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978EC63B224B21BB005D98EE /* CZTrialAllReportHotController.m */; };
 		97911045222F6A2100C2DE5B /* CZMyWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97911043222F6A2100C2DE5B /* CZMyWalletController.m */; };
 		97911046222F6A2200C2DE5B /* CZMyWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97911044222F6A2100C2DE5B /* CZMyWalletController.xib */; };
@@ -1106,6 +1110,12 @@
 		9786FF162255973E0007021C /* CZCommonRecommendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCommonRecommendCell.xib; sourceTree = "<group>"; };
 		978D25A4219993C4004040DD /* CZReplyButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZReplyButton.h; sourceTree = "<group>"; };
 		978D25A5219993C4004040DD /* CZReplyButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZReplyButton.m; sourceTree = "<group>"; };
+		978E8769236936D900802E06 /* CZFestivalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFestivalCell.h; sourceTree = "<group>"; };
+		978E876A236936D900802E06 /* CZFestivalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFestivalCell.m; sourceTree = "<group>"; };
+		978E876B236936D900802E06 /* CZFestivalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZFestivalCell.xib; sourceTree = "<group>"; };
+		978E876E23698F0800802E06 /* CZFestivalTwoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFestivalTwoController.h; sourceTree = "<group>"; };
+		978E876F23698F0800802E06 /* CZFestivalTwoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFestivalTwoController.m; sourceTree = "<group>"; };
+		978E8771236ACA5F00802E06 /* 11.11.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 11.11.gif; sourceTree = "<group>"; };
 		978EC63A224B21BB005D98EE /* CZTrialAllReportHotController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialAllReportHotController.h; sourceTree = "<group>"; };
 		978EC63B224B21BB005D98EE /* CZTrialAllReportHotController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialAllReportHotController.m; sourceTree = "<group>"; };
 		97911042222F6A2100C2DE5B /* CZMyWalletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletController.h; sourceTree = "<group>"; };
@@ -1679,10 +1689,16 @@
 		9706C8DA2367E41F0002EDC1 /* Festival-活动 */ = {
 			isa = PBXGroup;
 			children = (
+				978E8771236ACA5F00802E06 /* 11.11.gif */,
 				9706C8D72367E2120002EDC1 /* CZTabbar.h */,
 				9706C8D82367E2120002EDC1 /* CZTabbar.m */,
 				9768FAE82367F05000019B4E /* CZFestivalController.h */,
 				9768FAE92367F05000019B4E /* CZFestivalController.m */,
+				978E8769236936D900802E06 /* CZFestivalCell.h */,
+				978E876A236936D900802E06 /* CZFestivalCell.m */,
+				978E876B236936D900802E06 /* CZFestivalCell.xib */,
+				978E876E23698F0800802E06 /* CZFestivalTwoController.h */,
+				978E876F23698F0800802E06 /* CZFestivalTwoController.m */,
 			);
 			path = "Festival-活动";
 			sourceTree = "<group>";
@@ -4853,6 +4869,7 @@
 				97798C7C212CF4430052CE94 /* SVProgressHUD.bundle in Resources */,
 				974F489221A3B5BE00E1ED1A /* CZAttentionDetailCell.xib in Resources */,
 				9799933821A67B1A0000D42B /* CZCommentDetailCell.xib in Resources */,
+				978E876D236936D900802E06 /* CZFestivalCell.xib in Resources */,
 				97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */,
 				97EC482722D2DCC6006ACA23 /* CZMHSDCommodityCell.xib in Resources */,
 				972F4BA522AE447200F30F6B /* CZMyWalletDetailCell.xib in Resources */,
@@ -4869,6 +4886,7 @@
 				970C50A821F17F490091D7FF /* Assets.xcassets in Resources */,
 				970848FB22432507000D5528 /* CZTrialController.xib in Resources */,
 				9785778821A6E04800E42B29 /* CZPackUpCommentCell.xib in Resources */,
+				978E8772236ACA6000802E06 /* 11.11.gif in Resources */,
 				972E41C721147C2000BC751C /* CZOrderController.xib in Resources */,
 				97C78FCD21197E9500374CCD /* CZMessageActivityCell.xib in Resources */,
 				970497C5225F362900CC14FF /* CZOrderDetailController.xib in Resources */,
@@ -5031,6 +5049,7 @@
 				97C39258230BF3EB002EA036 /* CZSubCollectFourController.m in Sources */,
 				973122FA21A405F5007CF64B /* CZSystemMessageModel.m in Sources */,
 				9754C87A22FC215D008C2D98 /* CZEAttentionModel.m in Sources */,
+				978E876C236936D900802E06 /* CZFestivalCell.m in Sources */,
 				977607CC22D57E3200F846BE /* CZMHSDListNewController.m in Sources */,
 				97530AA52313A3FC00185C40 /* CZMHSDQuestCell1.m in Sources */,
 				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
@@ -5304,6 +5323,7 @@
 				97C7FF39216DDDB50091DC07 /* MJRefreshConst.m in Sources */,
 				97FEBF1722D46824007BF592 /* CZMHSDCommodityCell1.m in Sources */,
 				972E41BF211473B100BC751C /* CZMyPointDetailCell.m in Sources */,
+				978E877023698F0800802E06 /* CZFestivalTwoController.m in Sources */,
 				97B4A49E22490BB800E48D93 /* CZTrailTestCell.m in Sources */,
 				97773A7622C1DBBB00314E42 /* CZFreeTakePartInCell.m in Sources */,
 				97084912224335A9000D5528 /* CZTrialReportHotController.m in Sources */,
@@ -5519,7 +5539,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.6.5;
+				MARKETING_VERSION = 2.6.51;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -5616,7 +5636,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.6.5;
+				MARKETING_VERSION = 2.6.51;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",

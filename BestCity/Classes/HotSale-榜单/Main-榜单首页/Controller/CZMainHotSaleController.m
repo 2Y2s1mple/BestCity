@@ -29,6 +29,7 @@
 #import "CZHotsaleSearchController.h"
 #import "CZMainHotSaleDetailController.h"
 #import "CZMHSDListNewController.h"
+#import "CZFestivalController.h" // 活动"
 
 @interface CZMainHotSaleController () <UITableViewDelegate, UITableViewDataSource>
 /** 记录btn */
@@ -207,9 +208,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        CZMHSDListNewController *vc = [[CZMHSDListNewController alloc] init];
-        vc.data = self.adDic;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([self.adDic[@"type"]  isEqual: @(8)]) {
+            self.tabBarController.selectedIndex = 2;
+        } else {
+            CZMHSDListNewController *vc = [[CZMHSDListNewController alloc] init];
+            vc.data = self.adDic;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else {
         NSDictionary *model = self.dataSource[indexPath.row - 1];
         CZMainHotSaleDetailController *vc = [[CZMainHotSaleDetailController alloc] init];

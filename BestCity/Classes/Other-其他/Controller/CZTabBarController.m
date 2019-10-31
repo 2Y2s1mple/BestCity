@@ -21,6 +21,8 @@
 #import "CZTabbar.h"
 
 
+
+
 #import "CZEInventoryEditorController.h"
 
 
@@ -60,7 +62,8 @@
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
 
     if (self.isFestival) {
-        [self setupWithController:[[CZFestivalController alloc] init] title:@"" image:@"festival-tab" selectedImage:@"festival-tab"];
+        CZNavigationController *nav = [[CZNavigationController alloc] initWithRootViewController:[[CZFestivalController alloc] init]];
+        [self addChildViewController:nav];
     }
 
     [self setupWithController:[[CZTrialMainController alloc] init] title:@"免单" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
@@ -80,6 +83,14 @@
     [MobClick event:ID attributes:@{@"Tab" : context}];
 
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
+
+    if (_isFestival == YES && tabBarController.selectedIndex == 2) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectedFastival" object:nil userInfo:@{@"flag" : @(YES)}];
+    } if (_isFestival == YES && tabBarController.selectedIndex != 2) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectedFastival" object:nil userInfo:@{@"flag" : @(NO)}];
+    }
+
+
     if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 3) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
@@ -117,6 +128,7 @@
     vc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     CZNavigationController *nav = [[CZNavigationController alloc] initWithRootViewController:vc];
+//    vc.modalPresentationStyle =  UIModalPresentationFullScreen;
 //    [vc.navigationController setNavigationBarHidden:YES];
     [self addChildViewController:nav];
 }

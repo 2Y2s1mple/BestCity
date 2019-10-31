@@ -33,7 +33,7 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         self.PlanADimageView = [[UIImageView alloc] init];
-        self.PlanADimageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.PlanADimageView.contentMode = UIViewContentModeScaleToFill;
         [self.contentView addSubview:self.PlanADimageView];
         
     }
@@ -44,8 +44,7 @@
     
     [super layoutSubviews];
     
-    self.PlanADimageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    
+    self.PlanADimageView.frame = CGRectMake(0, 0, SCR_WIDTH, self.frame.size.height);
 }
 -(void)imageStr:(NSString*)imageStr placeholderimage:(UIImage *)placeholderimage;{
     
