@@ -8,6 +8,7 @@
 
 #import "CZLaunchViewController.h"
 #import "CZTabBarController.h"
+#import "GXNetTool.h"
 
 @interface CZLaunchViewController ()
 /** <#注释#> */
@@ -28,12 +29,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        CZTabBarController *tabbar = [[CZTabBarController alloc] init];
-        tabbar.isFestival = YES;
-        self.window.rootViewController = tabbar;
-    });
+    [self isOpenDouble11];
 }
+
+- (void)isOpenDouble11
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/open11"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        CZTabBarController *tabbar = [[CZTabBarController alloc] init];
+        if ([result[@"code"] isEqual:@(0)]) {
+            tabbar.isFestival = [result[@"data"] isEqualToString:@"1"];
+        } else {
+            tabbar.isFestival = NO;
+        }
+        self.window.rootViewController = tabbar;
+    } failure:^(NSError *error) {
+        CZTabBarController *tabbar = [[CZTabBarController alloc] init];
+        tabbar.isFestival = NO;
+        self.window.rootViewController = tabbar;
+    }];
+}
+
 
 
 

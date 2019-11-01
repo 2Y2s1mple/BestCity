@@ -13,6 +13,7 @@
 #import "CZDiscoverController.h"
 #import "CZEvaluationController.h"
 #import "CZTrialMainController.h"
+#import "CZFreeChargeController.h"
 #import "CZMeController.h"
 #import "CZNavigationController.h"
 #import "CZFestivalController.h"// 活动
@@ -66,7 +67,7 @@
         [self addChildViewController:nav];
     }
 
-    [self setupWithController:[[CZTrialMainController alloc] init] title:@"免单" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
+    [self setupWithController:[[CZFreeChargeController alloc] init] title:@"免单" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
 
 

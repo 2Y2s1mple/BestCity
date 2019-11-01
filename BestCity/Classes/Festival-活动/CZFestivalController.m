@@ -47,10 +47,10 @@
     if (_editorBtn == nil) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setBackgroundImage:[UIImage imageNamed:@"Festival-share"] forState:UIControlStateNormal];
-        btn.x = SCR_WIDTH - 15 - 59;
-        btn.y = SCR_HEIGHT - (IsiPhoneX ? 183 : 139);
-        btn.width = 59;
-        btn.height = 59;
+        btn.width = 68;
+        btn.height = 45;
+        btn.x = SCR_WIDTH - 10 - btn.width;
+        btn.y = SCR_HEIGHT - (IsiPhoneX ? 83 + 150 : 49 + 150);
         [btn addTarget:self action:@selector(pushEditorController) forControlEvents:UIControlEventTouchUpInside];
         self.editorBtn = btn;
     }
@@ -68,11 +68,11 @@
     shareDic[@"shareTitle"] = @"这里全是钱啊，双十一我得了现金大额补贴";
     shareDic[@"shareContent"] = @"比官方还低价，同商品，同店铺，这里竟然有这样的价格！";
     shareDic[@"shareUrl"] = @"https://www.jipincheng.cn/share/index11.html";
-    shareDic[@"shareImg"] = [UIImage imageNamed:@"headDefault"];
-    CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
+    shareDic[@"shareImg"] = [UIImage imageNamed:@"launchLogo.png"];
+    CZShareView *share = [[CZShareView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     share.cententText = shareDic[@"content"];
     share.param = shareDic;
-    [self.view addSubview:share];
+    [[UIApplication sharedApplication].keyWindow addSubview:share];
 }
 
 - (UITableView *)tableView
@@ -183,34 +183,25 @@
     officialLine.layer.cornerRadius = 5;
     [headerView addSubview:officialLine];
 
-    UILabel *label2 = [[UILabel alloc] init];
-    label2.text = @"• 精选好物";
-    label2.textColor = UIColorFromRGB(0xE74434);
-    label2.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 12];
-    [label2 sizeToFit];
-    [officialLine addSubview:label2];
-    label2.centerY = officialLine.height / 2.0;
-    label2.x = officialLine.width - 10 - label2.width;
-
-    UILabel *label1 = [[UILabel alloc] init];
-    label1.text = @"• 双11极品补贴重量升级";
-    label1.textColor = UIColorFromRGB(0xE74434);
-    label1.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 12];
-    [label1 sizeToFit];
-    [officialLine addSubview:label1];
-    label1.centerY = officialLine.height / 2.0;
-    label1.x = 10;
-
-    UILabel *label3 = [[UILabel alloc] init];
-    label3.text = @"• 精选好物";
-    label3.textColor = UIColorFromRGB(0xE74434);
-    label3.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 12];
-    [label3 sizeToFit];
-    [officialLine addSubview:label3];
-    label3.centerY = officialLine.height / 2.0;
-    label3.x = CZGetX(label1);
-    label3.width = officialLine.width - (CZGetX(label1) + label2.width);
-    label3.textAlignment = NSTextAlignmentCenter;
+    CGFloat textWidth = officialLine.width / 4;
+    CGFloat textHeight = officialLine.height;
+    NSArray *textArr = @[
+        @"• 精选好物",
+        @"• 超高补贴",
+        @"• 官方授权 ",
+        @"• 品质保障",
+    ];
+    for (int i = 0; i < 4; i++) {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = textArr[i];
+        label.textColor = UIColorFromRGB(0xE74434);
+        label.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 12];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.x = i * textWidth;
+        label.width = textWidth;
+        label.height = textHeight;
+        [officialLine addSubview:label];
+    }
 
     // 分类的按钮
     UIView *categoryView = [[UIView alloc] init];
@@ -254,7 +245,7 @@
 {
     CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
     vc.categoryId = sender.categoryId;
-    vc.titleName = sender.titleLabel.text;
+    vc.titleName = [sender.titleLabel.text stringByAppendingString:@"双11专区"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -271,6 +262,7 @@
     } else {
         CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
         vc.categoryId = model[@"ad"][@"objectId"];
+        vc.titleName = [model[@"ad"][@"name"] stringByAppendingString:@"双11专区"];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
