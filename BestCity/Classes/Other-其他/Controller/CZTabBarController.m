@@ -70,7 +70,6 @@
     [self setupWithController:[[CZFreeChargeController alloc] init] title:@"免单" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
 
-
     [self setValue:[[CZTabbar alloc] init] forKey:@"tabBar"];
     self.tabBar.clipsToBounds = YES;
     self.selectedIndex = 0;
@@ -92,7 +91,10 @@
     }
 
 
-    if ([JPTOKEN length] <= 0 && tabBarController.selectedIndex == 3) {
+    NSString *token = JPTOKEN;
+    UINavigationController *nav = viewController;
+    NSLog(@"%@", token);
+    if ([JPTOKEN length] <= 0 && [nav.topViewController isKindOfClass:[CZMeController class]]) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
     } else {}

@@ -51,7 +51,7 @@
     //拉起淘宝
     AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
     showParam.openType = AlibcOpenTypeNative;
-    showParam.backUrl = @"tbopen25267281://xx.xx.xx";
+    showParam.backUrl = @"tbopen25267281";
     showParam.isNeedPush = NO;
     showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
 

@@ -66,14 +66,13 @@
         } else {
             [mutStr appendFormat:@"、%@", tagsArr[i][@"name"]];
         }
-
     }
 
     self.subTitleLabel.text = mutStr;
 
     NSDictionary *paramDic = dataDic[@"goods"];
     self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [paramDic[@"buyPrice"] floatValue]];
-    NSString *other = [NSString stringWithFormat:@"¥%.2f", [paramDic[@"otherPrice"] floatValue]];
+    NSString *other = [NSString stringWithFormat:@"¥%@", paramDic[@"otherPrice"]];
     self.otherPricelabel.attributedText = [other addStrikethroughWithRange:NSMakeRange(0, other.length)];
     self.couponPriceLabel.text = [NSString stringWithFormat:@"优惠券 ¥%.0f", [paramDic[@"couponPrice"] floatValue]];
     self.feeLabel.text = [NSString stringWithFormat:@"  补贴 ¥%.2f  ", [paramDic[@"fee"] floatValue]];

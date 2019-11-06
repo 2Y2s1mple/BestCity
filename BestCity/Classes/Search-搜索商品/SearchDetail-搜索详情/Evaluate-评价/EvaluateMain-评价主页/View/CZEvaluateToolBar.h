@@ -14,15 +14,15 @@ typedef void(^toolBarActionBlock)(void);
 
 @interface CZEvaluateToolBar : UIView
 /** 文本框 */
-@property (nonatomic, weak) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UIButton *senderBtn;
+@property (nonatomic, strong) UITextView *textView;
+@property (strong, nonatomic) UIButton *senderBtn;
 + (instancetype)evaluateToolBar;
 /** block */
 @property (nonatomic, copy) toolBarActionBlock block;
 /** placeHolder */
 @property (nonatomic, strong) NSString *placeHolderText;
 /** <#注释#> */
-@property (nonatomic, weak) IBOutlet UILabel *placeholderLabel;
+@property (nonatomic, strong) UILabel *placeholderLabel;
 @end
 
 NS_ASSUME_NONNULL_END

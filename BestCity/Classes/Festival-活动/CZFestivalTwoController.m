@@ -148,7 +148,7 @@
     UIView *headerView = [[UIView alloc] init];
     headerView.width = SCR_WIDTH;
     // 添加轮播图
-    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 200)];
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 187.5)];
     [self.view addSubview:imageView];
     [imageView setSelectedIndexBlock:^(NSInteger index) {
         //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情

@@ -13,6 +13,9 @@
 #import <UMShare/UMShare.h>
 #import "CZBindingController.h"
 #import "CZUpdataView.h"
+
+#import "CZMeController.h"
+#import "CZSettingController.h"
 // 工具
 #import <TCWebCodesSDK/TCWebCodesBridge.h> // 腾讯验证码
 
@@ -54,7 +57,12 @@ static id instancet_;
 #pragma mark - POP到前一页
 - (IBAction)popAction:(id)sender {
     UITabBarController *vc = (UITabBarController *)self.nextResponder;
-    if (!_isLogin && vc.selectedIndex == 3) {
+    UINavigationController *currentVc = [vc.viewControllers objectAtIndex:vc.selectedIndex];
+    if ([currentVc.topViewController isKindOfClass:[CZMeController class]]) {
+        vc.selectedIndex = 0;
+    }
+    if ([currentVc.topViewController isKindOfClass:[CZSettingController class]]) {
+        [currentVc popToRootViewControllerAnimated:NO];
         vc.selectedIndex = 0;
     }
     [self dismissViewControllerAnimated:YES completion:nil];

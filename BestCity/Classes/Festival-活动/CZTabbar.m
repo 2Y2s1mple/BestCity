@@ -45,6 +45,9 @@
         self.imageView.size = CGSizeMake(68, 44);
         self.imageView.image = [UIImage imageNamed:@"festival-tab"];
         self.imageView.center = CGPointMake(self.width / 2.0, self.height / 2.0);
+        if (IsiPhoneX) {
+            self.imageView.y = 5;
+        }
     } else {
         NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"11.11" ofType:@"gif"];
         NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
@@ -52,6 +55,9 @@
         self.imageView.image = image;
         self.imageView.size = CGSizeMake(80, 46.5);
         self.imageView.center = CGPointMake(self.width / 2.0, self.height / 2.0);
+        if (IsiPhoneX) {
+            self.imageView.y = 5;
+        }
     }
 }
 
@@ -64,7 +70,9 @@
     UITabBarItem *barItem = self.items[2];
 
     self.imageView.center = CGPointMake(self.width / 2.0, self.height / 2.0);
-
+    if (IsiPhoneX) {
+        self.imageView.y = 5;
+    }
     self.imageView.hidden = YES;
     // 调整其他按钮大小
     NSInteger index = 0;

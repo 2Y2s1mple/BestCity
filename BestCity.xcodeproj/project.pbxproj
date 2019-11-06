@@ -188,7 +188,6 @@
 		975E761421E73CCD00B0819B /* CZScollerImageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975E761321E73CCD00B0819B /* CZScollerImageTool.m */; };
 		9761EE0B219940D100E3276D /* CZEvaluateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE0A219940D100E3276D /* CZEvaluateModel.m */; };
 		9761EE0E2199669700E3276D /* CZEvaluateToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE0D2199669700E3276D /* CZEvaluateToolBar.m */; };
-		9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9761EE11219969B600E3276D /* CZEvaluateToolBar.xib */; };
 		9763A1F1225225F200F1A8FF /* CZMyTrialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9763A1F0225225F200F1A8FF /* CZMyTrialController.m */; };
 		97643476221AA27100EB0291 /* CZAdministratorAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97643474221AA27100EB0291 /* CZAdministratorAccountController.m */; };
 		97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97643475221AA27100EB0291 /* CZAdministratorAccountController.xib */; };
@@ -200,6 +199,7 @@
 		9768FAEA2367F05000019B4E /* CZFestivalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9768FAE92367F05000019B4E /* CZFestivalController.m */; };
 		9768FAEE2368130D00019B4E /* CZLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9768FAEC2368130D00019B4E /* CZLaunchViewController.m */; };
 		9768FAEF2368130D00019B4E /* CZLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9768FAED2368130D00019B4E /* CZLaunchViewController.xib */; };
+		976BAD5F237260E300AEFCFA /* CZEvaluateToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976BAD5E237260E300AEFCFA /* CZEvaluateToolBar.xib */; };
 		97705C122107068E00485D64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C102107068E00485D64 /* Main.storyboard */; };
 		97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97705C152107068F00485D64 /* LaunchScreen.storyboard */; };
 		97705C53210716A300485D64 /* CZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705C34210716A300485D64 /* CZTabBarController.m */; };
@@ -866,7 +866,6 @@
 		9761EE0A219940D100E3276D /* CZEvaluateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEvaluateModel.m; sourceTree = "<group>"; };
 		9761EE0C2199669700E3276D /* CZEvaluateToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEvaluateToolBar.h; sourceTree = "<group>"; };
 		9761EE0D2199669700E3276D /* CZEvaluateToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEvaluateToolBar.m; sourceTree = "<group>"; };
-		9761EE11219969B600E3276D /* CZEvaluateToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEvaluateToolBar.xib; sourceTree = "<group>"; };
 		9763A1EF225225F200F1A8FF /* CZMyTrialController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyTrialController.h; sourceTree = "<group>"; };
 		9763A1F0225225F200F1A8FF /* CZMyTrialController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyTrialController.m; sourceTree = "<group>"; };
 		97643473221AA27100EB0291 /* CZAdministratorAccountController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAdministratorAccountController.h; sourceTree = "<group>"; };
@@ -886,6 +885,7 @@
 		9768FAEC2368130D00019B4E /* CZLaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZLaunchViewController.m; sourceTree = "<group>"; };
 		9768FAED2368130D00019B4E /* CZLaunchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZLaunchViewController.xib; sourceTree = "<group>"; };
 		976A46BE222CD29D00D202E0 /* BestCity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BestCity.entitlements; sourceTree = "<group>"; };
+		976BAD5E237260E300AEFCFA /* CZEvaluateToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEvaluateToolBar.xib; sourceTree = "<group>"; };
 		97705C072107068E00485D64 /* BestCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97705C112107068E00485D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97705C162107068F00485D64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -3870,7 +3870,7 @@
 			children = (
 				9761EE0C2199669700E3276D /* CZEvaluateToolBar.h */,
 				9761EE0D2199669700E3276D /* CZEvaluateToolBar.m */,
-				9761EE11219969B600E3276D /* CZEvaluateToolBar.xib */,
+				976BAD5E237260E300AEFCFA /* CZEvaluateToolBar.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4899,7 +4899,6 @@
 				97643482221AB2FD00EB0291 /* CZCZChangeMobileController.xib in Resources */,
 				97C78FC621196C6F00374CCD /* CZSystemMessageCell.xib in Resources */,
 				977D8CFD22ACEB4F005E7ACB /* CZMyWalletCell.xib in Resources */,
-				9761EE12219969B600E3276D /* CZEvaluateToolBar.xib in Resources */,
 				97FEBF1822D46824007BF592 /* CZMHSDCommodityCell1.xib in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
 				977607D122D5892E00F846BE /* CZMHSDListNewCell.xib in Resources */,
@@ -4921,6 +4920,7 @@
 				9708492222434239000D5528 /* CZTrialReportMainCell.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97BC394A223BB0F800DC4D67 /* CZAffirmPointController.xib in Resources */,
+				976BAD5F237260E300AEFCFA /* CZEvaluateToolBar.xib in Resources */,
 				977D8D0622AD475D005E7ACB /* CZMyWalletWithdrawCell.xib in Resources */,
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
 				97B4A49F22490BB800E48D93 /* CZTrailTestCell.xib in Resources */,
@@ -5503,6 +5503,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5539,7 +5540,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.6.51;
+				MARKETING_VERSION = 2.6.81;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -5600,6 +5601,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5636,7 +5638,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.6.51;
+				MARKETING_VERSION = 2.6.81;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",

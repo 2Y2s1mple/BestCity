@@ -43,10 +43,12 @@
         } else {
             tabbar.isFestival = NO;
         }
+        isFestival = tabbar.isFestival;
         self.window.rootViewController = tabbar;
     } failure:^(NSError *error) {
         CZTabBarController *tabbar = [[CZTabBarController alloc] init];
         tabbar.isFestival = NO;
+        isFestival = tabbar.isFestival;
         self.window.rootViewController = tabbar;
     }];
 }

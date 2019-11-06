@@ -122,7 +122,10 @@
         }
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+        // 结束刷新
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 - (void)loadMoreTrailDataSorce
@@ -161,10 +164,15 @@
     [imageView setSelectedIndexBlock:^(NSInteger index) {
         //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
         NSDictionary *model = self.dataSource[@"adList"][index];
-        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        vc.detailType = [CZJIPINSynthesisTool getModuleType:[model[@"type"] integerValue]];
-        vc.findgoodsId = model[@"objectId"];
-        if ([model[@"type"] integerValue] != 0) {
+        if ([model[@"type"] integerValue] == 2) {
+            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+            vc.detailType = [CZJIPINSynthesisTool getModuleType:[model[@"type"] integerValue]];
+            vc.findgoodsId = model[@"objectId"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([model[@"type"] integerValue] == 10) {
+            CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
+            vc.categoryId = model[@"objectId"];
+            vc.titleName = [model[@"name"] stringByAppendingString:@"双11专区"];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }];
@@ -286,14 +294,19 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CZFestivalCell2"];
             cell.backgroundColor = UIColorFromRGB(0xE74434);
-            UIImageView *image = [[UIImageView alloc] init];
+        }
+
+        UIImageView *image = [cell viewWithTag:20];
+        if (image == nil) {
+            image = [[UIImageView alloc] init];
+            image.tag = 20;
             image.x = 10;
             image.y = 10;
             image.width = SCR_WIDTH - 20;
             image.height = 95;
             [cell addSubview:image];
-            [image sd_setImageWithURL:[NSURL URLWithString:model[@"ad"][@"img"]]];
         }
+        [image sd_setImageWithURL:[NSURL URLWithString:model[@"ad"][@"img"]]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
