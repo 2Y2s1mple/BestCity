@@ -23,4 +23,18 @@
     }
     return mutableDic;
 }
+
+- (NSDictionary *)changeAllNnmberValue
+{
+    NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] initWithDictionary:[self deleteAllNullValue]];
+    for (NSString *keyStr in mutableDic.allKeys) {
+        id value = [mutableDic objectForKey:keyStr];
+        if ([value isKindOfClass:[NSNumber class]]) {
+            [mutableDic setObject:[NSString stringWithFormat:@"%@", value] forKey:keyStr];
+        } else {
+            [mutableDic setObject:value forKey:keyStr];
+        }
+    }
+    return mutableDic;
+}
 @end

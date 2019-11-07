@@ -385,8 +385,6 @@
 		97B4A49F22490BB800E48D93 /* CZTrailTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B4A49D22490BB800E48D93 /* CZTrailTestCell.xib */; };
 		97B6C55F225AEC480061D9A0 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B6C55E225AEC480061D9A0 /* UMAnalytics.framework */; };
 		97B6C56C225AF3900061D9A0 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B6C56B225AF3900061D9A0 /* UMCommon.framework */; };
-		97B875FC21EDC472001CC393 /* CZVoteShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B875FB21EDC472001CC393 /* CZVoteShowView.m */; };
-		97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B875FD21EDC47D001CC393 /* CZVoteShowView.xib */; };
 		97B8760A21EED78A001CC393 /* CZMainAttentionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B8760921EED78A001CC393 /* CZMainAttentionController.m */; };
 		97B8760D21EEF936001CC393 /* CZSubCollectOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B8760C21EEF936001CC393 /* CZSubCollectOneController.m */; };
 		97B8761021EEF948001CC393 /* CZSubCollectTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B8760F21EEF948001CC393 /* CZSubCollectTwoController.m */; };
@@ -1229,9 +1227,6 @@
 		97B4A49D22490BB800E48D93 /* CZTrailTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTrailTestCell.xib; sourceTree = "<group>"; };
 		97B6C55E225AEC480061D9A0 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalytics.framework; sourceTree = "<group>"; };
 		97B6C56B225AF3900061D9A0 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
-		97B875FA21EDC472001CC393 /* CZVoteShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZVoteShowView.h; sourceTree = "<group>"; };
-		97B875FB21EDC472001CC393 /* CZVoteShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZVoteShowView.m; sourceTree = "<group>"; };
-		97B875FD21EDC47D001CC393 /* CZVoteShowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZVoteShowView.xib; sourceTree = "<group>"; };
 		97B8760821EED78A001CC393 /* CZMainAttentionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainAttentionController.h; sourceTree = "<group>"; };
 		97B8760921EED78A001CC393 /* CZMainAttentionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainAttentionController.m; sourceTree = "<group>"; };
 		97B8760B21EEF936001CC393 /* CZSubCollectOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSubCollectOneController.h; sourceTree = "<group>"; };
@@ -2772,8 +2767,9 @@
 		97705C3B210716A300485D64 /* Me-我的 */ = {
 			isa = PBXGroup;
 			children = (
-				97C3925F230C1734002EA036 /* 我的发布 */,
+				97DA5B942374203C0073EB12 /* New Group */,
 				97CF34282177397100DA9198 /* Main-主界面 */,
+				97C3925F230C1734002EA036 /* 我的发布 */,
 				9752466F230A7BA900A1A334 /* 达人主页 */,
 				972F4BA622AE536400F30F6B /*  TeamMembers-团队成员 */,
 				9763A1EE225225AA00F1A8FF /* MyTrial-我的试用 */,
@@ -2820,9 +2816,6 @@
 				97D8FCBF2111612200D8ED8F /* CZMeArrowCell.h */,
 				97D8FCC02111612200D8ED8F /* CZMeArrowCell.m */,
 				97D8FCC12111612200D8ED8F /* CZMeArrowCell.xib */,
-				97B875FA21EDC472001CC393 /* CZVoteShowView.h */,
-				97B875FB21EDC472001CC393 /* CZVoteShowView.m */,
-				97B875FD21EDC47D001CC393 /* CZVoteShowView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4335,6 +4328,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		97DA5B942374203C0073EB12 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		97EC481F22D2DC21006ACA23 /* Main-主要 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4932,7 +4932,6 @@
 				97BC05DC2112B122001ED65A /* key-blue.png in Resources */,
 				97A5B96B230D1BFB00014E90 /* CZMePublishOneCell.xib in Resources */,
 				979110732231131400C2DE5B /* province_data.xml in Resources */,
-				97B875FE21EDC47D001CC393 /* CZVoteShowView.xib in Resources */,
 				970AD8CE232A3BD600CCE9F9 /* SmartLink.bundle in Resources */,
 				97D8FCC32111612200D8ED8F /* CZMeArrowCell.xib in Resources */,
 				972E41CC21147C3A00BC751C /* CZAttentionController.xib in Resources */,
@@ -5140,7 +5139,6 @@
 				97E90C1D22CC4010001437A7 /* CZMainHotSaleController.m in Sources */,
 				97798CCF212D0FC90052CE94 /* SDWebImageTransition.m in Sources */,
 				970848FE22432969000D5528 /* CZTrialReportController.m in Sources */,
-				97B875FC21EDC472001CC393 /* CZVoteShowView.m in Sources */,
 				97798CD1212D0FC90052CE94 /* UIImageView+WebCache.m in Sources */,
 				97C7FF06216DDDAB0091DC07 /* NSObject+MJProperty.m in Sources */,
 				9723075721AD3ABB0004C00C /* CZCommentModel.m in Sources */,

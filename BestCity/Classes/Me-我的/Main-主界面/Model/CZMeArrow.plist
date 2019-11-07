@@ -27,35 +27,11 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>我的订单</string>
-			<key>icon</key>
-			<string>Order-1</string>
-			<key>destinationVC</key>
-			<string>CZOrderController</string>
-		</dict>
-        <dict>
-            <key>title</key>
-            <string>极币商城</string>
-            <key>icon</key>
-            <string>store</string>
-            <key>destinationVC</key>
-            <string>CZMyPointsController</string>
-        </dict>
-		<dict>
-			<key>title</key>
-			<string>极币任务</string>
+			<string>任务中心</string>
 			<key>icon</key>
 			<string>mission</string>
 			<key>destinationVC</key>
 			<string>CZCoinCenterController</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>我的收藏</string>
-			<key>icon</key>
-			<string>Collection</string>
-			<key>destinationVC</key>
-			<string>CZCollectController</string>
 		</dict>
 		<dict>
 			<key>title</key>

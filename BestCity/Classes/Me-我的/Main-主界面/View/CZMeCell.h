@@ -12,6 +12,4 @@
 + (instancetype)cellWithTabelView:(UITableView *)tableView;
 /** 数据 */
 @property (nonatomic, strong) NSDictionary *data;
-
-@property (nonatomic, weak) IBOutlet UILabel *messageCountLabel;
 @end

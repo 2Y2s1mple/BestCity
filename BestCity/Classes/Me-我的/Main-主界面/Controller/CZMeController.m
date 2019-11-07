@@ -17,21 +17,19 @@
 #import "CZMutContentButton.h"
 
 #import "CZLoginController.h"
-#import "CZVoteShowView.h"
 #import "UIImageView+WebCache.h"
 #import "CZMainAttentionController.h"
 #import "CZCoinCenterController.h"
 #import "CZUserInfoTool.h"
 #import "CZMeIntelligentController.h"// 达人主页
 #import "CZMePublishController.h"
+#import "CZMyWalletController.h" // 我的钱包
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 /** 数据 */
 @property (nonatomic, strong) NSArray *dataSource;
-/** 顶部的隐藏的导航栏 */
-@property (nonatomic, strong) UIImageView *navImage;
 /** 头像 */
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
 /** 登录按钮加用户名 */
@@ -52,8 +50,15 @@
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *messageCount;
-/** <#注释#> */
-@property (nonatomic, strong) NSString *moneyMessageCount;
+// 我的补贴
+/** 共省 */
+@property (nonatomic, weak) IBOutlet UILabel *totalFeeLabel;
+/** 可提现 */
+@property (nonatomic, weak) IBOutlet UILabel *withdrawLabel;
+/** 即将到账 */
+@property (nonatomic, weak) IBOutlet UILabel *preFeeLabel;
+/** 累计到账 */
+@property (nonatomic, weak) IBOutlet UILabel *finalFeeLabel;
 @end
 
 @implementation CZMeController
@@ -78,34 +83,23 @@
     [CZProgressHUD hideAfterDelay:1.5];
 }
 
-#pragma mark - 弹出点赞数
+#pragma mark - 收藏夹
 - (IBAction)voteBtnAction:(UIButton *)sender {
-    NSString *text = @"我的--点赞";
-    NSDictionary *context = @{@"mine" : text};
-    [MobClick event:@"ID5" attributes:context];
-
-    UIView *backView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    backView.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backViewHidden)];
-    [backView addGestureRecognizer:tap];
-    self.backView = backView;
-
-    CZVoteShowView *vc = [CZVoteShowView voteShowView];
-    vc.nameLabel.text = JPUSERINFO[@"nickname"];
-    
-    NSString *number = [NSString stringWithFormat:@"%@", JPUSERINFO[@"voteCount"]];
-    NSString *therPrice = [NSString stringWithFormat:@"共获得%@个赞", number];
-    vc.numberLabel.attributedText = [therPrice addAttributeColor:[UIColor colorWithRed:246/255.0 green:92/255.0 blue:56/255.0 alpha:1.0] Range:[therPrice rangeOfString:[NSString stringWithFormat:@"%@", number]]];
-    
-    vc.center = backView.center;
-    [backView addSubview:vc];
-    
-    [self.view addSubview:backView];
+    WMPageController *hotVc = (WMPageController *)[[NSClassFromString(@"CZCollectController") alloc] init];
+    [self.navigationController pushViewController:hotVc animated:YES];
 }
 
-- (void)backViewHidden
-{
-    [self.backView removeFromSuperview];
+#pragma mark - 我的钱包, 我的补贴
+- (IBAction)walletAction:(UIButton *)sender {
+    NSString *text = @"我的--我的钱包";
+    NSDictionary *context = @{@"mine" : text};
+    [MobClick event:@"ID5" attributes:context];
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    // 跳钱包
+    CZMyWalletController *toVc = [[CZMyWalletController alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 #pragma mark - 跳关注
@@ -187,25 +181,14 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     self.view.backgroundColor = CZGlobalLightGray;
+    // 设置样式
+    [self setPropertyStyle];
+
     // 头像的点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginAction:)];
     [self.headImage addGestureRecognizer:tap];
     self.headImage.layer.borderWidth = 2;
     self.headImage.layer.borderColor = CZGlobalWhiteBg.CGColor;
-    
-    // 设置最上面的导航栏, 实现滑动改变透明效果
-//    self.navImage = [[UIImageView alloc] init];
-    self.navImage.image = [UIImage imageNamed:@"矩形备份 + 矩形蒙版"];
-    _navImage.frame = CGRectMake(0, 0, SCR_WIDTH, 64);
-    [self.view addSubview:_navImage];
-    self.navImage.alpha = 0;
-//    UILabel *mytitle = [[UILabel alloc] init];
-//    mytitle.text = @"我的";
-//    mytitle.textColor = [UIColor whiteColor];
-//    mytitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
-//    [self.navImage addSubview:mytitle];
-//    [mytitle sizeToFit];
-//    mytitle.center = CGPointMake(SCR_WIDTH / 2, 44);
 
     // 接收登录时候的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpUserInfo) name:loginChangeUserInfo object:nil];
@@ -214,16 +197,25 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    // 获取用户数据
     [self getNetworkUserInfo];
+    // 获取消息数
     [self getMessageCount];
+    // 获取佣金数据
+    [self getCommssionSummary];
     [MobClick beginLogPageView:@"我的我的"]; //("Pagename"为页面名称，可自定义)
+}
+
+#pragma mark - 设置属性样式
+- (void)setPropertyStyle {
+    // 极币数 // 关注
+    self.attentionLabel.font = self.voteLabel.font = self.fansLabel.font = self.moneyLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];;
 }
 
 - (void)viewWillDisappear:(BOOL)animated 
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"我的我的"];
-
 }
 
 #pragma mark - 获取用户信息
@@ -235,6 +227,20 @@
     }];
 }
 
+#pragma mark - 获取佣金
+- (void)getCommssionSummary
+{
+    [CZUserInfoTool userInfoCommssionCallback:^(NSDictionary *param) {
+        /** 共省 */
+        self.totalFeeLabel.text = [NSString stringWithFormat:@"共省¥%@", param[@"totalFee"]];
+        /** 可提现 */
+        self.withdrawLabel.text = [NSString stringWithFormat:@"¥%@", param[@"withdraw"]];
+        /** 即将到账 */
+        self.preFeeLabel.text = [NSString stringWithFormat:@"¥%@", param[@"preFee"]];
+        /** 累计到账 */
+        self.finalFeeLabel.text = [NSString stringWithFormat:@"¥%@", param[@"finalFee"]];
+    }];
+}
 #pragma mark - 登录时候的通知
 - (void)setUpUserInfo
 {
@@ -266,8 +272,8 @@
     // 粉丝
     self.fansLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"fansCount"]];
     
-    // 点赞
-    self.voteLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"voteCount"]];
+    // 收藏数
+    self.voteLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"collectCount"]];
 }
 
 #pragma mark - <UITableViewDataSource>
@@ -286,26 +292,15 @@
     NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
     if (indexPath.section == 0) {
         CZMeCell *cell = [CZMeCell cellWithTabelView:tableView];
-        cell.messageCountLabel.text = self.moneyMessageCount;
-        if (![cell.messageCountLabel.text isEqualToString:@"0"]) {
-            cell.messageCountLabel.hidden = NO;
-        } else {
-            cell.messageCountLabel.hidden = YES;
-        }
         return cell;
     } else {
         CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
         cell.messageCountLabel.text = self.messageCount;
         cell.messageCountLabel.hidden = YES;
-        cell.lineView.hidden = YES;
         if (indexPath.row == 0) {
             if (![cell.messageCountLabel.text isEqualToString:@"0"]) {
                 cell.messageCountLabel.hidden = NO;
             }
-        }
-
-        if (indexPath.row == 6) {
-            cell.lineView.hidden = NO;
         }
         cell.dataSource = dic;
         return cell;
@@ -318,11 +313,8 @@
     if (indexPath.section == 0) {
         return 82;
     } else {
-        if (indexPath.row == 6) {
-            return 60 + 20 + 17;
-        } else {
-            return 60;
-        }
+        return 60;
+
     }
 }
 
@@ -357,20 +349,6 @@
     };
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGFloat offsetY = scrollView.contentOffset.y;
-//    if (offsetY >= 10 && offsetY <= 0) {
-//        self.navImage.alpha = (20 - (-offsetY)) / 20.0;
-//    }
-    if (offsetY > 10) {
-        self.navImage.alpha = 1;
-    }
-    if (offsetY <= 0) {
-        self.navImage.alpha = 0;
-    }
-}
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -383,9 +361,6 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/message/count"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
             self.messageCount = [NSString stringWithFormat:@"%@", [result[@"data"] integerValue] < 99 ? result[@"data"] : @"99+"];
-            self.moneyMessageCount = [NSString stringWithFormat:@"%@", [result[@"walletCount"] integerValue] < 99 ? result[@"walletCount"] : @"99+"];
-
-
             [self.tableView reloadData];
         } else {
 

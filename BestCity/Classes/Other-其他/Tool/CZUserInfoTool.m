@@ -53,4 +53,18 @@
         
     }];
 }
+
++ (void)userInfoCommssionCallback:(CZUserInfoBlock)action
+{
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/v2/myCommssionSummary"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            NSDictionary *dic = [result[@"data"] changeAllNnmberValue];
+            !action ? : action(dic);
+        }
+    } failure:^(NSError *error) {
+
+    }];
+}
 @end

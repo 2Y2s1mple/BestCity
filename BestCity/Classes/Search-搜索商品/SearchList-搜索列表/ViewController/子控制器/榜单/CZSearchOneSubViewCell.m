@@ -48,9 +48,10 @@
     self.tag3.hidden = YES;
     self.tag4.hidden = YES;
 
-    CGFloat maxWidth = SCR_WIDTH;
-
     NSArray *tagsArr = dataDic[@"goodsTagsList"];
+    if (![tagsArr isKindOfClass:[NSArray class]]) {
+        tagsArr = @[];
+    }
     for (int i = 0; i < tagsArr.count; i++) {
         switch (i) {
             case 0:

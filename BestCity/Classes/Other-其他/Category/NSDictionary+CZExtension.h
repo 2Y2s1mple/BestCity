@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDictionary (CZExtension)
 
 - (NSDictionary *)deleteAllNullValue;
+- (NSDictionary *)changeAllNnmberValue;
 
 @end
 

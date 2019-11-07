@@ -13,5 +13,7 @@ typedef void(^CZUserInfoBlock)(NSDictionary *param);
 @interface CZUserInfoTool : NSObject
 + (void)userInfoInformation:(CZUserInfoBlock)block;
 + (void)changeUserInfo:(NSDictionary *)info callbackAction:(CZUserInfoBlock)action;
+/** 获取佣金 */
++ (void)userInfoCommssionCallback:(CZUserInfoBlock)action;
 @end
 

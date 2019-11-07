@@ -45,15 +45,16 @@
 }
 
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {
-    NSString *text = @"我的--我的试用";
-    NSDictionary *context = @{@"mine" : text};
-    [MobClick event:@"ID5" attributes:context];
+    // 跳假订单及币商城的订单
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 跳试用
-    CZMyTrialController *toVc = [[CZMyTrialController alloc] init];
+    // 试用
+//    CZMyTrialController *toVc = [[CZMyTrialController alloc] init];
+//    [vc.navigationController pushViewController:toVc animated:YES];
+    UIViewController *toVc = [[NSClassFromString(@"CZOrderController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
+
 }
 
 - (IBAction)orderAction:(UITapGestureRecognizer *)sender {
@@ -70,14 +71,11 @@
 }
 
 - (IBAction)walletAction:(UITapGestureRecognizer *)sender {
-    NSString *text = @"我的--我的钱包";
-    NSDictionary *context = @{@"mine" : text};
-    [MobClick event:@"ID5" attributes:context];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 跳钱包
-    CZMyWalletController *toVc = [[CZMyWalletController alloc] init];
+    // 跳商城
+    UIViewController *toVc = [[NSClassFromString(@"CZMyPointsController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 

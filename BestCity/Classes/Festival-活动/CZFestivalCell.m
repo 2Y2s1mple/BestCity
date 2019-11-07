@@ -81,14 +81,21 @@
         [[self.couponPriceLabel superview] setHidden:YES];
         self.feeLabelMargin.constant = -75;
         [self layoutIfNeeded];
+    } else {
+        [[self.couponPriceLabel superview] setHidden:NO];
+        self.feeLabelMargin.constant = 5;
     }
 
     if ([self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
         [self.feeLabel setHidden:YES];
+    } else {
+        [self.feeLabel setHidden:NO];
     }
 
     if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
         self.actualPriceLabelBottomMragin.constant = -18;
+    } else {
+        self.actualPriceLabelBottomMragin.constant = 5;
     }
 
 }
@@ -124,14 +131,22 @@
         [[self.couponPriceLabel superview] setHidden:YES];
         self.feeLabelMargin.constant = -75;
         [self layoutIfNeeded];
+    } else {
+        [[self.couponPriceLabel superview] setHidden:NO];
+        self.feeLabelMargin.constant = 5;
+        [self layoutIfNeeded];
     }
 
     if ([self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
         [self.feeLabel setHidden:YES];
+    } else {
+        [self.feeLabel setHidden:NO];
     }
 
     if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
         self.actualPriceLabelBottomMragin.constant = -18;
+    } else {
+        self.actualPriceLabelBottomMragin.constant = 5;
     }
 
 }
