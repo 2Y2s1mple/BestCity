@@ -529,12 +529,13 @@
         // 显示更多按钮
         CZMutContentButton *moreBtn = [[CZMutContentButton alloc] init];
         [replyView addSubview:moreBtn];
-        moreBtn.x = 10;
-        moreBtn.y = replyView.height;
-        moreBtn.height = 20;
         [moreBtn setTitle:[NSString stringWithFormat:@"查看%@条回复", model.childCount] forState:UIControlStateNormal];
         [moreBtn setTitleColor:CZRGBColor(74, 144, 226) forState:UIControlStateNormal];
         moreBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+        [moreBtn sizeToFit];
+        moreBtn.x = 10;
+        moreBtn.y = replyView.height;
+        moreBtn.height = 20;
         [moreBtn addTarget:self action:@selector(pushCommentDetail:) forControlEvents:UIControlEventTouchUpInside];
         replyView.height = CZGetY(moreBtn) + 10;
     }
