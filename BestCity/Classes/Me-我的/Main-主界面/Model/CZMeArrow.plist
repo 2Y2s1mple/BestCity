@@ -35,6 +35,14 @@
 		</dict>
 		<dict>
 			<key>title</key>
+			<string>我的发布</string>
+			<key>icon</key>
+			<string>Order-1</string>
+			<key>destinationVC</key>
+			<string>CZMePublishController</string>
+		</dict>
+		<dict>
+			<key>title</key>
 			<string>收货地址</string>
 			<key>icon</key>
 			<string>address</string>

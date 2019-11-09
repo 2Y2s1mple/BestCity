@@ -542,6 +542,7 @@ static CGFloat const likeAndShareHeight = 55;
         NSLog(@"已经登录了");
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
         share.cententText =  self.dataDic[@"content"];
+        share.shareTypeParam = @{@"type" : @"2", @"object" : self.findgoodsId}; // 评测
         share.param = self.shareParam;
         [self.view addSubview:share];
     }

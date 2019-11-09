@@ -543,6 +543,21 @@
 		97F904C622F42C3200FA7A56 /* CZERecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F904C522F42C3200FA7A56 /* CZERecommendController.m */; };
 		97F904C922F42C4100FA7A56 /* CZETestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F904C822F42C4100FA7A56 /* CZETestController.m */; };
 		97F904CC22F42C5300FA7A56 /* CZEInventoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F904CB22F42C5300FA7A56 /* CZEInventoryController.m */; };
+		97FA0B1C237682D5001D1B70 /* asdasd.png in Resources */ = {isa = PBXBuildFile; fileRef = 97FA0B1B237682D5001D1B70 /* asdasd.png */; };
+		97FA0B2023769F71001D1B70 /* CZAllOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B1F23769F71001D1B70 /* CZAllOrderController.m */; };
+		97FA0B232376A280001D1B70 /* CZAllOrderSubOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B222376A280001D1B70 /* CZAllOrderSubOne.m */; };
+		97FA0B262376A290001D1B70 /* CZAllOrderSubTow.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B252376A290001D1B70 /* CZAllOrderSubTow.m */; };
+		97FA0B292376A29A001D1B70 /* CZAllOrderSubThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B282376A29A001D1B70 /* CZAllOrderSubThree.m */; };
+		97FA0B2C2376A2A5001D1B70 /* CZAllOrderSubFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B2B2376A2A5001D1B70 /* CZAllOrderSubFour.m */; };
+		97FA0B302376A54C001D1B70 /* CZAllOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B2E2376A54C001D1B70 /* CZAllOrderCell.m */; };
+		97FA0B312376A54C001D1B70 /* CZAllOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97FA0B2F2376A54C001D1B70 /* CZAllOrderCell.xib */; };
+		97FA0B352376BB9C001D1B70 /* CZFreeOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B342376BB9C001D1B70 /* CZFreeOrderController.m */; };
+		97FA0B382376BDC9001D1B70 /* CZFreeOrderSubOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B372376BDC9001D1B70 /* CZFreeOrderSubOne.m */; };
+		97FA0B3B2376BDD5001D1B70 /* CZFreeOrderSubTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B3A2376BDD5001D1B70 /* CZFreeOrderSubTwo.m */; };
+		97FA0B3E2376BDE2001D1B70 /* CZFreeOrderSubThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B3D2376BDE2001D1B70 /* CZFreeOrderSubThree.m */; };
+		97FA0B412376BDF4001D1B70 /* CZFreeOrderSubFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B402376BDF4001D1B70 /* CZFreeOrderSubFour.m */; };
+		97FA0B452376C1D1001D1B70 /* CZFreeOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FA0B432376C1D0001D1B70 /* CZFreeOrderCell.m */; };
+		97FA0B462376C1D1001D1B70 /* CZFreeOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97FA0B442376C1D1001D1B70 /* CZFreeOrderCell.xib */; };
 		97FC29F32109C62D003AE857 /* CZPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FC29F22109C62D003AE857 /* CZPointView.m */; };
 		97FD66CE229784120053AAE9 /* CZReportCoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FD66CD229784120053AAE9 /* CZReportCoverController.m */; };
 		97FD66D12297CEBE0053AAE9 /* CZEditorImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FD66D02297CEBE0053AAE9 /* CZEditorImageView.m */; };
@@ -1505,6 +1520,33 @@
 		97F904C822F42C4100FA7A56 /* CZETestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZETestController.m; sourceTree = "<group>"; };
 		97F904CA22F42C5300FA7A56 /* CZEInventoryController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEInventoryController.h; sourceTree = "<group>"; };
 		97F904CB22F42C5300FA7A56 /* CZEInventoryController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEInventoryController.m; sourceTree = "<group>"; };
+		97FA0B1B237682D5001D1B70 /* asdasd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asdasd.png; sourceTree = "<group>"; };
+		97FA0B1E23769F71001D1B70 /* CZAllOrderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAllOrderController.h; sourceTree = "<group>"; };
+		97FA0B1F23769F71001D1B70 /* CZAllOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAllOrderController.m; sourceTree = "<group>"; };
+		97FA0B212376A280001D1B70 /* CZAllOrderSubOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAllOrderSubOne.h; sourceTree = "<group>"; };
+		97FA0B222376A280001D1B70 /* CZAllOrderSubOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAllOrderSubOne.m; sourceTree = "<group>"; };
+		97FA0B242376A290001D1B70 /* CZAllOrderSubTow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAllOrderSubTow.h; sourceTree = "<group>"; };
+		97FA0B252376A290001D1B70 /* CZAllOrderSubTow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAllOrderSubTow.m; sourceTree = "<group>"; };
+		97FA0B272376A29A001D1B70 /* CZAllOrderSubThree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAllOrderSubThree.h; sourceTree = "<group>"; };
+		97FA0B282376A29A001D1B70 /* CZAllOrderSubThree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAllOrderSubThree.m; sourceTree = "<group>"; };
+		97FA0B2A2376A2A5001D1B70 /* CZAllOrderSubFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAllOrderSubFour.h; sourceTree = "<group>"; };
+		97FA0B2B2376A2A5001D1B70 /* CZAllOrderSubFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAllOrderSubFour.m; sourceTree = "<group>"; };
+		97FA0B2D2376A54C001D1B70 /* CZAllOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAllOrderCell.h; sourceTree = "<group>"; };
+		97FA0B2E2376A54C001D1B70 /* CZAllOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAllOrderCell.m; sourceTree = "<group>"; };
+		97FA0B2F2376A54C001D1B70 /* CZAllOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAllOrderCell.xib; sourceTree = "<group>"; };
+		97FA0B332376BB9C001D1B70 /* CZFreeOrderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeOrderController.h; sourceTree = "<group>"; };
+		97FA0B342376BB9C001D1B70 /* CZFreeOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeOrderController.m; sourceTree = "<group>"; };
+		97FA0B362376BDC9001D1B70 /* CZFreeOrderSubOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeOrderSubOne.h; sourceTree = "<group>"; };
+		97FA0B372376BDC9001D1B70 /* CZFreeOrderSubOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeOrderSubOne.m; sourceTree = "<group>"; };
+		97FA0B392376BDD5001D1B70 /* CZFreeOrderSubTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeOrderSubTwo.h; sourceTree = "<group>"; };
+		97FA0B3A2376BDD5001D1B70 /* CZFreeOrderSubTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeOrderSubTwo.m; sourceTree = "<group>"; };
+		97FA0B3C2376BDE2001D1B70 /* CZFreeOrderSubThree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeOrderSubThree.h; sourceTree = "<group>"; };
+		97FA0B3D2376BDE2001D1B70 /* CZFreeOrderSubThree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeOrderSubThree.m; sourceTree = "<group>"; };
+		97FA0B3F2376BDF4001D1B70 /* CZFreeOrderSubFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeOrderSubFour.h; sourceTree = "<group>"; };
+		97FA0B402376BDF4001D1B70 /* CZFreeOrderSubFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeOrderSubFour.m; sourceTree = "<group>"; };
+		97FA0B422376C1D0001D1B70 /* CZFreeOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeOrderCell.h; sourceTree = "<group>"; };
+		97FA0B432376C1D0001D1B70 /* CZFreeOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeOrderCell.m; sourceTree = "<group>"; };
+		97FA0B442376C1D1001D1B70 /* CZFreeOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZFreeOrderCell.xib; sourceTree = "<group>"; };
 		97FC29F12109C62D003AE857 /* CZPointView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointView.h; sourceTree = "<group>"; };
 		97FC29F22109C62D003AE857 /* CZPointView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZPointView.m; sourceTree = "<group>"; };
 		97FD66CC229784120053AAE9 /* CZReportCoverController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZReportCoverController.h; sourceTree = "<group>"; };
@@ -2161,7 +2203,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		972E41C121147B8000BC751C /* Order-订单 */ = {
+		972E41C121147B8000BC751C /* Order-极币商城的订单 */ = {
 			isa = PBXGroup;
 			children = (
 				972E41C321147C2000BC751C /* CZOrderController.h */,
@@ -2173,7 +2215,7 @@
 				970497C2225F362900CC14FF /* CZOrderDetailController.m */,
 				970497C3225F362900CC14FF /* CZOrderDetailController.xib */,
 			);
-			path = "Order-订单";
+			path = "Order-极币商城的订单";
 			sourceTree = "<group>";
 		};
 		972E41C221147BE400BC751C /* Attention-关注 */ = {
@@ -2767,13 +2809,14 @@
 		97705C3B210716A300485D64 /* Me-我的 */ = {
 			isa = PBXGroup;
 			children = (
-				97DA5B942374203C0073EB12 /* New Group */,
 				97CF34282177397100DA9198 /* Main-主界面 */,
+				97FA0B322376BB04001D1B70 /* MyFree-我的免单 */,
+				97FA0B1D23769F2D001D1B70 /* AllOrder-我的全部订单 */,
 				97C3925F230C1734002EA036 /* 我的发布 */,
 				9752466F230A7BA900A1A334 /* 达人主页 */,
 				972F4BA622AE536400F30F6B /*  TeamMembers-团队成员 */,
 				9763A1EE225225AA00F1A8FF /* MyTrial-我的试用 */,
-				972E41C121147B8000BC751C /* Order-订单 */,
+				972E41C121147B8000BC751C /* Order-极币商城的订单 */,
 				97911047222F6B5800C2DE5B /* MyAddress-收货地址 */,
 				97911041222F69F700C2DE5B /* MyWallet-钱包 */,
 				970C50A121F17E350091D7FF /* CoinCenter-极币中心 */,
@@ -4328,13 +4371,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		97DA5B942374203C0073EB12 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		97EC481F22D2DC21006ACA23 /* Main-主要 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4396,6 +4432,7 @@
 		97F0EC0121251187000FE1DC /* 友盟 */ = {
 			isa = PBXGroup;
 			children = (
+				97FA0B1B237682D5001D1B70 /* asdasd.png */,
 				97F0EC30212529F5000FE1DC /* CZUMConfigure.h */,
 				97F0EC31212529F5000FE1DC /* CZUMConfigure.m */,
 				97B6C568225AF3900061D9A0 /* common */,
@@ -4651,6 +4688,46 @@
 			path = "Inventory-清单";
 			sourceTree = "<group>";
 		};
+		97FA0B1D23769F2D001D1B70 /* AllOrder-我的全部订单 */ = {
+			isa = PBXGroup;
+			children = (
+				97FA0B1E23769F71001D1B70 /* CZAllOrderController.h */,
+				97FA0B1F23769F71001D1B70 /* CZAllOrderController.m */,
+				97FA0B212376A280001D1B70 /* CZAllOrderSubOne.h */,
+				97FA0B222376A280001D1B70 /* CZAllOrderSubOne.m */,
+				97FA0B242376A290001D1B70 /* CZAllOrderSubTow.h */,
+				97FA0B252376A290001D1B70 /* CZAllOrderSubTow.m */,
+				97FA0B272376A29A001D1B70 /* CZAllOrderSubThree.h */,
+				97FA0B282376A29A001D1B70 /* CZAllOrderSubThree.m */,
+				97FA0B2A2376A2A5001D1B70 /* CZAllOrderSubFour.h */,
+				97FA0B2B2376A2A5001D1B70 /* CZAllOrderSubFour.m */,
+				97FA0B2D2376A54C001D1B70 /* CZAllOrderCell.h */,
+				97FA0B2E2376A54C001D1B70 /* CZAllOrderCell.m */,
+				97FA0B2F2376A54C001D1B70 /* CZAllOrderCell.xib */,
+			);
+			path = "AllOrder-我的全部订单";
+			sourceTree = "<group>";
+		};
+		97FA0B322376BB04001D1B70 /* MyFree-我的免单 */ = {
+			isa = PBXGroup;
+			children = (
+				97FA0B332376BB9C001D1B70 /* CZFreeOrderController.h */,
+				97FA0B342376BB9C001D1B70 /* CZFreeOrderController.m */,
+				97FA0B362376BDC9001D1B70 /* CZFreeOrderSubOne.h */,
+				97FA0B372376BDC9001D1B70 /* CZFreeOrderSubOne.m */,
+				97FA0B392376BDD5001D1B70 /* CZFreeOrderSubTwo.h */,
+				97FA0B3A2376BDD5001D1B70 /* CZFreeOrderSubTwo.m */,
+				97FA0B3C2376BDE2001D1B70 /* CZFreeOrderSubThree.h */,
+				97FA0B3D2376BDE2001D1B70 /* CZFreeOrderSubThree.m */,
+				97FA0B3F2376BDF4001D1B70 /* CZFreeOrderSubFour.h */,
+				97FA0B402376BDF4001D1B70 /* CZFreeOrderSubFour.m */,
+				97FA0B422376C1D0001D1B70 /* CZFreeOrderCell.h */,
+				97FA0B432376C1D0001D1B70 /* CZFreeOrderCell.m */,
+				97FA0B442376C1D1001D1B70 /* CZFreeOrderCell.xib */,
+			);
+			path = "MyFree-我的免单";
+			sourceTree = "<group>";
+		};
 		97FD7E1D2276E8E700F5DFFC /* WebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -4843,6 +4920,7 @@
 				972E41C0211473B100BC751C /* CZMyPointDetailCell.xib in Resources */,
 				97D0C62A23604BF800F3B994 /* CZGotoScoreView.xib in Resources */,
 				97BC05E12112B122001ED65A /* key@2x.png in Resources */,
+				97FA0B312376A54C001D1B70 /* CZAllOrderCell.xib in Resources */,
 				972E41B82114636100BC751C /* CZMyPointsCell.xib in Resources */,
 				97F0947A21B8F7C800F550B5 /* wwwipinchengcn.cer in Resources */,
 				97420DD721EC321400FE3D9F /* CZHisSearchCell.xib in Resources */,
@@ -4925,6 +5003,7 @@
 				97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */,
 				97B4A49F22490BB800E48D93 /* CZTrailTestCell.xib in Resources */,
 				97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */,
+				97FA0B462376C1D1001D1B70 /* CZFreeOrderCell.xib in Resources */,
 				9779471022BCD39900DA3948 /* CZFreeDetailsubView.xib in Resources */,
 				975BCF1922D85A3A0031F3AC /* CZMHSDQDetailCell.xib in Resources */,
 				970AD8CF232A3BD600CCE9F9 /* NBResource.bundle in Resources */,
@@ -4954,6 +5033,7 @@
 				97C85131211AFAA9005540D8 /* CZBindingMobileController.xib in Resources */,
 				97B30CFA21F2FEF900B8427E /* launchLogo.png in Resources */,
 				97C7FF3A216DDDB50091DC07 /* MJRefresh.bundle in Resources */,
+				97FA0B1C237682D5001D1B70 /* asdasd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4989,6 +5069,7 @@
 				97FF6DF8211862EF00376435 /* CZfeedbackController.m in Sources */,
 				97705CBA2108230F00485D64 /* UIViewController+WMPageController.m in Sources */,
 				97B8760A21EED78A001CC393 /* CZMainAttentionController.m in Sources */,
+				97FA0B262376A290001D1B70 /* CZAllOrderSubTow.m in Sources */,
 				97BDE5CB2195B232005FB405 /* CZConst.m in Sources */,
 				979B05CD210EBD270023292D /* CZMutContentButton.m in Sources */,
 				97D5A4AB22C0FE7C008F2B30 /* CZFreeSubTwoController.m in Sources */,
@@ -4996,6 +5077,7 @@
 				97B30CFE21F30CA000B8427E /* CZBindingController.m in Sources */,
 				97AB0C2222533C2E00072426 /* CZTrialApplySuccessController.m in Sources */,
 				97AC558822C64A9B00D7F2DA /* CZScrollView.m in Sources */,
+				97FA0B3E2376BDE2001D1B70 /* CZFreeOrderSubThree.m in Sources */,
 				97C7FF42216DDDB50091DC07 /* MJRefreshAutoGifFooter.m in Sources */,
 				97CA2D79230E84C4004FC257 /* CZMePublishDetailController.m in Sources */,
 				979EFD8921E08923000FE466 /* CZCommodityModel.m in Sources */,
@@ -5017,6 +5099,7 @@
 				97A5B974230D2DF500014E90 /* CZMePublishThreeController.m in Sources */,
 				97F0EC392125692B000FE1DC /* CZGuideTool.m in Sources */,
 				97C3925E230C109D002EA036 /* CZSubCollectFiveController.m in Sources */,
+				97FA0B2023769F71001D1B70 /* CZAllOrderController.m in Sources */,
 				97798C7B212CF4430052CE94 /* SVIndefiniteAnimatedView.m in Sources */,
 				97F4D485224A0CA600A82B14 /* CZvoteUserController.m in Sources */,
 				97481AC52303D4F000230367 /* CZETestAllOpenBoxController.m in Sources */,
@@ -5029,8 +5112,10 @@
 				97C7FF38216DDDB50091DC07 /* UIScrollView+MJRefresh.m in Sources */,
 				97C7FF47216DDDB50091DC07 /* MJRefreshFooter.m in Sources */,
 				97530AAA2313A98900185C40 /* CZMHSDQuestCell2.m in Sources */,
+				97FA0B412376BDF4001D1B70 /* CZFreeOrderSubFour.m in Sources */,
 				97705C59210716A300485D64 /* CZDiscoverController.m in Sources */,
 				97C8513E211C3B1B005540D8 /* NSString+CZExtension.m in Sources */,
+				97FA0B452376C1D1001D1B70 /* CZFreeOrderCell.m in Sources */,
 				9785778721A6E04800E42B29 /* CZPackUpCommentCell.m in Sources */,
 				97CC633522D6D00E0054CFEE /* CZMHSDQuestController.m in Sources */,
 				97C78FB821196A6A00374CCD /* CZMessageActivityController.m in Sources */,
@@ -5058,6 +5143,7 @@
 				9745082F21F807FE006A71EF /* KCUtilMd5.m in Sources */,
 				979110782231131400C2DE5B /* AddressModel.m in Sources */,
 				97BC05DA2112B122001ED65A /* DLIDEKeyboardView.m in Sources */,
+				97FA0B352376BB9C001D1B70 /* CZFreeOrderController.m in Sources */,
 				97C7FF04216DDDAB0091DC07 /* MJConst.m in Sources */,
 				975BCF1122D81C1A0031F3AC /* CZMHSDQDetailController.m in Sources */,
 				97F0EC3C212569C4000FE1DC /* CZSaveTool.m in Sources */,
@@ -5167,6 +5253,7 @@
 				977E8098225B6AD30041A126 /* CZMyTrialApplyForFailedCell.m in Sources */,
 				9778649C211A7AD6001B41F1 /* MASConstraintMaker.m in Sources */,
 				97798CCC212D0FC90052CE94 /* SDAnimatedImageRep.m in Sources */,
+				97FA0B302376A54C001D1B70 /* CZAllOrderCell.m in Sources */,
 				972E41D121147C6F00BC751C /* CZDiscountCouponController.m in Sources */,
 				977864A1211A7AD6001B41F1 /* MASViewConstraint.m in Sources */,
 				97F71B9F21AD21A7005BCAC3 /* PlanPageControl.m in Sources */,
@@ -5184,6 +5271,7 @@
 				97705CE92108733F00485D64 /* CZNavigationController.m in Sources */,
 				97FEBF2022D47BAE007BF592 /* CZMHSDCommodityCell2.m in Sources */,
 				97F904C322F42C2200FA7A56 /* CZEAttentionController.m in Sources */,
+				97FA0B3B2376BDD5001D1B70 /* CZFreeOrderSubTwo.m in Sources */,
 				97420DDA21EC918800FE3D9F /* CZSearchSubDetailOneController.m in Sources */,
 				97911058222FAE3B00C2DE5B /* CZEditAddressController.m in Sources */,
 				97643485221BF31000EB0291 /* CZSubButton.m in Sources */,
@@ -5195,6 +5283,7 @@
 				97C3924F230BD90D002EA036 /* CZChangeSignController.m in Sources */,
 				97C8513B211C1BDC005540D8 /* CZProgressHUD.m in Sources */,
 				97C7FF3E216DDDB50091DC07 /* MJRefreshBackGifFooter.m in Sources */,
+				97FA0B382376BDC9001D1B70 /* CZFreeOrderSubOne.m in Sources */,
 				97C7FF44216DDDB50091DC07 /* MJRefreshNormalHeader.m in Sources */,
 				970E619022BA20A100E68BE3 /* CZCZFreeChargeCell2.m in Sources */,
 				97798CD3212D0FC90052CE94 /* SDWebImageGIFCoder.m in Sources */,
@@ -5290,6 +5379,7 @@
 				97AB0C182253254D00072426 /* CZTrialApplyForController.m in Sources */,
 				97705C6E2107172A00485D64 /* AFNetworkReachabilityManager.m in Sources */,
 				9763A1F1225225F200F1A8FF /* CZMyTrialController.m in Sources */,
+				97FA0B232376A280001D1B70 /* CZAllOrderSubOne.m in Sources */,
 				97798CD9212D0FC90052CE94 /* SDWebImageWebPCoder.m in Sources */,
 				975BCF1822D85A3A0031F3AC /* CZMHSDQDetailCell.m in Sources */,
 				97798CC8212D0FC90052CE94 /* SDWebImageCompat.m in Sources */,
@@ -5311,6 +5401,7 @@
 				97798CCA212D0FC90052CE94 /* SDWebImageCoder.m in Sources */,
 				977D8D0522AD475D005E7ACB /* CZMyWalletWithdrawCell.m in Sources */,
 				9778649A211A7AD6001B41F1 /* ViewController+MASAdditions.m in Sources */,
+				97FA0B2C2376A2A5001D1B70 /* CZAllOrderSubFour.m in Sources */,
 				9799933721A67B1A0000D42B /* CZCommentDetailCell.m in Sources */,
 				97420DCA21E9985100FE3D9F /* CZBuyView.m in Sources */,
 				97C7FF01216DDDAB0091DC07 /* NSObject+MJKeyValue.m in Sources */,
@@ -5328,6 +5419,7 @@
 				972F4BA422AE447200F30F6B /* CZMyWalletDetailCell.m in Sources */,
 				97BB481A2133E56E006AE982 /* CZGiveLikeView.m in Sources */,
 				9708491A22433AFB000D5528 /* CZTrailReportModel.m in Sources */,
+				97FA0B292376A29A001D1B70 /* CZAllOrderSubThree.m in Sources */,
 				97C7FF4B216DDDB50091DC07 /* MJRefreshComponent.m in Sources */,
 				974C559422C070C9001A1E1C /* CZFreeAlertView.m in Sources */,
 				97798CC4212D0FC90052CE94 /* SDWebImageDownloader.m in Sources */,
@@ -5538,7 +5630,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.6.82;
+				MARKETING_VERSION = 2.6.85;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -5636,7 +5728,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.6.82;
+				MARKETING_VERSION = 2.6.85;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",

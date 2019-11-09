@@ -12,6 +12,7 @@
 
 #import "CZInvitationController.h"
 #import "CZOrderController.h"
+#import "CZAllOrderController.h" // 我的全部订单
 
 #import "CZMyWalletController.h"
 #import "CZMyPointsController.h"
@@ -45,28 +46,27 @@
 }
 
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {
-    // 跳假订单及币商城的订单
+    // 跳我的免单
+//    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+//    UINavigationController *nav = tabbar.selectedViewController;
+//    CZMeController *vc = (CZMeController *)nav.topViewController;
+//    UIViewController *toVc = [[NSClassFromString(@"CZFreeOrderController") alloc] init];
+//    [vc.navigationController pushViewController:toVc animated:YES];
+
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 试用
-//    CZMyTrialController *toVc = [[CZMyTrialController alloc] init];
-//    [vc.navigationController pushViewController:toVc animated:YES];
-    UIViewController *toVc = [[NSClassFromString(@"CZOrderController") alloc] init];
+    UIViewController *toVc = [[NSClassFromString(@"CZMePublishController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 
 }
 
 - (IBAction)orderAction:(UITapGestureRecognizer *)sender {
-    NSString *text = @"我的--我的发布";
-    NSDictionary *context = @{@"mine" : text};
-    [MobClick event:@"ID5" attributes:context];
+    // 跳全部订单
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 跳发布
-    CZMePublishController *toVc = [[CZMePublishController alloc] init];
-    toVc.isQingDan = YES;
+    UIViewController *toVc = [[NSClassFromString(@"CZAllOrderController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
@@ -81,7 +81,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-//    self.layer.cornerRadius = 10;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

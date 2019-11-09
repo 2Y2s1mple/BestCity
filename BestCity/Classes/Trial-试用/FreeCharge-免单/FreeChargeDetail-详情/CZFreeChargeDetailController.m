@@ -139,6 +139,7 @@ static BOOL isBuyTime;
     }
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
     share.cententText =  self.shareDic[@"shareContent"];
+    share.shareTypeParam = @{@"type" : @"0", @"object" : self.Id}; // 免单
     share.param = @{
                     @"shareUrl" : self.shareDic[@"shareUrl"],
                     @"shareTitle" : self.shareDic[@"shareTitle"],

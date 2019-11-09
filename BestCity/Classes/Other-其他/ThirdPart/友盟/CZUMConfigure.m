@@ -11,6 +11,7 @@
 #import <UShareUI/UShareUI.h>
 #import <UMAnalytics/MobClick.h>
 #import "CZGetJIBITool.h"
+#import "UIImageView+WebCache.h"
 
 @implementation CZUMConfigure
 static id _instance;
@@ -28,7 +29,7 @@ static id _instance;
     [UMConfigure initWithAppkey:@"5b729a75f29d987629000096" channel:@"App Store"];
     // U-Share 平台设置
     [self configUSharePlatforms];
-    
+//     [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO
     [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
 //    [UMConfigure setEncryptEnabled:YES];//打开加密传输
     [UMConfigure setLogEnabled:YES];//设置打开日志
@@ -49,23 +50,27 @@ static id _instance;
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2148903410" appSecret:@"8d3c2285a9a46b5e4f36656874c0c188" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
 }
 
-- (void)shareToPlatformType:(UMSocialPlatformType)platformType currentViewController:(UIViewController *)vc webUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage
+- (void)shareToPlatformType:(UMSocialPlatformType)platformType currentViewController:(UIViewController *)vc webUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage shareType:(NSInteger)type object:(id)anObject
 {
-    //    //设置图片内容对象
-//        UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-//        shareObject.thumbImage = [UIImage imageNamed:@"icon.png"];//如果有缩略图，则设置缩略图
-//        [shareObject setShareImage:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534319537557&di=f5dcb1f44d10702889212857acdb5371&imgtype=0&src=http%3A%2F%2Fwww.qqma.com%2Fimgpic2%2Fcpimagenew%2F2018%2F4%2F5%2F6e1de60ce43d4bf4b9671d7661024e7a.jpg"];
-    
-    // 设置网页
-    UMShareWebpageObject *shareUrlObject = [UMShareWebpageObject shareObjectWithTitle:title descr:subTitle thumImage:thumImage];
-    //设置网页地址
-    shareUrlObject.webpageUrl = webUrl;
-    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareUrlObject;
-    
+    if (platformType == UMSocialPlatformType_WechatSession) {
+        if (type == 0) { // 0元购
+            //分享消息对象设置分享内容对象
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-info/index?freeId=%@", anObject]];
+        } else if (type == 1) { // 商品
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b0a86c45468d" path:[NSString stringWithFormat:@"pages/list/top-info/main?topListVal=%@", anObject]];
+        } else if (type == 2) { // 评测
+            //设置分享内容
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b0a86c45468d" path:[NSString stringWithFormat:@"pages/ev/ev-info/main?evListVal=%@", anObject]];
+        } else {
+            //设置分享内容
+            messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
+        }
+    } else {
+        //设置分享内容
+        messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
+    }
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:vc completion:^(id data, NSError *error) {
         if (error) {
@@ -75,7 +80,45 @@ static id _instance;
             NSLog(@"response data is %@", dataResponse.message);
             [CZGetJIBITool getJiBiWitType:@(5)];
         }
-        
     }];
 }
+
+
+// 网页形式
+- (UMShareWebpageObject *)setUpWebUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage
+{
+    // 设置网页
+    UMShareWebpageObject *shareUrlObject = [UMShareWebpageObject shareObjectWithTitle:title descr:subTitle thumImage:thumImage];
+    //设置网页地址
+    shareUrlObject.webpageUrl = webUrl;
+    return shareUrlObject;
+}
+
+// 小程序形式
+- (UMShareMiniProgramObject *)setUpMiniWebUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage userName:(NSString *)userName path:(NSString *)path
+{
+    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:title descr:subTitle thumImage:thumImage];
+    shareObject.webpageUrl = webUrl;
+    shareObject.userName = userName;
+    shareObject.path = path;
+
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumImage]];
+    UIImage* newImage = [UIImage imageWithData:data];
+    NSData *imageData =  UIImagePNGRepresentation(newImage);
+    NSInteger length = [imageData length];
+    CGFloat compression;
+    if ([imageData length] > 127000) {
+        compression =  127000.0 / length;
+    } else {
+        compression = 1;
+    }
+
+    imageData =  UIImageJPEGRepresentation(newImage, compression);
+    shareObject.hdImageData = imageData;
+    shareObject.miniProgramType = UShareWXMiniProgramTypeRelease; // 可选体验版和开发板
+    return shareObject;
+}
+
+
+
 @end

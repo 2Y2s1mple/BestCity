@@ -47,7 +47,7 @@
         self.window.rootViewController = tabbar;
     } failure:^(NSError *error) {
         CZTabBarController *tabbar = [[CZTabBarController alloc] init];
-        tabbar.isFestival = NO;
+        tabbar.isFestival = YES;
         isFestival = tabbar.isFestival;
         self.window.rootViewController = tabbar;
     }];

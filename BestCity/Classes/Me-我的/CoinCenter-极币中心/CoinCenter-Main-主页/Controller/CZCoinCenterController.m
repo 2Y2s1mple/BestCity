@@ -164,7 +164,13 @@
 {
     // 明日签到极币+15
     self.todayPointNumber.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
-    self.todayPointNumber.text = [NSString stringWithFormat:@"明日签到极币+%@", self.dataSource[@"pointArr"][[self.dataSource[@"daysCount"] integerValue]]];
+    NSInteger index = [self.dataSource[@"daysCount"] integerValue];
+    NSArray *pointArr = self.dataSource[@"pointArr"];
+    if (index >= pointArr.count) {
+        index = 0;
+    }
+
+    self.todayPointNumber.text = [NSString stringWithFormat:@"明日签到极币+%@", pointArr[index]];
     self.usablePointNumber.text = [NSString stringWithFormat:@"%@", self.dataSource[@"pointAccount"][@"usablePoint"]];
     self.daysCountNumber = [self.dataSource[@"daysCount"] integerValue];
     

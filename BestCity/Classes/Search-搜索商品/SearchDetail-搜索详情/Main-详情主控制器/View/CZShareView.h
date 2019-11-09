@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSDictionary *param;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *cententText;
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *shareTypeParam;
 @end

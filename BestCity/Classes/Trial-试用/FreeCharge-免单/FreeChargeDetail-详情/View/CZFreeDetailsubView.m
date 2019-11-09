@@ -11,6 +11,7 @@
 @interface CZFreeDetailsubView ()
 /** 粉色文字背景 */
 @property (nonatomic, weak) IBOutlet UIView *pinkBackView;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pinkBackViewHeight;
 /** 粉色文字 */
 @property (nonatomic, weak) IBOutlet UILabel *pinkLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pinkLabelHeight;
@@ -196,7 +197,12 @@
             default:
                 break;
         }
+        self.pinkLabel.preferredMaxLayoutWidth = SCR_WIDTH - 36;
         self.pinkLabel.text = model.freeNote;
+
+
+//        [self layoutIfNeeded];
+//        self.pinkBackViewHeight.constant = self.pinkLabel.height;
         [self layoutIfNeeded];
         self.height = CZGetY(self.pinkBackView);
     }

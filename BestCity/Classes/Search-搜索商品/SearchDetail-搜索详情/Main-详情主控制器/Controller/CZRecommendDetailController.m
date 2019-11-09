@@ -113,6 +113,9 @@ static NSString * const type = @"1";
             }
             CZShareView *share = [[CZShareView alloc] initWithFrame:weakSelf.view.frame];
             share.cententText = weakSelf.shareDic[@"content"];
+            NSData *strData = [NSJSONSerialization dataWithJSONObject:weakSelf.shareDic[@"data"][@"goodsEntity"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSString *jsonStr = [[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding];
+             share.shareTypeParam = @{@"type" : @"1", @"object" : jsonStr}; // 商品
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{

@@ -123,7 +123,11 @@
     UINavigationController *nav = tabbar.selectedViewController;
     UIViewController *currentVc = nav.topViewController;
 
-    [[CZUMConfigure shareConfigure] shareToPlatformType:type currentViewController:currentVc webUrl:self.param[@"shareUrl"] Title:self.param[@"shareTitle"] subTitle:self.param[@"shareContent"] thumImage:self.param[@"shareImg"]];
+    if (self.shareTypeParam == nil) {
+        self.shareTypeParam = @{@"type" : @"998", @"object" : @""};
+    }
+
+    [[CZUMConfigure shareConfigure] shareToPlatformType:type currentViewController:currentVc webUrl:self.param[@"shareUrl"] Title:self.param[@"shareTitle"] subTitle:self.param[@"shareContent"] thumImage:self.param[@"shareImg"] shareType:[self.shareTypeParam[@"type"] integerValue] object:self.shareTypeParam[@"object"]];
 }
 
 - (void)dismiss
