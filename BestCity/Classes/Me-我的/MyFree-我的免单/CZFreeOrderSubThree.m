@@ -156,6 +156,7 @@
     NSDictionary *model = self.dataSource[indexPath.row];
     CZFreeOrderCell *cell = [CZFreeOrderCell cellwithTableView:tableView];
     cell.model = model;
+    cell.statusLabel.text = @"已结算";
     return cell;
 }
 

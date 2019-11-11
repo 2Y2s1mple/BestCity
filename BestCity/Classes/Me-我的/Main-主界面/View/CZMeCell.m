@@ -47,18 +47,11 @@
 
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {
     // 跳我的免单
-//    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-//    UINavigationController *nav = tabbar.selectedViewController;
-//    CZMeController *vc = (CZMeController *)nav.topViewController;
-//    UIViewController *toVc = [[NSClassFromString(@"CZFreeOrderController") alloc] init];
-//    [vc.navigationController pushViewController:toVc animated:YES];
-
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZMePublishController") alloc] init];
+    UIViewController *toVc = [[NSClassFromString(@"CZFreeOrderController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
-
 }
 
 - (IBAction)orderAction:(UITapGestureRecognizer *)sender {

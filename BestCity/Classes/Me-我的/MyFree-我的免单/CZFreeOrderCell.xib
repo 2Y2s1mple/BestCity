@@ -137,6 +137,7 @@
             <connections>
                 <outlet property="alipayTotalPrice" destination="LkI-nh-Iwh" id="qhC-dR-GlC"/>
                 <outlet property="createTime" destination="cz5-w5-0sS" id="lVD-oV-6om"/>
+                <outlet property="freePrice" destination="CJZ-rE-nWq" id="IUp-Cb-cCJ"/>
                 <outlet property="itemImgView" destination="wF8-sr-bk6" id="UtO-kg-ejE"/>
                 <outlet property="itemTitle" destination="oEW-xL-T0f" id="W8z-vb-0qE"/>
                 <outlet property="oldPriceLabel" destination="bVj-a0-Wkh" id="JM6-7z-76g"/>

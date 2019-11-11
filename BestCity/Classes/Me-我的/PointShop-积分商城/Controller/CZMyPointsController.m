@@ -11,6 +11,7 @@
 #import "CZMyPointsCell.h"
 #import "GXNetTool.h"
 #import "CZMyPointsDetailController.h"
+#import "CZOrderController.h"
 
 @interface CZMyPointsController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIView *lineView;
@@ -40,7 +41,10 @@ static NSString * const ID = @"myPointCollectionCell";
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"极币商城" rightBtnTitle:nil rightBtnAction:nil ];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"极币商城" rightBtnTitle:@"兑换记录" rightBtnAction:^{
+        CZOrderController *vc = [[CZOrderController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } ];
     [self.view addSubview:navigationView];
 
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];

@@ -43,14 +43,6 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>收货地址</string>
-			<key>icon</key>
-			<string>address</string>
-			<key>destinationVC</key>
-			<string>CZAddressController</string>
-		</dict>
-		<dict>
-			<key>title</key>
 			<string>设置</string>
 			<key>icon</key>
 			<string>address-1</string>

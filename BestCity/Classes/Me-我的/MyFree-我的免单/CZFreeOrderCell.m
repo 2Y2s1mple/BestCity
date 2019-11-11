@@ -19,7 +19,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *alipayTotalPrice;
 @property (nonatomic, weak) IBOutlet UILabel *oldPriceLabel;
 @property (nonatomic, weak) IBOutlet UILabel *freePrice;
-@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 
 
 @end
@@ -47,26 +46,12 @@
     NSString *otherPrice = [NSString stringWithFormat:@"¥%@", _model[@"otherPrice"]];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
 
-//    self.freePrice.text = [NSString stringWithFormat:@"免50%，预估返：¥199.80", _model[@"actualPrice"]];
-
-    if ([_model[@"applyStatus"] isEqualToString:@"1"]) { // 1待确认，2已结算，3已失效
-        self.statusLabel.text = @"待确认";
-    } else if ([_model[@"status"] isEqualToString:@"2"]) {
-        self.statusLabel.text = @"已结算";
-    } else if ([_model[@"status"] isEqualToString:@"3"]) {
-        self.statusLabel.text = @"已失效";
-
-    }
-
-
-
-
-
+    self.freePrice.text = [NSString stringWithFormat:@"免%ld%%，预估返：¥%@", [_model[@"freeRate"] integerValue] * 100, _model[@"freePrice"]];
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

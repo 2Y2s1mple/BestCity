@@ -14,6 +14,7 @@
 #import "SDImageCache.h"
 #import "CZAlertViewTool.h"
 #import "GXNetTool.h"
+#import "CZAddressController.h"
 
 @interface CZSettingController ()<UITableViewDelegate, UITableViewDataSource>
 /** 标题数组 */
@@ -26,7 +27,7 @@
 - (NSArray *)contentTitles
 {
     if (_contentTitles == nil) {
-        _contentTitles = @[@"我要反馈", @"清除缓存", @"联系客服", @"用户协议", @"关于极品城"];
+        _contentTitles = @[ @"收货地址", @"我要反馈", @"清除缓存", @"联系客服", @"用户协议", @"关于极品城",];
     }
     return _contentTitles;
 }
@@ -108,12 +109,19 @@
     switch (indexPath.row) {
         case 0:
         {
+            /** 添加地址 */
+            CZAddressController *vc = [[CZAddressController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:
+        {
             /** 跳转到反馈 */
             CZfeedbackController *vc = [[CZfeedbackController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 1:
+        case 2:
         {
             [CZAlertViewTool showSheetAlertAction:^{
                 //响应事件
@@ -125,14 +133,14 @@
             }];
         }
             break;
-        case 2:
+        case 3:
         {
             /** 打电话 */
             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"0571-88120907"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
             break;
-        case 3:
+        case 4:
         {
             /** 跳转到用户协议 */
             TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserAgreement_url]];

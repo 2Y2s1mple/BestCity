@@ -7,7 +7,7 @@
 //
 
 #import "CZFreeOrderSubOne.h"
-#import "CZFreeOrderCell.h"
+#import "CZTableViewCell1.h"
 #import "GXNetTool.h"
 
 @interface CZFreeOrderSubOne () <UITableViewDelegate, UITableViewDataSource>
@@ -48,6 +48,7 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.backgroundColor = UIColorFromRGB(0xF5F5F5);
     }
     return _tableView;
 }
@@ -143,7 +144,7 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 170;
+    return 400;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -154,7 +155,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *model = self.dataSource[indexPath.row];
-    CZFreeOrderCell *cell = [CZFreeOrderCell cellwithTableView:tableView];
+    CZTableViewCell1 *cell = [CZTableViewCell1 cellwithTableView:tableView];
     cell.model = model;
     return cell;
 }

@@ -1,8 +1,8 @@
 //
-//  CZFreeOrderCell.h
+//  CZTableViewCell1.h
 //  BestCity
 //
-//  Created by JasonBourne on 2019/11/9.
+//  Created by JasonBourne on 2019/11/11.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
@@ -10,11 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZFreeOrderCell : UITableViewCell
+@interface CZTableViewCell1 : UITableViewCell
 + (instancetype)cellwithTableView:(UITableView *)tableView;
-/** 数据 */
 @property (nonatomic, strong) NSDictionary *model;
-@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 @end
 
 NS_ASSUME_NONNULL_END

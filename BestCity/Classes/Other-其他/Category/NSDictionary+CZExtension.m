@@ -30,7 +30,14 @@
     for (NSString *keyStr in mutableDic.allKeys) {
         id value = [mutableDic objectForKey:keyStr];
         if ([value isKindOfClass:[NSNumber class]]) {
-            [mutableDic setObject:[NSString stringWithFormat:@"%@", value] forKey:keyStr];
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+            // 小数位最多位数
+            numberFormatter.maximumFractionDigits = 2;
+            numberFormatter.minimumFractionDigits = 2;
+
+            NSString *formattedNumberString = [numberFormatter stringFromNumber:value];
+            [mutableDic setObject:[NSString stringWithFormat:@"%@", formattedNumberString] forKey:keyStr];
         } else {
             [mutableDic setObject:value forKey:keyStr];
         }
