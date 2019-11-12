@@ -11,8 +11,8 @@
 
 //极品城URL
 //#define JPSERVER_URL @"http://192.168.3.152:8081/qualityshop-api/" // 测试
-#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
-//#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
+//#define JPSERVER_URL @"http://192.168.1.84:8081/qualityshop-api/" // 测试
+#define JPSERVER_URL @"https://www.jipincheng.cn/qualityshop-api/" // 生产
 
 #ifdef DEBUG
 
@@ -99,7 +99,6 @@ line.backgroundColor = CZGlobalLightGray; \
     return;\
 }
 
-
 #import "UIView+GXExtension.h"//为了view.width
 #import "UIImage+CZExtension.h"
 #import "NSString+CZExtension.h" // 为了获取文字高度
@@ -115,7 +114,6 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZJIPINSynthesisTool.h" //综合工具
 #import <UMAnalytics/MobClick.h> // 统计
 #import "CZCustomGifHeader.h"
-
 
 /************************************************************/
 #endif 

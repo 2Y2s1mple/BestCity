@@ -2041,6 +2041,9 @@
 		9712727322CF3855009EB40F /* 公共界面 */ = {
 			isa = PBXGroup;
 			children = (
+				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
+				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
+				971CDFF521E44A0B00DE3883 /* 网络请求工具 */,
 				97115C9422EFF5A600C45665 /* 菜单 */,
 				97D5E20422EF1EA000DA8034 /* 导航栏 */,
 				97BF266B22E566CC0064B20C /* 弹框 */,
@@ -2715,7 +2718,6 @@
 		97705C30210716A300485D64 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9706C8DA2367E41F0002EDC1 /* Festival-活动 */,
 				970D0B5521ACE84900649FC2 /* 百川 */,
 				97C52A6C2254B82A00787BC5 /* Common-公共 */,
 				97054BFA2182F26F0008E416 /* Search-搜索商品 */,
@@ -3735,16 +3737,6 @@
 			path = "试用名单";
 			sourceTree = "<group>";
 		};
-		97B65D5722F19A750064E99F /* Handle */ = {
-			isa = PBXGroup;
-			children = (
-				971CDFF521E44A0B00DE3883 /* 网络请求工具 */,
-				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
-				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
-			);
-			path = Handle;
-			sourceTree = "<group>";
-		};
 		97B65D5822F19A880064E99F /* 异常账号界面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4002,9 +3994,9 @@
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
-				9768FAF02368133000019B4E /* 启动页 */,
 				9710E61322D87CF600AA5D87 /* Base */,
-				97B65D5722F19A750064E99F /* Handle */,
+				9768FAF02368133000019B4E /* 启动页 */,
+				9706C8DA2367E41F0002EDC1 /* Festival-活动 */,
 				9712727322CF3855009EB40F /* 公共界面 */,
 			);
 			path = "Common-公共";
