@@ -9,6 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface CZTabBarController : UITabBarController
-/** 是否有活动页面 */
-@property (nonatomic, assign) BOOL isFestival;
 @end

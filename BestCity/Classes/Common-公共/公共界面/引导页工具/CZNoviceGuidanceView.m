@@ -71,11 +71,8 @@
 {
     UIView *backView = sender.superview;
     UIImageView *imageView1 = [backView viewWithTag:10];
-    if (isFestival) {
-        imageView1.image = [UIImage imageNamed:@"guide-back-view1-1"];
-    } else {
-        imageView1.image = [UIImage imageNamed:@"guide-back-view1"];
-    }
+    imageView1.image = [UIImage imageNamed:@"guide-back-view1-1"];
+
 
     UIImageView *imageView2 = [backView viewWithTag:20];
     imageView2.image = [UIImage imageNamed:@"guide-arrow1"];
@@ -103,11 +100,8 @@
     [sender addTarget:self action:@selector(guideFinalView:) forControlEvents:UIControlEventTouchUpInside];
 
     UIImageView *imageView1 = [backView viewWithTag:10];
-    if (isFestival) {
-        imageView1.image = [UIImage imageNamed:@"guide-back-view2-1"];
-    } else {
-        imageView1.image = [UIImage imageNamed:@"guide-back-view2"];
-    }
+    imageView1.image = [UIImage imageNamed:@"guide-back-view2-1"];
+  
 
 
     UIImageView *arrowImage = [backView viewWithTag:20];

@@ -54,18 +54,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
+    [self createSubController:YES];
+
 }
 
-- (void)setIsFestival:(BOOL)isFestival
+- (void)createSubController:(BOOL)isFestiva
 {
-    _isFestival = isFestival;
-    [self setupWithController:[[CZMainHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
+    [self setupWithController:[[CZFestivalController alloc] init] title:@"首页" image:@"tab-main-nor" selectedImage:@"tab-main-sel"];
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
-
-    if (self.isFestival) {
-        CZNavigationController *nav = [[CZNavigationController alloc] initWithRootViewController:[[CZFestivalController alloc] init]];
-        [self addChildViewController:nav];
-    }
+    [self setupWithController:[[CZMainHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
 
     [self setupWithController:[[CZFreeChargeController alloc] init] title:@"免单" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
@@ -81,19 +78,10 @@
     NSString *ID = [NSString stringWithFormat:@"ID%ld", (tabBarController.selectedIndex + 1)];
     NSDictionary *context = configureList[tabBarController.selectedIndex];
     [MobClick event:ID attributes:@{@"Tab" : context}];
-
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
-
-    if (_isFestival == YES && tabBarController.selectedIndex == 2) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectedFastival" object:nil userInfo:@{@"flag" : @(YES)}];
-    } if (_isFestival == YES && tabBarController.selectedIndex != 2) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectedFastival" object:nil userInfo:@{@"flag" : @(NO)}];
-    }
-
 
     NSString *token = JPTOKEN;
     UINavigationController *nav = viewController;
-    NSLog(@"%@", token);
     if ([JPTOKEN length] <= 0 && [nav.topViewController isKindOfClass:[CZMeController class]]) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];

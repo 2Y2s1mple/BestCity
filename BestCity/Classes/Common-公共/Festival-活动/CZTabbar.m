@@ -30,10 +30,8 @@
         imageView.size = CGSizeMake(80, 46.5);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
 
-        [self addSubview:imageView];
+//        [self addSubview:imageView];
         self.imageView = imageView;
-
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideCenterImageView:) name:@"selectedFastival" object:nil];
         
     }
     return self;
@@ -90,8 +88,4 @@
 
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 @end

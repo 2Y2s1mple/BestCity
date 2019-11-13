@@ -209,7 +209,7 @@
 {
     if (indexPath.row == 0) {
         if ([self.adDic[@"type"]  isEqual: @(8)]) {
-            self.tabBarController.selectedIndex = 2;
+            self.tabBarController.selectedIndex = 0;
         } else {
             CZMHSDListNewController *vc = [[CZMHSDListNewController alloc] init];
             vc.data = self.adDic;

@@ -111,7 +111,6 @@
 {
     [super viewWillAppear:animated];
     self.tableView.height = self.view.height - 1;
-    [self reloadNewDataSorce];
 }
 
 #pragma mark -- 方法
@@ -168,7 +167,6 @@
     if ([viewModel.model.type isEqual: @"2"]) {
       
     } else {
-        
         CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
         vc.detailType = [CZJIPINSynthesisTool getModuleType:[viewModel.model.article[@"type"] integerValue]];
         vc.findgoodsId = viewModel.model.article[@"articleId"];
