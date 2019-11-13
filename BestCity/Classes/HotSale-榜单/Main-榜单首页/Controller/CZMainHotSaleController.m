@@ -258,12 +258,6 @@ static NSInteger page_ = 1;
         }];
     }
 
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 新用户指导
-        [CZGuideTool newpPeopleGuide];
-    });
-
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
     page_ = 1;
