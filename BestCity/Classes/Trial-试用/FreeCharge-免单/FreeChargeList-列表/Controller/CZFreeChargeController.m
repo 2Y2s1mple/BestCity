@@ -150,8 +150,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZFreeChargeModel *model = self.freeChargeDatas[indexPath.row];
-    return model.cellHeight + 15;
+    if (indexPath.row == 0) {
+        return 288;
+    } else {
+        CZFreeChargeModel *model = self.freeChargeDatas[indexPath.row];
+        return model.cellHeight + 15;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
