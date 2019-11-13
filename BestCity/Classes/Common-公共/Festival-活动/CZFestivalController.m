@@ -23,6 +23,8 @@
 #import "CZDChoiceDetailController.h"
 #import "CZFestivalTwoController.h"
 
+#import "CZGuideTool.h"
+
 
 
 @interface CZFestivalController () <UITableViewDelegate, UITableViewDataSource>
@@ -100,6 +102,16 @@
     [self setupRefresh];
 
     [self.view addSubview:self.editorBtn];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 新用户指导
+        [CZGuideTool newpPeopleGuide];
+    });
 }
 
 // 上拉加载, 下拉刷新

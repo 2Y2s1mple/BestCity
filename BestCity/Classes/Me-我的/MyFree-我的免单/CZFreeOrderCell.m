@@ -46,7 +46,7 @@
     NSString *otherPrice = [NSString stringWithFormat:@"¥%@", _model[@"otherPrice"]];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
 
-    self.freePrice.text = [NSString stringWithFormat:@"免%ld%%，预估返：¥%@", [_model[@"freeRate"] integerValue] * 100, _model[@"freePrice"]];
+    self.freePrice.text = [NSString stringWithFormat:@"免%.0f%%，预估返：¥%@", [_model[@"freeRate"] floatValue] * 100, _model[@"freePrice"]];
 }
 
 - (void)awakeFromNib {

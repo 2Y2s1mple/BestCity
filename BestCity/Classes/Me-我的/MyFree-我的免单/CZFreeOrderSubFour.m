@@ -156,6 +156,7 @@
     CZFreeOrderCell *cell = [CZFreeOrderCell cellwithTableView:tableView];
     cell.model = model;
     cell.statusLabel.text = @"已失效";
+    cell.statusLabel.backgroundColor = UIColorFromRGB(0xACACAC);
     return cell;
 }
 

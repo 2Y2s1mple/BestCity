@@ -36,13 +36,13 @@
 
 - (void)setModel:(NSDictionary *)model {
     _model = [model changeAllNnmberValue];
-    if ([_model[@"status"] isEqualToString:@"1"]) { // 0全部 1即将到账，2已到账，3订单失效
+    if ([_model[@"status"] integerValue] == 1) { // 0全部 1即将到账，2已到账，3订单失效
         self.statusLabel.text = @"即将到账";
         self.appEarningTime.text = @"收货后次月结算";
-    } else if ([_model[@"status"] isEqualToString:@"2"]) {
+    } else if ([_model[@"status"] integerValue] == 2) {
         self.statusLabel.text = @"已到账";
         self.appEarningTime.text = [NSString stringWithFormat:@"%@已到账", _model[@"appEarningTime"]];
-    } else if ([_model[@"status"] isEqualToString:@"3"]) {
+    } else if ([_model[@"status"] integerValue] == 3) {
         self.statusLabel.text = @"订单失效";
         self.appEarningTime.text = @"失效订单无补贴";
     }

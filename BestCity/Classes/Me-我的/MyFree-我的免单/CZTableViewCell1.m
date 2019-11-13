@@ -46,7 +46,7 @@
     [self.itemImgView sd_setImageWithURL:[NSURL URLWithString:_model[@"img"]]];
     self.itemTitle.text = _model[@"name"];
     self.userCountLabel.text = [NSString stringWithFormat:@"剩余%ld件", [_model[@"count"] integerValue] - [_model[@"userCount"] integerValue]];
-    [self.btn setTitle:[NSString stringWithFormat:@"立即购买（可免%@元）", _model[@"freePrice"]] forState:UIControlStateNormal];
+    [self.btn setTitle:[NSString stringWithFormat:@"立即购买（额外补贴%@元）", _model[@"freePrice"]] forState:UIControlStateNormal];
 }
 
 // 购买
