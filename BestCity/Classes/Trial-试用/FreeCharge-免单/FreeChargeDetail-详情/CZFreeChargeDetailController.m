@@ -62,16 +62,12 @@
 @property (nonatomic, strong) NSDictionary *shareDic;
 /** statusView */
 @property (nonatomic, strong) UIView *statusView;
-/** 提示文字 */
-@property (nonatomic, strong) UIView *noteView;
+
 /**x是否悬停了*/
 @property (nonatomic , assign) BOOL  isHover;
 /** <#注释#> */
 @property (nonatomic, assign) CGFloat headerViewHeight;
 @end
-
-// 购买时间是否到时
-static BOOL isBuyTime;
 
 // universal links
 #import <MobLinkPro/MLSDKScene.h>
@@ -157,30 +153,16 @@ static BOOL isBuyTime;
     bottomView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 49);
     [self.view addSubview:bottomView];
 
-    UIView *noteView = [[UIView alloc] init];
-    self.noteView = noteView;
-    noteView.x = 0;
-    noteView.y = - 44;
-    noteView.width = SCR_WIDTH;
-    noteView.height = 44;
-    noteView.backgroundColor = [UIColor colorWithRed:230/255.0 green:243/255.0 blue:255/255.0 alpha:1.0];
-    [bottomView addSubview:noteView];
-
-    UILabel *label = [[UILabel alloc] init];
-    label.size = noteView.size;
-    label.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
-    label.text = @"需全款购买，并确认收货按照抢到名额对应比例返现哦！";
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = UIColorFromRGB(0x888888);
-    [noteView addSubview:label];
-
     // 两个按钮
     UIButton *commentBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    commentBtn.frame = CGRectMake(0, 0, bottomView.width / 2.0, bottomView.height);
-    commentBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-    [commentBtn setTitle:[NSString stringWithFormat:@"剩余%ld件", ([self.dataSource.count integerValue] - [self.dataSource.userCount integerValue])] forState:UIControlStateNormal];
-    [commentBtn setTitleColor:UIColorFromRGB(0x151515) forState:UIControlStateNormal];
+    commentBtn.frame = CGRectMake(0, 0, bottomView.width - 160, bottomView.height);
+    commentBtn.titleLabel.font = [UIFont systemFontOfSize:19];
     [commentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"购买后补贴¥%@", self.dataSource.freePrice]];
+    [string addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13]} range:NSMakeRange(0, 6)];
+    [string addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Medium" size: 19]} range:NSMakeRange(6, self.dataSource.freePrice.length)];
+    [string addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838)} range:NSMakeRange(0, string.length)];
+    [commentBtn setAttributedTitle:string forState:UIControlStateNormal];
     [bottomView addSubview:commentBtn];
 
     UIView *lineView = [[UIView alloc] init];
@@ -192,9 +174,9 @@ static BOOL isBuyTime;
     [bottomView addSubview:lineView];
 
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    rightBtn.frame = CGRectMake(commentBtn.width, commentBtn.y, commentBtn.width, commentBtn.height);
-    rightBtn.titleLabel.font = commentBtn.titleLabel.font;
-    [rightBtn setTitle:@"即将开始" forState:UIControlStateNormal];
+    rightBtn.frame = CGRectMake(commentBtn.width, commentBtn.y, 160, commentBtn.height);
+    rightBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+    [rightBtn setTitle:@"立即邀请" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     rightBtn.backgroundColor = UIColorFromRGB(0xF76D20);
     [rightBtn addTarget:self action:@selector(rightBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -206,7 +188,7 @@ static BOOL isBuyTime;
 - (void)setupContentView
 {
     // 创建轮播图
-    _imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 375)];
+    _imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 320)];
     [self.scrollerView addSubview:_imageView];
     _imageView.imgList = self.dataSource.imgList;
 
@@ -239,28 +221,14 @@ static BOOL isBuyTime;
 // 刷新视图
 - (CZFreeDetailsubView *)refreshModule
 {
-    isBuyTime = NO;
     [self.topContent removeFromSuperview];
-    //  -1未申请，0申请成功未付款，1已付款 applyStatus;
-    if ([self.dataSource.applyStatus integerValue] == 0) { // 0申请成功未付款
-        self.topContent = [CZFreeDetailsubView freeDetailsubView1:^{
-            isBuyTime = YES;
-            [self->_rightBtn setTitle:@"前往购买" forState:UIControlStateNormal];
-            self->_rightBtn.enabled = NO;
-            self->_rightBtn.backgroundColor = UIColorFromRGB(0xFFD8D8D8);
-        }];
-    } else if ([self.dataSource.applyStatus integerValue] == 1) { // 1申请成功已付款
-        self.topContent = [CZFreeDetailsubView freeDetailsubView2];
-    } else {
-        self.topContent = [CZFreeDetailsubView freeDetailsubView];
-    }
-
+    self.topContent = [CZFreeDetailsubView freeDetailsubView];
     self.topContent.y = CZGetY(_imageView);
     self.topContent.width = SCR_WIDTH;
     self.topContent.model = self.dataSource;
     [self.scrollerView addSubview:self.topContent];
 
-    self.menusView.y = CZGetY(self.topContent) + 10;
+    self.menusView.y = CZGetY(self.topContent);
     self.contentScrollView.y = CGRectGetMaxY(self.menusView.frame);
     self.scrollerView.contentSize = CGSizeMake(0, CZGetY(self.menusView) + SCR_HEIGHT - (IsiPhoneX ? 83 : 49) - 50 - (IsiPhoneX ? 44 : 20));
     return self.topContent;
@@ -362,43 +330,20 @@ static BOOL isBuyTime;
 #pragma mark - 赋值
 - (void)assignmentWithModule
 {
-    self.noteView.hidden = YES;
-    NSString *statusText = [self currentStatusText];
-    if ([statusText isEqualToString:@"即将开始"]) {
-        [_rightBtn setTitle:@"即将开始" forState:UIControlStateNormal];
-        _rightBtn.enabled = YES;
-        _rightBtn.backgroundColor = UIColorFromRGB(0xF76D20);
-    } else if ([statusText isEqualToString:@"未抢购"]) {
-        [_rightBtn setTitle:@"免费抢购" forState:UIControlStateNormal];
-        _rightBtn.enabled = YES;
-        _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
-    } else if ([statusText isEqualToString:@"未申请已售罄"]) {
-        [_rightBtn setTitle:@"已售罄" forState:UIControlStateNormal];
-        _rightBtn.enabled = NO;
-        _rightBtn.backgroundColor = UIColorFromRGB(0xFFD8D8D8);
-    } else if ([statusText isEqualToString:@"抢购成功未付款"]) {
-        self.noteView.hidden = NO;
-        NSString *title = [NSString stringWithFormat:@"前往购买 (可返回%0.2lf元)", [self.dataSource.freePrice floatValue]];
-        NSMutableAttributedString *attriStr = [title addAttributeFont:[UIFont systemFontOfSize:13] Range:[title rangeOfString:[NSString stringWithFormat:@"(可返回%.2lf元)", [self.dataSource.freePrice floatValue]]]];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:CZGlobalWhiteBg range:NSMakeRange(0, attriStr.length)];
-        [_rightBtn setAttributedTitle:attriStr forState:UIControlStateNormal];
-        _rightBtn.enabled = YES;
-        _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
-    } else if ([statusText isEqualToString:@"再来一单"]) {
-        [_rightBtn setTitle:@"前往购买" forState:UIControlStateNormal];
-        _rightBtn.enabled = YES;
-        _rightBtn.backgroundColor = UIColorFromRGB(0xE31B3C);
-    } else if ([statusText isEqualToString:@"已售罄"]) {
-        [_rightBtn setTitle:@"已售罄" forState:UIControlStateNormal];
-        _rightBtn.enabled = NO;
-        _rightBtn.backgroundColor = UIColorFromRGB(0xFFD8D8D8);
+    NSString *statusText;
+    if ([self.dataSource.myInviteUserCount integerValue] < [self.dataSource.inviteUserCount integerValue]) {
+        statusText = @"立即邀请";
+    } else {
+        statusText = @"立即购买";
     }
+    [_rightBtn setTitle:statusText forState:UIControlStateNormal];
+    _rightBtn.backgroundColor = UIColorFromRGB(0xE25838);
 }
 
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    isBuyTime = NO;
+
     self.view.backgroundColor = CZGlobalWhiteBg;
     if (@available(iOS 11.0, *)) {
         self.scrollerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -441,11 +386,9 @@ static BOOL isBuyTime;
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"freeId"] = self.Id;
-    param[@"fromType"] = self.fromType;
-    param[@"fromId"] = self.fromId;
 
     //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.shareDic = result[@"data"];
             self.dataSource = [CZFreeChargeModel objectWithKeyValues:result[@"data"]];
@@ -553,8 +496,6 @@ static BOOL isBuyTime;
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"freeId"] = self.Id;
-    param[@"fromType"] = self.fromType;
-    param[@"fromId"] = self.fromId;
     //获取数据
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -734,34 +675,6 @@ static BOOL isBuyTime;
 }
 
 #pragma mark - 业务处理方法
-- (NSString *)currentStatusText
-{
-    if ([self.dataSource.applyStatus integerValue] == -1) {// -1未申请
-        // （0即将开始，1进行中，2已售罄，3已结束）
-        if([self.dataSource.status integerValue] == 0) {
-            return @"即将开始";
-        } else if ([self.dataSource.status integerValue] == 1) {
-            return @"未抢购";
-        } else {
-            return @"未申请已售罄";
-        }
-    } else if ([self.dataSource.applyStatus integerValue] == 0) {// 0申请成功未付款
-        if (isBuyTime) {
-            return @"购买时间到";
-        } else {
-            return @"抢购成功未付款";
-        }
-    } else if ([self.dataSource.applyStatus integerValue] == 1) {// 1已付款
-        // （0即将开始，1进行中，2已售罄，3已结束）
-        if([self.dataSource.status integerValue] == 1) {
-            return @"再来一单";
-        } else {
-            return @"已售罄";
-        }
-    } else {
-        return @"不知道";
-    }
-}
 
 // 返回选中菜单按钮的样式
 - (void (^)(CGFloat))selectedMenuItem

@@ -81,11 +81,12 @@
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @( self.page);
+    param[@"type"] = @(1);
 
     //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            self.freeChargeDatas = [CZFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"]];
+            self.freeChargeDatas = [NSMutableArray arrayWithArray: result[@"data"]];
             [self.tableView reloadData];
             // 结束刷新
         }
@@ -108,9 +109,9 @@
     param[@"page"] = @(self.page);
 
     //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            NSArray *arr = [CZFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"]];
+            NSArray *arr = result[@"data"];
             [self.freeChargeDatas addObjectsFromArray:arr];
             [self.tableView reloadData];
             if (arr.count == 0) {
@@ -139,11 +140,11 @@
 {
     if (indexPath.row == 0) {
         CZFreeChargeCell *cell = [CZFreeChargeCell cellWithTableView:tableView];
-            cell.model = self.freeChargeDatas[indexPath.row];
+//            cell.model = self.freeChargeDatas[indexPath.row];
         return cell;
     } else {
         CZCZFreeChargeCell2 *cell = [CZCZFreeChargeCell2 cellWithTableView:tableView];
-            cell.model = self.freeChargeDatas[indexPath.row];
+        cell.model = self.freeChargeDatas[indexPath.row];
         return cell;
     }
 }
@@ -153,18 +154,17 @@
     if (indexPath.row == 0) {
         return 288;
     } else {
-        CZFreeChargeModel *model = self.freeChargeDatas[indexPath.row];
-        return model.cellHeight + 15;
+        return 140;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //push到详情
-    CZFreeChargeModel *model = self.freeChargeDatas[indexPath.row];
+    NSDictionary *model = self.freeChargeDatas[indexPath.row];
     CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
-    vc.Id = model.Id;
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.Id = model[@"id"];
+    [self.navigationController  pushViewController:vc animated:YES];
 }
 
 @end

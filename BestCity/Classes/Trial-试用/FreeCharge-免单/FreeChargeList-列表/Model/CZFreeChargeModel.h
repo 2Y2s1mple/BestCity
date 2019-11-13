@@ -21,6 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *actualPrice;
 @property (nonatomic, strong) NSString *otherPrice;
 @property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *inviteUserCount;
+@property (nonatomic, strong) NSString *myInviteUserCount;
+
+
+
+
+
 /** 开始时间 */
 @property (nonatomic, strong) NSString *activitiesStartTime;
 // 辅助

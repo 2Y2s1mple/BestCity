@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZFreeChargeModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZCZFreeChargeCell2 : UITableViewCell
 /** <#注释#> */
-@property (nonatomic, strong) CZFreeChargeModel *model;
+@property (nonatomic, strong) NSDictionary *model;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end
 

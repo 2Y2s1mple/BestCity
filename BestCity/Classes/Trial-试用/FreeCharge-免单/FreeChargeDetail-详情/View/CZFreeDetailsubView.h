@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** 数据 */
 @property (nonatomic, strong) CZFreeChargeModel *model;
 + (instancetype)freeDetailsubView;
-+ (instancetype)freeDetailsubView1:(void (^)(void))block;
-+ (instancetype)freeDetailsubView2;
 @end
 
 NS_ASSUME_NONNULL_END

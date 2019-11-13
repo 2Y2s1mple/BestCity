@@ -215,8 +215,8 @@
     NSLog(@"00000");
     CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
     vc.Id = self.goodsViewParamDic[@"id"];
-    vc.fromType = @"1";
-    vc.fromId = self.goodsViewParamDic[@"fromId"];
+//    vc.fromType = @"1";
+//    vc.fromId = self.goodsViewParamDic[@"fromId"];
 
 
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
