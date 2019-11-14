@@ -386,6 +386,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"freeId"] = self.Id;
+    param[@"type"] = @(1);
 
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -410,7 +411,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-// 免费抢购
+// 立即购买
 - (void)rightBtnAction:(UIButton *)btn
 {
     if ([JPTOKEN length] <= 0) {
@@ -420,47 +421,7 @@
         return;
     }
 
-    if ([btn.titleLabel.text isEqual:@"即将开始"]) {
-        [CZProgressHUD showProgressHUDWithText:@"活动暂未开始!"];
-        [CZProgressHUD hideAfterDelay:1.5];
-        return;
-    }
 
-    if ([JPUSERINFO[@"point"] integerValue] < [self.dataSource.point integerValue]) {
-        CZFreeAlertView2 *vc = [CZFreeAlertView2 freeAlertView:^(CZFreeAlertView2 *alert){
-            CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }];
-        vc.point = self.dataSource.point;
-        [vc show];
-        return;
-    }
-
-
-    if ([btn.titleLabel.text isEqual: @"免费抢购"]) {
-        CZFreeAlertView *vc = [CZFreeAlertView freeAlertView:^(CZFreeAlertView *alert){
-            NSMutableDictionary *param = [NSMutableDictionary dictionary];
-            param[@"freeId"] = self.Id;
-            //获取详情数据
-            [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-                if ([result[@"code"] isEqual:@(0)]) {
-                    [self refreshDataSource];
-
-                    [CZProgressHUD showProgressHUDWithText:@"参与成功"];
-                    [CZProgressHUD hideAfterDelay:1.5];
-                    [alert hide];
-                } else {
-                    [CZProgressHUD showProgressHUDWithText:@"请求错误, 请刷新界面"];
-                    [CZProgressHUD hideAfterDelay:1.5];
-                    [alert hide];
-                }
-            } failure:^(NSError *error) {}];
-        }];
-        vc.point = self.dataSource.point;
-        [vc show];
-    } else {
-        [self buyBtnAction];
-    }
 }
 
 // 菜单点击方法
@@ -489,25 +450,6 @@
         recordLineView.hidden = YES;
         self.recordBtn = sender;
     }
-}
-
-// 刷新数据
-- (void)refreshDataSource
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"freeId"] = self.Id;
-    //获取数据
-    [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/detail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
-            self.dataSource = [CZFreeChargeModel objectWithKeyValues:result[@"data"]];
-            //
-            [self refreshModule];
-            [self assignmentWithModule];
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {}];
 }
 
 // 购买

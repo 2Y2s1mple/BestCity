@@ -12,12 +12,15 @@
 
 /** 倒计时背景图 */
 @property (nonatomic, weak) IBOutlet UIView *countDownView;
+/** 现价 */
+@property (nonatomic, weak) IBOutlet UILabel *priceLabel;
+/** 原价 */
+@property (nonatomic, weak) IBOutlet UILabel *oldPriceLabel;
 /** 一共多少件 */
 @property (nonatomic, weak) IBOutlet UILabel *countDownViewTotalLabel;
-
 /** 标题 */
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelTopMargin;
+@property (nonatomic, weak) IBOutlet UILabel *inviteLabel;
 
 /** 免单提示*/
 @property (nonatomic, weak) IBOutlet UILabel *activitiesStartsTimeLabel;
@@ -49,9 +52,28 @@
 {
     _model = model;
 
+    self.priceLabel.text = [NSString stringWithFormat:@"%.2lf", [model.buyPrice floatValue]];
+    NSString *otherPrice = [NSString stringWithFormat:@"¥%.2lf", [model.otherPrice floatValue]];
+    self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
+    self.countDownViewTotalLabel.text = [NSString stringWithFormat:@"已抢%@件", _model.count];
+    self.titleLabel.text = _model.name;
+
+    if ([_model.myInviteUserCount integerValue] < [_model.inviteUserCount integerValue]) {
+        self.inviteLabel.text = [NSString stringWithFormat:@"已邀请%@位好友,再邀请%ld位新用户即可享¥%@元补贴", _model.myInviteUserCount, [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue], _model.freePrice];
+    } else {
+
+    }
+
 
     self.height = CZGetY(self.activitiesStartsTimeLabel) + 20;
 
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.priceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 30];
+    self.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
 }
 
 

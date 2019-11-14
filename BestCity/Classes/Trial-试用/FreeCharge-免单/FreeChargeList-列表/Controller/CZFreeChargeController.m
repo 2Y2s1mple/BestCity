@@ -133,7 +133,7 @@
 // <UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.freeChargeDatas.count;
+    return (self.freeChargeDatas.count  + 1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,7 +144,7 @@
         return cell;
     } else {
         CZCZFreeChargeCell2 *cell = [CZCZFreeChargeCell2 cellWithTableView:tableView];
-        cell.model = self.freeChargeDatas[indexPath.row];
+        cell.model = self.freeChargeDatas[indexPath.row - 1];
         return cell;
     }
 }
@@ -160,11 +160,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //push到详情
-    NSDictionary *model = self.freeChargeDatas[indexPath.row];
-    CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
-    vc.Id = model[@"id"];
-    [self.navigationController  pushViewController:vc animated:YES];
+     if (indexPath.row == 0) {
+
+     } else {
+         //push到详情
+         NSDictionary *model = self.freeChargeDatas[indexPath.row - 1];
+         CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
+         vc.Id = model[@"id"];
+         [self.navigationController  pushViewController:vc animated:YES];
+     }
 }
 
 @end

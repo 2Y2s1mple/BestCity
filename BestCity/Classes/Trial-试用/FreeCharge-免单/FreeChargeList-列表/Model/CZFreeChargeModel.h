@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *inviteUserCount;
 @property (nonatomic, strong) NSString *myInviteUserCount;
+@property (nonatomic, strong) NSString *buyPrice;
+
 
 
 

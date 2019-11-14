@@ -171,11 +171,13 @@
                 <outlet property="countDownView" destination="FSE-sU-qKP" id="0mc-Vx-il4"/>
                 <outlet property="countDownViewTotalLabel" destination="ow7-dZ-GvQ" id="DDk-zj-qJX"/>
                 <outlet property="goryBackView" destination="FyY-1z-JY7" id="gSC-G3-2sj"/>
+                <outlet property="inviteLabel" destination="Ar9-XO-0SB" id="OXj-J7-MWe"/>
                 <outlet property="lineView" destination="rDV-Tw-H67" id="zj7-FL-mLC"/>
+                <outlet property="oldPriceLabel" destination="7oR-zw-NeJ" id="xln-KN-K0f"/>
+                <outlet property="priceLabel" destination="yrE-cC-2Nh" id="OiR-jI-gD3"/>
                 <outlet property="redViewWidth" destination="Vq8-aB-dDR" id="y2r-mh-fZj"/>
                 <outlet property="residueLabel" destination="jkf-DU-qFq" id="3j6-yC-xOJ"/>
                 <outlet property="titleLabel" destination="kgD-t0-H0Y" id="Foh-b6-1PJ"/>
-                <outlet property="titleLabelTopMargin" destination="R0t-GW-zTv" id="lK0-55-s8a"/>
                 <outlet property="totalLabel" destination="x8A-iV-tfC" id="oWf-6H-5L6"/>
             </connections>
             <point key="canvasLocation" x="-410.39999999999998" y="-869.41529235382313"/>
