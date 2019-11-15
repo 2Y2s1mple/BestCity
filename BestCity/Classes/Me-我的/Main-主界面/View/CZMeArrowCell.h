@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CZMeArrowCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *icon;
-@property (weak, nonatomic) IBOutlet UILabel *title;
-/** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *messageCountLabel;
 /** shuju */
 @property (nonatomic, strong) NSDictionary *dataSource;

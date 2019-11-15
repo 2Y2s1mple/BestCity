@@ -11,18 +11,13 @@
 #import "CZFreeChargeCell.h"
 #import "CZCZFreeChargeCell2.h"
 
-// 工具
-#import "GXNetTool.h"
+
 
 // 跳转
 #import "CZFreeChargeDetailController.h"
 
-@interface CZFreeChargeController ()<UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) UITableView *tableView;
-/** 试用数据 */
-@property (nonatomic, strong) NSMutableArray *freeChargeDatas;
-/** 页数 */
-@property (nonatomic, assign) NSInteger page;
+@interface CZFreeChargeController ()
+
 @end
 
 @implementation CZFreeChargeController
@@ -69,7 +64,6 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadMoreTrailDataSorce)];
-
 }
 
 - (void)reloadNewTrailDataSorce
@@ -106,6 +100,7 @@
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
+    param[@"type"] = @(1);
 
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {

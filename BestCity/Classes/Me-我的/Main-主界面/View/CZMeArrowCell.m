@@ -7,8 +7,16 @@
 //
 
 #import "CZMeArrowCell.h"
+#import "CZMeController.h"
+#import "CZSubFreeChargeController.h"
 
 @interface CZMeArrowCell ()
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIView *personalityNewView;
+@property (nonatomic, weak) IBOutlet UIView *inviteView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *settingLeftMargin;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *personalityNewViewLeftMargin;
+
 
 @end
 
@@ -16,7 +24,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -24,12 +32,13 @@
 
     // Configure the view for the selected state
 }
+
 + (instancetype)cellWithTabelView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
     static NSString *ID = @"meArrowCell";
     CZMeArrowCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeArrowCell class]) owner:nil options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeArrowCell class]) owner:nil options:nil] firstObject];
     }
     if (indexPath.row == 0) {
 //        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
@@ -50,7 +59,92 @@
 - (void)setDataSource:(NSDictionary *)dataSource
 {
     _dataSource = dataSource;
-    self.icon.image = [UIImage imageNamed:dataSource[@"icon"]];
-    self.title.text = dataSource[@"title"];
+   if ([JPUSERINFO[@"pid"] integerValue] != 0) {
+       self.inviteView.hidden = YES;
+   } else {
+       self.inviteView.hidden = NO;
+   }
+
+   if ([JPUSERINFO[@"isNewUser"] integerValue] != 0) {
+        self.personalityNewView.hidden = YES;
+    } else {
+        self.personalityNewView.hidden = NO;
+    }
+
+   //1.
+   if (self.personalityNewView.hidden == YES && self.inviteView.hidden == YES) {
+       self.settingLeftMargin.constant = -(2 * ((SCR_WIDTH - 30) / 4));
+   } else if (self.personalityNewView.hidden == YES && self.inviteView.hidden == NO) {
+       self.settingLeftMargin.constant = -((SCR_WIDTH - 30) / 4);
+   } else if (self.personalityNewView.hidden == NO && self.inviteView.hidden == YES) {
+       self.personalityNewViewLeftMargin.constant = -((SCR_WIDTH - 30) / 4);
+       self.settingLeftMargin.constant = -((SCR_WIDTH - 30) / 4);
+   } else {
+       self.personalityNewViewLeftMargin.constant = 0;
+       self.settingLeftMargin.constant = 0;
+   }
+}
+
+// 团队
+- (IBAction)action1:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"CZMeTeamMembersController") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+//我的发布
+- (IBAction)action2:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"CZMePublishController") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+//任务中心
+- (IBAction)action3:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"CZCoinCenterController") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+//消息通知
+- (IBAction)action4:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"CZSystemMessageController") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+//邀请码
+- (IBAction)action5:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+//新人专区
+- (IBAction)action6:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    CZSubFreeChargeController *toVc = [[CZSubFreeChargeController alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+//设置
+- (IBAction)action7:(UITapGestureRecognizer *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"CZSettingController") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 @end

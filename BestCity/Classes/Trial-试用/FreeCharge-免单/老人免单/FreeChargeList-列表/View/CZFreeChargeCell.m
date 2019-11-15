@@ -17,7 +17,6 @@
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIButton *invitingNowBtn;
 /** <#注释#> */
-/** <#注释#> */
 @property (nonatomic, assign) BOOL isAnimate;
 @end
 

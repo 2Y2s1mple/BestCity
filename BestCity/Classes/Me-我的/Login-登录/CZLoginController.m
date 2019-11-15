@@ -22,8 +22,6 @@
 @interface CZLoginController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-/** 邀请码 */
-@property (nonatomic, weak) IBOutlet UITextField *invitationCodeTextField;
 /** 验证码 */
 @property (weak, nonatomic) IBOutlet UIButton *verificationCodeBtn;
 /** 登录按钮 */
@@ -111,7 +109,6 @@ static id instancet_;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"mobile"] = self.userTextField.text;
     param[@"code"] = self.passwordTextField.text;
-    param[@"invitationCode"] = self.invitationCodeTextField.text;
   
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/mobileLogin"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {

@@ -295,13 +295,13 @@
         return cell;
     } else {
         CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
-        cell.messageCountLabel.text = self.messageCount;
-        cell.messageCountLabel.hidden = YES;
-        if (indexPath.row == 0) {
-            if (![cell.messageCountLabel.text isEqualToString:@"0"]) {
-                cell.messageCountLabel.hidden = NO;
-            }
-        }
+//        cell.messageCountLabel.text = self.messageCount;
+//        cell.messageCountLabel.hidden = YES;
+//        if (indexPath.row == 0) {
+//            if (![cell.messageCountLabel.text isEqualToString:@"0"]) {
+//                cell.messageCountLabel.hidden = NO;
+//            }
+//        }
         cell.dataSource = dic;
         return cell;
     }
@@ -313,7 +313,7 @@
     if (indexPath.section == 0) {
         return 82;
     } else {
-        return 60;
+        return 205;
 
     }
 }

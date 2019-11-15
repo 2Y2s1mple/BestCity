@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -292,10 +292,10 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
-                            <rect key="frame" x="15" y="327" width="345" height="550"/>
+                            <rect key="frame" x="15" y="327" width="345" height="450"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="550" id="nbk-yn-gRV"/>
+                                <constraint firstAttribute="height" constant="450" id="nbk-yn-gRV"/>
                             </constraints>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="iG4-fn-ILy"/>
@@ -496,7 +496,7 @@
                         <constraint firstAttribute="trailing" secondItem="3eh-JT-ign" secondAttribute="trailing" id="WjW-EZ-6oE"/>
                         <constraint firstItem="e2s-se-hww" firstAttribute="top" secondItem="3eh-JT-ign" secondAttribute="bottom" constant="-36" id="ZVa-zw-0fg"/>
                         <constraint firstItem="3eh-JT-ign" firstAttribute="centerX" secondItem="D8s-nW-E3e" secondAttribute="centerX" id="eam-GG-GAc"/>
-                        <constraint firstAttribute="bottom" secondItem="zJo-aO-yIP" secondAttribute="bottom" constant="49" id="j3s-7l-YZi"/>
+                        <constraint firstAttribute="bottom" secondItem="zJo-aO-yIP" secondAttribute="bottom" id="j3s-7l-YZi"/>
                     </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="XmW-7V-FDW"/>
