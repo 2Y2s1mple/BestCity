@@ -6,7 +6,8 @@
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>// 模型
+#import "CZFreeChargeModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)hide;
 - (void)show;
 /** <#注释#> */
-@property (nonatomic, strong) NSString *point;
+@property (nonatomic, strong) CZFreeChargeModel *param;
 @end
 
 NS_ASSUME_NONNULL_END

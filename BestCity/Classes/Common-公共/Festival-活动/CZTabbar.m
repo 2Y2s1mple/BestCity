@@ -25,6 +25,7 @@
         NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"11.11" ofType:@"gif"];
         NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
         UIImage *image = [UIImage sd_animatedGIFWithData:imageData];
+
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.image = image;
         imageView.size = CGSizeMake(80, 46.5);

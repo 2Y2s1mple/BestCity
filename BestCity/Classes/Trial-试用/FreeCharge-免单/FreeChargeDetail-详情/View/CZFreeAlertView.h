@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZFreeAlertView : UIView
 - (void)hide;
 - (void)show;
-+ (instancetype)freeAlertView:(void (^)(CZFreeAlertView *))rightBlock;
++ (instancetype)freeAlertViewRightBlock:(void (^)(CZFreeAlertView *))rightBlock leftBlock:(void (^)(CZFreeAlertView *))leftBlock;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *point;
 @end

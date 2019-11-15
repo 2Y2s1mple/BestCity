@@ -7,30 +7,31 @@
 //
 
 #import "CZFreeChargeDetailController.h"
-#import "CZScollerImageTool.h"
-#import "GXNetTool.h"
-#import "UIButton+CZExtension.h" // 按钮扩展
 // 模型
 #import "CZFreeChargeModel.h"
 
 // 视图
 #import "CZFreeDetailsubView.h"
-#import "CZFreeAlertView.h"
-#import "CZFreeAlertView2.h"
-#import "CZOpenAlibcTrade.h"
 #import "CZFreeSubOneController.h"
 #import "CZFreeSubTwoController.h"
 #import "CZFreeSubThreeController.h"
 #import "CZCoinCenterController.h"
 #import "CZShareView.h"
+#import "CZFreeAlertView2.h"
+#import "CZFreeAlertView.h"
+#import "CZScollerImageTool.h"
 
 // 跳转
 #import "TSLWebViewController.h"
 
 // 工具
+#import "CZOpenAlibcTrade.h"
+#import "CZUMConfigure.h"
 #import "CZUserInfoTool.h"
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
+#import "UIButton+CZExtension.h" // 按钮扩展
+#import "GXNetTool.h"
 
 @interface CZFreeChargeDetailController () <UIScrollViewDelegate>
 /** 滚动视图 */
@@ -278,7 +279,7 @@
 
         if (i == 0) {
             view.hidden = NO;
-            [btn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
+            [btn setTitleColor:UIColorFromRGB(0x050505) forState:UIControlStateNormal];
             btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
             self.recordBtn = btn;
         }
@@ -301,7 +302,7 @@
     [self addChildViewController:social1];
 
     CZFreeSubThreeController *social2 = [[CZFreeSubThreeController alloc] init];
-    social2.title = @"规则说明";
+    social2.title = @"免单技巧";
     social2.stringHtml = self.dataSource.freeGuide;
     social2.view.backgroundColor = [UIColor whiteColor];
     [self addChildViewController:social2];
@@ -421,7 +422,31 @@
         return;
     }
 
+    if ([btn.titleLabel.text isEqualToString:@"立即购买"]) {
 
+        CZFreeAlertView2 *alertView = [CZFreeAlertView2 freeAlertView:^(CZFreeAlertView2 * _Nonnull alertView) {
+            [self buyBtnAction];
+        }];
+        alertView.param = self.dataSource;
+        [alertView show];
+
+    } else {
+        [[CZFreeAlertView freeAlertViewRightBlock:^(CZFreeAlertView * _Nonnull alertView) {
+            [self shareActionWithType:998];
+        } leftBlock:^(CZFreeAlertView * _Nonnull alertView) {
+            [self shareActionWithType:998];
+        }] show];
+    }
+}
+
+- (void)shareActionWithType:(NSInteger)type
+{
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    [CZProgressHUD showProgressHUDWithText:nil];
+    [[CZUMConfigure shareConfigure] shareToPlatformType:UMSocialPlatformType_WechatSession currentViewController:currentVc webUrl:@"" Title:@"" subTitle:@"" thumImage:@"" shareType:type object:@""];
+    [CZProgressHUD hideAfterDelay:3.0];
 }
 
 // 菜单点击方法
@@ -437,7 +462,7 @@
 {
     if (self.recordBtn != sender) {
         // 现在的btn
-        [sender setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
+        [sender setTitleColor:UIColorFromRGB(0x050505) forState:UIControlStateNormal];
         sender.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         NSInteger lineViewTag = sender.tag + 100;
         UIView *lineView =  [sender.superview viewWithTag:lineViewTag];

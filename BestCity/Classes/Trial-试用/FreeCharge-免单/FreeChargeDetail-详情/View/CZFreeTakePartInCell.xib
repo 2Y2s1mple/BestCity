@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,21 +14,11 @@
             <rect key="frame" x="0.0" y="0.0" width="481" height="128"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="481" height="127.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="481" height="128"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hss-2m-3jc">
-                        <rect key="frame" x="34" y="54" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="x2F-e2-vL4"/>
-                            <constraint firstAttribute="width" constant="20" id="zTw-dE-PyT"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head1" translatesAutoresizingMaskIntoConstraints="NO" id="IgA-KA-dKf">
-                        <rect key="frame" x="70" y="43" width="42" height="42"/>
+                        <rect key="frame" x="15" y="43" width="42" height="42"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="42" id="3W8-Px-fAI"/>
                             <constraint firstAttribute="height" constant="42" id="B8g-Jc-fC2"/>
@@ -43,7 +31,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="爱分享的Tina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4v-kN-yXb">
-                        <rect key="frame" x="124" y="43" width="85" height="17"/>
+                        <rect key="frame" x="69" y="43" width="85" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.19997885823249817" green="0.20001345872879028" blue="0.19997128844261169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -55,7 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019-06-09 16:55:59" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mg-Qv-HR6">
-                        <rect key="frame" x="124" y="70.5" width="124" height="14.5"/>
+                        <rect key="frame" x="69" y="70.5" width="124" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.6744493842124939" green="0.6745484471321106" blue="0.67442780733108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -63,13 +51,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="o4v-kN-yXb" firstAttribute="top" secondItem="IgA-KA-dKf" secondAttribute="top" id="0xu-97-XV3"/>
+                    <constraint firstItem="IgA-KA-dKf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2hL-sZ-k8L"/>
                     <constraint firstItem="8Mg-Qv-HR6" firstAttribute="bottom" secondItem="IgA-KA-dKf" secondAttribute="bottom" id="4XM-KG-g7H"/>
-                    <constraint firstItem="IgA-KA-dKf" firstAttribute="leading" secondItem="hss-2m-3jc" secondAttribute="trailing" constant="16" id="82t-3M-d02"/>
-                    <constraint firstItem="hss-2m-3jc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="14" id="8li-fw-sPL"/>
                     <constraint firstItem="7XX-96-J8i" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ACy-YH-wF7"/>
                     <constraint firstItem="8Mg-Qv-HR6" firstAttribute="leading" secondItem="o4v-kN-yXb" secondAttribute="leading" id="J5R-VT-wWG"/>
-                    <constraint firstItem="IgA-KA-dKf" firstAttribute="centerY" secondItem="hss-2m-3jc" secondAttribute="centerY" id="PbI-3g-KBA"/>
-                    <constraint firstItem="hss-2m-3jc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="c4r-Rm-Ha4"/>
+                    <constraint firstItem="IgA-KA-dKf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Mjb-Fc-baE"/>
                     <constraint firstAttribute="trailing" secondItem="7XX-96-J8i" secondAttribute="trailing" constant="16" id="hmm-CU-RFx"/>
                     <constraint firstItem="o4v-kN-yXb" firstAttribute="leading" secondItem="IgA-KA-dKf" secondAttribute="trailing" constant="12" id="jxx-oD-Q5A"/>
                 </constraints>
@@ -79,8 +65,6 @@
                 <outlet property="headerImage" destination="IgA-KA-dKf" id="itE-O6-y8g"/>
                 <outlet property="likeCount" destination="7XX-96-J8i" id="Hid-xH-Qfa"/>
                 <outlet property="nameLabel" destination="o4v-kN-yXb" id="RvC-yd-0WM"/>
-                <outlet property="numberLabelWidth" destination="zTw-dE-PyT" id="tDu-gC-VqH"/>
-                <outlet property="numbersLabel" destination="hss-2m-3jc" id="mej-oQ-0uv"/>
                 <outlet property="timerLabel" destination="8Mg-Qv-HR6" id="y8Q-uL-ni2"/>
             </connections>
             <point key="canvasLocation" x="-163" y="-14"/>

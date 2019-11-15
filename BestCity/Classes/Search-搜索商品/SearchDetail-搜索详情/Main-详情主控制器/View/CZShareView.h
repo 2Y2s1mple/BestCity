@@ -16,4 +16,6 @@
 @property (nonatomic, strong) NSString *cententText;
 /** <#注释#> */
 @property (nonatomic, strong) NSDictionary *shareTypeParam;
+// 分享小程序
+- (void)shareMiniProgram;
 @end

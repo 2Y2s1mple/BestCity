@@ -81,7 +81,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
     param[@"freeId"] = self.freeID;
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/freeUserList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/freeUserList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             if ([result[@"data"] count] > 0) {
                 // 删除noData图片
@@ -109,7 +109,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"freeId"] = self.freeID;
     param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/free/freeUserList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/freeUserList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             NSArray *newArr = result[@"data"];
             [self.DatasArr addObjectsFromArray:newArr];
@@ -138,7 +138,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CZFreeTakePartInCell *cell = [CZFreeTakePartInCell cellWithTableView:tableView];
-    cell.numbersLabel.text = [NSString stringWithFormat:@"%ld", (indexPath.row + 1)];
     cell.dic = self.DatasArr[indexPath.row];
     return cell;
 }

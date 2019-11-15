@@ -14,6 +14,8 @@
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *topLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bottomLabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *titleText;
 @end
 @implementation CZFreeAlertView2
 + (instancetype)freeAlertView:(void (^)(CZFreeAlertView2 *))rightBlock
@@ -37,25 +39,27 @@
 - (void)show
 {
     UIView *backView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    backView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     [backView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hide)]];
     [[UIApplication sharedApplication].keyWindow addSubview:backView];
     [backView addSubview:self];
     _backView = backView;
-    self.y = SCR_HEIGHT - 248;
-    self.size = CGSizeMake(SCR_WIDTH, 248);
+    self.y = 165;
+    self.size = CGSizeMake(315, 230);
+    self.centerX = SCR_WIDTH / 2.0;
 }
 
 - (void)hide
 {
-    [_backView removeFromSuperview];
+    [_backView removeFromSuperview]; 
 }
 
-- (void)setPoint:(NSString *)point
+- (void)setParam:(CZFreeChargeModel *)param
 {
-    _point = point;
-    self.topLabel.text = [NSString stringWithFormat:@"现有极币：%@个", JPUSERINFO[@"point"]];;
-    self.bottomLabel.text = [NSString stringWithFormat:@"所需极币：%@个", point];
+    _param = param;
+    self.titleText.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    self.topLabel.text = [NSString stringWithFormat:@"￥%@", param.buyPrice];;
+    self.bottomLabel.text = [NSString stringWithFormat:@"￥%@", param.freePrice];
 }
 
 @end

@@ -55,10 +55,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rDV-Tw-H67" userLabel="lineView">
-                    <rect key="frame" x="10" y="157.5" width="354" height="40"/>
+                    <rect key="frame" x="14" y="157.5" width="351" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyY-1z-JY7">
-                            <rect key="frame" x="0.0" y="0.0" width="354" height="10"/>
+                            <rect key="frame" x="0.0" y="0.0" width="351" height="10"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WqR-m4-gZm" userLabel="redView">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="10"/>
@@ -88,11 +88,11 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trail-已邀" translatesAutoresizingMaskIntoConstraints="NO" id="nEq-lN-95F">
+                            <rect key="frame" x="332.5" y="-5" width="20.5" height="20.5"/>
+                        </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="已邀" translatesAutoresizingMaskIntoConstraints="NO" id="Rz3-w6-Rmq">
                             <rect key="frame" x="81.5" y="-5" width="20.5" height="20.5"/>
-                        </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trail-已邀" translatesAutoresizingMaskIntoConstraints="NO" id="nEq-lN-95F">
-                            <rect key="frame" x="333.5" y="-5" width="20.5" height="20.5"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已邀2人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkf-DU-qFq">
                             <rect key="frame" x="69.5" y="17.5" width="44.5" height="14.5"/>
@@ -101,7 +101,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（2/10人）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8A-iV-tfC">
-                            <rect key="frame" x="298.5" y="17.5" width="61.5" height="14.5"/>
+                            <rect key="frame" x="295.5" y="17.5" width="61.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -110,7 +110,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="x8A-iV-tfC" secondAttribute="trailing" constant="-6" id="7se-A1-ixh"/>
-                        <constraint firstAttribute="trailing" secondItem="nEq-lN-95F" secondAttribute="trailing" id="B98-QY-QAt"/>
+                        <constraint firstAttribute="trailing" secondItem="nEq-lN-95F" secondAttribute="trailing" constant="-2" id="B98-QY-QAt"/>
                         <constraint firstItem="jkf-DU-qFq" firstAttribute="centerX" secondItem="Rz3-w6-Rmq" secondAttribute="centerX" id="NhB-gF-bNa"/>
                         <constraint firstItem="Rz3-w6-Rmq" firstAttribute="trailing" secondItem="WqR-m4-gZm" secondAttribute="trailing" constant="2" id="a6S-hf-3Zk"/>
                         <constraint firstItem="FyY-1z-JY7" firstAttribute="leading" secondItem="rDV-Tw-H67" secondAttribute="leading" id="biF-vZ-Vuf"/>
@@ -159,9 +159,9 @@
                 <constraint firstItem="t1M-ZE-Td2" firstAttribute="top" secondItem="rDV-Tw-H67" secondAttribute="bottom" constant="10" id="grK-vs-m0D"/>
                 <constraint firstItem="rDV-Tw-H67" firstAttribute="top" secondItem="Ar9-XO-0SB" secondAttribute="bottom" constant="15" id="i81-G8-1bW"/>
                 <constraint firstItem="Ar9-XO-0SB" firstAttribute="top" secondItem="kgD-t0-H0Y" secondAttribute="bottom" constant="16" id="nMW-2O-XnS"/>
-                <constraint firstItem="rDV-Tw-H67" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="naI-xh-Lro"/>
+                <constraint firstItem="rDV-Tw-H67" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="naI-xh-Lro"/>
                 <constraint firstItem="FSE-sU-qKP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="v3M-Jd-Vci"/>
-                <constraint firstAttribute="trailing" secondItem="rDV-Tw-H67" secondAttribute="trailing" constant="15" id="vA4-fl-IaO"/>
+                <constraint firstAttribute="trailing" secondItem="rDV-Tw-H67" secondAttribute="trailing" constant="14" id="vA4-fl-IaO"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

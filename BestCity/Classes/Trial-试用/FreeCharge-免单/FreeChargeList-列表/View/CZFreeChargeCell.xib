@@ -56,6 +56,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nnvitingNowAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Qkg-nE-qmE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6k-Ey-g2Q">
                                 <rect key="frame" x="324.5" y="56" width="82.5" height="28"/>
@@ -102,6 +105,9 @@
                     <constraint firstAttribute="bottom" secondItem="bkZ-kX-VbP" secondAttribute="bottom" id="xeR-uy-BpF"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="invitingNowBtn" destination="eeb-gK-n4a" id="riN-jY-EWK"/>
+            </connections>
             <point key="canvasLocation" x="-31" y="-5"/>
         </tableViewCell>
     </objects>

@@ -63,9 +63,15 @@ static id _instance;
         } else if (type == 2) { // 评测
             //设置分享内容
             messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b0a86c45468d" path:[NSString stringWithFormat:@"pages/ev/ev-info/main?evListVal=%@", anObject]];
-        } else {
+        } else if (type == 3) { // 网页
             //设置分享内容
             messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
+        } else {
+            UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+            shareObject.thumbImage = [UIImage imageNamed:@"icon.png"];//如果有缩略图，则设置缩略图
+            [shareObject setShareImage:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534319537557&di=f5dcb1f44d10702889212857acdb5371&imgtype=0&src=http%3A%2F%2Fwww.qqma.com%2Fimgpic2%2Fcpimagenew%2F2018%2F4%2F5%2F6e1de60ce43d4bf4b9671d7661024e7a.jpg"];
+            messageObject.shareObject = shareObject;
+
         }
     } else {
         //设置分享内容

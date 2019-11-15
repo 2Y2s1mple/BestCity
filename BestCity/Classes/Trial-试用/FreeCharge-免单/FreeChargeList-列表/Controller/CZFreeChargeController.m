@@ -13,8 +13,7 @@
 
 // 工具
 #import "GXNetTool.h"
-// 模型
-#import "CZFreeChargeModel.h"
+
 // 跳转
 #import "CZFreeChargeDetailController.h"
 

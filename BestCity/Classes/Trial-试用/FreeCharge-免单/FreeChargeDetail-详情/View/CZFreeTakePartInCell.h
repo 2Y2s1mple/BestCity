@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZFreeTakePartInCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 /** <#注释#> */
-@property (nonatomic, weak) IBOutlet UILabel *numbersLabel;
-/** <#注释#> */
 @property (nonatomic, strong) NSDictionary *dic;
 @end
 
