@@ -168,6 +168,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activitiesStartsTimeLabel" destination="065-uK-iVr" id="tWQ-uC-9Dh"/>
+                <outlet property="adViewTopMargin" destination="grK-vs-m0D" id="vmc-uw-iP9"/>
+                <outlet property="bottomImageView" destination="t1M-ZE-Td2" id="Dh9-KY-rui"/>
                 <outlet property="countDownView" destination="FSE-sU-qKP" id="0mc-Vx-il4"/>
                 <outlet property="countDownViewTotalLabel" destination="ow7-dZ-GvQ" id="DDk-zj-qJX"/>
                 <outlet property="goryBackView" destination="FyY-1z-JY7" id="gSC-G3-2sj"/>
@@ -177,10 +179,12 @@
                 <outlet property="priceLabel" destination="yrE-cC-2Nh" id="OiR-jI-gD3"/>
                 <outlet property="redViewWidth" destination="Vq8-aB-dDR" id="y2r-mh-fZj"/>
                 <outlet property="residueLabel" destination="jkf-DU-qFq" id="3j6-yC-xOJ"/>
+                <outlet property="residueLabelCenterX" destination="NhB-gF-bNa" id="MJL-w0-Mlx"/>
+                <outlet property="rightImageView" destination="nEq-lN-95F" id="LpK-G1-hv1"/>
                 <outlet property="titleLabel" destination="kgD-t0-H0Y" id="Foh-b6-1PJ"/>
                 <outlet property="totalLabel" destination="x8A-iV-tfC" id="oWf-6H-5L6"/>
             </connections>
-            <point key="canvasLocation" x="-410.39999999999998" y="-869.41529235382313"/>
+            <point key="canvasLocation" x="-591" y="-888"/>
         </view>
     </objects>
     <resources>

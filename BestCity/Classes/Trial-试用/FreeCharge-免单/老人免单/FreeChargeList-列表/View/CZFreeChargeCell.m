@@ -9,6 +9,7 @@
 #import "CZFreeChargeCell.h"
 #import "UIImageView+WebCache.h"
 #import "CZFreeAlertView.h"
+#import "TSLWebViewController.h"
 
 // 工具
 #import "CZUMConfigure.h"
@@ -16,11 +17,22 @@
 @interface CZFreeChargeCell ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIButton *invitingNowBtn;
+
 /** <#注释#> */
 @property (nonatomic, assign) BOOL isAnimate;
+
 @end
 
 @implementation CZFreeChargeCell
+- (IBAction)freeDescAction:(id)sender {
+
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/free-desc.html"]];
+    webVc.titleName = @"规则说明";
+    [currentVc presentViewController:webVc animated:YES completion:nil];
+}
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
@@ -68,24 +80,5 @@
     // Configure the view for the selected state
 }
 
-/** <#注释#> */
-- (IBAction)nnvitingNowAction
-{
-    [[CZFreeAlertView freeAlertViewRightBlock:^(CZFreeAlertView * _Nonnull alertView) {
-        [self shareActionWithType:998];
-    } leftBlock:^(CZFreeAlertView * _Nonnull alertView) {
-        [self shareActionWithType:998];
-    }] show];
-}
-
-- (void)shareActionWithType:(NSInteger)type
-{
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    UIViewController *currentVc = nav.topViewController;
-    [CZProgressHUD showProgressHUDWithText:nil];
-    [[CZUMConfigure shareConfigure] shareToPlatformType:UMSocialPlatformType_WechatSession currentViewController:currentVc webUrl:@"" Title:@"" subTitle:@"" thumImage:@"" shareType:type object:@""];
-    [CZProgressHUD hideAfterDelay:3.0];
-}
 
 @end

@@ -10,14 +10,17 @@
 // 视图
 #import "CZFreeChargeCell.h"
 #import "CZCZFreeChargeCell2.h"
+#import "CZFreeAlertView.h"
 
 
 
 // 跳转
 #import "CZFreeChargeDetailController.h"
+#import "CZUMConfigure.h"
 
 @interface CZFreeChargeController ()
-
+/** 控制分享按钮的点击 */
+@property (nonatomic, assign) NSInteger controlClickedNumber;
 @end
 
 @implementation CZFreeChargeController
@@ -61,7 +64,7 @@
 #pragma mark - 获取数据
 - (void)setupRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
+    self.tableView.mj_header = [CZCustomGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadMoreTrailDataSorce)];
 }
@@ -134,7 +137,6 @@
 {
     if (indexPath.row == 0) {
         CZFreeChargeCell *cell = [CZFreeChargeCell cellWithTableView:tableView];
-//            cell.model = self.freeChargeDatas[indexPath.row];
         return cell;
     } else {
         CZCZFreeChargeCell2 *cell = [CZCZFreeChargeCell2 cellWithTableView:tableView];
@@ -155,14 +157,55 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
      if (indexPath.row == 0) {
-
+         if ([JPTOKEN length] <= 0) {
+             CZLoginController *vc = [CZLoginController shareLoginController];
+             UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+             [tabbar presentViewController:vc animated:NO completion:nil];
+             return;
+         }
+         [self getShareImage];
      } else {
          //push到详情
          NSDictionary *model = self.freeChargeDatas[indexPath.row - 1];
          CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
          vc.Id = model[@"id"];
+         vc.isOldUser = YES;
          [self.navigationController  pushViewController:vc animated:YES];
      }
 }
+
+- (void)getShareImage
+{
+    self.controlClickedNumber++;
+    if (self.controlClickedNumber > 1) {
+        return;
+    }
+
+    CURRENTVC(currentVc);
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/getShareInfo"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
+            [CZProgressHUD hideAfterDelay:0];
+            NSDictionary *param = result[@"data"];
+            [[CZFreeAlertView freeAlertViewRightBlock:^(CZFreeAlertView * _Nonnull alertView) {
+                [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:param[@"shareTitle"] subTitle:param[@"shareContent"] thumImage:param[@"shareImg"] shareType:CZUMConfigureTypeMiniProgramFreeOldUserList object:@""];
+            } leftBlock:^(CZFreeAlertView * _Nonnull alertView) {
+                [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatTimeLine controller:currentVc url:@"https://www.jipincheng.cn" Title:param[@"shareTitle"] subTitle:param[@"shareContent"] thumImage:param[@"posterImg"] shareType:CZUMConfigureTypeImage object:@""];
+            }] show];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
+        self.controlClickedNumber = 0;
+        //隐藏菊花
+    } failure:^(NSError *error) {
+        [CZProgressHUD hideAfterDelay:0];
+        self.controlClickedNumber = 0;
+    }];
+}
+
+
 
 @end

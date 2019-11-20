@@ -10,6 +10,7 @@
 #import "CZFreeChargeCell3.h"
 #import "CZFreeChargeCell4.h"
 #import "UIButton+CZExtension.h" // 按钮扩展
+#import "CZFreeChargeDetailController.h"
 
 @interface CZSubFreeChargeController ()
 /** 返回键 */
@@ -103,7 +104,6 @@
 {
     if (indexPath.row == 0) {
         CZFreeChargeCell3 *cell = [CZFreeChargeCell3 cellWithTableView:tableView];
-//            cell.model = self.freeChargeDatas[indexPath.row];
         return cell;
     } else {
         CZFreeChargeCell4 *cell = [CZFreeChargeCell4 cellWithTableView:tableView];
@@ -111,4 +111,19 @@
         return cell;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     if (indexPath.row == 0) {
+
+     } else {
+         //push到详情
+         NSDictionary *model = self.freeChargeDatas[indexPath.row - 1];
+         CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
+         vc.Id = model[@"id"];
+         vc.isOldUser = NO;
+         [self.navigationController  pushViewController:vc animated:YES];
+     }
+}
+
 @end

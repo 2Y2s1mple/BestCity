@@ -29,8 +29,16 @@
 @property (nonatomic, weak) IBOutlet UIView *lineView;
 @property (nonatomic, weak) IBOutlet UIView *goryBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *redViewWidth; // 红条宽
+@property (weak, nonatomic) IBOutlet UIImageView *rightImageView;
+
 @property (nonatomic, weak) IBOutlet UILabel *totalLabel; // 一共
 @property (nonatomic, weak) IBOutlet UILabel *residueLabel; // 剩余
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *residueLabelCenterX;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *adViewTopMargin;
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIImageView *bottomImageView;
+
 
 @end
 
@@ -61,30 +69,58 @@
     self.countDownViewTotalLabel.text = [NSString stringWithFormat:@"已抢%@件", _model.count];
     self.titleLabel.text = _model.name;
 
-    if ([_model.myInviteUserCount integerValue] < [_model.inviteUserCount integerValue]) {
-        NSString *textStr = [NSString stringWithFormat:@"已邀请%@位好友,再邀请%ld位新用户即可享¥%@元补贴", _model.myInviteUserCount, [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue], _model.freePrice];
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:textStr];
-        [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:_model.myInviteUserCount]];
-        [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:[NSString stringWithFormat:@"%ld", [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue]]]];
-        [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:[NSString stringWithFormat:@"¥%@", _model.freePrice]]];
-        self.inviteLabel.attributedText = attrStr;
-    } else {
+    if (self.isOldUser) {
+        if ([_model.myInviteUserCount integerValue] < [_model.inviteUserCount integerValue]) {
+            NSString *textStr = [NSString stringWithFormat:@"已邀请%@位好友,再邀请%ld位新用户即可享¥%@元补贴", _model.myInviteUserCount, [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue], _model.freePrice];
+            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:textStr];
+            [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:_model.myInviteUserCount]];
+            [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:[NSString stringWithFormat:@"%ld", [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue]]]];
+            [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:[NSString stringWithFormat:@"¥%@", _model.freePrice]]];
+            self.inviteLabel.attributedText = attrStr;
 
+        } else {
+            NSString *textStr = [NSString stringWithFormat:@"恭喜您已获得免单权益，确认收货后享¥%@元补贴", _model.freePrice];
+            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:textStr];
+            [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:[NSString stringWithFormat:@"¥%@", _model.freePrice]]];
+            self.inviteLabel.attributedText = attrStr;
+        }
+
+        CGFloat scale = [_model.myInviteUserCount floatValue] / [_model.inviteUserCount floatValue];
+        if (isinf(scale)) {
+            scale = 1;
+        } else {
+            scale = [_model.myInviteUserCount floatValue] / [_model.inviteUserCount floatValue];
+        }
+
+        self.redViewWidth.constant = scale * (SCR_WIDTH - 28);
+        if (self.redViewWidth.constant > (SCR_WIDTH - 28 - 100)) {
+            self.redViewWidth.constant = SCR_WIDTH - 28;
+            self.residueLabel.hidden = YES;
+        } else if (self.redViewWidth.constant == 0) {
+            self.redViewWidth.constant = 15;
+            self.residueLabelCenterX.constant = 17;
+            self.residueLabel.text = [NSString stringWithFormat:@"已邀%@人", _model.myInviteUserCount];
+        } else {
+            self.residueLabel.text = [NSString stringWithFormat:@"已邀%@人", _model.myInviteUserCount];
+        }
+        self.totalLabel.text = [NSString stringWithFormat:@"（%@/%@人）", _model.myInviteUserCount, _model.inviteUserCount];
+
+        NSString *freeStr = [NSString stringWithFormat:@"免单提示：所有邀请好友需注册成功才有效哦!"];
+        self.activitiesStartsTimeLabel.attributedText = [freeStr addAttributeFont:[UIFont fontWithName:@"PingFangSC-Medium" size: 13] Range:NSMakeRange(0, 5)];
+
+        self.bottomImageView.image = [UIImage imageNamed:@"trail-point"];
+
+        self.height = CZGetY(self.activitiesStartsTimeLabel) + 10;
+    } else {
+        self.bottomImageView.image = [UIImage imageNamed:@"trail-point-1"];
+        self.lineView.hidden = YES;
+        self.inviteLabel.hidden = YES;
+        self.adViewTopMargin.constant = - 70;
+        [self layoutIfNeeded];
+        self.height = CZGetY(self.activitiesStartsTimeLabel) + 10;
     }
 
-    CGFloat scale = [_model.myInviteUserCount floatValue] / [_model.inviteUserCount floatValue];
-    self.redViewWidth.constant = scale * (SCR_WIDTH - 28);
-    if (self.redViewWidth.constant > (SCR_WIDTH - 28 - 100)) {
-        self.residueLabel.hidden = YES;
-    } else {
-        self.residueLabel.text = [NSString stringWithFormat:@"已邀%@人", _model.myInviteUserCount];
-    }
-    self.totalLabel.text = [NSString stringWithFormat:@"（%@/%@人）", _model.myInviteUserCount, _model.inviteUserCount];
 
-    NSString *freeStr = [NSString stringWithFormat:@"免单提示：所有邀请好友需注册成功才有效哦!"];
-    self.activitiesStartsTimeLabel.attributedText = [freeStr addAttributeFont:[UIFont fontWithName:@"PingFangSC-Medium" size: 13] Range:NSMakeRange(0, 5)];
-
-    self.height = CZGetY(self.activitiesStartsTimeLabel) + 10;
 
 }
 

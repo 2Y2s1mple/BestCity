@@ -15,6 +15,7 @@
 #import "WMPageController.h"
 #import "CZTrialDetailController.h" // 新品试用
 #import "CZFreeChargeDetailController.h"
+#import "CZSubFreeChargeController.h" // 新品免单
 
 
 @interface CZUpdataView ()
@@ -230,7 +231,7 @@
 
 - (void)pushToVC:(NSDictionary *)param
 {
-    //0默认消息，1榜单首页，11榜单详情，12商品详情，2评测主页，21评测文章，23清单文章web，24清单文章json，3新品主页，31新品详情，4免单主页，41免单详情
+    //0默认消息，1榜单首页，11榜单详情，12商品详情，2评测主页，21评测文章，23清单文章web，24清单文章json，3新品主页，31新品详情，4免单主页，41免单详情, 5免单
     NSInteger targetType  = [param[@"targetType"] integerValue];
     NSString *targetId = param[@"targetId"];
     NSString *targetTitle = param[@"targetTitle"];
@@ -317,6 +318,20 @@
             UINavigationController *nav = tabbar.selectedViewController;
             WMPageController *hotVc = (WMPageController *)nav.topViewController;
             hotVc.selectIndex = 1;
+            break;
+        }
+        case 5:
+        {
+            if ([JPTOKEN length] <= 0) {
+                CZLoginController *vc = [CZLoginController shareLoginController];
+                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                [tabbar presentViewController:vc animated:NO completion:nil];
+                return;
+            }
+            CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
+           UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            UINavigationController *nav = tabbar.selectedViewController;
+            [nav pushViewController:vc animated:YES];
             break;
         }
         case 41:

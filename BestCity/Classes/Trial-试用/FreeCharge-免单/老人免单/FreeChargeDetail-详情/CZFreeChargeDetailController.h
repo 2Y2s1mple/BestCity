@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFreeChargeDetailController : UIViewController
 @property (nonatomic, strong) NSString *Id;
+/** <#注释#> */
+@property (nonatomic, assign) BOOL isOldUser;
 @end
 
 NS_ASSUME_NONNULL_END

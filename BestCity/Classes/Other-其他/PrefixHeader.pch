@@ -99,6 +99,10 @@ line.backgroundColor = CZGlobalLightGray; \
     return;\
 }
 
+#define CURRENTVC(currentVc) UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];\
+UINavigationController *nav = tabbar.selectedViewController;\
+UIViewController *currentVc = nav.topViewController;
+
 #import "UIView+GXExtension.h"//为了view.width
 #import "UIImage+CZExtension.h"
 #import "NSString+CZExtension.h" // 为了获取文字高度
@@ -114,6 +118,7 @@ line.backgroundColor = CZGlobalLightGray; \
 #import "CZJIPINSynthesisTool.h" //综合工具
 #import <UMAnalytics/MobClick.h> // 统计
 #import "CZCustomGifHeader.h"
+#import "TSLWebViewController.h" // webView
 
 /************************************************************/
 #endif 

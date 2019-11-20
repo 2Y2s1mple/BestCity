@@ -36,15 +36,14 @@
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@", _model[@"buyPrice"]];
     NSString *otherPrice = [NSString stringWithFormat:@"¥%@", _model[@"otherPrice"]];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
-    self.totalLabel.text = [NSString stringWithFormat:@"已抢%@件", _model[@"count"]];
-    self.totalLabel.text = [NSString stringWithFormat:@"需邀请%@人可享", _model[@"inviteUserCount"]];
+    self.totalLabel.text = [NSString stringWithFormat:@"已抢%ld件", [_model[@"count"] integerValue]];
+    self.residueLabel.text = [NSString stringWithFormat:@"需邀请%ld人可享", [_model[@"inviteUserCount"] integerValue]];
 
     NSString *inviteUserCount = [NSString stringWithFormat:@"(%ld/%ld)", (long)[_model[@"myInviteUserCount"] integerValue], (long)[_model[@"inviteUserCount"] integerValue]];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立即抢%@", inviteUserCount]];
     [string addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11]} range:NSMakeRange(3, inviteUserCount.length)];
     [string addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xFFFFFF)} range:NSMakeRange(0, string.length)];
     [self.btn setAttributedTitle:string forState:UIControlStateNormal];
-
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView

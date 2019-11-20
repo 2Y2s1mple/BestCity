@@ -17,6 +17,7 @@
 #import "CZFreeSubThreeController.h"
 #import "CZCoinCenterController.h"
 #import "CZShareView.h"
+#import "CZFreeAlertView3.h"
 #import "CZFreeAlertView2.h"
 #import "CZFreeAlertView.h"
 #import "CZScollerImageTool.h"
@@ -68,6 +69,9 @@
 @property (nonatomic , assign) BOOL  isHover;
 /** <#注释#> */
 @property (nonatomic, assign) CGFloat headerViewHeight;
+
+/** 控制分享按钮的点击 */
+@property (nonatomic, assign) NSInteger controlClickedNumber;
 @end
 
 // universal links
@@ -84,7 +88,6 @@
     }
     return self;
 }
-
 
 #pragma mark - 创建视图
 - (UIScrollView *)scrollerView
@@ -134,17 +137,51 @@
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
     }
-    CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-    share.cententText =  self.shareDic[@"shareContent"];
-    share.shareTypeParam = @{@"type" : @"0", @"object" : self.Id}; // 免单
-    share.param = @{
-                    @"shareUrl" : self.shareDic[@"shareUrl"],
-                    @"shareTitle" : self.shareDic[@"shareTitle"],
-                    @"shareContent" : self.shareDic[@"shareContent"],
-                    @"shareImg" : self.shareDic[@"shareImg"],
-                    };
-    [self.view addSubview:share];
+    [self getShareImage];
 }
+
+- (void)getShareImage
+{
+    self.controlClickedNumber++;
+    if (self.controlClickedNumber > 1) {
+        return;
+    }
+
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"freeId"] = self.Id;
+    [CZProgressHUD showProgressHUDWithText:nil];
+    //获取详情数据
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/createFreePoster"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
+            [CZProgressHUD hideAfterDelay:0];
+            NSString *param = result[@"data"];
+            [[CZFreeAlertView freeAlertViewRightBlock:^(CZFreeAlertView * _Nonnull alertView) {
+                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                UINavigationController *nav = tabbar.selectedViewController;
+                UIViewController *currentVc = nav.topViewController;
+                NSInteger type;
+                if (self.isOldUser) {
+                    type = 11;
+                } else {
+                    type = 12;
+                }
+                [[CZUMConfigure shareConfigure] shareToPlatformType:UMSocialPlatformType_WechatSession currentViewController:currentVc webUrl:@"https://www.jipincheng.cn" Title:self.shareDic[@"shareTitle"] subTitle:self.shareDic[@"shareContent"] thumImage:self.shareDic[@"shareImg"] shareType:type object:self.shareDic[@"id"]];
+            } leftBlock:^(CZFreeAlertView * _Nonnull alertView) {
+                CURRENTVC(currentVc);
+                [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatTimeLine controller:currentVc url:@"https://www.jipincheng.cn" Title:self.shareDic[@"shareTitle"] subTitle:self.shareDic[@"shareContent"] thumImage:param shareType:CZUMConfigureTypeImage object:@""];
+            }] show];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
+        self.controlClickedNumber = 0;
+        //隐藏菊花
+    } failure:^(NSError *error) {
+        [CZProgressHUD hideAfterDelay:0];
+        self.controlClickedNumber = 0;
+    }];
+}
+
 
 // 初始化底部菜单
 - (void)setupBottomView
@@ -176,7 +213,8 @@
 
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     rightBtn.frame = CGRectMake(commentBtn.width, commentBtn.y, 160, commentBtn.height);
-    rightBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+    rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
+
     [rightBtn setTitle:@"立即邀请" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     rightBtn.backgroundColor = UIColorFromRGB(0xF76D20);
@@ -224,6 +262,7 @@
 {
     [self.topContent removeFromSuperview];
     self.topContent = [CZFreeDetailsubView freeDetailsubView];
+    self.topContent.isOldUser = self.isOldUser;
     self.topContent.y = CZGetY(_imageView);
     self.topContent.width = SCR_WIDTH;
     self.topContent.model = self.dataSource;
@@ -243,13 +282,10 @@
     backView.height = 50;
     backView.width = SCR_WIDTH;
 
-    UIButton *menusbtn = [UIButton buttonWithFrame:CGRectMake(0, 0, 35, backView.height) backImage:@"nav-back" target:self action:@selector(popAction)];
-    _menusbtn = menusbtn;
-    [backView addSubview:menusbtn];
-    _menusbtn.hidden = YES;
+
 
     NSInteger count = self.childViewControllers.count;
-    CGFloat space = (SCR_WIDTH - 70 - count * 55) / (count - 1);
+    CGFloat width = SCR_WIDTH / count;
     for (NSInteger i = 0; i < count; i++) {
         UIButton *btn = [[UIButton alloc] init];
         btn.tag = i + 100;
@@ -257,17 +293,18 @@
         btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
         [btn setTitleColor:CZGlobalGray forState:UIControlStateNormal];
         [btn sizeToFit];
+        btn.width = width;
         btn.centerY = backView.height / 2.0;
-        btn.x = 35 + i * (space + 55);
+        btn.x = i * width;
         [backView addSubview:btn];
         [btn addTarget:self action:@selector(menuDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
 
         UIView *view = [[UIView alloc] init];
         view.tag = i + 200;
-        view.x = btn.x;
         view.y = backView.height - 4;
-        view.width = btn.width;
+        view.width = 55;
         view.height = 3;
+        view.centerX = btn.centerX;
         view.backgroundColor = CZREDCOLOR;
         view.layer.cornerRadius = 2;
         [backView addSubview:view];
@@ -284,6 +321,12 @@
             self.recordBtn = btn;
         }
     }
+
+    UIButton *menusbtn = [UIButton buttonWithFrame:CGRectMake(0, 0, 35, backView.height) backImage:@"nav-back" target:self action:@selector(popAction)];
+    menusbtn.backgroundColor = [UIColor clearColor];
+    _menusbtn = menusbtn;
+    [backView addSubview:menusbtn];
+    _menusbtn.hidden = YES;
     return backView;
 }
 
@@ -301,11 +344,13 @@
     social1.view.backgroundColor = [UIColor whiteColor];
     [self addChildViewController:social1];
 
-    CZFreeSubThreeController *social2 = [[CZFreeSubThreeController alloc] init];
-    social2.title = @"免单技巧";
-    social2.stringHtml = self.dataSource.freeGuide;
-    social2.view.backgroundColor = [UIColor whiteColor];
-    [self addChildViewController:social2];
+    if (_isOldUser) {
+        CZFreeSubThreeController *social2 = [[CZFreeSubThreeController alloc] init];
+        social2.title = @"免单技巧";
+        social2.stringHtml = self.dataSource.freeGuide;
+        social2.view.backgroundColor = [UIColor whiteColor];
+        [self addChildViewController:social2];
+    }
 }
 
 // 创建底部视图
@@ -372,7 +417,6 @@
     // 加载pop按钮
     [self.scrollerView addSubview:self.popButton];
     [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -412,7 +456,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-// 立即购买
+// 立即购买, 立即邀请
 - (void)rightBtnAction:(UIButton *)btn
 {
     if ([JPTOKEN length] <= 0) {
@@ -424,29 +468,22 @@
 
     if ([btn.titleLabel.text isEqualToString:@"立即购买"]) {
 
-        CZFreeAlertView2 *alertView = [CZFreeAlertView2 freeAlertView:^(CZFreeAlertView2 * _Nonnull alertView) {
-            [self buyBtnAction];
-        }];
-        alertView.param = self.dataSource;
-        [alertView show];
-
+        if (_isOldUser) {
+            CZFreeAlertView2 *alertView = [CZFreeAlertView2 freeAlertView:^(CZFreeAlertView2 * _Nonnull alertView) {
+                [self buyBtnAction];
+            }];
+            alertView.param = self.dataSource;
+            [alertView show];
+        } else {
+            CZFreeAlertView3 *alertView = [CZFreeAlertView3 freeAlertView:^(CZFreeAlertView3 * _Nonnull alertView) {
+                [self buyBtnAction];
+            }];
+            alertView.param = self.dataSource;
+            [alertView show];
+        }
     } else {
-        [[CZFreeAlertView freeAlertViewRightBlock:^(CZFreeAlertView * _Nonnull alertView) {
-            [self shareActionWithType:998];
-        } leftBlock:^(CZFreeAlertView * _Nonnull alertView) {
-            [self shareActionWithType:998];
-        }] show];
+        [self getShareImage];
     }
-}
-
-- (void)shareActionWithType:(NSInteger)type
-{
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    UIViewController *currentVc = nav.topViewController;
-    [CZProgressHUD showProgressHUDWithText:nil];
-    [[CZUMConfigure shareConfigure] shareToPlatformType:UMSocialPlatformType_WechatSession currentViewController:currentVc webUrl:@"" Title:@"" subTitle:@"" thumImage:@"" shareType:type object:@""];
-    [CZProgressHUD hideAfterDelay:3.0];
 }
 
 // 菜单点击方法

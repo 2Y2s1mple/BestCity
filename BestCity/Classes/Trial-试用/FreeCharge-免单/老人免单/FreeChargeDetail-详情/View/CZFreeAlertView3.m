@@ -1,33 +1,30 @@
 //
-//  CZFreeAlertView2.m
+//  CZFreeAlertView3.m
 //  BestCity
 //
-//  Created by JasonBourne on 2019/6/25.
+//  Created by JasonBourne on 2019/11/18.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import "CZFreeAlertView2.h"
-@interface CZFreeAlertView2 ()
+#import "CZFreeAlertView3.h"
+
+@interface CZFreeAlertView3 ()
 @property (nonatomic, strong) UIView *backView;
 /** 右边的参数 */
-@property (nonatomic, copy) void (^rightBlock)(CZFreeAlertView2 *);
+@property (nonatomic, copy) void (^rightBlock)(CZFreeAlertView3 *);
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *topLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bottomLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *titleText;
 @end
-@implementation CZFreeAlertView2
-+ (instancetype)freeAlertView:(void (^)(CZFreeAlertView2 *))rightBlock
+
+@implementation CZFreeAlertView3
++ (instancetype)freeAlertView:(void (^)(CZFreeAlertView3 *))rightBlock
 {
-    CZFreeAlertView2 *currentView = [[NSBundle mainBundle] loadNibNamed:@"CZFreeAlertView" owner:nil options:nil][1];
+    CZFreeAlertView3 *currentView = [[NSBundle mainBundle] loadNibNamed:@"CZFreeAlertView" owner:nil options:nil][2];
     currentView.rightBlock = rightBlock;
     return currentView;
-}
-
-- (IBAction)leftBtnAction:(UIButton *)sender
-{
-    [self hide];
 }
 
 - (IBAction)rightBtnAction:(UIButton *)sender
@@ -45,13 +42,13 @@
     [backView addSubview:self];
     _backView = backView;
     self.y = 165;
-    self.size = CGSizeMake(315, 230);
+    self.size = CGSizeMake(315, 253);
     self.centerX = SCR_WIDTH / 2.0;
 }
 
 - (void)hide
 {
-    [_backView removeFromSuperview]; 
+    [_backView removeFromSuperview];
 }
 
 - (void)setParam:(CZFreeChargeModel *)param
@@ -63,5 +60,6 @@
     self.topLabel.text = [NSString stringWithFormat:@"￥%@", param.buyPrice];;
     self.bottomLabel.text = [NSString stringWithFormat:@"￥%@", param.freePrice];
 }
+
 
 @end

@@ -38,7 +38,6 @@
 
 @end
 
-
 static id instancet_;
 @implementation CZLoginController
 
@@ -137,6 +136,8 @@ static id instancet_;
             
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
+
+            [self loadUserAlert];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             [CZProgressHUD hideAfterDelay:2];
@@ -286,6 +287,38 @@ static id instancet_;
 {
     btn.backgroundColor = CZBTNGRAY;
     btn.enabled = NO;
+}
+
+
+- (void)loadUserAlert
+{
+    //获取数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getPopInfo"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSDictionary *param = result[@"data"][@"data"];
+            NSLog(@"%@----%@", param, [param class]);
+            if ([param isKindOfClass:[NSNull class]])
+            {
+                return;
+            }
+
+            if ([result[@"data"][@"type"] isEqualToNumber:@1]) {
+                CZUpdataView *backView = [CZUpdataView buyingView];
+                backView.frame = [UIScreen mainScreen].bounds;
+                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                [[UIApplication sharedApplication].keyWindow addSubview: backView];
+                backView.paramDic = result[@"data"][@"data"];
+            } else {
+                CZUpdataView *backView = [CZUpdataView goodsView];
+                backView.frame = [UIScreen mainScreen].bounds;
+                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                [[UIApplication sharedApplication].keyWindow addSubview: backView];
+                backView.goodsViewParamDic = result[@"data"][@"data"];
+            }
+        }
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 @end

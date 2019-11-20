@@ -68,7 +68,7 @@
                             <constraint firstAttribute="height" constant="1" id="cal-LU-2Y3"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="viL-Iy-myY">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="viL-Iy-myY">
                         <rect key="frame" x="349" y="97" width="100" height="28"/>
                         <color key="backgroundColor" red="0.88627450980392153" green="0.34509803921568627" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -119,7 +119,7 @@
                 <outlet property="titleLabel" destination="bib-xu-ETK" id="Zbr-DP-c8Q"/>
                 <outlet property="totalLabel" destination="QTv-Ki-5kE" id="Ac3-UH-rfp"/>
             </connections>
-            <point key="canvasLocation" x="-139" y="-764"/>
+            <point key="canvasLocation" x="-177" y="-765"/>
         </tableViewCell>
     </objects>
 </document>

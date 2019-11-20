@@ -35,7 +35,8 @@
     _webView.backgroundColor = CZGlobalWhiteBg;
     [self.scrollerView addSubview:_webView];
     _webView.delegate = self;
-    [_webView loadHTMLString:self.stringHtml baseURL:nil];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/free-rule.html"]];
+    [_webView loadRequest:request];
     _webView.scrollView.scrollEnabled = NO;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
 

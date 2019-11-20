@@ -23,8 +23,8 @@
 + (instancetype)freeAlertViewRightBlock:(void (^)(CZFreeAlertView *))rightBlock leftBlock:(void (^)(CZFreeAlertView *))leftBlock
 {
     CZFreeAlertView *currentView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] firstObject];
-    currentView.rightBlock = rightBlock;
     currentView.leftBlock = rightBlock;
+    currentView.rightBlock = leftBlock;
     return currentView;
 }
 
@@ -47,8 +47,8 @@
     [[UIApplication sharedApplication].keyWindow addSubview:backView];
     [backView addSubview:self];
     _backView = backView;
-    self.y = SCR_HEIGHT - 120;
-    self.size = CGSizeMake(SCR_WIDTH, 120);
+    self.y = SCR_HEIGHT - 172;
+    self.size = CGSizeMake(SCR_WIDTH, 172);
 }
 
 - (void)hide {

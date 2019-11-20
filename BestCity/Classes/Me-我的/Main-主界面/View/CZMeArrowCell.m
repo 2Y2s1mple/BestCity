@@ -9,6 +9,7 @@
 #import "CZMeArrowCell.h"
 #import "CZMeController.h"
 #import "CZSubFreeChargeController.h"
+#import "CZFreeAlertView4.h"
 
 @interface CZMeArrowCell ()
 /** <#注释#> */
@@ -123,11 +124,29 @@
 
 //邀请码
 - (IBAction)action5:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"") alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
+    CZFreeAlertView4 *alertView = [CZFreeAlertView4 freeAlertView:^(NSString * _Nonnull text) {
+        if (text.length == 0) {
+            [CZProgressHUD showProgressHUDWithText:@"邀请码为空"];
+            // 取消菊花
+            [CZProgressHUD hideAfterDelay:1.5];
+            return;
+        }
+
+        NSLog(@"%@", text);
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        // 要关注对象ID
+        param[@"invitationCode"] = text;
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/addInvitationCode"];
+        [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            // 取消菊花
+            [CZProgressHUD hideAfterDelay:1.5];
+        } failure:^(NSError *error) {
+            // 取消菊花
+            [CZProgressHUD hideAfterDelay:0];
+        }];
+    }];
+    [alertView show];
 }
 
 //新人专区

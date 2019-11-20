@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 数据 */
 @property (nonatomic, strong) CZFreeChargeModel *model;
 + (instancetype)freeDetailsubView;
+@property (nonatomic, assign) BOOL isOldUser;
 @end
 
 NS_ASSUME_NONNULL_END

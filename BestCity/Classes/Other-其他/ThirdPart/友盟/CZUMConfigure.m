@@ -25,7 +25,6 @@ static id _instance;
 }
 
 - (void)configure{
-    
     [UMConfigure initWithAppkey:@"5b729a75f29d987629000096" channel:@"App Store"];
     // U-Share 平台设置
     [self configUSharePlatforms];
@@ -33,6 +32,7 @@ static id _instance;
     [MobClick setScenarioType:E_UM_NORMAL];//支持普通场景
 //    [UMConfigure setEncryptEnabled:YES];//打开加密传输
     [UMConfigure setLogEnabled:YES];//设置打开日志
+    [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
 }
 
 - (void)configUSharePlatforms
@@ -52,12 +52,29 @@ static id _instance;
 
 - (void)shareToPlatformType:(UMSocialPlatformType)platformType currentViewController:(UIViewController *)vc webUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage shareType:(NSInteger)type object:(id)anObject
 {
+    if (webUrl.length == 0) {
+        webUrl = @"https://www.jipincheng.cn";
+    }
+
+    if ([thumImage isKindOfClass:[NSString class]] && thumImage.length == 0) {
+        thumImage = [UIImage imageNamed:@"headDefault"];
+    }
+
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     if (platformType == UMSocialPlatformType_WechatSession) {
         if (type == 0) { // 0元购
             //分享消息对象设置分享内容对象
             messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-info/index?freeId=%@", anObject]];
+        } else if (type == 10) { // 免单老人页面
+            //分享消息对象设置分享内容对象
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-v2-list/index?fromUserId=%@", JPUSERINFO[@"userId"]]];
+        } else if (type == 11) { // 免单老人详情
+            //分享消息对象设置分享内容对象
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-v2-info/index?id=%@&fromUserId=%@", anObject, JPUSERINFO[@"userId"]]];
+        } else if (type == 12) { // 新人详情页面
+            //分享消息对象设置分享内容对象
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-new-info/index?id=%@&fromUserId=%@", anObject, JPUSERINFO[@"userId"]]];
         } else if (type == 1) { // 商品
             messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b0a86c45468d" path:[NSString stringWithFormat:@"pages/list/top-info/main?topListVal=%@", anObject]];
         } else if (type == 2) { // 评测
@@ -66,16 +83,27 @@ static id _instance;
         } else if (type == 3) { // 网页
             //设置分享内容
             messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
+        } else if (type == 998) {
+            //设置分享内容
+            messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
         } else {
             UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-            shareObject.thumbImage = [UIImage imageNamed:@"icon.png"];//如果有缩略图，则设置缩略图
-            [shareObject setShareImage:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534319537557&di=f5dcb1f44d10702889212857acdb5371&imgtype=0&src=http%3A%2F%2Fwww.qqma.com%2Fimgpic2%2Fcpimagenew%2F2018%2F4%2F5%2F6e1de60ce43d4bf4b9671d7661024e7a.jpg"];
+            shareObject.thumbImage = [UIImage imageNamed:@"launchLogo.png"];//如果有缩略图，则设置缩略图
+            [shareObject setShareImage:thumImage];
             messageObject.shareObject = shareObject;
 
         }
     } else {
-        //设置分享内容
-        messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
+        if (type == 998) {
+            //设置分享内容
+            messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
+        } else {
+            UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+            shareObject.thumbImage = [UIImage imageNamed:@"launchLogo.png"];//如果有缩略图，则设置缩略图
+            [shareObject setShareImage:thumImage];
+            messageObject.shareObject = shareObject;
+        }
+
     }
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:vc completion:^(id data, NSError *error) {
@@ -108,23 +136,97 @@ static id _instance;
     shareObject.userName = userName;
     shareObject.path = path;
 
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumImage]];
-    UIImage* newImage = [UIImage imageWithData:data];
-    NSData *imageData =  UIImagePNGRepresentation(newImage);
-    NSInteger length = [imageData length];
-    CGFloat compression;
-    if ([imageData length] > 127000) {
-        compression =  127000.0 / length;
+    if ([thumImage isKindOfClass:[UIImage class]]) {
+        UIImage* newImage = thumImage;
+        NSData *imageData =  UIImagePNGRepresentation(newImage);
+        NSInteger length = [imageData length];
+        CGFloat compression;
+        if ([imageData length] > 127000) {
+            compression =  127000.0 / length;
+        } else {
+            compression = 1;
+        }
+        imageData =  UIImageJPEGRepresentation(newImage, compression);
+        shareObject.hdImageData = imageData;
     } else {
-        compression = 1;
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumImage]];
+        UIImage* newImage = [UIImage imageWithData:data];
+        NSData *imageData =  UIImagePNGRepresentation(newImage);
+        NSInteger length = [imageData length];
+        CGFloat compression;
+        if ([imageData length] > 127000) {
+            compression =  127000.0 / length;
+        } else {
+            compression = 1;
+        }
+        imageData =  UIImageJPEGRepresentation(newImage, compression);
+        shareObject.hdImageData = imageData;
     }
 
-    imageData =  UIImageJPEGRepresentation(newImage, compression);
-    shareObject.hdImageData = imageData;
-    shareObject.miniProgramType = UShareWXMiniProgramTypeRelease; // 可选体验版和开发板
+
+    shareObject.miniProgramType = UShareWXMiniProgramTypeTest; // 可选体验版和开发板
     return shareObject;
 }
 
+- (void)sharePlatform:(UMSocialPlatformType)platform controller:(UIViewController *)vc url:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(id)thumImage shareType:(CZUMConfigureType)type object:(id)anObject
+{
+    if (webUrl.length == 0) {
+        webUrl = @"https://www.jipincheng.cn";
+    }
 
+    if ([thumImage isKindOfClass:[NSString class]] && [thumImage length] == 0) {
+        thumImage = [UIImage imageNamed:@"headDefault"];
+    }
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    switch (type) {
+        case CZUMConfigureTypeMiniProgramFree:
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-info/index?freeId=%@", anObject]];
+            break;
+        case CZUMConfigureTypeMiniProgramFreeOldUserList:
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-v2-list/index?fromUserId=%@", JPUSERINFO[@"userId"]]];
+            break;
+        case CZUMConfigureTypeMiniProgramFreeOldUserDetail:
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-v2-info/index?id=%@&fromUserId=%@", anObject, JPUSERINFO[@"userId"]]];
+            break;
+        case CZUMConfigureTypeMiniProgramFreeNewUserDetail:
+             messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b92a56fb45d1" path:[NSString stringWithFormat:@"pages/main/main-new-info/index?id=%@&fromUserId=%@", anObject, JPUSERINFO[@"userId"]]];
+            break;
+        case CZUMConfigureTypeMiniProgramGoods:
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b0a86c45468d" path:[NSString stringWithFormat:@"pages/list/top-info/main?topListVal=%@", anObject]];
+            break;
+        case CZUMConfigureTypeMiniProgramEvaluate:
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b0a86c45468d" path:[NSString stringWithFormat:@"pages/ev/ev-info/main?evListVal=%@", anObject]];
+            break;
+        case CZUMConfigureTypeWeb:
+            messageObject.shareObject = [self setUpWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage];
+            break;
+        case CZUMConfigureTypeImage:
+        {
+            UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+            shareObject.thumbImage = [UIImage imageNamed:@"launchLogo.png"];//如果有缩略图，则设置缩略图
+            [shareObject setShareImage:thumImage];
+            messageObject.shareObject = shareObject;
+            break;
+        }
+        default:
+            break;
+    }
+
+
+
+
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:vc completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            UMSocialShareResponse *dataResponse = data;
+            NSLog(@"response data is %@", dataResponse.message);
+            [CZGetJIBITool getJiBiWitType:@(5)];
+        }
+    }];
+}
 
 @end

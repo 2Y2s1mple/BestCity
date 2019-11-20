@@ -12,6 +12,15 @@
 @end
 
 @implementation CZFreeChargeCell3
+- (IBAction)freeDescAction:(id)sender {
+
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/new-free-desc.html"]];
+    webVc.titleName = @"规则说明";
+    [currentVc presentViewController:webVc animated:YES completion:nil];
+}
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {

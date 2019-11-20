@@ -580,6 +580,8 @@
 		97FEBF2B22D490BC007BF592 /* CZMHSDCommodityCell3.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FEBF2922D490BC007BF592 /* CZMHSDCommodityCell3.m */; };
 		97FEBF2C22D490BC007BF592 /* CZMHSDCommodityCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97FEBF2A22D490BC007BF592 /* CZMHSDCommodityCell3.xib */; };
 		97FEBF3122D4C806007BF592 /* CZMHSDRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FEBF3022D4C806007BF592 /* CZMHSDRecommendController.m */; };
+		97FF57E523827AE900373DD1 /* CZFreeAlertView3.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FF57E423827AE900373DD1 /* CZFreeAlertView3.m */; };
+		97FF57E8238281B900373DD1 /* CZFreeAlertView4.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FF57E7238281B900373DD1 /* CZFreeAlertView4.m */; };
 		97FF6DD22117FAD800376435 /* backshadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 97FF6DD12117FAD800376435 /* backshadow.png */; };
 		97FF6DF321184F5A00376435 /* CZSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FF6DF121184F5A00376435 /* CZSettingCell.m */; };
 		97FF6DF421184F5A00376435 /* CZSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97FF6DF221184F5A00376435 /* CZSettingCell.xib */; };
@@ -1585,6 +1587,10 @@
 		97FEBF2A22D490BC007BF592 /* CZMHSDCommodityCell3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMHSDCommodityCell3.xib; sourceTree = "<group>"; };
 		97FEBF2F22D4C806007BF592 /* CZMHSDRecommendController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDRecommendController.h; sourceTree = "<group>"; };
 		97FEBF3022D4C806007BF592 /* CZMHSDRecommendController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDRecommendController.m; sourceTree = "<group>"; };
+		97FF57E323827AE900373DD1 /* CZFreeAlertView3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeAlertView3.h; sourceTree = "<group>"; };
+		97FF57E423827AE900373DD1 /* CZFreeAlertView3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeAlertView3.m; sourceTree = "<group>"; };
+		97FF57E6238281B900373DD1 /* CZFreeAlertView4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeAlertView4.h; sourceTree = "<group>"; };
+		97FF57E7238281B900373DD1 /* CZFreeAlertView4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeAlertView4.m; sourceTree = "<group>"; };
 		97FF6DD12117FAD800376435 /* backshadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backshadow.png; sourceTree = "<group>"; };
 		97FF6DF021184F5A00376435 /* CZSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSettingCell.h; sourceTree = "<group>"; };
 		97FF6DF121184F5A00376435 /* CZSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSettingCell.m; sourceTree = "<group>"; };
@@ -2403,6 +2409,10 @@
 				97773A7322C1DBBB00314E42 /* CZFreeTakePartInCell.h */,
 				97773A7422C1DBBB00314E42 /* CZFreeTakePartInCell.m */,
 				97773A7522C1DBBB00314E42 /* CZFreeTakePartInCell.xib */,
+				97FF57E6238281B900373DD1 /* CZFreeAlertView4.h */,
+				97FF57E7238281B900373DD1 /* CZFreeAlertView4.m */,
+				97FF57E323827AE900373DD1 /* CZFreeAlertView3.h */,
+				97FF57E423827AE900373DD1 /* CZFreeAlertView3.m */,
 				97773A7822C217FC00314E42 /* CZFreeAlertView2.h */,
 				97773A7922C217FC00314E42 /* CZFreeAlertView2.m */,
 				974C559222C070C9001A1E1C /* CZFreeAlertView.h */,
@@ -5074,6 +5084,7 @@
 				97773A7A22C217FC00314E42 /* CZFreeAlertView2.m in Sources */,
 				97705CD82108595600485D64 /* CALayer+LayerColor.m in Sources */,
 				975BCF2222D85F3E0031F3AC /* CZMHSDQDetailModel.m in Sources */,
+				97FF57E8238281B900373DD1 /* CZFreeAlertView4.m in Sources */,
 				9723075A21AD50D50004C00C /* NSDictionary+CZExtension.m in Sources */,
 				97A5B974230D2DF500014E90 /* CZMePublishThreeController.m in Sources */,
 				97F0EC392125692B000FE1DC /* CZGuideTool.m in Sources */,
@@ -5163,6 +5174,7 @@
 				9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */,
 				97798CCE212D0FC90052CE94 /* SDWebImageDownloaderOperation.m in Sources */,
 				97572A8C21198F7F00FB42DE /* CZLoginController.m in Sources */,
+				97FF57E523827AE900373DD1 /* CZFreeAlertView3.m in Sources */,
 				97705CB92108230F00485D64 /* WMPageController.m in Sources */,
 				9708492522438C5B000D5528 /* CZJIPINSynthesisTool.m in Sources */,
 				97481AD62303E84A00230367 /* CZEInventoryCell.m in Sources */,
@@ -5571,7 +5583,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5669,7 +5681,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
