@@ -29,7 +29,7 @@
 - (IBAction)rightBtnAction:(UIButton *)sender
 {
     !self.rightBlock ? : self.rightBlock(_textField.text);
-    [self hide];
+    
 }
 
 - (void)show

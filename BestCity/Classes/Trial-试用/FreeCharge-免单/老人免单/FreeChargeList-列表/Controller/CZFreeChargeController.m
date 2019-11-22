@@ -53,6 +53,7 @@
     [self.view addSubview:self.tableView];
     //创建刷新控件
     [self setupRefresh];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

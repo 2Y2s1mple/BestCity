@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,14 +19,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ec-1H-FUw" userLabel="签到">
                         <rect key="frame" x="0.0" y="0.0" width="102" height="82"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-sign in1" translatesAutoresizingMaskIntoConstraints="NO" id="KW3-A5-roN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Me-items_icon-sign in" translatesAutoresizingMaskIntoConstraints="NO" id="KW3-A5-roN">
                                 <rect key="frame" x="36" y="15" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="HIh-wp-5Vr"/>
                                     <constraint firstAttribute="height" constant="30" id="YEp-MI-y70"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请领奖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdU-9a-Y4d">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务中心" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdU-9a-Y4d">
                                 <rect key="frame" x="24" y="52" width="53.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
@@ -155,7 +155,7 @@
                 <outlet property="tryOutlabel" destination="HRD-Cw-ap9" id="uxp-m6-Mnd"/>
                 <outlet property="walletLabel" destination="e4o-Dn-HH6" id="dHj-LO-Vwp"/>
             </connections>
-            <point key="canvasLocation" x="-1644" y="-677"/>
+            <point key="canvasLocation" x="-1782" y="-667"/>
         </tableViewCell>
         <tapGestureRecognizer id="0i8-Dw-ZjR" userLabel="签到点击">
             <connections>
@@ -179,8 +179,8 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="Me-items_icon-sign in" width="30" height="30"/>
         <image name="icon-jibi" width="30" height="30"/>
-        <image name="icon-sign in1" width="30" height="30.5"/>
         <image name="icon-trial-1" width="30" height="30"/>
         <image name="icon-wallet-1" width="30" height="30"/>
     </resources>

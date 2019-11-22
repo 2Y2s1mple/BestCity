@@ -16,6 +16,7 @@
 
 #import "CZMeController.h"
 #import "CZSettingController.h"
+#import "CZSubFreeChargeController.h" // 新人专区
 // 工具
 #import <TCWebCodesSDK/TCWebCodesBridge.h> // 腾讯验证码
 
@@ -137,7 +138,13 @@ static id instancet_;
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
 
-            [self loadUserAlert];
+            if (didClickedNewPeople && [JPUSERINFO[@"isNewUser"] isEqualToNumber:@(0)]) {
+                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                UINavigationController *nav = tabbar.selectedViewController;
+                CZMeController *vc = (CZMeController *)nav.topViewController;
+                CZSubFreeChargeController *toVc = [[CZSubFreeChargeController alloc] init];
+                [vc.navigationController pushViewController:toVc animated:YES];
+            }
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             [CZProgressHUD hideAfterDelay:2];
@@ -262,9 +269,6 @@ static id instancet_;
         } else {
             [self disabledAndGrayColor:self.verificationCodeBtn];
         }
-        
-        
-        
     }
 }
 

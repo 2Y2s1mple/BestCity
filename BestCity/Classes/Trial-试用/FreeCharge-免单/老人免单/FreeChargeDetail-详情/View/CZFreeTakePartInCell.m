@@ -38,7 +38,7 @@
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:dic[@"avatar"]]];
     self.nameLabel.text = dic[@"nickname"];
     self.timerLabel.text = dic[@"createTime"];
-    self.likeCount.text = [NSString stringWithFormat:@"补贴¥%.0lf", [dic[@"freePrice"] floatValue]];
+    self.likeCount.text = [NSString stringWithFormat:@"到手￥%.0lf", [dic[@"buyPrice"] floatValue]];
 }
 
 - (void)awakeFromNib {

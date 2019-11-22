@@ -24,7 +24,6 @@
 
 /** 免单提示*/
 @property (nonatomic, weak) IBOutlet UILabel *activitiesStartsTimeLabel;
-
 /** 红色条 */
 @property (nonatomic, weak) IBOutlet UIView *lineView;
 @property (nonatomic, weak) IBOutlet UIView *goryBackView;
@@ -38,8 +37,6 @@
 
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIImageView *bottomImageView;
-
-
 @end
 
 @implementation CZFreeDetailsubView
@@ -52,7 +49,6 @@
 
 - (void)setupPorperty
 {
-
 //    self.activitiesStartsTimeLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
 }
 
@@ -105,17 +101,19 @@
         }
         self.totalLabel.text = [NSString stringWithFormat:@"（%@/%@人）", _model.myInviteUserCount, _model.inviteUserCount];
 
-        NSString *freeStr = [NSString stringWithFormat:@"免单提示：所有邀请好友需注册成功才有效哦!"];
+        NSString *freeStr = [NSString stringWithFormat:@"免单提示：%@!", _model.freeNote];
         self.activitiesStartsTimeLabel.attributedText = [freeStr addAttributeFont:[UIFont fontWithName:@"PingFangSC-Medium" size: 13] Range:NSMakeRange(0, 5)];
-
         self.bottomImageView.image = [UIImage imageNamed:@"trail-point"];
-
+        [self layoutIfNeeded];
         self.height = CZGetY(self.activitiesStartsTimeLabel) + 10;
     } else {
         self.bottomImageView.image = [UIImage imageNamed:@"trail-point-1"];
         self.lineView.hidden = YES;
         self.inviteLabel.hidden = YES;
         self.adViewTopMargin.constant = - 70;
+
+        NSString *freeStr = [NSString stringWithFormat:@"免单提示：%@!", _model.freeNote];
+        self.activitiesStartsTimeLabel.attributedText = [freeStr addAttributeFont:[UIFont fontWithName:@"PingFangSC-Medium" size: 13] Range:NSMakeRange(0, 5)];
         [self layoutIfNeeded];
         self.height = CZGetY(self.activitiesStartsTimeLabel) + 10;
     }

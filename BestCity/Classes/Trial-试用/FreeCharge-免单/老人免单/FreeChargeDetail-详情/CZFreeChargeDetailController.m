@@ -377,11 +377,16 @@
 - (void)assignmentWithModule
 {
     NSString *statusText;
-    if ([self.dataSource.myInviteUserCount integerValue] < [self.dataSource.inviteUserCount integerValue]) {
-        statusText = @"立即邀请";
+    if (_isOldUser) {
+        if ([self.dataSource.myInviteUserCount integerValue] < [self.dataSource.inviteUserCount integerValue]) {
+            statusText = @"立即邀请";
+        } else {
+            statusText = @"立即购买";
+        }
     } else {
         statusText = @"立即购买";
     }
+
     [_rightBtn setTitle:statusText forState:UIControlStateNormal];
     _rightBtn.backgroundColor = UIColorFromRGB(0xE25838);
 }
@@ -573,7 +578,7 @@
         }];
     } else {
         // 打开淘宝
-        [self openAlibcTradeWithId:self.dataSource.goodsId];
+        [self openAlibcTradeWithId:self.dataSource.Id];
     }
 
 //    NSString *text = @"试用--商品--优惠购买";
@@ -585,12 +590,19 @@
 - (void)openAlibcTradeWithId:(NSString *)ID
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"goodsId"] = ID;
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    param[@"freeId"] = ID;
+    if (_isOldUser) {
+        param[@"type"] = @(1);
+    } else {
+        param[@"type"] = @(0);
+    }
+
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:self];
         } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            [CZProgressHUD hideAfterDelay:1.5];
         }
     } failure:^(NSError *error) {
 
@@ -634,10 +646,6 @@
             self.scrollerView.contentOffset = CGPointMake(0, self.headerViewHeight);
         }
     }
-
-//    if (scrollView == self.contentScrollView) {
-//        self.selectedMenuItem(scrollView.contentOffset.x);
-//    }
 }
 
 #pragma mark - 通知
@@ -667,8 +675,6 @@
                 }
             }
         }
-
-
     }
 }
 
@@ -711,5 +717,9 @@
     };
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

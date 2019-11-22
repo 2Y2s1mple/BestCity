@@ -34,15 +34,16 @@
 @implementation CZMeCell
 
 - (IBAction)signInAction:(UITapGestureRecognizer *)sender {
+    // 任务中心
     NSString *text = @"我的--邀请领奖";
     NSDictionary *context = @{@"mine" : text};
     [MobClick event:@"ID5" attributes:context];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    // 跳邀请
-    CZInvitationController *toVc = [[CZInvitationController alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
+    // 任务中心
+     UIViewController *toVc = [[NSClassFromString(@"CZCoinCenterController") alloc] init];
+       [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 - (IBAction)coinAction:(UITapGestureRecognizer *)sender {

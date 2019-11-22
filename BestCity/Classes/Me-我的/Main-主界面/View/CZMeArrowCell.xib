@@ -9,6 +9,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tapGestureRecognizer id="fad-Db-klM" userLabel="我的团队">
+            <connections>
+                <action selector="action1:" destination="KGk-i7-Jjw" id="nZA-k3-M0y"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="dxb-XE-zk8" userLabel="我的发布">
+            <connections>
+                <action selector="action2:" destination="KGk-i7-Jjw" id="mOA-Le-nun"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="ggc-vQ-TYf" userLabel="任务中心">
+            <connections>
+                <action selector="action3:" destination="KGk-i7-Jjw" id="jbP-gi-42u"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="hxa-of-evn" userLabel="消息通知">
+            <connections>
+                <action selector="action4:" destination="KGk-i7-Jjw" id="J6l-bz-wE3"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="h5G-v7-JT6" userLabel="邀请码">
+            <connections>
+                <action selector="action5:" destination="KGk-i7-Jjw" id="ph0-06-KBv"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="G20-Fd-G0J" userLabel="新人专区">
+            <connections>
+                <action selector="action6:" destination="KGk-i7-Jjw" id="BWU-bo-fFV"/>
+            </connections>
+        </tapGestureRecognizer>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="meArrowCell" rowHeight="205" id="KGk-i7-Jjw" customClass="CZMeArrowCell">
             <rect key="frame" x="0.0" y="0.0" width="471" height="205"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -32,14 +62,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sor-FL-BtX" userLabel="任务中心">
                         <rect key="frame" x="235.5" y="35" width="118" height="82"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mission" translatesAutoresizingMaskIntoConstraints="NO" id="8gK-pg-aUV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="8gK-pg-aUV">
                                 <rect key="frame" x="44" y="15" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WGW-GA-3vD"/>
                                     <constraint firstAttribute="width" constant="30" id="x6v-8p-w0E"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务中心" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adD-0v-9br">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消息通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adD-0v-9br">
                                 <rect key="frame" x="32" y="52" width="54" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
@@ -86,15 +116,15 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knb-c8-C7t" userLabel="消息通知">
                         <rect key="frame" x="353.5" y="35" width="117.5" height="82"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="LAA-D3-gsS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address-1" translatesAutoresizingMaskIntoConstraints="NO" id="LAA-D3-gsS">
                                 <rect key="frame" x="43.5" y="15" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="dNz-gM-pWC"/>
                                     <constraint firstAttribute="height" constant="30" id="ifS-Xc-epA"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消息通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFO-cF-hgE">
-                                <rect key="frame" x="31.5" y="52" width="54" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFO-cF-hgE">
+                                <rect key="frame" x="45" y="52" width="27" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -195,38 +225,10 @@
                             <outletCollection property="gestureRecognizers" destination="G20-Fd-G0J" appends="YES" id="zv5-DN-OOI"/>
                         </connections>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sK-T1-boZ" userLabel="新人专区">
-                        <rect key="frame" x="235.5" y="117" width="118" height="82"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address-1" translatesAutoresizingMaskIntoConstraints="NO" id="0sc-ZL-7vz">
-                                <rect key="frame" x="44" y="15" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="Aq5-1Y-6Pa"/>
-                                    <constraint firstAttribute="height" constant="30" id="QO1-R0-XYw"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHS-Yy-2tj">
-                                <rect key="frame" x="45.5" y="52.5" width="27" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="eHS-Yy-2tj" firstAttribute="centerX" secondItem="9sK-T1-boZ" secondAttribute="centerX" id="45n-bz-Mu5"/>
-                            <constraint firstItem="0sc-ZL-7vz" firstAttribute="top" secondItem="9sK-T1-boZ" secondAttribute="top" constant="15" id="LBm-wf-k32"/>
-                            <constraint firstItem="0sc-ZL-7vz" firstAttribute="centerX" secondItem="9sK-T1-boZ" secondAttribute="centerX" id="ctS-11-LYb"/>
-                            <constraint firstItem="eHS-Yy-2tj" firstAttribute="top" secondItem="0sc-ZL-7vz" secondAttribute="bottom" constant="7.5" id="h7z-ch-NNg"/>
-                            <constraint firstAttribute="height" constant="82" id="iLJ-Dm-qTF"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="vYB-cT-w3H" appends="YES" id="K87-aK-6tE"/>
-                        </connections>
-                    </view>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="sor-FL-BtX" firstAttribute="height" secondItem="ITa-Ut-N2L" secondAttribute="height" id="1Dy-HQ-9ma"/>
-                    <constraint firstItem="9sK-T1-boZ" firstAttribute="leading" secondItem="BV9-wS-R5f" secondAttribute="trailing" id="2na-xz-9h5"/>
                     <constraint firstItem="sor-FL-BtX" firstAttribute="leading" secondItem="y3x-bc-R4Z" secondAttribute="trailing" id="4Aq-56-JWu"/>
                     <constraint firstItem="deD-DY-iKJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="7Xi-ta-syc"/>
                     <constraint firstItem="JrX-Lc-bga" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DmJ-Cw-U9b"/>
@@ -244,7 +246,6 @@
                     <constraint firstAttribute="trailing" secondItem="knb-c8-C7t" secondAttribute="trailing" id="VSs-lt-1TO"/>
                     <constraint firstItem="deD-DY-iKJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="gaT-Gt-P8g"/>
                     <constraint firstItem="y3x-bc-R4Z" firstAttribute="width" secondItem="ITa-Ut-N2L" secondAttribute="width" id="i42-BH-OMg"/>
-                    <constraint firstItem="9sK-T1-boZ" firstAttribute="width" secondItem="sor-FL-BtX" secondAttribute="width" id="i4O-w7-WKb"/>
                     <constraint firstItem="y3x-bc-R4Z" firstAttribute="top" secondItem="djD-S1-GSo" secondAttribute="bottom" id="m2G-Yi-NLa"/>
                     <constraint firstItem="BV9-wS-R5f" firstAttribute="top" secondItem="sor-FL-BtX" secondAttribute="bottom" id="nPp-rI-RyU"/>
                     <constraint firstItem="sor-FL-BtX" firstAttribute="top" secondItem="djD-S1-GSo" secondAttribute="bottom" id="o76-u4-aSI"/>
@@ -255,52 +256,16 @@
                     <constraint firstItem="y3x-bc-R4Z" firstAttribute="height" secondItem="ITa-Ut-N2L" secondAttribute="height" id="vo7-WL-dPL"/>
                     <constraint firstItem="sor-FL-BtX" firstAttribute="width" secondItem="ITa-Ut-N2L" secondAttribute="width" id="vxo-9h-yDa"/>
                     <constraint firstItem="djD-S1-GSo" firstAttribute="top" secondItem="deD-DY-iKJ" secondAttribute="bottom" constant="9" id="xHy-xl-L4k"/>
-                    <constraint firstItem="9sK-T1-boZ" firstAttribute="top" secondItem="sor-FL-BtX" secondAttribute="bottom" id="ygn-MY-f6i"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="inviteView" destination="JrX-Lc-bga" id="7bj-bc-qtu"/>
                 <outlet property="personalityNewView" destination="BV9-wS-R5f" id="eUO-bz-GTO"/>
                 <outlet property="personalityNewViewLeftMargin" destination="pJ0-2i-PY4" id="qgL-OE-YIF"/>
-                <outlet property="settingLeftMargin" destination="2na-xz-9h5" id="9bL-85-Qsy"/>
             </connections>
-            <point key="canvasLocation" x="-1185" y="-259"/>
+            <point key="canvasLocation" x="-1257" y="-424"/>
         </tableViewCell>
-        <tapGestureRecognizer id="fad-Db-klM" userLabel="我的团队">
-            <connections>
-                <action selector="action1:" destination="KGk-i7-Jjw" id="nZA-k3-M0y"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="dxb-XE-zk8" userLabel="我的发布">
-            <connections>
-                <action selector="action2:" destination="KGk-i7-Jjw" id="mOA-Le-nun"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="ggc-vQ-TYf" userLabel="任务中心">
-            <connections>
-                <action selector="action3:" destination="KGk-i7-Jjw" id="jbP-gi-42u"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="hxa-of-evn" userLabel="消息通知">
-            <connections>
-                <action selector="action4:" destination="KGk-i7-Jjw" id="J6l-bz-wE3"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="h5G-v7-JT6" userLabel="邀请码">
-            <connections>
-                <action selector="action5:" destination="KGk-i7-Jjw" id="ph0-06-KBv"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="G20-Fd-G0J" userLabel="新人专区">
-            <connections>
-                <action selector="action6:" destination="KGk-i7-Jjw" id="BWU-bo-fFV"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="vYB-cT-w3H" userLabel="设置">
-            <connections>
-                <action selector="action7:" destination="KGk-i7-Jjw" id="bcq-d2-7DU"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="Order" width="26" height="26"/>
@@ -308,7 +273,6 @@
         <image name="address-1" width="26" height="26"/>
         <image name="address-2" width="26" height="26"/>
         <image name="address-3" width="26" height="26"/>
-        <image name="mission" width="26" height="26"/>
         <image name="news" width="26" height="26"/>
     </resources>
 </document>

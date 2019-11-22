@@ -87,7 +87,7 @@
     param[@"applyStatus"] = @(0);
 
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/user/freeList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/user/freeList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             if ([result[@"data"] count] > 0) {
                 // 没有数据图片
@@ -122,7 +122,7 @@
     param[@"page"] = @(self.page);
     param[@"applyStatus"] = @(0);
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/user/freeList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/user/freeList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
             [self.dataSource addObjectsFromArray:result[@"data"]];
             [self.tableView reloadData];

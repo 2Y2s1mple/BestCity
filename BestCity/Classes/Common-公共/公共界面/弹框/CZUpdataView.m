@@ -322,14 +322,17 @@
         }
         case 5:
         {
+            // 记录新人邀请点击
+            didClickedNewPeople = YES;
             if ([JPTOKEN length] <= 0) {
                 CZLoginController *vc = [CZLoginController shareLoginController];
                 UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
                 [tabbar presentViewController:vc animated:NO completion:nil];
                 return;
             }
+
             CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
-           UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             UINavigationController *nav = tabbar.selectedViewController;
             [nav pushViewController:vc animated:YES];
             break;

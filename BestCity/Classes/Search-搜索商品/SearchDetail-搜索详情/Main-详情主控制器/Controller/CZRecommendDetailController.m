@@ -172,7 +172,7 @@ static NSString * const type = @"1";
                          NSLog(@"----------退出交易流程----------");
                      }];
                 } failureCallback:^(ALBBSession *session, NSError *error) {
-                    NSString *tip=[NSString stringWithFormat:@"登录失败:%@",@""];
+                    NSString *tip= [NSString stringWithFormat:@"登录失败:%@",@""];
                     NSLog(@"%@", tip);
                 }];
             } else {

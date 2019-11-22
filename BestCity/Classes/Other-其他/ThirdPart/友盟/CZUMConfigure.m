@@ -131,11 +131,12 @@ static id _instance;
 // 小程序形式
 - (UMShareMiniProgramObject *)setUpMiniWebUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage userName:(NSString *)userName path:(NSString *)path
 {
-    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:title descr:subTitle thumImage:thumImage];
-    shareObject.webpageUrl = webUrl;
-    shareObject.userName = userName;
-    shareObject.path = path;
+//    thumImage = [UIImage imageNamed:@"launchLogo.png"];
 
+
+
+
+    NSData *currentImageData;
     if ([thumImage isKindOfClass:[UIImage class]]) {
         UIImage* newImage = thumImage;
         NSData *imageData =  UIImagePNGRepresentation(newImage);
@@ -146,9 +147,9 @@ static id _instance;
         } else {
             compression = 1;
         }
-        imageData =  UIImageJPEGRepresentation(newImage, compression);
-        shareObject.hdImageData = imageData;
+        currentImageData =  UIImageJPEGRepresentation(newImage, compression);
     } else {
+
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumImage]];
         UIImage* newImage = [UIImage imageWithData:data];
         NSData *imageData =  UIImagePNGRepresentation(newImage);
@@ -157,14 +158,20 @@ static id _instance;
         if ([imageData length] > 127000) {
             compression =  127000.0 / length;
         } else {
-            compression = 1;
+            compression = 0.9;
         }
-        imageData =  UIImageJPEGRepresentation(newImage, compression);
-        shareObject.hdImageData = imageData;
+        currentImageData =  UIImageJPEGRepresentation(newImage, compression);
     }
 
 
-    shareObject.miniProgramType = UShareWXMiniProgramTypeTest; // 可选体验版和开发板
+    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:title descr:subTitle thumImage:[UIImage imageWithData:currentImageData]];
+    shareObject.webpageUrl = webUrl;
+    shareObject.userName = userName;
+    shareObject.path = path;
+    shareObject.hdImageData = currentImageData;
+
+
+    shareObject.miniProgramType = UShareWXMiniProgramTypeRelease; // 可选体验版和开发板
     return shareObject;
 }
 

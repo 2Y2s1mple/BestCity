@@ -35,8 +35,12 @@
 
     NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%@", _model[@"otherPrice"]];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
-    self.totalLabel.text = [NSString stringWithFormat:@"已抢%ld件", [_model[@"count"] integerValue]];
-    self.residueLabel.text = [NSString stringWithFormat:@"需邀请%ld人可享", [_model[@"inviteUserCount"] integerValue]];
+    self.totalLabel.text = [NSString stringWithFormat:@"已抢%ld件", (long)[_model[@"count"] integerValue]];
+
+
+    
+
+
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView

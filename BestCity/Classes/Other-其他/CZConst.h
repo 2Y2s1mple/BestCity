@@ -16,5 +16,7 @@ UIKIT_EXTERN NSString * const requiredVersionCode;
 /** 收藏通知的KEY */
 UIKIT_EXTERN NSString * const collectNotification;
 
+UIKIT_EXTERN BOOL didClickedNewPeople;
+
 
 

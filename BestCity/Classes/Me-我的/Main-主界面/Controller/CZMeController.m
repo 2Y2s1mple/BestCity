@@ -204,6 +204,8 @@
     // 获取佣金数据
     [self getCommssionSummary];
     [MobClick beginLogPageView:@"我的我的"]; //("Pagename"为页面名称，可自定义)
+
+    [self.tableView reloadData];
 }
 
 #pragma mark - 设置属性样式
@@ -295,13 +297,6 @@
         return cell;
     } else {
         CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
-//        cell.messageCountLabel.text = self.messageCount;
-//        cell.messageCountLabel.hidden = YES;
-//        if (indexPath.row == 0) {
-//            if (![cell.messageCountLabel.text isEqualToString:@"0"]) {
-//                cell.messageCountLabel.hidden = NO;
-//            }
-//        }
         cell.dataSource = dic;
         return cell;
     }
@@ -313,8 +308,11 @@
     if (indexPath.section == 0) {
         return 82;
     } else {
-        return 205;
-
+        if ([JPUSERINFO[@"pid"] integerValue] == 0 || [JPUSERINFO[@"isNewUser"] integerValue] == 0) {
+            return 205;
+        } else {
+            return (205 - 82);
+        }
     }
 }
 

@@ -15,7 +15,7 @@
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *personalityNewView;
 @property (nonatomic, weak) IBOutlet UIView *inviteView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *settingLeftMargin;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *personalityNewViewLeftMargin;
 
 
@@ -39,7 +39,7 @@
     static NSString *ID = @"meArrowCell";
     CZMeArrowCell *cell =[tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeArrowCell class]) owner:nil options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZMeArrowCell class]) owner:nil options:nil] lastObject];
     }
     if (indexPath.row == 0) {
 //        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
@@ -73,16 +73,11 @@
     }
 
    //1.
-   if (self.personalityNewView.hidden == YES && self.inviteView.hidden == YES) {
-       self.settingLeftMargin.constant = -(2 * ((SCR_WIDTH - 30) / 4));
-   } else if (self.personalityNewView.hidden == YES && self.inviteView.hidden == NO) {
-       self.settingLeftMargin.constant = -((SCR_WIDTH - 30) / 4);
-   } else if (self.personalityNewView.hidden == NO && self.inviteView.hidden == YES) {
+   if (self.personalityNewView.hidden == NO && self.inviteView.hidden == YES) {
        self.personalityNewViewLeftMargin.constant = -((SCR_WIDTH - 30) / 4);
-       self.settingLeftMargin.constant = -((SCR_WIDTH - 30) / 4);
    } else {
        self.personalityNewViewLeftMargin.constant = 0;
-       self.settingLeftMargin.constant = 0;
+
    }
 }
 
@@ -104,21 +99,21 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
-//任务中心
+//消息通知
 - (IBAction)action3:(UITapGestureRecognizer *)sender {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZCoinCenterController") alloc] init];
+    UIViewController *toVc = [[NSClassFromString(@"CZSystemMessageController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
-//消息通知
+// 设置
 - (IBAction)action4:(UITapGestureRecognizer *)sender {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZSystemMessageController") alloc] init];
+    UIViewController *toVc = [[NSClassFromString(@"CZSettingController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
@@ -138,9 +133,13 @@
         param[@"invitationCode"] = text;
         NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/addInvitationCode"];
         [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"code"] isEqualToNumber:@(630)]) {
+                [alertView hide];
+            }
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             // 取消菊花
             [CZProgressHUD hideAfterDelay:1.5];
+
         } failure:^(NSError *error) {
             // 取消菊花
             [CZProgressHUD hideAfterDelay:0];
@@ -158,12 +157,4 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
-//设置
-- (IBAction)action7:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZSettingController") alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
-}
 @end

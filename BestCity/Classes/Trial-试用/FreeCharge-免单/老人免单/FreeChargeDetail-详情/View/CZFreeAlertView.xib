@@ -101,7 +101,7 @@
             <connections>
                 <outlet property="leftBtn" destination="2MJ-Af-fc7" id="zYc-DS-Ru9"/>
             </connections>
-            <point key="canvasLocation" x="-174.40000000000001" y="-653.07346326836591"/>
+            <point key="canvasLocation" x="-93" y="-688"/>
         </view>
         <view contentMode="scaleToFill" id="l2Y-E1-wbd" customClass="CZFreeAlertView2">
             <rect key="frame" x="0.0" y="0.0" width="315" height="230"/>
@@ -231,8 +231,8 @@
             <rect key="frame" x="0.0" y="0.0" width="315" height="253"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您将前往淘宝APP购买该商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qw-96-lk5">
-                    <rect key="frame" x="59" y="62.5" width="197" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您需在一小时内前往淘宝APP购买" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qw-96-lk5">
+                    <rect key="frame" x="43.5" y="62.5" width="228" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.33725490200000002" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
