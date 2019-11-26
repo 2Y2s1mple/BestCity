@@ -36,11 +36,11 @@
     self.arrow.hidden = NO;
     self.leftTitle.text = title;
     self.rightTitle.hidden = YES;
-    if ([title isEqualToString:@"联系客服"]) {
+    if ([title isEqualToString:@"客服微信"]) {
         self.rightTitle.hidden = NO;
-        self.rightTitle.text = @"0571-88120907";
-        self.arrow.hidden = YES;
-        self.textSpace.constant = 14;
+        self.rightTitle.text = JPUSERINFO[@"officialWeChat"];
+//        self.arrow.hidden = YES;
+//        self.textSpace.constant = 14;
     } else if ([title isEqualToString:@"清除缓存"]) {
         //获取缓存的大小
         NSUInteger intg = [[SDImageCache sharedImageCache] getSize];

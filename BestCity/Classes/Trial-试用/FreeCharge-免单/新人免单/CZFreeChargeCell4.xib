@@ -118,7 +118,7 @@
                 <outlet property="titleLabel" destination="mjo-Um-Mnd" id="tF2-F3-zRS"/>
                 <outlet property="totalLabel" destination="6GG-RF-fcS" id="uND-02-pLZ"/>
             </connections>
-            <point key="canvasLocation" x="-139" y="-764"/>
+            <point key="canvasLocation" x="-139.13043478260872" y="-764.0625"/>
         </tableViewCell>
     </objects>
 </document>

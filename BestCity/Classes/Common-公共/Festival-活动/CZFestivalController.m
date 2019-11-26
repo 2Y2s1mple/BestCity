@@ -67,8 +67,8 @@
         return;
     }
     NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
-    shareDic[@"shareTitle"] = @"这里全是钱啊，双十一我得了现金大额补贴";
-    shareDic[@"shareContent"] = @"比官方还低价，同商品，同店铺，这里竟然有这样的价格！";
+    shareDic[@"shareTitle"] = @"这里全是钱啊，我得个现金大额补贴~";
+    shareDic[@"shareContent"] = @"比官方还低，同商品，同店铺，这里竟然有这样的价格！";
     shareDic[@"shareUrl"] = @"https://www.jipincheng.cn/share/index11.html";
     shareDic[@"shareImg"] = [UIImage imageNamed:@"launchLogo.png"];
     CZShareView *share = [[CZShareView alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -287,7 +287,7 @@
     } else {
         CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
         vc.categoryId = model[@"ad"][@"objectId"];
-        vc.titleName = [model[@"ad"][@"name"] stringByAppendingString:@"双11专区"];
+        vc.titleName = [model[@"ad"][@"name"] stringByAppendingString:@"专区"];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

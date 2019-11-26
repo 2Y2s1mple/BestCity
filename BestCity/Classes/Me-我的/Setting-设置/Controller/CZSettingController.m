@@ -27,7 +27,7 @@
 - (NSArray *)contentTitles
 {
     if (_contentTitles == nil) {
-        _contentTitles = @[ @"收货地址", @"我要反馈", @"清除缓存", @"联系客服", @"用户协议", @"关于极品城",];
+        _contentTitles = @[@"收货地址", @"我要反馈", @"清除缓存", @"客服微信", @"鼓励一下", @"用户协议", @"关于极品城",];
     }
     return _contentTitles;
 }
@@ -64,11 +64,9 @@
     [loginOut addTarget:self action:@selector(loginOutAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
 /** 退出登录 */
 - (void)loginOutAction
 {
-
     [CZAlertViewTool showAlertWithTitle:@"确认退出" action:^{
         // 参数
         NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/logout"];
@@ -135,12 +133,21 @@
             break;
         case 3:
         {
-            /** 打电话 */
-            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"0571-88120907"];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            [CZAlertViewTool showAlertWithTitle:[@"官方客服微信: " stringByAppendingString:JPUSERINFO[@"officialWeChat"]] actionBtns:@[@"取消", @"复制"] action:^{
+                UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+                posteboard.string = JPUSERINFO[@"officialWeChat"];
+                [CZProgressHUD showProgressHUDWithText:@"复制成功"];
+                [CZProgressHUD hideAfterDelay:1.5];
+            }];
         }
             break;
         case 4:
+        {
+            // 跳转App Store评分
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1450707933&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"]];
+            break;
+        }
+        case 5:
         {
             /** 跳转到用户协议 */
             TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserAgreement_url]];
@@ -148,8 +155,7 @@
             [self.navigationController pushViewController:webVc animated:YES];
         }
             break;
-        
-            
+
         default:
             break;
     }

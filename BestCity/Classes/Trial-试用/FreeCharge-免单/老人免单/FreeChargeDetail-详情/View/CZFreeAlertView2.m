@@ -60,7 +60,7 @@
     self.titleText.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     self.topLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
     self.bottomLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
-    self.topLabel.text = [NSString stringWithFormat:@"￥%@", param.buyPrice];;
+    self.topLabel.text = [NSString stringWithFormat:@"￥%@", param.actualPrice];;
     self.bottomLabel.text = [NSString stringWithFormat:@"￥%@", param.freePrice];
 }
 
