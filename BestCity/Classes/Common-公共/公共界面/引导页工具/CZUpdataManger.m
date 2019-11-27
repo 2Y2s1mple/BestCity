@@ -22,8 +22,10 @@
         if ([result[@"msg"] isEqualToString:@"success"]) {
             NSNumber *appVersion1 = result[@"data"][@"open"];
             if (![appVersion1 isEqual:@(0)]) {} else {}
+
+            NSDictionary *versionInfo = [result[@"data"] deleteAllNullValue];
             //有新版本
-            [CZSaveTool setObject:result[@"data"] forKey:requiredVersionCode];
+            [CZSaveTool setObject:versionInfo forKey:requiredVersionCode];
             //比较
             BOOL isAscending = [curVersion compare:result[@"data"][@"versionCode"]] == NSOrderedAscending;
             BOOL isOpen = [result[@"data"][@"open"] isEqualToNumber:@(1)];

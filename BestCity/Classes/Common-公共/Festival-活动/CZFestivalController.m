@@ -270,7 +270,7 @@
 {
     CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
     vc.categoryId = sender.categoryId;
-    vc.titleName = [sender.titleLabel.text stringByAppendingString:@"双11专区"];
+    vc.titleName = [sender.titleLabel.text stringByAppendingString:@"专区"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

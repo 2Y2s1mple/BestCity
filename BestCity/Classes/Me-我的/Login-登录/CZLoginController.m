@@ -138,7 +138,7 @@ static id instancet_;
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
 
-            if (didClickedNewPeople && [JPUSERINFO[@"isNewUser"] isEqualToNumber:@(0)]) {
+            if (didClickedNewPeople && [JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
                 UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
                 UINavigationController *nav = tabbar.selectedViewController;
                 CZMeController *vc = (CZMeController *)nav.topViewController;
@@ -155,7 +155,7 @@ static id instancet_;
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
     NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
-    if ([versionParam[@"needVerify"] isEqualToNumber:@(1)]) {
+    if ([versionParam[@"needVerify"] isEqual:@(1)]) {
         [self.view endEditing:YES];
         // 加载腾讯验证码
         [[TCWebCodesBridge sharedBridge] loadTencentCaptcha:self.view appid:@"2087266956" callback:^(NSDictionary *resultJSON) {

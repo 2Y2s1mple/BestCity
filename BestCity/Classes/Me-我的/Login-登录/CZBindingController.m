@@ -51,10 +51,8 @@
   
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/bindMobile"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqualToNumber:@(0)])
+        if ([result[@"code"] isEqual:@(0)])
         {
-//            [CZProgressHUD showProgressHUDWithText:@"绑定成功"];
-//            [CZProgressHUD hideAfterDelay:1.5];
             // 用户数据
             NSDictionary *userDic = [result[@"data"] deleteAllNullValue];
             // 存储token 
@@ -82,7 +80,7 @@
 #pragma mark - 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
     NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
-    if ([versionParam[@"needVerify"] isEqualToNumber:@(1)]) {
+    if ([versionParam[@"needVerify"] isEqual:@(1)]) {
         [self.view endEditing:YES];
         // 加载腾讯验证码
         [[TCWebCodesBridge sharedBridge] loadTencentCaptcha:self.view appid:@"2087266956" callback:^(NSDictionary *resultJSON) {
