@@ -22,6 +22,7 @@
 // 跳转
 #import "CZDChoiceDetailController.h"
 #import "CZFestivalTwoController.h"
+#import "CZTaobaoDetailController.h" // 淘宝详情页
 
 #import "CZGuideTool.h"
 
@@ -279,10 +280,12 @@
 {
     NSDictionary *model = self.listData[indexPath.row];
     if ([model[@"type"] isEqual:@(1)]) {
+        CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+        vc.otherGoodsId = model[@"goods"][@"otherGoodsId"];
         //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
-        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        vc.detailType = [CZJIPINSynthesisTool getModuleType:2];
-        vc.findgoodsId = model[@"goods"][@"articleId"];
+//        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+//        vc.detailType = [CZJIPINSynthesisTool getModuleType:2];
+//        vc.findgoodsId = model[@"goods"][@"articleId"];
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];

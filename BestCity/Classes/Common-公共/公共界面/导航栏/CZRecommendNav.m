@@ -160,7 +160,6 @@
         [rightBtn setImage:[UIImage imageNamed:@"Trail-share-black"] forState:UIControlStateNormal];
         [rightBtn setImage:[UIImage imageNamed:@"Trail-share-black"] forState:UIControlStateSelected];
         [rightBtn addTarget:self action:@selector(shareBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-
     } else {
         [rightBtn setImage:[UIImage imageNamed:@"nav-favor"] forState:UIControlStateNormal];
         [rightBtn setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];

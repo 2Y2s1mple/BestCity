@@ -12,6 +12,8 @@
 		97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFC2182F46B0008E416 /* CZHotTitleModel.m */; };
 		97054C002182FACC0008E416 /* CZHotSubTilteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */; };
 		9706C8D92367E2120002EDC1 /* CZTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9706C8D82367E2120002EDC1 /* CZTabbar.m */; };
+		9707DAC72390B4B500A307A8 /* CZTaoBaoShopNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9707DAC62390B4B500A307A8 /* CZTaoBaoShopNameView.m */; };
+		9707DAC92390B4CA00A307A8 /* CZTaoBaoShopNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9707DAC82390B4CA00A307A8 /* CZTaoBaoShopNameView.xib */; };
 		970848FA22432507000D5528 /* CZTrialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970848F822432507000D5528 /* CZTrialController.m */; };
 		970848FB22432507000D5528 /* CZTrialController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970848F922432507000D5528 /* CZTrialController.xib */; };
 		970848FE22432969000D5528 /* CZTrialReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970848FD22432969000D5528 /* CZTrialReportController.m */; };
@@ -507,6 +509,9 @@
 		97D8FCCE2111ABA000D8ED8F /* CZNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCCD2111ABA000D8ED8F /* CZNavigationView.m */; };
 		97D8FCD52111BA2A00D8ED8F /* CZMyProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D8FCD32111BA2A00D8ED8F /* CZMyProfileCell.m */; };
 		97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D8FCD42111BA2A00D8ED8F /* CZMyProfileCell.xib */; };
+		97E6C4FC238F69BA002541F4 /* CZTaobaoDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E6C4FB238F69BA002541F4 /* CZTaobaoDetailController.m */; };
+		97E6C4FF238F7872002541F4 /* CZTaobaoGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E6C4FE238F7872002541F4 /* CZTaobaoGoodsView.m */; };
+		97E6C501238F788F002541F4 /* CZTaobaoGoodsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E6C500238F788F002541F4 /* CZTaobaoGoodsView.xib */; };
 		97E90C1D22CC4010001437A7 /* CZMainHotSaleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E90C1C22CC4010001437A7 /* CZMainHotSaleController.m */; };
 		97E90C2022CC4933001437A7 /* CZBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E90C1F22CC4933001437A7 /* CZBaseViewController.m */; };
 		97EC481E22CF72BD006ACA23 /* CZMHSDetailCommodity.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC481D22CF72BD006ACA23 /* CZMHSDetailCommodity.m */; };
@@ -600,6 +605,9 @@
 		97054BFF2182FACC0008E416 /* CZHotSubTilteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHotSubTilteModel.m; sourceTree = "<group>"; };
 		9706C8D72367E2120002EDC1 /* CZTabbar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTabbar.h; sourceTree = "<group>"; };
 		9706C8D82367E2120002EDC1 /* CZTabbar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTabbar.m; sourceTree = "<group>"; };
+		9707DAC52390B4B500A307A8 /* CZTaoBaoShopNameView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTaoBaoShopNameView.h; sourceTree = "<group>"; };
+		9707DAC62390B4B500A307A8 /* CZTaoBaoShopNameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaoBaoShopNameView.m; sourceTree = "<group>"; };
+		9707DAC82390B4CA00A307A8 /* CZTaoBaoShopNameView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTaoBaoShopNameView.xib; sourceTree = "<group>"; };
 		970848F722432507000D5528 /* CZTrialController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialController.h; sourceTree = "<group>"; };
 		970848F822432507000D5528 /* CZTrialController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialController.m; sourceTree = "<group>"; };
 		970848F922432507000D5528 /* CZTrialController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTrialController.xib; sourceTree = "<group>"; };
@@ -1464,6 +1472,11 @@
 		97D8FCD22111BA2A00D8ED8F /* CZMyProfileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyProfileCell.h; sourceTree = "<group>"; };
 		97D8FCD32111BA2A00D8ED8F /* CZMyProfileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMyProfileCell.m; sourceTree = "<group>"; };
 		97D8FCD42111BA2A00D8ED8F /* CZMyProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMyProfileCell.xib; sourceTree = "<group>"; };
+		97E6C4FA238F69BA002541F4 /* CZTaobaoDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTaobaoDetailController.h; sourceTree = "<group>"; };
+		97E6C4FB238F69BA002541F4 /* CZTaobaoDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaobaoDetailController.m; sourceTree = "<group>"; };
+		97E6C4FD238F7872002541F4 /* CZTaobaoGoodsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTaobaoGoodsView.h; sourceTree = "<group>"; };
+		97E6C4FE238F7872002541F4 /* CZTaobaoGoodsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaobaoGoodsView.m; sourceTree = "<group>"; };
+		97E6C500238F788F002541F4 /* CZTaobaoGoodsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTaobaoGoodsView.xib; sourceTree = "<group>"; };
 		97E90C1B22CC4010001437A7 /* CZMainHotSaleController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainHotSaleController.h; sourceTree = "<group>"; };
 		97E90C1C22CC4010001437A7 /* CZMainHotSaleController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleController.m; sourceTree = "<group>"; };
 		97E90C1E22CC4933001437A7 /* CZBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZBaseViewController.h; sourceTree = "<group>"; };
@@ -2741,6 +2754,7 @@
 		97705C30210716A300485D64 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				97E6C4F9238F6956002541F4 /* Main-主页 */,
 				970D0B5521ACE84900649FC2 /* 百川 */,
 				97C52A6C2254B82A00787BC5 /* Common-公共 */,
 				97054BFA2182F26F0008E416 /* Search-搜索商品 */,
@@ -4380,6 +4394,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		97E6C4F9238F6956002541F4 /* Main-主页 */ = {
+			isa = PBXGroup;
+			children = (
+				97E6C4FA238F69BA002541F4 /* CZTaobaoDetailController.h */,
+				97E6C4FB238F69BA002541F4 /* CZTaobaoDetailController.m */,
+				9707DAC52390B4B500A307A8 /* CZTaoBaoShopNameView.h */,
+				9707DAC62390B4B500A307A8 /* CZTaoBaoShopNameView.m */,
+				9707DAC82390B4CA00A307A8 /* CZTaoBaoShopNameView.xib */,
+				97E6C4FD238F7872002541F4 /* CZTaobaoGoodsView.h */,
+				97E6C4FE238F7872002541F4 /* CZTaobaoGoodsView.m */,
+				97E6C500238F788F002541F4 /* CZTaobaoGoodsView.xib */,
+			);
+			path = "Main-主页";
+			sourceTree = "<group>";
+		};
 		97EC481F22D2DC21006ACA23 /* Main-主要 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4917,11 +4946,13 @@
 				97BC05DE2112B122001ED65A /* keyboard.png in Resources */,
 				97421B602271A718007E5A72 /* CZUnusualController.xib in Resources */,
 				977E82D2223C9B4700C8C01B /* CZInvitationController.xib in Resources */,
+				9707DAC92390B4CA00A307A8 /* CZTaoBaoShopNameView.xib in Resources */,
 				97BC05DD2112B122001ED65A /* key.png in Resources */,
 				97D0C63323605C2000F3B994 /* CZUserUpdataView.xib in Resources */,
 				97FEBF2122D47BAE007BF592 /* CZMHSDCommodityCell2.xib in Resources */,
 				97AAB8B3237EAA7200031801 /* CZFreeChargeCell3.xib in Resources */,
 				9754C87622FC18FD008C2D98 /* CZEACCollectionCell.xib in Resources */,
+				97E6C501238F788F002541F4 /* CZTaobaoGoodsView.xib in Resources */,
 				97B466BB232A26B9001316B4 /* yw_1222.jpg in Resources */,
 				97D0C6252360003100F3B994 /* CZNotificationAlertView.xib in Resources */,
 				97D8FCC82111796600D8ED8F /* CZMeArrow.plist in Resources */,
@@ -5192,6 +5223,7 @@
 				9795853122951AA0005FC54D /* CZEditorTextView.m in Sources */,
 				97ECD778212190C900D07ABE /* CZHotsaleSearchDetailController.m in Sources */,
 				97481ADD230401A300230367 /* CZEInventoryCoverController.m in Sources */,
+				97E6C4FC238F69BA002541F4 /* CZTaobaoDetailController.m in Sources */,
 				97705C58210716A300485D64 /* CZEvaluationController.m in Sources */,
 				979EFD8D21E0AC9B000FE466 /* CZCouponsModel.m in Sources */,
 				972E41CB21147C3A00BC751C /* CZAttentionController.m in Sources */,
@@ -5218,6 +5250,7 @@
 				970848FE22432969000D5528 /* CZTrialReportController.m in Sources */,
 				97798CD1212D0FC90052CE94 /* UIImageView+WebCache.m in Sources */,
 				97C7FF06216DDDAB0091DC07 /* NSObject+MJProperty.m in Sources */,
+				97E6C4FF238F7872002541F4 /* CZTaobaoGoodsView.m in Sources */,
 				9723075721AD3ABB0004C00C /* CZCommentModel.m in Sources */,
 				97798CD7212D0FC90052CE94 /* SDWebImageImageIOCoder.m in Sources */,
 				971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */,
@@ -5245,6 +5278,7 @@
 				9778649C211A7AD6001B41F1 /* MASConstraintMaker.m in Sources */,
 				97798CCC212D0FC90052CE94 /* SDAnimatedImageRep.m in Sources */,
 				97FA0B302376A54C001D1B70 /* CZAllOrderCell.m in Sources */,
+				9707DAC72390B4B500A307A8 /* CZTaoBaoShopNameView.m in Sources */,
 				977864A1211A7AD6001B41F1 /* MASViewConstraint.m in Sources */,
 				97F71B9F21AD21A7005BCAC3 /* PlanPageControl.m in Sources */,
 				97421B5F2271A718007E5A72 /* CZUnusualController.m in Sources */,
@@ -5620,7 +5654,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.7.1;
+				MARKETING_VERSION = 2.7.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -5718,7 +5752,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.7.1;
+				MARKETING_VERSION = 2.7.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
