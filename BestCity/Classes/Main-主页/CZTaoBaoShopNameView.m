@@ -34,7 +34,7 @@
 {
     CZTaoBaoShopNameView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] firstObject];
     view.width = SCR_WIDTH;
-    view.height = 93;
+    view.height = 101;
     return view;
 }
 

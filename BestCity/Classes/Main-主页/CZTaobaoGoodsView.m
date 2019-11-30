@@ -92,6 +92,7 @@
     }
     [self layoutIfNeeded];
     self.commodityH = CGRectGetMaxY(self.pointView.frame);
+    self.height = self.commodityH;
 }
 
 - (IBAction)feeRule:(UIButton *)sender {

@@ -11,12 +11,21 @@
 #import "GXNetTool.h"
 #import "UIButton+CZExtension.h" // 按钮扩展
 #import "CZCollectButton.h"
-
+// 工具
+#import "UIImageView+WebCache.h"
+#import "CZUserInfoTool.h"
+#import "CZUMConfigure.h"
 // 视图
 #import "CZTaobaoGoodsView.h"
 #import "CZTaoBaoShopNameView.h" // 淘宝商家标题
+#import "CZGuessWhatYouLikeView.h"
+#import "CZGoodsParameterView.h" // 产品参数
 
-@interface CZTaobaoDetailController ()<UIScrollViewDelegate>
+#import <AlibcTradeSDK/AlibcTradeSDK.h>
+#import <AlibabaAuthSDK/albbsdk.h>
+#import "CZOpenAlibcTrade.h"
+
+@interface CZTaobaoDetailController ()<UIScrollViewDelegate, CZGuessWhatYouLikeViewDelegate>
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
 /** <#注释#> */
@@ -40,6 +49,9 @@ static CGFloat const likeAndShareHeight = 49;
         _scrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : likeAndShareHeight))];
         self.scrollerView.delegate = self;
         _scrollerView.backgroundColor = CZGlobalWhiteBg;
+//        _scrollerView.backgroundColor = [UIColor redColor];
+        _scrollerView.showsVerticalScrollIndicator = NO;
+        _scrollerView.showsHorizontalScrollIndicator = NO;
     }
     return _scrollerView;
 }
@@ -94,11 +106,11 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)getSourceData
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"otherGoodsId"] = @"560617264724";
+    param[@"otherGoodsId"] = self.otherGoodsId;
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/goodsDetail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.detailModel = result[@"data"];
+            self.detailModel = [result[@"data"] deleteAllNullValue];
 
             // 初始化顶部视图
             [self imageGoodsView];
@@ -128,11 +140,12 @@ static CGFloat const likeAndShareHeight = 49;
     self.recordHeight += titlesView.commodityH; // 高度
 
     // 功能评分
-    [self functionScoresViewImage:@"quality" title:@"功能评分" contextList:self.detailModel[@"scoreOptionsList"]];
+    if(![self.detailModel[@"scoreOptionsList"] isKindOfClass:[NSNull class]] && [self.detailModel[@"scoreOptionsList"] count] > 0) {
+        [self functionScoresViewImage:@"quality" title:@"功能评分" contextList:self.detailModel[@"scoreOptionsList"]];
+    }
 
     // 产品参数
     [self functionScoresViewImage:@"parameter" title:@"产品参数" contextList:self.detailModel[@"parametersList"]];
-    self.recordHeight += 8; // 高度
 
     // 淘宝商家
     CZTaoBaoShopNameView *shopNameView = [CZTaoBaoShopNameView taoBaoShopNameView];
@@ -142,9 +155,26 @@ static CGFloat const likeAndShareHeight = 49;
     self.recordHeight += shopNameView.height; // 高度
 
     // 推荐理由
-    [self recommendReason];
+    if(![self.detailModel[@"recommendReason"] isKindOfClass:[NSNull class]] && [self.detailModel[@"recommendReason"] length] > 0) {
+        [self recommendReason:self.detailModel[@"recommendReason"]];
+    }
 
-    
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    lineView.y = self.recordHeight;
+    lineView.height = 10;
+    lineView.width = SCR_WIDTH;
+    [self.scrollerView addSubview:lineView];
+    self.recordHeight += 10;
+
+
+    // 商品详情
+    [self goodsDetail];
+
+
+    // 猜你喜欢
+    [self guessView];
+
 }
 
 // 初始化底部菜单
@@ -156,19 +186,35 @@ static CGFloat const likeAndShareHeight = 49;
     [self.view addSubview:bottomView];
 
     // 两个按钮
+
+    UIView *shareView = [[UIView alloc] init];
+    shareView.backgroundColor = [UIColor whiteColor];
+    shareView.frame = CGRectMake(0, 0, 145, bottomView.height);
+    [bottomView addSubview:shareView];
+
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    shareBtn.frame = CGRectMake(0, 0, 145, bottomView.height);
-    [shareBtn setTitle:@"  分享" forState:UIControlStateNormal];
+    shareBtn.frame = CGRectMake(17, 0, 25, bottomView.height);
+    [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+    shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
     [shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [shareBtn setImage:[UIImage imageNamed:@"Forward-2"] forState:UIControlStateNormal];
-    shareBtn.backgroundColor = CZBTNGRAY;
     [shareBtn addTarget:self action:@selector(shareBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [bottomView addSubview:shareBtn];
+    [shareView addSubview:shareBtn];
+    shareBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    shareBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+
+    UIButton *shareBtn1 = [UIButton buttonWithType:UIButtonTypeSystem];
+    shareBtn1.frame = CGRectMake(CZGetX(shareBtn) + 45, 0, 25, bottomView.height);
+    [shareBtn1 setTitle:@"首页" forState:UIControlStateNormal];
+    shareBtn1.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
+    [shareBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [shareBtn1 setImage:[UIImage imageNamed:@"taobaoDetai_upstage-sel"] forState:UIControlStateNormal];
+    [shareBtn1 addTarget:self action:@selector(mainIndexBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [shareView addSubview:shareBtn1];
+
 
     UIButton *buyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    buyBtn.frame = CGRectMake(shareBtn.width, shareBtn.y, SCR_WIDTH - shareBtn.width, shareBtn.height);
-
-
+    buyBtn.frame = CGRectMake(shareView.width, shareView.y, SCR_WIDTH - shareView.width, shareView.height);
     NSString *buyBtnStr = @"立即购买（省¥%.2lf）";
     buyBtnStr = [NSString stringWithFormat:buyBtnStr, ([self.detailModel[@"fee"] floatValue] + [self.detailModel[@"couponPrice"] floatValue])];
 
@@ -188,6 +234,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)functionScoresViewImage:(NSString *)iconName title:(NSString *)titleName contextList:(NSArray *)list
 {
     UIView *containerView = [[UIView alloc] init];
+    containerView.backgroundColor = [UIColor whiteColor];
     containerView.y = self.recordHeight;
     containerView.width = SCR_WIDTH;
     [self.scrollerView addSubview:containerView];
@@ -216,6 +263,7 @@ static CGFloat const likeAndShareHeight = 49;
     NSInteger count;
     if ([titleName isEqualToString:@"功能评分"]) {
         count = list.count + 1;
+//        UITapGestureRecognizer *tap = [UITapGestureRecognizer alloc] initWithTarget:<#(nullable id)#> action:<#(nullable SEL)#>
     } else {
         count = list.count;
     }
@@ -269,7 +317,7 @@ static CGFloat const likeAndShareHeight = 49;
                 label.text = @"综合评分";
 
                 label1.textColor = UIColorFromRGB(0xE25838);
-                label1.text = [NSString stringWithFormat:@"%@分", self.detailModel[@"score"]];
+                label1.text = [NSString stringWithFormat:@"%.1lf分", [self.detailModel[@"score"] floatValue]];
             } else {
                 NSDictionary *dic = list[i - 1];
                 label.textColor = UIColorFromRGB(0x9D9D9D);
@@ -286,17 +334,15 @@ static CGFloat const likeAndShareHeight = 49;
             label1.textColor = UIColorFromRGB(0x565252);
             label1.text = [dic[@"value"] stringByAppendingString:@"分"];
         }
-
-
     }
     containerView.height = CZGetY(scoresView) + 14;
     self.recordHeight += containerView.height ;
 }
 
 // 推荐理由
-- (void)recommendReason
+- (void)recommendReason:(NSString *)context
 {
-    UIView *backView =[[UIView alloc] init];
+    UIView *backView = [[UIView alloc] init];
     backView.y =self.recordHeight;
     backView.width =SCR_WIDTH;
 //    backView.height = 430;
@@ -330,9 +376,10 @@ static CGFloat const likeAndShareHeight = 49;
     topImage.y = 7.5;
 
 
-    NSString *contextStr = @"      超大容量1.5L！食品级304不锈钢，一键保温持续70度，自动断电保护，无二次沸腾！用这个温度冲奶粉，泡茶营养价值很高~【赠运费险】   超大容量1.5L！食品级304不锈钢，一键保温持续70度，自动断电保护，无二次沸腾！用这个温度冲奶粉，泡茶营养价值很高~【赠运费险】   超大容量1.5L！食品级304不锈钢，一键保温持续70度，自动断电保护，无二次沸腾！用这个温度冲奶粉，泡茶营养价值很高~【赠运费险】超大容量1.5L！食品级不…钢，一键保温持续70度，自动断电保护，无二次沸腾！用这个温度冲奶粉，泡茶…养价值很高~【赠运费险】";
+    NSString *contextStr = context;
 
     UILabel *contentLabel = [[UILabel alloc] init];
+    contentLabel.tag = 101;
     contentLabel.text = contextStr;
     contentLabel.numberOfLines = 0;
     contentLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
@@ -345,24 +392,341 @@ static CGFloat const likeAndShareHeight = 49;
     contentLabel.height = height;
     [subView addSubview:contentLabel];
 
-    UIButton *showAll = [UIButton buttonWithType:UIButtonTypeSystem];
-    [showAll setTitle:@"展开更多" forState:UIControlStateNormal];
+
+
+    NSNumber *count = @((height) / contentLabel.font.lineHeight);
+    // 判断
+    if ([count integerValue] >= 10) {
+        // 默认是收起
+        contentLabel.numberOfLines = 10;
+        contentLabel.height = 10 * contentLabel.font.lineHeight;
+
+        UIButton *showAll = [UIButton buttonWithType:UIButtonTypeCustom];
+        [showAll setTitle:@"展开更多" forState:UIControlStateNormal];
+        [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right"] forState:UIControlStateNormal];
+        [showAll setTitle:@"点击收起" forState:UIControlStateSelected];
+        [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right-1"] forState:UIControlStateSelected];
+        showAll.imageEdgeInsets = UIEdgeInsetsMake(0, 44, 0, 0);
+        showAll.titleEdgeInsets = UIEdgeInsetsMake(0, -28, 0, 0);
+        showAll.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
+        [showAll setTitleColor:UIColorFromRGB(0xCECECE) forState:UIControlStateNormal];
+        [subView addSubview:showAll];
+        [showAll sizeToFit];
+        showAll.y = CZGetY(contentLabel) + 10;
+        showAll.centerX = contentLabel.centerX;
+        [showAll addTarget:self action:@selector(showAllAction:) forControlEvents:UIControlEventTouchUpInside];
+
+        subView.height = CZGetY(showAll) + 12;
+        backView.height = CZGetY(subView) + 20;
+        self.recordHeight += backView.height;
+    } else {
+        UIImageView *topImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"“备份"]];
+        [subView addSubview:topImage];
+        topImage.x = subView.width - 7.5 - 19;
+        topImage.y = CZGetY(contentLabel);
+
+        subView.height = CZGetY(topImage) + 12;
+        backView.height = CZGetY(subView) + 20;
+        self.recordHeight += backView.height;
+    }
+}
+
+// 商品详情
+- (void)goodsDetail
+{
+    UIView *backView = [[UIView alloc] init];
+    backView.backgroundColor = [UIColor whiteColor];
+    backView.y = self.recordHeight;
+    backView.width = SCR_WIDTH;
+    [self.scrollerView addSubview:backView];
+
+    UIImageView *titleBackImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"taobaoDetail_矩形"]];
+    titleBackImage.centerX = backView.width / 2.0;
+    titleBackImage.y = 15;
+    titleBackImage.size = CGSizeMake(132, 39);
+    [backView addSubview:titleBackImage];
+
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"商品详情";
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+    titleLabel.size = titleBackImage.size;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleBackImage addSubview:titleLabel];
+
+    UIView *subView = [[UIView alloc] init];
+    subView.tag = 101;
+    subView.layer.masksToBounds = YES;
+    subView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    [backView addSubview:subView];
+    subView.y = 75;
+    subView.width = SCR_WIDTH;
+    self.recordHeight += 75;
+
+
+
+    UIButton *showAll = [UIButton buttonWithType:UIButtonTypeCustom];
+    [showAll setTitle:@"点击查看完整详情" forState:UIControlStateNormal];
     [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right"] forState:UIControlStateNormal];
+    [showAll setTitle:@"点击收起完整详情" forState:UIControlStateSelected];
     [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right-1"] forState:UIControlStateSelected];
-    showAll.imageEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
+    showAll.imageEdgeInsets = UIEdgeInsetsMake(0, 90, 0, 0);
+    showAll.titleEdgeInsets = UIEdgeInsetsMake(0, -28, 0, 0);
     showAll.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
     [showAll setTitleColor:UIColorFromRGB(0xCECECE) forState:UIControlStateNormal];
-    [subView addSubview:showAll];
+    [backView addSubview:showAll];
     [showAll sizeToFit];
-    showAll.y = CZGetY(contentLabel) + 10;
-    showAll.centerX = contentLabel.centerX;
+    showAll.centerX = subView.width / 2.0;
+
+    self.recordHeight += (22 + showAll.height);
+    [showAll addTarget:self action:@selector(showAllDeatilImages:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSMutableArray *imageList = [NSMutableArray arrayWithArray:self.detailModel[@"descImgList"]];
+
+    if (imageList.count > 0) { // 默认图片300
+        self.recordHeight += 300;
+    }
+
+    for (NSString *imageUrl in imageList) {
+
+        UIImageView *bigImage = [[UIImageView alloc] init];
+        bigImage.width = SCR_WIDTH;
+        bigImage.height = 200;
 
 
+        [subView addSubview:bigImage];
+        [bigImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            if (image == nil) {
+                return ;
+            };
+            CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
+            bigImage.height = imageHeight;
 
-    subView.height = CZGetY(showAll);
-    backView.height = CZGetY(subView);
-    self.recordHeight += backView.height;
+            for (int i = 0; i < subView.subviews.count; i++) {
+                UIView *view = subView.subviews[i];
+                if (i == 0) {
+                    view.y = 0;
+                    continue;
+                }
+                view.y = CZGetY(subView.subviews[i - 1]);
+            }
+            subView.height = CZGetY([subView.subviews lastObject]);
+
+
+            if (subView.height > 300) { // 默认300
+                subView.height = 300;
+                showAll.y = CZGetY(subView) + 10;
+                backView.height = CZGetY(showAll) + 12;
+            } else {
+                showAll.y = CZGetY(subView) + 10;
+                backView.height = CZGetY(showAll) + 12;
+                self.recordHeight += imageHeight;
+            }
+            self.scrollerView.contentSize = CGSizeMake(0, self.recordHeight);
+        }];
+    }
 }
+
+// 设置各个控件的尺寸
+- (void)changeSubViewFrame
+{
+    for (int i = 0; i < self.scrollerView.subviews.count; i++) {
+        UIView *view = self.scrollerView.subviews[i];
+        if (i == 0) {
+            view.y = 0;
+            continue;
+        }
+        view.y = CZGetY(self.scrollerView.subviews[i - 1]);
+    }
+    self.scrollerView.contentSize = CGSizeMake(0, CZGetY([self.scrollerView.subviews lastObject]));
+}
+
+// 猜你喜欢
+- (void)guessView
+{
+    CZGuessWhatYouLikeView *guess = [CZGuessWhatYouLikeView guessWhatYouLikeView];
+    guess.delegate = self;
+    guess.y = self.recordHeight;
+    guess.width = SCR_WIDTH;
+    guess.otherGoodsId = self.otherGoodsId;
+
+    [self.scrollerView addSubview:guess];
+
+    
+
+
+
+    self.recordHeight += guess.height;
+}
+
+
+
+
+
+
+#pragma mark - 事件
+// 显示全部推荐
+- (void)showAllAction:(UIButton *)sender
+{
+    // 放label的view
+    UIView *subView = sender.superview;
+    // 最外面的View
+    UIView *backView = subView.superview;
+    // 文字
+    UILabel *label = [subView viewWithTag:101];
+
+    CGFloat height = [label.text boundingRectWithSize:CGSizeMake(label.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : label.font} context:nil].size.height;
+
+
+    if (sender.isSelected) { // 默认是收起的
+        sender.selected = NO;
+        label.numberOfLines = 10;
+        label.height = 10 * label.font.lineHeight;
+
+        sender.y = CZGetY(label) + 10;
+        subView.height = CZGetY(sender) + 12;
+        backView.height = CZGetY(subView) + 20;
+
+    } else {
+        sender.selected = YES;
+        label.numberOfLines = 0;
+        label.height = height;
+
+        sender.y = CZGetY(label) + 10;
+        subView.height = CZGetY(sender) + 12;
+        backView.height = CZGetY(subView) + 20;
+    }
+
+    [self changeSubViewFrame];
+
+}
+
+// 显示全部详情
+- (void)showAllDeatilImages:(UIButton *)sender
+{
+    // 最外面的View
+    UIView *backView = sender.superview;
+    // 放图片的View
+    UIView *imagesView = [backView viewWithTag:101];
+
+    if (sender.isSelected) { // 默认是收起的
+        sender.selected = NO;
+        imagesView.height = 300;
+        sender.y = CZGetY(imagesView) + 10;
+        backView.height = CZGetY(sender) + 12;
+
+    } else {
+        sender.selected = YES;
+        for (int i = 0; i < imagesView.subviews.count; i++) {
+            UIView *view = imagesView.subviews[i];
+            if (i == 0) {
+                view.y = 0;
+                continue;
+            }
+            view.y = CZGetY(imagesView.subviews[i - 1]);
+        }
+        imagesView.height = CZGetY([imagesView.subviews lastObject]);
+        sender.y = CZGetY(imagesView) + 10;
+        backView.height = CZGetY(sender) + 12;
+    }
+    [self changeSubViewFrame];
+
+}
+
+// 购买
+- (void)buyBtnAction
+{
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *naVc = tabbar.selectedViewController;
+    UIViewController *toVC = naVc.topViewController;
+    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    if (specialId.length == 0) {
+        [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
+        [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
+            NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
+            NSLog(@"%@", tip);
+            TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
+                [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+                [CZProgressHUD hideAfterDelay:1.5];
+                [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
+            }];
+            [tabbar presentViewController:webVc animated:YES completion:nil];
+
+            //拉起淘宝
+            AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
+            showParam.openType = AlibcOpenTypeAuto;
+            showParam.backUrl = @"tbopen25267281://xx.xx.xx";
+            showParam.isNeedPush = YES;
+            showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
+
+            [CZProgressHUD hideAfterDelay:1.5];
+
+            [[AlibcTradeSDK sharedInstance].tradeService
+             openByUrl:[NSString stringWithFormat:@"https://oauth.m.taobao.com/authorize?response_type=code&client_id=25612235&redirect_uri=https://www.jipincheng.cn/qualityshop-api/api/taobao/returnUrl&state=%@&view=wap", JPTOKEN]
+             identity:@"trade"
+             webView:webVc.webView
+             parentController:tabbar
+             showParams:showParam
+             taoKeParams:nil
+             trackParam:nil
+             tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
+                 NSLog(@"-----AlibcTradeSDK------");
+                 if(result.result == AlibcTradeResultTypeAddCard){
+                     NSLog(@"交易成功");
+                 } else if(result.result == AlibcTradeResultTypeAddCard){
+                     NSLog(@"加入购物车");
+                 }
+             } tradeProcessFailedCallback:^(NSError * _Nullable error) {
+                 NSLog(@"----------退出交易流程----------");
+             }];
+        } failureCallback:^(ALBBSession *session, NSError *error) {
+            NSString *tip = [NSString stringWithFormat:@"登录失败:%@", @""];
+            NSLog(@"%@", tip);
+        }];
+    } else {
+        // 打开淘宝
+        [self getGoodsURl];
+    }
+}
+
+
+// 获取购买的URL
+- (void)getGoodsURl
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"goodsBuyLink"] = self.detailModel[@"goodsBuyLink"];
+    param[@"otherGoodsId"] = self.detailModel[@"otherGoodsId"];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            // 打开淘宝
+            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:self];
+        } else {
+
+            [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
+    } failure:^(NSError *error) {
+
+    }];
+}
+
+// 分享
+- (void)shareBtnAction
+{
+    CURRENTVC(currentVc);
+    [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.detailModel[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.detailModel[@"shareImg"] shareType:1125 object:self.detailModel[@"descImgs"]];
+}
+
+- (void)reloadGuessWhatYouLikeView
+{
+    [self changeSubViewFrame];
+}
+
 
 
 @end

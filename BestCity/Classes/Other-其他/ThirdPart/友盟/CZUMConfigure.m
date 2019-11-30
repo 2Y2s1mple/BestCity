@@ -216,6 +216,11 @@ static id _instance;
             messageObject.shareObject = shareObject;
             break;
         }
+        case 1125:
+        {
+            messageObject.shareObject = [self setUpMiniWebUrl:webUrl Title:title subTitle:subTitle thumImage:thumImage userName:@"gh_b0a86c45468d" path:[NSString stringWithFormat:@"pages/list/main-v2-info/main?id=%@", anObject]];
+            break;
+        }
         default:
             break;
     }

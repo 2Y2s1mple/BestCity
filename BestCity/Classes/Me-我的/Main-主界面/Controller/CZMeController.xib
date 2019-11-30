@@ -67,14 +67,14 @@
                                         <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="iNE-aB-Eyi"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请码：37ER80" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB8-9v-bhm">
-                                    <rect key="frame" x="92" y="107" width="108.5" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请码：0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB8-9v-bhm">
+                                    <rect key="frame" x="92" y="107" width="66" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMu-OY-okU">
-                                    <rect key="frame" x="210.5" y="103.5" width="70" height="24"/>
+                                    <rect key="frame" x="168" y="103.5" width="70" height="24"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="70" id="PSG-qV-qrS"/>
@@ -314,8 +314,8 @@
                                             <color key="textColor" red="0.98810738330000003" green="0.8929579258" blue="0.75871163610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共省¥9522" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jT-cY-kbO">
-                                            <rect key="frame" x="253" y="10.5" width="62" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共省¥0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jT-cY-kbO">
+                                            <rect key="frame" x="275" y="10.5" width="40" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.90445530409999997" green="0.26794710760000001" blue="0.201970607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -510,7 +510,7 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-7039.1999999999998" y="-2552.4737631184412"/>
+            <point key="canvasLocation" x="-6900" y="-2705"/>
         </view>
     </objects>
     <resources>
