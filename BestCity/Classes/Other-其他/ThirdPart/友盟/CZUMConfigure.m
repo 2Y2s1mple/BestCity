@@ -132,10 +132,6 @@ static id _instance;
 - (UMShareMiniProgramObject *)setUpMiniWebUrl:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage userName:(NSString *)userName path:(NSString *)path
 {
 //    thumImage = [UIImage imageNamed:@"launchLogo.png"];
-
-
-
-
     NSData *currentImageData;
     if ([thumImage isKindOfClass:[UIImage class]]) {
         UIImage* newImage = thumImage;

@@ -21,6 +21,8 @@
 #import "CZGuessWhatYouLikeView.h"
 #import "CZGoodsParameterView.h" // 产品参数
 
+#import "CZParameterScoreView.h" // 功能评分和产品视图"
+
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
 #import "CZOpenAlibcTrade.h"
@@ -110,7 +112,7 @@ static CGFloat const likeAndShareHeight = 49;
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/goodsDetail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.detailModel = [result[@"data"] deleteAllNullValue];
+            self.detailModel = result[@"data"];
 
             // 初始化顶部视图
             [self imageGoodsView];
@@ -141,11 +143,18 @@ static CGFloat const likeAndShareHeight = 49;
 
     // 功能评分
     if(![self.detailModel[@"scoreOptionsList"] isKindOfClass:[NSNull class]] && [self.detailModel[@"scoreOptionsList"] count] > 0) {
-        [self functionScoresViewImage:@"quality" title:@"功能评分" contextList:self.detailModel[@"scoreOptionsList"]];
+        CZParameterScoreView *parameter = [CZParameterScoreView parameterScoreViewImage:@"quality" title:@"功能评分" contextList:self.detailModel[@"scoreOptionsList"] detailModel:self.detailModel];
+        parameter.y = self.recordHeight;
+        [self.scrollerView addSubview:parameter];
+        self.recordHeight += parameter.height ;
     }
 
+
     // 产品参数
-    [self functionScoresViewImage:@"parameter" title:@"产品参数" contextList:self.detailModel[@"parametersList"]];
+    CZParameterScoreView *scores = [CZParameterScoreView parameterScoreViewImage:@"parameter" title:@"产品参数" contextList:self.detailModel[@"parametersList"] detailModel:self.detailModel];
+    scores.y = self.recordHeight;
+    [self.scrollerView addSubview:scores];
+    self.recordHeight += scores.height ;
 
     // 淘宝商家
     CZTaoBaoShopNameView *shopNameView = [CZTaoBaoShopNameView taoBaoShopNameView];
@@ -171,6 +180,14 @@ static CGFloat const likeAndShareHeight = 49;
     // 商品详情
     [self goodsDetail];
 
+    UIView *lineView1 = [[UIView alloc] init];
+    lineView1.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    lineView1.y = self.recordHeight;
+    lineView1.height = 10;
+    lineView1.width = SCR_WIDTH;
+    [self.scrollerView addSubview:lineView1];
+    self.recordHeight += 10;
+
 
     // 猜你喜欢
     [self guessView];
@@ -186,7 +203,6 @@ static CGFloat const likeAndShareHeight = 49;
     [self.view addSubview:bottomView];
 
     // 两个按钮
-
     UIView *shareView = [[UIView alloc] init];
     shareView.backgroundColor = [UIColor whiteColor];
     shareView.frame = CGRectMake(0, 0, 145, bottomView.height);
@@ -195,20 +211,22 @@ static CGFloat const likeAndShareHeight = 49;
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     shareBtn.frame = CGRectMake(17, 0, 25, bottomView.height);
     [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+    [shareBtn setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
     shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
-    [shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [shareBtn setImage:[UIImage imageNamed:@"Forward-2"] forState:UIControlStateNormal];
+    [shareBtn setImage:[UIImage imageNamed:@"Forward-3"] forState:UIControlStateNormal];
     [shareBtn addTarget:self action:@selector(shareBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [shareView addSubview:shareBtn];
-    shareBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    shareBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+    shareBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
+    shareBtn.titleEdgeInsets = UIEdgeInsetsMake(30, -26, 0, 0);
 
     UIButton *shareBtn1 = [UIButton buttonWithType:UIButtonTypeSystem];
     shareBtn1.frame = CGRectMake(CZGetX(shareBtn) + 45, 0, 25, bottomView.height);
     [shareBtn1 setTitle:@"首页" forState:UIControlStateNormal];
+    [shareBtn1 setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
     shareBtn1.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
-    [shareBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [shareBtn1 setImage:[UIImage imageNamed:@"taobaoDetai_upstage-sel"] forState:UIControlStateNormal];
+    shareBtn1.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
+    shareBtn1.titleEdgeInsets = UIEdgeInsetsMake(30, -26, 0, 0);
     [shareBtn1 addTarget:self action:@selector(mainIndexBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [shareView addSubview:shareBtn1];
 
@@ -227,116 +245,6 @@ static CGFloat const likeAndShareHeight = 49;
     buyBtn.backgroundColor = CZREDCOLOR;
     [buyBtn addTarget:self action:@selector(buyBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:buyBtn];
-}
-
-
-// 创建产品参数
-- (void)functionScoresViewImage:(NSString *)iconName title:(NSString *)titleName contextList:(NSArray *)list
-{
-    UIView *containerView = [[UIView alloc] init];
-    containerView.backgroundColor = [UIColor whiteColor];
-    containerView.y = self.recordHeight;
-    containerView.width = SCR_WIDTH;
-    [self.scrollerView addSubview:containerView];
-    UIImageView *iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"quality"]];
-    iconImageView.x = 14;
-    iconImageView.y = 14;
-    iconImageView.size = CGSizeMake(19, 19);
-    [containerView addSubview:iconImageView];
-
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = titleName;
-    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
-    [titleLabel sizeToFit];
-    titleLabel.centerY = iconImageView.centerY;
-    titleLabel.x = CZGetX(iconImageView) + 3;
-    [containerView addSubview:titleLabel];
-
-
-    UIScrollView *scoresView = [[UIScrollView alloc] init];
-    [containerView addSubview:scoresView];
-    scoresView.y = CZGetY(iconImageView) + 15;
-    scoresView.width = SCR_WIDTH;
-    scoresView.height = 85;
-    scoresView.backgroundColor = [UIColor whiteColor];
-
-    NSInteger count;
-    if ([titleName isEqualToString:@"功能评分"]) {
-        count = list.count + 1;
-//        UITapGestureRecognizer *tap = [UITapGestureRecognizer alloc] initWithTarget:<#(nullable id)#> action:<#(nullable SEL)#>
-    } else {
-        count = list.count;
-    }
-    for (int i = 0; i < count; i++) {
-        CGFloat width = 75;
-        CGFloat height  = 85;
-        UIView *view = [[UIView alloc] init];
-        view.x = 14 + i * width;
-        view.height = height;
-        view.width = width;
-        view.backgroundColor = UIColorFromRGB(0xD8D8D8);
-        [scoresView addSubview:view];
-        scoresView.contentSize = CGSizeMake(CZGetX(view) + 14, 0);
-
-        UILabel *label = [[UILabel alloc] init];
-        UILabel *label1 = [[UILabel alloc] init];
-        label.backgroundColor = [UIColor whiteColor];
-        label1.backgroundColor = [UIColor whiteColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label1.textAlignment = NSTextAlignmentCenter;
-        label.height = view.height / 2.0 - 0.75;
-        label1.height = label.height;
-
-        label.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
-        label1.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
-        if (i == (count - 1)) {
-            label.x = 0.5;
-            label.y = 0.5;
-            label.width = view.width - 1;
-
-            label1.x = label.x;
-            label1.y = CZGetY(label) + 0.5;
-            label1.width = view.width - 1;
-        } else {
-            label.x = 0.5;
-            label.y = 0.5;
-            label.width = view.width - 0.5;
-
-            label1.x = label.x;
-            label1.y = CZGetY(label) + 0.5;
-            label1.width = view.width - 0.5;
-        }
-
-
-        [view addSubview:label];
-        [view addSubview:label1];
-
-        if ([titleName isEqualToString:@"功能评分"]) {
-            if (i == 0) {
-                label.textColor = UIColorFromRGB(0x565252);
-                label.text = @"综合评分";
-
-                label1.textColor = UIColorFromRGB(0xE25838);
-                label1.text = [NSString stringWithFormat:@"%.1lf分", [self.detailModel[@"score"] floatValue]];
-            } else {
-                NSDictionary *dic = list[i - 1];
-                label.textColor = UIColorFromRGB(0x9D9D9D);
-                label.text = dic[@"name"];
-
-                label1.textColor = UIColorFromRGB(0x565252);
-                label1.text = [dic[@"score"] stringByAppendingString:@"分"];
-            }
-        } else {
-            NSDictionary *dic = list[i];
-            label.textColor = UIColorFromRGB(0x9D9D9D);
-            label.text = dic[@"name"];
-
-            label1.textColor = UIColorFromRGB(0x565252);
-            label1.text = [dic[@"value"] stringByAppendingString:@"分"];
-        }
-    }
-    containerView.height = CZGetY(scoresView) + 14;
-    self.recordHeight += containerView.height ;
 }
 
 // 推荐理由
@@ -719,7 +627,15 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)shareBtnAction
 {
     CURRENTVC(currentVc);
-    [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.detailModel[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.detailModel[@"shareImg"] shareType:1125 object:self.detailModel[@"descImgs"]];
+    [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.detailModel[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.detailModel[@"descImgs"] shareType:1125 object:self.detailModel[@"otherGoodsId"]];
+}
+
+// 跳转到首页
+- (void)mainIndexBtnAction
+{
+    [self.navigationController popViewControllerAnimated:NO];
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    tabbar.selectedIndex = 0;
 }
 
 - (void)reloadGuessWhatYouLikeView

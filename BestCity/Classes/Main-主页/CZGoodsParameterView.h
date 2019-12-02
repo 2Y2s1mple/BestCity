@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZGoodsParameterView : UIView
 + (instancetype)goodsParameterView;
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *detailModel;
+@property (nonatomic, strong) NSString *titleName;
 @end
 
 NS_ASSUME_NONNULL_END

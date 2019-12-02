@@ -20,10 +20,10 @@
 
 @implementation CZGuessWhatYouLikeView
 
-+(instancetype)guessWhatYouLikeView
++ (instancetype)guessWhatYouLikeView
 {
     CZGuessWhatYouLikeView *view = [[CZGuessWhatYouLikeView alloc] init];
-    view.backgroundColor = UIColorFromRGB(0xF5F5F5);
+//    view.backgroundColor = UIColorFromRGB(0xF5F5F5);
 
     return view;
 }

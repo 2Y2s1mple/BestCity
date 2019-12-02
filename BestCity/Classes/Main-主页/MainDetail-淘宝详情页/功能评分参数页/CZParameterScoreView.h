@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZParameterScoreView : UIView
-
++ (instancetype)parameterScoreViewImage:(NSString *)iconName title:(NSString *)titleName contextList:(NSArray *)list detailModel:(NSDictionary *)detailModel;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -180,6 +180,7 @@
 		9754C87522FC18FD008C2D98 /* CZEACCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754C87322FC18FD008C2D98 /* CZEACCollectionCell.m */; };
 		9754C87622FC18FD008C2D98 /* CZEACCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9754C87422FC18FD008C2D98 /* CZEACCollectionCell.xib */; };
 		9754C87A22FC215D008C2D98 /* CZEAttentionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754C87922FC215D008C2D98 /* CZEAttentionModel.m */; };
+		975726672394DB2600745DB9 /* CZGoodsScoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 975726662394DB2600745DB9 /* CZGoodsScoreView.xib */; };
 		97572A852119862C00FB42DE /* CZSystemMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97572A842119862C00FB42DE /* CZSystemMessageDetailController.m */; };
 		97572A8C21198F7F00FB42DE /* CZLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97572A8A21198F7F00FB42DE /* CZLoginController.m */; };
 		97572A8D21198F7F00FB42DE /* CZLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97572A8B21198F7F00FB42DE /* CZLoginController.xib */; };
@@ -878,6 +879,7 @@
 		9754C87422FC18FD008C2D98 /* CZEACCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEACCollectionCell.xib; sourceTree = "<group>"; };
 		9754C87822FC215D008C2D98 /* CZEAttentionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEAttentionModel.h; sourceTree = "<group>"; };
 		9754C87922FC215D008C2D98 /* CZEAttentionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEAttentionModel.m; sourceTree = "<group>"; };
+		975726662394DB2600745DB9 /* CZGoodsScoreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZGoodsScoreView.xib; sourceTree = "<group>"; };
 		97572A832119862C00FB42DE /* CZSystemMessageDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSystemMessageDetailController.h; sourceTree = "<group>"; };
 		97572A842119862C00FB42DE /* CZSystemMessageDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSystemMessageDetailController.m; sourceTree = "<group>"; };
 		97572A8921198F7F00FB42DE /* CZLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZLoginController.h; sourceTree = "<group>"; };
@@ -2419,6 +2421,7 @@
 		974759CA239268C20026C56C /* MainDetail-淘宝详情页 */ = {
 			isa = PBXGroup;
 			children = (
+				974759CF2392739A0026C56C /* 工具 */,
 				974759CB239268ED0026C56C /* 功能评分参数页 */,
 			);
 			path = "MainDetail-淘宝详情页";
@@ -2431,6 +2434,13 @@
 				974759CD239269660026C56C /* CZParameterScoreView.m */,
 			);
 			path = "功能评分参数页";
+			sourceTree = "<group>";
+		};
+		974759CF2392739A0026C56C /* 工具 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "工具";
 			sourceTree = "<group>";
 		};
 		97481AE1230418BB00230367 /* 添加商品 */ = {
@@ -4449,6 +4459,7 @@
 				974759C5239265240026C56C /* CZGoodsParameterView.m */,
 				974759C7239266410026C56C /* CZGoodsScoreView.h */,
 				974759C8239266410026C56C /* CZGoodsScoreView.m */,
+				975726662394DB2600745DB9 /* CZGoodsScoreView.xib */,
 			);
 			path = "Main-主页";
 			sourceTree = "<group>";
@@ -4993,6 +5004,7 @@
 				9707DAC92390B4CA00A307A8 /* CZTaoBaoShopNameView.xib in Resources */,
 				97BC05DD2112B122001ED65A /* key.png in Resources */,
 				97D0C63323605C2000F3B994 /* CZUserUpdataView.xib in Resources */,
+				975726672394DB2600745DB9 /* CZGoodsScoreView.xib in Resources */,
 				97FEBF2122D47BAE007BF592 /* CZMHSDCommodityCell2.xib in Resources */,
 				97AAB8B3237EAA7200031801 /* CZFreeChargeCell3.xib in Resources */,
 				9754C87622FC18FD008C2D98 /* CZEACCollectionCell.xib in Resources */,

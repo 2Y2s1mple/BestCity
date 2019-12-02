@@ -7,22 +7,35 @@
 //
 
 #import "CZParameterScoreView.h"
+#import "CZGoodsParameterView.h"
+#import "CZGoodsScoreView.h"
+
+
+@interface CZParameterScoreView ()
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *detailModel;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *titleName;
+@end
 
 @implementation CZParameterScoreView
 
-- (instancetype)initWithFrame:(CGRect)frame
++ (instancetype)parameterScoreViewImage:(NSString *)iconName title:(NSString *)titleName contextList:(NSArray *)list detailModel:(NSDictionary *)detailModel
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-
-    }
-    return self;
+    CZParameterScoreView *view = [[CZParameterScoreView alloc] init];
+    view.width = SCR_HEIGHT;
+    view.detailModel = detailModel;
+    view.titleName = titleName;
+    [view functionScoresViewImage:iconName title:titleName contextList:list];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:view action:@selector(action:)];
+    [view addGestureRecognizer:tap];
+    return view;
 }
 
-// 创建产品参数
-- (void)functionScoresViewImage:(NSString *)iconName title:(NSString *)titleName contextList:(NSArray *)list
-{
 
+// 创建产品参数
+- (void)functionScoresViewImage:(NSString *)iconName title:(NSString *)titleName contextList:(NSArray *)list 
+{
     UIImageView *iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
     iconImageView.x = 14;
     iconImageView.y = 14;
@@ -48,7 +61,7 @@
     NSInteger count;
     if ([titleName isEqualToString:@"功能评分"]) {
         count = list.count + 1;
-//        UITapGestureRecognizer *tap = [UITapGestureRecognizer alloc] initWithTarget:<#(nullable id)#> action:<#(nullable SEL)#>
+
     } else {
         count = list.count;
     }
@@ -102,7 +115,7 @@
                 label.text = @"综合评分";
 
                 label1.textColor = UIColorFromRGB(0xE25838);
-//                label1.text = [NSString stringWithFormat:@"%.1lf分", [self.detailModel[@"score"] floatValue]];
+                label1.text = [NSString stringWithFormat:@"%.1lf分", [self.detailModel[@"score"] floatValue]];
             } else {
                 NSDictionary *dic = list[i - 1];
                 label.textColor = UIColorFromRGB(0x9D9D9D);
@@ -120,8 +133,24 @@
             label1.text = [dic[@"value"] stringByAppendingString:@"分"];
         }
     }
-//    containerView.height = CZGetY(scoresView) + 14;
-//    self.recordHeight += containerView.height ;
+    self.height = CZGetY(scoresView) + 14;
 }
+
+- (void)action:(UITapGestureRecognizer *)tap
+{
+    CURRENTVC(currentVc);
+   if ([self.titleName isEqualToString:@"功能评分"]) {
+       CZGoodsScoreView *parameterView = [CZGoodsScoreView goodsScoreView];
+       parameterView.detailModel = self.detailModel;
+       parameterView.titleName = @"功能评分";
+       [currentVc.view addSubview:parameterView];
+    } else {
+        CZGoodsParameterView *parameterView = [CZGoodsParameterView goodsParameterView];
+        parameterView.detailModel = self.detailModel;
+        parameterView.titleName = @"产品参数";
+        [currentVc.view addSubview:parameterView];
+    }
+}
+
 
 @end
