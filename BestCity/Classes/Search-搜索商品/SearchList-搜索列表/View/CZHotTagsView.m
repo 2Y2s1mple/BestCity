@@ -62,8 +62,8 @@
 {
     _title = title;
     UILabel *hisLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 23)];
-    hisLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 16];
-    hisLabel.textColor = UIColorFromRGB(0x9D9D9D);
+    hisLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
+    hisLabel.textColor = UIColorFromRGB(0x202020);
     hisLabel.text = _title;
     [self addSubview:hisLabel];
 }
@@ -146,8 +146,9 @@
 
 - (void)tagLabelLayout
 {
+    self.recordNumber = 1;
     // 布局
-    for (int i = 0; i < self.tagsView.subviews.count; i++) {
+    for (int i = 0; i < self.hisArray.count; i++) {
         // 先布局第一个
         CZHotTagLabel *label = self.tagsView.subviews[i];
         label.x = 10;
@@ -160,8 +161,13 @@
                 label.x = CGRectGetMaxX(prevlabel.frame) + 10;
                 label.y = prevlabel.y;
             } else {
+                self.recordNumber++;
+
                 label.y = CGRectGetMaxY(prevlabel.frame) + 10;
                 label.x = 10;
+            }
+            if (self.recordNumber == 3) {
+                self.lineNumber = i;
             }
         }
     }

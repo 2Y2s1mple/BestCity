@@ -10,6 +10,7 @@
 #import "GXNetTool.h"
 #import <AdSupport/AdSupport.h>
 #import "CZguessWhatYouLikeCell.h"
+#import "CZTaobaoDetailController.h"
 
 @interface CZGuessWhatYouLikeView () <UICollectionViewDelegate, UICollectionViewDataSource>
 /** <#注释#> */
@@ -102,6 +103,20 @@
             !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
         }
     } failure:^(NSError *error) {}];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *param = self.dataSource[indexPath.row];
+    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+    vc.otherGoodsId = param[@"otherGoodsId"];
+            //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
+    //        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+    //        vc.detailType = [CZJIPINSynthesisTool getModuleType:2];
+    //        vc.findgoodsId = model[@"goods"][@"articleId"];
+    CURRENTVC(currentVc)
+    [currentVc.navigationController pushViewController:vc animated:YES];
+    
 }
 
 @end

@@ -66,7 +66,7 @@
     
 
 
-    NSString *other = [NSString stringWithFormat:@"¥%@", dataDic[@"otherPrice"]];
+    NSString *other = [NSString stringWithFormat:@"¥%.2lf", [dataDic[@"otherPrice"] floatValue]];
     self.otherPricelabel.attributedText = [other addStrikethroughWithRange:NSMakeRange(0, other.length)];
 
     self.couponPriceLabel.text = [NSString stringWithFormat:@"券 ¥%.0f", [dataDic[@"couponPrice"] floatValue]];

@@ -23,6 +23,7 @@
 #import "CZDChoiceDetailController.h"
 #import "CZFestivalTwoController.h"
 #import "CZTaobaoDetailController.h" // 淘宝详情页
+#import "CZHotsaleSearchController.h"
 
 #import "CZGuideTool.h"
 
@@ -82,8 +83,6 @@
 {
     if (_tableView == nil) {
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : 49)) style:UITableViewStylePlain];
-        _tableView.backgroundColor = UIColorFromRGB(0xE74434);
-//        self.tableView.scrollEnabled = NO;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -176,63 +175,50 @@
 {
     UIView *headerView = [[UIView alloc] init];
 
+    UIView *searchView = [[UIView alloc] init];
+    searchView.x = 10;
+    searchView.y = (IsiPhoneX ? 54 : 30);
+    searchView.width = SCR_WIDTH - 20;
+    searchView.height = 36;
+    searchView.layer.cornerRadius =  18;
+    searchView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    [headerView addSubview:searchView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchView)];
+    [searchView addGestureRecognizer:tap];
+
+    UIImageView *imageS = [[UIImageView alloc] init];
+    imageS.image = [UIImage imageNamed:@"taobaoDetai_搜索"];
+    [searchView addSubview:imageS];
+    [imageS sizeToFit];
+    imageS.x = 14;
+    imageS.centerY = searchView.height / 2.0;
+
+    UILabel *title = [[UILabel alloc] init];
+    title.text = @"搜商品名称或粘贴标题";
+    title.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+    title.textColor = UIColorFromRGB(0x9D9D9D);
+    [searchView addSubview:title];
+    [title sizeToFit];
+    title.x = CZGetX(imageS) + 5;
+    title.centerY = searchView.height / 2.0;
+
+
     // 添加轮播图
-    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 200)];
-    [self.view addSubview:imageView];
-    [imageView setSelectedIndexBlock:^(NSInteger index) {
-        //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
-        NSDictionary *model = self.dataSource[@"adList"][index];
-        if ([model[@"type"] integerValue] == 2) {
-            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-            vc.detailType = [CZJIPINSynthesisTool getModuleType:[model[@"type"] integerValue]];
-            vc.findgoodsId = model[@"objectId"];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else if ([model[@"type"] integerValue] == 10) {
-            CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
-            vc.categoryId = model[@"objectId"];
-            vc.titleName = [model[@"name"] stringByAppendingString:@"双11专区"];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }];
-    
-    NSMutableArray *imgs = [NSMutableArray array];
-    for (NSDictionary *imgDic in self.dataSource[@"adList"]) {
-        [imgs addObject:imgDic[@"img"]];
-    }
-    imageView.imgList = imgs;
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CZGetY(searchView) + 5, SCR_WIDTH, 200)];
+    imageView.image = [UIImage imageNamed:@"Main-bigImage"];
     [headerView addSubview:imageView];
 
     // 添加官网声明的条
-    UIView *officialLine = [[UIView alloc] init];
-    officialLine.frame = CGRectMake(10, CZGetY(imageView) + 10, SCR_WIDTH - 20, 28);
-    officialLine.backgroundColor = UIColorFromRGB(0xF9E0CD);
-    officialLine.layer.cornerRadius = 5;
-    [headerView addSubview:officialLine];
-
-    CGFloat textWidth = officialLine.width / 4;
-    CGFloat textHeight = officialLine.height;
-    NSArray *textArr = @[
-        @"• 精选好物",
-        @"• 超高补贴",
-        @"• 官方授权 ",
-        @"• 品质保障",
-    ];
-    for (int i = 0; i < 4; i++) {
-        UILabel *label = [[UILabel alloc] init];
-        label.text = textArr[i];
-        label.textColor = UIColorFromRGB(0xE74434);
-        label.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 12];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.x = i * textWidth;
-        label.width = textWidth;
-        label.height = textHeight;
-        [officialLine addSubview:label];
-    }
+    UIImageView *icon = [[UIImageView alloc] init];
+    icon.image = [UIImage imageNamed:@"Main-icon5"];
+    [headerView addSubview:icon];
+    [icon sizeToFit];
+    icon.centerX = SCR_WIDTH / 2.0;
+    icon.y = CZGetY(imageView) + 10;
 
     // 分类的按钮
     UIView *categoryView = [[UIView alloc] init];
-    categoryView.frame = CGRectMake(0, CZGetY(officialLine) + 15, SCR_WIDTH, 0);
-//    categoryView.backgroundColor = RANDOMCOLOR;
+    categoryView.frame = CGRectMake(0, CZGetY(icon) + 10, SCR_WIDTH, 0);
     [headerView addSubview:categoryView];
 
     CGFloat width = 50;
@@ -254,14 +240,22 @@
         btn.x = leftSpace + col * (width + space) + (i / 10) * SCR_WIDTH;
         btn.y = 12 + row * (height + 25);
         [btn sd_setImageWithURL:[NSURL URLWithString:self.dataSource[@"categoryList"][i][@"iconImg"]] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
         [btn setTitle:self.dataSource[@"categoryList"][i][@"categoryName"] forState:UIControlStateNormal];
         [categoryView addSubview:btn];
         // 点击事件
         [btn addTarget:self action:@selector(headerViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
         categoryView.height = CZGetY(btn);
     }
-    headerView.height = CZGetY(categoryView) + 15;
+
+    UIView *lineView = [[UIView alloc] init];
+    lineView.y = CZGetY(categoryView) + 15;
+    lineView.width = SCR_WIDTH;
+    lineView.height = 10;
+    lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    [headerView addSubview:lineView];
+
+    headerView.height = CZGetY(lineView);
     return headerView;
 }
 
@@ -313,7 +307,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CZFestivalCell2"];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CZFestivalCell2"];
-            cell.backgroundColor = UIColorFromRGB(0xE74434);
+//            cell.backgroundColor = UIColorFromRGB(0xE74434);
         }
 
         UIImageView *image = [cell viewWithTag:20];
@@ -340,6 +334,12 @@
     } else {
         return 115;
     }
+}
+
+- (void)pushSearchView
+{
+    CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

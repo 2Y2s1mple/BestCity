@@ -11,12 +11,14 @@
 #import "CZHotSearchView.h"
 #import "CZHotTagsView.h"
 #import "GXNetTool.h"
-#import "CZHisSearchCell.h"
+#import "CZGuessWhatYouLikeView.h"
 
-@interface CZHotsaleSearchController ()<hotsaleSearchDetailControllerDelegate, CZHotSearchViewDelegate, CZHotTagsViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface CZHotsaleSearchController ()<hotsaleSearchDetailControllerDelegate, CZHotSearchViewDelegate, CZHotTagsViewDelegate, CZGuessWhatYouLikeViewDelegate>
 
 /** 历史搜索视图 */
 @property (nonatomic, strong) CZHotTagsView *hisView;
+/** 历史搜索视图 */
+@property (nonatomic, strong) CZHotTagsView *hisView1;
 /** 删除Btn */
 @property (nonatomic, strong) UIButton *btnClose;
 /** 记录要删除的tag */
@@ -27,13 +29,23 @@
 @property (nonatomic, strong) NSMutableArray *searchArr;
 /** 历史搜索记录 */
 @property (nonatomic, strong) NSMutableArray *hisArr;
-/** 历史记录tableView */
-@property (nonatomic, strong) UITableView *tableView;
 /** 分割线 */
 @property (nonatomic, strong) UIView *line;
+/** <#注释#> */
+@property (nonatomic, strong) UIScrollView *scrollView;
 @end
 
 @implementation CZHotsaleSearchController
+- (UIScrollView *)scrollView
+{
+    if (_scrollView == nil) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.showsHorizontalScrollIndicator = NO;
+    }
+    return _scrollView;
+}
+
 #pragma mark - 数据
 // 搜索框Y值
 - (CGFloat)searchViewY
@@ -44,7 +56,7 @@
 // 搜索框H值
 - (CGFloat)searchHeight
 {
-    return 44;
+    return 38;
 }
 #pragma mark -- end
 
@@ -77,7 +89,10 @@
                 [self.searchArr addObject:dic[@"word"]];
             }
             // 历史
-            self.hisArr = result[@"data"][@"logList"];
+            self.hisArr = [NSMutableArray array];
+            for (NSDictionary *dic in result[@"data"][@"logList"]) {
+                [self.hisArr addObject:dic[@"word"]];
+            }
             // 创建大家都在搜
             [self createHistorySearchModule];
             // 创建历史搜索
@@ -101,14 +116,64 @@
     }];
     self.searchView.textFieldBorderColor = CZGlobalGray;
     self.searchView.textFieldActive = YES;
-//    self.searchView.msgTitle = @"取消";
     self.searchView.delegate = self;
     self.searchView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.searchView];
 
-    self.line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.searchView) + 22, SCR_WIDTH, 1)];
+
+    for (int i = 0; i < 2; i++) {
+        UIButton *btn1 = [[UIButton alloc] init];
+        btn1.y = CZGetY(self.searchView) + 22;
+
+        [btn1 setTitleColor:UIColorFromRGB(0xE25838) forState:UIControlStateSelected];
+        [btn1 setTitleColor:UIColorFromRGB(0x9D9D9D) forState:UIControlStateNormal];
+        btn1.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
+        btn1.width = SCR_WIDTH / 2.0;
+        btn1.height = 25;
+        btn1.x = i * btn1.width;
+        [self.view addSubview:btn1];
+
+        UIView *btnLine = [[UIView alloc] init];
+        btnLine.tag = 100;
+        btnLine.y = btn1.height + 5;
+        btnLine.width = 65;
+        btnLine.height = 3;
+        btnLine.centerX = btn1.width / 2.0;
+        btnLine.backgroundColor = UIColorFromRGB(0xE25838);
+        [btn1 addSubview:btnLine];
+        if (i == 1) {
+            [btn1 setTitle:@"搜淘宝" forState:UIControlStateNormal];
+            btnLine.hidden = YES;
+            btn1.selected = NO;
+        } else {
+            [btn1 setTitle:@"搜极品城" forState:UIControlStateNormal];
+            btn1.selected = YES;
+        }
+    }
+    self.line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.searchView) + 25 + 5 + 3 + 22, SCR_WIDTH, 1)];
     self.line.backgroundColor = CZGlobalLightGray;
     [self.view addSubview:self.line];
+
+    [self.view addSubview:self.scrollView];
+    self.scrollView.y = CZGetY(self.line);
+    self.scrollView.width = SCR_WIDTH;
+    self.scrollView.height = SCR_HEIGHT - self.scrollView.y;
+
+    UIView *imageBackView = [[UIView alloc] init];
+    imageBackView.backgroundColor = UIColorFromRGB(0xFFEFEB);
+    [self.scrollView addSubview:imageBackView];
+
+    UIImageView *imageS = [[UIImageView alloc] init];
+    imageS.image = [UIImage imageNamed:@"Main-编组 3"];
+    [self.scrollView addSubview:imageS];
+    [imageS sizeToFit];
+    imageS.y = 20;
+    imageS.centerX = SCR_WIDTH / 2.0;
+
+    imageBackView.width = imageS.width + 30;
+    imageBackView.height = imageS.height + 20;
+    imageBackView.y = imageS.y - 10;
+    imageBackView.centerX = imageS.centerX;
 }
 
 // <CZHotSearchViewDelegate>
@@ -125,44 +190,90 @@
 // 大家都在搜
 - (void)createHistorySearchModule
 {
-    self.hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, CZGetY(self.line) + 22, SCR_WIDTH, 300)];
+    self.hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, 110, SCR_WIDTH, 300)];
     self.hisView.type = CZHotTagLabelTypeTapGesture;
     self.hisView.delegate = self;
-    self.hisView.title = @"大家都在搜";
+    self.hisView.title = @"今日热搜";
     self.hisView.hisArray = [NSMutableArray arrayWithArray:self.searchArr];
-    [self.view addSubview:_hisView];
-
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 22, SCR_WIDTH, 10)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
+    [self.scrollView addSubview:_hisView];
 }
 
 // 历史搜索
 - (void)createHotSearchModule
 {
-    UIView *historyView = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 32 + 26, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.hisView) + 32 + 26))];
-    [self.view addSubview:historyView];
 
-    UILabel *hisLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 20)];
-    hisLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 16];
-    hisLabel.text = @"历史搜索";
-    hisLabel.textColor = UIColorFromRGB(0x9D9D9D);
-    [historyView addSubview:hisLabel];
-  
+    CZHotTagsView *hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 32 + 26, SCR_WIDTH, 300)];
+    self.hisView1 = hisView;
+    hisView.type = CZHotTagLabelTypeTapGesture;
+    hisView.delegate = self;
+    hisView.title = @"历史搜索";
+    hisView.hisArray = [NSMutableArray arrayWithArray:self.hisArr];
+    [self.scrollView addSubview:self.hisView1];
+
     UIButton *deleteBtn = [[UIButton alloc] init];
-    deleteBtn.frame = CGRectMake(SCR_WIDTH - 26- 17, hisLabel.y, 26, 25);
+    deleteBtn.frame = CGRectMake(SCR_WIDTH - 26- 17, hisView.y, 26, 25);
     [deleteBtn setImage:[UIImage imageNamed:@"delete-2"] forState:UIControlStateNormal];
     [deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-    [historyView addSubview:deleteBtn];
-    
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, CZGetY(hisLabel) + 20, SCR_WIDTH - 10, 200) style:UITableViewStylePlain];
-    tableView.height = SCR_WIDTH - CGRectGetMinY(tableView.frame); 
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [historyView addSubview:tableView];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    self.tableView = tableView;
+    [self.scrollView addSubview:deleteBtn];
+
+    NSLog(@"%ld", hisView.lineNumber);
+
+     [self.hisArr removeObjectsInRange:NSMakeRange(hisView.lineNumber, self.hisArr.count - hisView.lineNumber)];
+    hisView.hisArray = self.hisArr;
+
+    if (hisView.lineNumber > 0) {
+        UIButton *showAll = [UIButton buttonWithType:UIButtonTypeCustom];
+        [showAll setTitle:@"更多搜索历史" forState:UIControlStateNormal];
+        [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right"] forState:UIControlStateNormal];
+        [showAll setTitle:@"收起" forState:UIControlStateSelected];
+        [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right-1"] forState:UIControlStateSelected];
+        showAll.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+        [showAll setTitleColor:UIColorFromRGB(0xCECECE) forState:UIControlStateNormal];
+        [self.scrollView addSubview:showAll];
+        showAll.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0);
+        showAll.titleEdgeInsets = UIEdgeInsetsMake(0, -28, 0, 0);
+        [showAll sizeToFit];
+        showAll.y = CZGetY(hisView) + 20;
+        showAll.centerX = SCR_WIDTH / 2.0;
+
+        self.scrollView.contentSize = CGSizeMake(0, CZGetY(showAll) + 10);
+    } else {
+        self.scrollView.contentSize = CGSizeMake(0, CZGetY(hisView));
+    }
+
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    lineView.y = CZGetY([self.scrollView.subviews lastObject]) + 10;
+    lineView.height = 10;
+    lineView.width = SCR_WIDTH;
+    [self.scrollView addSubview:lineView];
+
+    // 猜你喜欢
+    [self guessView];
+
 }
+
+
+// 猜你喜欢
+- (void)guessView
+{
+    CZGuessWhatYouLikeView *guess = [CZGuessWhatYouLikeView guessWhatYouLikeView];
+    guess.delegate = self;
+    guess.y = CZGetY([self.scrollView.subviews lastObject]);
+    guess.width = SCR_WIDTH;
+    guess.otherGoodsId = @"";
+
+    [self.scrollView addSubview:guess];
+
+}
+
+
+- (void)reloadGuessWhatYouLikeView
+{
+    self.scrollView.contentSize = CGSizeMake(0, CZGetY([self.scrollView.subviews lastObject]) + 10);
+}
+
+
 
 #pragma mark - 全部删除
 - (void)deleteAction
@@ -188,8 +299,10 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/log"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 历史
-            self.hisArr =  result[@"data"][@"logList"];
-            [self.tableView reloadData];
+            self.hisArr = [NSMutableArray array];
+            for (NSDictionary *dic in result[@"data"][@"logList"]) {
+                [self.hisArr addObject:dic[@"word"]];
+            }
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -199,32 +312,8 @@
     }];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.hisArr.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CZHisSearchCell *cell = [CZHisSearchCell cellWithTableView:tableView deleteBtnBlock:^{
-        [self reloadData];
-    }];
-    cell.historyData = self.hisArr[indexPath.row];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *titleData = self.hisArr[indexPath.row];
-    self.searchView.searchText = titleData[@"word"];
-    [self pushSearchDetail];
-}
 
 // 点击事件 <CZHotTagsViewDelegate>
 - (void)hotTagsView:(CZHotTagsView *)tagsView didSelectedTag:(CZHotTagLabel *)tagLabel

@@ -28,8 +28,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *title;
 /** 类型 */
 @property (nonatomic, assign) CZHotTagLabelType type;
+
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger lineNumber;
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger recordNumber;
 /** 创建标签方法 */
 - (void)createTagLabelWithTitle:(NSString *)title withEventType:(CZHotTagLabelType)type;
+- (void)reloadSubViews;
 @end
 
 NS_ASSUME_NONNULL_END

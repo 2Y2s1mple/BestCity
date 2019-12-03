@@ -33,8 +33,6 @@
 - (void)setFrame:(CGRect)frame
 {
     CGRect rect = frame;
-//    rect.size.width = SCR_WIDTH - 45 - 15;
-//    rect.size.height = 44;
     [super setFrame:rect];
 }
 
@@ -58,12 +56,12 @@
     backView.width = self.width - 45 - 15;
     backView.height = self.height;
     backView.backgroundColor = UIColorFromRGB(0xD8D8D8);
-    backView.layer.cornerRadius = 6;
+    backView.layer.cornerRadius = 19;
     backView.layer.masksToBounds = YES;
     [self addSubview:backView];
 
     CZTextField *textF = [[CZTextField alloc] init];
-    textF.width = backView.width - 48;
+    textF.width = backView.width - 76;
     textF.height = self.height;
     self.textField = textF;
     self.textField.delegate = self;
@@ -71,28 +69,16 @@
     [backView addSubview:textF];
     
     UIButton *msgBtn = [[UIButton alloc] init];
-    [msgBtn setImage:[UIImage imageNamed:@"搜索"] forState:UIControlStateNormal];
+    msgBtn.backgroundColor = UIColorFromRGB(0xE25838);
+    [msgBtn setTitle:@"搜索" forState:UIControlStateNormal];
+    [msgBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    msgBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 17];
     msgBtn.x = CGRectGetMaxX(textF.frame);
-    msgBtn.size = CGSizeMake(40, self.height);
-    msgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    msgBtn.size = CGSizeMake(76, self.height);
+    msgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [msgBtn addTarget:self action:@selector(msgAction) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:msgBtn];
     self.rightBtn = msgBtn;
-    
-//    UILabel *unreadLabel = [[UILabel alloc] init];
-//    unreadLabel.hidden = YES;
-//    unreadLabel.userInteractionEnabled = NO;
-//    self.unreadLabel = unreadLabel;
-//    unreadLabel.x = CZGetX(msgBtn) - 10;
-//    unreadLabel.y = 0;
-//    unreadLabel.textColor = CZGlobalWhiteBg;
-//    unreadLabel.font = [UIFont systemFontOfSize:11];
-//    unreadLabel.textAlignment = NSTextAlignmentCenter;
-//    unreadLabel.size = CGSizeMake(15, 15);
-//    unreadLabel.backgroundColor = [UIColor redColor];
-//    unreadLabel.layer.cornerRadius = unreadLabel.width / 2.0;
-//    unreadLabel.layer.masksToBounds = YES;
-//    [self addSubview:unreadLabel];
 }
 
 - (void)setUnreaderCount:(NSInteger)unreaderCount
@@ -132,9 +118,6 @@
 - (void)setTextFieldBorderColor:(UIColor *)textFieldBorderColor
 {
     _textFieldBorderColor = textFieldBorderColor;
-//    self.textField.backgroundColor = [UIColor whiteColor];
-//    self.textField.layer.borderWidth = 0.3;
-//    self.textField.layer.borderColor = textFieldBorderColor.CGColor;
 }
 
 - (void)setSearchText:(NSString *)searchText

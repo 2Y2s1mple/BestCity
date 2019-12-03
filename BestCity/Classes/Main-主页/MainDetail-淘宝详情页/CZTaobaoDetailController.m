@@ -121,6 +121,9 @@ static CGFloat const likeAndShareHeight = 49;
             [self setupBottomView];
 
             self.scrollerView.contentSize = CGSizeMake(0, self.recordHeight);
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            [CZProgressHUD hideAfterDelay:1.5];
         }
     } failure:^(NSError *error) {}];
 }
@@ -370,8 +373,6 @@ static CGFloat const likeAndShareHeight = 49;
     subView.width = SCR_WIDTH;
     self.recordHeight += 75;
 
-
-
     UIButton *showAll = [UIButton buttonWithType:UIButtonTypeCustom];
     [showAll setTitle:@"点击查看完整详情" forState:UIControlStateNormal];
     [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right"] forState:UIControlStateNormal];
@@ -458,10 +459,6 @@ static CGFloat const likeAndShareHeight = 49;
     guess.otherGoodsId = self.otherGoodsId;
 
     [self.scrollerView addSubview:guess];
-
-    
-
-
 
     self.recordHeight += guess.height;
 }

@@ -24,11 +24,11 @@
 //        [placeholder addAttribute:NSFontAttributeName
 //                            value:[UIFont fontWithName:@"PingFangSC-Regular" size: 13]
 //                            range:NSMakeRange(0, 5)];
-        self.placeholder = @"输入查询商品名称";
-//        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-search"]];
-//        self.leftView = image;
-//        self.leftViewMode = UITextFieldViewModeAlways;
-//        self.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.placeholder = @"搜商品名称或粘贴标题";
+        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"搜索-2"]];
+        self.leftView = image;
+        self.leftViewMode = UITextFieldViewModeAlways;
+        self.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.returnKeyType = UIReturnKeySearch;
     }
     return self;
@@ -49,7 +49,7 @@
  */
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
-    return CGRectInset(bounds, 15, 0);
+    return CGRectInset(bounds, 45, 0);
 }
 
 /**
@@ -58,7 +58,7 @@
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
     
-    return CGRectInset(bounds, 15, 0);
+    return CGRectInset(bounds, 45, 0);
 }
 
 /**
