@@ -23,8 +23,7 @@
 #import "CZDChoiceDetailController.h"
 #import "CZFestivalTwoController.h"
 #import "CZTaobaoDetailController.h" // 淘宝详情页
-#import "CZHotsaleSearchController.h"
-
+#import "CZTaobaoSearchController.h"
 #import "CZGuideTool.h"
 
 
@@ -338,7 +337,7 @@
 
 - (void)pushSearchView
 {
-    CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
+    CZTaobaoSearchController *vc = [[CZTaobaoSearchController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
