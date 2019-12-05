@@ -7,13 +7,13 @@
 //
 
 #import "CZTaobaoSearchController.h"
-#import "CZHotsaleSearchDetailController.h"
-#import "CZHotSearchView.h"
+#import "CZTaobaoSearchView.h"
 #import "CZHotTagsView.h"
 #import "GXNetTool.h"
 #import "CZGuessWhatYouLikeView.h"
+#import "CZTabbaoSearchDetailController.h"
 
-@interface CZTaobaoSearchController ()<hotsaleSearchDetailControllerDelegate, CZHotSearchViewDelegate, CZHotTagsViewDelegate, CZGuessWhatYouLikeViewDelegate>
+@interface CZTaobaoSearchController ()<CZHotSearchViewDelegate, CZHotTagsViewDelegate, CZGuessWhatYouLikeViewDelegate, CZTabbaoSearchDetailControllerDelegate>
 
 /** 历史搜索视图 */
 @property (nonatomic, strong) CZHotTagsView *hisView;
@@ -24,7 +24,7 @@
 /** 记录要删除的tag */
 @property (nonatomic, assign) NSInteger recordTag;
 /** 搜索框 */
-@property (nonatomic, strong) CZHotSearchView *searchView;
+@property (nonatomic, strong) CZTaobaoSearchView *searchView;
 /** search记录 */
 @property (nonatomic, strong) NSMutableArray *searchArr;
 /** 历史搜索记录 */
@@ -33,6 +33,7 @@
 @property (nonatomic, strong) UIView *line;
 /** <#注释#> */
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) NSString *type; // 分类（1搜索极品城，2搜索淘宝）
 @end
 
 @implementation CZTaobaoSearchController
@@ -111,7 +112,7 @@
 - (void)setupSearchView
 {
     __weak typeof(self) weakSelf = self;
-    self.searchView = [[CZHotSearchView alloc] initWithFrame:CGRectMake(0, self.searchViewY, SCR_WIDTH, self.searchHeight) msgAction:^(NSString *rightBtnText){
+    self.searchView = [[CZTaobaoSearchView alloc] initWithFrame:CGRectMake(0, self.searchViewY, SCR_WIDTH, self.searchHeight) msgAction:^(NSString *rightBtnText){
         [weakSelf pushSearchDetail];
     }];
     self.searchView.textFieldBorderColor = CZGlobalGray;
@@ -149,6 +150,7 @@
             [btn1 setTitle:@"搜极品城" forState:UIControlStateNormal];
             btn1.selected = YES;
         }
+        self.type = @"1"; // 1搜索极品城，2搜索淘宝
     }
     self.line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.searchView) + 25 + 5 + 3 + 22, SCR_WIDTH, 1)];
     self.line.backgroundColor = CZGlobalLightGray;
@@ -177,7 +179,7 @@
 }
 
 // <CZHotSearchViewDelegate>
-- (void)hotView:(CZHotSearchView *)hotView didTextFieldChange:(CZTextField *)textField
+- (void)hotView:(CZTaobaoSearchView *)hotView didTextFieldChange:(CZTextField *)textField
 {
 //    if (textField.text.length == 0) {
 //        hotView.msgTitle = @"取消";
@@ -363,23 +365,10 @@
 #pragma mark - 跳转
 - (void)pushSearchDetail
 {
-    CZHotsaleSearchDetailController *vc = [[CZHotsaleSearchDetailController alloc] init];
-    vc.textTitle = self.searchView.searchText;
-    vc.type = @"1";
+    CZTabbaoSearchDetailController *vc = [[CZTabbaoSearchDetailController alloc] init];
+    vc.searchText = self.searchView.searchText;
     vc.currentDelegate = self;
-    WMPageController *hotVc = (WMPageController *)vc;
-    hotVc.selectIndex = 0;
-    hotVc.menuViewStyle = WMMenuViewStyleDefault;
-    //        hotVc.progressWidth = 30;
-    hotVc.itemMargin = 10;
-//    hotVc.progressHeight = 3;
-    hotVc.automaticallyCalculatesItemWidths = YES;
-    hotVc.titleFontName = @"PingFangSC-Medium";
-    hotVc.titleColorNormal = CZGlobalGray;
-    hotVc.titleColorSelected = CZRGBColor(5, 5, 5);
-    hotVc.titleSizeNormal = 16.0f;
-    hotVc.titleSizeSelected = 16;
-    hotVc.progressColor = [UIColor redColor];
+    vc.type = self.type;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

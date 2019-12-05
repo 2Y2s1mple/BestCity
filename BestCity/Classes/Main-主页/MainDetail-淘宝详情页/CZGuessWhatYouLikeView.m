@@ -16,10 +16,18 @@
 /** <#注释#> */
 @property (nonatomic, strong) UICollectionView *collectionView;
 /** <#注释#> */
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation CZGuessWhatYouLikeView
+
+- (NSMutableArray *)dataSource
+{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 
 + (instancetype)guessWhatYouLikeView
 {
@@ -78,6 +86,20 @@
 {
     _otherGoodsId = otherGoodsId;
     [self getSourceData];
+}
+
+
+- (void)setList:(NSArray *)list
+{
+    _list = list;
+    [self.dataSource addObjectsFromArray:list];
+    CGFloat height = ((self.dataSource.count + 1) / 2) * 312 + ((self.dataSource.count  + 1) / 2 + 1) * 10;
+    self.collectionView.height = height;
+
+    self.height = CZGetY(self.collectionView);
+
+    [self.collectionView reloadData];
+    !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
 }
 
 

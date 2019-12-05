@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZGuessWhatYouLikeView : UIView
 +(instancetype)guessWhatYouLikeView;
 /** <#注释#> */
-@property (nonatomic, strong) NSDictionary *paraDic;
+@property (nonatomic, strong) NSArray *list;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *otherGoodsId;
 /** <#注释#> */
