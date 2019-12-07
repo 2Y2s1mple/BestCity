@@ -26,6 +26,8 @@
 /**  */
 @property (nonatomic, weak) IBOutlet UILabel *feeLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *feeLabelMargin;
+/** <#注释#> */
+
 @end
 
 @implementation CZFestivalCell
@@ -110,15 +112,18 @@
 
     NSArray *tagsArr = dataDic1[@"goodsTagsList"];
     NSMutableString *mutStr = [NSMutableString string];
-    for (int i = 0; i < tagsArr.count; i++) {
-        if (i == 0) {
-            [mutStr appendFormat:@"%@", tagsArr[i][@"name"]];
-        } else {
-            [mutStr appendFormat:@"、%@", tagsArr[i][@"name"]];
+    if ([tagsArr isKindOfClass:[NSArray class]] && tagsArr.count > 0) {
+
+        for (int i = 0; i < tagsArr.count; i++) {
+            if (i == 0) {
+                [mutStr appendFormat:@"%@", tagsArr[i][@"name"]];
+            } else {
+                [mutStr appendFormat:@"、%@", tagsArr[i][@"name"]];
+            }
         }
+        self.subTitleLabel.text = mutStr;
     }
 
-    self.subTitleLabel.text = mutStr;
 
     NSDictionary *paramDic = dataDic1;
     self.actualPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", [paramDic[@"buyPrice"] floatValue]];

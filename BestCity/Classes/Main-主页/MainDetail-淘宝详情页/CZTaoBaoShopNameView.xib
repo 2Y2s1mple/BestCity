@@ -14,10 +14,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBk-c5-gyb">
-                    <rect key="frame" x="0.0" y="18" width="361" height="88"/>
+                    <rect key="frame" x="0.0" y="0.0" width="361" height="106"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BIP-yI-T3Y">
-                            <rect key="frame" x="14" y="24" width="40" height="40"/>
+                            <rect key="frame" x="14" y="33" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="FUU-IR-byd"/>
                                 <constraint firstAttribute="width" constant="40" id="N6S-Ak-dVG"/>
@@ -30,37 +30,37 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小米官方旗舰店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYO-r4-zLr">
-                            <rect key="frame" x="63" y="24" width="100" height="17"/>
+                            <rect key="frame" x="63" y="33" width="100" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-eV-r6C">
-                            <rect key="frame" x="63" y="49" width="50" height="15"/>
+                            <rect key="frame" x="63" y="58" width="50" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxi-gF-6cC">
-                            <rect key="frame" x="123" y="49.5" width="18.5" height="14.5"/>
+                            <rect key="frame" x="123" y="58.5" width="18.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.88627450980392153" green="0.34509803921568627" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6f-5N-ciA">
-                            <rect key="frame" x="263.5" y="49" width="50" height="15"/>
+                            <rect key="frame" x="263.5" y="58" width="50" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pik-nF-w1p">
-                            <rect key="frame" x="323.5" y="49.5" width="18.5" height="14.5"/>
+                            <rect key="frame" x="323.5" y="58.5" width="18.5" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vF-AX-dTV">
-                            <rect key="frame" x="141.5" y="47" width="122" height="19"/>
+                            <rect key="frame" x="141.5" y="56" width="122" height="19"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pX7-Vj-nOl">
                                     <rect key="frame" x="21" y="2" width="50" height="15"/>
@@ -104,23 +104,13 @@
                         <constraint firstItem="hfD-eV-r6C" firstAttribute="bottom" secondItem="BIP-yI-T3Y" secondAttribute="bottom" id="z8d-8f-zg4"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABB-gV-bi9">
-                    <rect key="frame" x="0.0" y="0.0" width="361" height="8"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="8" id="brH-fj-Ena"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="gBk-c5-gyb" secondAttribute="trailing" id="5il-nx-d61"/>
                 <constraint firstAttribute="bottom" secondItem="gBk-c5-gyb" secondAttribute="bottom" constant="10" id="EKI-az-PYH"/>
-                <constraint firstItem="ABB-gV-bi9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Z2z-nF-Shx"/>
                 <constraint firstItem="gBk-c5-gyb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bcj-EU-YcH"/>
-                <constraint firstItem="ABB-gV-bi9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eeb-oK-Pge"/>
-                <constraint firstAttribute="trailing" secondItem="ABB-gV-bi9" secondAttribute="trailing" id="sWU-73-Kw7"/>
-                <constraint firstItem="gBk-c5-gyb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="v6e-o7-5gK"/>
+                <constraint firstItem="gBk-c5-gyb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="v6e-o7-5gK"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

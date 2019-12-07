@@ -67,6 +67,7 @@
 		97159B1522D6DB14008DC859 /* CZMHSDQuestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97159B1322D6DB14008DC859 /* CZMHSDQuestCell.m */; };
 		97159B1622D6DB14008DC859 /* CZMHSDQuestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97159B1422D6DB14008DC859 /* CZMHSDQuestCell.xib */; };
 		97159B1922D6E91D008DC859 /* CZMHSDQuestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97159B1822D6E91D008DC859 /* CZMHSDQuestModel.m */; };
+		97161C4C23989FCA005AB63A /* CZTBSubOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97161C4B23989FCA005AB63A /* CZTBSubOneView.m */; };
 		971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971C19EC21706B1400E6D864 /* CZPointDetailModel.m */; };
 		971CBEC821917B6300E4590B /* CZHotTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 971CBEC721917B6300E4590B /* CZHotTagsView.m */; };
 		972037572362933C00C0ACAB /* CZGoodsDetailGuidanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 972037562362933C00C0ACAB /* CZGoodsDetailGuidanceView.m */; };
@@ -123,6 +124,11 @@
 		97418DC221B11F39001F4E92 /* jpush-extension-ios-1.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DBD21B11F39001F4E92 /* jpush-extension-ios-1.1.1.a */; };
 		97418DC321B11F39001F4E92 /* jpush-ios-3.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DC021B11F39001F4E92 /* jpush-ios-3.1.0.a */; };
 		97418DC421B11F39001F4E92 /* jcore-ios-1.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DC121B11F39001F4E92 /* jcore-ios-1.2.1.a */; };
+		974199112398EA000064FA00 /* CZAlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 974199102398EA000064FA00 /* CZAlertTool.m */; };
+		974199142398EA550064FA00 /* CZGuessTypeOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 974199132398EA550064FA00 /* CZGuessTypeOneView.m */; };
+		974199162398EA610064FA00 /* CZGuessTypeOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974199152398EA610064FA00 /* CZGuessTypeOneView.xib */; };
+		974199192398FAD60064FA00 /* CZGuessTypeTowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 974199182398FAD60064FA00 /* CZGuessTypeTowView.m */; };
+		9741991B2398FAE70064FA00 /* CZGuessTypeTowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9741991A2398FAE70064FA00 /* CZGuessTypeTowView.xib */; };
 		97420DCA21E9985100FE3D9F /* CZBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97420DC921E9985100FE3D9F /* CZBuyView.m */; };
 		97420DCE21E9BE5100FE3D9F /* CZBuyViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97420DCC21E9BE5100FE3D9F /* CZBuyViewCell.m */; };
 		97420DCF21E9BE5100FE3D9F /* CZBuyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97420DCD21E9BE5100FE3D9F /* CZBuyViewCell.xib */; };
@@ -696,6 +702,8 @@
 		97159B1422D6DB14008DC859 /* CZMHSDQuestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMHSDQuestCell.xib; sourceTree = "<group>"; };
 		97159B1722D6E91D008DC859 /* CZMHSDQuestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQuestModel.h; sourceTree = "<group>"; };
 		97159B1822D6E91D008DC859 /* CZMHSDQuestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQuestModel.m; sourceTree = "<group>"; };
+		97161C4A23989FCA005AB63A /* CZTBSubOneView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTBSubOneView.h; sourceTree = "<group>"; };
+		97161C4B23989FCA005AB63A /* CZTBSubOneView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTBSubOneView.m; sourceTree = "<group>"; };
 		971C19EB21706B1400E6D864 /* CZPointDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZPointDetailModel.h; sourceTree = "<group>"; };
 		971C19EC21706B1400E6D864 /* CZPointDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZPointDetailModel.m; sourceTree = "<group>"; };
 		971CBEC621917B6300E4590B /* CZHotTagsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHotTagsView.h; sourceTree = "<group>"; };
@@ -793,6 +801,14 @@
 		97418DBF21B11F39001F4E92 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		97418DC021B11F39001F4E92 /* jpush-ios-3.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.1.0.a"; sourceTree = "<group>"; };
 		97418DC121B11F39001F4E92 /* jcore-ios-1.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.2.1.a"; sourceTree = "<group>"; };
+		9741990F2398EA000064FA00 /* CZAlertTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAlertTool.h; sourceTree = "<group>"; };
+		974199102398EA000064FA00 /* CZAlertTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAlertTool.m; sourceTree = "<group>"; };
+		974199122398EA550064FA00 /* CZGuessTypeOneView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZGuessTypeOneView.h; sourceTree = "<group>"; };
+		974199132398EA550064FA00 /* CZGuessTypeOneView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZGuessTypeOneView.m; sourceTree = "<group>"; };
+		974199152398EA610064FA00 /* CZGuessTypeOneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZGuessTypeOneView.xib; sourceTree = "<group>"; };
+		974199172398FAD50064FA00 /* CZGuessTypeTowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZGuessTypeTowView.h; sourceTree = "<group>"; };
+		974199182398FAD60064FA00 /* CZGuessTypeTowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZGuessTypeTowView.m; sourceTree = "<group>"; };
+		9741991A2398FAE70064FA00 /* CZGuessTypeTowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZGuessTypeTowView.xib; sourceTree = "<group>"; };
 		97420DC821E9985100FE3D9F /* CZBuyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZBuyView.h; sourceTree = "<group>"; };
 		97420DC921E9985100FE3D9F /* CZBuyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZBuyView.m; sourceTree = "<group>"; };
 		97420DCB21E9BE5100FE3D9F /* CZBuyViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZBuyViewCell.h; sourceTree = "<group>"; };
@@ -1738,7 +1754,7 @@
 			isa = PBXGroup;
 			children = (
 				97161C4923989D86005AB63A /* 极品城搜索 */,
-				97161C4623989CF9005AB63A /* 淘宝搜索详情 */,
+				97161C4623989CF9005AB63A /* 淘宝搜索 */,
 				97054C02218315180008E416 /* SearchDetail-搜索详情 */,
 			);
 			path = "Search-搜索商品";
@@ -2071,8 +2087,6 @@
 				9794FC5B2193E761003C6AA6 /* CZBaseRecommendController.m */,
 				97350BCA23965200008A2D4E /* CZHotsaleSearchController.h */,
 				97350BC923965200008A2D4E /* CZHotsaleSearchController.m */,
-				97ECD7732121276800D07ABE /* CZTaobaoSearchController.h */,
-				97ECD7742121276800D07ABE /* CZTaobaoSearchController.m */,
 				97ECD776212190C900D07ABE /* CZHotsaleSearchDetailController.h */,
 				97ECD777212190C900D07ABE /* CZHotsaleSearchDetailController.m */,
 				970959BA2305616C00D2AE67 /* 子控制器 */,
@@ -2112,13 +2126,13 @@
 			path = "公共界面";
 			sourceTree = "<group>";
 		};
-		97161C4623989CF9005AB63A /* 淘宝搜索详情 */ = {
+		97161C4623989CF9005AB63A /* 淘宝搜索 */ = {
 			isa = PBXGroup;
 			children = (
 				97161C4823989D5F005AB63A /* Controller */,
 				97161C4723989D54005AB63A /* View */,
 			);
-			path = "淘宝搜索详情";
+			path = "淘宝搜索";
 			sourceTree = "<group>";
 		};
 		97161C4723989D54005AB63A /* View */ = {
@@ -2127,6 +2141,8 @@
 				972A65472397BDE300BE5FDF /* CZguessLineCell.h */,
 				972A65482397BDE300BE5FDF /* CZguessLineCell.m */,
 				972A65492397BDE300BE5FDF /* CZguessLineCell.xib */,
+				97161C4A23989FCA005AB63A /* CZTBSubOneView.h */,
+				97161C4B23989FCA005AB63A /* CZTBSubOneView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2134,6 +2150,8 @@
 		97161C4823989D5F005AB63A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				97ECD7732121276800D07ABE /* CZTaobaoSearchController.h */,
+				97ECD7742121276800D07ABE /* CZTaobaoSearchController.m */,
 				97350BCF23965C3D008A2D4E /* CZTabbaoSearchDetailController.h */,
 				97350BD023965C3D008A2D4E /* CZTabbaoSearchDetailController.m */,
 			);
@@ -2468,19 +2486,13 @@
 		974759CA239268C20026C56C /* MainDetail-淘宝详情页 */ = {
 			isa = PBXGroup;
 			children = (
+				97B6410F239B499600AE4A31 /* 猜你喜欢 */,
+				97C6B4EB2399FADF003DA73F /* View */,
 				97E6C4FA238F69BA002541F4 /* CZTaobaoDetailController.h */,
 				97E6C4FB238F69BA002541F4 /* CZTaobaoDetailController.m */,
 				9707DAC52390B4B500A307A8 /* CZTaoBaoShopNameView.h */,
 				9707DAC62390B4B500A307A8 /* CZTaoBaoShopNameView.m */,
 				9707DAC82390B4CA00A307A8 /* CZTaoBaoShopNameView.xib */,
-				97E6C4FD238F7872002541F4 /* CZTaobaoGoodsView.h */,
-				97E6C4FE238F7872002541F4 /* CZTaobaoGoodsView.m */,
-				97E6C500238F788F002541F4 /* CZTaobaoGoodsView.xib */,
-				974759B5239205E60026C56C /* CZGuessWhatYouLikeView.h */,
-				974759B6239205E60026C56C /* CZGuessWhatYouLikeView.m */,
-				974759BF239248200026C56C /* CZguessWhatYouLikeCell.h */,
-				974759C0239248200026C56C /* CZguessWhatYouLikeCell.m */,
-				974759C1239248200026C56C /* CZguessWhatYouLikeCell.xib */,
 				974759C4239265240026C56C /* CZGoodsParameterView.h */,
 				974759C5239265240026C56C /* CZGoodsParameterView.m */,
 				974759C7239266410026C56C /* CZGoodsScoreView.h */,
@@ -2863,9 +2875,9 @@
 		97705C30210716A300485D64 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				97E6C4F9238F6956002541F4 /* Main-主页 */,
-				970D0B5521ACE84900649FC2 /* 百川 */,
 				97C52A6C2254B82A00787BC5 /* Common-公共 */,
+				970D0B5521ACE84900649FC2 /* 百川 */,
+				97E6C4F9238F6956002541F4 /* Main-主页 */,
 				97054BFA2182F26F0008E416 /* Search-搜索商品 */,
 				97705C41210716A300485D64 /* HotSale-榜单 */,
 				97705C4D210716A300485D64 /* Discover-发现弃用 */,
@@ -3907,6 +3919,18 @@
 			path = "试用名单";
 			sourceTree = "<group>";
 		};
+		97B6410F239B499600AE4A31 /* 猜你喜欢 */ = {
+			isa = PBXGroup;
+			children = (
+				974759B5239205E60026C56C /* CZGuessWhatYouLikeView.h */,
+				974759B6239205E60026C56C /* CZGuessWhatYouLikeView.m */,
+				974759BF239248200026C56C /* CZguessWhatYouLikeCell.h */,
+				974759C0239248200026C56C /* CZguessWhatYouLikeCell.m */,
+				974759C1239248200026C56C /* CZguessWhatYouLikeCell.xib */,
+			);
+			path = "猜你喜欢";
+			sourceTree = "<group>";
+		};
 		97B65D5822F19A880064E99F /* 异常账号界面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4103,6 +4127,14 @@
 				977E82D6223CD3CA00C8C01B /* CZUpdataView.h */,
 				977E82D7223CD3CA00C8C01B /* CZUpdataView.m */,
 				977E82D9223CD3D600C8C01B /* CZUpdataView.xib */,
+				9741990F2398EA000064FA00 /* CZAlertTool.h */,
+				974199102398EA000064FA00 /* CZAlertTool.m */,
+				974199172398FAD50064FA00 /* CZGuessTypeTowView.h */,
+				974199182398FAD60064FA00 /* CZGuessTypeTowView.m */,
+				9741991A2398FAE70064FA00 /* CZGuessTypeTowView.xib */,
+				974199122398EA550064FA00 /* CZGuessTypeOneView.h */,
+				974199132398EA550064FA00 /* CZGuessTypeOneView.m */,
+				974199152398EA610064FA00 /* CZGuessTypeOneView.xib */,
 			);
 			path = "弹框";
 			sourceTree = "<group>";
@@ -4200,6 +4232,16 @@
 				97C53DF82302951B002B1F76 /* CZERecommendCell.xib */,
 				97C53DFA2302BA7E002B1F76 /* CZERecommendHeaderView.h */,
 				97C53DFB2302BA7E002B1F76 /* CZERecommendHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		97C6B4EB2399FADF003DA73F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97E6C4FD238F7872002541F4 /* CZTaobaoGoodsView.h */,
+				97E6C4FE238F7872002541F4 /* CZTaobaoGoodsView.m */,
+				97E6C500238F788F002541F4 /* CZTaobaoGoodsView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5085,6 +5127,7 @@
 				97BC05E02112B122001ED65A /* key-pressed.png in Resources */,
 				97F0EC20212512B6000FE1DC /* UMSocialSDKResources.bundle in Resources */,
 				970C50A821F17F490091D7FF /* Assets.xcassets in Resources */,
+				9741991B2398FAE70064FA00 /* CZGuessTypeTowView.xib in Resources */,
 				970848FB22432507000D5528 /* CZTrialController.xib in Resources */,
 				9785778821A6E04800E42B29 /* CZPackUpCommentCell.xib in Resources */,
 				978E8772236ACA6000802E06 /* 11.11.gif in Resources */,
@@ -5146,6 +5189,7 @@
 				97911059222FAE3B00C2DE5B /* CZEditAddressController.xib in Resources */,
 				97BDB85F211077D800966FF0 /* CZMeController.xib in Resources */,
 				9786FF182255973E0007021C /* CZCommonRecommendCell.xib in Resources */,
+				974199162398EA610064FA00 /* CZGuessTypeOneView.xib in Resources */,
 				979110632230F3A600C2DE5B /* CZOrderListCell.xib in Resources */,
 				970C50A621F17E890091D7FF /* CZCoinCenterController.xib in Resources */,
 				97B4A49A2248DBF200E48D93 /* CZTrialTestListController.xib in Resources */,
@@ -5264,6 +5308,7 @@
 				977607CC22D57E3200F846BE /* CZMHSDListNewController.m in Sources */,
 				97530AA52313A3FC00185C40 /* CZMHSDQuestCell1.m in Sources */,
 				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
+				974199112398EA000064FA00 /* CZAlertTool.m in Sources */,
 				977E8090225B23660041A126 /* CZTrialApplySuccessModel.m in Sources */,
 				979B05D3210F07EF0023292D /* CZShareAndlikeView.m in Sources */,
 				97D8FCCB2111A67700D8ED8F /* CZMyProfileController.m in Sources */,
@@ -5278,6 +5323,7 @@
 				97FEBF2B22D490BC007BF592 /* CZMHSDCommodityCell3.m in Sources */,
 				97C7FF02216DDDAB0091DC07 /* MJProperty.m in Sources */,
 				97798CBE212D0FC90052CE94 /* SDWebImageManager.m in Sources */,
+				97161C4C23989FCA005AB63A /* CZTBSubOneView.m in Sources */,
 				97F904CC22F42C5300FA7A56 /* CZEInventoryController.m in Sources */,
 				97C78FBB21196A8F00374CCD /* CZTestWinController.m in Sources */,
 				97AB0C1C22532A6900072426 /* CZTrialApplyForCell.m in Sources */,
@@ -5299,6 +5345,7 @@
 				97054BFD2182F46B0008E416 /* CZHotTitleModel.m in Sources */,
 				9729617121B11CB600648940 /* CZJPushHandler.m in Sources */,
 				9708490C2243315D000D5528 /* CZTrialReportDetailController.m in Sources */,
+				974199192398FAD60064FA00 /* CZGuessTypeTowView.m in Sources */,
 				97EC481E22CF72BD006ACA23 /* CZMHSDetailCommodity.m in Sources */,
 				970497C4225F362900CC14FF /* CZOrderDetailController.m in Sources */,
 				972953A922D5D87500B2973F /* CZMHSDetailBkController.m in Sources */,
@@ -5583,6 +5630,7 @@
 				977D8D0122ACFC6C005E7ACB /* CZMyWalletModel.m in Sources */,
 				97643481221AB2FD00EB0291 /* CZCZChangeMobileController.m in Sources */,
 				97C7FF48216DDDB50091DC07 /* MJRefreshHeader.m in Sources */,
+				974199142398EA550064FA00 /* CZGuessTypeOneView.m in Sources */,
 				972F4B9F22AE316300F30F6B /* CZMyWalletDetailController.m in Sources */,
 				97F0EC32212529F5000FE1DC /* CZUMConfigure.m in Sources */,
 				9768FAEE2368130D00019B4E /* CZLaunchViewController.m in Sources */,

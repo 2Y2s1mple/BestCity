@@ -59,7 +59,7 @@
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
 //    NSArray *titles = @[@"商品", @"发现", @"评测", @"试用报告"];
-    NSArray *titles = @[@"榜单", @"问答", @"评测", @"清单", @"试用报告"];
+    NSArray *titles = @[@"商品", @"问答", @"评测", @"清单", @"试用报告"];
     return titles[index];
 }
 

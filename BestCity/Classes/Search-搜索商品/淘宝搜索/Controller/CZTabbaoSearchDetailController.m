@@ -12,7 +12,13 @@
 #import "CZguessLineCell.h"
 #import <AdSupport/AdSupport.h>
 #import "GXNetTool.h"
+#import "KCUtilMd5.h"
+
+// subviews
+#import "CZTBSubOneView.h" // 收极品城
 //#import "CZGuessWhatYouLikeView.h"asd 265
+
+#import "CZTaobaoDetailController.h"
 
 @interface CZTabbaoSearchDetailController () <UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
 /** <#注释#> */
@@ -40,7 +46,10 @@
 @property (nonatomic, strong) UIButton *recordBtn;
 /** <#注释#> */
 @property (nonatomic, assign) NSInteger recoredBtnClick;
-
+// 搜淘宝按钮
+@property (nonatomic, strong) CZTBSubOneView *subOne;
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger flagSubOne;
 
 /** <#注释#> */
 @property (nonatomic, assign) BOOL layoutType;
@@ -105,7 +114,7 @@
     backView.x = 45;
     backView.width = SCR_WIDTH - 45 - 15;
     backView.height = self.searchHeight;
-    backView.backgroundColor = UIColorFromRGB(0xD8D8D8);
+    backView.backgroundColor = UIColorFromRGB(0xF5F5F5);
     backView.layer.cornerRadius = 19;
     backView.layer.masksToBounds = YES;
     [view addSubview:backView];
@@ -130,67 +139,20 @@
     [backView addSubview:msgBtn];
 
 
-    for (int i = 0; i < 2; i++) {
-        UIButton *btn1 = [[UIButton alloc] init];
-        btn1.tag = 100 + i;
-        btn1.y = CZGetY(view) + 22;
-
-        [btn1 setTitleColor:UIColorFromRGB(0xE25838) forState:UIControlStateSelected];
-        [btn1 setTitleColor:UIColorFromRGB(0x9D9D9D) forState:UIControlStateNormal];
-        btn1.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
-        btn1.width = SCR_WIDTH / 2.0;
-        btn1.height = 25;
-        btn1.x = i * btn1.width;
-        [self.view addSubview:btn1];
-
-        UIView *btnLine = [[UIView alloc] init];
-        btnLine.tag = 100;
-        btnLine.y = btn1.height + 5;
-        btnLine.width = 65;
-        btnLine.height = 3;
-        btnLine.centerX = btn1.width / 2.0;
-        btnLine.backgroundColor = UIColorFromRGB(0xE25838);
-        [btn1 addSubview:btnLine];
-        if (i == 1) {
-            [btn1 setTitle:@"搜淘宝" forState:UIControlStateNormal];
-            btnLine.hidden = YES;
-            btn1.selected = NO;
-            self.typeBtn2 = btn1;
-            self.line2 = btnLine;
-        } else {
-            self.typeBtn1 = btn1;
-            self.line1 = btnLine;
-            [btn1 setTitle:@"搜极品城" forState:UIControlStateNormal];
-            btn1.selected = YES;
-        }
-        [btn1 addTarget:self action:@selector(changeTabbao:) forControlEvents:UIControlEventTouchUpInside];
-
-    }
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(view) + 25 + 5 + 3 + 22, SCR_WIDTH, 1)];
-    line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:line];
+    // 搜淘宝按钮
+    CZTBSubOneView *subOne = [[CZTBSubOneView alloc] initWithFrame:CGRectMake(0, CZGetY(view) + 22, SCR_WIDTH, 34)];
+    self.subOne = subOne;
+    subOne.selectIndex = ([self.type integerValue] - 1);
+    [subOne setBtnBlock:^(NSInteger index) {
+        // （1搜索极品城，2搜索淘宝）
+        self.type = [NSString stringWithFormat:@"%ld", (index + 1)];
+        [self reloadNewDataSorce];
+    }];
+    [self.view addSubview:subOne];
 
     [self createTitles];
 }
 
-- (void)changeTabbao:(UIButton *)sender
-{
-    if ([sender.titleLabel.text isEqual: @"搜淘宝"]) {
-        self.type = @"2";
-        sender.selected = YES;
-        self.line2.hidden = NO;
-
-        self.typeBtn1.selected = NO;
-        self.line1.hidden = YES;
-    } else {
-        self.type = @"1";
-        sender.selected = YES;
-        self.line1.hidden = NO;
-        self.typeBtn2.selected = NO;
-        self.line2.hidden = YES;
-    }
-    [self reloadNewDataSorce];
-}
 
 - (void)createTitles
 {
@@ -211,7 +173,7 @@
         btn.tag = 105 + i;
         btn.x = leftRightSpace + i * (itemWidth + space);
         [btn setTitleColor:UIColorFromRGB(0x9D9D9D) forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 16];
+        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 16];
         btn.width = itemWidth;
         btn.height = 38;
         [btn setTitle:list[i] forState:UIControlStateNormal];
@@ -222,11 +184,11 @@
         if (i == 0) {
             [btn setTitleColor:UIColorFromRGB(0x202020) forState:UIControlStateNormal];
             self.recordBtn = btn;
+            btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 16];
         }
 
         if (i == 1) {
-            [btn setImage:[UIImage imageNamed:@"search_asc"] forState:UIControlStateNormal];
-            [btn setImage:[UIImage imageNamed:@"search_nasc"] forState:UIControlStateSelected];
+            [btn setImage:[UIImage imageNamed:@"search_asc_non"] forState:UIControlStateNormal];
             btn.imageEdgeInsets = UIEdgeInsetsMake(0, 37, 0, 0);
             btn.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         }
@@ -245,6 +207,9 @@
     if (sender.tag != 106) {
         self.recoredBtnClick = 0;
     }
+    if (self.recordBtn.tag == 106) {
+        [self.recordBtn setImage:[UIImage imageNamed:@"search_asc_non"] forState:UIControlStateNormal];
+    }
     //（0综合，1价格，2补贴，3销量）
     switch (sender.tag) {
         case 105:
@@ -254,9 +219,11 @@
         {
             self.recoredBtnClick++;
             if (self.recoredBtnClick == 1) {
+                [sender setImage:[UIImage imageNamed:@"search_asc"] forState:UIControlStateNormal];
                 sender.selected = NO;
                 self.asc = @"1"; // (1正序，0倒序)
             } else if(self.recoredBtnClick == 2) {
+                [sender setImage:[UIImage imageNamed:@"search_nasc"] forState:UIControlStateSelected];
                 sender.selected = YES;
                 self.asc = @"0"; // (1正序，0倒序)
                 self.recoredBtnClick = 0;
@@ -272,6 +239,7 @@
             break;
         case 109:
         {
+            self.collectView.contentOffset = CGPointMake(0, 0);
             if (sender.isSelected) {
                 sender.selected = NO; // 条
                 self.layoutType = YES;
@@ -287,7 +255,9 @@
     }
 
     [self.recordBtn setTitleColor:UIColorFromRGB(0x9D9D9D) forState:UIControlStateNormal];
+    self.recordBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 16];
     [sender setTitleColor:UIColorFromRGB(0x202020) forState:UIControlStateNormal];
+    sender.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 16];
     self.recordBtn = sender;
     [self reloadNewDataSorce];
 }
@@ -361,7 +331,9 @@
     self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    param[@"deviceType"] = idfa;
+    param[@"deviceType"] = @"IDFA";
+    param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
+    param[@"deviceEncrypt"] = @"MD5";
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"keyword"] = self.searchText;
     param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
@@ -381,6 +353,16 @@
                     [self.dataSource addObject:dic];
                 }
             }
+            self.flagSubOne++;
+            if (self.dataSource.count == 0 && self.flagSubOne == 1) {
+                [CZProgressHUD showProgressHUDWithText:@"极品城暂无相关推荐"];
+                [CZProgressHUD hideAfterDelay:1.5];
+                self.subOne.selectIndex = 1;
+                self.type = @"2";
+                [self reloadNewDataSorce];
+            }
+
+            self.collectView.contentOffset = CGPointMake(0, 0);
             [self.collectView reloadData];
         }
         // 结束刷新
@@ -400,7 +382,9 @@
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    param[@"deviceType"] = idfa;
+    param[@"deviceType"] = @"IDFA";
+    param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
+    param[@"deviceEncrypt"] = @"MD5";
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"keyword"] = self.searchText;
     param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
@@ -557,6 +541,15 @@
     }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *list = @[self.dataSource, self.guessList];
+    NSDictionary *param = list[indexPath.section][indexPath.item];
+    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+    vc.otherGoodsId = param[@"otherGoodsId"];
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
 
 
 @end

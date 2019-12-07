@@ -11,6 +11,7 @@
 #import <AdSupport/AdSupport.h>
 #import "CZguessWhatYouLikeCell.h"
 #import "CZTaobaoDetailController.h"
+#import "KCUtilMd5.h"
 
 @interface CZGuessWhatYouLikeView () <UICollectionViewDelegate, UICollectionViewDataSource>
 /** <#注释#> */
@@ -99,7 +100,9 @@
     self.height = CZGetY(self.collectionView);
 
     [self.collectionView reloadData];
-    !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+     !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
+    });
 }
 
 
@@ -107,7 +110,10 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    param[@"deviceType"] = idfa;
+
+    param[@"deviceType"] = @"IDFA";
+    param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
+    param[@"deviceEncrypt"] = @"MD5";
     param[@"otherGoodsId"] = self.otherGoodsId;
 
     //获取详情数据
@@ -122,7 +128,9 @@
             self.height = CZGetY(self.collectionView);
             
             [self.collectionView reloadData];
-            !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
+               });
         }
     } failure:^(NSError *error) {}];
 }

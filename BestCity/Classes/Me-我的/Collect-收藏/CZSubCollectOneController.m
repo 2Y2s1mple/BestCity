@@ -8,6 +8,7 @@
 
 #import "CZSubCollectOneController.h"
 #import "GXNetTool.h"
+#import "CZFestivalCell.h"
 
 #import "CZSearchOneSubViewCell.h"
 // 跳转
@@ -121,7 +122,7 @@
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"type"] = @(1); 
+    param[@"type"] = @(8); 
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
@@ -161,8 +162,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dic = self.dataSource[indexPath.row];
-    CZSearchOneSubViewCell *cell = [CZSearchOneSubViewCell cellwithTableView:tableView];
-    cell.dataDic = dic;
+    CZFestivalCell *cell = [CZFestivalCell cellwithTableView:tableView];
+    cell.dataDic1 = [dic deleteAllNullValue];
     return cell;
 }
 

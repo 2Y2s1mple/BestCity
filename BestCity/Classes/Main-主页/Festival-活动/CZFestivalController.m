@@ -18,6 +18,7 @@
 // 视图
 #import "CZFestivalCell.h"
 #import "CZScollerImageTool.h" // 轮播图
+#import "CZAlertTool.h"
 
 // 跳转
 #import "CZDChoiceDetailController.h"
@@ -42,9 +43,11 @@
 /** <#注释#> */
 @property (nonatomic, strong) UIButton *editorBtn;
 
+
 @end
 
 @implementation CZFestivalController
+
 - (UIButton *)editorBtn
 {
     if (_editorBtn == nil) {
@@ -100,12 +103,25 @@
     // 获取数据创建视图
     [self setupRefresh];
 
-    [self.view addSubview:self.editorBtn];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchAlert) name:@"showSearchAlert" object:nil];
 }
+
+- (void)showSearchAlert
+{
+    [CZAlertTool alertRule];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    [CZAlertTool alertRule];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         // 新用户指导
@@ -203,8 +219,29 @@
 
 
     // 添加轮播图
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CZGetY(searchView) + 5, SCR_WIDTH, 200)];
-    imageView.image = [UIImage imageNamed:@"Main-bigImage"];
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, CZGetY(searchView) + 5, SCR_WIDTH, 200)];
+    [self.view addSubview:imageView];
+    [imageView setSelectedIndexBlock:^(NSInteger index) {
+        //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
+        NSDictionary *model = self.dataSource[@"adList"][index];
+        if ([model[@"type"] integerValue] == 2) {
+            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+            vc.detailType = [CZJIPINSynthesisTool getModuleType:[model[@"type"] integerValue]];
+            vc.findgoodsId = model[@"objectId"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([model[@"type"] integerValue] == 10) {
+            CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
+            vc.categoryId = model[@"objectId"];
+            vc.titleName = [model[@"name"] stringByAppendingString:@"双11专区"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
+
+    NSMutableArray *imgs = [NSMutableArray array];
+    for (NSDictionary *imgDic in self.dataSource[@"adList"]) {
+        [imgs addObject:imgDic[@"img"]];
+    }
+    imageView.imgList = imgs;
     [headerView addSubview:imageView];
 
     // 添加官网声明的条

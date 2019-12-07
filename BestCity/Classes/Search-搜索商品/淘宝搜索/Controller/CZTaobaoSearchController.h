@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CZTaobaoSearchController : UIViewController
-
+/** <#注释#> */
+@property (nonatomic, strong) NSString *searchText;
 @end

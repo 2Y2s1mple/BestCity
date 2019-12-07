@@ -20,6 +20,9 @@ NSString * const requiredVersionCode = @"requiredVersionCode";
 /** 收藏通知的KEY */
 NSString * const collectNotification = @"collectNotification";
 
+/** 记录搜索的字段 */
+NSMutableArray *recordSearchTextArray;
+
 BOOL didClickedNewPeople;
 
 

@@ -1,15 +1,16 @@
 //
-//  CZguessLineCell.m
+//  CZguessWhatYouLikeCell.m
 //  BestCity
 //
-//  Created by JasonBourne on 2019/12/4.
+//  Created by JasonBourne on 2019/11/30.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import "CZguessLineCell.h"
+#import "CZguessWhatYouLikeCell.h"
 #import "UIImageView+WebCache.h"
+#import "CZUMConfigure.h"
 
-@interface CZguessLineCell ()
+@interface CZguessWhatYouLikeCell ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *backView;
 /** 大图片 */
@@ -32,13 +33,23 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *feeLabelMargin;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *volumeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *buyRateLabel;
 @end
 
-@implementation CZguessLineCell
+@implementation CZguessWhatYouLikeCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.contentView.backgroundColor = [UIColor clearColor];
+    self.contentView.layer.cornerRadius = 5;
+    self.contentView.layer.masksToBounds = YES;
+    
+    self.backView.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
+    self.backView.layer.cornerRadius = 4;
+    self.backView.layer.shadowColor = [UIColor colorWithRed:167/255.0 green:167/255.0 blue:167/255.0 alpha:0.5].CGColor;
+    self.backView.layer.shadowOffset = CGSizeMake(0, 1);
+    self.backView.layer.shadowOpacity = 1;
+    self.backView.layer.shadowRadius = 4;
 }
 
 -(void)setDataDic:(NSDictionary *)dataDic
@@ -46,10 +57,9 @@
     _dataDic = dataDic;
     [_bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"img"]]];
     self.titleLabel.text = dataDic[@"otherName"];
-
     self.subTitleLabel.text = dataDic[@"shopName"];
 
-
+    self.buyRateLabel.text = [NSString stringWithFormat:@"%@折", dataDic[@"buyRate"]];
 
     NSString *buyBtnStr = [NSString stringWithFormat:@"¥%.2f", [dataDic[@"buyPrice"] floatValue]];
 
@@ -58,7 +68,7 @@
     [attrStr addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Medium" size: 11]} range:NSMakeRange(0, 1)];
 
     self.actualPriceLabel.attributedText = attrStr;
-
+    
 
 
     NSString *other = [NSString stringWithFormat:@"¥%.2lf", [dataDic[@"otherPrice"] floatValue]];
@@ -66,7 +76,7 @@
 
     self.couponPriceLabel.text = [NSString stringWithFormat:@"券 ¥%.0f", [dataDic[@"couponPrice"] floatValue]];
     self.feeLabel.text = [NSString stringWithFormat:@"  补贴 ¥%.2f  ", [dataDic[@"fee"] floatValue]];
-
+    
     if ([self.couponPriceLabel.text isEqualToString:@"券 ¥0"]) {
         self.couponPriceView.hidden = YES;
         self.feeLabelMargin.constant = -50;
@@ -94,5 +104,14 @@
 
 }
 
+- (IBAction)share:(id)sender {
+    [self shareBtnAction];
+}
+
+- (void)shareBtnAction
+{
+    CURRENTVC(currentVc);
+    [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.dataDic[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.dataDic[@"img"] shareType:1125 object:self.dataDic[@"otherGoodsId"]];
+}
 
 @end

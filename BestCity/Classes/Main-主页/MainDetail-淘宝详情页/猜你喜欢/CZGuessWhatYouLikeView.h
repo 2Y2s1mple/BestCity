@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface CZGuessWhatYouLikeView : UIView
-+(instancetype)guessWhatYouLikeView;
++ (instancetype)guessWhatYouLikeView;
 /** <#注释#> */
 @property (nonatomic, strong) NSArray *list;
 /** <#注释#> */

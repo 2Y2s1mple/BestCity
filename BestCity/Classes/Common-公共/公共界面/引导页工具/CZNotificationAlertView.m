@@ -10,6 +10,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "GXNetTool.h"
 #import "CZUpdataView.h"
+#import "CZAlertTool.h"
 UIKIT_EXTERN BOOL oldUser;
 @implementation CZNotificationAlertView
 /** 退出 */
@@ -97,6 +98,7 @@ UIKIT_EXTERN BOOL oldUser;
             NSLog(@"%@----%@", param, [param class]);
             if ([param isKindOfClass:[NSNull class]])
             {
+                [CZAlertTool alertRule];
                 return;
             }
 

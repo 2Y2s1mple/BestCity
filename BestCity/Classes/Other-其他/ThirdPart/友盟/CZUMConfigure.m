@@ -112,7 +112,7 @@ static id _instance;
         }else{
             UMSocialShareResponse *dataResponse = data;
             NSLog(@"response data is %@", dataResponse.message);
-            [CZGetJIBITool getJiBiWitType:@(5)];
+//            [CZGetJIBITool getJiBiWitType:@(5)];
         }
     }];
 }

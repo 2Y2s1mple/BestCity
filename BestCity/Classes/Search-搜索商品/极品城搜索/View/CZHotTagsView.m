@@ -147,6 +147,7 @@
 - (void)tagLabelLayout
 {
     self.recordNumber = 1;
+    self.maxLineNumber = self.hisArray.count;
     // 布局
     for (int i = 0; i < self.hisArray.count; i++) {
         // 先布局第一个
@@ -166,8 +167,12 @@
                 label.y = CGRectGetMaxY(prevlabel.frame) + 10;
                 label.x = 10;
             }
-            if (self.recordNumber == 3) {
-                self.lineNumber = i;
+            if (self.recordNumber == 4) {
+                self.lineNumber = (i - 1);
+            }
+
+            if (self.recordNumber == 6) {
+                self.maxLineNumber = (i - 1);
             }
         }
     }

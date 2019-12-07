@@ -18,5 +18,8 @@ UIKIT_EXTERN NSString * const collectNotification;
 
 UIKIT_EXTERN BOOL didClickedNewPeople;
 
+/** 记录搜索的字段 */
+UIKIT_EXTERN NSMutableArray *recordSearchTextArray;
+
 
 

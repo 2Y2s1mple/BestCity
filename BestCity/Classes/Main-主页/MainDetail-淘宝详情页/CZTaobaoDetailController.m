@@ -39,11 +39,24 @@
 
 /** <#注释#> */
 @property (nonatomic, assign) CGFloat recordHeight;
+
+/** <#注释#> */
+@property (nonatomic, strong) UIImageView *topImage;
 @end
 
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
 @implementation CZTaobaoDetailController
+
+- (UIImageView *)topImage
+{
+    if (_topImage == nil) {
+        self.topImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"“备份"]];
+    }
+    return _topImage;
+}
+
+
 #pragma mark - 懒加载
 - (UIScrollView *)scrollerView
 {
@@ -84,7 +97,7 @@ static CGFloat const likeAndShareHeight = 49;
         _collectButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
         _collectButton.layer.cornerRadius = 15;
         _collectButton.layer.masksToBounds = YES;
-        _collectButton.type = @"1";
+        _collectButton.type = @"8";
         _collectButton.commodityID = self.otherGoodsId;
     }
     return _collectButton;
@@ -144,6 +157,14 @@ static CGFloat const likeAndShareHeight = 49;
     [self.scrollerView addSubview:titlesView];
     self.recordHeight += titlesView.commodityH; // 高度
 
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    lineView.y = self.recordHeight;
+    lineView.height = 10;
+    lineView.width = SCR_WIDTH;
+    [self.scrollerView addSubview:lineView];
+    self.recordHeight += 10;
+
     // 功能评分
     if(![self.detailModel[@"scoreOptionsList"] isKindOfClass:[NSNull class]] && [self.detailModel[@"scoreOptionsList"] count] > 0) {
         CZParameterScoreView *parameter = [CZParameterScoreView parameterScoreViewImage:@"quality" title:@"功能评分" contextList:self.detailModel[@"scoreOptionsList"] detailModel:self.detailModel];
@@ -154,10 +175,28 @@ static CGFloat const likeAndShareHeight = 49;
 
 
     // 产品参数
-    CZParameterScoreView *scores = [CZParameterScoreView parameterScoreViewImage:@"parameter" title:@"产品参数" contextList:self.detailModel[@"parametersList"] detailModel:self.detailModel];
-    scores.y = self.recordHeight;
-    [self.scrollerView addSubview:scores];
-    self.recordHeight += scores.height ;
+    if(![self.detailModel[@"parametersList"] isKindOfClass:[NSNull class]] && [self.detailModel[@"parametersList"] count] > 0) {
+        CZParameterScoreView *scores = [CZParameterScoreView parameterScoreViewImage:@"parameter" title:@"产品参数" contextList:self.detailModel[@"parametersList"] detailModel:self.detailModel];
+        scores.y = self.recordHeight;
+        [self.scrollerView addSubview:scores];
+        self.recordHeight += scores.height ;
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor whiteColor];
+        lineView.y = self.recordHeight;
+        lineView.height = 8;
+        lineView.width = SCR_WIDTH;
+        [self.scrollerView addSubview:lineView];
+        self.recordHeight += 8;
+
+        UIView *lineView1 = [[UIView alloc] init];
+        lineView1.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        lineView1.y = self.recordHeight;
+        lineView1.height = 10;
+        lineView1.width = SCR_WIDTH;
+        [self.scrollerView addSubview:lineView1];
+        self.recordHeight += 10;
+    }
+
 
     // 淘宝商家
     CZTaoBaoShopNameView *shopNameView = [CZTaoBaoShopNameView taoBaoShopNameView];
@@ -169,27 +208,28 @@ static CGFloat const likeAndShareHeight = 49;
     // 推荐理由
     if(![self.detailModel[@"recommendReason"] isKindOfClass:[NSNull class]] && [self.detailModel[@"recommendReason"] length] > 0) {
         [self recommendReason:self.detailModel[@"recommendReason"]];
+        UIView *lineView1 = [[UIView alloc] init];
+        lineView1.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        lineView1.y = self.recordHeight;
+        lineView1.height = 10;
+        lineView1.width = SCR_WIDTH;
+        [self.scrollerView addSubview:lineView1];
+        self.recordHeight += 10;
     }
 
-    UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    lineView.y = self.recordHeight;
-    lineView.height = 10;
-    lineView.width = SCR_WIDTH;
-    [self.scrollerView addSubview:lineView];
-    self.recordHeight += 10;
 
 
     // 商品详情
-    [self goodsDetail];
-
-    UIView *lineView1 = [[UIView alloc] init];
-    lineView1.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    lineView1.y = self.recordHeight;
-    lineView1.height = 10;
-    lineView1.width = SCR_WIDTH;
-    [self.scrollerView addSubview:lineView1];
-    self.recordHeight += 10;
+    if(![self.detailModel[@"descImgList"] isKindOfClass:[NSNull class]] && [self.detailModel[@"descImgList"] count] > 0) {
+        [self goodsDetail];
+        UIView *lineView2 = [[UIView alloc] init];
+        lineView2.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        lineView2.y = self.recordHeight;
+        lineView2.height = 10;
+        lineView2.width = SCR_WIDTH;
+        [self.scrollerView addSubview:lineView2];
+        self.recordHeight += 10;
+    }
 
 
     // 猜你喜欢
@@ -331,12 +371,11 @@ static CGFloat const likeAndShareHeight = 49;
         backView.height = CZGetY(subView) + 20;
         self.recordHeight += backView.height;
     } else {
-        UIImageView *topImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"“备份"]];
-        [subView addSubview:topImage];
-        topImage.x = subView.width - 7.5 - 19;
-        topImage.y = CZGetY(contentLabel);
+        [subView addSubview:self.topImage];
+        self.topImage.x = subView.width - 7.5 - 19;
+        self.topImage.y = CZGetY(contentLabel);
 
-        subView.height = CZGetY(topImage) + 12;
+        subView.height = CZGetY(self.topImage) + 12;
         backView.height = CZGetY(subView) + 20;
         self.recordHeight += backView.height;
     }
@@ -431,6 +470,11 @@ static CGFloat const likeAndShareHeight = 49;
                 self.recordHeight += imageHeight;
             }
             self.scrollerView.contentSize = CGSizeMake(0, self.recordHeight);
+
+            if ([subView.subviews lastObject] == bigImage) {
+                NSLog(@"%@", imageURL.absoluteString);
+                [self changeSubViewFrame];
+            }
         }];
     }
 }
@@ -490,7 +534,7 @@ static CGFloat const likeAndShareHeight = 49;
         sender.y = CZGetY(label) + 10;
         subView.height = CZGetY(sender) + 12;
         backView.height = CZGetY(subView) + 20;
-
+        [self.topImage removeFromSuperview];
     } else {
         sender.selected = YES;
         label.numberOfLines = 0;
@@ -499,6 +543,11 @@ static CGFloat const likeAndShareHeight = 49;
         sender.y = CZGetY(label) + 10;
         subView.height = CZGetY(sender) + 12;
         backView.height = CZGetY(subView) + 20;
+
+
+        [backView addSubview:self.topImage];
+        self.topImage.x = subView.width - 7.5 - 19;
+        self.topImage.y = CZGetY(subView) - 40;
     }
 
     [self changeSubViewFrame];
@@ -534,7 +583,6 @@ static CGFloat const likeAndShareHeight = 49;
         backView.height = CZGetY(sender) + 12;
     }
     [self changeSubViewFrame];
-
 }
 
 // 购买
@@ -624,13 +672,13 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)shareBtnAction
 {
     CURRENTVC(currentVc);
-    [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.detailModel[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.detailModel[@"descImgs"] shareType:1125 object:self.detailModel[@"otherGoodsId"]];
+    [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.detailModel[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.detailModel[@"img"] shareType:1125 object:self.detailModel[@"otherGoodsId"]];
 }
 
 // 跳转到首页
 - (void)mainIndexBtnAction
 {
-    [self.navigationController popViewControllerAnimated:NO];
+    [self.navigationController popToRootViewControllerAnimated:NO];
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     tabbar.selectedIndex = 0;
 }
@@ -640,6 +688,6 @@ static CGFloat const likeAndShareHeight = 49;
     [self changeSubViewFrame];
 }
 
-
+ 
 
 @end

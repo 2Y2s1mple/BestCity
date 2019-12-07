@@ -12,6 +12,8 @@
 #import "GXNetTool.h"
 #import "CZGuessWhatYouLikeView.h"
 #import "CZTabbaoSearchDetailController.h"
+// subviews
+#import "CZTBSubOneView.h" // 收极品城
 
 @interface CZTaobaoSearchController ()<CZHotSearchViewDelegate, CZHotTagsViewDelegate, CZGuessWhatYouLikeViewDelegate, CZTabbaoSearchDetailControllerDelegate>
 
@@ -34,6 +36,17 @@
 /** <#注释#> */
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *type; // 分类（1搜索极品城，2搜索淘宝）
+
+/** <#注释#> */
+@property (nonatomic, strong) UIButton *showAll;
+/** <#注释#> */
+@property (nonatomic, strong) UIView *lineView;
+/** <#注释#> */
+@property (nonatomic, strong) CZGuessWhatYouLikeView *guess;
+/** <#注释#> */
+@property (nonatomic, strong) UIView *imageBackView;
+/** <#注释#> */
+@property (nonatomic, strong) UIButton *deleteBtn;
 @end
 
 @implementation CZTaobaoSearchController
@@ -43,6 +56,7 @@
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
+        _scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }
     return _scrollView;
 }
@@ -65,6 +79,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.type = @"1";
     // 创建搜索栏
     [self setupSearchView];
 }
@@ -74,6 +89,14 @@
     [super viewWillAppear:animated];
     // 获取数据
     [self getSourceData];
+    [self reloadGuessWhatYouLikeView];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.hisView1 removeFromSuperview];
+    self.hisView1 = nil;
 }
 
 - (void)getSourceData
@@ -94,10 +117,9 @@
             for (NSDictionary *dic in result[@"data"][@"logList"]) {
                 [self.hisArr addObject:dic[@"word"]];
             }
-            // 创建大家都在搜
-            [self createHistorySearchModule];
-            // 创建历史搜索
-            [self createHotSearchModule];
+
+            // 创建热搜
+            [self createSubViews];
         }
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
@@ -119,63 +141,111 @@
     self.searchView.textFieldActive = YES;
     self.searchView.delegate = self;
     self.searchView.backgroundColor = [UIColor whiteColor];
+    if (self.searchText.length > 0) {
+        self.searchView.searchText = self.searchText;
+    }
     [self.view addSubview:self.searchView];
 
-
-    for (int i = 0; i < 2; i++) {
-        UIButton *btn1 = [[UIButton alloc] init];
-        btn1.y = CZGetY(self.searchView) + 22;
-
-        [btn1 setTitleColor:UIColorFromRGB(0xE25838) forState:UIControlStateSelected];
-        [btn1 setTitleColor:UIColorFromRGB(0x9D9D9D) forState:UIControlStateNormal];
-        btn1.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
-        btn1.width = SCR_WIDTH / 2.0;
-        btn1.height = 25;
-        btn1.x = i * btn1.width;
-        [self.view addSubview:btn1];
-
-        UIView *btnLine = [[UIView alloc] init];
-        btnLine.tag = 100;
-        btnLine.y = btn1.height + 5;
-        btnLine.width = 65;
-        btnLine.height = 3;
-        btnLine.centerX = btn1.width / 2.0;
-        btnLine.backgroundColor = UIColorFromRGB(0xE25838);
-        [btn1 addSubview:btnLine];
-        if (i == 1) {
-            [btn1 setTitle:@"搜淘宝" forState:UIControlStateNormal];
-            btnLine.hidden = YES;
-            btn1.selected = NO;
-        } else {
-            [btn1 setTitle:@"搜极品城" forState:UIControlStateNormal];
-            btn1.selected = YES;
-        }
-        self.type = @"1"; // 1搜索极品城，2搜索淘宝
-    }
-    self.line = [[UIView alloc] initWithFrame:CGRectMake(0, CZGetY(self.searchView) + 25 + 5 + 3 + 22, SCR_WIDTH, 1)];
-    self.line.backgroundColor = CZGlobalLightGray;
-    [self.view addSubview:self.line];
+    // 搜淘宝按钮
+    CZTBSubOneView *subOne = [[CZTBSubOneView alloc] initWithFrame:CGRectMake(0, CZGetY(self.searchView) + 22, SCR_WIDTH, 34)];
+    subOne.selectIndex = 0;
+    [subOne setBtnBlock:^(NSInteger index) {
+        // （1搜索极品城，2搜索淘宝）
+        self.type = [NSString stringWithFormat:@"%ld", (index + 1)];
+    }];
+    [self.view addSubview:subOne];
 
     [self.view addSubview:self.scrollView];
-    self.scrollView.y = CZGetY(self.line);
+    self.scrollView.y = CZGetY(subOne);
     self.scrollView.width = SCR_WIDTH;
     self.scrollView.height = SCR_HEIGHT - self.scrollView.y;
+}
+- (void)userAgreement
+{
+    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/tbk-rule.html"]];
+    webVc.titleName = @"省钱攻略";
+    [self presentViewController:webVc animated:YES completion:nil];
+}
 
-    UIView *imageBackView = [[UIView alloc] init];
-    imageBackView.backgroundColor = UIColorFromRGB(0xFFEFEB);
-    [self.scrollView addSubview:imageBackView];
+- (void)createSubViews
+{
+    if(self.imageBackView == nil) {
+        UIView *imageBackView = [[UIView alloc] init];
+        self.imageBackView = imageBackView;
+        self.imageBackView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userAgreement)];
+        [self.imageBackView addGestureRecognizer:tap];
+        imageBackView.backgroundColor = UIColorFromRGB(0xFFEFEB);
+        [self.scrollView addSubview:imageBackView];
 
-    UIImageView *imageS = [[UIImageView alloc] init];
-    imageS.image = [UIImage imageNamed:@"Main-编组 3"];
-    [self.scrollView addSubview:imageS];
-    [imageS sizeToFit];
-    imageS.y = 20;
-    imageS.centerX = SCR_WIDTH / 2.0;
+        UIImageView *imageS = [[UIImageView alloc] init];
+        imageS.image = [UIImage imageNamed:@"Main-编组 3"];
+        [self.scrollView addSubview:imageS];
+        [imageS sizeToFit];
+        imageS.y = 20;
+        imageS.centerX = SCR_WIDTH / 2.0;
 
-    imageBackView.width = imageS.width + 30;
-    imageBackView.height = imageS.height + 20;
-    imageBackView.y = imageS.y - 10;
-    imageBackView.centerX = imageS.centerX;
+        imageBackView.width = imageS.width + 30;
+        imageBackView.height = imageS.height + 20;
+        imageBackView.y = imageS.y - 10;
+        imageBackView.centerX = imageS.centerX;
+    }
+
+    // 创建大家都在搜
+    if (self.hisView == nil) {
+        [self createHistorySearchModule];
+    }
+    // 创建历史搜索
+    if (self.hisView1 == nil) {
+        [self createHotSearchModule];
+    }
+
+
+
+    if (self.lineView == nil) {
+        self.lineView = [[UIView alloc] init];
+        self.lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        if (self.showAll == nil) {
+            self.lineView.y = CZGetY(self.hisView1) + 10;
+        } else {
+            self.lineView.y = CZGetY(self.showAll) + 10;
+        }
+        self.lineView.height = 10;
+        self.lineView.width = SCR_WIDTH;
+        [self.scrollView addSubview:self.lineView];
+    } else {
+        if (self.showAll == nil) {
+            self.lineView.y = CZGetY(self.hisView1) + 20;
+        } else {
+            self.lineView.y = CZGetY(self.showAll) + 20;
+        }
+    }
+
+
+    if (self.hisArr.count == 0) {
+        self.hisView1.hidden = YES;
+        self.deleteBtn.hidden = YES;
+        self.lineView.y = CZGetY(self.hisView1) - 40;
+    } else {
+        self.hisView.hidden = NO;
+        self.deleteBtn.hidden = NO;
+        if (self.showAll == nil) {
+            self.lineView.y = CZGetY(self.hisView1) + 20;
+        } else {
+            self.lineView.y = CZGetY(self.showAll) + 20;
+        }
+    }
+
+
+
+//    // 猜你喜欢
+    if (self.guess == nil) {
+        [self guessView];
+    } else {
+
+        self.guess.y = CZGetY(self.lineView) + 10;
+        self.scrollView.contentSize = CGSizeMake(0, CZGetY(self.guess) + 10);
+    }
 }
 
 // <CZHotSearchViewDelegate>
@@ -203,7 +273,6 @@
 // 历史搜索
 - (void)createHotSearchModule
 {
-
     CZHotTagsView *hisView = [[CZHotTagsView alloc] initWithFrame:CGRectMake(0, CZGetY(self.hisView) + 32 + 26, SCR_WIDTH, 300)];
     self.hisView1 = hisView;
     hisView.type = CZHotTagLabelTypeTapGesture;
@@ -213,18 +282,23 @@
     [self.scrollView addSubview:self.hisView1];
 
     UIButton *deleteBtn = [[UIButton alloc] init];
+    self.deleteBtn = deleteBtn;
     deleteBtn.frame = CGRectMake(SCR_WIDTH - 26- 17, hisView.y, 26, 25);
     [deleteBtn setImage:[UIImage imageNamed:@"delete-2"] forState:UIControlStateNormal];
     [deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:deleteBtn];
+    [self.scrollView addSubview:self.deleteBtn];
 
     NSLog(@"%ld", hisView.lineNumber);
 
-     [self.hisArr removeObjectsInRange:NSMakeRange(hisView.lineNumber, self.hisArr.count - hisView.lineNumber)];
-    hisView.hisArray = self.hisArr;
+    NSMutableArray *list = [self.hisArr mutableCopy];
+    if (hisView.lineNumber > 0) {
+        [list removeObjectsInRange:NSMakeRange(hisView.lineNumber, self.hisArr.count - hisView.lineNumber)];
+    }
+    hisView.hisArray = list;
 
     if (hisView.lineNumber > 0) {
         UIButton *showAll = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.showAll = showAll;
         [showAll setTitle:@"更多搜索历史" forState:UIControlStateNormal];
         [showAll setImage:[UIImage imageNamed:@"taobaoDetail_list-right"] forState:UIControlStateNormal];
         [showAll setTitle:@"收起" forState:UIControlStateSelected];
@@ -237,45 +311,57 @@
         [showAll sizeToFit];
         showAll.y = CZGetY(hisView) + 20;
         showAll.centerX = SCR_WIDTH / 2.0;
-
+        [showAll addTarget:self action:@selector(showAllAction:) forControlEvents:UIControlEventTouchUpInside];
         self.scrollView.contentSize = CGSizeMake(0, CZGetY(showAll) + 10);
     } else {
         self.scrollView.contentSize = CGSizeMake(0, CZGetY(hisView));
     }
 
-    UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    lineView.y = CZGetY([self.scrollView.subviews lastObject]) + 10;
-    lineView.height = 10;
-    lineView.width = SCR_WIDTH;
-    [self.scrollView addSubview:lineView];
-
-    // 猜你喜欢
-    [self guessView];
-
 }
 
+- (void)showAllAction:(UIButton *)sender
+{
+    if (sender.isSelected) { // 默认是收起的
+        sender.selected = NO;
+        self.hisView1.hisArray = self.hisArr;
+        NSMutableArray *list = [self.hisArr mutableCopy];
+         [list removeObjectsInRange:NSMakeRange(self.hisView1.lineNumber, list.count - self.hisView1.lineNumber)];
+        self.hisView1.hisArray = list;
+        sender.imageEdgeInsets = UIEdgeInsetsMake(0, 80, 0, 0);
+        sender.titleEdgeInsets = UIEdgeInsetsMake(0, -28, 0, 0);
+    } else {
+        sender.selected = YES;
+        self.hisView1.hisArray = self.hisArr;
+        NSMutableArray *list = [self.hisArr mutableCopy];
+         [list removeObjectsInRange:NSMakeRange(self.hisView1.maxLineNumber, list.count - self.hisView1.maxLineNumber)];
+        self.hisView1.hisArray = list;
+        sender.imageEdgeInsets = UIEdgeInsetsMake(0, 54, 0, 0);
+        sender.titleEdgeInsets = UIEdgeInsetsMake(0, -28, 0, 0);
+    }
+
+    self.showAll.y = CZGetY(self.hisView1) + 20;
+    self.lineView.y =  CZGetY(self.showAll) + 10;
+    self.guess.y = CZGetY(self.lineView);
+    [self reloadGuessWhatYouLikeView];
+}
 
 // 猜你喜欢
 - (void)guessView
 {
     CZGuessWhatYouLikeView *guess = [CZGuessWhatYouLikeView guessWhatYouLikeView];
+    self.guess = guess;
     guess.delegate = self;
     guess.y = CZGetY([self.scrollView.subviews lastObject]);
     guess.width = SCR_WIDTH;
     guess.otherGoodsId = @"";
 
     [self.scrollView addSubview:guess];
-
 }
-
 
 - (void)reloadGuessWhatYouLikeView
 {
     self.scrollView.contentSize = CGSizeMake(0, CZGetY([self.scrollView.subviews lastObject]) + 10);
 }
-
-
 
 #pragma mark - 全部删除
 - (void)deleteAction
@@ -287,7 +373,14 @@
         [CZProgressHUD showProgressHUDWithText:nil];
         [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/deleteAll"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
-                [self reloadData];
+                // 获取数据
+                [self.hisView1 removeFromSuperview];
+                self.hisView1 = nil;
+                [self.showAll removeFromSuperview];
+                self.showAll = nil;
+                [self.deleteBtn removeFromSuperview];
+                self.deleteBtn = nil;
+                [self getSourceData];
             }        
         } failure:^(NSError *error) {}];
     }]];
@@ -313,9 +406,6 @@
         [CZProgressHUD hideAfterDelay:0];
     }];
 }
-
-
-
 
 // 点击事件 <CZHotTagsViewDelegate>
 - (void)hotTagsView:(CZHotTagsView *)tagsView didSelectedTag:(CZHotTagLabel *)tagLabel

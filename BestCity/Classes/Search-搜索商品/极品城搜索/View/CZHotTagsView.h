@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** <#注释#> */
 @property (nonatomic, assign) NSInteger lineNumber;
 /** <#注释#> */
+@property (nonatomic, assign) NSInteger maxLineNumber;
+/** <#注释#> */
 @property (nonatomic, assign) NSInteger recordNumber;
 /** 创建标签方法 */
 - (void)createTagLabelWithTitle:(NSString *)title withEventType:(CZHotTagLabelType)type;

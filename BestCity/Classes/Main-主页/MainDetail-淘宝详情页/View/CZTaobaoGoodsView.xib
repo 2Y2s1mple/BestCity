@@ -33,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNq-eC-krH" userLabel="CouponView">
-                    <rect key="frame" x="14" y="152" width="384" height="65"/>
+                    <rect key="frame" x="14" y="171" width="384" height="65"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R19-eJ-BgQ">
                             <rect key="frame" x="0.0" y="0.0" width="384" height="65"/>
@@ -107,10 +107,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D7w-0p-aq8">
-                    <rect key="frame" x="0.0" y="235" width="412" height="6"/>
+                    <rect key="frame" x="0.0" y="254" width="412" height="0.0"/>
                     <color key="backgroundColor" red="0.96070021390000004" green="0.96083813910000004" blue="0.96067017320000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="6" id="r7x-Rg-yhr"/>
+                        <constraint firstAttribute="height" id="r7x-Rg-yhr"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbg-MV-un3">
@@ -176,6 +176,18 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3568人已买" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcJ-qn-R6h">
+                    <rect key="frame" x="14" y="145" width="68" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海  浦东" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9p-kK-Q8z">
+                    <rect key="frame" x="337" y="144" width="61" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -186,15 +198,19 @@
                 <constraint firstItem="cAe-Qy-mMX" firstAttribute="top" secondItem="Sbg-MV-un3" secondAttribute="bottom" constant="15" id="Ej0-fZ-Wid"/>
                 <constraint firstItem="Sbg-MV-un3" firstAttribute="leading" secondItem="haI-Ze-jO5" secondAttribute="leading" constant="14" id="GqP-sX-BgE"/>
                 <constraint firstAttribute="trailing" secondItem="WNq-eC-krH" secondAttribute="trailing" constant="14" id="ODH-hs-5Ek"/>
+                <constraint firstItem="WNq-eC-krH" firstAttribute="top" secondItem="BcJ-qn-R6h" secondAttribute="bottom" constant="11" id="R7I-kf-RBS"/>
                 <constraint firstAttribute="trailing" secondItem="cAe-Qy-mMX" secondAttribute="trailing" constant="14" id="ROd-pB-68v"/>
                 <constraint firstItem="Sbg-MV-un3" firstAttribute="top" secondItem="rRZ-8N-Jxe" secondAttribute="bottom" constant="15" id="Txx-nk-njS"/>
+                <constraint firstItem="r9p-kK-Q8z" firstAttribute="trailing" secondItem="R19-eJ-BgQ" secondAttribute="trailing" id="WBe-7w-yec"/>
                 <constraint firstItem="D7w-0p-aq8" firstAttribute="top" secondItem="WNq-eC-krH" secondAttribute="bottom" constant="18" id="XmG-g0-otK"/>
                 <constraint firstItem="hBF-1a-oH2" firstAttribute="centerY" secondItem="rRZ-8N-Jxe" secondAttribute="centerY" id="YBu-yA-V3d"/>
                 <constraint firstItem="cAe-Qy-mMX" firstAttribute="leading" secondItem="haI-Ze-jO5" secondAttribute="leading" constant="14" id="YTX-6B-qJq"/>
+                <constraint firstItem="BcJ-qn-R6h" firstAttribute="leading" secondItem="R19-eJ-BgQ" secondAttribute="leading" id="jMT-wP-QJt"/>
                 <constraint firstItem="D7w-0p-aq8" firstAttribute="leading" secondItem="haI-Ze-jO5" secondAttribute="leading" id="m2d-uk-aOe"/>
                 <constraint firstItem="hBF-1a-oH2" firstAttribute="leading" secondItem="rRZ-8N-Jxe" secondAttribute="trailing" constant="10" id="q2W-u8-hMg"/>
                 <constraint firstItem="rRZ-8N-Jxe" firstAttribute="leading" secondItem="haI-Ze-jO5" secondAttribute="leading" constant="14" id="rPh-GY-lLb"/>
-                <constraint firstItem="WNq-eC-krH" firstAttribute="top" secondItem="cAe-Qy-mMX" secondAttribute="bottom" constant="15" id="yzS-qj-gUF"/>
+                <constraint firstItem="WNq-eC-krH" firstAttribute="top" secondItem="cAe-Qy-mMX" secondAttribute="bottom" constant="34" id="yzS-qj-gUF"/>
+                <constraint firstItem="WNq-eC-krH" firstAttribute="top" secondItem="r9p-kK-Q8z" secondAttribute="bottom" constant="11" id="zOK-As-9x5"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -210,10 +226,12 @@
                 <outlet property="lineView" destination="D7w-0p-aq8" id="qzR-QD-OoG"/>
                 <outlet property="otherPrice" destination="hBF-1a-oH2" id="hBW-vk-e2i"/>
                 <outlet property="pointView" destination="D7w-0p-aq8" id="d18-Cu-xPv"/>
+                <outlet property="provcity" destination="r9p-kK-Q8z" id="T1E-y3-nrf"/>
                 <outlet property="titleLabelTop" destination="Ej0-fZ-Wid" id="C40-ph-9Sy"/>
                 <outlet property="titleName" destination="cAe-Qy-mMX" id="tZl-Ct-Jls"/>
+                <outlet property="volume" destination="BcJ-qn-R6h" id="bRE-Qb-A27"/>
             </connections>
-            <point key="canvasLocation" x="-3091.1999999999998" y="-1554.872563718141"/>
+            <point key="canvasLocation" x="-3134" y="-1589"/>
         </view>
     </objects>
     <resources>

@@ -13,6 +13,7 @@
 #import "CZOpenAlibcTrade.h"
 //#import "UMSocialSnsService.h"
 #import "GXNetTool.h"
+#import "CZAlertTool.h"
 #import "CZLaunchViewController.h"
 
 #import <MobLinkPro/IMLSDKRestoreDelegate.h>
@@ -26,6 +27,8 @@
 @property (nonatomic) dispatch_queue_t guideQueue;
 @property (nonatomic) dispatch_semaphore_t guideSemaphore;
 @property (nonatomic) BOOL isAlreadyRun;
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger flagNumber;
 @end
 
 @implementation AppDelegate
@@ -53,6 +56,8 @@
     [MobLink setDelegate:self];
 
     [self.window makeKeyAndVisible];
+
+    recordSearchTextArray = [NSMutableArray array];
 
     return YES;
 }
@@ -163,7 +168,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [application setApplicationIconBadgeNumber:0];
     [application cancelAllLocalNotifications];
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    self.flagNumber++;
+    if (self.flagNumber > 1) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showSearchAlert" object:nil];
+    }
+
+    NSLog(@"x555555555");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
