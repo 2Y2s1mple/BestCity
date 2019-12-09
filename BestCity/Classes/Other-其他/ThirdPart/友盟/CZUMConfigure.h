@@ -29,4 +29,6 @@ typedef NS_ENUM(NSUInteger, CZUMConfigureType) {
 
 // 新
 - (void)sharePlatform:(UMSocialPlatformType)platform controller:(UIViewController *)vc url:(NSString *)webUrl Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(id)thumImage shareType:(CZUMConfigureType)type object:(id)anObject;
+
+- (void)weChatCallback;
 @end

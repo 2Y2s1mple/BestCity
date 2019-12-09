@@ -54,6 +54,9 @@
 /** <#注释#> */
 @property (nonatomic, assign) BOOL layoutType;
 
+/** 记录当前的参数, 防止多次点击 */
+@property (nonatomic, strong) NSDictionary *recordParam;
+
 
 @end
 
@@ -327,6 +330,9 @@
 #pragma  mark - 获取数据
 - (void)reloadNewDataSorce
 {
+
+
+
     // 结束尾部刷新
     [self.collectView.mj_footer endRefreshing];
     self.page = 1;
@@ -341,8 +347,11 @@
     param[@"type"] = self.type; // 分类（1搜索极品城，2搜索淘宝）
     param[@"page"] = @(self.page);
 
+    self.recordParam = param;
+
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (self.recordParam != param) return;
         if ([result[@"msg"] isEqualToString:@"success"]) {
 
             self.dataSource = [NSMutableArray array];

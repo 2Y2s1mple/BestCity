@@ -232,7 +232,7 @@
         } else if ([model[@"type"] integerValue] == 10) {
             CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
             vc.categoryId = model[@"objectId"];
-            vc.titleName = [model[@"name"] stringByAppendingString:@"双11专区"];
+            vc.titleName = [model[@"name"] stringByAppendingString:@"专区"];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }];

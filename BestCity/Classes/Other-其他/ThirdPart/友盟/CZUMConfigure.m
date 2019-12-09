@@ -13,6 +13,12 @@
 #import "CZGetJIBITool.h"
 #import "UIImageView+WebCache.h"
 
+#import "WXApi.h"
+
+@interface CZUMConfigure ()
+
+@end
+
 @implementation CZUMConfigure
 static id _instance;
 + (instancetype)shareConfigure
@@ -26,6 +32,7 @@ static id _instance;
 
 - (void)configure{
     [UMConfigure initWithAppkey:@"5b729a75f29d987629000096" channel:@"App Store"];
+
     // U-Share 平台设置
     [self configUSharePlatforms];
 //     [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO
@@ -39,6 +46,9 @@ static id _instance;
 {
     /* 设置微信的appKey和appSecret */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxfd2e92db2568030a" appSecret:@"80b12d76b891c37a6ccc47bc0b651713" redirectURL:@"http://mobile.umeng.com/social"];
+
+    //向微信注册
+    [WXApi registerApp:@"wxfd2e92db2568030a" universalLink:@"https://help.wechat.com/sdksample/"];
     
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
@@ -246,5 +256,6 @@ static id _instance;
         [alertView removeFromSuperview];
     });
 }
+
 
 @end

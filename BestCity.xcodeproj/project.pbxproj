@@ -4657,10 +4657,10 @@
 		97F0EC0121251187000FE1DC /* 友盟 */ = {
 			isa = PBXGroup;
 			children = (
-				97A5078B239E0C0200EF670F /* 微信 */,
 				97FA0B1B237682D5001D1B70 /* asdasd.png */,
 				97F0EC30212529F5000FE1DC /* CZUMConfigure.h */,
 				97F0EC31212529F5000FE1DC /* CZUMConfigure.m */,
+				97A5078B239E0C0200EF670F /* 微信 */,
 				97B6C568225AF3900061D9A0 /* common */,
 				97B6C55C225AEC470061D9A0 /* analytics */,
 				97F0EC06212512B6000FE1DC /* share */,
@@ -5863,9 +5863,11 @@
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信/libWeChatSDK.a\"",
 					"-force_load",
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/WeChat/libSocialWeChat.a",
 					"-force_load",
@@ -5962,9 +5964,11 @@
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
 				);
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信/libWeChatSDK.a\"",
 					"-force_load",
 					"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/WeChat/libSocialWeChat.a",
 					"-force_load",

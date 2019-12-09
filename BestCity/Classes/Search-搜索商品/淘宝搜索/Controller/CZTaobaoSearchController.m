@@ -291,26 +291,6 @@
 
 
 #pragma mark - 数据
-- (void)reloadData
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/log"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            // 历史
-            self.hisArr = [NSMutableArray array];
-            for (NSDictionary *dic in result[@"data"][@"logList"]) {
-                [self.hisArr addObject:dic[@"word"]];
-            }
-        }
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    }];
-}
-
 - (void)getSourceData:(void (^)(void))callback
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -322,14 +302,17 @@
             // 大家都在搜
             self.searchArr = [NSMutableArray array];
             for (NSDictionary *dic in result[@"data"][@"hotWordList"]) {
-                [self.searchArr addObject:dic[@"word"]];
+                if (![dic[@"word"] isKindOfClass:[NSNull class]]) {
+                    [self.searchArr addObject:dic[@"word"]];
+                }
             }
             // 历史
             self.hisArr = [NSMutableArray array];
             for (NSDictionary *dic in result[@"data"][@"logList"]) {
-                [self.hisArr addObject:dic[@"word"]];
+                if (![dic[@"word"] isKindOfClass:[NSNull class]]) {
+                    [self.hisArr addObject:dic[@"word"]];
+                }
             }
-
             // 创建热搜
             callback();
         }
@@ -384,9 +367,10 @@
 {
 
     CZTabbaoSearchDetailController *vc = [[CZTabbaoSearchDetailController alloc] init];
-    vc.searchText = self.searchView.searchText;
-    if (vc.searchText.length > 0 && ![[vc.searchText substringFromIndex:0]  isEqual: @""]) {
-
+    NSString *text = [self.searchView.searchText stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.searchView.searchText = text;
+    if (text.length > 0) {
+        vc.searchText = text;
         vc.currentDelegate = self;
         vc.type = self.type;
         [self.navigationController pushViewController:vc animated:YES];

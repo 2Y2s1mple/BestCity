@@ -22,6 +22,10 @@
 
 #import "WXApi.h"
 
+#import "CZFreeChargeDetailController.h"
+#import "CZTaobaoDetailController.h"
+#import "CZDChoiceDetailController.h"
+
 @interface AppDelegate () <IMLSDKRestoreDelegate, WXApiDelegate>
 
 /** <#注释#> */
@@ -60,9 +64,6 @@
     [self.window makeKeyAndVisible];
 
     recordSearchTextArray = [NSMutableArray array];
-
-    //向微信注册
-    [WXApi registerApp:@"wxfd2e92db2568030a" universalLink:@""];
 
     return YES;
 }
@@ -136,6 +137,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                                           annotation:annotation]) {
         // 处理其他app跳转到自己的app
     }
+    [WXApi handleOpenURL:url delegate:self];
     NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
     NSLog(@"URL scheme:%@", [url scheme]);
     NSLog(@"URL query: %@", [url query]);
@@ -154,35 +156,106 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         //处理其他app跳转到自己的app，如果百川处理过会返回YES
     }
     [WXApi handleOpenURL:url delegate:self];
+
     NSLog(@"URL scheme:%@", [url scheme]);
     NSLog(@"URL query: %@", [url query]);
     return YES;
 }
 
 
-
-
 -(void) onReq:(BaseReq*)req
 {
-
-    NSLog(@"-----------");
-    if([req isKindOfClass:[ShowMessageFromWXReq class]])
+    if([req isKindOfClass:[LaunchFromWXReq class]])
     {
-        ShowMessageFromWXReq* temp = (ShowMessageFromWXReq*)req;
+        //从微信启动App
+       ShowMessageFromWXReq* temp = (ShowMessageFromWXReq*)req;
         WXMediaMessage *msg = temp.message;
-
-        //显示微信传过来的内容
-        WXAppExtendObject *obj = msg.mediaObject;
-
-        NSString *strTitle = [NSString stringWithFormat:@"微信请求App显示内容"];
-        NSString *strMsg = [NSString stringWithFormat:@"标题：%@ \n内容：%@ \n附带信息：%@ \n缩略图:%u bytes\n\n", msg.title, msg.description, obj.extInfo, msg.thumbData.length];
-
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        [self pushToVC:msg.messageExt];
+        NSLog(@"%@", msg.messageExt);
     }
 }
 
+- (void)pushToVC:(NSString *)text
+{
 
+    NSArray *textArr = [text componentsSeparatedByString:@"&"];
+    NSString *type = [[[textArr firstObject] componentsSeparatedByString:@"="] lastObject];
+    NSString *ID = [[textArr[1] componentsSeparatedByString:@"="] lastObject];
+    NSString *articleType = [[[textArr lastObject] componentsSeparatedByString:@"="] lastObject];
+
+
+    //        1.免单新人详情页  type=0&id=xxx
+    //        2.免单老人免单详情页 type=1&id=xxx
+    //        3.app首页type=3&id=0
+    //
+    //        4.新的商品详情页： type=2&id=xxx
+    //        5.评测详情页：  contentType：1
+    //        type=3&id=xxx&articleType=文章type
+    //                     contentType：3
+    //        type=4&id=xxx&articleType=文章type
+
+    //0默认消息，1榜单首页，11榜单详情，12商品详情，2评测主页，21评测文章，23清单文章web，24清单文章json，3新品主页，31新品详情，4免单主页，41免单详情, 5免单
+
+    switch ([type integerValue]) {
+        case 0:
+        {
+            CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
+            vc.Id = ID;
+            vc.isOldUser = NO;
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            UINavigationController *nav = tabbar.selectedViewController;
+            [nav pushViewController:vc animated:YES];
+            break;
+        }
+        case 1:
+        {
+            CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
+            vc.Id = ID;
+            vc.isOldUser = YES;
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            UINavigationController *nav = tabbar.selectedViewController;
+            [nav pushViewController:vc animated:YES];
+            break;
+        }
+        case 2:
+        {
+            CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+            vc.otherGoodsId = ID;
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            UINavigationController *nav = tabbar.selectedViewController;
+            [nav pushViewController:vc animated:YES];
+            break;
+        }
+        case 3:
+        {
+            if ([ID isEqual:@"0"]) {
+                UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                tabbar.selectedIndex = 1;
+            } else {
+                CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+                vc.detailType = CZJIPINModuleQingDan;
+                vc.findgoodsId = ID;
+                UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                UINavigationController *nav = tabbar.selectedViewController;
+                [nav pushViewController:vc animated:YES];
+            }
+            break;
+        }
+        case 4:
+        {
+            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+            vc.detailType = CZJIPINModuleQingDan;
+            vc.findgoodsId = ID;
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            UINavigationController *nav = tabbar.selectedViewController;
+            [nav pushViewController:vc animated:YES];
+            break;
+        }
+
+        default:
+            break;
+    }
+}
 
 #pragma mark - 系统的方法
 - (void)applicationWillResignActive:(UIApplication *)application {
