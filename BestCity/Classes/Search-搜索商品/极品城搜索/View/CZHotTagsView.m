@@ -7,6 +7,7 @@
 //
 
 #import "CZHotTagsView.h"
+#import "GXNetTool.h"
 
 
 @interface CZHotTagsView () <CZHotTagLabelDelegate>
@@ -66,6 +67,16 @@
     hisLabel.textColor = UIColorFromRGB(0x202020);
     hisLabel.text = _title;
     [self addSubview:hisLabel];
+
+    if (![title isEqualToString:@"今日热搜"]) {
+        UIButton *deleteBtn = [[UIButton alloc] init];
+        deleteBtn.size = CGSizeMake(26, 25);
+        deleteBtn.centerY = hisLabel.centerY;
+        deleteBtn.x = self.width -  deleteBtn.width - 15;
+        [deleteBtn setImage:[UIImage imageNamed:@"delete-2"] forState:UIControlStateNormal];
+        [deleteBtn addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:deleteBtn];
+    }
 }
 
 // 设置类型
@@ -127,27 +138,42 @@
 - (void)setup
 {
     self.tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, self.width, 100)];
+    self.tagsView.clipsToBounds = YES;
     [self addSubview:_tagsView];
     // 内容
     for (int i = 0; i < self.hisArray.count; i++) {
         CZHotTagLabel *label = [[CZHotTagLabel alloc] init];
         label.delegate = self;
         label.text = self.hisArray[i];
-        [self.tagsView addSubview:label];
-        CGSize size = [label.text sizeWithAttributes:@{NSFontAttributeName : label.font}];
-        if (size.width > SCR_WIDTH - 20) {
-            label.size = CGSizeMake(SCR_WIDTH - 20, 30);
-        } else {
-            label.size = CGSizeMake((int)((size.width + 28) + 0.5), 30);
-        }
         label.type = self.type;
+        [label sizeToFit];
+
+        UIView *backView = [[UIView alloc] init];
+        backView.backgroundColor = RANDOMCOLOR;
+        backView.height = 30;
+        [backView addSubview:label];
+        backView.layer.cornerRadius = 15;
+        backView.layer.masksToBounds = YES;
+        backView.backgroundColor = CZGlobalLightGray;
+
+
+        [self.tagsView addSubview:backView];
+//        CGSize size = [label.text sizeWithAttributes:@{NSFontAttributeName : label.font}];
+//        NSLog(@"%lf", size.width);
+        
+        if ((label.size.width + 28) > SCR_WIDTH - 20) {
+            backView.width = SCR_WIDTH - 20;
+            label.width = backView.width - 28;
+        } else {
+            backView.width = label.size.width + 28;
+
+        }
+        label.center = CGPointMake(backView.size.width / 2.0, backView.size.height / 2.0);
     }
 }
 
 - (void)tagLabelLayout
 {
-    self.recordNumber = 1;
-    self.maxLineNumber = self.hisArray.count;
     // 布局
     for (int i = 0; i < self.hisArray.count; i++) {
         // 先布局第一个
@@ -158,27 +184,104 @@
         if (i > 0) {
             // 获取前一个
             CZHotTagLabel *prevlabel = self.tagsView.subviews[i - 1];
-            if (SCR_WIDTH - CGRectGetMaxX(prevlabel.frame) > label.width + 10) {
+            if (SCR_WIDTH - CGRectGetMaxX(prevlabel.frame) > (label.width + 20)) {
                 label.x = CGRectGetMaxX(prevlabel.frame) + 10;
                 label.y = prevlabel.y;
             } else {
-                self.recordNumber++;
-
                 label.y = CGRectGetMaxY(prevlabel.frame) + 10;
                 label.x = 10;
             }
-            if (self.recordNumber == 4) {
-                self.lineNumber = (i - 1);
-            }
+        }
+    }
+    self.tagsView.height = CZGetY([self.tagsView.subviews lastObject]);
 
-            if (self.recordNumber == 6) {
-                self.maxLineNumber = (i - 1);
+    if (self.tagsView.height > 120) {
+        self.tagsView.height = 120;
+        self.isShow = YES; // 显示外面的按钮
+    } else {
+        self.isShow = NO; // 不显示外面的按钮
+    }
+    self.height = CZGetY(self.tagsView);
+}
+
+- (void)showAll
+{
+    // 布局
+    for (int i = 0; i < self.hisArray.count; i++) {
+        // 先布局第一个
+        CZHotTagLabel *label = self.tagsView.subviews[i];
+        label.x = 10;
+        label.y = 10;
+
+        if (i > 0) {
+            // 获取前一个
+            CZHotTagLabel *prevlabel = self.tagsView.subviews[i - 1];
+            if (SCR_WIDTH - CGRectGetMaxX(prevlabel.frame) > label.width + 20) {
+                label.x = CGRectGetMaxX(prevlabel.frame) + 10;
+                label.y = prevlabel.y;
+            } else {
+                label.y = CGRectGetMaxY(prevlabel.frame) + 10;
+                label.x = 10;
             }
         }
     }
-    
-    UILabel *lab = (UILabel *)[self.tagsView.subviews lastObject];
-    self.tagsView.height = CZGetY(lab);
+    self.tagsView.height = CZGetY([self.tagsView.subviews lastObject]);
+
+    CGFloat height = 40 * 5;
+    if (self.tagsView.height > height) {
+        self.tagsView.height = height;
+    }
     self.height = CZGetY(self.tagsView);
+}
+
+- (void)hide
+{
+    // 布局
+    for (int i = 0; i < self.hisArray.count; i++) {
+        // 先布局第一个
+        CZHotTagLabel *label = self.tagsView.subviews[i];
+        label.x = 10;
+        label.y = 10;
+
+        if (i > 0) {
+            // 获取前一个
+            CZHotTagLabel *prevlabel = self.tagsView.subviews[i - 1];
+            if (SCR_WIDTH - CGRectGetMaxX(prevlabel.frame) > label.width + 20) {
+                label.x = CGRectGetMaxX(prevlabel.frame) + 10;
+                label.y = prevlabel.y;
+            } else {
+                label.y = CGRectGetMaxY(prevlabel.frame) + 10;
+                label.x = 10;
+            }
+        }
+    }
+    self.tagsView.height = CZGetY([self.tagsView.subviews lastObject]);
+
+    CGFloat height = 40 * 3;
+    if (self.tagsView.height > height) {
+        self.tagsView.height = height;
+    }
+    self.height = CZGetY(self.tagsView);
+}
+
+
+// 全部删除
+- (void)deleteAction
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除全部历史记录？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+//        [CZProgressHUD showProgressHUDWithText:nil];
+        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/search/deleteAll"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"msg"] isEqualToString:@"success"]) {
+                // 获取数据
+//                [self getSourceData];
+                [self.delegate deleteTags];
+            }
+//            [CZProgressHUD hideAfterDelay:1.5];
+        } failure:^(NSError *error) {}];
+    }]];
+    [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:alert animated:NO completion:nil];
 }
 @end

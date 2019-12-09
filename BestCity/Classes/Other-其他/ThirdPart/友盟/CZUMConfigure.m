@@ -223,8 +223,13 @@ static id _instance;
 
 
 
+    UIView *alertView = [[UIView alloc] init];
+    alertView.frame = [UIScreen mainScreen].bounds;
+    alertView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    [[UIApplication sharedApplication].keyWindow addSubview:alertView];
 
 
+    [CZProgressHUD showProgressHUDWithText:@"正在启动微信, 请等待..."];
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:vc completion:^(id data, NSError *error) {
         if (error) {
@@ -232,9 +237,14 @@ static id _instance;
         }else{
             UMSocialShareResponse *dataResponse = data;
             NSLog(@"response data is %@", dataResponse.message);
-            [CZGetJIBITool getJiBiWitType:@(5)];
+//            [CZGetJIBITool getJiBiWitType:@(5)];
         }
     }];
+    [CZProgressHUD hideAfterDelay:3];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alertView removeFromSuperview];
+    });
 }
 
 @end

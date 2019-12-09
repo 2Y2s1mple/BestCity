@@ -40,6 +40,7 @@
             if ([result[@"data"] isKindOfClass:[NSString class]]) {
                 CZGuessTypeOneView *view1 = [CZGuessTypeOneView createView];
                 view1.text = param[@"tkl"];
+                
                 [[UIApplication sharedApplication].keyWindow addSubview:view1];
             } else if ([result[@"data"] isKindOfClass:[NSDictionary class]]){
                 CZGuessTypeTowView *view1 = [CZGuessTypeTowView createView];
@@ -57,17 +58,19 @@
 
 + (void)alertRule
 {
-    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-    NSString *string = posteboard.string;
+    if ([JPTOKEN length] > 0) {
+        UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+        NSString *string = posteboard.string;
 
-    if (string == nil) {
-        return;
-    } else {
-        if ([recordSearchTextArray containsObject:string]) {
+        if (string == nil) {
             return;
         } else {
-            [recordSearchTextArray addObject:string];
-            [CZAlertTool getDataSorce];
+            if ([recordSearchTextArray containsObject:string]) {
+                return;
+            } else {
+                [recordSearchTextArray addObject:string];
+                [CZAlertTool getDataSorce];
+            }
         }
     }
 }

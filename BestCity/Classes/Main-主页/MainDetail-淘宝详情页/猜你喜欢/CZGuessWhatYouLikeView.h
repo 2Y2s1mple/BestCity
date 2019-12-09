@@ -12,13 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol CZGuessWhatYouLikeViewDelegate <NSObject>
 @optional
-- (void)reloadGuessWhatYouLikeView;
+- (void)reloadGuessWhatYouLikeView:(CGFloat)height;
 @end
 
 @interface CZGuessWhatYouLikeView : UIView
 + (instancetype)guessWhatYouLikeView;
-/** <#注释#> */
-@property (nonatomic, strong) NSArray *list;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *otherGoodsId;
 /** <#注释#> */

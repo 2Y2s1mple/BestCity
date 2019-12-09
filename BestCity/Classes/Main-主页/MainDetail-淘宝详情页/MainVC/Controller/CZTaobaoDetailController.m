@@ -122,6 +122,7 @@ static CGFloat const likeAndShareHeight = 49;
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"otherGoodsId"] = self.otherGoodsId;
+    [CZProgressHUD showProgressHUDWithText:nil];
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/goodsDetail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -133,11 +134,10 @@ static CGFloat const likeAndShareHeight = 49;
             // 最下面购买视图
             [self setupBottomView];
 
-            self.scrollerView.contentSize = CGSizeMake(0, self.recordHeight);
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-            [CZProgressHUD hideAfterDelay:1.5];
         }
+        [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
 }
 
@@ -217,8 +217,6 @@ static CGFloat const likeAndShareHeight = 49;
         self.recordHeight += 10;
     }
 
-
-
     // 商品详情
     if(![self.detailModel[@"descImgList"] isKindOfClass:[NSNull class]] && [self.detailModel[@"descImgList"] count] > 0) {
         [self goodsDetail];
@@ -234,6 +232,9 @@ static CGFloat const likeAndShareHeight = 49;
 
     // 猜你喜欢
     [self guessView];
+
+
+    [self changeSubViewFrame];
 
 }
 
@@ -432,6 +433,9 @@ static CGFloat const likeAndShareHeight = 49;
 
     if (imageList.count > 0) { // 默认图片300
         self.recordHeight += 300;
+        subView.height = 300;
+        showAll.y = CZGetY(subView) + 10;
+        backView.height = CZGetY(showAll) + 12;
     }
 
     for (NSString *imageUrl in imageList) {
@@ -469,12 +473,11 @@ static CGFloat const likeAndShareHeight = 49;
                 backView.height = CZGetY(showAll) + 12;
                 self.recordHeight += imageHeight;
             }
-            self.scrollerView.contentSize = CGSizeMake(0, self.recordHeight);
 
-            if ([subView.subviews lastObject] == bigImage) {
-                NSLog(@"%@", imageURL.absoluteString);
-                [self changeSubViewFrame];
-            }
+//            if ([subView.subviews lastObject] == bigImage) {
+//                NSLog(@"%@", imageURL.absoluteString);
+//                [self changeSubViewFrame];
+//            }
         }];
     }
 }
@@ -489,6 +492,7 @@ static CGFloat const likeAndShareHeight = 49;
             continue;
         }
         view.y = CZGetY(self.scrollerView.subviews[i - 1]);
+        NSLog(@"%@", view);
     }
     self.scrollerView.contentSize = CGSizeMake(0, CZGetY([self.scrollerView.subviews lastObject]));
 }
@@ -683,7 +687,7 @@ static CGFloat const likeAndShareHeight = 49;
     tabbar.selectedIndex = 0;
 }
 
-- (void)reloadGuessWhatYouLikeView
+- (void)reloadGuessWhatYouLikeView:(CGFloat)height
 {
     [self changeSubViewFrame];
 }

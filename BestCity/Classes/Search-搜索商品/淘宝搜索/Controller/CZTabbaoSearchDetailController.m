@@ -124,6 +124,7 @@
     textF.delegate = self;
     textF.width = backView.width - 76;
     textF.height = self.searchHeight;
+    textF.backgroundColor = UIColorFromRGB(0xF5F5F5);
 //    [textF addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
     [backView addSubview:textF];
 

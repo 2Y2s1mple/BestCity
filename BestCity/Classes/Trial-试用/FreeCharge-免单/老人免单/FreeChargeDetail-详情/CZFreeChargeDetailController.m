@@ -196,7 +196,7 @@
     commentBtn.frame = CGRectMake(0, 0, bottomView.width - 160, bottomView.height);
     commentBtn.titleLabel.font = [UIFont systemFontOfSize:19];
     [commentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"购买后补贴¥%@", self.dataSource.freePrice]];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"购买后补贴¥%.2lf", [self.dataSource.freePrice floatValue]]];
     [string addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13]} range:NSMakeRange(0, 6)];
     [string addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Medium" size: 19]} range:NSMakeRange(6, self.dataSource.freePrice.length)];
     [string addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838)} range:NSMakeRange(0, string.length)];

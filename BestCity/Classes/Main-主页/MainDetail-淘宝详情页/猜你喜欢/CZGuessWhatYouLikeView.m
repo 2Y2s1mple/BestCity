@@ -61,6 +61,7 @@
         collectionView.dataSource = self;
         [self addSubview:collectionView];
         self.collectionView = collectionView;
+        [collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
 
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessWhatYouLikeCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessWhatYouLikeCell"];
 
@@ -90,22 +91,6 @@
 }
 
 
-- (void)setList:(NSArray *)list
-{
-    _list = list;
-    [self.dataSource addObjectsFromArray:list];
-    CGFloat height = ((self.dataSource.count + 1) / 2) * 312 + ((self.dataSource.count  + 1) / 2 + 1) * 10;
-    self.collectionView.height = height;
-
-    self.height = CZGetY(self.collectionView);
-
-    [self.collectionView reloadData];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-     !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
-    });
-}
-
-
 - (void)getSourceData
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -124,13 +109,11 @@
 
             CGFloat height = ((self.dataSource.count + 1) / 2) * 312 + ((self.dataSource.count  + 1) / 2 + 1) * 10;
             self.collectionView.height = height;
-
             self.height = CZGetY(self.collectionView);
+
+            !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView:self.height];
             
             [self.collectionView reloadData];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                !self.delegate ? : [self.delegate reloadGuessWhatYouLikeView];
-               });
         }
     } failure:^(NSError *error) {}];
 }
@@ -140,13 +123,16 @@
     NSDictionary *param = self.dataSource[indexPath.row];
     CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
     vc.otherGoodsId = param[@"otherGoodsId"];
-            //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
-    //        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-    //        vc.detailType = [CZJIPINSynthesisTool getModuleType:2];
-    //        vc.findgoodsId = model[@"goods"][@"articleId"];
     CURRENTVC(currentVc)
     [currentVc.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    CGSize size =  [change[@"new"] CGSizeValue];
+    NSLog(@"%s -- collectionView.height = %f", __func__, size.height);
+
 }
 
 @end

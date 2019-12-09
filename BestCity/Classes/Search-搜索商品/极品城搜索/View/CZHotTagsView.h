@@ -13,6 +13,8 @@
 @optional
 - (void)hotTagsView:(CZHotTagsView *)tagsView didSelectedTag:(CZHotTagLabel *)tagLabel;
 - (void)hotTagsViewLongPressAccessoryEvent;
+
+- (void)deleteTags;
 @end
 
 NS_ASSUME_NONNULL_BEGIN
@@ -30,14 +32,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CZHotTagLabelType type;
 
 /** <#注释#> */
-@property (nonatomic, assign) NSInteger lineNumber;
-/** <#注释#> */
-@property (nonatomic, assign) NSInteger maxLineNumber;
-/** <#注释#> */
-@property (nonatomic, assign) NSInteger recordNumber;
+@property (nonatomic, assign) BOOL isShow;
+
 /** 创建标签方法 */
 - (void)createTagLabelWithTitle:(NSString *)title withEventType:(CZHotTagLabelType)type;
 - (void)reloadSubViews;
+
+
+- (void)showAll;
+- (void)hide;
 @end
 
 NS_ASSUME_NONNULL_END

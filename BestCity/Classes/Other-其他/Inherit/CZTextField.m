@@ -49,7 +49,10 @@
  */
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
-    return CGRectInset(bounds, 45, 0);
+    CGRect rect = [super textRectForBounds:bounds];
+    rect.origin.x += 15;
+    return rect;
+//    return CGRectInset(bounds, 45, 0);
 }
 
 /**
@@ -57,8 +60,13 @@
  */
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
-    
-    return CGRectInset(bounds, 45, 0);
+    CGRect rect = [super editingRectForBounds:bounds];
+    rect.origin.x += 15;
+    rect.size.width -= 15;
+    return rect;
+    //
+//    CGRectOffet
+//    return CGRectInset(bounds, 45, 0);
 }
 
 /**
@@ -68,6 +76,7 @@
 {
     CGRect rect = [super rightViewRectForBounds:bounds];
     rect.origin.x -= 15;
+    rect.size.width -= 15;
     return rect;
 }
 

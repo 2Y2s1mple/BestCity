@@ -130,7 +130,7 @@
             label.text = dic[@"name"];
 
             label1.textColor = UIColorFromRGB(0x565252);
-            label1.text = [dic[@"value"] stringByAppendingString:@"分"];
+            label1.text = dic[@"value"];
         }
     }
     self.height = CZGetY(scoresView) + 14;

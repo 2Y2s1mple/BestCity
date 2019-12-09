@@ -22,9 +22,7 @@
     self.font = [UIFont systemFontOfSize:15];
     self.textAlignment = NSTextAlignmentCenter;
     self.textColor = UIColorFromRGB(0x565252);
-    self.layer.cornerRadius = self.height * 0.5;
-    self.layer.masksToBounds = YES;
-    self.backgroundColor = CZGlobalLightGray;
+
     self.userInteractionEnabled = YES;
     if (type == CZHotTagLabelTypeTapGesture) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapEvent:)];
@@ -38,6 +36,14 @@
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressEvent:)];
         [self addGestureRecognizer:longPress];
     }
+}
+
+- (void)setText:(NSString *)text
+{
+    NSLog(@"%@", text);
+    text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"　" withString:@""];
+    [super setText:text];
 }
 
 #pragma mark - 事件

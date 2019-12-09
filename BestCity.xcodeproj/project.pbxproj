@@ -180,6 +180,8 @@
 		97524678230A7FCB00A1A334 /* CZMeIntelligentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97524677230A7FCB00A1A334 /* CZMeIntelligentView.m */; };
 		9752467A230A7FD500A1A334 /* CZMeIntelligentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97524679230A7FD500A1A334 /* CZMeIntelligentView.xib */; };
 		9752467D230AAB6700A1A334 /* CZMeIntelligentSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9752467C230AAB6700A1A334 /* CZMeIntelligentSubController.m */; };
+		9752AD92239B69C800779D32 /* CZHistoryLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9752AD91239B69C800779D32 /* CZHistoryLabelView.m */; };
+		9752AD96239B8F2C00779D32 /* CZArrowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9752AD95239B8F2C00779D32 /* CZArrowButton.m */; };
 		97530A9E2313897100185C40 /* CZMeAnswersPublishTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97530A9D2313897100185C40 /* CZMeAnswersPublishTwoController.m */; };
 		97530AA123138A5D00185C40 /* CZMeAnswersPublishThreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97530AA023138A5D00185C40 /* CZMeAnswersPublishThreeController.m */; };
 		97530AA52313A3FC00185C40 /* CZMHSDQuestCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 97530AA32313A3FC00185C40 /* CZMHSDQuestCell1.m */; };
@@ -891,6 +893,10 @@
 		97524679230A7FD500A1A334 /* CZMeIntelligentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMeIntelligentView.xib; sourceTree = "<group>"; };
 		9752467B230AAB6700A1A334 /* CZMeIntelligentSubController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeIntelligentSubController.h; sourceTree = "<group>"; };
 		9752467C230AAB6700A1A334 /* CZMeIntelligentSubController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMeIntelligentSubController.m; sourceTree = "<group>"; };
+		9752AD90239B69C800779D32 /* CZHistoryLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZHistoryLabelView.h; sourceTree = "<group>"; };
+		9752AD91239B69C800779D32 /* CZHistoryLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZHistoryLabelView.m; sourceTree = "<group>"; };
+		9752AD94239B8F2C00779D32 /* CZArrowButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZArrowButton.h; sourceTree = "<group>"; };
+		9752AD95239B8F2C00779D32 /* CZArrowButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZArrowButton.m; sourceTree = "<group>"; };
 		97530A9C2313897100185C40 /* CZMeAnswersPublishTwoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeAnswersPublishTwoController.h; sourceTree = "<group>"; };
 		97530A9D2313897100185C40 /* CZMeAnswersPublishTwoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMeAnswersPublishTwoController.m; sourceTree = "<group>"; };
 		97530A9F23138A5D00185C40 /* CZMeAnswersPublishThreeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeAnswersPublishThreeController.h; sourceTree = "<group>"; };
@@ -2138,6 +2144,10 @@
 		97161C4723989D54005AB63A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9752AD90239B69C800779D32 /* CZHistoryLabelView.h */,
+				9752AD91239B69C800779D32 /* CZHistoryLabelView.m */,
+				977C33B4218D951000FAA144 /* CZTaobaoSearchView.h */,
+				977C33B5218D951000FAA144 /* CZTaobaoSearchView.m */,
 				972A65472397BDE300BE5FDF /* CZguessLineCell.h */,
 				972A65482397BDE300BE5FDF /* CZguessLineCell.m */,
 				972A65492397BDE300BE5FDF /* CZguessLineCell.xib */,
@@ -2188,8 +2198,6 @@
 				97705CD12108495D00485D64 /* CZHotSaleCell.h */,
 				97705CD22108495D00485D64 /* CZHotSaleCell.m */,
 				97705CD32108495D00485D64 /* CZHotSaleCell.xib */,
-				977C33B4218D951000FAA144 /* CZTaobaoSearchView.h */,
-				977C33B5218D951000FAA144 /* CZTaobaoSearchView.m */,
 				971CBEC621917B6300E4590B /* CZHotTagsView.h */,
 				971CBEC721917B6300E4590B /* CZHotTagsView.m */,
 				97D68C66219054E000802B30 /* CZHotTagLabel.h */,
@@ -2486,19 +2494,8 @@
 		974759CA239268C20026C56C /* MainDetail-淘宝详情页 */ = {
 			isa = PBXGroup;
 			children = (
+				97B64111239B4A8400AE4A31 /* MainVC */,
 				97B6410F239B499600AE4A31 /* 猜你喜欢 */,
-				97C6B4EB2399FADF003DA73F /* View */,
-				97E6C4FA238F69BA002541F4 /* CZTaobaoDetailController.h */,
-				97E6C4FB238F69BA002541F4 /* CZTaobaoDetailController.m */,
-				9707DAC52390B4B500A307A8 /* CZTaoBaoShopNameView.h */,
-				9707DAC62390B4B500A307A8 /* CZTaoBaoShopNameView.m */,
-				9707DAC82390B4CA00A307A8 /* CZTaoBaoShopNameView.xib */,
-				974759C4239265240026C56C /* CZGoodsParameterView.h */,
-				974759C5239265240026C56C /* CZGoodsParameterView.m */,
-				974759C7239266410026C56C /* CZGoodsScoreView.h */,
-				974759C8239266410026C56C /* CZGoodsScoreView.m */,
-				975726662394DB2600745DB9 /* CZGoodsScoreView.xib */,
-				974759CF2392739A0026C56C /* 工具 */,
 				974759CB239268ED0026C56C /* 功能评分参数页 */,
 			);
 			path = "MainDetail-淘宝详情页";
@@ -2507,17 +2504,15 @@
 		974759CB239268ED0026C56C /* 功能评分参数页 */ = {
 			isa = PBXGroup;
 			children = (
+				974759C4239265240026C56C /* CZGoodsParameterView.h */,
+				974759C5239265240026C56C /* CZGoodsParameterView.m */,
+				974759C7239266410026C56C /* CZGoodsScoreView.h */,
+				974759C8239266410026C56C /* CZGoodsScoreView.m */,
+				975726662394DB2600745DB9 /* CZGoodsScoreView.xib */,
 				974759CC239269660026C56C /* CZParameterScoreView.h */,
 				974759CD239269660026C56C /* CZParameterScoreView.m */,
 			);
 			path = "功能评分参数页";
-			sourceTree = "<group>";
-		};
-		974759CF2392739A0026C56C /* 工具 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "工具";
 			sourceTree = "<group>";
 		};
 		97481AE1230418BB00230367 /* 添加商品 */ = {
@@ -2652,6 +2647,17 @@
 				9752467C230AAB6700A1A334 /* CZMeIntelligentSubController.m */,
 			);
 			path = "达人主页";
+			sourceTree = "<group>";
+		};
+		9752AD93239B8ABD00779D32 /* Button-样式 */ = {
+			isa = PBXGroup;
+			children = (
+				97643483221BF31000EB0291 /* CZSubButton.h */,
+				97643484221BF31000EB0291 /* CZSubButton.m */,
+				9752AD94239B8F2C00779D32 /* CZArrowButton.h */,
+				9752AD95239B8F2C00779D32 /* CZArrowButton.m */,
+			);
+			path = "Button-样式";
 			sourceTree = "<group>";
 		};
 		97530A9A2313895200185C40 /* 审核中 */ = {
@@ -3160,8 +3166,6 @@
 				97C85136211C174F005540D8 /* CZLabel.m */,
 				97705C75210729BA00485D64 /* CZTextField.h */,
 				97705C76210729BA00485D64 /* CZTextField.m */,
-				97643483221BF31000EB0291 /* CZSubButton.h */,
-				97643484221BF31000EB0291 /* CZSubButton.m */,
 			);
 			path = Inherit;
 			sourceTree = "<group>";
@@ -3931,6 +3935,24 @@
 			path = "猜你喜欢";
 			sourceTree = "<group>";
 		};
+		97B64110239B4A6A00AE4A31 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				97E6C4FA238F69BA002541F4 /* CZTaobaoDetailController.h */,
+				97E6C4FB238F69BA002541F4 /* CZTaobaoDetailController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		97B64111239B4A8400AE4A31 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				97B64110239B4A6A00AE4A31 /* Controller */,
+				97C6B4EB2399FADF003DA73F /* View */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
 		97B65D5822F19A880064E99F /* 异常账号界面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4196,6 +4218,7 @@
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
+				9752AD93239B8ABD00779D32 /* Button-样式 */,
 				9710E61322D87CF600AA5D87 /* Base */,
 				9768FAF02368133000019B4E /* 启动页 */,
 				9712727322CF3855009EB40F /* 公共界面 */,
@@ -4239,6 +4262,9 @@
 		97C6B4EB2399FADF003DA73F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9707DAC52390B4B500A307A8 /* CZTaoBaoShopNameView.h */,
+				9707DAC62390B4B500A307A8 /* CZTaoBaoShopNameView.m */,
+				9707DAC82390B4CA00A307A8 /* CZTaoBaoShopNameView.xib */,
 				97E6C4FD238F7872002541F4 /* CZTaobaoGoodsView.h */,
 				97E6C4FE238F7872002541F4 /* CZTaobaoGoodsView.m */,
 				97E6C500238F788F002541F4 /* CZTaobaoGoodsView.xib */,
@@ -5290,6 +5316,7 @@
 				97FA0B452376C1D1001D1B70 /* CZFreeOrderCell.m in Sources */,
 				9785778721A6E04800E42B29 /* CZPackUpCommentCell.m in Sources */,
 				97CC633522D6D00E0054CFEE /* CZMHSDQuestController.m in Sources */,
+				9752AD96239B8F2C00779D32 /* CZArrowButton.m in Sources */,
 				97C78FB821196A6A00374CCD /* CZMessageActivityController.m in Sources */,
 				97D0C62823604BDC00F3B994 /* CZGotoScoreView.m in Sources */,
 				972E41E321147D2400BC751C /* CZSettingController.m in Sources */,
@@ -5606,6 +5633,7 @@
 				97FA0B292376A29A001D1B70 /* CZAllOrderSubThree.m in Sources */,
 				97C7FF4B216DDDB50091DC07 /* MJRefreshComponent.m in Sources */,
 				974C559422C070C9001A1E1C /* CZFreeAlertView.m in Sources */,
+				9752AD92239B69C800779D32 /* CZHistoryLabelView.m in Sources */,
 				97798CC4212D0FC90052CE94 /* SDWebImageDownloader.m in Sources */,
 				97481AC82303D51100230367 /* CZETestAllContrastController.m in Sources */,
 				97B8761021EEF948001CC393 /* CZSubCollectTwoController.m in Sources */,
@@ -5816,7 +5844,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.7.2;
+				MARKETING_VERSION = 2.8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -5914,7 +5942,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 				);
-				MARKETING_VERSION = 2.7.2;
+				MARKETING_VERSION = 2.8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",

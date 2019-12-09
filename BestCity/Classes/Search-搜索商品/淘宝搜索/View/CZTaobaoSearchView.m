@@ -55,13 +55,14 @@
     backView.x = 45;
     backView.width = self.width - 45 - 15;
     backView.height = self.height;
-    backView.backgroundColor = UIColorFromRGB(0xD8D8D8);
+    backView.backgroundColor = UIColorFromRGB(0xF5F5F5);
     backView.layer.cornerRadius = 19;
     backView.layer.masksToBounds = YES;
     [self addSubview:backView];
 
     CZTextField *textF = [[CZTextField alloc] init];
     textF.width = backView.width - 76;
+    textF.backgroundColor = UIColorFromRGB(0xF5F5F5);
     textF.height = self.height;
     self.textField = textF;
     self.textField.delegate = self;

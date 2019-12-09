@@ -170,8 +170,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [application cancelAllLocalNotifications];
     self.flagNumber++;
     if (self.flagNumber > 1) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showSearchAlert" object:nil];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showSearchAlert" object:nil];
 
     NSLog(@"x555555555");
 }
