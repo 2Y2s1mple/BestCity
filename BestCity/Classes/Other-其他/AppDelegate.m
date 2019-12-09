@@ -20,7 +20,9 @@
 #import <MobLinkPro/MobLink.h>
 #import <MobLinkPro/MLSDKScene.h>
 
-@interface AppDelegate () <IMLSDKRestoreDelegate>
+#import "WXApi.h"
+
+@interface AppDelegate () <IMLSDKRestoreDelegate, WXApiDelegate>
 
 /** <#注释#> */
 @property (nonatomic, strong) MLSDKScene *recordScene;
@@ -58,6 +60,9 @@
     [self.window makeKeyAndVisible];
 
     recordSearchTextArray = [NSMutableArray array];
+
+    //向微信注册
+    [WXApi registerApp:@"wxfd2e92db2568030a" universalLink:@""];
 
     return YES;
 }
@@ -148,10 +153,36 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                                              options:options]) {
         //处理其他app跳转到自己的app，如果百川处理过会返回YES
     }
+    [WXApi handleOpenURL:url delegate:self];
     NSLog(@"URL scheme:%@", [url scheme]);
     NSLog(@"URL query: %@", [url query]);
     return YES;
 }
+
+
+
+
+-(void) onReq:(BaseReq*)req
+{
+
+    NSLog(@"-----------");
+    if([req isKindOfClass:[ShowMessageFromWXReq class]])
+    {
+        ShowMessageFromWXReq* temp = (ShowMessageFromWXReq*)req;
+        WXMediaMessage *msg = temp.message;
+
+        //显示微信传过来的内容
+        WXAppExtendObject *obj = msg.mediaObject;
+
+        NSString *strTitle = [NSString stringWithFormat:@"微信请求App显示内容"];
+        NSString *strMsg = [NSString stringWithFormat:@"标题：%@ \n内容：%@ \n附带信息：%@ \n缩略图:%u bytes\n\n", msg.title, msg.description, obj.extInfo, msg.thumbData.length];
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+
 
 #pragma mark - 系统的方法
 - (void)applicationWillResignActive:(UIApplication *)application {

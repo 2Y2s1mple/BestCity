@@ -382,11 +382,18 @@
 // 跳转
 - (void)pushSearchDetail
 {
+
     CZTabbaoSearchDetailController *vc = [[CZTabbaoSearchDetailController alloc] init];
     vc.searchText = self.searchView.searchText;
-    vc.currentDelegate = self;
-    vc.type = self.type;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (vc.searchText.length > 0 && ![[vc.searchText substringFromIndex:0]  isEqual: @""]) {
+
+        vc.currentDelegate = self;
+        vc.type = self.type;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        NSLog(@"有空格");
+    }
+
 }
 
 // 长按事件 <CZHotTagsViewDelegate>

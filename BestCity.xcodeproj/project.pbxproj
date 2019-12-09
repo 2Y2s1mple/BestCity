@@ -380,6 +380,7 @@
 		979EFD8521E085B5000FE466 /* CZHotSaleDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8421E085B5000FE466 /* CZHotSaleDetailModel.m */; };
 		979EFD8921E08923000FE466 /* CZCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8821E08923000FE466 /* CZCommodityModel.m */; };
 		979EFD8D21E0AC9B000FE466 /* CZCouponsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */; };
+		97A5078F239E0C4C00EF670F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A5078D239E0C4B00EF670F /* libWeChatSDK.a */; };
 		97A5B95F230D17AE00014E90 /* CZMePublishOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A5B95E230D17AE00014E90 /* CZMePublishOneController.m */; };
 		97A5B96A230D1BFB00014E90 /* CZMePublishOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A5B967230D1BFA00014E90 /* CZMePublishOneCell.m */; };
 		97A5B96B230D1BFB00014E90 /* CZMePublishOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A5B969230D1BFB00014E90 /* CZMePublishOneCell.xib */; };
@@ -1265,6 +1266,10 @@
 		979EFD8821E08923000FE466 /* CZCommodityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommodityModel.m; sourceTree = "<group>"; };
 		979EFD8B21E0AC9B000FE466 /* CZCouponsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCouponsModel.h; sourceTree = "<group>"; };
 		979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCouponsModel.m; sourceTree = "<group>"; };
+		97A5078C239E0C4B00EF670F /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		97A5078D239E0C4B00EF670F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		97A5078E239E0C4C00EF670F /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		97A50790239E0E0F00EF670F /* WXApiObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		97A5B95D230D17AE00014E90 /* CZMePublishOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMePublishOneController.h; sourceTree = "<group>"; };
 		97A5B95E230D17AE00014E90 /* CZMePublishOneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMePublishOneController.m; sourceTree = "<group>"; };
 		97A5B967230D1BFA00014E90 /* CZMePublishOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZMePublishOneCell.m; sourceTree = "<group>"; };
@@ -1713,6 +1718,7 @@
 				974C586B21229F91008B3E6A /* CoreGraphics.framework in Frameworks */,
 				974C586521229F76008B3E6A /* CoreFoundation.framework in Frameworks */,
 				97F0EC21212512B6000FE1DC /* UShareUI.framework in Frameworks */,
+				97A5078F239E0C4C00EF670F /* libWeChatSDK.a in Frameworks */,
 				970AD8DE232A3BD600CCE9F9 /* AlipaySDK.framework in Frameworks */,
 				970AD8DC232A3BD600CCE9F9 /* SGAVMP.framework in Frameworks */,
 				970AD8D3232A3BD600CCE9F9 /* AlibabaAuthSDK.framework in Frameworks */,
@@ -3744,6 +3750,17 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		97A5078B239E0C0200EF670F /* 微信 */ = {
+			isa = PBXGroup;
+			children = (
+				97A50790239E0E0F00EF670F /* WXApiObject.h */,
+				97A5078D239E0C4B00EF670F /* libWeChatSDK.a */,
+				97A5078E239E0C4C00EF670F /* WechatAuthSDK.h */,
+				97A5078C239E0C4B00EF670F /* WXApi.h */,
+			);
+			path = "微信";
+			sourceTree = "<group>";
+		};
 		97A5B960230D1A9D00014E90 /* SubViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4640,6 +4657,7 @@
 		97F0EC0121251187000FE1DC /* 友盟 */ = {
 			isa = PBXGroup;
 			children = (
+				97A5078B239E0C0200EF670F /* 微信 */,
 				97FA0B1B237682D5001D1B70 /* asdasd.png */,
 				97F0EC30212529F5000FE1DC /* CZUMConfigure.h */,
 				97F0EC31212529F5000FE1DC /* CZUMConfigure.m */,
@@ -5843,6 +5861,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
 				);
 				MARKETING_VERSION = 2.8.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5941,6 +5960,7 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
 				);
 				MARKETING_VERSION = 2.8.0;
 				ONLY_ACTIVE_ARCH = YES;
