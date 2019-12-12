@@ -564,6 +564,11 @@
 		97F0EC3C212569C4000FE1DC /* CZSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F0EC3B212569C4000FE1DC /* CZSaveTool.m */; };
 		97F152FF21097A24009F7922 /* CZCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F152FE21097A24009F7922 /* CZCommodityView.m */; };
 		97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F1530021097A75009F7922 /* CZCommodityView.xib */; };
+		97F41E0523A08C62003C656C /* CZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F41E0423A08C62003C656C /* CZMainViewController.m */; };
+		97F41E0A23A08F43003C656C /* CZMainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F41E0923A08F43003C656C /* CZMainViewModel.m */; };
+		97F41E0E23A0AEAF003C656C /* CZUILayoutTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F41E0D23A0AEAF003C656C /* CZUILayoutTool.m */; };
+		97F41E1223A0C156003C656C /* CZMainViewSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F41E1123A0C156003C656C /* CZMainViewSearch.m */; };
+		97F41E1723A1048D003C656C /* GXWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F41E1623A1048D003C656C /* GXWindow.m */; };
 		97F4D4812249BD7600A82B14 /* CZTestReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F4D4802249BD7600A82B14 /* CZTestReportController.m */; };
 		97F4D485224A0CA600A82B14 /* CZvoteUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F4D484224A0CA600A82B14 /* CZvoteUserController.m */; };
 		97F4D487224A127300A82B14 /* CZvoteUserController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F4D486224A127300A82B14 /* CZvoteUserController.xib */; };
@@ -1438,7 +1443,6 @@
 		97C7FF10216DDDB50091DC07 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		97C7FF11216DDDB50091DC07 /* UIScrollView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJExtension.m"; sourceTree = "<group>"; };
 		97C7FF12216DDDB50091DC07 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
-		97C7FF13216DDDB50091DC07 /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
 		97C7FF14216DDDB50091DC07 /* NSBundle+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+MJRefresh.m"; sourceTree = "<group>"; };
 		97C7FF15216DDDB50091DC07 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		97C7FF19216DDDB50091DC07 /* MJRefreshBackGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackGifFooter.h; sourceTree = "<group>"; };
@@ -1584,6 +1588,17 @@
 		97F152FD21097A24009F7922 /* CZCommodityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommodityView.h; sourceTree = "<group>"; };
 		97F152FE21097A24009F7922 /* CZCommodityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommodityView.m; sourceTree = "<group>"; };
 		97F1530021097A75009F7922 /* CZCommodityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCommodityView.xib; sourceTree = "<group>"; };
+		97F41E0323A08C62003C656C /* CZMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainViewController.h; sourceTree = "<group>"; };
+		97F41E0423A08C62003C656C /* CZMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainViewController.m; sourceTree = "<group>"; };
+		97F41E0823A08F43003C656C /* CZMainViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainViewModel.h; sourceTree = "<group>"; };
+		97F41E0923A08F43003C656C /* CZMainViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainViewModel.m; sourceTree = "<group>"; };
+		97F41E0C23A0AEAF003C656C /* CZUILayoutTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZUILayoutTool.h; sourceTree = "<group>"; };
+		97F41E0D23A0AEAF003C656C /* CZUILayoutTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZUILayoutTool.m; sourceTree = "<group>"; };
+		97F41E1023A0C156003C656C /* CZMainViewSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainViewSearch.h; sourceTree = "<group>"; };
+		97F41E1123A0C156003C656C /* CZMainViewSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainViewSearch.m; sourceTree = "<group>"; };
+		97F41E1323A0C325003C656C /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
+		97F41E1523A1048D003C656C /* GXWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXWindow.h; sourceTree = "<group>"; };
+		97F41E1623A1048D003C656C /* GXWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXWindow.m; sourceTree = "<group>"; };
 		97F4D47F2249BD7600A82B14 /* CZTestReportController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTestReportController.h; sourceTree = "<group>"; };
 		97F4D4802249BD7600A82B14 /* CZTestReportController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTestReportController.m; sourceTree = "<group>"; };
 		97F4D483224A0CA600A82B14 /* CZvoteUserController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZvoteUserController.h; sourceTree = "<group>"; };
@@ -2913,10 +2928,10 @@
 				97705C38210716A300485D64 /* View */,
 				97705C32210716A300485D64 /* AppDelegate.h */,
 				97705C39210716A300485D64 /* AppDelegate.m */,
+				97F41E1523A1048D003C656C /* GXWindow.h */,
+				97F41E1623A1048D003C656C /* GXWindow.m */,
 				97705C36210716A300485D64 /* main.m */,
 				97705C3A210716A300485D64 /* PrefixHeader.pch */,
-				97BDE5C92195B232005FB405 /* CZConst.h */,
-				97BDE5CA2195B232005FB405 /* CZConst.m */,
 			);
 			path = "Other-其他";
 			sourceTree = "<group>";
@@ -3168,8 +3183,6 @@
 				978D25A5219993C4004040DD /* CZReplyButton.m */,
 				979B05CB210EBD270023292D /* CZMutContentButton.h */,
 				979B05CC210EBD270023292D /* CZMutContentButton.m */,
-				97C85135211C174F005540D8 /* CZLabel.h */,
-				97C85136211C174F005540D8 /* CZLabel.m */,
 				97705C75210729BA00485D64 /* CZTextField.h */,
 				97705C76210729BA00485D64 /* CZTextField.m */,
 			);
@@ -4235,6 +4248,8 @@
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
+				97F41E1423A0F17C003C656C /* Label-样式 */,
+				97F41E0B23A0AE86003C656C /* UI-Tool视图布局工具以及常量 */,
 				9752AD93239B8ABD00779D32 /* Button-样式 */,
 				9710E61322D87CF600AA5D87 /* Base */,
 				9768FAF02368133000019B4E /* 启动页 */,
@@ -4370,15 +4385,15 @@
 				97C7FEFC216DDDAA0091DC07 /* NSObject+MJKeyValue.h */,
 				97C7FEF2216DDDAA0091DC07 /* NSObject+MJKeyValue.m */,
 				97C7FEF1216DDDAA0091DC07 /* NSObject+MJProperty.h */,
+				97C7FEF9216DDDAA0091DC07 /* NSObject+MJProperty.m */,
+				97C7FEFD216DDDAA0091DC07 /* NSObject+MJCoding.h */,
+				97C7FEF7216DDDAA0091DC07 /* NSObject+MJCoding.m */,
+				97C7FEFB216DDDAA0091DC07 /* MJProperty.h */,
 				97C7FEF3216DDDAA0091DC07 /* MJProperty.m */,
 				97C7FEF4216DDDAA0091DC07 /* MJFoundation.h */,
+				97C7FEF8216DDDAA0091DC07 /* MJExtension.h */,
 				97C7FEF5216DDDAA0091DC07 /* MJType.m */,
 				97C7FEF6216DDDAA0091DC07 /* MJConst.m */,
-				97C7FEF7216DDDAA0091DC07 /* NSObject+MJCoding.m */,
-				97C7FEF8216DDDAA0091DC07 /* MJExtension.h */,
-				97C7FEF9216DDDAA0091DC07 /* NSObject+MJProperty.m */,
-				97C7FEFB216DDDAA0091DC07 /* MJProperty.h */,
-				97C7FEFD216DDDAA0091DC07 /* NSObject+MJCoding.h */,
 				97C7FEFE216DDDAA0091DC07 /* MJConst.h */,
 				97C7FEFF216DDDAA0091DC07 /* MJType.h */,
 				97C7FF00216DDDAA0091DC07 /* MJFoundation.m */,
@@ -4389,18 +4404,18 @@
 		97C7FF09216DDDB50091DC07 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
-				97C7FF0A216DDDB50091DC07 /* UIScrollView+MJRefresh.m */,
-				97C7FF0B216DDDB50091DC07 /* MJRefreshConst.m */,
-				97C7FF0C216DDDB50091DC07 /* UIScrollView+MJExtension.h */,
-				97C7FF0D216DDDB50091DC07 /* MJRefresh.h */,
-				97C7FF0E216DDDB50091DC07 /* NSBundle+MJRefresh.h */,
 				97C7FF0F216DDDB50091DC07 /* MJRefresh.bundle */,
-				97C7FF10216DDDB50091DC07 /* UIView+MJExtension.h */,
+				97C7FF0D216DDDB50091DC07 /* MJRefresh.h */,
+				97C7FF0C216DDDB50091DC07 /* UIScrollView+MJExtension.h */,
 				97C7FF11216DDDB50091DC07 /* UIScrollView+MJExtension.m */,
-				97C7FF12216DDDB50091DC07 /* MJRefreshConst.h */,
-				97C7FF13216DDDB50091DC07 /* UIScrollView+MJRefresh.h */,
-				97C7FF14216DDDB50091DC07 /* NSBundle+MJRefresh.m */,
+				97F41E1323A0C325003C656C /* UIScrollView+MJRefresh.h */,
+				97C7FF0A216DDDB50091DC07 /* UIScrollView+MJRefresh.m */,
+				97C7FF10216DDDB50091DC07 /* UIView+MJExtension.h */,
 				97C7FF15216DDDB50091DC07 /* UIView+MJExtension.m */,
+				97C7FF12216DDDB50091DC07 /* MJRefreshConst.h */,
+				97C7FF0B216DDDB50091DC07 /* MJRefreshConst.m */,
+				97C7FF0E216DDDB50091DC07 /* NSBundle+MJRefresh.h */,
+				97C7FF14216DDDB50091DC07 /* NSBundle+MJRefresh.m */,
 				97C7FF16216DDDB50091DC07 /* Custom */,
 				97C7FF2D216DDDB50091DC07 /* Base */,
 			);
@@ -4590,6 +4605,9 @@
 		97E6C4F9238F6956002541F4 /* Main-主页 */ = {
 			isa = PBXGroup;
 			children = (
+				97F41E0623A08EE1003C656C /* Controller */,
+				97F41E0F23A0C127003C656C /* View */,
+				97F41E0723A08F04003C656C /* ViewModel */,
 				9706C8DA2367E41F0002EDC1 /* Festival-活动 */,
 				974759CA239268C20026C56C /* MainDetail-淘宝详情页 */,
 			);
@@ -4788,6 +4806,53 @@
 				977E82D4223CA96600C8C01B /* CZGetJIBITool.m */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		97F41E0623A08EE1003C656C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				97F41E0323A08C62003C656C /* CZMainViewController.h */,
+				97F41E0423A08C62003C656C /* CZMainViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		97F41E0723A08F04003C656C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				97F41E0823A08F43003C656C /* CZMainViewModel.h */,
+				97F41E0923A08F43003C656C /* CZMainViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		97F41E0B23A0AE86003C656C /* UI-Tool视图布局工具以及常量 */ = {
+			isa = PBXGroup;
+			children = (
+				97BDE5C92195B232005FB405 /* CZConst.h */,
+				97BDE5CA2195B232005FB405 /* CZConst.m */,
+				97F41E0C23A0AEAF003C656C /* CZUILayoutTool.h */,
+				97F41E0D23A0AEAF003C656C /* CZUILayoutTool.m */,
+			);
+			path = "UI-Tool视图布局工具以及常量";
+			sourceTree = "<group>";
+		};
+		97F41E0F23A0C127003C656C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97F41E1023A0C156003C656C /* CZMainViewSearch.h */,
+				97F41E1123A0C156003C656C /* CZMainViewSearch.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		97F41E1423A0F17C003C656C /* Label-样式 */ = {
+			isa = PBXGroup;
+			children = (
+				97C85135211C174F005540D8 /* CZLabel.h */,
+				97C85136211C174F005540D8 /* CZLabel.m */,
+			);
+			path = "Label-样式";
 			sourceTree = "<group>";
 		};
 		97F4D47E2249BD5600A82B14 /* 使用报告 */ = {
@@ -5321,7 +5386,9 @@
 				97481AC52303D4F000230367 /* CZETestAllOpenBoxController.m in Sources */,
 				975D683522B8A93100F70951 /* CZNewProductTrialController.m in Sources */,
 				977E82D1223C9B4700C8C01B /* CZInvitationController.m in Sources */,
+				97F41E0A23A08F43003C656C /* CZMainViewModel.m in Sources */,
 				978EC63C224B21BB005D98EE /* CZTrialAllReportHotController.m in Sources */,
+				97F41E0E23A0AEAF003C656C /* CZUILayoutTool.m in Sources */,
 				972F4BAD22AE5AAE00F30F6B /* CZTeamMembersCell.m in Sources */,
 				97159B1522D6DB14008DC859 /* CZMHSDQuestCell.m in Sources */,
 				97159B1922D6E91D008DC859 /* CZMHSDQuestModel.m in Sources */,
@@ -5412,6 +5479,7 @@
 				97481AD62303E84A00230367 /* CZEInventoryCell.m in Sources */,
 				9779470B22BCB18800DA3948 /* CZFreeChargeDetailController.m in Sources */,
 				97705CD42108495D00485D64 /* CZHotSaleCell.m in Sources */,
+				97F41E1223A0C156003C656C /* CZMainViewSearch.m in Sources */,
 				977C33B6218D951000FAA144 /* CZTaobaoSearchView.m in Sources */,
 				977D8D0C22AD4AF0005E7ACB /* CZWithdrawModel.m in Sources */,
 				97101AC4230433920061F83C /* CZEInventoryAddGoodsCellViewMdoel.m in Sources */,
@@ -5467,6 +5535,7 @@
 				97BB480C2133AD9B006AE982 /* CZTestSubController.m in Sources */,
 				97ED11FE211598210003E0F7 /* CZAttentionBtn.m in Sources */,
 				97BFD13F235DB58D00493F28 /* CZETestViewModel.m in Sources */,
+				97F41E0523A08C62003C656C /* CZMainViewController.m in Sources */,
 				9778F9E9230196660019138A /* CZERecommendViewModel.m in Sources */,
 				9754C87022FBBEDD008C2D98 /* CZEAttentionCommendCell.m in Sources */,
 				97C78FC521196C6F00374CCD /* CZSystemMessageCell.m in Sources */,
@@ -5503,6 +5572,7 @@
 				97911058222FAE3B00C2DE5B /* CZEditAddressController.m in Sources */,
 				97643485221BF31000EB0291 /* CZSubButton.m in Sources */,
 				97798CC6212D0FC90052CE94 /* UIImage+MultiFormat.m in Sources */,
+				97F41E1723A1048D003C656C /* GXWindow.m in Sources */,
 				97F4D4812249BD7600A82B14 /* CZTestReportController.m in Sources */,
 				97C39262230C179A002EA036 /* CZMePublishController.m in Sources */,
 				97D489CD22A647C300FD4EC7 /* CZMyWalletDepositController.m in Sources */,

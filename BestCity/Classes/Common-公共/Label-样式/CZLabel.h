@@ -10,4 +10,5 @@
 
 @interface CZLabel : UILabel
 @property (nonatomic, assign) UIEdgeInsets textInsets;
++ (instancetype)labelText:(NSString *)text textColor:(int)hex font:(NSInteger)font alignment:(NSTextAlignment)alignment bold:(BOOL)isBold;
 @end

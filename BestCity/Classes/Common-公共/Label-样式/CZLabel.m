@@ -14,6 +14,16 @@
 
 @implementation CZLabel
 
++ (instancetype)labelText:(NSString *)text textColor:(int)hex font:(NSInteger)font alignment:(NSTextAlignment)alignment bold:(BOOL)isBold
+{
+    CZLabel *label = [[CZLabel alloc] init];
+    label.text = text;
+    label.font = !isBold ? [UIFont fontWithName:@"PingFangSC-Regular" size:font] : [UIFont fontWithName:@"PingFangSC-Medium" size:font];
+    label.textColor = UIColorFromRGB(hex);
+    label.textAlignment = alignment;
+    return label;
+}
+
 - (instancetype)init {
     if (self = [super init]) {
         _textInsets = UIEdgeInsetsZero;

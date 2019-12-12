@@ -117,6 +117,8 @@
     [super viewDidAppear:animated];
 
     [CZAlertTool alertRule];
+    self.tableView.height = self.view.height;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -127,6 +129,8 @@
         // 新用户指导
         [CZGuideTool newpPeopleGuide];
     });
+
+    self.tableView.height = self.view.height;
 }
 
 // 上拉加载, 下拉刷新
@@ -190,36 +194,8 @@
 {
     UIView *headerView = [[UIView alloc] init];
 
-    UIView *searchView = [[UIView alloc] init];
-    searchView.x = 10;
-    searchView.y = (IsiPhoneX ? 54 : 30);
-    searchView.width = SCR_WIDTH - 20;
-    searchView.height = 36;
-    searchView.layer.cornerRadius =  18;
-    searchView.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    [headerView addSubview:searchView];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchView)];
-    [searchView addGestureRecognizer:tap];
-
-    UIImageView *imageS = [[UIImageView alloc] init];
-    imageS.image = [UIImage imageNamed:@"taobaoDetai_搜索"];
-    [searchView addSubview:imageS];
-    [imageS sizeToFit];
-    imageS.x = 14;
-    imageS.centerY = searchView.height / 2.0;
-
-    UILabel *title = [[UILabel alloc] init];
-    title.text = @"搜商品名称或粘贴标题";
-    title.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
-    title.textColor = UIColorFromRGB(0x9D9D9D);
-    [searchView addSubview:title];
-    [title sizeToFit];
-    title.x = CZGetX(imageS) + 5;
-    title.centerY = searchView.height / 2.0;
-
-
     // 添加轮播图
-    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, CZGetY(searchView) + 5, SCR_WIDTH, 200)];
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 200)];
     [self.view addSubview:imageView];
     [imageView setSelectedIndexBlock:^(NSInteger index) {
         //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情

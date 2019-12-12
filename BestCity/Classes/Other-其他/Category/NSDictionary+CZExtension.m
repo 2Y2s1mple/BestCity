@@ -15,9 +15,9 @@
     NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] initWithDictionary:self];
     for (NSString *keyStr in mutableDic.allKeys) {
         if ([[mutableDic objectForKey:keyStr] isEqual:[NSNull null]]) {
-            [mutableDic setObject:@"" forKey:keyStr];
-        }
-        else{
+//            [mutableDic setObject:@"" forKey:keyStr];
+            [mutableDic removeObjectForKey:keyStr];
+        } else {
             [mutableDic setObject:[mutableDic objectForKey:keyStr] forKey:keyStr];
         }
     }

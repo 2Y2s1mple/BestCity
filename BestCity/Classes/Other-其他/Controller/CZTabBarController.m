@@ -8,15 +8,15 @@
 
 #import "CZTabBarController.h"
 
+#import "CZMainViewController.h" // 主页
 #import "CZMainHotSaleController.h"
-
 #import "CZDiscoverController.h"
 #import "CZEvaluationController.h"
 #import "CZTrialMainController.h"
 #import "CZFreeChargeController.h"
 #import "CZMeController.h"
 #import "CZNavigationController.h"
-#import "CZFestivalController.h"// 活动
+//#import "CZFestivalController.h"// 活动
 #import "CZLoginController.h"
 // 视图
 #import "CZTabbar.h"
@@ -60,7 +60,7 @@
 
 - (void)createSubController:(BOOL)isFestiva
 {
-    [self setupWithController:[[CZFestivalController alloc] init] title:@"首页" image:@"tab-main-nor" selectedImage:@"tab-main-sel"];
+    [self setupWithController:[[CZMainViewController alloc] init] title:@"首页" image:@"tab-main-nor" selectedImage:@"tab-main-sel"];
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
     [self setupWithController:[[CZMainHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
 

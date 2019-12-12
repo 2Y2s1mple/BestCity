@@ -26,6 +26,8 @@
 #import "CZTaobaoDetailController.h"
 #import "CZDChoiceDetailController.h"
 
+#import "GXWindow.h"
+
 @interface AppDelegate () <IMLSDKRestoreDelegate, WXApiDelegate>
 
 /** <#注释#> */
@@ -43,7 +45,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
 
     // 设置跟视图
