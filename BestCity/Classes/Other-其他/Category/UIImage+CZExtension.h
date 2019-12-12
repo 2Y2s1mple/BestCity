@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (CZExtension)
-- (UIImage *)imageWithTintColor:(UIColor *)tintColor;
-+ (UIImage *)imageWithColor:(UIColor *)color;
+- (UIImage *)gx_imageWithTintColor:(UIColor *)tintColor;
++ (UIImage *)gx_imageWithColor:(UIColor *)color;
 @end

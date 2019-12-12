@@ -28,8 +28,22 @@
 #import "CZGuideTool.h"
 
 
+//------------------
+#import "CZFestivalCollectDelegate.h"
+
 
 @interface CZFestivalController () <UITableViewDelegate, UITableViewDataSource>
+/** <#注释#> */
+@property (nonatomic, strong) UICollectionView *collectView;
+/** <#注释#> */
+@property (nonatomic, strong) CZFestivalCollectDelegate *collectDataSurce;
+
+/** <#注释#> */
+@property (nonatomic, weak) UIImageView *icon;
+//---------------------/
+
+
+
 /** <#注释#> */
 //@property (nonatomic, strong) UIScrollView *scrollerView;
 /** <#注释#> */
@@ -44,9 +58,79 @@
 @property (nonatomic, strong) UIButton *editorBtn;
 
 
+
+
+
 @end
 
 @implementation CZFestivalController
+#pragma mark - 系统生命周期
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+//    UIColorFromRGB(0x143030)
+    UIImageView *icon = [[UIImageView alloc] init];
+    self.icon = icon;
+    icon.image = [[UIImage imageNamed:@"Main-矩形"] gx_imageWithTintColor:UIColorFromRGB(0x143030)];
+    icon.width = SCR_WIDTH;
+    icon.height = 58;
+    [self.view addSubview:icon];
+
+
+
+    [self.view addSubview:self.collectView];
+
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageColorChange:) name:@"mainImageColorChange" object:nil];
+
+//    [self.view addSubview:self.tableView];
+//    // 获取数据创建视图
+//    [self setupRefresh];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchAlert) name:@"showSearchAlert" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    [CZAlertTool alertRule];
+    self.collectView.height = self.view.height;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 新用户指导
+        [CZGuideTool newpPeopleGuide];
+    });
+}
+
+#pragma mark - UI创建
+- (UICollectionView *)collectView
+{
+    if (_collectView == nil) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.itemSize = CGSizeMake(100, 100);
+
+        CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
+        _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+        _collectView.backgroundColor = [UIColor whiteColor];
+        self.collectDataSurce = [[CZFestivalCollectDelegate alloc] initWithCollectView:_collectView];
+    }
+    return _collectView;
+}
+
+
+
+
+
+
+
+
 
 - (UIButton *)editorBtn
 {
@@ -92,19 +176,7 @@
     return _tableView;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    if (@available(iOS 11.0, *)) {
-        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    [self.view addSubview:self.tableView];
-    // 获取数据创建视图
-    [self setupRefresh];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchAlert) name:@"showSearchAlert" object:nil];
-}
 
 - (void)showSearchAlert
 {
@@ -112,26 +184,9 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 
-    [CZAlertTool alertRule];
-    self.tableView.height = self.view.height;
 
-}
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 新用户指导
-        [CZGuideTool newpPeopleGuide];
-    });
-
-    self.tableView.height = self.view.height;
-}
 
 // 上拉加载, 下拉刷新
 - (void)setupRefresh
@@ -272,6 +327,17 @@
 }
 
 #pragma mark - 事件
+// 改变颜色
+- (void)imageColorChange:(NSNotification *)sender
+{
+    NSArray *colors = @[@"0x143030", @"0xE25838", @"0x565252"];
+    NSInteger index = [sender.userInfo[@"index"] integerValue];
+    NSInteger colorhex = [colors[index] integerValue];
+    self.icon.image = [[UIImage imageNamed:@"Main-矩形"] gx_imageWithTintColor:UIColorFromRGB(colorhex)];
+}
+
+
+
 // 分类的点击
 - (void)headerViewDidClickedBtn:(CZSubButton *)sender
 {

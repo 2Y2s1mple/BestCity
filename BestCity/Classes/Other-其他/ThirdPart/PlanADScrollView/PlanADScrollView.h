@@ -14,7 +14,9 @@
 /**
  代理回调方法，点击图片回调
  */
-- (void)PlanADScrollViewdidSelectAtIndex:(NSInteger )index;
+- (void)PlanADScrollViewdidSelectAtIndex:(NSInteger)index;
+
+- (void)PlanADScrollViewCurrentAtIndex:(NSInteger)index;
 
 @end
 

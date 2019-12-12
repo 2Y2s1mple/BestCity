@@ -18,7 +18,6 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self setup];
-
     }
     return self;
 }
@@ -31,7 +30,6 @@
     // 调整图片
     self.titleLabel.x -= self.imageView.width;
     self.imageView.x = CZGetX(self.titleLabel)+ 4;
-
 }
 
 @end

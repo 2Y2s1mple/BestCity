@@ -124,8 +124,12 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     int page = (int) (scrollView.contentOffset.x/scrollView.frame.size.width+0.5)%self.imageUrls.count;
-    
-    self.pageControl.currentPage =page;
+    self.pageControl.currentPage = page;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
 }
 
 -(NSString *)controllerTitle{

@@ -10,7 +10,7 @@
 
 @implementation UIImage (CZExtension)
 /** 改变图片的颜色 */
-- (UIImage *)imageWithTintColor:(UIColor *)tintColor
+- (UIImage *)gx_imageWithTintColor:(UIColor *)tintColor
 {
     //We want to keep alpha, set opaque to NO; Use 0.0f for scale to use the scale factor of the device’s main screen.
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0f);
@@ -27,7 +27,7 @@
     return tintedImage;
 }
 
-+ (UIImage *)imageWithColor:(UIColor *)color
++ (UIImage *)gx_imageWithColor:(UIColor *)color
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
