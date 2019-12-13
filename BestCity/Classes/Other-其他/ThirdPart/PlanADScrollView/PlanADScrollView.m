@@ -25,6 +25,15 @@
 
 @implementation PlanADScrollView
 
+- (NSTimer *)timer
+{
+    if (_timer == nil) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    }
+    return _timer;
+}
+
 /**
  imageUrls         网络请求的图片url
  placeholderimage  占位图片
@@ -48,14 +57,13 @@
     self.imageUrls = imageUrls;
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:PlanSections/2] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
     self.pageControl.numberOfPages = imageUrls.count;
-    self.placeholderimage =placeholderimage;
+    self.placeholderimage = placeholderimage;
 }
 
 #pragma mark 添加定时器
 -(void)addTimer{
-//    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
-//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-//    self.timer = timer ;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 
@@ -65,17 +73,18 @@
     self.timer = nil;
 }
 
--(void)nextpage{
+-(void)nextpage {
+
     NSIndexPath *currentIndexPath = [[self.collectionView indexPathsForVisibleItems] lastObject];
     
     NSIndexPath *currentIndexPathReset = [NSIndexPath indexPathForItem:currentIndexPath.item inSection:100/2];
     
     [self.collectionView scrollToItemAtIndexPath:currentIndexPathReset atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
     
-    NSInteger nextItem = currentIndexPathReset.item +1;
+    NSInteger nextItem = currentIndexPathReset.item + 1;
     NSInteger nextSection = currentIndexPathReset.section;
-    if (nextItem==self.imageUrls.count) {
-        nextItem=0;
+    if (nextItem == self.imageUrls.count) {
+        nextItem = 0;
         nextSection++;
     }
     NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:nextItem inSection:nextSection];
@@ -111,18 +120,18 @@
     }
 }
 
+// 手碰上就调用
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self removeTimer];
 }
 
-#pragma mark 当用户停止的时候调用
+// 手移开就调用
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [self addTimer];
 }
 
 #pragma mark 设置页码
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     int page = (int) (scrollView.contentOffset.x/scrollView.frame.size.width+0.5)%self.imageUrls.count;
     self.pageControl.currentPage = page;
 }
@@ -130,6 +139,12 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
+    NSLog(@"%s", __func__);
 }
 
 -(NSString *)controllerTitle{

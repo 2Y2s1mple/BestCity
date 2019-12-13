@@ -14,18 +14,6 @@
 @end
 
 @implementation PlanADCollectionViewCell
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        
-    }
-    return self;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -44,8 +32,9 @@
     
     [super layoutSubviews];
     
-    self.PlanADimageView.frame = CGRectMake(0, 0, SCR_WIDTH, self.frame.size.height);
+    self.PlanADimageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
+
 -(void)imageStr:(NSString*)imageStr placeholderimage:(UIImage *)placeholderimage;{
     
     if ([imageStr hasPrefix:@"http"]) {
@@ -53,9 +42,6 @@
     }else{
         self.PlanADimageView.image = [UIImage imageNamed:imageStr];
     }
-   
-   
-    
 }
 
 @end

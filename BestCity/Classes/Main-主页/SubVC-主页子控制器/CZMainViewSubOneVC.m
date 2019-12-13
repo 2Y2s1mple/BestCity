@@ -1,13 +1,12 @@
 //
-//  CZFestivalController.m
+//  CZMainViewSubOneVC.m
 //  BestCity
 //
-//  Created by JasonBourne on 2019/10/29.
+//  Created by JasonBourne on 2019/12/13.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import "CZFestivalController.h"
-
+#import "CZMainViewSubOneVC.h"
 // 工具
 #import "GXNetTool.h"
 
@@ -23,8 +22,7 @@
 //------------------
 // viewModel
 #import "CZFestivalCollectDelegate.h"
-
-@interface CZFestivalController ()
+@interface CZMainViewSubOneVC ()
 /** <#注释#> */
 @property (nonatomic, strong) UICollectionView *collectView;
 /** <#注释#> */
@@ -35,7 +33,7 @@
 @property (nonatomic, strong) UIImageView *icon;
 @end
 
-@implementation CZFestivalController
+@implementation CZMainViewSubOneVC
 #pragma mark - 系统生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -157,6 +155,7 @@
     CZTaobaoSearchController *vc = [[CZTaobaoSearchController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 
 @end

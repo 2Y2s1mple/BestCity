@@ -330,9 +330,6 @@
 #pragma  mark - 获取数据
 - (void)reloadNewDataSorce
 {
-
-
-
     // 结束尾部刷新
     [self.collectView.mj_footer endRefreshing];
     self.page = 1;
