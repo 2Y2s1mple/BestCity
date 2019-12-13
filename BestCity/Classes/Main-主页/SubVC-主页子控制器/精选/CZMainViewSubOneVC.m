@@ -31,6 +31,9 @@
 @property (nonatomic, assign) NSInteger page;
 /** <#注释#> */
 @property (nonatomic, strong) UIImageView *icon;
+
+/** 精选推荐 */
+@property (nonatomic, strong) NSMutableArray *qualityGoods;
 @end
 
 @implementation CZMainViewSubOneVC
@@ -50,15 +53,16 @@
     [self.view addSubview:self.collectView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageColorChange:) name:@"mainImageColorChange" object:nil];
+
+    // 数据
+    [self setupRefresh];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
     [CZAlertTool alertRule];
     self.collectView.height = self.view.height;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -76,6 +80,8 @@
 {
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 0;
 
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
@@ -95,6 +101,15 @@
 
 
 #pragma mark - 数据
+// 精品推荐数据
+- (NSMutableArray *)qualityGoods
+{
+    if (_qualityGoods == nil) {
+        _qualityGoods = [NSMutableArray array];
+    }
+    return _qualityGoods;
+}
+
 - (void)reloadNewTrailDataSorce
 {
     // 结束尾部刷新
@@ -114,6 +129,9 @@
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
+            self.qualityGoods = result[@"data"];
+            self.collectDataSurce.qualityGoods = self.qualityGoods;
+
             if (0) {
                 [CZProgressHUD showProgressHUDWithText:@"极品城暂无相关推荐"];
                 [CZProgressHUD hideAfterDelay:1.5];
@@ -131,6 +149,7 @@
 
 - (void)loadMoreTrailDataSorce
 {
+    [self.collectView.mj_footer endRefreshing];
 }
 
 #pragma mark - 事件

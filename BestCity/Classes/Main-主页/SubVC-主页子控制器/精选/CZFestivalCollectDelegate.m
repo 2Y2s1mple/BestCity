@@ -13,6 +13,7 @@
 #import "CZFestivalCollectOneCell.h" // 新人0元购
 #import "CZFestivalCollectTwoCell.h" // 热销
 #import "CZFestivalCollectThreeCell.h" // 按钮
+#import "CZguessLineCell.h" // 一行
 
 @implementation CZFestivalCollectDelegate
 static NSString *ID = @"CZFestivalCollectCell";
@@ -33,6 +34,8 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZFestivalCollectTwoCell class]) bundle:nil] forCellWithReuseIdentifier:twoId];
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZFestivalCollectThreeCell class]) bundle:nil] forCellWithReuseIdentifier:threeId];
 
+        [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessLineCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessLineCell"]; // 一行
+
 
         collectionView.dataSource = self;
         collectionView.delegate = self;
@@ -45,17 +48,22 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 // <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 1;
+    if (section == 3) {
+        return self.qualityGoods.count;
+    } else if (section == 2) {
+        return 1;
+    } else {
+        return 1;
+    }
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if (indexPath.section == 0) { // 新人0元购
         CZFestivalCollectOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:oneId forIndexPath:indexPath];
         return cell;
@@ -66,8 +74,11 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
            CZFestivalCollectThreeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:threeId forIndexPath:indexPath];
            return cell;
     } else if (indexPath.section == 3) { // 做过了 横排
-           CZFestivalCollectOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:oneId forIndexPath:indexPath];
-           return cell;
+
+        NSDictionary *dic = self.qualityGoods[indexPath.item];
+        CZguessLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessLineCell" forIndexPath:indexPath];
+        cell.dataDic = dic;
+        return cell;
     } else if (indexPath.section == 4) { // 做过了 竖排
         CZFestivalCollectOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:oneId forIndexPath:indexPath];
         return cell;
@@ -110,6 +121,8 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         return CGSizeMake(SCR_WIDTH, 270);
     } else if (indexPath.section == 2) {
         return CGSizeMake(SCR_WIDTH, 89);
+    } else if (indexPath.section == 3) {
+        return CGSizeMake(SCR_WIDTH, 150);
     } else {
         return CGSizeZero;
     }
@@ -123,6 +136,11 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
     } else {
         return CGSizeZero;
     }
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsZero;
 }
 
 

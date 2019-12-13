@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFestivalCollectDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 - (instancetype)initWithCollectView:(UICollectionView *)collectionView;
-/** <#注释#> */
+/** 精选推荐 */
+@property (nonatomic, strong) NSMutableArray *qualityGoods;
 
 @end
 

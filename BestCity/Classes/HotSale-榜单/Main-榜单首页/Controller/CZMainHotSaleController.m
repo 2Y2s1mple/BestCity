@@ -21,15 +21,12 @@
 #import "CZUpdataView.h"
 #import "CZCustomGifHeader.h"
 
-
-
 // 模型
 #import "CZHotTitleModel.h"
 // 跳转
 #import "CZHotsaleSearchController.h"
 #import "CZMainHotSaleDetailController.h"
 #import "CZMHSDListNewController.h"
-#import "CZFestivalController.h" // 活动"
 
 @interface CZMainHotSaleController () <UITableViewDelegate, UITableViewDataSource>
 /** 记录btn */

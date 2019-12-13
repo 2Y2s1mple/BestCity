@@ -7,7 +7,6 @@
 //
 
 #import "CZTabbar.h"
-#import "CZFestivalController.h"
 #import "CZNavigationController.h"
 #import "UIImage+GIF.h"
 

@@ -15,6 +15,7 @@
 
 // 子视图
 #import "CZMainViewSubOneVC.h"
+#import "CZGuessWhatYouLikeSubVC.h"
 
 // 跳转
 #import "CZTaobaoSearchController.h"
@@ -116,7 +117,7 @@
         }
         case 1:
         {
-            UIViewController *vc = [[UIViewController alloc] init];
+            CZGuessWhatYouLikeSubVC *vc = [[CZGuessWhatYouLikeSubVC alloc] init];
             vc.view.backgroundColor = RANDOMCOLOR;
             return vc;
         }
