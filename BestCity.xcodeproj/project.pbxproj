@@ -2364,8 +2364,8 @@
 		972BDC9E23A39C2F00C3F8BF /* SubVC-主页子控制器 */ = {
 			isa = PBXGroup;
 			children = (
-				972BDCA823A3AD5200C3F8BF /* 猜你喜欢 */,
 				972BDCA623A39EFD00C3F8BF /* 精选 */,
+				972BDCA823A3AD5200C3F8BF /* 猜你喜欢 */,
 			);
 			path = "SubVC-主页子控制器";
 			sourceTree = "<group>";

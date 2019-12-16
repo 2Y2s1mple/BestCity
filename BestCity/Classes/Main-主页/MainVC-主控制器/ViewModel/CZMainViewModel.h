@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMainViewModel : NSObject
 /** <#注释#> */
-@property (nonatomic, strong) NSArray *mainTitles;
+@property (nonatomic, strong) NSMutableArray *mainTitles;
 
 - (void)getMainTitles:(void (^)(void))callback;
 @end

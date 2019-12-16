@@ -113,38 +113,61 @@
 - (void)reloadNewTrailDataSorce
 {
     // 结束尾部刷新
-    [self.collectView.mj_footer endRefreshing];
-    self.page = 1;
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    param[@"deviceType"] = @"IDFA";
-    param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
-    param[@"deviceEncrypt"] = @"MD5";
-    param[@"asc"] = @"1"; // (1正序，0倒序);
-    param[@"keyword"] = @"电动牙刷";
-    param[@"orderByType"] = @"0"; // 0综合，1价格，2补贴，3销量
-    param[@"type"] = @"1"; // 分类（1搜索极品城，2搜索淘宝）
-    param[@"page"] = @(self.page);
+       [self.collectView.mj_footer endRefreshing];
+       NSMutableDictionary *param = [NSMutableDictionary dictionary];
 
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.qualityGoods = result[@"data"];
-            self.collectDataSurce.qualityGoods = self.qualityGoods;
+       //获取详情数据
+       [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+           if ([result[@"msg"] isEqualToString:@"success"]) {
+//               self.qualityGoods = result[@"data"];
+//               self.collectDataSurce.qualityGoods = self.qualityGoods;
+//
+//               if (0) {
+//                   [CZProgressHUD showProgressHUDWithText:@"极品城暂无相关推荐"];
+//                   [CZProgressHUD hideAfterDelay:1.5];
+//               }
+               [self.collectView reloadData];
+           }
+           // 结束刷新
+           [self.collectView.mj_header endRefreshing];
 
-            if (0) {
-                [CZProgressHUD showProgressHUDWithText:@"极品城暂无相关推荐"];
-                [CZProgressHUD hideAfterDelay:1.5];
-            }
-            [self.collectView reloadData];
-        }
-        // 结束刷新
-        [self.collectView.mj_header endRefreshing];
+       } failure:^(NSError *error) {// 结束刷新
+           [self.collectView.mj_header endRefreshing];
 
-    } failure:^(NSError *error) {// 结束刷新
-        [self.collectView.mj_header endRefreshing];
-
-    }];
+       }];
+//    // 结束尾部刷新
+//    [self.collectView.mj_footer endRefreshing];
+//    self.page = 1;
+//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+//    NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//    param[@"deviceType"] = @"IDFA";
+//    param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
+//    param[@"deviceEncrypt"] = @"MD5";
+//    param[@"asc"] = @"1"; // (1正序，0倒序);
+//    param[@"keyword"] = @"电动牙刷";
+//    param[@"orderByType"] = @"0"; // 0综合，1价格，2补贴，3销量
+//    param[@"type"] = @"1"; // 分类（1搜索极品城，2搜索淘宝）
+//    param[@"page"] = @(self.page);
+//
+//    //获取详情数据
+//    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+//        if ([result[@"msg"] isEqualToString:@"success"]) {
+//            self.qualityGoods = result[@"data"];
+//            self.collectDataSurce.qualityGoods = self.qualityGoods;
+//
+//            if (0) {
+//                [CZProgressHUD showProgressHUDWithText:@"极品城暂无相关推荐"];
+//                [CZProgressHUD hideAfterDelay:1.5];
+//            }
+//            [self.collectView reloadData];
+//        }
+//        // 结束刷新
+//        [self.collectView.mj_header endRefreshing];
+//
+//    } failure:^(NSError *error) {// 结束刷新
+//        [self.collectView.mj_header endRefreshing];
+//
+//    }];
 }
 
 - (void)loadMoreTrailDataSorce
