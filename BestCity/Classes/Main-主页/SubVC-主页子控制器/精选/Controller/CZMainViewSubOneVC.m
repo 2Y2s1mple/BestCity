@@ -22,6 +22,10 @@
 //------------------
 // viewModel
 #import "CZFestivalCollectDelegate.h"
+
+// 数据
+#import "CZMainViewSubOneVCModel.h"
+
 @interface CZMainViewSubOneVC ()
 /** <#注释#> */
 @property (nonatomic, strong) UICollectionView *collectView;
@@ -29,8 +33,15 @@
 @property (nonatomic, strong) CZFestivalCollectDelegate *collectDataSurce;
 /** <#注释#> */
 @property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
+@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2补贴，3销量
+/** 是否是条形布局 */
+@property (nonatomic, assign) BOOL layoutType;
 /** <#注释#> */
 @property (nonatomic, strong) UIImageView *icon;
+
+/** 总数据 */
+@property (nonatomic, strong) CZMainViewSubOneVCModel *totalDataModel;
 
 /** 精选推荐 */
 @property (nonatomic, strong) NSMutableArray *qualityGoods;
@@ -42,7 +53,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
 
-//    UIColorFromRGB(0x143030)
+    // 数据初始化
+    self.asc = @"1"; // (1正序，0倒序);
+    self.orderByType = @"0";
+
+
+    // 创建UI
     self.icon = [[UIImageView alloc] init];
     self.icon.image = [UIImage imageNamed:@"Main-矩形"];
     [self.icon setTintColor:UIColorFromRGB(0x143030)];
@@ -52,7 +68,10 @@
 
     [self.view addSubview:self.collectView];
 
+    // 改变上部环形图片的颜色
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageColorChange:) name:@"mainImageColorChange" object:nil];
+    // 监听按钮的点击事件
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsRecommendedBtnsAction:) name:@"mainSameTitleAction" object:nil];
 
     // 数据
     [self setupRefresh];
@@ -81,7 +100,7 @@
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumInteritemSpacing = 0;
-        layout.minimumLineSpacing = 0;
+//        layout.minimumLineSpacing = 0;
 
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
@@ -119,60 +138,73 @@
        //获取详情数据
        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
            if ([result[@"msg"] isEqualToString:@"success"]) {
-//               self.qualityGoods = result[@"data"];
-//               self.collectDataSurce.qualityGoods = self.qualityGoods;
-//
-//               if (0) {
-//                   [CZProgressHUD showProgressHUDWithText:@"极品城暂无相关推荐"];
-//                   [CZProgressHUD hideAfterDelay:1.5];
-//               }
-               [self.collectView reloadData];
+               self.totalDataModel = [CZMainViewSubOneVCModel objectWithKeyValues:result[@"data"]];
+               self.collectDataSurce.totalDataModel = self.totalDataModel;
+               // 获取精品推荐
+               [self getProductsRecommendedData:@{@"orderByType" : self.orderByType, @"asc" : self.asc}];
+           } else {
+               // 结束刷新
+               [self.collectView.mj_header endRefreshing];
            }
-           // 结束刷新
-           [self.collectView.mj_header endRefreshing];
-
        } failure:^(NSError *error) {// 结束刷新
            [self.collectView.mj_header endRefreshing];
-
        }];
-//    // 结束尾部刷新
-//    [self.collectView.mj_footer endRefreshing];
-//    self.page = 1;
-//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//    NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-//    param[@"deviceType"] = @"IDFA";
-//    param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
-//    param[@"deviceEncrypt"] = @"MD5";
-//    param[@"asc"] = @"1"; // (1正序，0倒序);
-//    param[@"keyword"] = @"电动牙刷";
-//    param[@"orderByType"] = @"0"; // 0综合，1价格，2补贴，3销量
-//    param[@"type"] = @"1"; // 分类（1搜索极品城，2搜索淘宝）
-//    param[@"page"] = @(self.page);
-//
-//    //获取详情数据
-//    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/searchGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-//        if ([result[@"msg"] isEqualToString:@"success"]) {
-//            self.qualityGoods = result[@"data"];
-//            self.collectDataSurce.qualityGoods = self.qualityGoods;
-//
-//            if (0) {
-//                [CZProgressHUD showProgressHUDWithText:@"极品城暂无相关推荐"];
-//                [CZProgressHUD hideAfterDelay:1.5];
-//            }
-//            [self.collectView reloadData];
-//        }
-//        // 结束刷新
-//        [self.collectView.mj_header endRefreshing];
-//
-//    } failure:^(NSError *error) {// 结束刷新
-//        [self.collectView.mj_header endRefreshing];
-//
-//    }];
 }
 
 - (void)loadMoreTrailDataSorce
 {
-    [self.collectView.mj_footer endRefreshing];
+    [self.collectView.mj_header endRefreshing];
+    self.page++;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"asc"] = self.asc; // (1正序，0倒序);
+    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
+    param[@"page"] = @(self.page);
+
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            if ([result[@"data"] count] != 0) {
+                [self.qualityGoods addObjectsFromArray:result[@"data"]];
+                self.collectDataSurce.qualityGoods = self.qualityGoods;
+                [self.collectView reloadData];
+            } else {
+                [self.collectView.mj_footer endRefreshingWithNoMoreData];
+            }
+        } else {
+            // 结束刷新
+            [self.collectView.mj_footer endRefreshing];
+        }
+    } failure:^(NSError *error) {// 结束刷新
+        [self.collectView.mj_footer endRefreshing];
+
+    }];
+}
+
+// 获取精品推荐
+- (void)getProductsRecommendedData:(NSDictionary *)dataParam
+{
+    self.page = 1;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"asc"] = dataParam[@"asc"]; // (1正序，0倒序);
+    param[@"orderByType"] = dataParam[@"orderByType"]; // 0综合，1价格，2补贴，3销量
+    param[@"page"] = @(self.page);
+
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            self.qualityGoods = [NSMutableArray arrayWithArray:result[@"data"]];
+            self.collectDataSurce.qualityGoods = self.qualityGoods;
+
+
+            [self.collectView reloadData];
+        }
+        // 结束刷新
+        [self.collectView.mj_header endRefreshing];
+
+    } failure:^(NSError *error) {// 结束刷新
+        [self.collectView.mj_header endRefreshing];
+
+    }];
 }
 
 #pragma mark - 事件
@@ -184,6 +216,27 @@
         [self.icon setTintColor:color];
     }];
 }
+
+// 精品推荐的按钮
+- (void)productsRecommendedBtnsAction:(NSNotification *)sender
+{
+    NSDictionary *param = sender.userInfo;
+
+    if (param[@"asc"] == self.asc && param[@"orderByType"] == self.orderByType && self.layoutType != [param[@"layoutType"] boolValue]) {
+        self.collectDataSurce.layoutType = self.layoutType;
+        [self.collectView reloadData];
+    } else {
+        [self getProductsRecommendedData:param];
+    }
+
+    self.asc =  param[@"asc"]; // (1正序，0倒序);
+    self.orderByType = param[@"orderByType"];
+    self.layoutType = [param[@"layoutType"] boolValue];
+    [self getProductsRecommendedData:param];
+
+}
+
+
 
 // 复制搜索弹框
 - (void)showSearchAlert

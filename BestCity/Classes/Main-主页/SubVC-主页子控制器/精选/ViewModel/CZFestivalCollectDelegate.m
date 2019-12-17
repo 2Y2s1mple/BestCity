@@ -14,6 +14,7 @@
 #import "CZFestivalCollectTwoCell.h" // 热销
 #import "CZFestivalCollectThreeCell.h" // 按钮
 #import "CZguessLineCell.h" // 一行
+#import "CZguessWhatYouLikeCell.h" // 横排
 
 @implementation CZFestivalCollectDelegate
 static NSString *ID = @"CZFestivalCollectCell";
@@ -35,6 +36,7 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZFestivalCollectThreeCell class]) bundle:nil] forCellWithReuseIdentifier:threeId];
 
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessLineCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessLineCell"]; // 一行
+        [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessWhatYouLikeCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessWhatYouLikeCell"]; // 两行
 
 
         collectionView.dataSource = self;
@@ -66,19 +68,32 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 {
     if (indexPath.section == 0) { // 新人0元购
         CZFestivalCollectOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:oneId forIndexPath:indexPath];
+        cell.ad2 = self.totalDataModel.ad2;
+        cell.hotActivity = self.totalDataModel.hotActivity;
+        cell.activityList = self.totalDataModel.activityList;
+        cell.freeGoodsList = self.totalDataModel.freeGoodsList;
+
         return cell;
-    } else if (indexPath.section == 1) { // 爆款
+    } else if (indexPath.section == 1) { // 热销榜单
         CZFestivalCollectTwoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:twoId forIndexPath:indexPath];
+        cell.hotGoodsList = self.totalDataModel.hotGoodsList;
         return cell;
     } else if (indexPath.section == 2) { // 按钮
            CZFestivalCollectThreeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:threeId forIndexPath:indexPath];
            return cell;
     } else if (indexPath.section == 3) { // 做过了 横排
-
         NSDictionary *dic = self.qualityGoods[indexPath.item];
-        CZguessLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessLineCell" forIndexPath:indexPath];
-        cell.dataDic = dic;
-        return cell;
+        if (self.layoutType == YES) { // 一条
+            CZguessLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessLineCell" forIndexPath:indexPath];
+            cell.dataDic = dic;
+            return cell;
+        } else { // 块
+            CZguessWhatYouLikeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessWhatYouLikeCell" forIndexPath:indexPath];
+            cell.dataDic = dic;
+            return cell;
+        }
+
+
     } else if (indexPath.section == 4) { // 做过了 竖排
         CZFestivalCollectOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:oneId forIndexPath:indexPath];
         return cell;
@@ -97,7 +112,8 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 
     if (indexPath.section == 0) {
         CZFestivalCollectHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderId forIndexPath:indexPath];
-
+        headerView.boxList = self.totalDataModel.boxList;
+        headerView.ad1List = self.totalDataModel.ad1List;
         return headerView;
     } else {
         return nil;
@@ -122,7 +138,11 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
     } else if (indexPath.section == 2) {
         return CGSizeMake(SCR_WIDTH, 89);
     } else if (indexPath.section == 3) {
-        return CGSizeMake(SCR_WIDTH, 150);
+        if (self.layoutType == YES) { // 一条
+            return CGSizeMake(SCR_WIDTH, 150);
+        } else { // 块
+            return CGSizeMake((SCR_WIDTH - 40) / 2.0, 312);
+        }
     } else {
         return CGSizeZero;
     }
@@ -140,7 +160,19 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsZero;
+    if (section == 3) {
+        if (self.layoutType == YES) { // 一条
+            return UIEdgeInsetsZero;
+        } else { // 块
+            if (self.qualityGoods.count == 0) {
+                return UIEdgeInsetsZero;
+            } else {
+                return UIEdgeInsetsMake(10, 15, 10, 15);
+            }
+        }
+    } else {
+        return UIEdgeInsetsZero;
+    }
 }
 
 

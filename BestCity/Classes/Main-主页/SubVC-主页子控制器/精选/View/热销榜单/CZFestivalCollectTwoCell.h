@@ -1,5 +1,5 @@
 //
-//  CZFestivalCollectOneCell.h
+//  CZFestivalCollectTwoCell.h
 //  BestCity
 //
 //  Created by JasonBourne on 2019/12/13.
@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZFestivalCollectOneCell : UICollectionViewCell
-
+@interface CZFestivalCollectTwoCell : UICollectionViewCell
+/** 热销榜单 */
+@property (nonatomic, strong) NSArray *hotGoodsList;
 @end
 
 NS_ASSUME_NONNULL_END

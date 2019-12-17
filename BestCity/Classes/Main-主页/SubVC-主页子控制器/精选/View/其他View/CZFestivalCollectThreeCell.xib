@@ -53,6 +53,7 @@
             <size key="customSize" width="479" height="89"/>
             <connections>
                 <outlet property="backView" destination="VCS-aU-FST" id="0Ou-ez-Dfz"/>
+                <outlet property="titleName" destination="LuA-Te-uhk" id="zbg-UR-pMr"/>
             </connections>
             <point key="canvasLocation" x="174.63768115942031" y="29.799107142857142"/>
         </collectionViewCell>

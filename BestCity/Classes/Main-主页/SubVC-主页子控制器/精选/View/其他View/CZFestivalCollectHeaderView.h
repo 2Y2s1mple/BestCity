@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFestivalCollectHeaderView : UICollectionReusableView
+/** 轮播图 */
+@property (nonatomic, strong) NSArray *ad1List;
+/** 宫格图 */
+@property (nonatomic, strong) NSArray *boxList;
 
 @end
 

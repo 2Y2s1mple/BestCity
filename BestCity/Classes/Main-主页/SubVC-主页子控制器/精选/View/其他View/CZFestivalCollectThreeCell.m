@@ -9,12 +9,16 @@
 #import "CZFestivalCollectThreeCell.h"
 
 @interface CZFestivalCollectThreeCell ()
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *titleName;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *backView;
 
 @property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
 @property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2补贴，3销量
-
+/** 是否是条形布局 */
+@property (nonatomic, assign) BOOL layoutType;
 /** <#注释#> */
 @property (nonatomic, strong) UIButton *recordBtn;
 /** <#注释#> */
@@ -25,6 +29,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.titleName.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 17];
     [self createTitles];
 }
 
@@ -80,6 +85,7 @@
     }
     if (self.recordBtn.tag == 106) {
         [self.recordBtn setImage:[UIImage imageNamed:@"search_asc_non"] forState:UIControlStateNormal];
+        [self.recordBtn setImage:[UIImage imageNamed:@"search_asc_non"] forState:UIControlStateSelected];
     }
     //（0综合，1价格，2补贴，3销量）
     switch (sender.tag) {
@@ -113,11 +119,15 @@
 //            self.collectView.contentOffset = CGPointMake(0, 0);
             if (sender.isSelected) {
                 sender.selected = NO; // 条
-//                self.layoutType = YES;
+                self.layoutType = YES;
             } else {
                 sender.selected = YES; // 块
-//                self.layoutType = NO;
+                self.layoutType = NO;
             }
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"mainSameTitleAction" object:nil userInfo:@{@"orderByType" : self.orderByType, @"asc" : self.asc, @"layoutType" : @(self.layoutType)}];
+
+
             return;
         }
         default:
@@ -129,5 +139,8 @@
     [sender setTitleColor:UIColorFromRGB(0x202020) forState:UIControlStateNormal];
     sender.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 16];
     self.recordBtn = sender;
+
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"mainSameTitleAction" object:nil userInfo:@{@"orderByType" : self.orderByType, @"asc" : self.asc, @"layoutType" : @(self.layoutType)}];
 }
 @end

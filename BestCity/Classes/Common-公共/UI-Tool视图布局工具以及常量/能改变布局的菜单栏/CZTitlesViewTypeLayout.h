@@ -1,8 +1,8 @@
 //
-//  CZFestivalCollectTwoCell.h
+//  CZTitlesViewTypeLayout.h
 //  BestCity
 //
-//  Created by JasonBourne on 2019/12/13.
+//  Created by JasonBourne on 2019/12/17.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZFestivalCollectTwoCell : UICollectionViewCell
+@interface CZTitlesViewTypeLayout : UIView
 
 @end
 

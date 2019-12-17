@@ -55,8 +55,8 @@
     [self addTimer];
     
     self.imageUrls = imageUrls;
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:PlanSections/2] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
     self.pageControl.numberOfPages = imageUrls.count;
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:PlanSections/2] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
     self.placeholderimage = placeholderimage;
 }
 
@@ -143,8 +143,10 @@
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
-    NSLog(@"%s", __func__);
+    if (self.pageControl.currentPage) {
+        [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
+        NSLog(@"%s", __func__);
+    }
 }
 
 -(NSString *)controllerTitle{

@@ -44,4 +44,31 @@
     }
     return mutableDic;
 }
+
+
+- (NSDictionary *)changeAllValueWithString
+{
+    NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] initWithDictionary:[self deleteAllNullValue]];
+    for (NSString *keyStr in mutableDic.allKeys) {
+        id value = [mutableDic objectForKey:keyStr];
+        if (![value isKindOfClass:[NSString class]]) {
+            NSString *stringValue = [NSString stringWithFormat:@"%@", value];
+            NSArray *arr = [stringValue componentsSeparatedByString:@"."];
+            if (arr.count > 1){
+                NSString *str = arr[1];
+                if (str.length <= 2) {
+                    [mutableDic setObject:stringValue forKey:keyStr];
+                } else {
+                    NSString *currentValue = [NSString stringWithFormat:@"%@.%@", arr[0], [str substringToIndex:2]];
+                    [mutableDic setObject:currentValue forKey:keyStr];
+                }
+            } else {
+                [mutableDic setObject:stringValue forKey:keyStr];
+            }
+        } else {
+            [mutableDic setObject:value forKey:keyStr];
+        }
+    }
+    return mutableDic;
+}
 @end
