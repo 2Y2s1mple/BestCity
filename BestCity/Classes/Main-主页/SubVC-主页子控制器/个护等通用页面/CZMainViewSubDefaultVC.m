@@ -93,7 +93,7 @@
             self.categoryList = result[@"categoryList"];
 
             
-
+            // 创建头部视图
             // 创建头部视图
 
             [self.collectView reloadData];
