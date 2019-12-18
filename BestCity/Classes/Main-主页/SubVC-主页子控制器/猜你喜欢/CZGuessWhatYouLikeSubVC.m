@@ -19,6 +19,8 @@
 /** <#注释#> */
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
+@property (nonatomic, assign) NSInteger page;
+
 @end
 
 @implementation CZGuessWhatYouLikeSubVC
@@ -41,7 +43,7 @@
 
     [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessWhatYouLikeCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessWhatYouLikeCell"];
 
-    [self getSourceData];
+    [self setupRefresh];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -50,6 +52,15 @@
     self.collectionView.height = self.view.height;
 }
 
+
+#pragma mark - UI创建
+// 上拉加载, 下拉刷新
+- (void)setupRefresh
+{
+    self.collectionView.mj_header = [CZCustomGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
+    [self.collectionView.mj_header beginRefreshing];
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
+}
 
 #pragma mark - 代理
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -79,32 +90,54 @@
 
 
 #pragma mark - 数据
-- (NSMutableArray *)dataSource
-{
-    if (_dataSource == nil) {
-        _dataSource = [NSMutableArray array];
-        //
-    }
-    return _dataSource;
-}
 
-- (void)getSourceData
+- (void)reloadNewTrailDataSorce
 {
+    [self.collectionView.mj_footer endRefreshing];
+    self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-
     param[@"deviceType"] = @"IDFA";
     param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
     param[@"deviceEncrypt"] = @"MD5";
-    param[@"otherGoodsId"] = @"";
+    param[@"page"] = @(self.page);
 
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/listSimilerGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.dataSource = result[@"data"];
+            self.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
             [self.collectionView reloadData];
         }
-    } failure:^(NSError *error) {}];
+        [self.collectionView.mj_header endRefreshing];
+    } failure:^(NSError *error) {
+        [self.collectionView.mj_header endRefreshing];
+    }];
+}
+
+
+- (void)loadMoreTrailDataSorce
+{
+    [self.collectionView.mj_header endRefreshing];
+    self.page++;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    param[@"deviceType"] = @"IDFA";
+    param[@"deviceValue"] = [KCUtilMd5 stringToMD5:idfa];
+    param[@"deviceEncrypt"] = @"MD5";
+    param[@"page"] = @(self.page);
+
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/listSimilerGoods"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            [self.dataSource addObjectsFromArray:result[@"data"]];
+            [self.collectionView reloadData];
+        }
+        // 结束刷新
+        [self.collectionView.mj_footer endRefreshing];
+    } failure:^(NSError *error) {
+        // 结束刷新
+        [self.collectionView.mj_footer endRefreshing];
+    }];
 }
 
 @end

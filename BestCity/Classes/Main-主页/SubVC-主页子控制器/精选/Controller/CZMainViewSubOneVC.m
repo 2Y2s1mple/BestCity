@@ -56,7 +56,7 @@
     // 数据初始化
     self.asc = @"1"; // (1正序，0倒序);
     self.orderByType = @"0";
-
+    self.layoutType = YES;
 
     // 创建UI
     self.icon = [[UIImageView alloc] init];
@@ -167,6 +167,8 @@
                 [self.qualityGoods addObjectsFromArray:result[@"data"]];
                 self.collectDataSurce.qualityGoods = self.qualityGoods;
                 [self.collectView reloadData];
+                // 结束刷新
+                [self.collectView.mj_footer endRefreshing];
             } else {
                 [self.collectView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -222,21 +224,16 @@
 {
     NSDictionary *param = sender.userInfo;
 
-    if (param[@"asc"] == self.asc && param[@"orderByType"] == self.orderByType && self.layoutType != [param[@"layoutType"] boolValue]) {
+    if (self.layoutType != [param[@"layoutType"] boolValue]) {
+        self.layoutType = [param[@"layoutType"] boolValue];
         self.collectDataSurce.layoutType = self.layoutType;
         [self.collectView reloadData];
     } else {
+        self.asc =  param[@"asc"]; // (1正序，0倒序);
+        self.orderByType = param[@"orderByType"];
         [self getProductsRecommendedData:param];
     }
-
-    self.asc =  param[@"asc"]; // (1正序，0倒序);
-    self.orderByType = param[@"orderByType"];
-    self.layoutType = [param[@"layoutType"] boolValue];
-    [self getProductsRecommendedData:param];
-
 }
-
-
 
 // 复制搜索弹框
 - (void)showSearchAlert

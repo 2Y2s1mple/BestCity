@@ -77,8 +77,6 @@
         imageView.layer.cornerRadius = 15;
         imageView.layer.masksToBounds = YES;
 
-
-
         NSMutableArray *colors = [NSMutableArray array];
         NSMutableArray *imgs = [NSMutableArray array];
         
@@ -86,7 +84,7 @@
             [imgs addObject:imgDic[@"img"]];
             [colors addObject:[@"0x" stringByAppendingString:imgDic[@"color"]]];
         }
-        [imageView setSelectedIndexBlock:^(NSInteger index) {
+        [imageView setScrollViewCurrentBlock:^(NSInteger index) {
             UIColor *currentColor = [UIColor gx_colorWithHexString:colors[index]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"mainImageColorChange" object:nil userInfo:@{@"color" : currentColor}];
         }];

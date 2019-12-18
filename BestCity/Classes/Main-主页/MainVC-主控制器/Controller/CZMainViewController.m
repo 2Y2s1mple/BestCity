@@ -16,6 +16,9 @@
 // 子视图
 #import "CZMainViewSubOneVC.h"
 #import "CZGuessWhatYouLikeSubVC.h"
+#import "CZMainViewSubDefaultVC.h" // 通用界面
+
+#import "CZFestivalController.h"
 
 // 跳转
 #import "CZTaobaoSearchController.h"
@@ -121,27 +124,17 @@
             vc.view.backgroundColor = RANDOMCOLOR;
             return vc;
         }
-        case 2:
-        {
-            UIViewController *vc = [[UIViewController alloc] init];
-            vc.view.backgroundColor = RANDOMCOLOR;
-            return vc;
-        }
-        case 3:
-        {
-            UIViewController *vc = [[UIViewController alloc] init];
-            vc.view.backgroundColor = RANDOMCOLOR;
-            return vc;
-        }
         default:
         {
-            return [[UIViewController alloc] init];
+            CZMainViewSubDefaultVC *vc = [[CZMainViewSubDefaultVC alloc] init];
+            vc.category1Id = self.viewModel.mainTitles[index][@"categoryId"];
+            return vc;
         }
     }
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    return self.viewModel.mainTitles[index];
+    return self.viewModel.mainTitles[index][@"categoryName"];
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {

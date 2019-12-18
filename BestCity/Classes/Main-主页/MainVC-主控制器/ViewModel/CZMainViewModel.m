@@ -23,11 +23,11 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/category1"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            NSArray *titleList = result[@"data"];
-            self.mainTitles = [NSMutableArray array];
-            for (NSDictionary *dic in titleList) {
-                [self.mainTitles addObject:dic[@"categoryName"]];
-            }
+            self.mainTitles = result[@"data"];
+//            self.mainTitles = [NSMutableArray array];
+//            for (NSDictionary *dic in titleList) {
+//                [self.mainTitles addObject:dic[@"categoryName"]];
+//            }
         }
         callback();
     } failure:^(NSError *error) {

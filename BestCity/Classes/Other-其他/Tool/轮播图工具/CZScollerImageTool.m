@@ -64,6 +64,6 @@
 - (void)PlanADScrollViewCurrentAtIndex:(NSInteger)index
 {
     NSLog(@"%------ld", index);
-    !self.selectedIndexBlock ? : self.selectedIndexBlock(index);
+    !self.scrollViewCurrentBlock ? : self.scrollViewCurrentBlock(index);
 }
 @end

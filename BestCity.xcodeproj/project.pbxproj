@@ -204,6 +204,8 @@
 		97530AA62313A3FC00185C40 /* CZMHSDQuestCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97530AA42313A3FC00185C40 /* CZMHSDQuestCell1.xib */; };
 		97530AAA2313A98900185C40 /* CZMHSDQuestCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 97530AA82313A98900185C40 /* CZMHSDQuestCell2.m */; };
 		97530AAB2313A98900185C40 /* CZMHSDQuestCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97530AA92313A98900185C40 /* CZMHSDQuestCell2.xib */; };
+		97532FAB23AA37E300D8AB1C /* CZMainViewSubDefaultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97532FAA23AA37E300D8AB1C /* CZMainViewSubDefaultVC.m */; };
+		97532FAE23AA5A9000D8AB1C /* CZMVSDefaultVCDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97532FAD23AA5A9000D8AB1C /* CZMVSDefaultVCDelegate.m */; };
 		9754C87022FBBEDD008C2D98 /* CZEAttentionCommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754C86E22FBBEDD008C2D98 /* CZEAttentionCommendCell.m */; };
 		9754C87122FBBEDD008C2D98 /* CZEAttentionCommendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9754C86F22FBBEDD008C2D98 /* CZEAttentionCommendCell.xib */; };
 		9754C87522FC18FD008C2D98 /* CZEACCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754C87322FC18FD008C2D98 /* CZEACCollectionCell.m */; };
@@ -956,6 +958,10 @@
 		97530AA72313A98900185C40 /* CZMHSDQuestCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQuestCell2.h; sourceTree = "<group>"; };
 		97530AA82313A98900185C40 /* CZMHSDQuestCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQuestCell2.m; sourceTree = "<group>"; };
 		97530AA92313A98900185C40 /* CZMHSDQuestCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMHSDQuestCell2.xib; sourceTree = "<group>"; };
+		97532FA923AA37E300D8AB1C /* CZMainViewSubDefaultVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainViewSubDefaultVC.h; sourceTree = "<group>"; };
+		97532FAA23AA37E300D8AB1C /* CZMainViewSubDefaultVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainViewSubDefaultVC.m; sourceTree = "<group>"; };
+		97532FAC23AA5A9000D8AB1C /* CZMVSDefaultVCDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMVSDefaultVCDelegate.h; sourceTree = "<group>"; };
+		97532FAD23AA5A9000D8AB1C /* CZMVSDefaultVCDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMVSDefaultVCDelegate.m; sourceTree = "<group>"; };
 		9754C86D22FBBEDD008C2D98 /* CZEAttentionCommendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEAttentionCommendCell.h; sourceTree = "<group>"; };
 		9754C86E22FBBEDD008C2D98 /* CZEAttentionCommendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEAttentionCommendCell.m; sourceTree = "<group>"; };
 		9754C86F22FBBEDD008C2D98 /* CZEAttentionCommendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEAttentionCommendCell.xib; sourceTree = "<group>"; };
@@ -2375,6 +2381,7 @@
 		972BDC9E23A39C2F00C3F8BF /* SubVC-主页子控制器 */ = {
 			isa = PBXGroup;
 			children = (
+				97532FA823AA37AB00D8AB1C /* 个护等通用页面 */,
 				972BDCA623A39EFD00C3F8BF /* 精选 */,
 				972BDCA823A3AD5200C3F8BF /* 猜你喜欢 */,
 			);
@@ -2644,13 +2651,13 @@
 			path = "其他View";
 			sourceTree = "<group>";
 		};
-		9733E56423A8F52E002F8E7C /* 能改变布局的菜单栏 */ = {
+		9733E56423A8F52E002F8E7C /* 菜单栏 */ = {
 			isa = PBXGroup;
 			children = (
 				9733E56523A8F591002F8E7C /* CZTitlesViewTypeLayout.h */,
 				9733E56623A8F591002F8E7C /* CZTitlesViewTypeLayout.m */,
 			);
-			path = "能改变布局的菜单栏";
+			path = "菜单栏";
 			sourceTree = "<group>";
 		};
 		973CF63A22FD098E007E554B /* Controller */ = {
@@ -2865,6 +2872,17 @@
 				97530AA92313A98900185C40 /* CZMHSDQuestCell2.xib */,
 			);
 			path = "未通过";
+			sourceTree = "<group>";
+		};
+		97532FA823AA37AB00D8AB1C /* 个护等通用页面 */ = {
+			isa = PBXGroup;
+			children = (
+				97532FA923AA37E300D8AB1C /* CZMainViewSubDefaultVC.h */,
+				97532FAA23AA37E300D8AB1C /* CZMainViewSubDefaultVC.m */,
+				97532FAC23AA5A9000D8AB1C /* CZMVSDefaultVCDelegate.h */,
+				97532FAD23AA5A9000D8AB1C /* CZMVSDefaultVCDelegate.m */,
+			);
+			path = "个护等通用页面";
 			sourceTree = "<group>";
 		};
 		9754C87722FC213D008C2D98 /* Model */ = {
@@ -4991,7 +5009,7 @@
 		97F41E0B23A0AE86003C656C /* UI-Tool视图布局工具以及常量 */ = {
 			isa = PBXGroup;
 			children = (
-				9733E56423A8F52E002F8E7C /* 能改变布局的菜单栏 */,
+				9733E56423A8F52E002F8E7C /* 菜单栏 */,
 				97BDE5C92195B232005FB405 /* CZConst.h */,
 				97BDE5CA2195B232005FB405 /* CZConst.m */,
 				97F41E0C23A0AEAF003C656C /* CZUILayoutTool.h */,
@@ -5771,6 +5789,7 @@
 				97C39255230BEFD1002EA036 /* CZSubCollectThreeController.m in Sources */,
 				977864A2211A7AD6001B41F1 /* MASViewAttribute.m in Sources */,
 				9780B0B023069F53002F5CC8 /* CZSearchThreeSubView.m in Sources */,
+				97532FAB23AA37E300D8AB1C /* CZMainViewSubDefaultVC.m in Sources */,
 				97C53DFC2302BA7E002B1F76 /* CZERecommendHeaderView.m in Sources */,
 				97572A852119862C00FB42DE /* CZSystemMessageDetailController.m in Sources */,
 				97FD7E1C2276B2C200F5DFFC /* CZReachabilityHandle.m in Sources */,
@@ -5850,6 +5869,7 @@
 				97705C6A2107172A00485D64 /* AFURLResponseSerialization.m in Sources */,
 				9779470E22BCD38A00DA3948 /* CZFreeDetailsubView.m in Sources */,
 				97C52A6F2254B8DC00787BC5 /* CZCommonRecommendController.m in Sources */,
+				97532FAE23AA5A9000D8AB1C /* CZMVSDefaultVCDelegate.m in Sources */,
 				97B4A4922248BDB800E48D93 /* CZTrialApplyForDetailController.m in Sources */,
 				97AB0C182253254D00072426 /* CZTrialApplyForController.m in Sources */,
 				97705C6E2107172A00485D64 /* AFNetworkReachabilityManager.m in Sources */,

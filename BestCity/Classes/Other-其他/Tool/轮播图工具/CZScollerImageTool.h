@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *imgList;
 /** <#注释#> */
 @property (nonatomic, strong) void (^selectedIndexBlock)(NSInteger index);
+@property (nonatomic, strong) void (^scrollViewCurrentBlock)(NSInteger index);
 @end
 
 NS_ASSUME_NONNULL_END

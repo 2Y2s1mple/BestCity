@@ -27,6 +27,7 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 {
     self = [super init];
     if (self) {
+        self.layoutType = YES;
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ID];
 
         [collectionView registerClass:[CZFestivalCollectHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderId];

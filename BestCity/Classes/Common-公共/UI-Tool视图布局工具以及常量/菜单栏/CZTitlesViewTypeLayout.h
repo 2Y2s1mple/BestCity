@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface CZTitlesViewTypeLayout : UIView
+@interface CZTVTLayoutBtn : UIButton
 
 @end
+
+@interface CZTitlesViewTypeLayout : UIView
+/** <#注释#> */
+@property (nonatomic, strong) void (^blcok) (BOOL isLine, BOOL isAsc, NSInteger index);
+@end
+
 
 NS_ASSUME_NONNULL_END
