@@ -326,6 +326,8 @@
 		97798CDC212D2D3E0052CE94 /* CZRecommendListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97798CDB212D2D3E0052CE94 /* CZRecommendListModel.m */; };
 		9779CE882239060F0090303F /* CZTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE872239060F0090303F /* CZTaskView.m */; };
 		9779CE8B2239264E0090303F /* CZTaskMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779CE8A2239264E0090303F /* CZTaskMainView.m */; };
+		9779E1FD23AB28E700CE6078 /* CZMainProjectGeneralView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779E1FC23AB28E700CE6078 /* CZMainProjectGeneralView.m */; };
+		9779E20123AB5EBC00CE6078 /* CZFreePushTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9779E20023AB5EBC00CE6078 /* CZFreePushTool.m */; };
 		977C33B6218D951000FAA144 /* CZTaobaoSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977C33B5218D951000FAA144 /* CZTaobaoSearchView.m */; };
 		977D8CFC22ACEB4F005E7ACB /* CZMyWalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D8CFA22ACEB4F005E7ACB /* CZMyWalletCell.m */; };
 		977D8CFD22ACEB4F005E7ACB /* CZMyWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977D8CFB22ACEB4F005E7ACB /* CZMyWalletCell.xib */; };
@@ -1194,6 +1196,10 @@
 		9779CE872239060F0090303F /* CZTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaskView.m; sourceTree = "<group>"; };
 		9779CE892239264E0090303F /* CZTaskMainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTaskMainView.h; sourceTree = "<group>"; };
 		9779CE8A2239264E0090303F /* CZTaskMainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaskMainView.m; sourceTree = "<group>"; };
+		9779E1FB23AB28E700CE6078 /* CZMainProjectGeneralView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMainProjectGeneralView.h; sourceTree = "<group>"; };
+		9779E1FC23AB28E700CE6078 /* CZMainProjectGeneralView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainProjectGeneralView.m; sourceTree = "<group>"; };
+		9779E1FF23AB5EBB00CE6078 /* CZFreePushTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreePushTool.h; sourceTree = "<group>"; };
+		9779E20023AB5EBC00CE6078 /* CZFreePushTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreePushTool.m; sourceTree = "<group>"; };
 		977C33B4218D951000FAA144 /* CZTaobaoSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTaobaoSearchView.h; sourceTree = "<group>"; };
 		977C33B5218D951000FAA144 /* CZTaobaoSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTaobaoSearchView.m; sourceTree = "<group>"; };
 		977D8CF922ACEB4F005E7ACB /* CZMyWalletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMyWalletCell.h; sourceTree = "<group>"; };
@@ -2381,9 +2387,12 @@
 		972BDC9E23A39C2F00C3F8BF /* SubVC-主页子控制器 */ = {
 			isa = PBXGroup;
 			children = (
-				97532FA823AA37AB00D8AB1C /* 个护等通用页面 */,
 				972BDCA623A39EFD00C3F8BF /* 精选 */,
 				972BDCA823A3AD5200C3F8BF /* 猜你喜欢 */,
+				97532FA823AA37AB00D8AB1C /* 个护等通用页面 */,
+				9779E1FA23AB287900CE6078 /* 专题通用界面 */,
+				9706C8DA2367E41F0002EDC1 /* Festival-活动 */,
+				974759CA239268C20026C56C /* MainDetail-淘宝详情页 */,
 			);
 			path = "SubVC-主页子控制器";
 			sourceTree = "<group>";
@@ -2391,9 +2400,9 @@
 		972BDCA623A39EFD00C3F8BF /* 精选 */ = {
 			isa = PBXGroup;
 			children = (
+				9733E55A23A8C3B3002F8E7C /* Controller */,
 				9733E55C23A8C3CC002F8E7C /* View */,
 				9733E55B23A8C3C1002F8E7C /* ViewModel */,
-				9733E55A23A8C3B3002F8E7C /* Controller */,
 				9733E55623A86838002F8E7C /* Model */,
 			);
 			path = "精选";
@@ -3589,6 +3598,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9779E1FA23AB287900CE6078 /* 专题通用界面 */ = {
+			isa = PBXGroup;
+			children = (
+				9779E1FB23AB28E700CE6078 /* CZMainProjectGeneralView.h */,
+				9779E1FC23AB28E700CE6078 /* CZMainProjectGeneralView.m */,
+			);
+			path = "专题通用界面";
+			sourceTree = "<group>";
+		};
+		9779E1FE23AB5E8400CE6078 /* 跳转工具 */ = {
+			isa = PBXGroup;
+			children = (
+				9779E1FF23AB5EBB00CE6078 /* CZFreePushTool.h */,
+				9779E20023AB5EBC00CE6078 /* CZFreePushTool.m */,
+			);
+			path = "跳转工具";
+			sourceTree = "<group>";
+		};
 		977D8CFE22ACEBE9005E7ACB /* Main-主页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4431,7 +4458,7 @@
 				970E2D3D23A33690005CB9BD /* Color-类扩展 */,
 				9752AD93239B8ABD00779D32 /* Button-样式 */,
 				97F41E1423A0F17C003C656C /* Label-样式 */,
-				97F41E0B23A0AE86003C656C /* UI-Tool视图布局工具以及常量 */,
+				97F41E0B23A0AE86003C656C /* UI-Tool视图布局跳转相关 */,
 				9710E61322D87CF600AA5D87 /* Base */,
 				9768FAF02368133000019B4E /* 启动页 */,
 				9712727322CF3855009EB40F /* 公共界面 */,
@@ -4788,8 +4815,6 @@
 			children = (
 				972BDCA723A39F1200C3F8BF /* MainVC-主控制器 */,
 				972BDC9E23A39C2F00C3F8BF /* SubVC-主页子控制器 */,
-				9706C8DA2367E41F0002EDC1 /* Festival-活动 */,
-				974759CA239268C20026C56C /* MainDetail-淘宝详情页 */,
 			);
 			path = "Main-主页";
 			sourceTree = "<group>";
@@ -5006,16 +5031,17 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		97F41E0B23A0AE86003C656C /* UI-Tool视图布局工具以及常量 */ = {
+		97F41E0B23A0AE86003C656C /* UI-Tool视图布局跳转相关 */ = {
 			isa = PBXGroup;
 			children = (
+				9779E1FE23AB5E8400CE6078 /* 跳转工具 */,
 				9733E56423A8F52E002F8E7C /* 菜单栏 */,
 				97BDE5C92195B232005FB405 /* CZConst.h */,
 				97BDE5CA2195B232005FB405 /* CZConst.m */,
 				97F41E0C23A0AEAF003C656C /* CZUILayoutTool.h */,
 				97F41E0D23A0AEAF003C656C /* CZUILayoutTool.m */,
 			);
-			path = "UI-Tool视图布局工具以及常量";
+			path = "UI-Tool视图布局跳转相关";
 			sourceTree = "<group>";
 		};
 		97F41E0F23A0C127003C656C /* View */ = {
@@ -5606,6 +5632,7 @@
 				9754C87A22FC215D008C2D98 /* CZEAttentionModel.m in Sources */,
 				978E876C236936D900802E06 /* CZFestivalCell.m in Sources */,
 				977607CC22D57E3200F846BE /* CZMHSDListNewController.m in Sources */,
+				9779E1FD23AB28E700CE6078 /* CZMainProjectGeneralView.m in Sources */,
 				97530AA52313A3FC00185C40 /* CZMHSDQuestCell1.m in Sources */,
 				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
 				974199112398EA000064FA00 /* CZAlertTool.m in Sources */,
@@ -5771,6 +5798,7 @@
 				97F152FF21097A24009F7922 /* CZCommodityView.m in Sources */,
 				97C3924F230BD90D002EA036 /* CZChangeSignController.m in Sources */,
 				974759C6239265240026C56C /* CZGoodsParameterView.m in Sources */,
+				9779E20123AB5EBC00CE6078 /* CZFreePushTool.m in Sources */,
 				97C8513B211C1BDC005540D8 /* CZProgressHUD.m in Sources */,
 				97C7FF3E216DDDB50091DC07 /* MJRefreshBackGifFooter.m in Sources */,
 				97FA0B382376BDC9001D1B70 /* CZFreeOrderSubOne.m in Sources */,

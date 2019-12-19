@@ -89,6 +89,16 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"mainImageColorChange" object:nil userInfo:@{@"color" : currentColor}];
         }];
 
+        [imageView setSelectedIndexBlock:^(NSInteger index) {
+            NSDictionary *dic = self.ad1List[index];
+            CZMainProjectGeneralView *vc = [[CZMainProjectGeneralView alloc] init];
+            vc.titleText = dic[@""];
+            vc.category2Id = dic[@""];
+            CURRENTVC(currentVc)
+            [currentVc.navigationController pushViewController:vc animated:YES];
+
+        }];
+
         imageView.imgList = imgs;
     }
 

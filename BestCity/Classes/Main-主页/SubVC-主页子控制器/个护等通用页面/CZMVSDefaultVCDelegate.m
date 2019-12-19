@@ -14,6 +14,9 @@
 #import "CZSubButton.h"
 #import "CZTitlesViewTypeLayout.h"
 #import "UIButton+WebCache.h"
+#import "CZTaobaoDetailController.h"
+
+#import "CZMainProjectGeneralView.h" // 专题通用界面
 
 @interface CZMVSDefaultVCDelegate ()
 /** <#注释#> */
@@ -26,13 +29,9 @@
     self = [super init];
     if (self) {
         self.layoutType = YES;
-
         [collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CZMVSDefaultVCDelegate"];
-
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessLineCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessLineCell"]; // 一行
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessWhatYouLikeCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessWhatYouLikeCell"]; // 两行
-
-
         collectionView.dataSource = self;
         collectionView.delegate = self;
     }
@@ -65,18 +64,13 @@
         }
 }
 
-
 // <UICollectionViewDelegateFlowLayout>
 // 头视图
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-
     if (indexPath.section == 0) {
-        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"CZMVSDefaultVCDelegate" forIndexPath:indexPath];
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CZMVSDefaultVCDelegate" forIndexPath:indexPath];
         if (self.categoryList.count > 0) {
-            if (self.headerView == nil) {
-                self.headerView = [self createHeaderTableView];
-            }
             [headerView addSubview:self.headerView];
         }
         return headerView;
@@ -99,7 +93,11 @@
 // 头视图的高度
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return CGSizeMake(0, self.headerView.height);
+        if (self.adList.count > 0 && self.categoryList.count > 0) {
+            return CGSizeMake(0, self.headerView.height);
+        } else {
+            return CGSizeZero;
+        }
     } else {
         return CGSizeZero;
     }
@@ -123,79 +121,106 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld", indexPath.item);
+    NSDictionary *param = self.dataSource[indexPath.row];
+    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+    vc.otherGoodsId = param[@"otherGoodsId"];
+    CURRENTVC(currentVc)
+    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
 
-- (UIView *)createHeaderTableView
+- (UIView *)headerView
 {
-    UIView *headerView = [[UIView alloc] init];
-    // 添加轮播图
-    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 160)];
-    [headerView addSubview:imageView];
-    [imageView setSelectedIndexBlock:^(NSInteger index) {
+    if (_headerView == nil) {
+        _headerView = [[UIView alloc] init];
+        _headerView.width = SCR_WIDTH;
+        // 添加轮播图
+        CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 160)];
+        [_headerView addSubview:imageView];
+        [imageView setSelectedIndexBlock:^(NSInteger index) {
 
-    }];
+        }];
 
-    NSMutableArray *imgs = [NSMutableArray array];
-    for (NSDictionary *imgDic in self.adList) {
-        [imgs addObject:imgDic[@"img"]];
+        NSMutableArray *imgs = [NSMutableArray array];
+        for (NSDictionary *imgDic in self.adList) {
+            [imgs addObject:imgDic[@"img"]];
+        }
+        imageView.imgList = imgs;
+        [_headerView addSubview:imageView];
+
+        // 分类的按钮
+        UIView *categoryView = [[UIView alloc] init];
+        categoryView.frame = CGRectMake(0, CZGetY(imageView), SCR_WIDTH, 0);
+        [_headerView addSubview:categoryView];
+
+        CGFloat width = 50;
+        CGFloat height = width + 30;
+        CGFloat leftSpace = 24;
+        NSInteger cols = 5;
+        CGFloat space = (SCR_WIDTH - leftSpace * 2 - cols * width) / (cols - 1);
+        NSInteger count = self.categoryList.count;
+        for (int i = 0; i < count; i++) {
+            NSInteger col = i % cols;
+            NSInteger row = i / cols;
+
+            // 创建按钮
+            CZSubButton *btn = [CZSubButton buttonWithType:UIButtonTypeCustom];
+            btn.tag = i + 100;
+            btn.width = width;
+            btn.height = height;
+            btn.categoryId = self.categoryList[i][@"categoryId"];
+            btn.x = leftSpace + col * (width + space) + (i / 10) * SCR_WIDTH;
+            btn.y = 12 + row * (height + 25);
+            [btn sd_setImageWithURL:[NSURL URLWithString:self.categoryList[i][@"img"]] forState:UIControlStateNormal];
+            [btn setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
+            [btn setTitle:self.categoryList[i][@"categoryName"] forState:UIControlStateNormal];
+            [categoryView addSubview:btn];
+            // 点击事件
+            [btn addTarget:self action:@selector(headerViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
+            categoryView.height = CZGetY(btn);
+        }
+
+        UIView *lineView = [[UIView alloc] init];
+        lineView.y = CZGetY(categoryView) + 15;
+        lineView.width = SCR_WIDTH;
+        lineView.height = 10;
+        lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        [_headerView addSubview:lineView];
+
+
+        CZTitlesViewTypeLayout *titleView = [[CZTitlesViewTypeLayout alloc] init];
+        titleView.y = CZGetY(lineView);
+        titleView.width = SCR_WIDTH;
+        titleView.height = 38;
+        [titleView setBlcok:^(BOOL isLine, BOOL isAsc, NSInteger index) {
+            // orderByType : 0综合，1价格，2补贴，3销量
+            // orderByType : 0综合，1价格，2补贴，3销量
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMVSDefaultVCDelegate" object:nil userInfo:@{@"orderByType" : @(index), @"asc" : @(isAsc), @"layoutType" : @(isLine)}];
+        }];
+
+        [_headerView addSubview:titleView];
+
+        UIView *line = [[UIView alloc] init];
+        line.width = SCR_WIDTH;
+        line.height = 1;
+        line.y = CZGetY(titleView);
+        line.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        [_headerView addSubview:line];
+
+
+        _headerView.height = CZGetY(line);
     }
-    imageView.imgList = imgs;
-    [headerView addSubview:imageView];
+    return _headerView;
+}
 
-    // 分类的按钮
-    UIView *categoryView = [[UIView alloc] init];
-    categoryView.frame = CGRectMake(0, CZGetY(imageView), SCR_WIDTH, 0);
-    [headerView addSubview:categoryView];
-
-    CGFloat width = 50;
-    CGFloat height = width + 30;
-    CGFloat leftSpace = 24;
-    NSInteger cols = 5;
-    CGFloat space = (SCR_WIDTH - leftSpace * 2 - cols * width) / (cols - 1);
-    NSInteger count = self.categoryList.count;
-    for (int i = 0; i < count; i++) {
-        NSInteger col = i % cols;
-        NSInteger row = i / cols;
-
-        // 创建按钮
-        CZSubButton *btn = [CZSubButton buttonWithType:UIButtonTypeCustom];
-        btn.tag = i + 100;
-        btn.width = width;
-        btn.height = height;
-        btn.categoryId = self.categoryList[i][@"categoryId"];
-        btn.x = leftSpace + col * (width + space) + (i / 10) * SCR_WIDTH;
-        btn.y = 12 + row * (height + 25);
-        [btn sd_setImageWithURL:[NSURL URLWithString:self.categoryList[i][@"img"]] forState:UIControlStateNormal];
-        [btn setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
-        [btn setTitle:self.categoryList[i][@"categoryName"] forState:UIControlStateNormal];
-        [categoryView addSubview:btn];
-        // 点击事件
-        [btn addTarget:self action:@selector(headerViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
-        categoryView.height = CZGetY(btn);
-    }
-
-    UIView *lineView = [[UIView alloc] init];
-    lineView.y = CZGetY(categoryView) + 15;
-    lineView.width = SCR_WIDTH;
-    lineView.height = 10;
-    lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    [headerView addSubview:lineView];
-
-
-    CZTitlesViewTypeLayout *titleView = [[CZTitlesViewTypeLayout alloc] init];
-    titleView.y = CZGetY(lineView);
-    titleView.width = SCR_WIDTH;
-    titleView.height = 38;
-    [titleView setBlcok:^(BOOL isLine, BOOL isAsc, NSInteger index) {
-        // orderByType : 0综合，1价格，2补贴，3销量
-
-    }];
-
-    [headerView addSubview:titleView];
-
-    headerView.height = CZGetY(titleView);
-    return headerView;
+- (void)headerViewDidClickedBtn:(CZSubButton *)sender
+{
+    NSLog(@"%@", sender);
+    CZMainProjectGeneralView *vc = [[CZMainProjectGeneralView alloc] init];
+    vc.titleText = sender.titleLabel.text;
+    vc.category2Id = sender.categoryId;
+    CURRENTVC(currentVc)
+    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
 @end

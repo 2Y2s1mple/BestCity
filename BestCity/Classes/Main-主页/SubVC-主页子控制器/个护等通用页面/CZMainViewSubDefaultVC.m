@@ -14,7 +14,7 @@
 // 视图
 #import "CZMVSDefaultVCDelegate.h"
 
-@interface CZMainViewSubDefaultVC () <UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
+@interface CZMainViewSubDefaultVC ()
 @property (nonatomic, strong) NSDictionary *dataSource;
 /** 广告 */
 @property (nonatomic, strong) NSArray *adList;
@@ -26,6 +26,8 @@
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
 @property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2补贴，3销量
+/** 是否是条形布局 */
+@property (nonatomic, assign) BOOL layoutType;
 
 @property (nonatomic, strong) CZMVSDefaultVCDelegate *collectDataSurce;
 @end
@@ -35,9 +37,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    // 数据初始化
+    self.asc = @"1"; // (1正序，0倒序);
+    self.orderByType = @"0";
+    self.layoutType = YES;
 
     [self.view addSubview:self.collectView];
     [self setupRefresh];
+
+    // 监听按钮的点击事件
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsRecommendedBtnsAction:) name:@"CZMVSDefaultVCDelegate" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -47,7 +56,6 @@
     self.collectView.height = self.view.height;
 }
 
-
 #pragma mark - UI创建
 - (UICollectionView *)collectView
 {
@@ -55,15 +63,12 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumInteritemSpacing = 0;
 //        layout.minimumLineSpacing = 0;
-
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor clearColor];
         self.collectDataSurce = [[CZMVSDefaultVCDelegate alloc] initWithCollectView:_collectView];
     }
     return _collectView;
-
-    
 }
 
 // 上拉加载, 下拉刷新
@@ -83,7 +88,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"category1Id"] = self.category1Id;
-    param[@"orderByType"] = @"1"; //self.orderByType; // 0综合，1价格，2补贴，3销量
+    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
     param[@"page"] = @(self.page);
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsListByCategory1"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -91,11 +96,12 @@
             self.dataSource = result[@"data"];
             self.adList = result[@"adList"];
             self.categoryList = result[@"categoryList"];
-
+            
+            self.collectDataSurce.adList =  result[@"adList"];
+            self.collectDataSurce.categoryList = result[@"categoryList"];
+            self.collectDataSurce.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
             
             // 创建头部视图
-            // 创建头部视图
-
             [self.collectView reloadData];
         }
         // 结束刷新
@@ -112,6 +118,7 @@
     self.page++;
     [self.collectView.mj_header endRefreshing];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"category1Id"] = self.category1Id;
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
     param[@"page"] = @(self.page);
@@ -123,10 +130,14 @@
             if (list.count == 0) {
                 [self.collectView.mj_footer endRefreshingWithNoMoreData];
             } else {
+                [self.collectDataSurce.dataSource addObjectsFromArray:list];
                 [self.collectView reloadData];
                 // 结束刷新
                 [self.collectView.mj_footer endRefreshing];
             }
+        } else {
+            // 结束刷新
+            [self.collectView.mj_footer endRefreshing];
         }
     } failure:^(NSError *error) {
         // 结束刷新
@@ -134,5 +145,22 @@
     }];
 }
 
+
+#pragma mark - 事件
+// 精品推荐的按钮
+- (void)productsRecommendedBtnsAction:(NSNotification *)sender
+{
+    NSDictionary *param = sender.userInfo;
+
+    if (self.layoutType != [param[@"layoutType"] boolValue]) {
+        self.layoutType = [param[@"layoutType"] boolValue];
+        self.collectDataSurce.layoutType = self.layoutType;
+        [self.collectView reloadData];
+    } else {
+        self.asc =  param[@"asc"]; // (1正序，0倒序);
+        self.orderByType = param[@"orderByType"];
+        [self reloadNewTrailDataSorce];
+    }
+}
 
 @end

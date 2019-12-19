@@ -61,7 +61,7 @@
                 self.subScoreTitle2.text = dic[@"score"];
                 break;
             }
-            case 3:
+            case 2:
             {
                 NSDictionary *dic = list[i];
                 self.subTitle3.text = dic[@"title"];
