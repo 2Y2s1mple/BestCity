@@ -107,16 +107,24 @@
 #pragma mark - 数据
 - (void)reloadNewTrailDataSorce
 {
+    NSString *api;
+    if (_isGeneralProject) { // 通用专题接口
+        api = @"api/tbk/getGoodsListBySubjectId";
+    } else {
+        api = @"api/tbk/getGoodsListByCategory2";
+    }
+
     // 结束尾部刷新
     self.page = 1;
     [self.collectView.mj_footer endRefreshing];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"asc"] = self.asc; // (1正序，0倒序);
+    param[@"subjectId"] = self.category2Id;
     param[@"category2Id"] = self.category2Id;
     param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
     param[@"page"] = @(self.page);
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsListByCategory2"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:api] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
 
@@ -133,17 +141,24 @@
 
 - (void)loadMoreTrailDataSorce
 {
+    NSString *api;
+    if (_isGeneralProject) { // 通用专题接口
+        api = @"api/tbk/getGoodsListBySubjectId";
+    } else {
+        api = @"api/tbk/getGoodsListByCategory2";
+    }
     // 结束尾部刷新
     self.page++;
     [self.collectView.mj_header endRefreshing];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"category2Id"] = self.category2Id;
+    param[@"subjectId"] = self.category2Id;
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
     param[@"page"] = @(self.page);
 
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsListByCategory2"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:api] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             NSArray *list = result[@"data"];
             if (list.count == 0) {
@@ -215,8 +230,6 @@
     }
 }
 
-
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld", indexPath.item);
@@ -225,7 +238,5 @@
     vc.otherGoodsId = param[@"otherGoodsId"];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-
 
 @end

@@ -11,6 +11,7 @@
 #import "CZScollerImageTool.h"
 #import "CZSubButton.h"
 #import "UIButton+WebCache.h"
+#import "CZFreePushTool.h"
 
 @interface CZFestivalCollectHeaderView () <UIScrollViewDelegate>
 /** <#注释#> */
@@ -88,17 +89,17 @@
             UIColor *currentColor = [UIColor gx_colorWithHexString:colors[index]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"mainImageColorChange" object:nil userInfo:@{@"color" : currentColor}];
         }];
-
         [imageView setSelectedIndexBlock:^(NSInteger index) {
             NSDictionary *dic = self.ad1List[index];
-            CZMainProjectGeneralView *vc = [[CZMainProjectGeneralView alloc] init];
-            vc.titleText = dic[@""];
-            vc.category2Id = dic[@""];
-            CURRENTVC(currentVc)
-            [currentVc.navigationController pushViewController:vc animated:YES];
+            NSDictionary *param = @{
+                @"targetType" : dic[@"type"],
+                @"targetId" : dic[@"objectId"],
+                @"targetTitle" : dic[@"name"],
+            };
+            NSLog(@"%@", param);
+            [CZFreePushTool bannerPushToVC:param];
 
         }];
-
         imageView.imgList = imgs;
     }
 
@@ -126,12 +127,14 @@
             btn.tag = i + 100;
             btn.width = width;
             btn.height = height;
-            btn.categoryId = @"0";
+            btn.categoryId = paramDic[@"targetId"];
+            btn.categoryType = paramDic[@"type"];
+            btn.categoryName = paramDic[@"title"];
             btn.x = leftSpace + i * (width + space);
 
             [btn sd_setImageWithURL:[NSURL URLWithString:paramDic[@"iconUrl"]] forState:UIControlStateNormal];
             [btn setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
-            [btn setTitle:paramDic[@"title"] forState:UIControlStateNormal];
+            [btn setTitle:btn.categoryName forState:UIControlStateNormal];
             [categoryView addSubview:btn];
             // 点击事件
             [btn addTarget:self action:@selector(headerViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -194,7 +197,13 @@
 // 分类的点击
 - (void)headerViewDidClickedBtn:(CZSubButton *)sender
 {
-    NSLog(@"%s", __func__);
+    NSDictionary *param = @{
+        @"targetType" : sender.categoryType,
+        @"targetId" : sender.categoryId,
+        @"targetTitle" : sender.categoryName,
+    };
+    NSLog(@"%@", param);
+    [CZFreePushTool categoryPushToVC:param];
 }
 
 @end

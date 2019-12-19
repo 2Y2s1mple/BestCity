@@ -65,6 +65,8 @@
 
     [self.window makeKeyAndVisible];
 
+    
+
     recordSearchTextArray = [NSMutableArray array];
 
     return YES;

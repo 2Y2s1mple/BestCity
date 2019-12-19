@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** <#注释#> */
 @property (nonatomic, strong) NSString *titleText;
 @property (nonatomic, strong) NSString *category2Id;
+
+/** 通用专题页 */
+@property (nonatomic, assign) BOOL isGeneralProject;
 @end
 
 NS_ASSUME_NONNULL_END

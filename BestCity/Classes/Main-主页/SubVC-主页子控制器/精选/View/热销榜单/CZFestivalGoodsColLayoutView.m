@@ -8,6 +8,8 @@
 
 #import "CZFestivalGoodsColLayoutView.h"
 #import "UIImageView+WebCache.h"
+#import "CZFreePushTool.h"
+
 
 @interface CZFestivalGoodsColLayoutView ()
 /** <#注释#> */
