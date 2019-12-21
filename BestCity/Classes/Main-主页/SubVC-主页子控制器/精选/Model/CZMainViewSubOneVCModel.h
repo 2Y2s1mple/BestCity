@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *ad2;
 /** 热销榜单 */
 @property (nonatomic, strong) NSArray *hotGoodsList;
+/** 跑马灯 */
+@property (nonatomic, strong) NSArray *messageList;
 @end
 
 NS_ASSUME_NONNULL_END

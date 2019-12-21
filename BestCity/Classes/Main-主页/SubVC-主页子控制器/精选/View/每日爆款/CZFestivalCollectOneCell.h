@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *hotActivity;
 /** 广告位 */
 @property (nonatomic, strong) NSDictionary *ad2;
+/** 跑马灯 */
+@property (nonatomic, strong) NSArray *messageList;
 @end
 
 NS_ASSUME_NONNULL_END

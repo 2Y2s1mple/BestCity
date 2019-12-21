@@ -30,6 +30,8 @@
 @property (nonatomic, assign) BOOL layoutType;
 
 @property (nonatomic, strong) CZMVSDefaultVCDelegate *collectDataSurce;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZMainViewSubDefaultVC
@@ -57,6 +59,16 @@
 }
 
 #pragma mark - UI创建
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
+
 - (UICollectionView *)collectView
 {
     if (_collectView == nil) {
@@ -161,6 +173,11 @@
         self.orderByType = param[@"orderByType"];
         [self reloadNewTrailDataSorce];
     }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

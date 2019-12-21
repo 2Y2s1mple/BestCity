@@ -11,7 +11,6 @@
 
 #import "PlanPageControl.h"
 #define PlanSections 100
-
 @interface PlanADScrollView()<UICollectionViewDataSource, UICollectionViewDelegate>
 /**
  图片地址数组
@@ -143,10 +142,8 @@
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    if (self.pageControl.currentPage) {
-        [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
-        NSLog(@"%s", __func__);
-    }
+    [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
+    NSLog(@"%s", __func__);
 }
 
 -(NSString *)controllerTitle{
@@ -176,14 +173,13 @@
     return  _collectionView;
 }
 
--(UIPageControl *)pageControl{
+- (UIPageControl *)pageControl{
     if (!_pageControl) {
         _pageControl = [[PlanPageControl alloc] initWithFrame:CGRectMake(self.frame.size.width*0.5, self.frame.size.height-30, self.frame.size.width*0.5, 20)];
         _pageControl.pageIndicatorTintColor = CZGlobalLightGray;
         _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
         _pageControl.enabled = NO;
         _pageControl.pointSize = CGSizeMake(8, 8);
-        
     }
     return _pageControl;
 }

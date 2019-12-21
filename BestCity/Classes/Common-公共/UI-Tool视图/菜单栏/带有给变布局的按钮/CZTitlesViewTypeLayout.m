@@ -138,20 +138,23 @@
 
     if (sender.tag == 1) {
         if (self.isASC) { // 正序
+            self.blcok(self.islayoutLine, self.isASC, sender.tag);
             [sender setImage:[UIImage imageNamed:@"search_asc"] forState:UIControlStateSelected];
             self.isASC = NO;
         } else {
+            self.blcok(self.islayoutLine, self.isASC, sender.tag);
             [sender setImage:[UIImage imageNamed:@"search_nasc"] forState:UIControlStateSelected];
             self.isASC = YES;
         }
     } else { // 点了其他的默认改回升序
         self.isASC = YES;
+        self.blcok(self.islayoutLine, self.isASC, sender.tag);
     }
 
     self.recordBtn.selected = NO;
     sender.selected = YES;
     self.recordBtn = sender;
-    self.blcok(self.islayoutLine, self.isASC, sender.tag);
+
 }
 
 

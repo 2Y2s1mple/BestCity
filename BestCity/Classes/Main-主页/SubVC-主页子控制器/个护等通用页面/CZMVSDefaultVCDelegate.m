@@ -16,6 +16,9 @@
 #import "UIButton+WebCache.h"
 #import "CZTaobaoDetailController.h"
 
+// UI
+#import "CZCategoryLineLayoutView.h"
+
 #import "CZMainProjectGeneralView.h" // 专题通用界面
 
 @interface CZMVSDefaultVCDelegate ()
@@ -51,7 +54,6 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
         NSDictionary *dic = self.dataSource[indexPath.item];
         if (self.layoutType == YES) { // 一条
             CZguessLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessLineCell" forIndexPath:indexPath];
@@ -116,8 +118,6 @@
     }
 }
 
-
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld", indexPath.item);
@@ -149,36 +149,16 @@
         [_headerView addSubview:imageView];
 
         // 分类的按钮
-        UIView *categoryView = [[UIView alloc] init];
-        categoryView.frame = CGRectMake(0, CZGetY(imageView), SCR_WIDTH, 0);
+        NSArray *list = [CZCategoryLineLayoutView categoryItems:self.categoryList setupNameKey:@"categoryName" imageKey:@"img" IdKey:@"categoryId" objectKey:@""];
+        CGRect frame = CGRectMake(24, CZGetY(imageView) + 12, SCR_WIDTH - 48, 0);
+        CZCategoryLineLayoutView *categoryView = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:list type:0 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
+            CZMainProjectGeneralView *vc = [[CZMainProjectGeneralView alloc] init];
+            vc.titleText = item.categoryName;
+            vc.category2Id = item.categoryId;
+            CURRENTVC(currentVc)
+            [currentVc.navigationController pushViewController:vc animated:YES];
+        }];
         [_headerView addSubview:categoryView];
-
-        CGFloat width = 50;
-        CGFloat height = width + 30;
-        CGFloat leftSpace = 24;
-        NSInteger cols = 5;
-        CGFloat space = (SCR_WIDTH - leftSpace * 2 - cols * width) / (cols - 1);
-        NSInteger count = self.categoryList.count;
-        for (int i = 0; i < count; i++) {
-            NSInteger col = i % cols;
-            NSInteger row = i / cols;
-
-            // 创建按钮
-            CZSubButton *btn = [CZSubButton buttonWithType:UIButtonTypeCustom];
-            btn.tag = i + 100;
-            btn.width = width;
-            btn.height = height;
-            btn.categoryId = self.categoryList[i][@"categoryId"];
-            btn.x = leftSpace + col * (width + space) + (i / 10) * SCR_WIDTH;
-            btn.y = 12 + row * (height + 25);
-            [btn sd_setImageWithURL:[NSURL URLWithString:self.categoryList[i][@"img"]] forState:UIControlStateNormal];
-            [btn setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
-            [btn setTitle:self.categoryList[i][@"categoryName"] forState:UIControlStateNormal];
-            [categoryView addSubview:btn];
-            // 点击事件
-            [btn addTarget:self action:@selector(headerViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
-            categoryView.height = CZGetY(btn);
-        }
 
         UIView *lineView = [[UIView alloc] init];
         lineView.y = CZGetY(categoryView) + 15;
@@ -187,17 +167,14 @@
         lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         [_headerView addSubview:lineView];
 
-
         CZTitlesViewTypeLayout *titleView = [[CZTitlesViewTypeLayout alloc] init];
         titleView.y = CZGetY(lineView);
         titleView.width = SCR_WIDTH;
         titleView.height = 38;
         [titleView setBlcok:^(BOOL isLine, BOOL isAsc, NSInteger index) {
             // orderByType : 0综合，1价格，2补贴，3销量
-            // orderByType : 0综合，1价格，2补贴，3销量
             [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMVSDefaultVCDelegate" object:nil userInfo:@{@"orderByType" : @(index), @"asc" : @(isAsc), @"layoutType" : @(isLine)}];
         }];
-
         [_headerView addSubview:titleView];
 
         UIView *line = [[UIView alloc] init];
@@ -206,21 +183,9 @@
         line.y = CZGetY(titleView);
         line.backgroundColor = UIColorFromRGB(0xF5F5F5);
         [_headerView addSubview:line];
-
-
         _headerView.height = CZGetY(line);
     }
     return _headerView;
-}
-
-- (void)headerViewDidClickedBtn:(CZSubButton *)sender
-{
-    NSLog(@"%@", sender);
-    CZMainProjectGeneralView *vc = [[CZMainProjectGeneralView alloc] init];
-    vc.titleText = sender.titleLabel.text;
-    vc.category2Id = sender.categoryId;
-    CURRENTVC(currentVc)
-    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
 @end

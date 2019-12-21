@@ -72,6 +72,7 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         cell.ad2 = self.totalDataModel.ad2;
         cell.hotActivity = self.totalDataModel.hotActivity;
         cell.activityList = self.totalDataModel.activityList;
+        cell.messageList = self.totalDataModel.messageList;
         cell.freeGoodsList = self.totalDataModel.freeGoodsList;
 
         return cell;

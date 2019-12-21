@@ -28,10 +28,12 @@
 @property (nonatomic, assign) BOOL layoutType;
 /** <#注释#> */
 @property (nonatomic, strong) NSMutableArray *dataSource;
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 @end
 
 @implementation CZMainProjectGeneralView
-
+#pragma mark - 系统的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -79,6 +81,16 @@
 }
 
 #pragma mark - UI创建
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
+
 - (UICollectionView *)collectView
 {
     if (_collectView == nil) {
@@ -126,10 +138,17 @@
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:api] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            self.dataSource = [NSMutableArray arrayWithArray:result[@"data"]];
-
-            // 创建头部视图
-            [self.collectView reloadData];
+            NSArray *list = result[@"data"];
+            if (list.count > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+                self.dataSource = [NSMutableArray arrayWithArray:list];
+                // 创建头部视图
+                [self.collectView reloadData];
+            } else {
+                // 没有数据图片
+                [self.collectView addSubview:self.noDataView];
+            }
         }
         // 结束刷新
         [self.collectView.mj_header endRefreshing];
@@ -164,6 +183,8 @@
             if (list.count == 0) {
                 [self.collectView.mj_footer endRefreshingWithNoMoreData];
             } else {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
                 [self.dataSource addObjectsFromArray:list];
                 [self.collectView reloadData];
                 // 结束刷新

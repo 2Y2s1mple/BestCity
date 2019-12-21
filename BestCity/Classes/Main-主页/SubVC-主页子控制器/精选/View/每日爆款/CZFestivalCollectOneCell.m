@@ -14,6 +14,9 @@
 
 #import "CZFreePushTool.h"
 
+// 滚动广告位
+#import "CZScrollAD.h"
+
 @interface CZFestivalCollectOneCell ()
 
 /** 跑马灯Label */
@@ -21,28 +24,25 @@
 
 /** 新人 */
 @property (nonatomic, weak) IBOutlet UIView *peopleNewView;
-/** 新人大标题 */
+// 新人大标题
 @property (nonatomic, weak) IBOutlet UILabel *peopleNewViewLabel;
-/** 图片 */
+// 图片
 @property (nonatomic, weak) IBOutlet UIImageView *image1;
 @property (nonatomic, weak) IBOutlet UIImageView *image2;
 @property (nonatomic, weak) IBOutlet UIImageView *image3;
 @property (nonatomic, weak) IBOutlet UIImageView *image4;
-
-/** 文字 */
+// 文字
 @property (nonatomic, weak) IBOutlet UILabel *title1;
 @property (nonatomic, weak) IBOutlet UILabel *title2;
 @property (nonatomic, weak) IBOutlet UILabel *title3;
 @property (nonatomic, weak) IBOutlet UILabel *title4;
-
-
 @property (nonatomic, weak) IBOutlet UILabel *label1;
 @property (nonatomic, weak) IBOutlet UILabel *label2;
 @property (nonatomic, weak) IBOutlet UILabel *label3;
 @property (nonatomic, weak) IBOutlet UILabel *label4;
 
 /** 高反专区 */
-/** 背景图 */
+// 背景图
 @property (nonatomic, weak) IBOutlet UIView *highBackView;
 @property (nonatomic, weak) IBOutlet UIView *topHighBackView;
 @property (nonatomic, weak) IBOutlet UIView *bottomHighBackView;
@@ -60,8 +60,13 @@
 @property (nonatomic, weak) IBOutlet UIImageView *highImage2_2;
 
 /** 每日爆款 */
+@property (nonatomic, weak) IBOutlet UIView *HotStyleBackView;
 @property (nonatomic, weak) IBOutlet UILabel *HotStyleTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *HotStyleSubTitleLabel;
+// 上
+@property (nonatomic, weak) IBOutlet UIView *HotStyleTop;
+// 下
+@property (nonatomic, weak) IBOutlet UIView *HotStyleBottom;
 
 /** 广告位 */
 @property (nonatomic, weak) IBOutlet UIImageView *adImageView;
@@ -76,6 +81,8 @@
     // 跑马灯
     UITapGestureRecognizer *messageListViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushMessageListView)];
     [self.messageListView addGestureRecognizer:messageListViewTap];
+    self.messageListView.layer.cornerRadius = 4;
+    self.messageListView.layer.masksToBounds = YES;
 
     self.peopleNewViewLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
     self.title4.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
@@ -87,6 +94,11 @@
     [self.peopleNewView addGestureRecognizer:tap];
 
 
+    // 每日爆款
+    UITapGestureRecognizer *HotStyleBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainHighBackViewAction)];
+    [self.HotStyleBackView addGestureRecognizer:HotStyleBackViewTap];
+    self.HotStyleTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+
     // 高反专区
     self.titleLabel1.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
     self.titleLabel2.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
@@ -97,8 +109,7 @@
     UITapGestureRecognizer *bottomHighBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomHighBackViewAction)];
     [self.bottomHighBackView addGestureRecognizer:bottomHighBackViewTap];
 
-    // 每日爆款
-    self.HotStyleTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+
 
     // 广告位
     UITapGestureRecognizer *adImageViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adImageViewTapAction)];
@@ -110,8 +121,13 @@
 {
     _freeGoodsList = freeGoodsList;
 
-    // 新人0元购
+    // 跑马灯
+    if (self.messageList.count > 0) {
+        CZScrollAD *scollLabel =  [[CZScrollAD alloc] initWithFrame:self.messageListView.bounds dataSource:self.messageList type:0];
+        [self.messageListView addSubview:scollLabel];
+    }
 
+    // 新人0元购
     if (freeGoodsList.count == 0) {
         self.peopleNewView.hidden = YES;
         self.highBackViewTopMargin.constant = - 142;
@@ -157,15 +173,21 @@
     [self createAdImageView];
 }
 
-
-
-
 // 每日爆款
 - (void)DailyHotStyle
 {
     NSDictionary *param =  [self.hotActivity changeAllValueWithString];
     self.HotStyleTitleLabel.text = param[@"title"];
     self.HotStyleSubTitleLabel.text = param[@"smallTitle"];
+
+    if (self.hotActivity.count > 0) {
+        CZScrollAD *scollView1 =  [[CZScrollAD alloc] initWithFrame:self.HotStyleTop.bounds dataSource:self.hotActivity[@"goodsList1"] type:1];
+        [self.HotStyleTop addSubview:scollView1];
+
+        CZScrollAD *scollView2 =  [[CZScrollAD alloc] initWithFrame:self.HotStyleBottom.bounds dataSource:self.hotActivity[@"goodsList2"] type:1];
+        [self.HotStyleBottom addSubview:scollView2];
+    }
+
 }
 
 
@@ -221,6 +243,19 @@
     vc.titleName = @"极品城购物补贴说明";
     CURRENTVC(currentVc);
     [currentVc.navigationController pushViewController:vc animated:YES];
+}
+
+// 爆款主
+- (void)mainHighBackViewAction
+{
+    NSDictionary *dic =  self.hotActivity;
+    NSDictionary *param = @{
+        @"targetType" : dic[@"type"],
+        @"targetId" : dic[@"targetId"],
+        @"targetTitle" : dic[@"title"],
+    };
+    NSLog(@"%@", param);
+    [CZFreePushTool categoryPushToVC:param];
 }
 
 // 爆款上

@@ -47,6 +47,7 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchView:)];
         [view addGestureRecognizer:tap];
         view.frame = CGRectMake(x, y, w, h);
+        view.index = i;
         view.dataDic = hotGoodsList[i];
         [self.scrollerView addSubview:view];
         self.scrollerView.contentSize = CGSizeMake(CZGetX(view) + 15, 0);

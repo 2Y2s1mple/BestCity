@@ -570,6 +570,12 @@
                                     <constraint firstItem="sVC-6t-bnC" firstAttribute="leading" secondItem="wLQ-B5-b8J" secondAttribute="trailing" constant="5" id="xFM-Us-d3b"/>
                                     <constraint firstAttribute="bottom" secondItem="0Fc-zH-JFH" secondAttribute="bottom" constant="25" id="y3j-4K-xjt"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -622,8 +628,11 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="445" height="583"/>
             <connections>
+                <outlet property="HotStyleBackView" destination="tv4-Wg-D4t" id="Yf7-q3-8n4"/>
+                <outlet property="HotStyleBottom" destination="0Fc-zH-JFH" id="1Pd-Hf-SxN"/>
                 <outlet property="HotStyleSubTitleLabel" destination="gup-A4-tBA" id="Z6o-vd-lcl"/>
                 <outlet property="HotStyleTitleLabel" destination="wLQ-B5-b8J" id="GMr-Iy-v9X"/>
+                <outlet property="HotStyleTop" destination="vcD-ts-FSr" id="Nhu-KH-ZSN"/>
                 <outlet property="adImageView" destination="c14-oG-3vq" id="45Q-BY-Khr"/>
                 <outlet property="bottomHighBackView" destination="8LV-jU-IMy" id="WsG-mf-u49"/>
                 <outlet property="highBackView" destination="vzZ-Rh-Ody" id="Csl-mc-npx"/>

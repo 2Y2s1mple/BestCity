@@ -14,6 +14,8 @@
 @interface CZFestivalGoodsColLayoutView ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *backView;
+/** 小图片 */
+@property (nonatomic, weak) IBOutlet UIImageView *smallImageView;
 /** 大图片 */
 @property (nonatomic, weak) IBOutlet UIImageView *bigImageView;
 /** 标题 */
@@ -41,6 +43,22 @@
 -(void)setDataDic:(NSDictionary *)dataDic
 {
     _dataDic = dataDic;
+    switch (self.index) {
+        case 0:
+            self.smallImageView.image = [UIImage imageNamed:@"Main-icon7"];
+            break;
+        case 1:
+            self.smallImageView.image = [UIImage imageNamed:@"Main-icon8"];
+            break;
+        case 2:
+            self.smallImageView.image = [UIImage imageNamed:@"Main-icon9"];
+            break;
+        default:
+            self.smallImageView.hidden = YES;
+            break;
+    }
+
+
     [_bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"img"]]];
     self.titleLabel.text = dataDic[@"otherName"];
 
@@ -84,7 +102,6 @@
         [self.feeLabel setHidden:NO];
         self.actualPriceLabelBottomMragin.constant = 8;
     }
-
 }
 
 

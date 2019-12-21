@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZFestivalGoodsColLayoutView : UIView
 /** <#注释#> */
 @property (nonatomic, strong) NSDictionary *dataDic;
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger index;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,7 @@
 #import "CZSubButton.h"
 #import "UIButton+WebCache.h"
 #import "CZFreePushTool.h"
+#import "CZCategoryLineLayoutView.h"
 
 @interface CZFestivalCollectHeaderView () <UIScrollViewDelegate>
 /** <#注释#> */
@@ -22,7 +23,7 @@
 /** 轮播图 */
 @property (nonatomic, strong) CZScollerImageTool *imageView;
 /** 宫格 */
-@property (nonatomic, strong) UIScrollView *categoryView;
+@property (nonatomic, strong) CZCategoryLineLayoutView *categoryView;
 /** 最下面条 */
 @property (nonatomic, strong) UIView *lineView;
 
@@ -86,6 +87,7 @@
             [colors addObject:[@"0x" stringByAppendingString:imgDic[@"color"]]];
         }
         [imageView setScrollViewCurrentBlock:^(NSInteger index) {
+            NSLog(@"setScrollViewCurrentBlock %ld", index);
             UIColor *currentColor = [UIColor gx_colorWithHexString:colors[index]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"mainImageColorChange" object:nil userInfo:@{@"color" : currentColor}];
         }];
@@ -98,69 +100,26 @@
             };
             NSLog(@"%@", param);
             [CZFreePushTool bannerPushToVC:param];
-
         }];
         imageView.imgList = imgs;
     }
 
     // 分类的按钮
     if (self.categoryView == nil) {
-        UIScrollView *categoryView = [[UIScrollView alloc] init];
-        self.categoryView = categoryView;
-        categoryView.frame = CGRectMake(0, 170, SCR_WIDTH, 70);
+        // 分类的按钮
+       NSArray *list = [CZCategoryLineLayoutView categoryItems:self.boxList setupNameKey:@"title" imageKey:@"iconUrl" IdKey:@"targetId" objectKey:@"type"];
+        CGRect frame = CGRectMake(0, 170, SCR_WIDTH, 80);;
+        CZCategoryLineLayoutView *categoryView = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:list type:2 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
+            NSDictionary *param = @{
+                @"targetType" : item.objectInfo,
+                @"targetId" : item.categoryId,
+                @"targetTitle" : item.categoryName,
+            };
+            NSLog(@"%@", param);
+            [CZFreePushTool categoryPushToVC:param];
+        }];
         [self.headerView addSubview:categoryView];
-        categoryView.pagingEnabled = YES;
-        categoryView.showsHorizontalScrollIndicator = NO;
-        categoryView.delegate = self;
-
-        CGFloat width = 45;
-        CGFloat height = width + 30;
-        CGFloat leftSpace = 24;
-        NSInteger cols = 4;
-        CGFloat space = (SCR_WIDTH - leftSpace * 2 - cols * width) / (cols - 1);
-        NSInteger count = self.boxList.count;
-        for (int i = 0; i < count; i++) {
-            NSDictionary *paramDic = self.boxList[i];
-
-            // 创建按钮
-            CZSubButton *btn = [CZSubButton buttonWithType:UIButtonTypeCustom];
-            btn.tag = i + 100;
-            btn.width = width;
-            btn.height = height;
-            btn.categoryId = paramDic[@"targetId"];
-            btn.categoryType = paramDic[@"type"];
-            btn.categoryName = paramDic[@"title"];
-            btn.x = leftSpace + i * (width + space);
-
-            [btn sd_setImageWithURL:[NSURL URLWithString:paramDic[@"iconUrl"]] forState:UIControlStateNormal];
-            [btn setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
-            [btn setTitle:btn.categoryName forState:UIControlStateNormal];
-            [categoryView addSubview:btn];
-            // 点击事件
-            [btn addTarget:self action:@selector(headerViewDidClickedBtn:) forControlEvents:UIControlEventTouchUpInside];
-            categoryView.height = CZGetY(btn);
-
-            CGFloat contentWith = i <= 3 ? : SCR_WIDTH * 2;
-            categoryView.contentSize = (CGSizeMake(contentWith, 0));
-        }
-    }
-
-    // 指示器
-    if (self.minline == nil && self.boxList.count > 4) {
-        UIView *redLine = [[UIView alloc] init];
-        redLine.width = 46;
-        redLine.height = 3;
-        redLine.backgroundColor = UIColorFromRGB(0xD8D8D8);
-        [self.headerView addSubview:redLine];
-        redLine.centerX = self.headerView.centerX;
-        redLine.y = 170 + 70 + 10;
-
-        UIView *minline = [[UIView alloc] init];
-        minline.width = redLine.width / 2.0;
-        minline.height = redLine.height;
-        [redLine addSubview:minline];
-        minline.backgroundColor = UIColorFromRGB(0xE25838);
-        self.minline = minline;
+        self.categoryView = categoryView;
     }
 
     if (self.lineView == nil) {
@@ -172,38 +131,6 @@
         lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         [self.headerView addSubview:lineView];
     }
-}
-
-
-
-#pragma mark - 代理
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    NSInteger index =  scrollView.contentOffset.x / SCR_WIDTH;
-    NSLog(@"%ld", index);
-
-    [UIView animateWithDuration:0.25 animations:^{
-        if (index == 0) {
-            self.minline.transform = CGAffineTransformIdentity;
-        } else {
-            self.minline.transform = CGAffineTransformMakeTranslation(self.minline.width, 0);
-        }
-    }];
-}
-
-
-
-#pragma mark - 事件
-// 分类的点击
-- (void)headerViewDidClickedBtn:(CZSubButton *)sender
-{
-    NSDictionary *param = @{
-        @"targetType" : sender.categoryType,
-        @"targetId" : sender.categoryId,
-        @"targetTitle" : sender.categoryName,
-    };
-    NSLog(@"%@", param);
-    [CZFreePushTool categoryPushToVC:param];
 }
 
 @end
