@@ -483,6 +483,10 @@
 		97C53DF72302694B002B1F76 /* CZERecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C53DF62302694B002B1F76 /* CZERecommendCell.m */; };
 		97C53DF92302951B002B1F76 /* CZERecommendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C53DF82302951B002B1F76 /* CZERecommendCell.xib */; };
 		97C53DFC2302BA7E002B1F76 /* CZERecommendHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C53DFB2302BA7E002B1F76 /* CZERecommendHeaderView.m */; };
+		97C6F81B23B05C7E00A14812 /* CZCollectionTypeOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C6F81923B05C7E00A14812 /* CZCollectionTypeOneCell.m */; };
+		97C6F81C23B05C7E00A14812 /* CZCollectionTypeOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C6F81A23B05C7E00A14812 /* CZCollectionTypeOneCell.xib */; };
+		97C6F82023B06AAB00A14812 /* CZRemindLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C6F81F23B06AAA00A14812 /* CZRemindLoginView.m */; };
+		97C6F82223B06AB700A14812 /* CZRemindLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C6F82123B06AB700A14812 /* CZRemindLoginView.xib */; };
 		97C78FB521196A2A00374CCD /* CZSystemMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C78FB421196A2A00374CCD /* CZSystemMessageController.m */; };
 		97C78FB821196A6A00374CCD /* CZMessageActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C78FB721196A6A00374CCD /* CZMessageActivityController.m */; };
 		97C78FBB21196A8F00374CCD /* CZTestWinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C78FBA21196A8F00374CCD /* CZTestWinController.m */; };
@@ -1474,6 +1478,12 @@
 		97C53DF82302951B002B1F76 /* CZERecommendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZERecommendCell.xib; sourceTree = "<group>"; };
 		97C53DFA2302BA7E002B1F76 /* CZERecommendHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZERecommendHeaderView.h; sourceTree = "<group>"; };
 		97C53DFB2302BA7E002B1F76 /* CZERecommendHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZERecommendHeaderView.m; sourceTree = "<group>"; };
+		97C6F81823B05C7E00A14812 /* CZCollectionTypeOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectionTypeOneCell.h; sourceTree = "<group>"; };
+		97C6F81923B05C7E00A14812 /* CZCollectionTypeOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectionTypeOneCell.m; sourceTree = "<group>"; };
+		97C6F81A23B05C7E00A14812 /* CZCollectionTypeOneCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCollectionTypeOneCell.xib; sourceTree = "<group>"; };
+		97C6F81E23B06AAA00A14812 /* CZRemindLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRemindLoginView.h; sourceTree = "<group>"; };
+		97C6F81F23B06AAA00A14812 /* CZRemindLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRemindLoginView.m; sourceTree = "<group>"; };
+		97C6F82123B06AB700A14812 /* CZRemindLoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZRemindLoginView.xib; sourceTree = "<group>"; };
 		97C78FB321196A2A00374CCD /* CZSystemMessageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSystemMessageController.h; sourceTree = "<group>"; };
 		97C78FB421196A2A00374CCD /* CZSystemMessageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSystemMessageController.m; sourceTree = "<group>"; };
 		97C78FB621196A6A00374CCD /* CZMessageActivityController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMessageActivityController.h; sourceTree = "<group>"; };
@@ -2218,6 +2228,7 @@
 		9712727322CF3855009EB40F /* 公共界面 */ = {
 			isa = PBXGroup;
 			children = (
+				97C6F81D23B06A6500A14812 /* 提醒登录 */,
 				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
 				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
 				971CDFF521E44A0B00DE3883 /* 网络请求工具 */,
@@ -2374,16 +2385,6 @@
 			path = "每日爆款";
 			sourceTree = "<group>";
 		};
-		971D71C523ADB8A500EDD19C /* 菜单 */ = {
-			isa = PBXGroup;
-			children = (
-				972BDC9923A38C0200C3F8BF /* CZFestivalCollectThreeCell.h */,
-				972BDC9A23A38C0200C3F8BF /* CZFestivalCollectThreeCell.m */,
-				972BDC9B23A38C0200C3F8BF /* CZFestivalCollectThreeCell.xib */,
-			);
-			path = "菜单";
-			sourceTree = "<group>";
-		};
 		9721CE0521E31984007F9208 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2436,10 +2437,10 @@
 		972BDCA623A39EFD00C3F8BF /* 精选 */ = {
 			isa = PBXGroup;
 			children = (
-				9733E55A23A8C3B3002F8E7C /* Controller */,
-				9733E55C23A8C3CC002F8E7C /* View */,
-				9733E55B23A8C3C1002F8E7C /* ViewModel */,
 				9733E55623A86838002F8E7C /* Model */,
+				9733E55A23A8C3B3002F8E7C /* Controller */,
+				9733E55B23A8C3C1002F8E7C /* ViewModel */,
+				9733E55C23A8C3CC002F8E7C /* View */,
 			);
 			path = "精选";
 			sourceTree = "<group>";
@@ -2665,7 +2666,7 @@
 				9733E55E23A8C43B002F8E7C /* 轮播图+宫格 */,
 				971D71C423ADB88E00EDD19C /* 每日爆款 */,
 				9733E55D23A8C3DB002F8E7C /* 热销榜单 */,
-				971D71C523ADB8A500EDD19C /* 菜单 */,
+				97C6F81723B05BDA00A14812 /* 精品推荐 */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4577,6 +4578,29 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		97C6F81723B05BDA00A14812 /* 精品推荐 */ = {
+			isa = PBXGroup;
+			children = (
+				972BDC9923A38C0200C3F8BF /* CZFestivalCollectThreeCell.h */,
+				972BDC9A23A38C0200C3F8BF /* CZFestivalCollectThreeCell.m */,
+				972BDC9B23A38C0200C3F8BF /* CZFestivalCollectThreeCell.xib */,
+				97C6F81823B05C7E00A14812 /* CZCollectionTypeOneCell.h */,
+				97C6F81923B05C7E00A14812 /* CZCollectionTypeOneCell.m */,
+				97C6F81A23B05C7E00A14812 /* CZCollectionTypeOneCell.xib */,
+			);
+			path = "精品推荐";
+			sourceTree = "<group>";
+		};
+		97C6F81D23B06A6500A14812 /* 提醒登录 */ = {
+			isa = PBXGroup;
+			children = (
+				97C6F81E23B06AAA00A14812 /* CZRemindLoginView.h */,
+				97C6F81F23B06AAA00A14812 /* CZRemindLoginView.m */,
+				97C6F82123B06AB700A14812 /* CZRemindLoginView.xib */,
+			);
+			path = "提醒登录";
+			sourceTree = "<group>";
+		};
 		97C78FBD21196B9E00374CCD /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -5469,6 +5493,7 @@
 				97F0947A21B8F7C800F550B5 /* wwwipinchengcn.cer in Resources */,
 				970AD8CC232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle in Resources */,
 				977E8099225B6AD30041A126 /* CZMyTrialApplyForFailedCell.xib in Resources */,
+				97C6F81C23B05C7E00A14812 /* CZCollectionTypeOneCell.xib in Resources */,
 				97FF6DD22117FAD800376435 /* backshadow.png in Resources */,
 				97BC05DE2112B122001ED65A /* keyboard.png in Resources */,
 				97421B602271A718007E5A72 /* CZUnusualController.xib in Resources */,
@@ -5588,6 +5613,7 @@
 				972E41B2211455C500BC751C /* CZMyPointsController.xib in Resources */,
 				9726336E22CDA51E00995341 /* CZMainHotSaleCell.xib in Resources */,
 				97C85131211AFAA9005540D8 /* CZBindingMobileController.xib in Resources */,
+				97C6F82223B06AB700A14812 /* CZRemindLoginView.xib in Resources */,
 				97B30CFA21F2FEF900B8427E /* launchLogo.png in Resources */,
 				97C7FF3A216DDDB50091DC07 /* MJRefresh.bundle in Resources */,
 				97FA0B1C237682D5001D1B70 /* asdasd.png in Resources */,
@@ -5806,6 +5832,7 @@
 				97E90C1D22CC4010001437A7 /* CZMainHotSaleController.m in Sources */,
 				97798CCF212D0FC90052CE94 /* SDWebImageTransition.m in Sources */,
 				970848FE22432969000D5528 /* CZTrialReportController.m in Sources */,
+				97C6F81B23B05C7E00A14812 /* CZCollectionTypeOneCell.m in Sources */,
 				97798CD1212D0FC90052CE94 /* UIImageView+WebCache.m in Sources */,
 				97C7FF06216DDDAB0091DC07 /* NSObject+MJProperty.m in Sources */,
 				97E6C4FF238F7872002541F4 /* CZTaobaoGoodsView.m in Sources */,
@@ -5823,6 +5850,7 @@
 				97B9E7F723AC7A140063D667 /* CZCategoryLineLayoutView.m in Sources */,
 				97F904C622F42C3200FA7A56 /* CZERecommendController.m in Sources */,
 				97BB480C2133AD9B006AE982 /* CZTestSubController.m in Sources */,
+				97C6F82023B06AAB00A14812 /* CZRemindLoginView.m in Sources */,
 				97ED11FE211598210003E0F7 /* CZAttentionBtn.m in Sources */,
 				97BFD13F235DB58D00493F28 /* CZETestViewModel.m in Sources */,
 				97F41E0523A08C62003C656C /* CZMainViewController.m in Sources */,

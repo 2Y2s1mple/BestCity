@@ -1,8 +1,8 @@
 //
-//  CZguessLineCell.h
+//  CZCollectionTypeOneCell.h
 //  BestCity
 //
-//  Created by JasonBourne on 2019/12/4.
+//  Created by JasonBourne on 2019/12/23.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZguessLineCell : UICollectionViewCell
+@interface CZCollectionTypeOneCell : UICollectionViewCell
 /** 总数据 */
 @property (nonatomic, strong) NSDictionary *dataDic;
 @end

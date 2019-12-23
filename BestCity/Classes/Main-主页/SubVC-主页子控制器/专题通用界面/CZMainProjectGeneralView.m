@@ -251,6 +251,15 @@
     }
 }
 
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if (self.layoutType == YES) { // 一条
+        return 0;
+    } else { // 块
+        return 10;
+    }
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld", indexPath.item);

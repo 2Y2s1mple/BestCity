@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMVSDefaultVCDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 - (instancetype)initWithCollectView:(UICollectionView *)collectionView;
-/** <#注释#> */
+/** 总数据 */
 @property (nonatomic, strong) NSMutableArray *dataSource;
 /** 广告 */
 @property (nonatomic, strong) NSArray *adList;

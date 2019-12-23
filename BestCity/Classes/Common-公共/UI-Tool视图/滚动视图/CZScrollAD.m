@@ -14,11 +14,29 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 /** <#注释#> */
 @property (nonatomic, strong) NSTimer *timer;
-/** <#注释#> */
-@property (nonatomic, assign) NSInteger type;
+
 @end
 
 @implementation CZScrollAD
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    if (self = [super initWithCoder:coder]) {
+        NSLog(@"%@", self);
+        [self creatrUI];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    NSLog(@"%@", self);
+
+}
+
+
+
 - (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray *)dataSource type:(NSInteger)type
 {
     self = [super initWithFrame:frame];
@@ -28,6 +46,12 @@
         [self creatrUI];
     }
     return self;
+}
+
+- (void)setDataSource:(NSArray *)dataSource
+{
+    _dataSource = dataSource;
+    [self.collectionView reloadData];
 }
 
 - (NSTimer *)timer
@@ -40,28 +64,30 @@
 
 - (void)nextpage
 {
-    // 获取当前的indexPath.item
-    NSIndexPath *currentIndexPath = [[self.collectionView indexPathsForVisibleItems] lastObject];
+    if (self.dataSource.count > 0) {
+        // 获取当前的indexPath.item
+        NSIndexPath *currentIndexPath = [[self.collectionView indexPathsForVisibleItems] lastObject];
 
-    NSIndexPath *currentIndexPathReset = [NSIndexPath indexPathForItem:currentIndexPath.item inSection:100/2];
+        NSIndexPath *currentIndexPathReset = [NSIndexPath indexPathForItem:currentIndexPath.item inSection:100/2];
 
-    [self.collectionView scrollToItemAtIndexPath:currentIndexPathReset atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+        [self.collectionView scrollToItemAtIndexPath:currentIndexPathReset atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
 
-    NSInteger nextItem = currentIndexPathReset.item + 1;
-    NSInteger nextSection = currentIndexPathReset.section;
-    if (nextItem == self.dataSource.count) {
-        nextItem = 0;
-        nextSection++;
+        NSInteger nextItem = currentIndexPathReset.item + 1;
+        NSInteger nextSection = currentIndexPathReset.section;
+        if (nextItem == self.dataSource.count) {
+            nextItem = 0;
+            nextSection++;
+        }
+        NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:nextItem inSection:nextSection];
+
+        [self.collectionView scrollToItemAtIndexPath:nextIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     }
-    NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:nextItem inSection:nextSection];
-
-    [self.collectionView scrollToItemAtIndexPath:nextIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
 }
 
 - (void)creatrUI
 {
     [self addSubview:self.collectionView];
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:100 / 2] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:100 / 2] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
 
     [self.timer fire];
 }

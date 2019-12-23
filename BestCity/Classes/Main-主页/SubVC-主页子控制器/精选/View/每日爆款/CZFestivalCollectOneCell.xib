@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="583"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SmI-es-MSj">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SmI-es-MSj" customClass="CZScrollAD">
                         <rect key="frame" x="15" y="10" width="345" height="38"/>
                         <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -542,14 +542,14 @@
                                             <constraint firstAttribute="trailing" secondItem="gup-A4-tBA" secondAttribute="trailing" constant="5" id="xYo-Wh-BSt"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcD-ts-FSr">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcD-ts-FSr" customClass="CZScrollAD">
                                         <rect key="frame" x="10" y="48" width="147.5" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="EeN-iw-R91"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Fc-zH-JFH">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Fc-zH-JFH" customClass="CZScrollAD">
                                         <rect key="frame" x="10" y="125" width="147.5" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -632,7 +632,7 @@
                 <outlet property="HotStyleBottom" destination="0Fc-zH-JFH" id="1Pd-Hf-SxN"/>
                 <outlet property="HotStyleSubTitleLabel" destination="gup-A4-tBA" id="Z6o-vd-lcl"/>
                 <outlet property="HotStyleTitleLabel" destination="wLQ-B5-b8J" id="GMr-Iy-v9X"/>
-                <outlet property="HotStyleTop" destination="vcD-ts-FSr" id="Nhu-KH-ZSN"/>
+                <outlet property="HotStyleTop" destination="vcD-ts-FSr" id="fTD-Xk-Lot"/>
                 <outlet property="adImageView" destination="c14-oG-3vq" id="45Q-BY-Khr"/>
                 <outlet property="bottomHighBackView" destination="8LV-jU-IMy" id="WsG-mf-u49"/>
                 <outlet property="highBackView" destination="vzZ-Rh-Ody" id="Csl-mc-npx"/>
@@ -649,7 +649,7 @@
                 <outlet property="label2" destination="6tF-K6-QAA" id="A4E-aW-LCm"/>
                 <outlet property="label3" destination="P5q-dA-GKz" id="WrM-LS-yxx"/>
                 <outlet property="label4" destination="cxY-B7-K6f" id="qAz-EJ-2xm"/>
-                <outlet property="messageListView" destination="SmI-es-MSj" id="pbr-dw-Dng"/>
+                <outlet property="messageListView" destination="SmI-es-MSj" id="3Tv-sw-Mwu"/>
                 <outlet property="peopleNewView" destination="o9g-Du-mDA" id="AA0-sT-9lx"/>
                 <outlet property="peopleNewViewLabel" destination="79h-7S-1ou" id="91Z-qd-N10"/>
                 <outlet property="subTitleLabel1" destination="vfB-9I-C63" id="W3C-ZO-xG8"/>
@@ -662,7 +662,7 @@
                 <outlet property="titleLabel2" destination="WQ3-Rr-bQM" id="6fc-8c-755"/>
                 <outlet property="topHighBackView" destination="eg0-HL-OSP" id="LKA-Z7-AX2"/>
             </connections>
-            <point key="canvasLocation" x="209.42028985507247" y="260.15625"/>
+            <point key="canvasLocation" x="-254" y="214"/>
         </collectionViewCell>
     </objects>
     <resources>

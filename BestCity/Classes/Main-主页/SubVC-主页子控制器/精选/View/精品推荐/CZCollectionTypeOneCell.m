@@ -1,32 +1,31 @@
 //
-//  CZguessLineCell.m
+//  CZCollectionTypeOneCell.m
 //  BestCity
 //
-//  Created by JasonBourne on 2019/12/4.
+//  Created by JasonBourne on 2019/12/23.
 //  Copyright © 2019 JasonBourne. All rights reserved.
 //
 
-#import "CZguessLineCell.h"
+#import "CZCollectionTypeOneCell.h"
 #import "UIImageView+WebCache.h"
 #import "CZUMConfigure.h"
 
-@interface CZguessLineCell ()
+@interface CZCollectionTypeOneCell ()
 /** 最大的背景view */
 @property (nonatomic, weak) IBOutlet UIView *backView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backViewBottomMargin;
 
 /** 大图片 */
 @property (nonatomic, weak) IBOutlet UIImageView *bigImageView;
 /** 标题 */
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-/** 标题 */
+/** 副标题 */
 @property (nonatomic, weak) IBOutlet UILabel *subTitleLabel;
 
 /** 当前价格 */
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actualPriceLabelBottomMragin;
 @property (nonatomic, weak) IBOutlet UILabel *otherPricelabel;
-/** <#注释#> */
+/** 券价格 */
 @property (nonatomic, weak) IBOutlet UILabel *couponPriceLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *couponPriceView;
@@ -38,11 +37,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *buyRateLabel;
 @end
 
-@implementation CZguessLineCell
+@implementation CZCollectionTypeOneCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
 }
 
 -(void)setDataDic:(NSDictionary *)dataDic
@@ -107,4 +106,5 @@
     CURRENTVC(currentVc);
     [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.dataDic[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.dataDic[@"img"] shareType:1125 object:self.dataDic[@"otherGoodsId"]];
 }
+
 @end

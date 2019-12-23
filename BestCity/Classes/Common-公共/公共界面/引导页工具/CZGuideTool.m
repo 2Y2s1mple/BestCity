@@ -37,7 +37,7 @@ BOOL oldUser;
 //        CZNoviceGuidanceView *guide = [[CZNoviceGuidanceView alloc] initWithFrame:[UIScreen mainScreen].bounds];
 //        guide.backgroundColor = [UIColor clearColor];
 //        [[UIApplication sharedApplication].keyWindow addSubview: guide];
-//        [CZSaveTool setObject:curVersion forKey:CZVERSION];
+        [CZSaveTool setObject:curVersion forKey:CZVERSION];
 
         // 显示版本更新
         [CZUpdataManger ShowUpdataViewWithNetworkService];

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -198,6 +198,7 @@
                 <outlet property="actualPriceLabel" destination="Xtk-rM-SVV" id="5F8-i6-vyc"/>
                 <outlet property="actualPriceLabelBottomMragin" destination="br5-CM-XwD" id="j2C-8Q-unW"/>
                 <outlet property="backView" destination="hXs-if-CH4" id="zAr-kx-K0U"/>
+                <outlet property="backViewBottomMargin" destination="ymz-zo-iTD" id="1hL-D3-3eY"/>
                 <outlet property="bigImageView" destination="N9W-lN-Zxk" id="uU3-IO-71q"/>
                 <outlet property="buyRateLabel" destination="Ic8-Es-Is0" id="vn7-Qx-svp"/>
                 <outlet property="couponPriceLabel" destination="rg1-Qr-vb2" id="i5U-Yq-Qs5"/>
@@ -209,7 +210,7 @@
                 <outlet property="titleLabel" destination="tWR-Oh-VhY" id="hbC-xd-wTU"/>
                 <outlet property="volumeLabel" destination="YIn-Eo-Fam" id="1dJ-2J-rO3"/>
             </connections>
-            <point key="canvasLocation" x="-152" y="-42"/>
+            <point key="canvasLocation" x="-181" y="-55"/>
         </collectionViewCell>
     </objects>
     <resources>

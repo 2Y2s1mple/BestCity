@@ -21,9 +21,6 @@
 // 视图
 #import "CZTabbar.h"
 
-
-
-
 #import "CZEInventoryEditorController.h"
 
 
@@ -55,6 +52,12 @@
     [super viewDidLoad];
     self.delegate = self;
     [self createSubController:YES];
+
+
+
+
+
+
 
 }
 

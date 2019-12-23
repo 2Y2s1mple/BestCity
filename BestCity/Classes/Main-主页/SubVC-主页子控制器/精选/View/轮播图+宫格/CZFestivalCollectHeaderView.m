@@ -54,7 +54,6 @@
     if (ad1List.count > 0) {
         [self createHeaderTableView];
     }
-
 }
 
 - (UIView *)headerView

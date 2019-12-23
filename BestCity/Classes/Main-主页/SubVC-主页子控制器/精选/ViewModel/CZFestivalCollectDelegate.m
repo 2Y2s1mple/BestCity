@@ -13,8 +13,9 @@
 #import "CZFestivalCollectOneCell.h" // 新人0元购
 #import "CZFestivalCollectTwoCell.h" // 热销
 #import "CZFestivalCollectThreeCell.h" // 按钮
-#import "CZguessLineCell.h" // 一行
+#import "CZCollectionTypeOneCell.h" // 一行
 #import "CZguessWhatYouLikeCell.h" // 横排
+#import "CZTaobaoDetailController.h"
 
 @implementation CZFestivalCollectDelegate
 static NSString *ID = @"CZFestivalCollectCell";
@@ -36,7 +37,7 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZFestivalCollectTwoCell class]) bundle:nil] forCellWithReuseIdentifier:twoId];
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZFestivalCollectThreeCell class]) bundle:nil] forCellWithReuseIdentifier:threeId];
 
-        [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessLineCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessLineCell"]; // 一行
+        [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZCollectionTypeOneCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZCollectionTypeOneCell"]; // 一行
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessWhatYouLikeCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessWhatYouLikeCell"]; // 两行
 
 
@@ -86,7 +87,7 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
     } else if (indexPath.section == 3) { // 做过了 横排
         NSDictionary *dic = self.qualityGoods[indexPath.item];
         if (self.layoutType == YES) { // 一条
-            CZguessLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessLineCell" forIndexPath:indexPath];
+            CZCollectionTypeOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZCollectionTypeOneCell" forIndexPath:indexPath];
             cell.dataDic = dic;
             return cell;
         } else { // 块
@@ -145,7 +146,7 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         return CGSizeMake(SCR_WIDTH, 89);
     } else if (indexPath.section == 3) {
         if (self.layoutType == YES) { // 一条
-            return CGSizeMake(SCR_WIDTH, 150);
+            return CGSizeMake(SCR_WIDTH, 140);
         } else { // 块
             return CGSizeMake((SCR_WIDTH - 40) / 2.0, 312);
         }
@@ -181,12 +182,33 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
     }
 }
 
-
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if (self.layoutType == YES) { // 一条
+        return 0;
+    } else { // 块
+        return 10;
+    }
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%ld", indexPath.item);
+    NSDictionary *param = self.qualityGoods[indexPath.item];
+    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+    vc.otherGoodsId = param[@"otherGoodsId"];
+    CURRENTVC(currentVc)
+    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 0) {
+        NSLog(@"------");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerHidden" object:nil];
+    } else {
+        NSLog(@"++++++");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerShow" object:nil];
+    }
+}
 
 @end

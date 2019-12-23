@@ -7,7 +7,7 @@
 //
 
 #import "CZMVSDefaultVCDelegate.h"
-#import "CZguessLineCell.h" // 一行
+#import "CZCollectionTypeOneCell.h" // 一行
 #import "CZguessWhatYouLikeCell.h" // 横排
 
 #import "CZScollerImageTool.h"
@@ -33,7 +33,7 @@
     if (self) {
         self.layoutType = YES;
         [collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CZMVSDefaultVCDelegate"];
-        [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessLineCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessLineCell"]; // 一行
+        [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZCollectionTypeOneCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZCollectionTypeOneCell"]; // 一行
         [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessWhatYouLikeCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessWhatYouLikeCell"]; // 两行
         collectionView.dataSource = self;
         collectionView.delegate = self;
@@ -56,7 +56,7 @@
 {
         NSDictionary *dic = self.dataSource[indexPath.item];
         if (self.layoutType == YES) { // 一条
-            CZguessLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessLineCell" forIndexPath:indexPath];
+            CZCollectionTypeOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZCollectionTypeOneCell" forIndexPath:indexPath];
             cell.dataDic = dic;
             return cell;
         } else { // 块
@@ -85,7 +85,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.layoutType == YES) { // 一条
-        return CGSizeMake(SCR_WIDTH, 150);
+        return CGSizeMake(SCR_WIDTH, 140);
     } else { // 块
         return CGSizeMake((SCR_WIDTH - 40) / 2.0, 312);
     }
@@ -115,6 +115,15 @@
         } else {
             return UIEdgeInsetsMake(10, 15, 10, 15);
         }
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if (self.layoutType == YES) { // 一条
+        return 0;
+    } else { // 块
+        return 10;
     }
 }
 
@@ -186,6 +195,17 @@
         _headerView.height = CZGetY(line);
     }
     return _headerView;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 0) {
+        NSLog(@"------");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerHidden" object:nil];
+    } else {
+        NSLog(@"++++++");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerShow" object:nil];
+    }
 }
 
 @end

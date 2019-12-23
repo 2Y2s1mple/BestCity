@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray *)dataSource type:(NSInteger)type;
 /** <#注释#> */
 @property (nonatomic, strong) NSArray *dataSource;
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger type;
 @end
 
 NS_ASSUME_NONNULL_END

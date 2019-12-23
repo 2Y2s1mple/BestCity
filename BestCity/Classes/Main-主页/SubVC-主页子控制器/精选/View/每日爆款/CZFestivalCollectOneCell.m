@@ -19,20 +19,18 @@
 
 @interface CZFestivalCollectOneCell ()
 
-/** 跑马灯Label */
-@property (nonatomic, weak) IBOutlet UIView *messageListView;
+/** 跑马灯 */
+@property (weak, nonatomic) IBOutlet CZScrollAD *messageListView;
+
 
 /** 新人 */
 @property (nonatomic, weak) IBOutlet UIView *peopleNewView;
-// 新人大标题
-@property (nonatomic, weak) IBOutlet UILabel *peopleNewViewLabel;
-// 图片
-@property (nonatomic, weak) IBOutlet UIImageView *image1;
+@property (nonatomic, weak) IBOutlet UILabel *peopleNewViewLabel; // 新人大标题
+@property (nonatomic, weak) IBOutlet UIImageView *image1; // 图片
 @property (nonatomic, weak) IBOutlet UIImageView *image2;
 @property (nonatomic, weak) IBOutlet UIImageView *image3;
 @property (nonatomic, weak) IBOutlet UIImageView *image4;
-// 文字
-@property (nonatomic, weak) IBOutlet UILabel *title1;
+@property (nonatomic, weak) IBOutlet UILabel *title1; // 文字
 @property (nonatomic, weak) IBOutlet UILabel *title2;
 @property (nonatomic, weak) IBOutlet UILabel *title3;
 @property (nonatomic, weak) IBOutlet UILabel *title4;
@@ -41,32 +39,27 @@
 @property (nonatomic, weak) IBOutlet UILabel *label3;
 @property (nonatomic, weak) IBOutlet UILabel *label4;
 
-/** 高反专区 */
-// 背景图
-@property (nonatomic, weak) IBOutlet UIView *highBackView;
-@property (nonatomic, weak) IBOutlet UIView *topHighBackView;
-@property (nonatomic, weak) IBOutlet UIView *bottomHighBackView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *highBackViewTopMargin;
-
-//1.
-@property (nonatomic, weak) IBOutlet UILabel *titleLabel1;
-@property (nonatomic, weak) IBOutlet UILabel *subTitleLabel1;
-@property (nonatomic, weak) IBOutlet UIImageView *highImage1_1;
-@property (nonatomic, weak) IBOutlet UIImageView *highImage1_2;
-//2.
-@property (nonatomic, weak) IBOutlet UILabel *titleLabel2;
-@property (nonatomic, weak) IBOutlet UILabel *subTitleLabel2;
-@property (nonatomic, weak) IBOutlet UIImageView *highImage2_1;
-@property (nonatomic, weak) IBOutlet UIImageView *highImage2_2;
-
 /** 每日爆款 */
 @property (nonatomic, weak) IBOutlet UIView *HotStyleBackView;
 @property (nonatomic, weak) IBOutlet UILabel *HotStyleTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *HotStyleSubTitleLabel;
-// 上
-@property (nonatomic, weak) IBOutlet UIView *HotStyleTop;
-// 下
-@property (nonatomic, weak) IBOutlet UIView *HotStyleBottom;
+@property (nonatomic, weak) IBOutlet CZScrollAD *HotStyleTop; // 第一个轮播图载体
+@property (nonatomic, weak) IBOutlet CZScrollAD *HotStyleBottom; // 第二个轮播图载体
+
+
+/** 高反专区 */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *highBackViewTopMargin; // 高反距离新人的距离
+@property (nonatomic, weak) IBOutlet UIView *highBackView; // 背景图
+@property (nonatomic, weak) IBOutlet UIView *topHighBackView;
+@property (nonatomic, weak) IBOutlet UIView *bottomHighBackView;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel1; //高反上
+@property (nonatomic, weak) IBOutlet UILabel *subTitleLabel1;
+@property (nonatomic, weak) IBOutlet UIImageView *highImage1_1;
+@property (nonatomic, weak) IBOutlet UIImageView *highImage1_2;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel2; //高反下
+@property (nonatomic, weak) IBOutlet UILabel *subTitleLabel2;
+@property (nonatomic, weak) IBOutlet UIImageView *highImage2_1;
+@property (nonatomic, weak) IBOutlet UIImageView *highImage2_2;
 
 /** 广告位 */
 @property (nonatomic, weak) IBOutlet UIImageView *adImageView;
@@ -81,6 +74,7 @@
     // 跑马灯
     UITapGestureRecognizer *messageListViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushMessageListView)];
     [self.messageListView addGestureRecognizer:messageListViewTap];
+    self.messageListView.type = 0;
     self.messageListView.layer.cornerRadius = 4;
     self.messageListView.layer.masksToBounds = YES;
 
@@ -98,6 +92,8 @@
     UITapGestureRecognizer *HotStyleBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainHighBackViewAction)];
     [self.HotStyleBackView addGestureRecognizer:HotStyleBackViewTap];
     self.HotStyleTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+    self.HotStyleTop.type = 100;
+    self.HotStyleBottom.type = 100;
 
     // 高反专区
     self.titleLabel1.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
@@ -108,8 +104,6 @@
     //下
     UITapGestureRecognizer *bottomHighBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomHighBackViewAction)];
     [self.bottomHighBackView addGestureRecognizer:bottomHighBackViewTap];
-
-
 
     // 广告位
     UITapGestureRecognizer *adImageViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adImageViewTapAction)];
@@ -122,10 +116,11 @@
     _freeGoodsList = freeGoodsList;
 
     // 跑马灯
-    if (self.messageList.count > 0) {
-        CZScrollAD *scollLabel =  [[CZScrollAD alloc] initWithFrame:self.messageListView.bounds dataSource:self.messageList type:0];
-        [self.messageListView addSubview:scollLabel];
-    }
+    self.messageListView.dataSource = self.messageList;
+//    if (self.messageList.count > 0 && self.scollLabel == nil) {
+//        self.scollLabel =  [[CZScrollAD alloc] initWithFrame:self.messageListView.bounds dataSource:self.messageList type:0];
+//        [self.messageListView addSubview:self.scollLabel];
+//    }
 
     // 新人0元购
     if (freeGoodsList.count == 0) {
@@ -160,7 +155,6 @@
                     break;
             }
         }
-
     }
 
     // 每日爆款
@@ -181,13 +175,9 @@
     self.HotStyleSubTitleLabel.text = param[@"smallTitle"];
 
     if (self.hotActivity.count > 0) {
-        CZScrollAD *scollView1 =  [[CZScrollAD alloc] initWithFrame:self.HotStyleTop.bounds dataSource:self.hotActivity[@"goodsList1"] type:1];
-        [self.HotStyleTop addSubview:scollView1];
-
-        CZScrollAD *scollView2 =  [[CZScrollAD alloc] initWithFrame:self.HotStyleBottom.bounds dataSource:self.hotActivity[@"goodsList2"] type:1];
-        [self.HotStyleBottom addSubview:scollView2];
+        self.HotStyleTop.dataSource = self.hotActivity[@"goodsList1"];
+        self.HotStyleBottom.dataSource = self.hotActivity[@"goodsList2"];
     }
-
 }
 
 
@@ -203,7 +193,6 @@
                 self.subTitleLabel1.text = param[@"smallTitle"];
                 [self.highImage1_1 sd_setImageWithURL:[NSURL URLWithString:param[@"img1"]]];
                 [self.highImage1_2 sd_setImageWithURL:[NSURL URLWithString:param[@"img2"]]];
-
                 break;
             }
             case 1:
@@ -212,7 +201,6 @@
                 self.subTitleLabel2.text = param[@"smallTitle"];
                 [self.highImage2_1 sd_setImageWithURL:[NSURL URLWithString:param[@"img1"]]];
                 [self.highImage2_2 sd_setImageWithURL:[NSURL URLWithString:param[@"img2"]]];
-
                 break;
             }
             default:

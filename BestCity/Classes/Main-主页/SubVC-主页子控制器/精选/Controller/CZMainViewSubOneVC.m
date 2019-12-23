@@ -240,18 +240,13 @@
     }
 }
 
-// 复制搜索弹框
-- (void)showSearchAlert
-{
-    [CZAlertTool alertRule];
-}
-
 // 跳转搜索
 - (void)pushSearchView
 {
     CZTaobaoSearchController *vc = [[CZTaobaoSearchController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 
 

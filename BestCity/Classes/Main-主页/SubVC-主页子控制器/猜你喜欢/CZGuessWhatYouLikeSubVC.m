@@ -140,4 +140,15 @@
     }];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 0) {
+        NSLog(@"------");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerHidden" object:nil];
+    } else {
+        NSLog(@"++++++");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerShow" object:nil];
+    }
+}
+
 @end

@@ -12,13 +12,14 @@
 // 视图
 #import "CZMainViewSearch.h"
 #import "CZLabel.h"
+#import "CZRemindLoginView.h"
+#import "CZAlertTool.h"
+#import "CZGuideTool.h" // 新人弹框
 
 // 子视图
 #import "CZMainViewSubOneVC.h"
 #import "CZGuessWhatYouLikeSubVC.h"
 #import "CZMainViewSubDefaultVC.h" // 通用界面
-
-#import "CZFestivalController.h"
 
 // 跳转
 #import "CZTaobaoSearchController.h"
@@ -30,6 +31,8 @@
 @property (nonatomic, assign) CGFloat STATUSBAR_MAX_ORIGIN_Y;
 /** 补贴方法 */
 @property (nonatomic, strong)  CZLabel *remindLabel;
+/** 提示登录按钮 */
+@property (nonatomic, strong) CZRemindLoginView *remindView;
 @end
 
 @implementation CZMainViewController
@@ -68,7 +71,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0x143030);
 
-    // h数据
+    // 数据
     [self.viewModel getMainTitles:^{
         [self reloadData];
     }];
@@ -77,7 +80,60 @@
     [self createUI];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageColorChange:) name:@"mainImageColorChange" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remindLabelHidden) name:@"CZMainViewControllerHidden" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remindLabelShow) name:@"CZMainViewControllerShow" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchAlert) name:@"showSearchAlert" object:nil];
+
+    NSString *lastVersion = [CZSaveTool objectForKey:@"CZRemindLoginView"];
+    if (!lastVersion) {
+        [CZSaveTool setObject:@"" forKey:@"CZRemindLoginView"];
+        self.remindView = [CZRemindLoginView remindLoginView];
+        self.remindView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        self.remindView.height = 40;
+        self.remindView.width = SCR_WIDTH;
+        self.remindView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 49 + 40);
+        [[UIApplication sharedApplication].keyWindow addSubview:self.remindView];
+    } else {
+        self.remindView = [CZRemindLoginView remindLoginView2];
+        self.remindView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        self.remindView.height = 40;
+        self.remindView.width = SCR_WIDTH;
+        self.remindView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 49 + 40);
+        [[UIApplication sharedApplication].keyWindow addSubview:self.remindView];
+    }
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([JPTOKEN length] <= 0) {
+        self.remindView.hidden = NO;
+    } else {
+        self.remindView.hidden = YES;
+    }
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 新用户指导
+        [CZGuideTool newpPeopleGuide];
+    });
+
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.remindView.hidden = YES;
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [CZAlertTool alertRule];
+}
+
+
 
 #pragma mark - UI创建
 - (void)createUI
@@ -142,7 +198,7 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, CZGetY(self.remindLabel) + 8 + 33, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.remindLabel) + 8 + 33 + (IsiPhoneX ? 83 : 49)));
+    return CGRectMake(0, CZGetY(self.remindLabel) + 8 + 33, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.remindLabel) + 8 + 33 + (IsiPhoneX ? 83 : 49)) + 14);
 }
 
 - (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
@@ -152,36 +208,9 @@
     [MobClick event:@"ID3" attributes:context];
     NSLog(@"----%@", text);
     if ([info[@"title"] isEqualToString:@"关注"] || [info[@"title"] isEqualToString:@"推荐"]) {
-//        [viewController performSelector:@selecto r(viewWillAppear:) withObject:nil
-//                             afterDelay:0];
     }
 }
 
-
-
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    [self obtainTtitles];
-//}
-//
-//- (void)obtainTtitles
-//{
-//    //获取数据
-//    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/evaluation/categoryList"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-//        if ([result[@"msg"] isEqualToString:@"success"]) {
-//            //标题的数据
-//            [CZDiscoverTitleModel objectArrayWithKeyValuesArray:result[@"data"]];
-//
-//            //刷新WMPage控件
-//            [self reloadData];
-//        }
-//        //隐藏菊花
-//        [CZProgressHUD hideAfterDelay:0];
-//    } failure:^(NSError *error) {
-//        //隐藏菊花
-//        [CZProgressHUD hideAfterDelay:0];
-//    }];
-//}
 #pragma mark - 事件
 // 改变颜色
 - (void)imageColorChange:(NSNotification *)sender
@@ -190,6 +219,36 @@
     [UIView animateWithDuration:0.25 animations:^{
         self.view.backgroundColor = color;
     }];
+}
+
+// 隐藏最上面的label
+- (void)remindLabelHidden
+{
+    if (!self.remindLabel.hidden) {
+        self.remindLabel.hidden = YES;
+        self.remindLabel.height = 0;
+        self.menuView.y -= 14;
+        self.scrollView.y -= 14;
+    }
+
+}
+
+// 显示最上面的label
+- (void)remindLabelShow
+{
+    if (self.remindLabel.hidden == YES) {
+        self.remindLabel.hidden = NO;
+        self.remindLabel.height = 14;
+        self.menuView.y += 14;
+        self.scrollView.y += 14;
+    }
+}
+
+
+// 复制弹出搜索弹框
+- (void)showSearchAlert
+{
+    [CZAlertTool alertRule];
 }
 
 
