@@ -49,7 +49,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
     // 设置跟视图
-    [[CZLaunchViewController alloc] initWithWidow:self.window];
+    [CZGuideTool chooseRootViewController:self.window];
 
     // 加载极光推送
     [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];

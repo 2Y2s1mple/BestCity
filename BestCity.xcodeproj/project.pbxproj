@@ -137,6 +137,7 @@
 		97350BCB23965200008A2D4E /* CZHotsaleSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97350BC923965200008A2D4E /* CZHotsaleSearchController.m */; };
 		97350BCE2396546A008A2D4E /* CZHotSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97350BCC2396546A008A2D4E /* CZHotSearchView.m */; };
 		97350BD123965C3D008A2D4E /* CZTabbaoSearchDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97350BD023965C3D008A2D4E /* CZTabbaoSearchDetailController.m */; };
+		9735528623B22385005253A5 /* CZGuideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735528423B22385005253A5 /* CZGuideController.m */; };
 		97418DC221B11F39001F4E92 /* jpush-extension-ios-1.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DBD21B11F39001F4E92 /* jpush-extension-ios-1.1.1.a */; };
 		97418DC321B11F39001F4E92 /* jpush-ios-3.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DC021B11F39001F4E92 /* jpush-ios-3.1.0.a */; };
 		97418DC421B11F39001F4E92 /* jcore-ios-1.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97418DC121B11F39001F4E92 /* jcore-ios-1.2.1.a */; };
@@ -861,6 +862,8 @@
 		97350BCD2396546A008A2D4E /* CZHotSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHotSearchView.h; sourceTree = "<group>"; };
 		97350BCF23965C3D008A2D4E /* CZTabbaoSearchDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTabbaoSearchDetailController.h; sourceTree = "<group>"; };
 		97350BD023965C3D008A2D4E /* CZTabbaoSearchDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTabbaoSearchDetailController.m; sourceTree = "<group>"; };
+		9735528423B22385005253A5 /* CZGuideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZGuideController.m; sourceTree = "<group>"; };
+		9735528523B22385005253A5 /* CZGuideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZGuideController.h; sourceTree = "<group>"; };
 		97418DBD21B11F39001F4E92 /* jpush-extension-ios-1.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-extension-ios-1.1.1.a"; sourceTree = "<group>"; };
 		97418DBE21B11F39001F4E92 /* JPushNotificationExtensionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushNotificationExtensionService.h; sourceTree = "<group>"; };
 		97418DBF21B11F39001F4E92 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -2319,6 +2322,8 @@
 		971CDFF421E449E600DE3883 /* 引导页工具 */ = {
 			isa = PBXGroup;
 			children = (
+				9735528523B22385005253A5 /* CZGuideController.h */,
+				9735528423B22385005253A5 /* CZGuideController.m */,
 				97F0EC372125692B000FE1DC /* CZGuideTool.h */,
 				97F0EC382125692B000FE1DC /* CZGuideTool.m */,
 				97D0C61E235EE7C300F3B994 /* CZNoviceGuidanceView.h */,
@@ -5976,6 +5981,7 @@
 				97350BCE2396546A008A2D4E /* CZHotSearchView.m in Sources */,
 				977E82D5223CA96600C8C01B /* CZGetJIBITool.m in Sources */,
 				979B05D6210F0D270023292D /* CZAllCriticalController.m in Sources */,
+				9735528623B22385005253A5 /* CZGuideController.m in Sources */,
 				975DB215217B14FA00A062AB /* CZUserInfoTool.m in Sources */,
 				977D8CFC22ACEB4F005E7ACB /* CZMyWalletCell.m in Sources */,
 				975B85A4219FB84D00525198 /* CZDiscoverDetailModel.m in Sources */,

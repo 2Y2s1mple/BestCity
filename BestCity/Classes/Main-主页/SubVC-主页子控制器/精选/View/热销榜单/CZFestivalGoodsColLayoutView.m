@@ -97,10 +97,10 @@
     if ([self.couponPriceLabel.text isEqualToString:@"券0"] && [self.feeLabel.text isEqualToString:@"  补0.00  "]) {
         [self.feeLabel setHidden:YES];
         self.couponPriceView.hidden = YES;
-        self.actualPriceLabelBottomMragin.constant = -21;
+        self.actualPriceLabelBottomMragin.constant = -13;
     } else {
         [self.feeLabel setHidden:NO];
-        self.actualPriceLabelBottomMragin.constant = 8;
+        self.actualPriceLabelBottomMragin.constant = 5;
     }
 }
 

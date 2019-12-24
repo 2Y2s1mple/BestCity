@@ -13,6 +13,7 @@
 #import "GXNetTool.h"
 #import "CZNoviceGuidanceView.h"
 #import "CZUpdataManger.h"
+#import "CZGuideController.h"
 
 
 BOOL oldUser;
@@ -41,6 +42,27 @@ BOOL oldUser;
 
         // 显示版本更新
         [CZUpdataManger ShowUpdataViewWithNetworkService];
+    }
+}
+
+
++ (void)chooseRootViewController:(UIWindow *)window
+{
+    //获取当前的版本号
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+
+    //获取存储的版本号
+    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
+
+    //比较
+    if ([curVersion isEqualToString:lastVersion]) {
+        //没有新版本
+        window.rootViewController = [[CZTabBarController alloc] init];
+    } else {
+        //有新版本
+        [CZSaveTool setObject:curVersion forKey:CZVERSION];
+        CZGuideController *vc = [[CZGuideController alloc] init];
+        window.rootViewController = vc;
     }
 }
 

@@ -105,7 +105,7 @@
         btn.width = width;
         btn.height = height;
         btn.x = colIndex * (width + space);
-        btn.y = rowIndex * (height + 25);
+        btn.y = rowIndex * (height + 10);
         [btn sd_setImageWithURL:[NSURL URLWithString:item.categoryImage] forState:UIControlStateNormal];
         [btn setTitleColor:UIColorFromRGB(0x939393) forState:UIControlStateNormal];
         [btn setTitle:item.categoryName forState:UIControlStateNormal];
@@ -209,9 +209,5 @@
         self.minline.transform = CGAffineTransformIdentity;
     }
 }
-
-
-
-
 
 @end
