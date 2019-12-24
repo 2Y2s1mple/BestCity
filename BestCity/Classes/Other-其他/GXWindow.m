@@ -13,7 +13,7 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
      UIView *hitView = [super hitTest:point withEvent:event];
-       NSLog(@"GXWindow - %@", [hitView class]);
+//       NSLog(@"GXWindow - %@", [hitView class]);
        return hitView;
 }
 

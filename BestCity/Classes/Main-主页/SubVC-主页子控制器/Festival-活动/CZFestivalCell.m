@@ -26,7 +26,7 @@
 /**  */
 @property (nonatomic, weak) IBOutlet UILabel *feeLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *feeLabelMargin;
-/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *buyRateLabel;
 
 @end
 
@@ -58,7 +58,6 @@
     _dataDic = dataDic;
     [_bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"goods"][@"img"]]];
     self.titleLabel.text = dataDic[@"goods"][@"goodsName"];
-
 
     NSArray *tagsArr = dataDic[@"goods"][@"goodsTagsList"];
     NSMutableString *mutStr = [NSMutableString string];
@@ -108,7 +107,7 @@
     [_bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic1[@"img"]]];
     self.titleLabel.text = dataDic1[@"goodsName"];
 
-    
+    self.buyRateLabel.text = [NSString stringWithFormat:@"%@折", dataDic1[@"buyRate"]];
 
     NSArray *tagsArr = dataDic1[@"goodsTagsList"];
     NSMutableString *mutStr = [NSMutableString string];

@@ -23,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** 是否是条形布局 */
 @property (nonatomic, assign) BOOL layoutType;
 
+/** <#注释#> */
+@property (nonatomic, weak) UIImageView *iconImageView;
+@property (nonatomic, weak) UIView *superView;
+@property (nonatomic, weak) UICollectionView *collectionView;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

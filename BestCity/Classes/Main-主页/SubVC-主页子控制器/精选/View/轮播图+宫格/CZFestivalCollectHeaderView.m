@@ -55,6 +55,10 @@
 {
     _ad1List = ad1List;
     if (ad1List.count > 0) {
+        [self.imageView removeFromSuperview];
+        [self.categoryView removeFromSuperview];
+        self.imageView = nil;
+        self.categoryView = nil;
         [self createHeaderTableView];
     }
 }
@@ -89,7 +93,6 @@
             [colors addObject:[@"0x" stringByAppendingString:imgDic[@"color"]]];
         }
         [imageView setScrollViewCurrentBlock:^(NSInteger index) {
-            NSLog(@"setScrollViewCurrentBlock %ld", index);
             UIColor *currentColor = [UIColor gx_colorWithHexString:colors[index]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"mainImageColorChange" object:nil userInfo:@{@"color" : currentColor}];
         }];
@@ -100,7 +103,6 @@
                 @"targetId" : dic[@"objectId"],
                 @"targetTitle" : dic[@"name"],
             };
-            NSLog(@"%@", param);
             [CZFreePushTool bannerPushToVC:param];
         }];
         imageView.imgList = imgs;

@@ -29,6 +29,7 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
     self = [super init];
     if (self) {
         self.layoutType = YES;
+        self.collectionView = collectionView;
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ID];
 
         [collectionView registerClass:[CZFestivalCollectHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderId];
@@ -205,9 +206,11 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
     if (scrollView.contentOffset.y > 0) {
         NSLog(@"------");
         [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerHidden" object:nil];
+        self.iconImageView.hidden = YES;
     } else {
         NSLog(@"++++++");
         [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMainViewControllerShow" object:nil];
+        self.iconImageView.hidden = NO;
     }
 }
 

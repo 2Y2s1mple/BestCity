@@ -160,8 +160,9 @@
         categoryView.height = CZGetY(btn);
 
 
-//        CGFloat contentWith = self.width * ((count + (cols - 1)) / cols);
-        CGFloat contentWidth = itemWidth * (i + 1);
+//        CGFloat contentWidth = self.width * ((count + (cols - 1)) / cols);
+//        CGFloat contentWidth = self.width * 2;
+        CGFloat contentWidth = (int)(itemWidth + 0.5) * (i + 1);
         categoryView.contentSize = (CGSizeMake(contentWidth, 0));
     }
 
@@ -192,7 +193,7 @@
 {
     CGFloat itemWidth = SCR_WIDTH / 4;
     NSInteger index = scrollView.contentOffset.x / itemWidth;
-    NSLog(@"%ld", index);
+    NSLog(@"%ld", (long)index);
     [UIView animateWithDuration:0.25 animations:^{
         if (index == 0) {
             self.minline.transform = CGAffineTransformIdentity;
@@ -201,6 +202,14 @@
         }
     }];
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.x == 0) {
+        self.minline.transform = CGAffineTransformIdentity;
+    }
+}
+
 
 
 

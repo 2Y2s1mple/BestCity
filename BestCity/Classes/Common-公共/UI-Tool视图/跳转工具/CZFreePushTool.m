@@ -152,6 +152,12 @@
 #pragma mark - 任务中心
 + (void)taskCenter
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *nav = tabbar.selectedViewController;

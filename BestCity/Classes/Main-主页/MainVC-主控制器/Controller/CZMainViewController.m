@@ -194,7 +194,7 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    return CGRectMake(0, CZGetY(self.remindLabel) + 8, SCR_WIDTH, 33);
+    return CGRectMake(0, CZGetY(self.remindLabel) + 4, SCR_WIDTH, 33);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
@@ -230,10 +230,12 @@
 - (void)remindLabelHidden
 {
     if (!self.remindLabel.hidden) {
-        self.remindLabel.hidden = YES;
-        self.remindLabel.height = 0;
-        self.menuView.y -= 14;
-        self.scrollView.y -= 14;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.remindLabel.hidden = YES;
+            self.remindLabel.height = 0;
+            self.menuView.y -= 14;
+            self.scrollView.y -= 14;
+        }];
     }
 
 }
@@ -242,10 +244,12 @@
 - (void)remindLabelShow
 {
     if (self.remindLabel.hidden == YES) {
-        self.remindLabel.hidden = NO;
-        self.remindLabel.height = 14;
-        self.menuView.y += 14;
-        self.scrollView.y += 14;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.remindLabel.hidden = NO;
+            self.remindLabel.height = 14;
+            self.menuView.y += 14;
+            self.scrollView.y += 14;
+        }];
     }
 }
 

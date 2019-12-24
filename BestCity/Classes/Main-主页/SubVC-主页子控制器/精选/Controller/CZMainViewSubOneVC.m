@@ -77,6 +77,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageColorChange:) name:@"mainImageColorChange" object:nil];
     // 监听按钮的点击事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsRecommendedBtnsAction:) name:@"mainSameTitleAction" object:nil];
+    // 接收登录时候的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadNewTrailDataSorce) name:loginChangeUserInfo object:nil];
 
     // 数据
     [self setupRefresh];
@@ -110,6 +112,8 @@
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor clearColor];
         self.collectDataSurce = [[CZFestivalCollectDelegate alloc] initWithCollectView:_collectView];
+        self.collectDataSurce.iconImageView = self.icon;
+        self.collectDataSurce.superView = self.view;
     }
     return _collectView;
 }
