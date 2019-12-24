@@ -10,7 +10,8 @@
 #import "PlanADScrollView.h"
 
 @interface CZScollerImageTool () <PlanADScrollViewDelegate>
-
+/** <#注释#> */
+@property (nonatomic, strong) PlanADScrollView *ad;
 @end
 
 @implementation CZScollerImageTool
@@ -36,6 +37,7 @@
         } else {
             // 初始化控件
             PlanADScrollView *ad = [[PlanADScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height) imageUrls:self.imgList placeholderimage:nil];
+            self.ad = ad;
             ad.delegate = self;
             [self addSubview:ad];
         }
@@ -65,5 +67,15 @@
 {
     NSLog(@"%------ld", index);
     !self.scrollViewCurrentBlock ? : self.scrollViewCurrentBlock(index);
+}
+
+- (void)setIsScroll:(BOOL)isScroll
+{
+    _isScroll = isScroll;
+    if (isScroll) {
+        [self.ad addTimer];
+    } else {
+        [self.ad removeTimer];
+    }
 }
 @end

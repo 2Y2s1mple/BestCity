@@ -209,6 +209,11 @@
     NSLog(@"----%@", text);
     if ([info[@"title"] isEqualToString:@"关注"] || [info[@"title"] isEqualToString:@"推荐"]) {
     }
+    if (![info[@"title"] isEqualToString:@"精选"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shopScrollAd" object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"starScrollAd" object:nil];
+    }
 }
 
 #pragma mark - 事件

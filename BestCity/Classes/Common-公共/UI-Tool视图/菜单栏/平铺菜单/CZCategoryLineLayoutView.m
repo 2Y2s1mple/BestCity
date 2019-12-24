@@ -141,6 +141,7 @@
     CGFloat leftSpace = 24;
     NSInteger cols = 4;
     CGFloat space = (SCR_WIDTH - leftSpace * 2 - cols * width) / (cols - 1);
+    CGFloat itemWidth = SCR_WIDTH / cols;
     NSInteger count = self.categoryItems.count;
     for (int i = 0; i < count; i++) {
         CZCategoryItem *item = self.categoryItems[i];
@@ -158,8 +159,10 @@
         [btn addTarget:self action:@selector(categoryButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         categoryView.height = CZGetY(btn);
 
-        CGFloat contentWith = self.width * (count + (cols - 1) / cols);
-        categoryView.contentSize = (CGSizeMake(contentWith, 0));
+
+//        CGFloat contentWith = self.width * ((count + (cols - 1)) / cols);
+        CGFloat contentWidth = itemWidth * (i + 1);
+        categoryView.contentSize = (CGSizeMake(contentWidth, 0));
     }
 
 
@@ -187,7 +190,8 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSInteger index =  scrollView.contentOffset.x / SCR_WIDTH;
+    CGFloat itemWidth = SCR_WIDTH / 4;
+    NSInteger index = scrollView.contentOffset.x / itemWidth;
     NSLog(@"%ld", index);
     [UIView animateWithDuration:0.25 animations:^{
         if (index == 0) {

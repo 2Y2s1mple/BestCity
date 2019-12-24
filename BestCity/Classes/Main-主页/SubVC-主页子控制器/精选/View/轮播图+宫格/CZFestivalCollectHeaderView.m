@@ -44,6 +44,9 @@
         self.backgroundColor = [UIColor clearColor];
         [self addSubview:self.headerView];
 
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shopScrollAd) name:@"shopScrollAd" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(starScrollAd) name:@"starScrollAd" object:nil];
+
     }
     return self;
 }
@@ -130,6 +133,21 @@
         lineView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         [self.headerView addSubview:lineView];
     }
+}
+
+
+#pragma mark - 事件
+// 设置是否滚动
+- (void)shopScrollAd
+{
+    self.imageView.isScroll = NO;
+    UIColor *currentColor = UIColorFromRGB(0xE25838);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"mainImageColorChange" object:nil userInfo:@{@"color" : currentColor}];
+}
+
+- (void)starScrollAd
+{
+    self.imageView.isScroll = YES;
 }
 
 @end

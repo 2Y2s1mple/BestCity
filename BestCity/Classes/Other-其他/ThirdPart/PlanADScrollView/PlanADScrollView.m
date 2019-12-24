@@ -60,14 +60,14 @@
 }
 
 #pragma mark 添加定时器
--(void)addTimer{
+- (void)addTimer {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 
 #pragma mark 删除定时器
--(void)removeTimer{
+- (void)removeTimer {
     [self.timer invalidate];
     self.timer = nil;
 }

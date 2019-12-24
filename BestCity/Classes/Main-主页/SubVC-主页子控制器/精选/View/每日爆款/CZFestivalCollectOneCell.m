@@ -117,10 +117,6 @@
 
     // 跑马灯
     self.messageListView.dataSource = self.messageList;
-//    if (self.messageList.count > 0 && self.scollLabel == nil) {
-//        self.scollLabel =  [[CZScrollAD alloc] initWithFrame:self.messageListView.bounds dataSource:self.messageList type:0];
-//        [self.messageListView addSubview:self.scollLabel];
-//    }
 
     // 新人0元购
     if (freeGoodsList.count == 0) {
@@ -133,23 +129,24 @@
             NSDictionary *imageDic = [freeGoodsList[i] changeAllValueWithString];
             NSString *image = imageDic[@"img"];
             NSString *text = [@"¥" stringByAppendingString:imageDic[@"otherPrice"]];
+            NSAttributedString *attrText = [text addStrikethroughWithRange:NSMakeRange(0, text.length)];
 
             switch (i) {
                 case 0:
                     [self.image1 sd_setImageWithURL:[NSURL URLWithString:image]];
-                    self.label1.text = text;
+                    self.label1.attributedText = attrText;
                     break;
                 case 1:
                     [self.image2 sd_setImageWithURL:[NSURL URLWithString:image]];
-                    self.label2.text = text;
+                    self.label2.attributedText = attrText;
                     break;
                 case 2:
                     [self.image3 sd_setImageWithURL:[NSURL URLWithString:image]];
-                    self.label3.text = text;
+                    self.label3.attributedText = attrText;
                     break;
                 case 3:
                     [self.image4 sd_setImageWithURL:[NSURL URLWithString:image]];
-                    self.label4.text = text;
+                    self.label4.attributedText = attrText;
                     break;
                 default:
                     break;

@@ -31,7 +31,10 @@
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:paramDic[@"img"]]];
     self.label.text = paramDic[@"otherName"];
     self.label1.text = [NSString stringWithFormat:@"¥%@", paramDic[@"buyPrice"]];
-    self.label2.text = [NSString stringWithFormat:@"¥%@", paramDic[@"otherPrice"]];
+
+    NSString *text = [NSString stringWithFormat:@"¥%@", paramDic[@"otherPrice"]];
+    NSAttributedString *attrText = [text addStrikethroughWithRange:NSMakeRange(0, text.length)];
+    self.label2.attributedText = attrText;
 }
 
 @end

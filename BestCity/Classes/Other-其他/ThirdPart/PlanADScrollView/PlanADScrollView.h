@@ -45,5 +45,10 @@
 -(void)currentImage:(UIImage *)currentImage
           pageImage:(UIImage*)pageImage;
 
+/** 停止滚动 */
+-(void)removeTimer;
+
+/** 开始滚动 */
+- (void)addTimer;
 
 @end

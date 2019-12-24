@@ -41,6 +41,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = UIColorFromRGB(0xF5F5F5);
         self.type = type;
         self.dataSource = dataSource;
         [self creatrUI];
@@ -103,6 +104,7 @@
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         _collectionView.scrollEnabled = NO;
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
@@ -120,7 +122,6 @@
 {
     return 100;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {

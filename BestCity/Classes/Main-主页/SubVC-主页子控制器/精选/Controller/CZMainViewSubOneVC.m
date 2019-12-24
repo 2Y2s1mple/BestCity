@@ -106,7 +106,6 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumInteritemSpacing = 0;
 //        layout.minimumLineSpacing = 0;
-
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor clearColor];
@@ -139,7 +138,6 @@
     // 结束尾部刷新
        [self.collectView.mj_footer endRefreshing];
        NSMutableDictionary *param = [NSMutableDictionary dictionary];
-
        //获取详情数据
        [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
            if ([result[@"msg"] isEqualToString:@"success"]) {
@@ -195,22 +193,17 @@
     param[@"asc"] = dataParam[@"asc"]; // (1正序，0倒序);
     param[@"orderByType"] = dataParam[@"orderByType"]; // 0综合，1价格，2补贴，3销量
     param[@"page"] = @(self.page);
-
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.qualityGoods = [NSMutableArray arrayWithArray:result[@"data"]];
             self.collectDataSurce.qualityGoods = self.qualityGoods;
-
-
             [self.collectView reloadData];
         }
         // 结束刷新
         [self.collectView.mj_header endRefreshing];
-
     } failure:^(NSError *error) {// 结束刷新
         [self.collectView.mj_header endRefreshing];
-
     }];
 }
 

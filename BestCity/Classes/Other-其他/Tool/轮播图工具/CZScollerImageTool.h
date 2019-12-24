@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** <#注释#> */
 @property (nonatomic, strong) void (^selectedIndexBlock)(NSInteger index);
 @property (nonatomic, strong) void (^scrollViewCurrentBlock)(NSInteger index);
+/** <#注释#> */
+@property (nonatomic, assign) BOOL isScroll;
 @end
 
 NS_ASSUME_NONNULL_END

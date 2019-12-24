@@ -3827,6 +3827,15 @@
 			path = "Details-详情";
 			sourceTree = "<group>";
 		};
+		9789945D23B1BD150038AEDF /* Localization-数据的本地化 */ = {
+			isa = PBXGroup;
+			children = (
+				97F0EC3A212569C4000FE1DC /* CZSaveTool.h */,
+				97F0EC3B212569C4000FE1DC /* CZSaveTool.m */,
+			);
+			path = "Localization-数据的本地化";
+			sourceTree = "<group>";
+		};
 		97911041222F69F700C2DE5B /* MyWallet-钱包 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4521,6 +4530,7 @@
 		97C52A6C2254B82A00787BC5 /* Common-公共 */ = {
 			isa = PBXGroup;
 			children = (
+				9789945D23B1BD150038AEDF /* Localization-数据的本地化 */,
 				970E2D3D23A33690005CB9BD /* Color-类扩展 */,
 				9752AD93239B8ABD00779D32 /* Button-样式 */,
 				97F41E1423A0F17C003C656C /* Label-样式 */,
@@ -5090,8 +5100,6 @@
 				9723075E21AD76F80004C00C /* CZNoDataView.h */,
 				9723075F21AD76F80004C00C /* CZNoDataView.m */,
 				9723076121AD77000004C00C /* CZNoDataView.xib */,
-				97F0EC3A212569C4000FE1DC /* CZSaveTool.h */,
-				97F0EC3B212569C4000FE1DC /* CZSaveTool.m */,
 				975DB210217AFF1100A062AB /* CZAlertViewTool.h */,
 				975DB211217AFF1100A062AB /* CZAlertViewTool.m */,
 				975DB213217B14FA00A062AB /* CZUserInfoTool.h */,
