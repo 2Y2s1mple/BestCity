@@ -102,21 +102,6 @@
     [self.view addSubview:self.tableView];
     // 获取数据创建视图
     [self setupRefresh];
-
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchAlert) name:@"showSearchAlert" object:nil];
-}
-
-- (void)showSearchAlert
-{
-    [CZAlertTool alertRule];
-}
-
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    [CZAlertTool alertRule];
 }
 
 - (void)viewWillAppear:(BOOL)animated

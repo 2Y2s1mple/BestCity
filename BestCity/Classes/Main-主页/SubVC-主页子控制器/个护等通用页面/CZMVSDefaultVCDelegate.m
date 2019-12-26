@@ -81,7 +81,6 @@
     }
 }
 
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.layoutType == YES) { // 一条
@@ -95,7 +94,7 @@
 // 头视图的高度
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        if (self.adList.count > 0 && self.categoryList.count > 0) {
+        if (self.categoryList.count > 0) {
             return CGSizeMake(0, self.headerView.height);
         } else {
             return CGSizeZero;
@@ -143,19 +142,23 @@
     if (_headerView == nil) {
         _headerView = [[UIView alloc] init];
         _headerView.width = SCR_WIDTH;
-        // 添加轮播图
-        CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 160)];
-        [_headerView addSubview:imageView];
-        [imageView setSelectedIndexBlock:^(NSInteger index) {
 
-        }];
+        CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 0)];
+        if (self.adList.count > 0) {
+            imageView.height = 160;
+            // 添加轮播图
+            [_headerView addSubview:imageView];
+            [imageView setSelectedIndexBlock:^(NSInteger index) {
 
-        NSMutableArray *imgs = [NSMutableArray array];
-        for (NSDictionary *imgDic in self.adList) {
-            [imgs addObject:imgDic[@"img"]];
+            }];
+
+            NSMutableArray *imgs = [NSMutableArray array];
+            for (NSDictionary *imgDic in self.adList) {
+                [imgs addObject:imgDic[@"img"]];
+            }
+            imageView.imgList = imgs;
+
         }
-        imageView.imgList = imgs;
-        [_headerView addSubview:imageView];
 
         // 分类的按钮
         NSArray *list = [CZCategoryLineLayoutView categoryItems:self.categoryList setupNameKey:@"categoryName" imageKey:@"img" IdKey:@"categoryId" objectKey:@""];

@@ -39,12 +39,10 @@ BOOL oldUser;
 //        guide.backgroundColor = [UIColor clearColor];
 //        [[UIApplication sharedApplication].keyWindow addSubview: guide];
         [CZSaveTool setObject:curVersion forKey:CZVERSION];
-
         // 显示版本更新
         [CZUpdataManger ShowUpdataViewWithNetworkService];
     }
 }
-
 
 + (void)chooseRootViewController:(UIWindow *)window
 {

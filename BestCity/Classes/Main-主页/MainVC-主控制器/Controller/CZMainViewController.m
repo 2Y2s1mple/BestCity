@@ -85,20 +85,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchAlert) name:@"showSearchAlert" object:nil];
 
     NSString *lastVersion = [CZSaveTool objectForKey:@"CZRemindLoginView"];
+    CGFloat height = (IsiPhoneX ? 83 : 49) + 40;
     if (!lastVersion) {
         [CZSaveTool setObject:@"" forKey:@"CZRemindLoginView"];
         self.remindView = [CZRemindLoginView remindLoginView];
         self.remindView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
         self.remindView.height = 40;
         self.remindView.width = SCR_WIDTH;
-        self.remindView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 49 + 40);
+        self.remindView.y = SCR_HEIGHT - height;
         [[UIApplication sharedApplication].keyWindow addSubview:self.remindView];
     } else {
         self.remindView = [CZRemindLoginView remindLoginView2];
         self.remindView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
         self.remindView.height = 40;
         self.remindView.width = SCR_WIDTH;
-        self.remindView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 49 + 40);
+        self.remindView.y = SCR_HEIGHT - height;
         [[UIApplication sharedApplication].keyWindow addSubview:self.remindView];
     }
 }
@@ -111,13 +112,6 @@
     } else {
         self.remindView.hidden = YES;
     }
-
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 新用户指导
-        [CZGuideTool newpPeopleGuide];
-    });
-
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -126,14 +120,11 @@
     self.remindView.hidden = YES;
 }
 
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [CZAlertTool alertRule];
 }
-
-
 
 #pragma mark - UI创建
 - (void)createUI

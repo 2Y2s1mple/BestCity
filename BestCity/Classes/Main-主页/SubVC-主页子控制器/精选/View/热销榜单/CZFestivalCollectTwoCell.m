@@ -41,7 +41,7 @@
     for (int i = 0; i < hotGoodsList.count; i++) {
         CGFloat y = 0;
         CGFloat w = 100;
-        CGFloat h = 172;
+        CGFloat h = 167;
         CGFloat x = 15 + (w + 10) * i;
         CZFestivalGoodsColLayoutView *view = (CZFestivalGoodsColLayoutView *)[[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CZFestivalGoodsColLayoutView class]) owner:nil options:nil] firstObject];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushSearchView:)];

@@ -209,7 +209,12 @@
 // 广告位
 - (void)createAdImageView
 {
-    [self.adImageView sd_setImageWithURL:[NSURL URLWithString:self.ad2[@"img"]]];
+    if (self.ad2) {
+        self.adImageView.hidden = NO;
+        [self.adImageView sd_setImageWithURL:[NSURL URLWithString:self.ad2[@"img"]]];
+    } else {
+        self.adImageView.hidden = YES;
+    }
 }
 
 #pragma mark - 事件

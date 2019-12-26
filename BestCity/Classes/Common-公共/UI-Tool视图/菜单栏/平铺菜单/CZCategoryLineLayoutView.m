@@ -166,27 +166,29 @@
         categoryView.contentSize = (CGSizeMake(contentWidth, 0));
     }
 
+    if (count > cols) {
 
-    // 指示器
-    UIView *redLine = [[UIView alloc] init];
-    [self addSubview:redLine];
-    redLine.tag = 100;
-    redLine.width = 50;
-    redLine.height = 3;
-    redLine.layer.cornerRadius = 1.5;
-    redLine.layer.masksToBounds = YES;
-    redLine.backgroundColor = UIColorFromRGB(0xD8D8D8);
-    redLine.centerX = self.width / 2.0;
-    redLine.y = self.height - redLine.height;
-
-    UIView *minline = [[UIView alloc] init];
-    self.minline = minline;
-    minline.width = redLine.width / 2.0;
-    minline.height = redLine.height;
-    minline.layer.cornerRadius = 1.5;
-    minline.layer.masksToBounds = YES;
-    [redLine addSubview:minline];
-    minline.backgroundColor = UIColorFromRGB(0xE25838);
+        // 指示器
+        UIView *redLine = [[UIView alloc] init];
+        [self addSubview:redLine];
+        redLine.tag = 100;
+        redLine.width = 50;
+        redLine.height = 3;
+        redLine.layer.cornerRadius = 1.5;
+        redLine.layer.masksToBounds = YES;
+        redLine.backgroundColor = UIColorFromRGB(0xD8D8D8);
+        redLine.centerX = self.width / 2.0;
+        redLine.y = self.height - redLine.height;
+        
+        UIView *minline = [[UIView alloc] init];
+        self.minline = minline;
+        minline.width = redLine.width / 2.0;
+        minline.height = redLine.height;
+        minline.layer.cornerRadius = 1.5;
+        minline.layer.masksToBounds = YES;
+        [redLine addSubview:minline];
+        minline.backgroundColor = UIColorFromRGB(0xE25838);
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

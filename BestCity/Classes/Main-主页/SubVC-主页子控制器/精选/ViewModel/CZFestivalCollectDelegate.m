@@ -136,11 +136,16 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) { // 新人0元购
+        if (self.totalDataModel.freeGoodsList.count == 0 && self.totalDataModel.ad2 == nil) {
+            return CGSizeMake(SCR_WIDTH, 573 - 12 - 142 - 138);
+        }
         if (self.totalDataModel.freeGoodsList.count == 0) { // 不是新人
             return CGSizeMake(SCR_WIDTH, 573 - 12 - 142);
-        } else {
-            return CGSizeMake(SCR_WIDTH, 573);
         }
+        if (self.totalDataModel.ad2 == nil) {
+            return CGSizeMake(SCR_WIDTH, 573 - 138);
+        }
+        return CGSizeMake(SCR_WIDTH, 573);
     } else if (indexPath.section == 1) {
         return CGSizeMake(SCR_WIDTH, 270);
     } else if (indexPath.section == 2) {

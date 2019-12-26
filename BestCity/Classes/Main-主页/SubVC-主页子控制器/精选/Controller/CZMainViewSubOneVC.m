@@ -87,7 +87,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [CZAlertTool alertRule];
     self.collectView.height = self.view.height;
 }
 
