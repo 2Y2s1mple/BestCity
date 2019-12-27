@@ -45,8 +45,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 
-     self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
+
+    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
+        JPSERVER_URL = [CZSaveTool objectForKey:@"currentPath"];
+    } else {
+        JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/";
+    }
+
 
     // 设置跟视图
     [CZGuideTool chooseRootViewController:self.window];
@@ -64,8 +71,6 @@
     [MobLink setDelegate:self];
 
     [self.window makeKeyAndVisible];
-
-    
 
     recordSearchTextArray = [NSMutableArray array];
 

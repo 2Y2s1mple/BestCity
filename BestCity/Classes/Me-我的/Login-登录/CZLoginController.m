@@ -37,6 +37,9 @@
 /** 判断是否在读秒 */
 @property (nonatomic, assign) BOOL isReadSecond;
 
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger recoredClickedCount;
+
 @end
 
 static id instancet_;
@@ -249,6 +252,23 @@ static id instancet_;
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    self.recoredClickedCount++;
+    NSLog(@"-----");
+    if (self.recoredClickedCount == 15 && ![JPSERVER_URL  isEqual: @"http://192.168.1.84:8081/qualityshop-api/"]) {
+        NSLog(@"----------- 15下");
+        self.recoredClickedCount = 0;
+        JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";
+        [CZProgressHUD showProgressHUDWithText:@"切换测试地址"];
+        [CZProgressHUD hideAfterDelay:2.5];
+        [CZSaveTool setObject:JPSERVER_URL forKey:@"currentPath"];
+    }
+    if (self.recoredClickedCount == 20 && ![JPSERVER_URL  isEqual: @"https://www.jipincheng.cn/qualityshop-api/"]){
+        self.recoredClickedCount = 0;
+        JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/";
+        [CZProgressHUD showProgressHUDWithText:@"切换正式地址"];
+        [CZProgressHUD hideAfterDelay:2.5];
+        [CZSaveTool setObject:JPSERVER_URL forKey:@"currentPath"];
+    }
 }
 
 

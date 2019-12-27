@@ -23,6 +23,10 @@ NSString * const collectNotification = @"collectNotification";
 /** 记录搜索的字段 */
 NSMutableArray *recordSearchTextArray;
 
+/** 根路径 */
+NSString *JPSERVER_URL;
+
+
 BOOL didClickedNewPeople;
 
 

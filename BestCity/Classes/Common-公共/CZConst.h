@@ -21,5 +21,6 @@ UIKIT_EXTERN BOOL didClickedNewPeople;
 /** 记录搜索的字段 */
 UIKIT_EXTERN NSMutableArray *recordSearchTextArray;
 
-
+/** 根路径 */
+UIKIT_EXTERN NSString *JPSERVER_URL;
 
