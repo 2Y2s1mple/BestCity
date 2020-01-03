@@ -7,41 +7,84 @@
 //
 
 #import "CZSubFreeChargeController.h"
+// 群组1
 #import "CZFreeChargeCell3.h"
 #import "CZFreeChargeCell4.h"
-#import "UIButton+CZExtension.h" // 按钮扩展
-#import "CZFreeChargeDetailController.h"
+#import "CZFreeChargeCell5.h"
 
-@interface CZSubFreeChargeController ()
-/** 返回键 */
-@property (nonatomic, strong) UIButton *popButton;
+#import "CZSubFreeChargeModel.h"
+#import "CZFreeChargeDetailController.h"
+#import "CZNavigationView.h"
+
+// 群组2
+#import "CZFreeChargeCell6.h"
+#import "CZFreeChargeCell7.h"
+
+@interface CZSubFreeChargeController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) UITableView *tableView;
+/** <#注释#> */
+@property (nonatomic, strong) CZNavigationView *navigationView;
+/** 试用数据 */
+//@property (nonatomic, strong) NSMutableArray *freeChargeDatas;
+/** 页数 */
+@property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, strong) NSMutableArray *dataSource;
+/** 未展开数据 */
+@property (nonatomic, strong) NSMutableArray *upDataSource;
+/** 展开数据 */
+@property (nonatomic, strong) NSMutableArray *downDataSource;
+/** 下面的数据 */
+@property (nonatomic, strong) NSMutableArray *group2DataSource;
+/** 我的津贴 */
+@property (nonatomic, strong) NSString *allowance;
+/** 官方微信 */
+@property (nonatomic, strong) NSString *officialWeChat;
+
 @end
 
 @implementation CZSubFreeChargeController
-- (UIButton *)popButton
-{
-    if (_popButton == nil) {
-        _popButton = [UIButton buttonWithFrame:CGRectMake(14, (IsiPhoneX ? 54 : 30), 30, 30) backImage:@"nav-back" target:self action:@selector(popAction)];
-//        _popButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
-//        _popButton.layer.cornerRadius = 15;
-//        _popButton.layer.masksToBounds = YES;
-    }
-    return _popButton;
-}
-
-#pragma mark - 事件
-// 返回
-- (void)popAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.frame = CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0));
-    [self.view addSubview:self.popButton];
+    self.view.backgroundColor = UIColorFromRGB(0xEA4F17);
+    //导航条
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"新人0元专区" rightBtnTitle:nil rightBtnAction:nil];
+    navigationView.backgroundColor = [UIColor whiteColor];
+    self.navigationView = navigationView;
+    [self.view addSubview:navigationView];
+
+    // 表
+    [self.view addSubview:self.tableView];
+    //创建刷新控件
+    [self setupRefresh];
 }
+
+- (UITableView *)tableView
+{
+    if (_tableView == nil) {
+       CGRect frame = CGRectMake(0, CZGetY(self.navigationView), SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0) - CZGetY(self.navigationView));
+        self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+        self.tableView.backgroundColor = UIColorFromRGB(0xEA4F17);
+        self.tableView.estimatedRowHeight = 0;
+        self.tableView.estimatedSectionHeaderHeight = 0;
+        self.tableView.estimatedSectionFooterHeight = 0;
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+    }
+    return _tableView;
+}
+
+- (void)setupRefresh
+{
+    self.tableView.mj_header = [CZCustomGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
+    [self.tableView.mj_header beginRefreshing];
+//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadMoreTrailDataSorce)];
+}
+
+
 
 - (void)reloadNewTrailDataSorce
 {
@@ -53,10 +96,21 @@
     param[@"page"] = @( self.page);
     param[@"type"] = @(0);
 
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"response_1578045033088.json" withExtension:@""];
+
+    NSString *urlStr = [JPSERVER_URL stringByAppendingPathComponent:@"api/allowance/newIndex"];
+
     //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:url.absoluteString body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
-            self.freeChargeDatas = [NSMutableArray arrayWithArray: result[@"data"]];
+            self.allowance = result[@"data"][@"allowance"];
+            self.officialWeChat = result[@"data"][@"officialWeChat"];
+            [self upArrowData:result[@"data"][@"newAllowanceGoodsList"]];
+            [self downArrowData:result[@"data"][@"newAllowanceGoodsList"]];
+            [self group2Data:result[@"data"][@"allowanceGoodsList"]];
+
+            self.dataSource = self.upDataSource;
+
             [self.tableView reloadData];
             // 结束刷新
         }
@@ -69,61 +123,133 @@
     }];
 }
 
-- (void)reloadMoreTrailDataSorce
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // 结束尾部刷新
-    [self.tableView.mj_header endRefreshing];
-    self.page++;
+    return 2;
+}
 
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"page"] = @(self.page);
-    param[@"type"] = @(0);
-
-    //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
-            NSArray *arr = result[@"data"];
-            [self.freeChargeDatas addObjectsFromArray:arr];
-            [self.tableView reloadData];
-            if (arr.count == 0) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-            } else {
-                [self.tableView.mj_footer endRefreshing];
-            }
-        } else {
-            [self.tableView.mj_footer endRefreshing];
-        }
-
-    } failure:^(NSError *error) {
-        // 结束刷新
-        [self.tableView.mj_footer endRefreshing];
-    }];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return self.dataSource.count;
+    } else {
+        return self.group2DataSource.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        CZFreeChargeCell3 *cell = [CZFreeChargeCell3 cellWithTableView:tableView];
-        return cell;
+    if (indexPath.section == 0) {
+        CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
+        if ([model.typeNumber  isEqual: @(1)]) {
+            CZFreeChargeCell3 *cell = [CZFreeChargeCell3 cellWithTableView:tableView];
+            cell.model = model;
+            return cell;
+        } else if ([model.typeNumber  isEqual: @(100)] || [model.typeNumber  isEqual: @(101)]) {
+            CZFreeChargeCell5 *cell = [CZFreeChargeCell5 cellWithTableView:tableView];
+            cell.model = model;
+            return cell;
+        } else {
+            CZFreeChargeCell4 *cell = [CZFreeChargeCell4 cellWithTableView:tableView];
+            cell.model = model;
+            return cell;
+        }
     } else {
-        CZFreeChargeCell4 *cell = [CZFreeChargeCell4 cellWithTableView:tableView];
-        cell.model = self.freeChargeDatas[indexPath.row - 1];
-        return cell;
+        CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
+        if ([model.typeNumber  isEqual: @(1)]) {
+            CZFreeChargeCell6 *cell = [CZFreeChargeCell6 cellWithTableView:tableView];
+            cell.model = model;
+            return cell;
+        } else {
+            CZFreeChargeCell7 *cell = [CZFreeChargeCell7 cellWithTableView:tableView];
+            cell.model = model;
+            return cell;
+        }
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     if (indexPath.row == 0) {
+     if (indexPath.section == 0) {
+         CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
+         if ([model.typeNumber isEqual: @(100)]) {
+             self.dataSource = self.downDataSource;
+             NSIndexSet *set = [NSIndexSet indexSetWithIndex:0];
+
+            
+             [self.tableView reloadRowsAtIndexPaths:<#(nonnull NSArray<NSIndexPath *> *)#> withRowAnimation:<#(UITableViewRowAnimation)#>];
+
+             [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
+         } else if ([model.typeNumber isEqual: @(101)]) {
+
+             self.dataSource = self.upDataSource;
+             NSIndexSet *set = [NSIndexSet indexSetWithIndex:0];
+             [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
+         }
+
 
      } else {
          //push到详情
-         NSDictionary *model = self.freeChargeDatas[indexPath.row - 1];
-         CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
-         vc.Id = model[@"id"];
-         vc.isOldUser = NO;
-         [self.navigationController  pushViewController:vc animated:YES];
+//         NSDictionary *model = self.freeChargeDatas[indexPath.row - 1];
+//         CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
+//         vc.Id = model[@"id"];
+//         vc.isOldUser = NO;
+//         [self.navigationController  pushViewController:vc animated:YES];
      }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
+        return model.cellHeight;
+    } else {
+        CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
+        return model.cellHeight;
+
+    }
+
+}
+
+
+#pragma mark -- UI创建
+
+#pragma mark -- 数据处理
+- (void)upArrowData:(NSArray *)list
+{
+    self.upDataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
+    [self.upDataSource removeObjectsInRange:NSMakeRange(2, self.upDataSource.count - 2)];
+    CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
+    model1.officialWeChat = self.officialWeChat;
+    model1.typeNumber = @(1);
+    [self.upDataSource insertObject:model1 atIndex:0];
+    CZSubFreeChargeModel *model2 = [[CZSubFreeChargeModel alloc] init];
+    model2.typeNumber = @(100);
+    [self.upDataSource addObject:model2];
+}
+
+- (void)downArrowData:(NSArray *)list
+{
+    self.downDataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
+    CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
+    model1.officialWeChat = self.officialWeChat;
+    model1.typeNumber = @(1);
+    [self.downDataSource insertObject:model1 atIndex:0];
+    CZSubFreeChargeModel *model2 = [[CZSubFreeChargeModel alloc] init];
+    model2.typeNumber = @(101);
+    [self.downDataSource addObject:model2];
+}
+
+
+- (void)group2Data:(NSArray *)list
+{
+    self.group2DataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
+    CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
+    model1.allowance = self.allowance;
+    model1.typeNumber = @(1);
+    [self.group2DataSource insertObject:model1 atIndex:0];
+}
+
 
 @end

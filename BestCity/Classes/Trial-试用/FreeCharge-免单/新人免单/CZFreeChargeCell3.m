@@ -12,6 +12,23 @@
 @end
 
 @implementation CZFreeChargeCell3
+
+- (void)setModel:(CZSubFreeChargeModel *)model
+{
+    _model = model;
+    _model.cellHeight = 360;
+}
+
+/** 复制到剪切板 */
+- (IBAction)generalPaste:(id)sender
+{
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    posteboard.string = self.model.officialWeChat;
+    [CZProgressHUD showProgressHUDWithText:@"复制微信成功"];
+    [CZProgressHUD hideAfterDelay:1.5];
+}
+
+
 - (IBAction)freeDescAction:(id)sender {
 
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];

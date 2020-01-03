@@ -1,0 +1,102 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "newAllowanceGoodsList": [
+      {
+        "id": "1",
+        "goodsName": "1新洁丽简易包装软抽纸巾 100抽高品质面巾纸2层原木浆一箱包邮",
+        "otherGoodsId": "16900058608",
+        "count": 90,
+        "validDay": 10,
+        "img": "https://img.alicdn.com/bao/uploaded/i3/13416030965327878/T1B22GFhNXXXXXXXXX_!!0-item_pic.jpg",
+        "useAllowancePrice": 1,
+        "type": 1,
+        "status": 1,
+        "otherPrice": 2,
+        "actualPrice": 2,
+        "couponPrice": 0,
+        "buyPrice": 1
+      },
+      {
+        "id": "2",
+        "goodsName": "2新洁丽简易包装软抽纸巾 100抽高品质面巾纸2层原木浆一箱包邮",
+        "otherGoodsId": "16900058608",
+        "count": 60,
+        "validDay": 10,
+        "img": "https://img.alicdn.com/bao/uploaded/i3/13416030965327878/T1B22GFhNXXXXXXXXX_!!0-item_pic.jpg",
+        "useAllowancePrice": 1,
+        "type": 1,
+        "status": 1,
+        "otherPrice": 2,
+        "actualPrice": 2,
+        "couponPrice": 0,
+        "buyPrice": 1
+      },
+      {
+        "id": "5",
+        "goodsName": "3新洁丽简易包装软抽纸巾 100抽高品质面巾纸2层原木浆一箱包邮",
+        "otherGoodsId": "16900058608",
+        "count": 30,
+        "validDay": 10,
+        "img": "https://img.alicdn.com/bao/uploaded/i3/13416030965327878/T1B22GFhNXXXXXXXXX_!!0-item_pic.jpg",
+        "useAllowancePrice": 1,
+        "type": 1,
+        "status": 1,
+        "otherPrice": 2,
+        "actualPrice": 2,
+        "couponPrice": 0,
+        "buyPrice": 1
+      },
+      {
+        "id": "6",
+        "goodsName": "4新洁丽简易包装软抽纸巾 100抽高品质面巾纸2层原木浆一箱包邮",
+        "otherGoodsId": "16900058608",
+        "count": 89,
+        "validDay": 10,
+        "img": "https://img.alicdn.com/bao/uploaded/i3/13416030965327878/T1B22GFhNXXXXXXXXX_!!0-item_pic.jpg",
+        "useAllowancePrice": 1,
+        "type": 1,
+        "status": 1,
+        "otherPrice": 2,
+        "actualPrice": 2,
+        "couponPrice": 0,
+        "buyPrice": 1
+      }
+    ],
+    "allowanceGoodsList": [
+      {
+        "id": "3",
+        "goodsName": "1新洁丽简易包装软抽纸巾 100抽高品质面巾纸2层原木浆一箱包邮",
+        "otherGoodsId": "16900058608",
+        "count": 10,
+        "validDay": 10,
+        "img": "https://img.alicdn.com/bao/uploaded/i3/13416030965327878/T1B22GFhNXXXXXXXXX_!!0-item_pic.jpg",
+        "useAllowancePrice": 1,
+        "type": 2,
+        "status": 1,
+        "otherPrice": 2,
+        "actualPrice": 2,
+        "couponPrice": 0,
+        "buyPrice": 1
+      },
+      {
+        "id": "4",
+        "goodsName": "2新洁丽简易包装软抽纸巾 100抽高品质面巾纸2层原木浆一箱包邮",
+        "otherGoodsId": "16900058608",
+        "count": 10,
+        "validDay": 10,
+        "img": "https://img.alicdn.com/bao/uploaded/i3/13416030965327878/T1B22GFhNXXXXXXXXX_!!0-item_pic.jpg",
+        "useAllowancePrice": 1,
+        "type": 2,
+        "status": 1,
+        "otherPrice": 2,
+        "actualPrice": 2,
+        "couponPrice": 0,
+        "buyPrice": 1
+      }
+    ],
+    "allowance": 38.88,
+    "officialWeChat": "jpkele"
+  }
+}

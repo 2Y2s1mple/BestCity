@@ -60,7 +60,7 @@
     [[AlibcTradeSDK sharedInstance].tradeService
                                     openByUrl:urlStr
                                     identity:@"trade"
-                                    webView:webVc
+                                    webView:webVc.webView
                                     parentController:parentController
                                     showParams:showParam
                                     taoKeParams:nil

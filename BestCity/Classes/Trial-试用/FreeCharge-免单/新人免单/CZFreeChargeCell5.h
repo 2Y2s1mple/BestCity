@@ -1,9 +1,9 @@
 //
-//  CZFreeChargeCell4.h
+//  CZFreeChargeCell5.h
 //  BestCity
 //
-//  Created by JasonBourne on 2019/11/15.
-//  Copyright © 2019 JasonBourne. All rights reserved.
+//  Created by JasonBourne on 2020/1/2.
+//  Copyright © 2020 JasonBourne. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,11 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZFreeChargeCell4 : UITableViewCell
+@interface CZFreeChargeCell5 : UITableViewCell
 /** 数据 */
 @property (nonatomic, strong) CZSubFreeChargeModel *model;
-/** <#注释#> */
-//@property (nonatomic, strong) NSDictionary *model;
+
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end
 

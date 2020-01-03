@@ -8,6 +8,7 @@
 
 #import "CZFreeChargeCell4.h"
 #import "UIImageView+WebCache.h"
+#import "CZBusinessTool.h"
 
 @interface CZFreeChargeCell4 ()
 /** 大图片 */
@@ -18,24 +19,38 @@
 @property (nonatomic, weak) IBOutlet UILabel *priceLabel;
 /** 原价 */
 @property (nonatomic, weak) IBOutlet UILabel *oldPriceLabel;
-/** 一共多少件 */
-@property (nonatomic, weak) IBOutlet UILabel *totalLabel;
+/** 已抢多少件 */
+@property (nonatomic, weak) IBOutlet UILabel *qiangLabel;
 /** 即将开启 */
 @property (nonatomic, weak) IBOutlet UIButton *btn;
 /** 新人价 */
 @property (nonatomic, weak) IBOutlet UILabel *residueLabel;
+
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+
+
 @end
 
 @implementation CZFreeChargeCell4
-- (void)setModel:(NSDictionary *)model
-{
-    _model = [model changeAllNnmberValue];
-    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:_model[@"img"]]];
-    self.titleLabel.text = _model[@"name"];
 
-    NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%@", _model[@"otherPrice"]];
+
+
+- (void)setModel:(CZSubFreeChargeModel *)model
+{
+    _model = model;
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:_model.img]];
+    self.titleLabel.text = _model.goodsName;
+
+    NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%@", _model.otherPrice];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
-    self.totalLabel.text = [NSString stringWithFormat:@"已抢%ld件", (long)[_model[@"count"] integerValue]];
+
+    ;
+    [self.progressView setProgress:(model.count / 100.0) animated:YES];
+
+    self.qiangLabel.text = [NSString stringWithFormat:@"已抢%.0lf%%", (self.progressView.progress * 100)];
+  
+
+    _model.cellHeight = 140;
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
@@ -53,6 +68,24 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.priceLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 18];
     self.residueLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];
+    for (UIImageView * imageview in self.progressView.subviews) {
+        imageview.layer.cornerRadius = 3;
+        imageview.clipsToBounds = YES;
+    }
+}
+
+- (IBAction)bugBtnClicked:(UIButton *)sender {
+    NSLog(@"----");
+    [CZBusinessTool buyBtnActionWithId:@""];
+}
+
+
+- (void)setFrame:(CGRect)frame
+{
+    CGRect rect = frame;
+    rect.origin.x = 10;
+    rect.size.width -= 20;
+    [super setFrame:rect];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
