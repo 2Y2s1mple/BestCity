@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *typeNumber;
 
 /** 数据 */
+/** <#注释#> */
+@property (nonatomic, strong) NSString *Id;
 @property (nonatomic, strong) NSString *otherGoodsId;
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSString *goodsName;
@@ -30,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *officialWeChat;
 /** 津贴抵扣 */
 @property (nonatomic, strong) NSNumber *useAllowancePrice;
+/** 共省多少钱 */
+@property (nonatomic, strong) NSNumber *totalUsedAllowance;
 /** 优惠券 */
 @property (nonatomic, strong) NSNumber *couponPrice;
 /** 现价 */

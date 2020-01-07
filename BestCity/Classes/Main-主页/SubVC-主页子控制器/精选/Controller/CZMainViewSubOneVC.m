@@ -142,7 +142,7 @@
        [self.collectView.mj_footer endRefreshing];
        NSMutableDictionary *param = [NSMutableDictionary dictionary];
        //获取详情数据
-       [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+       [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
            if ([result[@"msg"] isEqualToString:@"success"]) {
                self.totalDataModel = [CZMainViewSubOneVCModel objectWithKeyValues:result[@"data"]];
                self.collectDataSurce.totalDataModel = self.totalDataModel;

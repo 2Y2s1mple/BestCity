@@ -17,6 +17,9 @@
 // 滚动广告位
 #import "CZScrollAD.h"
 
+// 不是新人的时候显示
+#import "CZFestivalCollectMillionsView.h"
+
 @interface CZFestivalCollectOneCell ()
 
 /** 跑马灯 */
@@ -26,6 +29,8 @@
 /** 新人 */
 @property (nonatomic, weak) IBOutlet UIView *peopleNewView;
 @property (nonatomic, weak) IBOutlet UILabel *peopleNewViewLabel; // 新人大标题
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *peopleNewViewHeight;
+
 @property (nonatomic, weak) IBOutlet UIImageView *image1; // 图片
 @property (nonatomic, weak) IBOutlet UIImageView *image2;
 @property (nonatomic, weak) IBOutlet UIImageView *image3;
@@ -38,6 +43,10 @@
 @property (nonatomic, weak) IBOutlet UILabel *label2;
 @property (nonatomic, weak) IBOutlet UILabel *label3;
 @property (nonatomic, weak) IBOutlet UILabel *label4;
+
+/** 旧人 */
+/** 百万补贴 */
+@property (nonatomic, strong) CZFestivalCollectMillionsView *millionsView;
 
 /** 每日爆款 */
 @property (nonatomic, weak) IBOutlet UIView *HotStyleBackView;
@@ -87,6 +96,11 @@
     self.peopleNewView.userInteractionEnabled = YES;
     [self.peopleNewView addGestureRecognizer:tap];
 
+    // 百万补贴
+    self.millionsView = [CZFestivalCollectMillionsView festivalCollectMillionsView];
+    self.millionsView.width = self.peopleNewView.width;
+    self.millionsView.height = 118;
+
 
     // 每日爆款
     UITapGestureRecognizer *HotStyleBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainHighBackViewAction)];
@@ -120,8 +134,10 @@
 
     // 新人0元购
     if (freeGoodsList.count == 0) {
-        self.peopleNewView.hidden = YES;
-        self.highBackViewTopMargin.constant = - 142;
+        self.peopleNewViewHeight.constant = 118;
+        [self.peopleNewView addSubview:self.millionsView];
+
+        self.highBackViewTopMargin.constant = - 22;
     } else {
         self.peopleNewView.hidden = NO;
         self.highBackViewTopMargin.constant = 12;

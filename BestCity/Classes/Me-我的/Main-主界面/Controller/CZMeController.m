@@ -24,6 +24,7 @@
 #import "CZMeIntelligentController.h"// 达人主页
 #import "CZMePublishController.h"
 #import "CZMyWalletController.h" // 我的钱包
+#import "CZSubFreePreferentialController.h" // 特惠购
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
@@ -36,13 +37,13 @@
 @property (weak, nonatomic) IBOutlet CZMutContentButton *loginBtn;
 /** 邀请码 */
 @property (nonatomic, weak) IBOutlet UILabel *invitationCodeLabel;
-/** 极币数 */
+/** 津贴余额 */
 @property (nonatomic, weak) IBOutlet UILabel *moneyLabel;
-/** 关注 : follow */
+/** 极币数 */
 @property (nonatomic, weak) IBOutlet UILabel *attentionLabel;
-/** 粉丝 */
+/** 收藏 */
 @property (nonatomic, weak) IBOutlet UILabel *fansLabel;
-/** 点赞: vote */
+/** 团队人数 */
 @property (nonatomic, weak) IBOutlet UILabel *voteLabel;
 /** 弹出点赞数 */
 @property (nonatomic, strong) UIView *backView;
@@ -83,8 +84,18 @@
     [CZProgressHUD hideAfterDelay:1.5];
 }
 
-#pragma mark - 收藏夹
+#pragma mark - 团队人数
 - (IBAction)voteBtnAction:(UIButton *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    CZMeController *vc = (CZMeController *)nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"CZMeTeamMembersController") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+// 收藏夹
+- (void)pushVoteBtnAction
+{
     WMPageController *hotVc = (WMPageController *)[[NSClassFromString(@"CZCollectController") alloc] init];
     [self.navigationController pushViewController:hotVc animated:YES];
 }
@@ -102,8 +113,9 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
-#pragma mark - 跳关注
-- (IBAction)AttentionAction:(UIButton *)sender {
+// 跳关注
+- (void)pushAttentionAction
+{
     NSString *text = @"我的--关注";
     NSDictionary *context = @{@"mine" : text};
     [MobClick event:@"ID5" attributes:context];
@@ -123,8 +135,14 @@
     [self.navigationController pushViewController:hotVc animated:YES];
 }
 
-#pragma mark - 跳粉丝
+#pragma mark - 跳收藏
 - (IBAction)fansAction:(UIButton *)sender {
+    [self pushVoteBtnAction];
+}
+
+// 粉丝
+- (void)pushFans
+{
     NSString *text = @"我的--粉丝";
     NSDictionary *context = @{@"mine" : text};
     [MobClick event:@"ID5" attributes:context];
@@ -154,9 +172,27 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark -- 跳转特惠购
+- (IBAction)gotoPreferentialController
+{
+    CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 极币数
+- (IBAction)AttentionAction:(UIButton *)sender {
+    [self pushCoinAction];
+}
+
 #pragma mark - 跳转到极币中心
 - (IBAction)coinAction:(UIButton *)sender {
-    NSString *text = @"我的--极币数";
+    [self pushCoinAction];
+}
+
+// 跳转到极币中心
+- (void)pushCoinAction
+{
+    NSString *text = @"我的--极币中心";
     NSDictionary *context = @{@"mine" : text};
     [MobClick event:@"ID5" attributes:context];
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
@@ -210,7 +246,7 @@
 
 #pragma mark - 设置属性样式
 - (void)setPropertyStyle {
-    // 极币数 // 关注
+    // 津贴余额 // 关注
     self.attentionLabel.font = self.voteLabel.font = self.fansLabel.font = self.moneyLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];;
 }
 
@@ -265,17 +301,17 @@
     // 邀请码
     self.invitationCodeLabel.text = [NSString stringWithFormat:@"邀请码：%@", JPUSERINFO[@"invitationCode"]];
     
+    // 津贴余额
+    self.moneyLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"allowance"]];
+    
     // 极币数
-    self.moneyLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"point"]];
-    
-    // 关注
-    self.attentionLabel.text = [NSString stringWithFormat:@"%@",  JPUSERINFO[@"followCount"]];
-    
-    // 粉丝
-    self.fansLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"fansCount"]];
+    self.attentionLabel.text = [NSString stringWithFormat:@"%@",  JPUSERINFO[@"point"]];
     
     // 收藏数
-    self.voteLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"collectCount"]];
+    self.fansLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"collectCount"]];
+    
+    // 团队人数
+    self.voteLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"teamCount"]];
 }
 
 #pragma mark - <UITableViewDataSource>

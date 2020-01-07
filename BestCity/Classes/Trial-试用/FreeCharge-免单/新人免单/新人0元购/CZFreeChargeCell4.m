@@ -76,7 +76,7 @@
 
 - (IBAction)bugBtnClicked:(UIButton *)sender {
     NSLog(@"----");
-    [CZBusinessTool buyBtnActionWithId:@""];
+    [CZBusinessTool buyBtnActionWithId:self.model.Id];
 }
 
 

@@ -89,9 +89,9 @@
     UINavigationController *naVc = tabbar.selectedViewController;
     UIViewController *toVC = naVc.topViewController;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"freeId"] = ID;
+    param[@"allowanceGoodsId"] = ID;
 
-    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/free/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/allowance/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:toVC];
         } else {

@@ -20,6 +20,7 @@
 #import "CZCategoryLineLayoutView.h"
 
 #import "CZMainProjectGeneralView.h" // 专题通用界面
+#import "CZFreePushTool.h""
 
 @interface CZMVSDefaultVCDelegate ()
 /** <#注释#> */
@@ -149,7 +150,14 @@
             // 添加轮播图
             [_headerView addSubview:imageView];
             [imageView setSelectedIndexBlock:^(NSInteger index) {
-
+                NSLog(@"-----%ld", index);
+                NSDictionary *dic = self.adList[index];
+                NSDictionary *param = @{
+                    @"targetType" : dic[@"type"],
+                    @"targetId" : dic[@"objectId"],
+                    @"targetTitle" : dic[@"name"],
+                };
+                [CZFreePushTool bannerPushToVC:param];
             }];
 
             NSMutableArray *imgs = [NSMutableArray array];

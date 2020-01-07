@@ -10,14 +10,13 @@
 #import "CZMeController.h"
 #import "CZSubFreeChargeController.h"
 #import "CZFreeAlertView4.h"
+#import "CZMeArrowCell2.h"
 
-@interface CZMeArrowCell ()
-/** <#注释#> */
-@property (nonatomic, weak) IBOutlet UIView *personalityNewView;
-@property (nonatomic, weak) IBOutlet UIView *inviteView;
+@interface CZMeArrowCell () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *personalityNewViewLeftMargin;
+@property (nonatomic, strong) UICollectionView *collectionView;
 
+@property (nonatomic, strong) NSMutableArray *collectionArr;
 
 @end
 
@@ -26,6 +25,52 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    layout.itemSize = CGSizeMake((SCR_WIDTH - 30) / 4.0, 82);
+
+
+    CGRect frame = CGRectMake(0, 35, SCR_WIDTH - 30, 205 - 35);
+    self.collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    [self.contentView addSubview:_collectionView];
+    self.collectionView.showsVerticalScrollIndicator = NO;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.scrollEnabled = NO;
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZMeArrowCell2 class]) bundle:nil] forCellWithReuseIdentifier:@"CZMeArrowCell2"];
+
+    
+
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.collectionArr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    CZMeArrowCell2 *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZMeArrowCell2" forIndexPath:indexPath];
+    cell.dataDic = self.collectionArr[indexPath.item];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *param = self.collectionArr[indexPath.item];
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *navVc = nav.topViewController;
+    if ([param[@"destinationVC"] isEqualToString:@"custom1"] || [param[@"destinationVC"] isEqualToString:@"custom2"]) {
+
+    } else {
+        UIViewController *vc = [[NSClassFromString(param[@"destinationVC"]) alloc] init];
+        [navVc.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -57,68 +102,36 @@
     return cell;
 }
 
+
+
+
 - (void)setDataSource:(NSDictionary *)dataSource
 {
     _dataSource = dataSource;
+    self.collectionArr = [NSMutableArray arrayWithArray:dataSource[@"titles"]];
+
    if ([JPUSERINFO[@"pid"] integerValue] != 0) {
-       self.inviteView.hidden = YES;
-   } else {
-       self.inviteView.hidden = NO;
+       for (NSDictionary *dic in dataSource[@"titles"]) {
+           if ([dic[@"title"] isEqualToString:@"邀请码"]) {
+               [self.collectionArr removeObject:dic];
+           }
+       }
    }
 
-   if ([JPUSERINFO[@"isNewUser"] integerValue] != 0) {
-        self.personalityNewView.hidden = YES;
-    } else {
-        self.personalityNewView.hidden = NO;
+   if ([JPUSERINFO[@"isNewUser"] integerValue] == 1) { // 0 老人
+       for (NSDictionary *dic in dataSource[@"titles"]) {
+           if ([dic[@"title"] isEqualToString:@"新人专区"]) {
+               [self.collectionArr removeObject:dic];
+           }
+       }
     }
 
-   //1.
-   if (self.personalityNewView.hidden == NO && self.inviteView.hidden == YES) {
-       self.personalityNewViewLeftMargin.constant = -((SCR_WIDTH - 30) / 4);
-   } else {
-       self.personalityNewViewLeftMargin.constant = 0;
-
-   }
-}
-
-// 团队
-- (IBAction)action1:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZMeTeamMembersController") alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
-}
-
-//我的发布
-- (IBAction)action2:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZMePublishController") alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
-}
-
-//消息通知
-- (IBAction)action3:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZSystemMessageController") alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
-}
-
-// 设置
-- (IBAction)action4:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZSettingController") alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
+    [self.collectionView reloadData];
 }
 
 //邀请码
-- (IBAction)action5:(UITapGestureRecognizer *)sender {
+- (void)action5
+{
     CZFreeAlertView4 *alertView = [CZFreeAlertView4 freeAlertView:^(NSString * _Nonnull text) {
         if (text.length == 0) {
             [CZProgressHUD showProgressHUDWithText:@"邀请码为空"];
@@ -148,13 +161,5 @@
     [alertView show];
 }
 
-//新人专区
-- (IBAction)action6:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
-    CZSubFreeChargeController *toVc = [[CZSubFreeChargeController alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
-}
 
 @end

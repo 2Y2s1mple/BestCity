@@ -115,11 +115,11 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="94" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="极币数">
+                                                    <state key="normal" title="津贴余额">
                                                         <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="coinAction:" destination="-1" eventType="touchUpInside" id="VWt-IF-i7I"/>
+                                                        <action selector="gotoPreferentialController" destination="-1" eventType="touchUpInside" id="eXN-1Y-WLx"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -147,7 +147,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="93.5" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="关注">
+                                                    <state key="normal" title="极币数">
                                                         <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -179,7 +179,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="94" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="粉丝">
+                                                    <state key="normal" title="收藏夹">
                                                         <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -211,7 +211,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="93.5" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <inset key="titleEdgeInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="收藏夹">
+                                                    <state key="normal" title="团队人数">
                                                         <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>

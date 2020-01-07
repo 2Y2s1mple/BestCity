@@ -16,6 +16,73 @@
 			<string>news</string>
 			<key>destinationVC</key>
 			<string>CZSystemMessageController</string>
+			<key>titles</key>
+			<array>
+				<dict>
+					<key>title</key>
+					<string>消息通知</string>
+					<key>icon</key>
+					<string>news</string>
+					<key>destinationVC</key>
+					<string>CZSystemMessageController</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>我的发布</string>
+					<key>icon</key>
+					<string>Order-2</string>
+					<key>destinationVC</key>
+					<string>CZMePublishController</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>福利兑换</string>
+					<key>icon</key>
+					<string>mission-1</string>
+					<key>destinationVC</key>
+					<string>custom1</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>设置</string>
+					<key>icon</key>
+					<string>address-1</string>
+					<key>destinationVC</key>
+					<string>CZSettingController</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>反馈中心</string>
+					<key>icon</key>
+					<string>mission-2</string>
+					<key>destinationVC</key>
+					<string>CZfeedbackController</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>邀请好友</string>
+					<key>icon</key>
+					<string>address-4</string>
+					<key>destinationVC</key>
+					<string>CZInvitationController</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>新人专区</string>
+					<key>icon</key>
+					<string>address-2</string>
+					<key>destinationVC</key>
+					<string>CZSubFreeChargeController</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>邀请码</string>
+					<key>icon</key>
+					<string>address-3</string>
+					<key>destinationVC</key>
+					<string>custom2</string>
+				</dict>
+			</array>
 		</dict>
 	</array>
 </array>

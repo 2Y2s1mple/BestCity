@@ -13,19 +13,19 @@
 #import "CZFreeChargeCell5.h"
 
 #import "CZSubFreeChargeModel.h"
-#import "CZFreeChargeDetailController.h"
 #import "CZNavigationView.h"
 
 // 群组2
 #import "CZFreeChargeCell6.h"
 #import "CZFreeChargeCell7.h"
 
+
+#import "CZSubFreePreferentialController.h"
+
 @interface CZSubFreeChargeController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 /** <#注释#> */
 @property (nonatomic, strong) CZNavigationView *navigationView;
-/** 试用数据 */
-//@property (nonatomic, strong) NSMutableArray *freeChargeDatas;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
 
@@ -37,7 +37,7 @@
 /** 下面的数据 */
 @property (nonatomic, strong) NSMutableArray *group2DataSource;
 /** 我的津贴 */
-@property (nonatomic, strong) NSString *allowance;
+@property (nonatomic, strong) NSNumber *allowance;
 /** 官方微信 */
 @property (nonatomic, strong) NSString *officialWeChat;
 
@@ -48,6 +48,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0xEA4F17);
+    [CZSubFreeChargeModel setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                 @"Id" : @"id"
+                 };
+    }];
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"新人0元专区" rightBtnTitle:nil rightBtnAction:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
@@ -97,11 +102,10 @@
     param[@"type"] = @(0);
 
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"response_1578045033088.json" withExtension:@""];
-
     NSString *urlStr = [JPSERVER_URL stringByAppendingPathComponent:@"api/allowance/newIndex"];
 
     //获取数据
-    [GXNetTool GetNetWithUrl:url.absoluteString body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:urlStr body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.allowance = result[@"data"][@"allowance"];
             self.officialWeChat = result[@"data"][@"officialWeChat"];
@@ -110,7 +114,6 @@
             [self group2Data:result[@"data"][@"allowanceGoodsList"]];
 
             self.dataSource = self.upDataSource;
-
             [self.tableView reloadData];
             // 结束刷新
         }
@@ -175,27 +178,14 @@
          CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
          if ([model.typeNumber isEqual: @(100)]) {
              self.dataSource = self.downDataSource;
-             NSIndexSet *set = [NSIndexSet indexSetWithIndex:0];
-
-            
-             [self.tableView reloadRowsAtIndexPaths:<#(nonnull NSArray<NSIndexPath *> *)#> withRowAnimation:<#(UITableViewRowAnimation)#>];
-
-             [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
+             [self.tableView reloadData];
          } else if ([model.typeNumber isEqual: @(101)]) {
-
              self.dataSource = self.upDataSource;
-             NSIndexSet *set = [NSIndexSet indexSetWithIndex:0];
-             [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationNone];
+             [self.tableView reloadData];
          }
-
-
      } else {
-         //push到详情
-//         NSDictionary *model = self.freeChargeDatas[indexPath.row - 1];
-//         CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
-//         vc.Id = model[@"id"];
-//         vc.isOldUser = NO;
-//         [self.navigationController  pushViewController:vc animated:YES];
+         CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
+         [self.navigationController pushViewController:vc animated:YES];
      }
 }
 
