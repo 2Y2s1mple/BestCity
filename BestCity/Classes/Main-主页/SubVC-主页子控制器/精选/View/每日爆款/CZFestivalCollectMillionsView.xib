@@ -193,9 +193,15 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="imageView1" destination="EOH-kX-9p7" id="Ss4-x6-dvh"/>
+                <outlet property="imageView2" destination="cjT-tv-p94" id="rtE-wQ-yWl"/>
+                <outlet property="imageView3" destination="doV-p5-JLS" id="TbP-PX-6bs"/>
                 <outlet property="priceLabel1" destination="x17-nA-Zxe" id="MEx-Ct-xeH"/>
                 <outlet property="priceLabel2" destination="c0J-vg-xrl" id="wJO-EV-Dui"/>
                 <outlet property="priceLabel3" destination="9bG-Sv-qJT" id="Eeb-0l-qoh"/>
+                <outlet property="subpriceLabel1" destination="En6-pV-ywu" id="zcg-Hd-0bN"/>
+                <outlet property="subpriceLabel2" destination="6rV-eE-Koy" id="hW5-nX-Gae"/>
+                <outlet property="subpriceLabel3" destination="4eE-bE-i6G" id="VKQ-Qv-hzO"/>
                 <outlet property="titleLabel" destination="BJj-yl-2rV" id="qL8-TP-MS1"/>
             </connections>
             <point key="canvasLocation" x="-17" y="-13"/>

@@ -53,7 +53,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我的订单" rightBtnTitle:nil rightBtnAction:nil ];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"兑换记录" rightBtnTitle:nil rightBtnAction:nil ];
     navigationView.delegate = self;
     [self.view addSubview:navigationView];
 

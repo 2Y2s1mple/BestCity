@@ -11,6 +11,7 @@
 
 // 跳转
 #import "CZSubFreeChargeController.h"
+#import "CZSubFreePreferentialController.h" // 特惠购
 
 #import "CZFreePushTool.h"
 
@@ -100,6 +101,9 @@
     self.millionsView = [CZFestivalCollectMillionsView festivalCollectMillionsView];
     self.millionsView.width = self.peopleNewView.width;
     self.millionsView.height = 118;
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushPreferential)];
+    self.millionsView.userInteractionEnabled = YES;
+    [self.millionsView addGestureRecognizer:tap1];
 
 
     // 每日爆款
@@ -125,26 +129,28 @@
     [self.adImageView addGestureRecognizer:adImageViewTap];
 }
 
-- (void)setFreeGoodsList:(NSArray *)freeGoodsList
+- (void)setAllowanceGoodsList:(NSArray *)allowanceGoodsList
 {
-    _freeGoodsList = freeGoodsList;
+    _allowanceGoodsList = allowanceGoodsList;
 
     // 跑马灯
     self.messageListView.dataSource = self.messageList;
 
-    // 新人0元购
-    if (freeGoodsList.count == 0) {
+    // 老人
+    if (self.newUser == NO) {
         self.peopleNewViewHeight.constant = 118;
+        self.millionsView.allowanceGoodsList = allowanceGoodsList;
         [self.peopleNewView addSubview:self.millionsView];
-
-        self.highBackViewTopMargin.constant = - 22;
-    } else {
-        self.peopleNewView.hidden = NO;
         self.highBackViewTopMargin.constant = 12;
-        for (int i = 0; i < freeGoodsList.count; i++) {
-            NSDictionary *imageDic = [freeGoodsList[i] changeAllValueWithString];
+    } else { // 新人0元购
+        [self.millionsView removeFromSuperview];
+        self.peopleNewView.hidden = NO;
+        self.peopleNewViewHeight.constant = 142;
+        self.highBackViewTopMargin.constant = 12;
+        for (int i = 0; i < allowanceGoodsList.count; i++) {
+            NSDictionary *imageDic = [allowanceGoodsList[i] changeAllValueWithString];
             NSString *image = imageDic[@"img"];
-            NSString *text = [@"¥" stringByAppendingString:imageDic[@"otherPrice"]];
+            NSString *text = [NSString stringWithFormat:@"¥%@", imageDic[@"buyPrice"]];
             NSAttributedString *attrText = [text addStrikethroughWithRange:NSMakeRange(0, text.length)];
 
             switch (i) {
@@ -242,6 +248,15 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
+
+// 跳特惠购
+- (void)pushPreferential
+{
+    CURRENTVC(currentVc);
+    CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
+    [currentVc.navigationController pushViewController:vc animated:YES];
+}
+
 // 跳到极品城购物补贴说明
 - (void)pushMessageListView
 {
@@ -269,6 +284,7 @@
 {
     [self pushVC:0];
 }
+
 // 爆款下
 - (void)bottomHighBackViewAction
 {

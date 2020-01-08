@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 宫格图 */
 @property (nonatomic, strong) NSArray *boxList;
 /** 新人专区 */
-@property (nonatomic, strong) NSArray *freeGoodsList;
+@property (nonatomic, strong) NSArray *allowanceGoodsList;
 /** 高反专区 */
 @property (nonatomic, strong) NSArray *activityList;
 /** 今日爆款 */
@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *hotGoodsList;
 /** 跑马灯 */
 @property (nonatomic, strong) NSArray *messageList;
+/** 是否是新人 */
+@property (nonatomic, assign) BOOL newUser;
 @end
 
 NS_ASSUME_NONNULL_END

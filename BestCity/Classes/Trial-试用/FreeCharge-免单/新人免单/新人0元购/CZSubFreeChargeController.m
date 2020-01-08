@@ -19,9 +19,6 @@
 #import "CZFreeChargeCell6.h"
 #import "CZFreeChargeCell7.h"
 
-
-#import "CZSubFreePreferentialController.h"
-
 @interface CZSubFreeChargeController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 /** <#注释#> */
@@ -77,7 +74,6 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
     }
     return _tableView;
 }
@@ -125,7 +121,6 @@
         [self.tableView.mj_header endRefreshing];
     }];
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -184,8 +179,7 @@
              [self.tableView reloadData];
          }
      } else {
-         CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
-         [self.navigationController pushViewController:vc animated:YES];
+         
      }
 }
 

@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFestivalCollectOneCell : UICollectionViewCell
 /** 新人专区 */
-@property (nonatomic, strong) NSArray *freeGoodsList;
+@property (nonatomic, strong) NSArray *allowanceGoodsList;
+/** 是否是新人 */
+@property (nonatomic, assign) BOOL newUser;
 /** 高反专区 */
 @property (nonatomic, strong) NSArray *activityList;
 /** 今日爆款 */

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFestivalCollectMillionsView : UIView
 + (instancetype)festivalCollectMillionsView;
+@property (nonatomic, strong) NSArray *allowanceGoodsList;
 @end
 
 NS_ASSUME_NONNULL_END

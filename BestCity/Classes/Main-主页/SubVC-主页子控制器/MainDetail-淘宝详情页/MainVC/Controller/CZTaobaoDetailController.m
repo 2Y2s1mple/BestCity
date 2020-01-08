@@ -600,7 +600,7 @@ static CGFloat const likeAndShareHeight = 49;
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *naVc = tabbar.selectedViewController;
     UIViewController *toVC = naVc.topViewController;
-    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    NSString *specialId = JPUSERINFO[@"relationId"];
     if (specialId.length == 0) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
         [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {

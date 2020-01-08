@@ -12,6 +12,8 @@
 #import "CZFreeAlertView4.h"
 #import "CZMeArrowCell2.h"
 
+#import "CZWelfareChangeController.h"
+
 @interface CZMeArrowCell () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -65,9 +67,14 @@
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     UIViewController *navVc = nav.topViewController;
-    if ([param[@"destinationVC"] isEqualToString:@"custom1"] || [param[@"destinationVC"] isEqualToString:@"custom2"]) {
+    if ([param[@"destinationVC"] isEqualToString:@"custom1"]) {
+        // 福利兑换
+        CZWelfareChangeController *vc = [[CZWelfareChangeController alloc] init];
+        [navVc.navigationController pushViewController:vc animated:YES];
 
-    } else {
+    } else if ([param[@"destinationVC"] isEqualToString:@"custom2"]) {
+        [self action5];
+    }  else {
         UIViewController *vc = [[NSClassFromString(param[@"destinationVC"]) alloc] init];
         [navVc.navigationController pushViewController:vc animated:YES];
     }
@@ -118,7 +125,7 @@
        }
    }
 
-   if ([JPUSERINFO[@"isNewUser"] integerValue] == 1) { // 0 老人
+   if ([JPUSERINFO[@"isNewUser"] integerValue] != 0) { // 0 新用户
        for (NSDictionary *dic in dataSource[@"titles"]) {
            if ([dic[@"title"] isEqualToString:@"新人专区"]) {
                [self.collectionArr removeObject:dic];

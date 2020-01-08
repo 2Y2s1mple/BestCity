@@ -130,7 +130,7 @@
 
 
 
-    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    NSString *specialId = JPUSERINFO[@"relationId"];
 
     if (specialId.length == 0) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];

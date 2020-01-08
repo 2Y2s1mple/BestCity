@@ -83,7 +83,7 @@
     if (_tableView == nil) {
        CGRect frame = CGRectMake(0, CZGetY(self.navigationView), SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0) - CZGetY(self.navigationView));
         self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-        self.tableView.backgroundColor = UIColorFromRGB(0xEA4F17);
+        self.tableView.backgroundColor = UIColorFromRGB(0xF5F5F5);
         self.tableView.estimatedRowHeight = 0;
         self.tableView.estimatedSectionHeaderHeight = 0;
         self.tableView.estimatedSectionFooterHeight = 0;

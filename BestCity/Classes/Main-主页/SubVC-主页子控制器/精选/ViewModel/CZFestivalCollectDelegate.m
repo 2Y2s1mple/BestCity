@@ -75,7 +75,8 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         cell.hotActivity = self.totalDataModel.hotActivity;
         cell.activityList = self.totalDataModel.activityList;
         cell.messageList = self.totalDataModel.messageList;
-        cell.freeGoodsList = self.totalDataModel.freeGoodsList;
+        cell.newUser = self.totalDataModel.newUser;
+        cell.allowanceGoodsList = self.totalDataModel.allowanceGoodsList;
 
         return cell;
     } else if (indexPath.section == 1) { // 热销榜单
@@ -136,11 +137,11 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) { // 新人0元购
-        if (self.totalDataModel.freeGoodsList.count == 0 && self.totalDataModel.ad2 == nil) {
-            return CGSizeMake(SCR_WIDTH, 573 - 12 - 142 - 138);
+        if (self.totalDataModel.newUser == NO && self.totalDataModel.ad2 == nil) {
+            return CGSizeMake(SCR_WIDTH, 573 - 12 - 142 - 138 + 118);
         }
-        if (self.totalDataModel.freeGoodsList.count == 0) { // 不是新人
-            return CGSizeMake(SCR_WIDTH, 573 - 12 - 142);
+        if (self.totalDataModel.newUser == NO) { // 不是新人
+            return CGSizeMake(SCR_WIDTH, 573 - 12 - 142 + 118);
         }
         if (self.totalDataModel.ad2 == nil) {
             return CGSizeMake(SCR_WIDTH, 573 - 138);

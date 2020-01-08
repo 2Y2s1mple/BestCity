@@ -66,16 +66,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfa-V8-1zn">
-                        <rect key="frame" x="135" y="79.5" width="64" height="16"/>
+                        <rect key="frame" x="135" y="79.5" width="65" height="16"/>
                         <attributedString key="attributedText">
-                            <fragment content="淘宝价">
-                                <attributes>
-                                    <color key="NSColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <font key="NSFont" size="13" name=".PingFangSC-Regular"/>
-                                    <integer key="NSStrikethrough" value="1"/>
-                                </attributes>
-                            </fragment>
-                            <fragment content="¥66">
+                            <fragment content="淘宝价¥66">
                                 <attributes>
                                     <color key="NSColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" metaFont="system"/>

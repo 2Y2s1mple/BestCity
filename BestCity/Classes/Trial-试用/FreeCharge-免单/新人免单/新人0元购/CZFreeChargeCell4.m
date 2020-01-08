@@ -33,8 +33,6 @@
 
 @implementation CZFreeChargeCell4
 
-
-
 - (void)setModel:(CZSubFreeChargeModel *)model
 {
     _model = model;

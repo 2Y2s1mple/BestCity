@@ -15,6 +15,8 @@
 #import "CZUpdataManger.h"
 #import "CZGuideController.h"
 
+#import "CZAlertView1Controller.h"
+
 
 BOOL oldUser;
 @implementation CZGuideTool
@@ -34,13 +36,13 @@ BOOL oldUser;
         [CZUpdataManger ShowUpdataViewWithNetworkService];
     } else {
         oldUser = NO;
-//        // 新人引导
-//        CZNoviceGuidanceView *guide = [[CZNoviceGuidanceView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//        guide.backgroundColor = [UIColor clearColor];
-//        [[UIApplication sharedApplication].keyWindow addSubview: guide];
         [CZSaveTool setObject:curVersion forKey:CZVERSION];
-        // 显示版本更新
-        [CZUpdataManger ShowUpdataViewWithNetworkService];
+
+        // 显示获得新人红包
+        CURRENTVC(currentVc);
+        CZAlertView1Controller *alert1 = [[CZAlertView1Controller alloc] init];
+        alert1.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [currentVc presentViewController:alert1 animated:YES completion:nil];
     }
 }
 

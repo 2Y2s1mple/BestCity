@@ -493,7 +493,7 @@ static CGFloat const likeAndShareHeight = 55;
     UINavigationController *naVc = tabbar.selectedViewController;
     UIViewController *toVC = naVc.topViewController;
 
-    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    NSString *specialId = JPUSERINFO[@"relationId"];
 
     if (specialId.length == 0) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
@@ -566,7 +566,7 @@ static CGFloat const likeAndShareHeight = 55;
 
 
 
-    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    NSString *specialId = JPUSERINFO[@"relationId"];
 
     if (specialId.length == 0) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
