@@ -40,8 +40,8 @@
 {
     if (_centerTitle == nil) {
         _centerTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH - 100, 20)];
-        _centerTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
-        _centerTitle.textColor = [UIColor blackColor];
+        _centerTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 17];
+        _centerTitle.textColor = [UIColor colorWithRed:32/255.0 green:32/255.0 blue:32/255.0 alpha:1.0];
         _centerTitle.center = CGPointMake(self.width / 2, self.popBtn.center.y);
         _centerTitle.textAlignment = NSTextAlignmentCenter;
     }
@@ -94,7 +94,6 @@
     [super layoutSubviews];
     NSLog(@"%s", __func__);
 }
-
 
 - (void)didClickedRightBtn
 {

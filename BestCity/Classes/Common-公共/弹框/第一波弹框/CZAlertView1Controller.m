@@ -26,6 +26,15 @@
 @end
 
 @implementation CZAlertView1Controller
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

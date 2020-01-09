@@ -19,6 +19,8 @@
 #import "CZFreeChargeCell6.h"
 #import "CZFreeChargeCell7.h"
 
+#import "CZAlertView2Controller.h"
+
 @interface CZSubFreeChargeController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 /** <#注释#> */
@@ -37,6 +39,9 @@
 @property (nonatomic, strong) NSNumber *allowance;
 /** 官方微信 */
 @property (nonatomic, strong) NSString *officialWeChat;
+
+/** 给弹框的数据 */
+@property (nonatomic, strong) NSDictionary *alertViewParam;
 
 @end
 
@@ -60,6 +65,15 @@
     [self.view addSubview:self.tableView];
     //创建刷新控件
     [self setupRefresh];
+
+    // 第一次离开新人0元购
+    if (![CZSaveTool leaveOnceNew0yuan]) {
+        UIButton *btn = [[UIButton alloc] init];
+        btn.size = CGSizeMake(100, 100);
+        btn.backgroundColor = [RANDOMCOLOR colorWithAlphaComponent:0.01];
+        [self.view addSubview:btn];
+        [btn addTarget:self action:@selector(pushALert2ViewController:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 - (UITableView *)tableView
@@ -103,6 +117,7 @@
     //获取数据
     [GXNetTool GetNetWithUrl:urlStr body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            self.alertViewParam = result[@"data"];
             self.allowance = result[@"data"][@"allowance"];
             self.officialWeChat = result[@"data"][@"officialWeChat"];
             [self upArrowData:result[@"data"][@"newAllowanceGoodsList"]];
@@ -235,5 +250,16 @@
     [self.group2DataSource insertObject:model1 atIndex:0];
 }
 
+#pragma mark -- 事件
+- (void)pushALert2ViewController:(UIButton *)sender
+{
+    [sender removeFromSuperview];
+    CZAlertView2Controller *vc = [[CZAlertView2Controller alloc] init];
+    vc.param = self.alertViewParam;
+    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:vc animated:YES completion:^{
+    }];
+}
 
 @end

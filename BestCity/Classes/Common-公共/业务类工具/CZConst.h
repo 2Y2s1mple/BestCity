@@ -24,3 +24,6 @@ UIKIT_EXTERN NSMutableArray *recordSearchTextArray;
 /** 根路径 */
 UIKIT_EXTERN NSString *JPSERVER_URL;
 
+/** 存弹框的数组 */
+UIKIT_EXTERN NSMutableArray *alertList_;
+

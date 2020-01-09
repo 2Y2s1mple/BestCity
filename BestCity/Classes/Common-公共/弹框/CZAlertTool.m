@@ -10,6 +10,7 @@
 #import "CZGuessTypeTowView.h"
 #import "CZGuessTypeOneView.h"
 #import "GXNetTool.h"
+#import "CZAlertView4Controller.h"
 
 @implementation CZAlertTool
 
@@ -19,38 +20,41 @@
     [[UIApplication sharedApplication].keyWindow addSubview:view1];
 }
 
-
 + (void)createGuessTypeTwo
 {
     CZGuessTypeTowView *view1 = [CZGuessTypeTowView createView];
     [[UIApplication sharedApplication].keyWindow addSubview:view1];
 }
 
-
-
 + (void)getDataSorce
 {
-
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"tkl"] = posteboard.string;
+    param[@"keyword"] = posteboard.string;
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsByTkl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getInfoByKeyword"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            if ([result[@"data"] isKindOfClass:[NSDictionary class]]){
-                CZGuessTypeTowView *view1 = [CZGuessTypeTowView createView];
-                view1.dataDic = result[@"data"];
-                [[UIApplication sharedApplication].keyWindow addSubview:view1];
+            if ([result[@"data"][@"type"] isEqual: @(1)]) {
+                if ([result[@"data"] isKindOfClass:[NSDictionary class]]){
+                    CZGuessTypeTowView *view1 = [CZGuessTypeTowView createView];
+                    view1.dataDic = result[@"data"][@"data"];
+                    [[UIApplication sharedApplication].keyWindow addSubview:view1];
+                } else {
+                    CZGuessTypeOneView *view1 = [CZGuessTypeOneView createView];
+                    view1.text = param[@"keyword"];
+                    [[UIApplication sharedApplication].keyWindow addSubview:view1];
+                }
             } else {
-                CZGuessTypeOneView *view1 = [CZGuessTypeOneView createView];
-                view1.text = param[@"tkl"];
-                [[UIApplication sharedApplication].keyWindow addSubview:view1];
+                CZAlertView4Controller *vc = [[CZAlertView4Controller alloc] init];
+                vc.param = result;
+                vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                CURRENTVC(currentVc);
+                [currentVc presentViewController:vc animated:YES completion:nil];
             }
         }
     } failure:^(NSError *error) {// 结束刷新
     }];
 }
-
 
 + (void)alertRule
 {
@@ -63,8 +67,9 @@
         if ([recordSearchTextArray containsObject:string]) {
             return;
         } else {
-            [recordSearchTextArray addObject:string];
             [CZAlertTool getDataSorce];
+            [recordSearchTextArray addObject:string];
+            posteboard.string = nil;
         }
     }
 }

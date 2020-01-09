@@ -12,6 +12,7 @@
 #import "CZUpdataView.h"
 #import "CZAlertTool.h"
 UIKIT_EXTERN BOOL oldUser;
+
 @implementation CZNotificationAlertView
 /** 退出 */
 - (IBAction)delete
@@ -94,27 +95,82 @@ UIKIT_EXTERN BOOL oldUser;
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getPopInfo"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSDictionary *param = result[@"data"][@"data"];
-            NSLog(@"%@----%@", param, [param class]);
-            if ([param isKindOfClass:[NSNull class]])
-            {
+            NSArray *list = result[@"data"];
+            if (list.count == 0) {
                 [CZAlertTool alertRule];
                 return;
             }
 
-            if ([result[@"data"][@"type"] isEqualToNumber:@1]) {
-                CZUpdataView *backView = [CZUpdataView buyingView];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-                backView.paramDic = result[@"data"][@"data"];
-            } else {
-                CZUpdataView *backView = [CZUpdataView goodsView];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-                backView.goodsViewParamDic = result[@"data"][@"data"];
+
+            // 判断数组中有几个
+            if (list.count > 1) { // 两个以上
+                alertList_ = [NSMutableArray array];
+                for (int i = 0; i < list.count; i++) {
+                    CZUpdataView *backView = [CZUpdataView buyingView];
+                    backView.frame = [UIScreen mainScreen].bounds;
+                    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                    backView.paramDic = list[i][@"data"];
+                    [alertList_ addObject:backView];
+                }
+
+                [[UIApplication sharedApplication].keyWindow addSubview:alertList_[0]];
+
+            } else { // 一个
+                if ([list[0][@"type"] integerValue] == 1 || [list[0][@"type"] integerValue] == 0) { // 免单活动 一般活动
+                    CZUpdataView *backView = [CZUpdataView buyingView];
+                    backView.frame = [UIScreen mainScreen].bounds;
+                    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                    [[UIApplication sharedApplication].keyWindow addSubview: backView];
+                    backView.paramDic = list[0][@"data"];
+                } else { // 完成首单
+
+                }
             }
+
+
+
+
+//            for (int i = 0; i < list.count; i++) {
+//                switch ([list[i][@"type"] integerValue]) {
+//                    case 0:
+//                    {
+//                        CZUpdataView *backView = [CZUpdataView buyingView];
+//                        backView.frame = [UIScreen mainScreen].bounds;
+//                        backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+//                        [[UIApplication sharedApplication].keyWindow addSubview: backView];
+//                        backView.paramDic = list[i][@"data"];
+//                        break;
+//                    }
+//                    case 1:
+//                    {
+//                        CZUpdataView *backView = [CZUpdataView buyingView];
+//                        backView.frame = [UIScreen mainScreen].bounds;
+//                        backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+//                        [[UIApplication sharedApplication].keyWindow addSubview: backView];
+//                        backView.paramDic = list[i][@"data"];
+//                        break;
+//                    }
+//
+//                    default:
+//                        break;
+//                }
+//
+//            }
+
+
+//            if ([result[@"data"][@"type"] isEqualToNumber:@1]) {
+//                CZUpdataView *backView = [CZUpdataView buyingView];
+//                backView.frame = [UIScreen mainScreen].bounds;
+//                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+//                [[UIApplication sharedApplication].keyWindow addSubview: backView];
+//                backView.paramDic = result[@"data"][@"data"];
+//            } else {
+//                CZUpdataView *backView = [CZUpdataView goodsView];
+//                backView.frame = [UIScreen mainScreen].bounds;
+//                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+//                [[UIApplication sharedApplication].keyWindow addSubview: backView];
+//                backView.goodsViewParamDic = result[@"data"][@"data"];
+//            }
         }
     } failure:^(NSError *error) {
 

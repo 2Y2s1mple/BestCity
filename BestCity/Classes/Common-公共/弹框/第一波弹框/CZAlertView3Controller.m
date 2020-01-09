@@ -7,26 +7,71 @@
 //
 
 #import "CZAlertView3Controller.h"
+#import "UIImageView+WebCache.h"
 
 @interface CZAlertView3Controller ()
+@property (nonatomic, weak) IBOutlet UIImageView *imageView1;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel1;
 
+@property (nonatomic, weak) IBOutlet UIImageView *imageView2;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel2;
+
+@property (nonatomic, weak) IBOutlet UIImageView *imageView3;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel3;
 @end
 
 @implementation CZAlertView3Controller
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    NSArray *list = self.param[@"allowanceGoodsList"];
+
+    for (int i = 0; i < list.count; i++) {
+
+        switch (i) {
+            case 0:
+            {
+                NSDictionary *dic = list[i];
+                [self.imageView1 sd_setImageWithURL:[NSURL URLWithString:dic[@"img"]]];
+                self.titleLabel1.text = [NSString stringWithFormat:@"减 ¥%@", dic[@"actualPrice"]];
+                break;
+            }
+            case 1:
+            {
+                NSDictionary *dic = list[i];
+                [self.imageView2 sd_setImageWithURL:[NSURL URLWithString:dic[@"img"]]];
+                self.titleLabel2.text = [NSString stringWithFormat:@"减 ¥%@", dic[@"actualPrice"]];
+                break;
+            }
+            case 2:
+            {
+                NSDictionary *dic = list[i];
+                [self.imageView3 sd_setImageWithURL:[NSURL URLWithString:dic[@"img"]]];
+                self.titleLabel3.text = [NSString stringWithFormat:@"减 ¥%@", dic[@"actualPrice"]];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)dismiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
+
 
 @end

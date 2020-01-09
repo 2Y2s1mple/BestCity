@@ -117,11 +117,14 @@ static NSString *ID = @"PhotoCell";
             type = UMSocialPlatformType_Sina;//新浪微博
             break;
         case 3:
-            type = UMSocialPlatformType_QQ;//QQ好友
-            break;
-        case 4:
-            type = UMSocialPlatformType_Qzone;//QQ空间
-            break;
+        {
+            NSLog(@"----------");
+            UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+            posteboard.string = self.shareImageDic[@"linkUrlContent"];
+            [CZProgressHUD showProgressHUDWithText:@"复制链接成功"];
+            [CZProgressHUD hideAfterDelay:1.5];
+            return;
+        }
         default:
             
             break;

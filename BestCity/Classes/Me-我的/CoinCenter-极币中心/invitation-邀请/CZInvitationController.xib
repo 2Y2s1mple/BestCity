@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -83,40 +81,53 @@
                     <rect key="frame" x="0.0" y="592" width="375" height="75"/>
                     <subviews>
                         <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qS2-3O-i9g">
-                            <rect key="frame" x="167.5" y="12.5" width="40" height="40"/>
+                            <rect key="frame" x="117.5" y="12.5" width="40" height="40"/>
                             <state key="normal" backgroundImage="pyq"/>
                             <connections>
                                 <action selector="action:" destination="-1" eventType="touchUpInside" id="wMJ-a7-MWh"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lkj-Ce-RIq">
-                            <rect key="frame" x="270.5" y="12.5" width="40" height="40"/>
+                            <rect key="frame" x="217.5" y="12.5" width="40" height="40"/>
                             <state key="normal" backgroundImage="weibo"/>
                             <connections>
                                 <action selector="action:" destination="-1" eventType="touchUpInside" id="pd8-tR-uCv"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDT-a6-q2c">
-                            <rect key="frame" x="64.5" y="12.5" width="40" height="40"/>
+                            <rect key="frame" x="14.5" y="12.5" width="40" height="40"/>
                             <state key="normal" backgroundImage="wechat"/>
                             <connections>
                                 <action selector="action:" destination="-1" eventType="touchUpInside" id="Lcg-aG-zsu"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txn-ln-2Vt">
-                            <rect key="frame" x="72" y="54.5" width="25" height="15"/>
+                            <rect key="frame" x="22" y="54.5" width="25" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="朋友圈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkf-Wb-afB">
-                            <rect key="frame" x="169" y="54.5" width="37" height="15"/>
+                            <rect key="frame" x="119" y="54.5" width="37" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djx-VP-Nf5">
-                            <rect key="frame" x="278" y="54.5" width="25" height="15"/>
+                            <rect key="frame" x="225" y="54.5" width="25" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJU-Sh-fn1">
+                            <rect key="frame" x="320.5" y="12.5" width="40" height="40"/>
+                            <state key="normal" backgroundImage="wechat-1"/>
+                            <connections>
+                                <action selector="action:" destination="-1" eventType="touchUpInside" id="5p1-QD-fz2"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="链接" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9g-MN-eln">
+                            <rect key="frame" x="328" y="54.5" width="25" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -126,17 +137,21 @@
                     <constraints>
                         <constraint firstItem="qS2-3O-i9g" firstAttribute="centerY" secondItem="6eX-IA-yfY" secondAttribute="centerY" constant="-5" id="3Hg-n4-EAb"/>
                         <constraint firstItem="Lkj-Ce-RIq" firstAttribute="centerY" secondItem="qS2-3O-i9g" secondAttribute="centerY" id="3x1-jm-1Nb"/>
+                        <constraint firstItem="rJU-Sh-fn1" firstAttribute="leading" secondItem="Lkj-Ce-RIq" secondAttribute="trailing" constant="63" id="8jC-vD-soW"/>
                         <constraint firstItem="zkf-Wb-afB" firstAttribute="centerX" secondItem="qS2-3O-i9g" secondAttribute="centerX" id="8yA-cF-huS"/>
+                        <constraint firstItem="rJU-Sh-fn1" firstAttribute="centerY" secondItem="Lkj-Ce-RIq" secondAttribute="centerY" id="AAG-2G-f2N"/>
                         <constraint firstAttribute="height" constant="75" id="GEI-oP-oSn"/>
                         <constraint firstItem="Djx-VP-Nf5" firstAttribute="top" secondItem="Lkj-Ce-RIq" secondAttribute="bottom" constant="2" id="JB6-ot-9CO"/>
                         <constraint firstItem="zkf-Wb-afB" firstAttribute="top" secondItem="qS2-3O-i9g" secondAttribute="bottom" constant="2" id="PUa-Dx-ddh"/>
                         <constraint firstItem="txn-ln-2Vt" firstAttribute="centerX" secondItem="xDT-a6-q2c" secondAttribute="centerX" id="S5z-2T-OFT"/>
                         <constraint firstItem="xDT-a6-q2c" firstAttribute="centerY" secondItem="qS2-3O-i9g" secondAttribute="centerY" id="SYB-KC-Klv"/>
+                        <constraint firstItem="U9g-MN-eln" firstAttribute="centerX" secondItem="rJU-Sh-fn1" secondAttribute="centerX" id="c4Y-AB-pBL"/>
+                        <constraint firstItem="Lkj-Ce-RIq" firstAttribute="centerX" secondItem="6eX-IA-yfY" secondAttribute="centerX" constant="50" id="eYv-QJ-aXR"/>
                         <constraint firstItem="Djx-VP-Nf5" firstAttribute="centerX" secondItem="Lkj-Ce-RIq" secondAttribute="centerX" id="jbd-G7-ZKP"/>
+                        <constraint firstItem="U9g-MN-eln" firstAttribute="top" secondItem="rJU-Sh-fn1" secondAttribute="bottom" constant="2" id="rYh-Zx-MTo"/>
                         <constraint firstItem="txn-ln-2Vt" firstAttribute="top" secondItem="xDT-a6-q2c" secondAttribute="bottom" constant="2" id="rdV-BC-o9A"/>
-                        <constraint firstItem="Lkj-Ce-RIq" firstAttribute="leading" secondItem="qS2-3O-i9g" secondAttribute="trailing" constant="63" id="uay-Q1-TNO"/>
                         <constraint firstItem="qS2-3O-i9g" firstAttribute="leading" secondItem="xDT-a6-q2c" secondAttribute="trailing" constant="63" id="uv6-33-kpv"/>
-                        <constraint firstItem="qS2-3O-i9g" firstAttribute="centerX" secondItem="6eX-IA-yfY" secondAttribute="centerX" id="vmX-83-VY2"/>
+                        <constraint firstItem="qS2-3O-i9g" firstAttribute="centerX" secondItem="6eX-IA-yfY" secondAttribute="centerX" constant="-50" id="vmX-83-VY2"/>
                     </constraints>
                 </view>
             </subviews>
@@ -156,6 +171,7 @@
     <resources>
         <image name="pyq" width="40" height="40"/>
         <image name="wechat" width="40" height="40"/>
+        <image name="wechat-1" width="40" height="40"/>
         <image name="weibo" width="40" height="40"/>
     </resources>
 </document>

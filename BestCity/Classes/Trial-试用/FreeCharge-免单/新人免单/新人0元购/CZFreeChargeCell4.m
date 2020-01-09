@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "CZBusinessTool.h"
 
+#import "CZSubFreePreferentialController.h"
+
 @interface CZFreeChargeCell4 ()
 /** 大图片 */
 @property (nonatomic, weak) IBOutlet UIImageView *bigImageView;

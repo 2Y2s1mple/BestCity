@@ -11,4 +11,9 @@
 @interface CZSaveTool : NSObject
 + (id)objectForKey:(NSString *)defaultName;
 + (void)setObject:(id)value forKey:(NSString *)defaultName;
+
+// 判断是有是第一次离开新人0元购
++ (BOOL)leaveOnceNew0yuan;
+
+
 @end

@@ -18,6 +18,7 @@
 #import "CZSubFreeChargeController.h" // 新品免单
 
 
+
 @interface CZUpdataView ()
 /** 111111111 */
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
@@ -97,6 +98,9 @@
 - (IBAction)deleteView
 {
     [self removeFromSuperview];
+    if ([alertList_ containsObject:self]) {
+        [alertList_ removeObjectAtIndex:0];
+    }
     [self.timer setFireDate:[NSDate distantFuture]];
 }
 
@@ -173,6 +177,9 @@
 - (IBAction)buyingClicked:(id)sender {
     NSLog(@"0000000000000");
     [self pushToVC:self.paramDic];
+    if ([alertList_ containsObject:self]) {
+        [alertList_ removeObjectAtIndex:0];
+    }
     [self removeFromSuperview];
 }
 

@@ -98,6 +98,11 @@
         // 新用户指导
         [CZGuideTool newpPeopleGuide];
     });
+
+    // 全局弹框在全局, 显示一个删除一个
+    if (alertList_.count > 0) {
+        [[UIApplication sharedApplication].keyWindow addSubview:alertList_[0]];
+    }
 }
 
 #pragma mark - UI创建

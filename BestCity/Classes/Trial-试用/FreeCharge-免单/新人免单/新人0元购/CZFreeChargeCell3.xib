@@ -35,7 +35,7 @@
                                             <constraint firstAttribute="height" constant="26" id="3Ee-xc-wzI"/>
                                             <constraint firstAttribute="width" constant="73" id="ktn-Ow-tLq"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-130" maxY="0.0"/>
                                         <state key="normal" title="复制微信">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

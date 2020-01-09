@@ -70,4 +70,15 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
+ - (IBAction)pushPointsController
+{
+    // 跳商城
+    UIViewController *toVc = [[NSClassFromString(@"CZMyPointsController") alloc] init];
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    [currentVc.navigationController pushViewController:toVc animated:YES];
+}
+
+
 @end

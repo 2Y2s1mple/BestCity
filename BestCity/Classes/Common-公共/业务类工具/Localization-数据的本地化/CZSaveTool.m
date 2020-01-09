@@ -18,4 +18,17 @@
 {
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:defaultName];
 }
+
+
+// 判断是不是第一次离开新人0元购
++ (BOOL)leaveOnceNew0yuan
+{
+    if ([[CZSaveTool objectForKey:@"leaveOnceNew0yuan"] isEqualToString:@"0"]) {
+        return NO;
+    } else {
+        [CZSaveTool setObject:@"0" forKey:@"leaveOnceNew0yuan"];
+        return YES;
+    }
+}
+
 @end

@@ -62,8 +62,8 @@
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *naVc = tabbar.selectedViewController;
     UIViewController *toVC = naVc.topViewController;
-    NSString *specialId = JPUSERINFO[@"relationId"];
-    if (specialId.length == 0) {
+    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    if ([specialId isEqualToString:@"(null)"]) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
         [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
             NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];

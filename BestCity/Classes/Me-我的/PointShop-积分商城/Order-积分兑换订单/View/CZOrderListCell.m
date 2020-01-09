@@ -67,13 +67,27 @@
 - (void)setModel:(CZOrderModel *)model
 {
     _model = model;
-    
-    
-    if ([model.goodsType  isEqual: @(2)]) {
-        self.titleLabel.text = @"极币商城";
-    } else {
-        self.titleLabel.text = @"免费试用商品";
+
+    switch ([model.goodsType integerValue]) {
+        case 1:
+            self.titleLabel.text = @"免费试用";
+            break;
+        case 2:
+            self.titleLabel.text = @"积分商城";
+            break;
+        case 21:
+            self.titleLabel.text = @"积分商城会员卡";
+            break;
+        case 22:
+            self.titleLabel.text = @"积分商城津贴";
+            break;
+        case 3:
+            self.titleLabel.text = @"免单";
+            break;
+        default:
+            break;
     }
+
     
     NSString *statuslabel;
     switch ([model.status integerValue]) {

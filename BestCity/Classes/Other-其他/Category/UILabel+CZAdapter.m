@@ -15,7 +15,7 @@
     Method method1 = class_getInstanceMethod([self class], @selector(initWithCoder:));
     Method method2 = class_getInstanceMethod([self class], @selector(adapterInitWithCoder:));
 
-    method_exchangeImplementations(method1, method2);
+//    method_exchangeImplementations(method1, method2);
 }
 
 - (instancetype)adapterInitWithCoder:(NSCoder *)aDecoder

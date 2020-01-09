@@ -62,7 +62,6 @@
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
 
-
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     NSString *urlStr = [JPSERVER_URL stringByAppendingPathComponent:@"api/welfareList"];
     //获取数据

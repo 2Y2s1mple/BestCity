@@ -344,11 +344,7 @@
     if (indexPath.section == 0) {
         return 82;
     } else {
-        if ([JPUSERINFO[@"pid"] integerValue] == 0 || [JPUSERINFO[@"isNewUser"] integerValue] == 0) {
-            return 205;
-        } else {
-            return (205 - 82);
-        }
+        return 205;
     }
 }
 

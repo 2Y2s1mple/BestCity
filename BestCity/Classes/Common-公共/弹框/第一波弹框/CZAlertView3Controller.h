@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZAlertView3Controller : UIViewController
-
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *param;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,6 +9,7 @@
 #import "CZFreeChargeCell7.h"
 #import "UIImageView+WebCache.h"
 #import "CZBusinessTool.h"
+#import "CZSubFreePreferentialController.h"
 
 @interface CZFreeChargeCell7 ()
 /** 大图片 */
