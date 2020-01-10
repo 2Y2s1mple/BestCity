@@ -45,7 +45,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
 
 - (void)viewDidLoad {
@@ -67,8 +66,6 @@
     [self.bgImage sd_setImageWithURL:[NSURL URLWithString:self.dataSource[@"img"]]];
 }
 
-
-
 #pragma mark - 事件
 // 跳转到地址界面
 - (IBAction)pushAddressView:(UIButton *)sender {
@@ -77,7 +74,6 @@
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 /** 立即兑换 */
 - (IBAction)commit
@@ -132,7 +128,6 @@
     }
 }
 
-
 #pragma mark - 获取数据
 // 默认地址
 - (void)getAddress
@@ -168,7 +163,5 @@
         [CZProgressHUD hideAfterDelay:0];
     }];
 }
-
-
 
 @end

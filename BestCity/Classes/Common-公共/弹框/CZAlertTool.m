@@ -45,11 +45,13 @@
                     [[UIApplication sharedApplication].keyWindow addSubview:view1];
                 }
             } else {
-                CZAlertView4Controller *vc = [[CZAlertView4Controller alloc] init];
-                vc.param = result;
-                vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-                CURRENTVC(currentVc);
-                [currentVc presentViewController:vc animated:YES completion:nil];
+                if (result[@"data"]) {
+                    CZAlertView4Controller *vc = [[CZAlertView4Controller alloc] init];
+                    vc.param = result;
+                    vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                    CURRENTVC(currentVc);
+                    [currentVc presentViewController:vc animated:YES completion:nil];
+                }
             }
         }
     } failure:^(NSError *error) {// 结束刷新
@@ -69,7 +71,7 @@
         } else {
             [CZAlertTool getDataSorce];
             [recordSearchTextArray addObject:string];
-            posteboard.string = nil;
+            posteboard.string = @"";
         }
     }
 }

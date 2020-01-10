@@ -187,8 +187,6 @@
 {
     _paramDic = paramDic;
     [self.buyingImage sd_setImageWithURL:[NSURL URLWithString:paramDic[@"img"]]];
-
-
 }
 
 /** 商品 */

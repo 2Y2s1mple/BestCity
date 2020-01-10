@@ -8,6 +8,9 @@
 
 #import "CZTaskView.h"
 #import "CZInvitationController.h"
+#import "CZMyProfileController.h"
+#import "CZFreeAlertView4.h"
+#import "GXNetTool.h"
 
 @interface CZTaskView ()
 /** 详情 */
@@ -38,17 +41,18 @@
     itemTitle.centerY = self.height / 2;
     [self addSubview:itemTitle];
     
-    // 按钮 1邀请好友，2个人认证，3企业认证，4点赞，5分享内容，6阅读文章，7评论文章，8发文奖励）
+    // 按钮 1邀请好友，2个人认证，3企业认证，4点赞，5分享内容，6阅读文章，7评论文章，8发文奖励，9.填写邀请码，17浏览商品，18首次下单，19完善个人信息，20分享商品任务，21分享APP，22分享免单
     NSString *btnTitle;
     switch ([self.taskData[@"type"] integerValue]) {
+
         case 1:
             btnTitle = @"立即邀请";
             break;
         case 2:
-            btnTitle = @"立即认证";
+            btnTitle = @"个人认证";
             break;
         case 3:
-            btnTitle = @"立即认证";
+            btnTitle = @"企业认证";
             break;
         case 4:
             btnTitle = @"立即点赞";
@@ -65,6 +69,27 @@
         case 8:
             btnTitle = @"发文奖励";
             break;
+        case 22:
+            btnTitle = @"分享免单";
+            break;
+        case 21:
+            btnTitle = @"分享APP";
+            break;
+        case 20:
+            btnTitle = @"分享商品";
+            break;
+        case 19:
+            btnTitle = @"完善个人信息";
+            break;
+        case 18:
+            btnTitle = @"首次下单";
+            break;
+        case 17:
+            btnTitle = @"浏览商品";
+            break;
+        case 9:
+            btnTitle = @"填写邀请码";
+            break;
         default:
             break;
     }
@@ -72,8 +97,9 @@
     [itemBtn setTitle:btnTitle forState:UIControlStateNormal];
     [itemBtn setTitleColor:UIColorFromRGB(0xFFFF533A) forState:UIControlStateNormal];
     itemBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
-    itemBtn.width = 79;
+    [itemBtn sizeToFit];
     itemBtn.height = 26;
+    itemBtn.width = itemBtn.width + 15;
     itemBtn.layer.borderWidth = 1;
     itemBtn.layer.borderColor = UIColorFromRGB(0xFFFF533A).CGColor;
     itemBtn.layer.cornerRadius = 5;
@@ -172,8 +198,8 @@
     }
     [MobClick event:@"ID5" attributes:context];
 
-//    1首页，2发现，3评测，4邀请页面，5.认证页面
-    NSLog(@"%@", text);
+    //位置（0不跳转，1首页，2发现，3评测，4邀请页面，5.认证页面，6免单，7编辑资料，8填写邀请码）
+    NSLog(@"---location  : %@", self.taskData[@"location"]);
     switch ([self.taskData[@"location"] integerValue]) {
         case 1:
         {
@@ -190,7 +216,7 @@
         case 3:
         {
             UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabbar.selectedIndex = 2;
+            tabbar.selectedIndex = 1;
             break;
         }
         case 4:
@@ -199,10 +225,24 @@
              [[self viewController].navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 5:
-            
+        case 7:
+        {
+            CZMyProfileController *vc = [[CZMyProfileController alloc] init];
+            [[self viewController].navigationController pushViewController:vc animated:YES];
             break;
-            
+        }
+        case 6:
+        {
+            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabbar.selectedIndex = 3;
+            break;
+        }
+        case 8:
+        {
+            // 邀请码
+            [self action5];
+            break;
+        }
         default:
             break;
     }
@@ -217,5 +257,38 @@
     }
     return nil;
 }
+
+//邀请码
+- (void)action5
+{
+    CZFreeAlertView4 *alertView = [CZFreeAlertView4 freeAlertView:^(NSString * _Nonnull text) {
+        if (text.length == 0) {
+            [CZProgressHUD showProgressHUDWithText:@"邀请码为空"];
+            // 取消菊花
+            [CZProgressHUD hideAfterDelay:1.5];
+            return;
+        }
+
+        NSLog(@"%@", text);
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        // 要关注对象ID
+        param[@"invitationCode"] = text;
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/addInvitationCode"];
+        [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"code"] isEqualToNumber:@(630)]) {
+                [alertView hide];
+            }
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            // 取消菊花
+            [CZProgressHUD hideAfterDelay:1.5];
+
+        } failure:^(NSError *error) {
+            // 取消菊花
+            [CZProgressHUD hideAfterDelay:0];
+        }];
+    }];
+    [alertView show];
+}
+
 
 @end

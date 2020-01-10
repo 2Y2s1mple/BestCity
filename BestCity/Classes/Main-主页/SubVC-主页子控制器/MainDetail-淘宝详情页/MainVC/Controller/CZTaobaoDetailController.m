@@ -219,15 +219,15 @@ static CGFloat const likeAndShareHeight = 49;
 
     // 商品详情
     if(![self.detailModel[@"descImgList"] isKindOfClass:[NSNull class]] && [self.detailModel[@"descImgList"] count] > 0) {
-        [self goodsDetail];
-        UIView *lineView2 = [[UIView alloc] init];
-        lineView2.backgroundColor = UIColorFromRGB(0xF5F5F5);
-        lineView2.y = self.recordHeight;
-        lineView2.height = 10;
-        lineView2.width = SCR_WIDTH;
-        [self.scrollerView addSubview:lineView2];
-        self.recordHeight += 10;
     }
+    [self goodsDetail];
+    UIView *lineView2 = [[UIView alloc] init];
+    lineView2.backgroundColor = UIColorFromRGB(0xF5F5F5);
+    lineView2.y = self.recordHeight;
+    lineView2.height = 10;
+    lineView2.width = SCR_WIDTH;
+    [self.scrollerView addSubview:lineView2];
+    self.recordHeight += 10;
 
 
     // 猜你喜欢
@@ -428,6 +428,9 @@ static CGFloat const likeAndShareHeight = 49;
 
     self.recordHeight += (22 + showAll.height);
     [showAll addTarget:self action:@selector(showAllDeatilImages:) forControlEvents:UIControlEventTouchUpInside];
+
+
+
     
     NSMutableArray *imageList = [NSMutableArray arrayWithArray:self.detailModel[@"descImgList"]];
 
@@ -438,48 +441,44 @@ static CGFloat const likeAndShareHeight = 49;
         backView.height = CZGetY(showAll) + 12;
     }
 
-    for (NSString *imageUrl in imageList) {
-
-        UIImageView *bigImage = [[UIImageView alloc] init];
-        bigImage.width = SCR_WIDTH;
-        bigImage.height = 200;
-
-
-        [subView addSubview:bigImage];
-        [bigImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            if (image == nil) {
-                return ;
-            };
-            CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
-            bigImage.height = imageHeight;
-
-            for (int i = 0; i < subView.subviews.count; i++) {
-                UIView *view = subView.subviews[i];
-                if (i == 0) {
-                    view.y = 0;
-                    continue;
-                }
-                view.y = CZGetY(subView.subviews[i - 1]);
-            }
-            subView.height = CZGetY([subView.subviews lastObject]);
-
-
-            if (subView.height > 300) { // 默认300
-                subView.height = 300;
-                showAll.y = CZGetY(subView) + 10;
-                backView.height = CZGetY(showAll) + 12;
-            } else {
-                showAll.y = CZGetY(subView) + 10;
-                backView.height = CZGetY(showAll) + 12;
-                self.recordHeight += imageHeight;
-            }
-
-//            if ([subView.subviews lastObject] == bigImage) {
-//                NSLog(@"%@", imageURL.absoluteString);
-//                [self changeSubViewFrame];
+//    for (NSString *imageUrl in imageList) {
+//
+//        UIImageView *bigImage = [[UIImageView alloc] init];
+//        bigImage.width = SCR_WIDTH;
+//        bigImage.height = 200;
+//
+//
+//        [subView addSubview:bigImage];
+//        [bigImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//            if (image == nil) {
+//                return ;
+//            };
+//            CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
+//            bigImage.height = imageHeight;
+//
+//            for (int i = 0; i < subView.subviews.count; i++) {
+//                UIView *view = subView.subviews[i];
+//                if (i == 0) {
+//                    view.y = 0;
+//                    continue;
+//                }
+//                view.y = CZGetY(subView.subviews[i - 1]);
 //            }
-        }];
-    }
+//            subView.height = CZGetY([subView.subviews lastObject]);
+//
+//
+//            if (subView.height > 300) { // 默认300
+//                subView.height = 300;
+//                showAll.y = CZGetY(subView) + 10;
+//                backView.height = CZGetY(showAll) + 12;
+//            } else {
+//                showAll.y = CZGetY(subView) + 10;
+//                backView.height = CZGetY(showAll) + 12;
+//                self.recordHeight += imageHeight;
+//            }
+//
+//        }];
+//    }
 }
 
 // 设置各个控件的尺寸

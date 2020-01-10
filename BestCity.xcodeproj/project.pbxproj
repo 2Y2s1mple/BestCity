@@ -70,6 +70,10 @@
 		9711705023C32B6E008D5E95 /* CZSubFreePreferentialCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9711704E23C32B6E008D5E95 /* CZSubFreePreferentialCell1.xib */; };
 		9712727022CF1D47009EB40F /* CZMainHotSaleDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */; };
 		9712727B22CF3AC2009EB40F /* CZScrollMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */; };
+		9714680223C8206A00F4736B /* CZOrderListCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714680023C8206A00F4736B /* CZOrderListCell1.m */; };
+		9714680323C8206A00F4736B /* CZOrderListCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9714680123C8206A00F4736B /* CZOrderListCell1.xib */; };
+		9714680623C8425200F4736B /* CZOrderListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714680523C8425200F4736B /* CZOrderListHeaderView.m */; };
+		9714680823C8425C00F4736B /* CZOrderListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9714680723C8425C00F4736B /* CZOrderListHeaderView.xib */; };
 		97159B1522D6DB14008DC859 /* CZMHSDQuestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97159B1322D6DB14008DC859 /* CZMHSDQuestCell.m */; };
 		97159B1622D6DB14008DC859 /* CZMHSDQuestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97159B1422D6DB14008DC859 /* CZMHSDQuestCell.xib */; };
 		97159B1922D6E91D008DC859 /* CZMHSDQuestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97159B1822D6E91D008DC859 /* CZMHSDQuestModel.m */; };
@@ -777,6 +781,12 @@
 		9712726F22CF1D47009EB40F /* CZMainHotSaleDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMainHotSaleDetailController.m; sourceTree = "<group>"; };
 		9712727922CF3AC2009EB40F /* CZScrollMenuModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZScrollMenuModule.h; sourceTree = "<group>"; };
 		9712727A22CF3AC2009EB40F /* CZScrollMenuModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZScrollMenuModule.m; sourceTree = "<group>"; };
+		971467FF23C8206A00F4736B /* CZOrderListCell1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZOrderListCell1.h; sourceTree = "<group>"; };
+		9714680023C8206A00F4736B /* CZOrderListCell1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZOrderListCell1.m; sourceTree = "<group>"; };
+		9714680123C8206A00F4736B /* CZOrderListCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZOrderListCell1.xib; sourceTree = "<group>"; };
+		9714680423C8425200F4736B /* CZOrderListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZOrderListHeaderView.h; sourceTree = "<group>"; };
+		9714680523C8425200F4736B /* CZOrderListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZOrderListHeaderView.m; sourceTree = "<group>"; };
+		9714680723C8425C00F4736B /* CZOrderListHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZOrderListHeaderView.xib; sourceTree = "<group>"; };
 		97159B1222D6DB14008DC859 /* CZMHSDQuestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSDQuestCell.h; sourceTree = "<group>"; };
 		97159B1322D6DB14008DC859 /* CZMHSDQuestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMHSDQuestCell.m; sourceTree = "<group>"; };
 		97159B1422D6DB14008DC859 /* CZMHSDQuestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMHSDQuestCell.xib; sourceTree = "<group>"; };
@@ -1915,6 +1925,12 @@
 				9791105F2230F3A600C2DE5B /* CZOrderListCell.h */,
 				979110602230F3A600C2DE5B /* CZOrderListCell.m */,
 				979110612230F3A600C2DE5B /* CZOrderListCell.xib */,
+				971467FF23C8206A00F4736B /* CZOrderListCell1.h */,
+				9714680023C8206A00F4736B /* CZOrderListCell1.m */,
+				9714680123C8206A00F4736B /* CZOrderListCell1.xib */,
+				9714680423C8425200F4736B /* CZOrderListHeaderView.h */,
+				9714680523C8425200F4736B /* CZOrderListHeaderView.m */,
+				9714680723C8425C00F4736B /* CZOrderListHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5806,6 +5822,7 @@
 				97705CD52108495D00485D64 /* CZHotSaleCell.xib in Resources */,
 				97D489CE22A647C300FD4EC7 /* CZMyWalletDepositController.xib in Resources */,
 				974759C3239248200026C56C /* CZguessWhatYouLikeCell.xib in Resources */,
+				9714680823C8425C00F4736B /* CZOrderListHeaderView.xib in Resources */,
 				97911059222FAE3B00C2DE5B /* CZEditAddressController.xib in Resources */,
 				97BDB85F211077D800966FF0 /* CZMeController.xib in Resources */,
 				9786FF182255973E0007021C /* CZCommonRecommendCell.xib in Resources */,
@@ -5819,6 +5836,7 @@
 				97FF6DF421184F5A00376435 /* CZSettingCell.xib in Resources */,
 				97731C3322424AC700826F8E /* CZTrialMainCell.xib in Resources */,
 				97F0EC1F212512B6000FE1DC /* UMCommonLog.bundle in Resources */,
+				9714680323C8206A00F4736B /* CZOrderListCell1.xib in Resources */,
 				972E41B2211455C500BC751C /* CZMyPointsController.xib in Resources */,
 				9726336E22CDA51E00995341 /* CZMainHotSaleCell.xib in Resources */,
 				97C85131211AFAA9005540D8 /* CZBindingMobileController.xib in Resources */,
@@ -6056,6 +6074,7 @@
 				97C7FF06216DDDAB0091DC07 /* NSObject+MJProperty.m in Sources */,
 				97E6C4FF238F7872002541F4 /* CZTaobaoGoodsView.m in Sources */,
 				9723075721AD3ABB0004C00C /* CZCommentModel.m in Sources */,
+				9714680223C8206A00F4736B /* CZOrderListCell1.m in Sources */,
 				97798CD7212D0FC90052CE94 /* SDWebImageImageIOCoder.m in Sources */,
 				971C19ED21706B1400E6D864 /* CZPointDetailModel.m in Sources */,
 				972BDCAB23A3ADE400C3F8BF /* CZGuessWhatYouLikeSubVC.m in Sources */,
@@ -6217,6 +6236,7 @@
 				9734840D237EA4A900087877 /* CZSubFreeChargeController.m in Sources */,
 				97C7FF3D216DDDB50091DC07 /* UIView+MJExtension.m in Sources */,
 				97BC3945223A8EF000DC4D67 /* CZMyPointsDetailController.m in Sources */,
+				9714680623C8425200F4736B /* CZOrderListHeaderView.m in Sources */,
 				97C7FF05216DDDAB0091DC07 /* NSObject+MJCoding.m in Sources */,
 				97CAE7C021194C5D00858749 /* CZMessageCell.m in Sources */,
 				97D0C623235FFFF000F3B994 /* CZNotificationAlertView.m in Sources */,

@@ -43,7 +43,7 @@
     _paramDic = paramDic;
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:paramDic[@"shopIcon"]]];
     self.title.text = paramDic[@"shopName"];
-    NSArray *list = paramDic[@"evaluateList"];
+    NSArray *list;// = paramDic[@"evaluateList"];
 
     for (int i = 0; i < list.count; i++) {
         switch (i) {

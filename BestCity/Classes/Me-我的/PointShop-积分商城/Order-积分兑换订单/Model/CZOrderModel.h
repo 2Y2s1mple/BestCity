@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *total;
 /** 图片 */
 @property (nonatomic, strong) NSString *img;
+/** 激活码 */
+@property (nonatomic, strong) NSString *remark;
 
 /** 名字 */
 @property (nonatomic, strong) NSString *username;

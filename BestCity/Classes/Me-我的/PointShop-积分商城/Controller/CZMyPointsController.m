@@ -12,6 +12,7 @@
 #import "GXNetTool.h"
 #import "CZMyPointsDetailController.h"
 #import "CZOrderController.h"
+#import "CZOrderListHeaderView.h"
 
 @interface CZMyPointsController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIView *lineView;
@@ -62,6 +63,8 @@ static NSString * const ID = @"myPointCollectionCell";
 
     [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZMyPointsCell class]) bundle:nil] forCellWithReuseIdentifier:ID];
 
+    [collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CZMVSDefaultVCDelegate"];
+
     // 获取数据
     [self setupRefresh];
 }
@@ -79,6 +82,28 @@ static NSString * const ID = @"myPointCollectionCell";
     return cell;
 }
 
+// 头视图
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CZMVSDefaultVCDelegate" forIndexPath:indexPath];
+        [headerView addSubview:[CZOrderListHeaderView orderListHeaderView]];
+        return headerView;
+    } else {
+        return nil;
+    }
+}
+
+// 头视图的高度
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return CGSizeMake(0, 167);
+    } else {
+        return CGSizeZero;
+    }
+}
+
 #pragma mark - <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -86,6 +111,8 @@ static NSString * const ID = @"myPointCollectionCell";
     vc.pointId = self.dataSource[indexPath.row][@"id"];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

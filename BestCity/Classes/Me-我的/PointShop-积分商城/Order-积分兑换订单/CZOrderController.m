@@ -9,10 +9,12 @@
 #import "CZOrderController.h"
 #import "CZNavigationView.h"
 #import "CZOrderListCell.h"
+#import "CZOrderListCell1.h"
 #import "GXNetTool.h"
 #import "CZOrderModel.h"
 #import "CZMeController.h"
 #import "CZOrderDetailController.h" //详情
+
 
 
 
@@ -49,6 +51,7 @@
     return _tableView;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
@@ -61,6 +64,7 @@
     [self.view addSubview:self.tableView];
     [self getDataSource];
 }
+
 
 #pragma mark - <CZNavigationViewDelegate>
 - (void)popViewController
@@ -106,9 +110,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CZOrderListCell *cell = [CZOrderListCell cellWithTableView:tableView];
-    cell.model = self.roderArray[indexPath.row];
-    return cell;
+    CZOrderModel *model = self.roderArray[indexPath.row];
+    if ([model.goodsType integerValue] == 21) {
+        CZOrderListCell1 *cell = [CZOrderListCell1 cellWithTableView:tableView];
+        cell.model = model;
+        return cell;
+    } else {
+        CZOrderListCell *cell = [CZOrderListCell cellWithTableView:tableView];
+        cell.model = model;
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
