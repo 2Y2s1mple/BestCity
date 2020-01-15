@@ -42,6 +42,9 @@
                             <integer key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buyBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="6UL-bv-NaL"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分兑换" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jc5-n1-bKp">
                     <rect key="frame" x="170" y="114" width="61.5" height="18"/>

@@ -34,9 +34,9 @@
 @property (nonatomic, weak) IBOutlet UIImageView *scoreImage;
 /** 功能评分文字 */
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
-/** 极品城补贴 */
+/** 极品城返现 */
 @property (nonatomic, weak) IBOutlet UIView *feeView;
-/** 补贴数 */
+/** 返现数 */
 @property (nonatomic, weak) IBOutlet UILabel *feeLabel;
 /** 评分view */
 @property (weak, nonatomic) IBOutlet UIView *pointView;
@@ -108,10 +108,10 @@
         self.otherPrice.hidden = YES;
     }
 
-    if ([self.fee floatValue] > 0) { // 有极品城补贴
+    if ([self.fee floatValue] > 0) { // 有极品城返现
         self.feeLabel.text = [NSString stringWithFormat:@"¥%.2f", [self.fee floatValue]];
         self.feeView.hidden = NO;
-    } else { // 无极品城补贴
+    } else { // 无极品城返现
         self.feeView.hidden = YES;
         self.titleLabelTop.constant = - 30;
         [self layoutIfNeeded];
@@ -130,7 +130,7 @@
         [self.couponView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(0));
         }];
-        // 无券无补贴
+        // 无券无返现
         if ([self.fee floatValue] == 0) {
             self.titleLabelTop.constant = - 30;
         }
@@ -242,7 +242,7 @@
 
 - (IBAction)feeRule:(UIButton *)sender {
     TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/fee-rule.html"]];
-    webVc.titleName = @"极品城购物补贴说明";
+    webVc.titleName = @"极品城购物返现说明";
     [self.viewController presentViewController:webVc animated:YES completion:nil];
 }
 

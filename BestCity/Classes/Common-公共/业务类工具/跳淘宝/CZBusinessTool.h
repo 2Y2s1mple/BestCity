@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CZBusinessTool : NSObject
 /** 跳淘宝购买 */
-+ (void)buyBtnActionWithId:(NSString *)Id;
++ (void)buyBtnActionWithId:(NSString *)Id alertTitle:(NSString *)alertTitle;
+
+/** 弹窗工具 */
++ (void)loadAlertView;
+
 @end
 
 NS_ASSUME_NONNULL_END

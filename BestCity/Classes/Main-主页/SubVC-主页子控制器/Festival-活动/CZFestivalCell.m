@@ -76,7 +76,7 @@
     NSString *other = [NSString stringWithFormat:@"¥%@", paramDic[@"otherPrice"]];
     self.otherPricelabel.attributedText = [other addStrikethroughWithRange:NSMakeRange(0, other.length)];
     self.couponPriceLabel.text = [NSString stringWithFormat:@"优惠券 ¥%.0f", [paramDic[@"couponPrice"] floatValue]];
-    self.feeLabel.text = [NSString stringWithFormat:@"  补贴 ¥%.2f  ", [paramDic[@"fee"] floatValue]];
+    self.feeLabel.text = [NSString stringWithFormat:@"  返现 ¥%.2f  ", [paramDic[@"fee"] floatValue]];
 
     if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"]) {
         [[self.couponPriceLabel superview] setHidden:YES];
@@ -87,13 +87,13 @@
         self.feeLabelMargin.constant = 5;
     }
 
-    if ([self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+    if ([self.feeLabel.text isEqualToString:@"  返现 ¥0.00  "]) {
         [self.feeLabel setHidden:YES];
     } else {
         [self.feeLabel setHidden:NO];
     }
 
-    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  返现 ¥0.00  "]) {
         self.actualPriceLabelBottomMragin.constant = -18;
     } else {
         self.actualPriceLabelBottomMragin.constant = 5;
@@ -129,7 +129,7 @@
     NSString *other = [NSString stringWithFormat:@"¥%.2f", [paramDic[@"otherPrice"] floatValue]];
     self.otherPricelabel.attributedText = [other addStrikethroughWithRange:NSMakeRange(0, other.length)];
     self.couponPriceLabel.text = [NSString stringWithFormat:@"优惠券 ¥%.0f", [paramDic[@"couponPrice"] floatValue]];
-    self.feeLabel.text = [NSString stringWithFormat:@"  补贴 ¥%.2f  ", [paramDic[@"fee"] floatValue]];
+    self.feeLabel.text = [NSString stringWithFormat:@"  返现 ¥%.2f  ", [paramDic[@"fee"] floatValue]];
 
     if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"]) {
         [[self.couponPriceLabel superview] setHidden:YES];
@@ -141,13 +141,13 @@
         [self layoutIfNeeded];
     }
 
-    if ([self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+    if ([self.feeLabel.text isEqualToString:@"  返现 ¥0.00  "]) {
         [self.feeLabel setHidden:YES];
     } else {
         [self.feeLabel setHidden:NO];
     }
 
-    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  返现 ¥0.00  "]) {
         self.actualPriceLabelBottomMragin.constant = -18;
     } else {
         self.actualPriceLabelBottomMragin.constant = 5;

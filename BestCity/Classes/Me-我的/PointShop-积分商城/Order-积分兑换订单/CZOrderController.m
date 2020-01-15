@@ -69,11 +69,7 @@
 #pragma mark - <CZNavigationViewDelegate>
 - (void)popViewController
 {
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[CZMeController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-        }
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)getDataSource

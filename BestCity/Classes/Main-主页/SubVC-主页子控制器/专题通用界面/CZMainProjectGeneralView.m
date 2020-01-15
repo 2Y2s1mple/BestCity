@@ -23,7 +23,7 @@
 /** <#注释#> */
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
-@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2补贴，3销量
+@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2返现，3销量
 /** 是否是条形布局 */
 @property (nonatomic, assign) BOOL layoutType;
 /** <#注释#> */
@@ -59,7 +59,7 @@
         } else {
             // (1正序，0倒序);
             self.asc =  [NSString stringWithFormat:@"%@", @(isAsc)];
-            // orderByType : 0综合，1价格，2补贴，3销量
+            // orderByType : 0综合，1价格，2返现，3销量
             self.orderByType = [NSString stringWithFormat:@"%@", @(index)];
             [self reloadNewTrailDataSorce];
         }
@@ -133,7 +133,7 @@
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"subjectId"] = self.category2Id;
     param[@"category2Id"] = self.category2Id;
-    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
+    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2返现，3销量
     param[@"page"] = @(self.page);
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:api] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -173,7 +173,7 @@
     param[@"category2Id"] = self.category2Id;
     param[@"subjectId"] = self.category2Id;
     param[@"asc"] = self.asc; // (1正序，0倒序);
-    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
+    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2返现，3销量
     param[@"page"] = @(self.page);
 
     //获取详情数据

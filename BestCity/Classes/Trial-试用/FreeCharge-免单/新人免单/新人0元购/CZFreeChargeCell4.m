@@ -41,15 +41,10 @@
     [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:_model.img]];
     self.titleLabel.text = _model.goodsName;
 
-    NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%@", _model.otherPrice];
+    NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%.2f", [_model.otherPrice floatValue]];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
-
-    ;
     [self.progressView setProgress:(model.count / 100.0) animated:YES];
-
     self.qiangLabel.text = [NSString stringWithFormat:@"已抢%.0lf%%", (self.progressView.progress * 100)];
-  
-
     _model.cellHeight = 140;
 }
 
@@ -76,9 +71,9 @@
 
 - (IBAction)bugBtnClicked:(UIButton *)sender {
     NSLog(@"----");
-    [CZBusinessTool buyBtnActionWithId:self.model.Id];
+    
+    [CZBusinessTool buyBtnActionWithId:self.model.Id alertTitle:@"您将前往淘宝0元购买此商品，仅限首单"];
 }
-
 
 - (void)setFrame:(CGRect)frame
 {
@@ -91,6 +86,5 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
-
 
 @end

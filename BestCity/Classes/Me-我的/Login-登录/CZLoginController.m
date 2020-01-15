@@ -17,6 +17,7 @@
 #import "CZMeController.h"
 #import "CZSettingController.h"
 #import "CZSubFreeChargeController.h" // 新人专区
+#import "CZBusinessTool.h"
 // 工具
 #import <TCWebCodesSDK/TCWebCodesBridge.h> // 腾讯验证码
 
@@ -127,13 +128,6 @@ static id instancet_;
             [CZSaveTool setObject:userDic[@"token"] forKey:@"token"];
             // 存储用户信息, 都TM存储上了
             [CZSaveTool setObject:userDic forKey:@"user"];
-            if (![result[@"data"][@"addPoint"] isEqual:@(0)]) {
-                CZUpdataView *backView = [CZUpdataView newUserRegistrationView];
-                backView.userPoint = [NSString stringWithFormat:@"%@", result[@"data"][@"addPoint"]];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-            }
             // 删除账号密码
             self.userTextField.text = nil;
             self.passwordTextField.text = nil;
@@ -316,33 +310,8 @@ static id instancet_;
 
 - (void)loadUserAlert
 {
-    //获取数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getPopInfo"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            NSDictionary *param = result[@"data"][@"data"];
-            NSLog(@"%@----%@", param, [param class]);
-            if ([param isKindOfClass:[NSNull class]])
-            {
-                return;
-            }
+    [CZBusinessTool loadAlertView];
 
-            if ([result[@"data"][@"type"] isEqualToNumber:@1]) {
-                CZUpdataView *backView = [CZUpdataView buyingView];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-                backView.paramDic = result[@"data"][@"data"];
-            } else {
-                CZUpdataView *backView = [CZUpdataView goodsView];
-                backView.frame = [UIScreen mainScreen].bounds;
-                backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-                [[UIApplication sharedApplication].keyWindow addSubview: backView];
-                backView.goodsViewParamDic = result[@"data"][@"data"];
-            }
-        }
-    } failure:^(NSError *error) {
-
-    }];
 }
 
 @end

@@ -199,7 +199,7 @@
 
 
     CGFloat freePrice = [self.dataSource.freePrice floatValue];
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"购买后补贴¥%.2lf", freePrice]];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"购买后返现¥%.2lf", freePrice]];
     [string addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13]} range:NSMakeRange(0, 6)];
     [string addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Medium" size: 19]} range:NSMakeRange(6, self.dataSource.freePrice.length)];
     [string addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838)} range:NSMakeRange(0, string.length)];
@@ -536,7 +536,7 @@
     UINavigationController *naVc = tabbar.selectedViewController;
     UIViewController *toVC = naVc.topViewController;
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-    if ([specialId isEqualToString:@"(null)"]) {
+    if ([specialId isEqualToString:@""]) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
         [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
             NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];

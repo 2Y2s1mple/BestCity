@@ -66,7 +66,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEp-7l-UhI">
-                                <rect key="frame" x="224.5" y="81" width="48.5" height="14.5"/>
+                                <rect key="frame" x="224.5" y="96" width="48.5" height="14.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="¥699.00">
                                         <attributes>
@@ -79,13 +79,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥599.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npG-oc-uvC">
-                                <rect key="frame" x="148" y="77.5" width="71.5" height="21.5"/>
+                                <rect key="frame" x="148" y="92.5" width="71.5" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Forward-3" translatesAutoresizingMaskIntoConstraints="NO" id="A2A-hu-P1D">
-                                <rect key="frame" x="404" y="106" width="36" height="36"/>
+                                <rect key="frame" x="422" y="122.5" width="18" height="18"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 小米官方旗舰店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynu-Cj-oAm">
                                 <rect key="frame" x="148" y="53.5" width="89.5" height="15"/>
@@ -94,8 +94,8 @@
                                 <color key="textColor" red="0.61563080550000004" green="0.61572188139999995" blue="0.61561095710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="补贴 ¥3.21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F0-8F-Cxd">
-                                <rect key="frame" x="243" y="117" width="50" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="返 ¥3.21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F0-8F-Cxd">
+                                <rect key="frame" x="198" y="124.5" width="40" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="8vq-kL-3VC"/>
                                 </constraints>
@@ -116,13 +116,13 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BU8-9P-X4u">
-                                <rect key="frame" x="148" y="109" width="90" height="30"/>
+                                <rect key="frame" x="148" y="124" width="45" height="15"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taobaoDetai_coupon" translatesAutoresizingMaskIntoConstraints="NO" id="GGV-Qs-nlf">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="15"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="券 ¥0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="put-eu-XeH">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -141,7 +141,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0人已买" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PB5-oJ-bwy">
-                                <rect key="frame" x="278" y="81.5" width="41" height="14"/>
+                                <rect key="frame" x="278" y="96.5" width="41" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

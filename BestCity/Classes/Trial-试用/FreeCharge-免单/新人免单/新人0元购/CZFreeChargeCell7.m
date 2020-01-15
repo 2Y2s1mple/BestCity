@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *allowanceLabel;
 /** 立即抢购 */
 @property (nonatomic, weak) IBOutlet UIButton *btn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *allowanceLabelLeftMargin;
 
 @end
 
@@ -62,8 +63,13 @@
     self.couponsLabel.text = [NSString stringWithFormat:@"券 ¥%@", _model.couponPrice];
 
     self.allowanceLabel.text = [NSString stringWithFormat:@"津贴 ¥%@", _model.useAllowancePrice];
+    if ([self.couponsLabel.text isEqualToString:@"券 ¥0"]) {
+        self.allowanceLabelLeftMargin.constant = -45;
+    } else {
+        self.allowanceLabelLeftMargin.constant = 3;
+    }
 
-    NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%@", _model.otherPrice];
+    NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%.2f", [_model.otherPrice floatValue]];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
 
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@", _model.buyPrice];
@@ -84,6 +90,6 @@
 
 - (IBAction)bugBtnClicked:(UIButton *)sender {
     NSLog(@"----");
-    [CZBusinessTool buyBtnActionWithId:self.model.Id];
+    [CZBusinessTool buyBtnActionWithId:self.model.Id alertTitle:@"您将前往淘宝购买此商品，下单立减"];
 }
 @end

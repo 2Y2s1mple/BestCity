@@ -29,7 +29,7 @@
 @property (nonatomic, strong) CZMainViewModel *viewModel;
 /** 状态栏的最大坐标 */
 @property (nonatomic, assign) CGFloat STATUSBAR_MAX_ORIGIN_Y;
-/** 补贴方法 */
+/** 返现方法 */
 @property (nonatomic, strong)  CZLabel *remindLabel;
 /** 提示登录按钮 */
 @property (nonatomic, strong) CZRemindLoginView *remindView;
@@ -138,8 +138,8 @@
     }];
     [self.view addSubview:searchView];
 
-    // 补贴方法
-    self.remindLabel = [CZLabel labelText:@"补贴方法：①复制淘宝商品标题或淘口令 ； ②搜索商品领取专属补贴" textColor:0xFFFFFF font:10 alignment:NSTextAlignmentCenter bold:NO];
+    // 返现方法
+    self.remindLabel = [CZLabel labelText:@"返现方法：①复制淘宝商品标题或淘口令 ； ②搜索商品领取专属返现" textColor:0xFFFFFF font:10 alignment:NSTextAlignmentCenter bold:NO];
     self.remindLabel.alpha = 0.6;
     self.remindLabel.y = CZGetY(searchView) + 10;
     self.remindLabel.size = CGSizeMake(SCR_WIDTH, 14);

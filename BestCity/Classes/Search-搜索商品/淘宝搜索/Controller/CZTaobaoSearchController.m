@@ -51,7 +51,7 @@
 
 /** <#注释#> */
 @property (nonatomic, strong) UIView *lineView;
-/** 补贴三部曲 */
+/** 返现三部曲 */
 @property (nonatomic, strong) UIView *adImageView;
 @end
 

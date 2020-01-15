@@ -44,7 +44,7 @@
         self.appEarningTime.text = [NSString stringWithFormat:@"%@已到账", _model[@"appEarningTime"]];
     } else if ([_model[@"status"] integerValue] == 3) {
         self.statusLabel.text = @"订单失效";
-        self.appEarningTime.text = @"失效订单无补贴";
+        self.appEarningTime.text = @"失效订单无返现";
     }
 
     self.tkCreateTimeLabel.text = [NSString stringWithFormat:@"下单时间：%@", _model[@"tkCreateTime"]]; //下单时间
@@ -52,7 +52,7 @@
     self.itemTitle.text = _model[@"itemTitle"];
     self.itemNum.text = [NSString stringWithFormat:@"x%@", _model[@"itemNum"]];
     self.alipayTotalPrice.text = [NSString stringWithFormat:@"付款：%@元", _model[@"alipayTotalPrice"]];
-    self.preFee.text = [NSString stringWithFormat:@"补贴：%@元", _model[@"preFee"]];
+    self.preFee.text = [NSString stringWithFormat:@"返现：%@元", _model[@"preFee"]];
     self.tradeId.text = [NSString stringWithFormat:@"订单号：%@", _model[@"tradeId"]];
 }
 

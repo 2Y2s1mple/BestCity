@@ -133,15 +133,20 @@
                                     <action selector="bugBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="h1N-Qu-GtZ"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert-9" translatesAutoresizingMaskIntoConstraints="NO" id="egg-M6-IIx">
+                                <rect key="frame" x="10" y="17" width="26.5" height="31.5"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="egg-M6-IIx" firstAttribute="top" secondItem="QTV-91-ui4" secondAttribute="top" id="3DN-Kr-TPs"/>
                             <constraint firstItem="PVV-ah-VOr" firstAttribute="leading" secondItem="QTV-91-ui4" secondAttribute="trailing" constant="16" id="8ES-60-eIE"/>
                             <constraint firstItem="agX-E6-8sT" firstAttribute="leading" secondItem="UfR-3W-hOz" secondAttribute="trailing" constant="3" id="AEr-uM-i6w"/>
                             <constraint firstItem="PVV-ah-VOr" firstAttribute="top" secondItem="QTV-91-ui4" secondAttribute="top" id="AbU-K1-7Nz"/>
                             <constraint firstItem="27b-P4-wmq" firstAttribute="leading" secondItem="QTV-91-ui4" secondAttribute="trailing" constant="16" id="CvO-zD-nDE"/>
                             <constraint firstItem="agX-E6-8sT" firstAttribute="centerY" secondItem="z4D-vQ-6AR" secondAttribute="centerY" id="JXh-ae-Z2C"/>
                             <constraint firstItem="QTV-91-ui4" firstAttribute="centerY" secondItem="CjJ-Le-Ut8" secondAttribute="centerY" id="OI8-3W-HVn"/>
+                            <constraint firstItem="egg-M6-IIx" firstAttribute="leading" secondItem="QTV-91-ui4" secondAttribute="leading" constant="4" id="Q00-Lv-w9X"/>
                             <constraint firstItem="kZB-cF-UjE" firstAttribute="leading" secondItem="PVV-ah-VOr" secondAttribute="leading" id="Qyw-5N-Qkb"/>
                             <constraint firstItem="27b-P4-wmq" firstAttribute="bottom" secondItem="QTV-91-ui4" secondAttribute="bottom" id="RAx-qM-P0f"/>
                             <constraint firstItem="UfR-3W-hOz" firstAttribute="leading" secondItem="PVV-ah-VOr" secondAttribute="leading" id="T6P-UC-76A"/>
@@ -172,6 +177,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="allowanceLabel" destination="5bi-yl-sMo" id="ErI-zk-Klg"/>
+                <outlet property="allowanceLabelLeftMargin" destination="AEr-uM-i6w" id="3TY-iG-qQT"/>
                 <outlet property="bigImageView" destination="QTV-91-ui4" id="hrB-xD-rrl"/>
                 <outlet property="btn" destination="0b0-IH-YS5" id="zEE-8z-6mg"/>
                 <outlet property="couponsLabel" destination="z4D-vQ-6AR" id="SMS-0Z-Eis"/>
@@ -183,6 +189,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="alert-9" width="26.5" height="31.5"/>
         <image name="testImage1" width="391" height="393"/>
         <image name="trail-6" width="45" height="15"/>
         <image name="trail-7" width="59" height="15"/>

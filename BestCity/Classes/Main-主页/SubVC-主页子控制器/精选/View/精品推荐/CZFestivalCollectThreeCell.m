@@ -17,7 +17,7 @@
 @property (nonatomic, weak) IBOutlet UIView *backView;
 
 @property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
-@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2补贴，3销量
+@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2返现，3销量
 /** 是否是条形布局 */
 @property (nonatomic, assign) BOOL layoutType;
 /** <#注释#> */
@@ -37,7 +37,7 @@
     view.width = SCR_WIDTH;
     view.height = 38;
     [view setBlcok:^(BOOL isLine, BOOL isAsc, NSInteger index) {
-        // orderByType : 0综合，1价格，2补贴，3销量
+        // orderByType : 0综合，1价格，2返现，3销量
         [[NSNotificationCenter defaultCenter] postNotificationName:@"mainSameTitleAction" object:nil userInfo:@{@"orderByType" : @(index), @"asc" : @(isAsc), @"layoutType" : @(isLine)}];
     }];
 

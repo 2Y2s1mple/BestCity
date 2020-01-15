@@ -46,7 +46,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *label4;
 
 /** 旧人 */
-/** 百万补贴 */
+/** 百万返现 */
 @property (nonatomic, strong) CZFestivalCollectMillionsView *millionsView;
 
 /** 每日爆款 */
@@ -97,7 +97,7 @@
     self.peopleNewView.userInteractionEnabled = YES;
     [self.peopleNewView addGestureRecognizer:tap];
 
-    // 百万补贴
+    // 百万返现
     self.millionsView = [CZFestivalCollectMillionsView festivalCollectMillionsView];
     self.millionsView.width = self.peopleNewView.width;
     self.millionsView.height = 118;
@@ -257,11 +257,11 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
-// 跳到极品城购物补贴说明
+// 跳到极品城购物返现说明
 - (void)pushMessageListView
 {
-    TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/fee-rule.html"]];
-    vc.titleName = @"极品城购物补贴说明";
+    TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/newZn.html"]];
+    vc.titleName = @"极品城购物返现说明";
     CURRENTVC(currentVc);
     [currentVc.navigationController pushViewController:vc animated:YES];
 }

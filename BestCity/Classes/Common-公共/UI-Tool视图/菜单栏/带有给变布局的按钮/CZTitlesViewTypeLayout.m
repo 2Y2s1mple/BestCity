@@ -101,7 +101,7 @@
     CGFloat itemWidth = 42;
     CGFloat space = (SCR_WIDTH - 2 *leftRightSpace - itemWidth * 5) / 4;
 
-    NSArray *list = @[@"综合", @"价格", @"补贴", @"销量", @""];
+    NSArray *list = @[@"综合", @"价格", @"返现", @"销量", @""];
     for (int i = 0; i < list.count; i++) {
         CZTVTLayoutBtn *btn = [[CZTVTLayoutBtn alloc] init];
         btn.type = i;

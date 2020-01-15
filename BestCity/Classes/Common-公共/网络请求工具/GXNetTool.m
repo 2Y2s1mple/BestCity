@@ -10,6 +10,8 @@
 #import "CZPhoneModelHandle.h"
 #import "CZReachabilityHandle.h"
 
+#import <AdSupport/AdSupport.h>
+
 @interface GXNetTool()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
 @property (nonatomic, strong) NSString *urlPath;
@@ -20,6 +22,8 @@
 
 + (NSDictionary *)setupHeader
 {
+    // 获取IDFA
+    NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     // 获取UUID
     NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     // 手机系统版本号
@@ -35,6 +39,7 @@
     NSDictionary *paramHeader = @{
                                   @"token" : JPTOKEN ? JPTOKEN : @"",
                                   @"uuid" : deviceUUID,
+                                  @"idfa" : idfa,
                                   @"client" : @"iOS",
                                   @"sysVersion" : phoneVersion,
                                   @"model" : phoneModel,

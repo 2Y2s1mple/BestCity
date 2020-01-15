@@ -67,7 +67,7 @@
 
     if (self.isOldUser) {
         if ([_model.myInviteUserCount integerValue] < [_model.inviteUserCount integerValue]) {
-            NSString *textStr = [NSString stringWithFormat:@"已邀请%@位好友,再邀请%ld位新用户即可享¥%@元补贴", _model.myInviteUserCount, [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue], _model.freePrice];
+            NSString *textStr = [NSString stringWithFormat:@"已邀请%@位好友,再邀请%ld位新用户即可享¥%@元返现", _model.myInviteUserCount, [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue], _model.freePrice];
             NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:textStr];
             [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:_model.myInviteUserCount]];
             [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:[NSString stringWithFormat:@"%ld", [_model.inviteUserCount integerValue] - [_model.myInviteUserCount integerValue]]]];
@@ -75,7 +75,7 @@
             self.inviteLabel.attributedText = attrStr;
 
         } else {
-            NSString *textStr = [NSString stringWithFormat:@"恭喜您已获得免单权益，确认收货后享¥%@元补贴", _model.freePrice];
+            NSString *textStr = [NSString stringWithFormat:@"恭喜您已获得免单权益，确认收货后享¥%@元返现", _model.freePrice];
             NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:textStr];
             [attrStr addAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xE25838), NSFontAttributeName : [UIFont systemFontOfSize:15]} range:[textStr rangeOfString:[NSString stringWithFormat:@"¥%@", _model.freePrice]]];
             self.inviteLabel.attributedText = attrStr;

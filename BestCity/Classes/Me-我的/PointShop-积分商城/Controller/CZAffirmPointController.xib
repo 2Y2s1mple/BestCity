@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,6 +13,7 @@
                 <outlet property="addressNameLabel" destination="bkX-SF-fCx" id="nTX-U8-M0p"/>
                 <outlet property="addressNumberLabel" destination="25C-8p-ZBY" id="CPA-Bc-Whq"/>
                 <outlet property="addressView" destination="OTf-Hb-lrP" id="hJs-Gx-hja"/>
+                <outlet property="addressViewTopMargin" destination="0Ou-KG-wtM" id="GZq-Hx-p9n"/>
                 <outlet property="bgImage" destination="5iD-47-7SQ" id="0bd-rN-GBG"/>
                 <outlet property="changeAddressView" destination="vYB-kl-2CZ" id="aDg-m4-MhH"/>
                 <outlet property="moneyLabel" destination="4MF-hP-JGk" id="iLU-4B-ezj"/>
@@ -171,7 +170,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tm-IM-Vwz">
                             <rect key="frame" x="255" y="0.0" width="120" height="49"/>
-                            <color key="backgroundColor" red="0.88860207800000002" green="0.079048879439999997" blue="0.21190962199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.88627450980392153" green="0.34509803921568627" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="120" id="tX0-WN-afJ"/>
                             </constraints>
@@ -215,11 +214,11 @@
                 <constraint firstAttribute="trailing" secondItem="yfu-y6-7a0" secondAttribute="trailing" id="mwJ-TB-1hs"/>
                 <constraint firstItem="zAC-uC-rtE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xeI-UU-RN5"/>
             </constraints>
-            <point key="canvasLocation" x="601" y="-313"/>
+            <point key="canvasLocation" x="600.79999999999995" y="-313.49325337331339"/>
         </view>
     </objects>
     <resources>
-        <image name="address" width="16" height="20"/>
+        <image name="address" width="26" height="26"/>
         <image name="list-right" width="6.5" height="13"/>
     </resources>
 </document>

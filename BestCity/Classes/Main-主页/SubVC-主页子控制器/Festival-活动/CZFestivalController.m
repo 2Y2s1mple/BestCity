@@ -71,7 +71,7 @@
         return;
     }
     NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
-    shareDic[@"shareTitle"] = @"这里全是钱啊，我得个现金大额补贴~";
+    shareDic[@"shareTitle"] = @"这里全是钱啊，我得个现金大额返现~";
     shareDic[@"shareContent"] = @"比官方还低，同商品，同店铺，这里竟然有这样的价格！";
     shareDic[@"shareUrl"] = @"https://www.jipincheng.cn/share/index11.html";
     shareDic[@"shareImg"] = [UIImage imageNamed:@"launchLogo.png"];

@@ -68,7 +68,7 @@
         }
         NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
         shareDic[@"shareTitle"] = [NSString stringWithFormat:@"【%@】像我这样买才最低价！", self.titleName];
-        shareDic[@"shareContent"] = @"官方正品抄底价，加券！加现金！额外补贴现金转支付宝~";
+        shareDic[@"shareContent"] = @"官方正品抄底价，加券！加现金！额外返现现金转支付宝~";
         shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/share/category11.html?id=%@", self.categoryId];
         shareDic[@"shareImg"] = [UIImage imageNamed:@"launchLogo.png"];
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];

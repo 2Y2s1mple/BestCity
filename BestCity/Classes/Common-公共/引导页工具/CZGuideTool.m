@@ -60,7 +60,6 @@ BOOL oldUser;
         window.rootViewController = [[CZTabBarController alloc] init];
     } else {
         //有新版本
-        [CZSaveTool setObject:curVersion forKey:CZVERSION];
         CZGuideController *vc = [[CZGuideController alloc] init];
         window.rootViewController = vc;
     }

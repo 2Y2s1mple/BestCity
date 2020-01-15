@@ -7,6 +7,8 @@
 //
 
 #import "CZOrderListHeaderView.h"
+#import "CZCoinCenterController.h"
+
 @interface CZOrderListHeaderView ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *pointLabel;
@@ -27,5 +29,13 @@
 
     self.pointLabel.text = [NSString stringWithFormat:@"%@", JPUSERINFO[@"point"]];
 
+}
+
+// 购买按钮事件
+- (IBAction)buyBtnAction:(UIButton *)sender
+{
+    CURRENTVC(currentVc);
+    CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
+    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 @end

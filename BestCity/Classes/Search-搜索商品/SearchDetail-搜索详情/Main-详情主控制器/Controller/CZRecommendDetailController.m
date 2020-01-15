@@ -77,7 +77,7 @@ static NSString * const type = @"1";
 @implementation CZRecommendDetailController
 
 //实现带有场景参数的初始化方法，并根据场景参数还原该控制器：
--(instancetype)initWithMobLinkScene:(MLSDKScene *)scene
+- (instancetype)initWithMobLinkScene:(MLSDKScene *)scene
 {
     if (self = [super init]) {
         self.scene = scene;
@@ -132,7 +132,7 @@ static NSString * const type = @"1";
             UINavigationController *naVc = tabbar.selectedViewController;
             UIViewController *toVC = naVc.topViewController;
             NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-            if ([specialId isEqualToString:@"(null)"]) {
+            if ([specialId isEqualToString:@""]) {
                 [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
                 [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
                     NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
@@ -306,14 +306,8 @@ static NSString * const type = @"1";
             shareDic[@"shareUrl"] = self.detailModel.goodsDetailEntity.shareUrl;
             shareDic[@"shareImg"] = self.detailModel.goodsDetailEntity.shareImg;
             self.shareParam = shareDic;
+            self.likeView.titleData = @{@"right" : [NSString stringWithFormat:@"立即购买(返现￥%@)", self.detailModel.goodsEntity.fee]};
 
-            // self.detailModel.goodsCouponsEntity.dataFlag // -1 没有优惠券
-            NSDictionary *versionParam = [CZSaveTool objectForKey:requiredVersionCode];
-            if ([versionParam[@"open"] isEqualToNumber:@(1)]) {
-                self.likeView.titleData = @{@"right" : result[@"btnTxt2"]};
-            } else {
-                self.likeView.titleData = @{@"right" : result[@"btnTxt2"]};
-            }
             [self.view addSubview:self.likeView];
         }
     } failure:^(NSError *error) {}];

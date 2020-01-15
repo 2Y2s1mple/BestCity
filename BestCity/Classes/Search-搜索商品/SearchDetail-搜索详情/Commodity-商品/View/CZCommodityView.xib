@@ -474,7 +474,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSK-LQ-qZg">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="极品城补贴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCg-I4-95a">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="极品城返现" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCg-I4-95a">
                                     <rect key="frame" x="5" y="7" width="67" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="1" green="0.89411764705882346" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -500,7 +500,7 @@
                             <rect key="frame" x="150" y="0.0" width="234" height="30"/>
                             <color key="backgroundColor" red="1" green="0.89411764709999997" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="  查看什么是极品城补贴">
+                            <state key="normal" title="   查看极品城返现攻略">
                                 <color key="titleColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>

@@ -42,17 +42,18 @@
                  @"Id" : @"id"
                  };
     }];
+
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"百万补贴特惠购" rightBtnTitle:nil rightBtnAction:nil];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"百万返现特惠购" rightBtnTitle:nil rightBtnAction:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
     self.navigationView = navigationView;
     [self.view addSubview:navigationView];
 
     // 表
     [self.view addSubview:self.tableView];
+
     //创建刷新控件
     [self setupRefresh];
-
 
     // 完成了首次下单
     if (!self.isfirstOrder) {
@@ -60,9 +61,9 @@
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"type"] = @(3);
         NSURL *url = [[NSBundle mainBundle] URLForResource:@"getPopInfo.json" withExtension:nil];
-        NSString *urlStr = [JPSERVER_URL stringByAppendingPathComponent:@"api/v2/getPopInfo"];
+        NSString *urlStr = [JPSERVER_URL stringByAppendingPathComponent:@"api/v3/getPopInfo"];
 
-        [GXNetTool GetNetWithUrl:url.absoluteString body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        [GXNetTool GetNetWithUrl:urlStr body:param header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"msg"] isEqualToString:@"success"]) {
                 NSDictionary *param = result[@"data"];
                 NSLog(@"%@----%@", param, [param class]);
@@ -70,17 +71,14 @@
                 {
                     return;
                 }
-                if ([result[@"data"][@"type"] isEqualToNumber:@3]) {
+                if (![result[@"data"][@"type"] isKindOfClass:[NSNull class]] && [result[@"data"][@"type"] isEqualToNumber:@3]) {
                     CZAlertView3Controller *vc = [[CZAlertView3Controller alloc] init];
                     vc.param = result[@"data"];
                     vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
                     [self presentViewController:vc animated:YES completion:nil];
                 }
             }
-        } failure:^(NSError *error) {
-
-        }];
-
+        } failure:^(NSError *error) {}];
     }
 }
 

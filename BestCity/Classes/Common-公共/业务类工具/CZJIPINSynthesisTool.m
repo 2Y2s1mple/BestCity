@@ -10,6 +10,7 @@
 #import "GXNetTool.h"
 
 @implementation CZJIPINSynthesisTool
+#pragma mark - 判断是哪个模块
 + (NSString *)getModuleTypeNumber:(CZJIPINModuleType)type
 {
      /** 1商品，2评测, 3发现，4试用 5百科 6相关百科*/

@@ -494,7 +494,7 @@ static CGFloat const likeAndShareHeight = 55;
     UIViewController *toVC = naVc.topViewController;
 
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-    if ([specialId isEqualToString:@"(null)"]) {
+    if ([specialId isEqualToString:@""]) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
         [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
             NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
@@ -566,7 +566,7 @@ static CGFloat const likeAndShareHeight = 55;
 
 
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-    if ([specialId isEqualToString:@"(null)"]) {
+    if ([specialId isEqualToString:@""]) {
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
         [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
             NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];

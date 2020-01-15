@@ -12,7 +12,7 @@
 #import "GXNetTool.h"
 #import "CZAddressController.h"
 #import "CZAddressModel.h"
-#import "CZOrderController.h" // 订单
+#import "CZOrderDetailController.h" // 订单
 
 @interface CZAffirmPointController () <CZAddressControllerDelegate>
 /** <#注释#> */
@@ -37,6 +37,9 @@
 /** 添加地址的view */
 @property (nonatomic, weak) IBOutlet UIView *addressView;
 @property (nonatomic, weak) IBOutlet UIView *changeAddressView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressViewTopMargin;
+
+
 
 @end
 
@@ -64,6 +67,10 @@
     self.moneyLabel.text = [NSString stringWithFormat:@"%@极币", self.dataSource[@"exchangePoint"]];
     self.moneyLabel1.text = [NSString stringWithFormat:@"%@极币", self.dataSource[@"exchangePoint"]];
     [self.bgImage sd_setImageWithURL:[NSURL URLWithString:self.dataSource[@"img"]]];
+
+
+    // type类型：0普通商品，1限购一次，2视频会员类，3津贴
+    [self setupAddressViewisHidden];
 }
 
 #pragma mark - 事件
@@ -78,12 +85,17 @@
 /** 立即兑换 */
 - (IBAction)commit
 {
-    if (!self.model.addressId) {
+    if (!self.model.addressId && ![self setupAddressViewisHidden]) {
         [CZProgressHUD showProgressHUDWithText:@"地址不能为空"];
         // 取消菊花
         [CZProgressHUD hideAfterDelay:1];
         return;
     }
+    [CZOrderModel setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                    @"orderId" : @"id"
+                 };
+    }];
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     // 要关注对象ID
@@ -93,7 +105,9 @@
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/point/exchange"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            CZOrderController *vc = [[CZOrderController alloc] init];
+            CZOrderModel *model = [CZOrderModel objectWithKeyValues:result[@"data"]];
+            CZOrderDetailController *vc = [[CZOrderDetailController alloc] init];
+            vc.model = model;
             [self.navigationController pushViewController:vc animated:YES];
             [CZProgressHUD showProgressHUDWithText:@"商品兑换成功"];
         } else {
@@ -162,6 +176,26 @@
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
     }];
+}
+
+#pragma mark - 事件
+- (BOOL)setupAddressViewisHidden
+{
+    // type类型：0普通商品，1限购一次，2视频会员类，3津贴
+       switch ([self.dataSource[@"type"] integerValue]) {
+           case 2:
+               self.addressView.hidden = YES;
+               self.changeAddressView.hidden = YES;
+               self.addressViewTopMargin.constant = -96;
+               return YES;
+           case 3:
+               self.addressView.hidden = YES;
+               self.changeAddressView.hidden = YES;
+               self.addressViewTopMargin.constant = -96;
+               return YES;
+           default:
+               return NO;
+       }
 }
 
 @end

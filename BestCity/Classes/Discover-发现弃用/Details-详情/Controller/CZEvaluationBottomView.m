@@ -50,7 +50,7 @@
     self.otherPricelabel.attributedText = [other addStrikethroughWithRange:NSMakeRange(0, other.length)];
     self.otherPricelabel.hidden = ([paramDic[@"buyPrice"] floatValue] == [paramDic[@"otherPrice"] floatValue]);
     self.couponPriceLabel.text = [NSString stringWithFormat:@"优惠券 ¥%.0f", [paramDic[@"couponPrice"] floatValue]];
-    self.feeLabel.text = [NSString stringWithFormat:@"  补贴 ¥%.2f  ", [paramDic[@"fee"] floatValue]];
+    self.feeLabel.text = [NSString stringWithFormat:@"  返 ¥%.2f  ", [paramDic[@"fee"] floatValue]];
 
     if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"]) {
         [[self.couponPriceLabel superview] setHidden:YES];
@@ -59,11 +59,11 @@
         }];
     }
 
-    if ([self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+    if ([self.feeLabel.text isEqualToString:@"  返 ¥0.00  "]) {
         [self.feeLabel setHidden:YES];
     }
 
-    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  补贴 ¥0.00  "]) {
+    if ([self.couponPriceLabel.text isEqualToString:@"优惠券 ¥0"] && [self.feeLabel.text isEqualToString:@"  返 ¥0.00  "]) {
         self.actualPriceLabelBottomMragin.constant = (55 - 29) / 2.0;
     }
 

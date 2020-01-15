@@ -34,7 +34,7 @@
                             <rect key="frame" x="32" y="21" width="216.5" height="57.5"/>
                             <attributedString key="attributedText">
                                 <fragment>
-                                    <string key="content">再恭喜完成首次下单
+                                    <string key="content">恭喜完成首次下单
 额外送你10元津贴已经到账</string>
                                     <attributes>
                                         <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

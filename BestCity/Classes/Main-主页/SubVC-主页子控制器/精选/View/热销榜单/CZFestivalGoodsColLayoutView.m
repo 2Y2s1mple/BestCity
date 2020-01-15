@@ -31,7 +31,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *couponPriceLabel;
 /** 券价格背景 */
 @property (nonatomic, weak) IBOutlet UIView *couponPriceView;
-/** 补贴价格 */
+/** 返现价格 */
 @property (nonatomic, weak) IBOutlet UILabel *feeLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *feeLabelMargin;
@@ -77,7 +77,7 @@
 
     self.couponPriceLabel.text = [NSString stringWithFormat:@"券%.0f", [dataDic[@"couponPrice"] floatValue]];
 
-    self.feeLabel.text = [NSString stringWithFormat:@"  补%.2f  ", [dataDic[@"fee"] floatValue]];
+    self.feeLabel.text = [NSString stringWithFormat:@"  返%.2f  ", [dataDic[@"fee"] floatValue]];
 
     if ([self.couponPriceLabel.text isEqualToString:@"券0"]) {
         self.couponPriceView.hidden = YES;
@@ -88,13 +88,13 @@
         self.feeLabelMargin.constant = 5;
     }
 
-    if ([self.feeLabel.text isEqualToString:@"  补贴0.00  "]) {
+    if ([self.feeLabel.text isEqualToString:@"  返现0.00  "]) {
         [self.feeLabel setHidden:YES];
     } else {
         [self.feeLabel setHidden:NO];
     }
 
-    if ([self.couponPriceLabel.text isEqualToString:@"券0"] && [self.feeLabel.text isEqualToString:@"  补0.00  "]) {
+    if ([self.couponPriceLabel.text isEqualToString:@"券0"] && [self.feeLabel.text isEqualToString:@"  返0.00  "]) {
         [self.feeLabel setHidden:YES];
         self.couponPriceView.hidden = YES;
         self.actualPriceLabelBottomMragin.constant = -13;

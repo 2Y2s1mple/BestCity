@@ -48,11 +48,12 @@
     self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
 
-    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
-        JPSERVER_URL = [CZSaveTool objectForKey:@"currentPath"];
-    } else {
-        JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/";
-    }
+    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";
+//    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
+//        JPSERVER_URL = [CZSaveTool objectForKey:@"currentPath"];
+//    } else {
+//        JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/";
+//    }
 
 
     // 设置跟视图

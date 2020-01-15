@@ -14,6 +14,9 @@
 
 @interface CZOrderDetailController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topRadY;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIView *addressView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressViewBottomMargin;
 /** 姓名 */
 @property (nonatomic, weak) IBOutlet UILabel *addressNameLabel;
 /** 电话号码 */
@@ -98,10 +101,23 @@ static CGFloat const likeAndShareHeight = 49;
         [btn addTarget:self action:@selector(generalPaste) forControlEvents:UIControlEventTouchUpInside];
     }
 
-
+    if ( [param[@"title"]  isEqual: @"激活码"]) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.x = CZGetX(label1) + 20;
+        btn.width = 45;
+        btn.height = 25;
+        [btn setTitle:@"复制" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
+        btn.layer.cornerRadius = 3;
+        btn.layer.masksToBounds = YES;
+        btn.layer.borderWidth = 1;
+        btn.layer.borderColor = CZGlobalGray.CGColor;
+        [containerView addSubview:btn];
+        [btn addTarget:self action:@selector(generalPaste1) forControlEvents:UIControlEventTouchUpInside];
+    }
     [self.bottomView addSubview:containerView];
 }
-
 #pragma mark -- end
 
 #pragma mark - 生命周期
@@ -109,6 +125,7 @@ static CGFloat const likeAndShareHeight = 49;
     [super viewDidLoad];
     // 导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"订单详情" rightBtnTitle:nil rightBtnAction:nil ];
+    navigationView.delegate = self;
     [self.view addSubview:navigationView];
     self.topRadY.constant = CZGetY(navigationView);
     
@@ -122,11 +139,25 @@ static CGFloat const likeAndShareHeight = 49;
 
 
 #pragma mark - 事件
+- (void)popViewController
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 /** 复制到剪切板 */
 - (void)generalPaste
 {
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
     posteboard.string = self.model.expresssn;
+    [CZProgressHUD showProgressHUDWithText:@"复制成功"];
+    [CZProgressHUD hideAfterDelay:1.5];
+}
+
+/** 复制到剪切板 */
+- (void)generalPaste1
+{
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    posteboard.string = self.model.remark;
     [CZProgressHUD showProgressHUDWithText:@"复制成功"];
     [CZProgressHUD hideAfterDelay:1.5];
 }
@@ -138,11 +169,27 @@ static CGFloat const likeAndShareHeight = 49;
     self.addressNumberLabel.text = self.model.mobile;
     self.addressLabel.text = self.model.address;
 
-    if ([self.model.goodsType  isEqual: @(2)]) {
-        self.tilteLabel.text = @"极币商城";
-    } else {
-        self.tilteLabel.text = @"免费试用商品";
+
+    switch ([self.model.goodsType integerValue]) {
+        case 1:
+            self.tilteLabel.text = @"免费试用";
+            break;
+        case 2:
+            self.tilteLabel.text = @"积分商城";
+            break;
+        case 21:
+            self.tilteLabel.text = @"积分商城会员卡";
+            break;
+        case 22:
+            self.tilteLabel.text = @"积分商城津贴";
+            break;
+        case 3:
+            self.tilteLabel.text = @"免单";
+            break;
+        default:
+            break;
     }
+
     self.subTitleLabel.text = self.model.goodsName;
     self.subTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
     self.moneyLabel.text = [NSString stringWithFormat:@"%@极币", self.model.point];
@@ -211,36 +258,80 @@ static CGFloat const likeAndShareHeight = 49;
             [self.buyBtn setTitle:@"已收货" forState:UIControlStateNormal];
             [self.buyBtn setBackgroundColor:CZGlobalGray];
             self.buyBtn.enabled = NO;
-            NSArray *arr = @[
-                             @{
-                                 @"title" : @"订单号",
-                                 @"title1" : self.model.ordersn
-                                 },
-                             @{
-                                 @"title" : @"快递号",
-                                 @"title1" : (self.model.expresssn == nil) ? @"" : self.model.expresssn
-                                 },
-                             @{
-                                 @"title" : @"快递公司",
-                                 @"title1" : self.model.expresscom
-                                 },
-                             @{
-                                 @"title" : @"支付方式",
-                                 @"title1" : @"线上支付"
-                                 },
-                             @{
-                                 @"title" : @"下单时间",
-                                 @"title1" : self.model.payTime
-                                 },
-                             @{
-                                 @"title" : @"发件时间",
-                                 @"title1" : (self.model.sendTime == nil) ? @"昨天" :  self.model.sendTime
-                                 },
-                             @{
-                                 @"title" : @"收件时间",
-                                 @"title1" : (self.model.finishTime == nil) ? @"今天去哪" :  self.model.finishTime
-                                 }
-                             ];
+
+            NSArray *arr;
+            if ([self.model.goodsType integerValue] == 21) {
+                self.addressView.hidden = YES;
+                self.addressViewBottomMargin.constant = -82;
+                arr = @[
+                @{
+                    @"title" : @"订单号",
+                    @"title1" : self.model.ordersn
+                    },
+                @{
+                    @"title" : @"支付方式",
+                    @"title1" : @"线上支付"
+                    },
+                @{
+                    @"title" : @"下单时间",
+                    @"title1" : self.model.payTime
+                    },
+                @{
+                    @"title" : @"激活码",
+                    @"title1" : self.model.remark
+                },
+                ];
+
+            }else if ([self.model.goodsType integerValue] == 22) {
+                self.addressView.hidden = YES;
+                self.addressViewBottomMargin.constant = -82;
+                arr = @[
+                @{
+                    @"title" : @"订单号",
+                    @"title1" : self.model.ordersn
+                    },
+                @{
+                    @"title" : @"支付方式",
+                    @"title1" : @"线上支付"
+                    },
+                @{
+                    @"title" : @"下单时间",
+                    @"title1" : self.model.payTime
+                    }
+                ];
+
+            } else {
+                arr = @[
+                @{
+                    @"title" : @"订单号",
+                    @"title1" : self.model.ordersn
+                    },
+                @{
+                    @"title" : @"快递号",
+                    @"title1" : (self.model.expresssn == nil) ? @"" : self.model.expresssn
+                    },
+                @{
+                    @"title" : @"快递公司",
+                    @"title1" : self.model.expresscom
+                    },
+                @{
+                    @"title" : @"支付方式",
+                    @"title1" : @"线上支付"
+                    },
+                @{
+                    @"title" : @"下单时间",
+                    @"title1" : self.model.payTime
+                    },
+                @{
+                    @"title" : @"发件时间",
+                    @"title1" : (self.model.sendTime == nil) ? @"昨天" :  self.model.sendTime
+                    },
+                @{
+                    @"title" : @"收件时间",
+                    @"title1" : (self.model.finishTime == nil) ? @"今天去哪" :  self.model.finishTime
+                    }
+                ];
+            }
             for (int i = 0; i < arr.count; i++) {
                 [self setupBottomView:arr[i] frameY:(25 * i) + 20];
             }

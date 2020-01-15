@@ -34,7 +34,7 @@
 /** <#注释#> */
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
-@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2补贴，3销量
+@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2返现，3销量
 /** 是否是条形布局 */
 @property (nonatomic, assign) BOOL layoutType;
 /** <#注释#> */
@@ -168,7 +168,7 @@
     self.page++;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"asc"] = self.asc; // (1正序，0倒序);
-    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
+    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2返现，3销量
     param[@"page"] = @(self.page);
 
     //获取详情数据
@@ -199,7 +199,7 @@
     self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"asc"] = dataParam[@"asc"]; // (1正序，0倒序);
-    param[@"orderByType"] = dataParam[@"orderByType"]; // 0综合，1价格，2补贴，3销量
+    param[@"orderByType"] = dataParam[@"orderByType"]; // 0综合，1价格，2返现，3销量
     param[@"page"] = @(self.page);
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {

@@ -188,8 +188,8 @@
                             <constraint firstAttribute="bottom" secondItem="cfN-G4-paC" secondAttribute="bottom" id="yhd-nd-PgM"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="补贴 ¥3.21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAN-qB-MuF">
-                        <rect key="frame" x="227" y="118.5" width="55" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="返 ¥3.21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAN-qB-MuF">
+                        <rect key="frame" x="227" y="118.5" width="43.5" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="JX2-Yf-BrI"/>
                         </constraints>
@@ -215,7 +215,7 @@
                             <fragment content="¥699.00">
                                 <attributes>
                                     <color key="NSColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
-                                    <font key="NSFont" metaFont="cellTitle"/>
+                                    <font key="NSFont" metaFont="label" size="12"/>
                                     <integer key="NSStrikethrough" value="1"/>
                                 </attributes>
                             </fragment>

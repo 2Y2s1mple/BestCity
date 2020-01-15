@@ -192,7 +192,7 @@
         titleView.width = SCR_WIDTH;
         titleView.height = 38;
         [titleView setBlcok:^(BOOL isLine, BOOL isAsc, NSInteger index) {
-            // orderByType : 0综合，1价格，2补贴，3销量
+            // orderByType : 0综合，1价格，2返现，3销量
             [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMVSDefaultVCDelegate" object:nil userInfo:@{@"orderByType" : @(index), @"asc" : @(isAsc), @"layoutType" : @(isLine)}];
         }];
         [_headerView addSubview:titleView];

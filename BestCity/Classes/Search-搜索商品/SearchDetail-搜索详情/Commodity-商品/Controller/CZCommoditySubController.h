@@ -21,7 +21,7 @@
 /** 优惠券信息 */
 @property (nonatomic, strong) CZCouponsModel *couponData;
 
-/** 极品城补贴 */
+/** 极品城返现 */
 @property (nonatomic, strong) NSString *fee;
 
 @end

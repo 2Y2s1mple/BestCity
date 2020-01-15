@@ -51,7 +51,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *messageCount;
-// 我的补贴
+// 我的返现
 /** 共省 */
 @property (nonatomic, weak) IBOutlet UILabel *totalFeeLabel;
 /** 可提现 */
@@ -100,7 +100,7 @@
     [self.navigationController pushViewController:hotVc animated:YES];
 }
 
-#pragma mark - 我的钱包, 我的补贴
+#pragma mark - 我的钱包, 我的返现
 - (IBAction)walletAction:(UIButton *)sender {
     NSString *text = @"我的--我的钱包";
     NSDictionary *context = @{@"mine" : text};

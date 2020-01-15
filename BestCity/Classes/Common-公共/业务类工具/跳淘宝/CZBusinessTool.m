@@ -13,10 +13,15 @@
 #import "TSLWebViewController.h"
 #import "CZOpenAlibcTrade.h"
 #import "CZSubFreePreferentialController.h"
+#import "CZUserInfoTool.h"
+
+#import "CZUpdataView.h"
+#import "CZAlertView3Controller.h"
+#import "CZAlertTool.h"
 
 @implementation CZBusinessTool
-// 购买跳淘宝, 之后弹出特惠购
-+ (void)buyBtnActionWithId:(NSString *)Id
+#pragma mark - 购买跳淘宝, 之后弹出特惠购
++ (void)buyBtnActionWithId:(NSString *)Id alertTitle:(NSString *)alertTitle
 {
     if ([JPTOKEN length] <= 0) {
         CZLoginController *vc = [CZLoginController shareLoginController];
@@ -24,8 +29,10 @@
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
     }
-
-    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"" message:@"您将前往淘宝0元购买此商品，仅限首单" preferredStyle:UIAlertControllerStyleAlert];
+    NSString *string = @"dsddd"
+                        @"您将前往淘宝购买此商品，下单立减"
+    @"您将前往淘宝0元购买此商品，仅限首单";
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"" message:alertTitle preferredStyle:UIAlertControllerStyleAlert];
 
     [alertView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
 
@@ -35,7 +42,7 @@
         UINavigationController *naVc = tabbar.selectedViewController;
         UIViewController *toVC = naVc.topViewController;
         NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-        if ([specialId isEqualToString:@"(null)"]) {
+        if ([specialId isEqualToString:@""]) {
             [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
             [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
                 NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
@@ -43,6 +50,8 @@
                 TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
                     [CZProgressHUD showProgressHUDWithText:@"授权成功"];
                     [CZProgressHUD hideAfterDelay:1.5];
+                    // 为了同步关联的淘宝账号
+                    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
 
                 }];
                 webVc.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -120,4 +129,55 @@
 
     }];
 }
+
+#pragma mark - 弹窗工具
++ (void)loadAlertView
+{
+    //获取数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/getPopInfo"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSArray *list = result[@"data"];
+            if (list.count == 0) {
+                [CZAlertTool alertRule];
+                return;
+            }
+
+
+            // 判断数组中有几个
+            if (list.count > 1) { // 两个以上
+                alertList_ = [NSMutableArray array];
+                for (int i = 0; i < list.count; i++) {
+                    CZUpdataView *backView = [CZUpdataView buyingView];
+                    backView.frame = [UIScreen mainScreen].bounds;
+                    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                    backView.paramDic = list[i][@"data"];
+                    [alertList_ addObject:backView];
+                }
+
+                [[UIApplication sharedApplication].keyWindow addSubview:alertList_[0]];
+
+            } else { // 一个
+                if ([list[0][@"type"] integerValue] == 1 || [list[0][@"type"] integerValue] == 0) { // 免单活动 一般活动
+                    CZUpdataView *backView = [CZUpdataView buyingView];
+                    backView.frame = [UIScreen mainScreen].bounds;
+                    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                    [[UIApplication sharedApplication].keyWindow addSubview: backView];
+                    backView.paramDic = list[0][@"data"];
+                } else { // 完成首单
+                    CZAlertView3Controller *vc = [[CZAlertView3Controller alloc] init];
+                    vc.param = result[@"data"];
+                    vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                    CURRENTVC(currentVc);
+                    [currentVc presentViewController:vc animated:YES completion:nil];
+                }
+            }
+        }
+    } failure:^(NSError *error) {
+
+    }];
+}
+
+
+
+
 @end

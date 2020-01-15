@@ -28,7 +28,7 @@
 
 /** <#注释#> */
 @property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
-@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2补贴，3销量
+@property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2返现，3销量
 @property (nonatomic, assign) NSInteger page;
 
 /** <#注释#> */
@@ -171,7 +171,7 @@
     CGFloat itemWidth = 42;
     CGFloat space = (SCR_WIDTH - 2 *leftRightSpace - itemWidth * 5) / 4;
 
-    NSArray *list = @[@"综合", @"价格", @"补贴", @"销量", @""];
+    NSArray *list = @[@"综合", @"价格", @"返现", @"销量", @""];
     for (int i = 0; i < list.count; i++) {
         UIButton *btn = [[UIButton alloc] init];
         btn.tag = 105 + i;
@@ -183,7 +183,7 @@
         [btn setTitle:list[i] forState:UIControlStateNormal];
         [backView addSubview:btn];
         [btn addTarget:self action:@selector(titleAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.orderByType = @"0"; // 0综合，1价格，2补贴，3销量
+        self.orderByType = @"0"; // 0综合，1价格，2返现，3销量
         self.asc = @"1"; // (1正序，0倒序)
         if (i == 0) {
             [btn setTitleColor:UIColorFromRGB(0x202020) forState:UIControlStateNormal];
@@ -214,7 +214,7 @@
     if (self.recordBtn.tag == 106) {
         [self.recordBtn setImage:[UIImage imageNamed:@"search_asc_non"] forState:UIControlStateNormal];
     }
-    //（0综合，1价格，2补贴，3销量）
+    //（0综合，1价格，2返现，3销量）
     switch (sender.tag) {
         case 105:
             self.orderByType = @"0";
@@ -340,7 +340,7 @@
     param[@"deviceEncrypt"] = @"MD5";
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"keyword"] = self.searchText;
-    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
+    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2返现，3销量
     param[@"type"] = self.type; // 分类（1搜索极品城，2搜索淘宝）
     param[@"page"] = @(self.page);
 
@@ -394,7 +394,7 @@
     param[@"deviceEncrypt"] = @"MD5";
     param[@"asc"] = self.asc; // (1正序，0倒序);
     param[@"keyword"] = self.searchText;
-    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2补贴，3销量
+    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2返现，3销量
     param[@"type"] = self.type; // 分类（1搜索极品城，2搜索淘宝）
     param[@"page"] = @(self.page);
 
@@ -492,7 +492,6 @@
         guess.backgroundColor = [UIColor whiteColor];
         return guess;
     }
-
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -554,7 +553,6 @@
     CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
     vc.otherGoodsId = param[@"otherGoodsId"];
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 

@@ -86,7 +86,7 @@
     self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"type"] = @(1);
+    param[@"type"] = @(8);
     
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/collect/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
