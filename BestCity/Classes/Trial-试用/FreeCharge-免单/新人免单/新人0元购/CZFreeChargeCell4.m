@@ -48,13 +48,26 @@
     _model.cellHeight = 140;
 }
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView
++ (instancetype)cellWithTabelView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 {
     static NSString *ID = @"CZFreeChargeCell4";
     CZFreeChargeCell4 *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
     }
+    if (indexPath.row == 0) {
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 20 , 140) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(6, 6)];
+        CAShapeLayer *maskLayer = [[CAShapeLayer  alloc]  init];
+        maskLayer.frame = cell.bounds;
+        maskLayer.path = maskPath.CGPath;
+        cell.layer.mask = maskLayer;
+        } else if (indexPath.row == 6) {
+    //        UIBezierPath *bezierPath = [UIBezierPath  bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 40, 60) byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
+    //        CAShapeLayer *mask = [[CAShapeLayer alloc] init];
+    //        mask.frame = cell.bounds;
+    //        mask.path = bezierPath.CGPath;
+    //        cell.layer.mask = mask;
+        }
     return cell;
 }
 

@@ -7,10 +7,12 @@
 //
 
 #import "CZSubFreeChargeController.h"
+
 // 群组1
-#import "CZFreeChargeCell3.h"
+#import "CZFreeChargeHeaderView.h"
 #import "CZFreeChargeCell4.h"
-#import "CZFreeChargeCell5.h"
+#import "CZFreeChargeFooterView.h"
+
 
 #import "CZSubFreeChargeModel.h"
 #import "CZNavigationView.h"
@@ -18,7 +20,6 @@
 // 群组2
 #import "CZFreeChargeCell6.h"
 #import "CZFreeChargeCell7.h"
-
 #import "CZAlertView2Controller.h"
 
 @interface CZSubFreeChargeController () <UITableViewDataSource, UITableViewDelegate>
@@ -29,10 +30,8 @@
 @property (nonatomic, assign) NSInteger page;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
-/** 未展开数据 */
-@property (nonatomic, strong) NSMutableArray *upDataSource;
-/** 展开数据 */
-@property (nonatomic, strong) NSMutableArray *downDataSource;
+/** 数据个数 */
+@property (nonatomic, assign) NSInteger dataCount;
 /** 下面的数据 */
 @property (nonatomic, strong) NSMutableArray *group2DataSource;
 /** 我的津贴 */
@@ -43,9 +42,36 @@
 /** 给弹框的数据 */
 @property (nonatomic, strong) NSDictionary *alertViewParam;
 
+/** <#注释#> */
+@property (nonatomic, strong) CZFreeChargeFooterView *footerView;
+
 @end
 
 @implementation CZSubFreeChargeController
+
+- (CZFreeChargeFooterView *)footerView
+{
+    if (_footerView == nil) {
+        _footerView = [CZFreeChargeFooterView freeChargeFooterView];
+        [_footerView setBlock:^{
+            if (_footerView.isUpArrow == NO) {
+                self.dataCount = self.dataSource.count;
+//                [self.tableView reloadData];
+                _footerView.isUpArrow = YES;
+
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+//                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
+            } else {
+                self.dataCount = 2;
+//                [self.tableView reloadData];
+                _footerView.isUpArrow = NO;
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+            }
+        }];
+    }
+    return _footerView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +106,7 @@
 {
     if (_tableView == nil) {
        CGRect frame = CGRectMake(0, CZGetY(self.navigationView), SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0) - CZGetY(self.navigationView));
-        self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+        self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
         self.tableView.backgroundColor = UIColorFromRGB(0xEA4F17);
         self.tableView.estimatedRowHeight = 0;
         self.tableView.estimatedSectionHeaderHeight = 0;
@@ -99,10 +125,12 @@
 //    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadMoreTrailDataSorce)];
 }
 
-
-
+#pragma mark - 数据
 - (void)reloadNewTrailDataSorce
 {
+
+    self.footerView.isUpArrow = NO;
+
     // 结束尾部刷新
     [self.tableView.mj_footer endRefreshing];
     self.page = 1;
@@ -120,11 +148,14 @@
             self.alertViewParam = result[@"data"];
             self.allowance = result[@"data"][@"allowance"];
             self.officialWeChat = result[@"data"][@"officialWeChat"];
-            [self upArrowData:result[@"data"][@"newAllowanceGoodsList"]];
-            [self downArrowData:result[@"data"][@"newAllowanceGoodsList"]];
+
+            // 组1
+            self.dataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"][@"newAllowanceGoodsList"]];
+            self.dataCount = 2;
+
+            // 组2
             [self group2Data:result[@"data"][@"allowanceGoodsList"]];
 
-            self.dataSource = self.upDataSource;
             [self.tableView reloadData];
             // 结束刷新
         }
@@ -137,6 +168,8 @@
     }];
 }
 
+
+#pragma mark - 代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -145,7 +178,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return self.dataSource.count;
+        if (self.dataSource.count > 2) {
+            return self.dataCount;
+        } else {
+            return self.dataSource.count;
+        }
     } else {
         return self.group2DataSource.count;
     }
@@ -155,19 +192,9 @@
 {
     if (indexPath.section == 0) {
         CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
-        if ([model.typeNumber  isEqual: @(1)]) {
-            CZFreeChargeCell3 *cell = [CZFreeChargeCell3 cellWithTableView:tableView];
-            cell.model = model;
-            return cell;
-        } else if ([model.typeNumber  isEqual: @(100)] || [model.typeNumber  isEqual: @(101)]) {
-            CZFreeChargeCell5 *cell = [CZFreeChargeCell5 cellWithTableView:tableView];
-            cell.model = model;
-            return cell;
-        } else {
-            CZFreeChargeCell4 *cell = [CZFreeChargeCell4 cellWithTableView:tableView];
-            cell.model = model;
-            return cell;
-        }
+        CZFreeChargeCell4 *cell = [CZFreeChargeCell4 cellWithTabelView:tableView indexPath:indexPath];
+        cell.model = model;
+        return cell;
     } else {
         CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
         if ([model.typeNumber  isEqual: @(1)]) {
@@ -182,26 +209,54 @@
     }
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        CZFreeChargeHeaderView *v = [CZFreeChargeHeaderView freeChargeHeaderView];
+        return v;
+    } else {
+        return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        if (self.dataSource.count > 2) {
+            return self.footerView;
+        } else {
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 360;
+    } else {
+        return 0.01;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        if (self.dataSource.count > 2) {
+            return 55;
+        } else {
+            return 0.01;
+        }
+    } else {
+        return 0.01;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     if (indexPath.section == 0) {
-         CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
-         if ([model.typeNumber isEqual: @(100)]) {
-             self.dataSource = self.downDataSource;
-//             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
-//             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
-             [self.tableView reloadData];
-         } else if ([model.typeNumber isEqual: @(101)]) {
-             self.dataSource = self.upDataSource;
-//             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
-//             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
-             [self.tableView reloadData];
-         }
-     } else {
-         
-     }
+     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -212,50 +267,13 @@
     } else {
         CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
         return model.cellHeight;
-
     }
-
 }
 
 
 #pragma mark -- UI创建
 
 #pragma mark -- 数据处理
-- (void)upArrowData:(NSArray *)list
-{
-//    self.upDataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
-//    [self.upDataSource removeObjectsInRange:NSMakeRange(2, self.upDataSource.count - 2)];
-//    CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
-//    model1.officialWeChat = self.officialWeChat;
-//    model1.typeNumber = @(1);
-//    [self.upDataSource insertObject:model1 atIndex:0];
-//    CZSubFreeChargeModel *model2 = [[CZSubFreeChargeModel alloc] init];
-//    model2.typeNumber = @(100);
-//    [self.upDataSource addObject:model2];
-
-    self.upDataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
-    CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
-    model1.officialWeChat = self.officialWeChat;
-    model1.typeNumber = @(1);
-    [self.upDataSource insertObject:model1 atIndex:0];
-
-
-}
-
-- (void)downArrowData:(NSArray *)list
-{
-    self.downDataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
-    CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
-    model1.officialWeChat = self.officialWeChat;
-    model1.typeNumber = @(1);
-    [self.downDataSource insertObject:model1 atIndex:0];
-
-    CZSubFreeChargeModel *model2 = [[CZSubFreeChargeModel alloc] init];
-    model2.typeNumber = @(101);
-    [self.downDataSource addObject:model2];
-}
-
-
 - (void)group2Data:(NSArray *)list
 {
     self.group2DataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];

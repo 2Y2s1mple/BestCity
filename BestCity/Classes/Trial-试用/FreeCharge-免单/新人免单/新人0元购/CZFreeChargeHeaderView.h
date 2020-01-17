@@ -1,8 +1,8 @@
 //
-//  CZFreeChargeCell5.h
+//  CZFreeChargeHeaderView.h
 //  BestCity
 //
-//  Created by JasonBourne on 2020/1/2.
+//  Created by JasonBourne on 2020/1/17.
 //  Copyright © 2020 JasonBourne. All rights reserved.
 //
 
@@ -11,11 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZFreeChargeCell5 : UITableViewCell
+@interface CZFreeChargeHeaderView : UIView
 /** 数据 */
 @property (nonatomic, strong) CZSubFreeChargeModel *model;
-
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
++ (instancetype)freeChargeHeaderView;
 @end
 
 NS_ASSUME_NONNULL_END

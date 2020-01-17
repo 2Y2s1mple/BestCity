@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) CZSubFreeChargeModel *model;
 /** <#注释#> */
 //@property (nonatomic, strong) NSDictionary *model;
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
++ (instancetype)cellWithTabelView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

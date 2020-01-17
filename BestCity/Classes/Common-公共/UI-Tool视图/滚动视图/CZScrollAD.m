@@ -57,7 +57,7 @@
 - (NSTimer *)timer
 {
     if (_timer == nil ) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 + arc4random_uniform(10) / 10.0 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
     }
     return _timer;
 }
