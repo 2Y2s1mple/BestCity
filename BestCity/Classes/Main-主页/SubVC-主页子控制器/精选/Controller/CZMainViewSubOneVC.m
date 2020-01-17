@@ -11,7 +11,6 @@
 #import "GXNetTool.h"
 
 // 视图
-#import "CZAlertTool.h"
 #import <AdSupport/AdSupport.h>
 #import "KCUtilMd5.h"
 

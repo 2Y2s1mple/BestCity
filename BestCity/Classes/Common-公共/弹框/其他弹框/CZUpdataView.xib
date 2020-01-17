@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="f1K-SY-R4m" customClass="CZUpdataView">
+            <rect key="frame" x="0.0" y="0.0" width="364" height="539"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JL5-a1-URd">
+                    <rect key="frame" x="44.5" y="121" width="275" height="297"/>
+                    <subviews>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newPeople2" translatesAutoresizingMaskIntoConstraints="NO" id="HVD-yS-B6A">
+                            <rect key="frame" x="-11.5" y="-75" width="298" height="347"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="347" id="Dop-dc-cdZ"/>
+                                <constraint firstAttribute="width" constant="298" id="gXo-4E-jEg"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="7s3-Ay-Hsf" appends="YES" id="OG0-Te-lKk"/>
+                            </connections>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="297" id="5hb-pA-TOn"/>
+                        <constraint firstItem="HVD-yS-B6A" firstAttribute="centerY" secondItem="JL5-a1-URd" secondAttribute="centerY" constant="-50" id="MR6-4T-RDT"/>
+                        <constraint firstAttribute="width" constant="275" id="cJQ-8j-VPf"/>
+                        <constraint firstItem="HVD-yS-B6A" firstAttribute="centerX" secondItem="JL5-a1-URd" secondAttribute="centerX" id="i1c-Dw-jzY"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKY-Dc-sYW">
+                    <rect key="frame" x="166.5" y="418" width="31" height="31"/>
+                    <state key="normal" backgroundImage="hat-close"/>
+                    <connections>
+                        <action selector="deleteView" destination="f1K-SY-R4m" eventType="touchUpInside" id="6wB-5g-SwF"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.94509869810000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="JL5-a1-URd" firstAttribute="centerX" secondItem="f1K-SY-R4m" secondAttribute="centerX" id="P5u-eI-0aQ"/>
+                <constraint firstItem="KKY-Dc-sYW" firstAttribute="centerX" secondItem="f1K-SY-R4m" secondAttribute="centerX" id="g0d-zN-JwQ"/>
+                <constraint firstItem="KKY-Dc-sYW" firstAttribute="top" secondItem="JL5-a1-URd" secondAttribute="bottom" id="q00-Bi-aPx"/>
+                <constraint firstItem="JL5-a1-URd" firstAttribute="centerY" secondItem="f1K-SY-R4m" secondAttribute="centerY" id="vmG-po-dDC"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="buyingImage" destination="HVD-yS-B6A" id="IZA-9f-S8M"/>
+            </connections>
+            <point key="canvasLocation" x="149" y="-54"/>
+        </view>
+        <tapGestureRecognizer id="bC2-mA-FMd"/>
+        <tapGestureRecognizer id="7s3-Ay-Hsf">
+            <connections>
+                <action selector="buyingClicked:" destination="f1K-SY-R4m" id="3RG-fn-Hla"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="hat-close" width="31" height="31"/>
+        <image name="newPeople2" width="375" height="242"/>
+    </resources>
+</document>

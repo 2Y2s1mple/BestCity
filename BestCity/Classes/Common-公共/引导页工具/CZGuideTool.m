@@ -11,7 +11,6 @@
 #import "CZTabBarController.h"
 #define CZVERSION @"CZVersion"
 #import "GXNetTool.h"
-#import "CZNoviceGuidanceView.h"
 #import "CZUpdataManger.h"
 #import "CZGuideController.h"
 
@@ -37,7 +36,6 @@ BOOL oldUser;
     } else {
         oldUser = NO;
         [CZSaveTool setObject:curVersion forKey:CZVERSION];
-
         // 显示获得新人红包
         CURRENTVC(currentVc);
         CZAlertView1Controller *alert1 = [[CZAlertView1Controller alloc] init];

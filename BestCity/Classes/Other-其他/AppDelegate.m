@@ -13,7 +13,7 @@
 #import "CZOpenAlibcTrade.h"
 //#import "UMSocialSnsService.h"
 #import "GXNetTool.h"
-#import "CZAlertTool.h"
+
 #import "CZLaunchViewController.h"
 
 #import <MobLinkPro/IMLSDKRestoreDelegate.h>
@@ -48,7 +48,9 @@
     self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
 
-    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";
+
+    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/";
+//    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";
 //    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
 //        JPSERVER_URL = [CZSaveTool objectForKey:@"currentPath"];
 //    } else {
@@ -95,6 +97,15 @@
      restoreHandler(YES, MLPush);
 
     self.recordScene = scene;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        CURRENTVC(currentVc);
+        if (NSClassFromString(className) == [currentVc class]) {
+            // 5秒之后, 当前这个页面还在显示不清空
+        } else {
+            self.recordScene = nil;
+        }
+    });
 }
 
 - (void)IMLSDKCompleteRestore:(MLSDKScene *)scene

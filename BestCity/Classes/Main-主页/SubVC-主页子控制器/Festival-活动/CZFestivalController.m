@@ -18,7 +18,7 @@
 // 视图
 #import "CZFestivalCell.h"
 #import "CZScollerImageTool.h" // 轮播图
-#import "CZAlertTool.h"
+
 
 // 跳转
 #import "CZDChoiceDetailController.h"
@@ -76,7 +76,6 @@
     shareDic[@"shareUrl"] = @"https://www.jipincheng.cn/share/index11.html";
     shareDic[@"shareImg"] = [UIImage imageNamed:@"launchLogo.png"];
     CZShareView *share = [[CZShareView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    share.cententText = shareDic[@"content"];
     share.param = shareDic;
     [[UIApplication sharedApplication].keyWindow addSubview:share];
 }

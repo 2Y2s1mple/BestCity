@@ -8,7 +8,6 @@
 
 #import "CZFreeChargeCell7.h"
 #import "UIImageView+WebCache.h"
-#import "CZBusinessTool.h"
 #import "CZSubFreePreferentialController.h"
 
 @interface CZFreeChargeCell7 ()
@@ -90,6 +89,6 @@
 
 - (IBAction)bugBtnClicked:(UIButton *)sender {
     NSLog(@"----");
-    [CZBusinessTool buyBtnActionWithId:self.model.Id alertTitle:@"您将前往淘宝购买此商品，下单立减"];
+    [CZJIPINSynthesisTool buyBtnActionWithId:self.model.Id alertTitle:@"您将前往淘宝购买此商品，下单立减"];
 }
 @end

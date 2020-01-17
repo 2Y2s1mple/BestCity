@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZAlertView2Controller">
             <connections>
+                <outlet property="allowanceLabel" destination="LPi-HE-6NA" id="nOM-HR-Ksz"/>
                 <outlet property="imageView1" destination="dKc-kk-0hJ" id="0Aa-k9-NbC"/>
                 <outlet property="imageView2" destination="prC-N2-3V1" id="S7p-1O-Jti"/>
                 <outlet property="imageView3" destination="dBH-Xs-nH8" id="zB5-QU-dfW"/>

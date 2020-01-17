@@ -243,6 +243,12 @@
 // 跳转到新人专区
 - (void)pushPeopleNew
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     CURRENTVC(currentVc);
     CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
     [currentVc.navigationController pushViewController:vc animated:YES];
@@ -252,6 +258,12 @@
 // 跳特惠购
 - (void)pushPreferential
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     CURRENTVC(currentVc);
     CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
     [currentVc.navigationController pushViewController:vc animated:YES];
@@ -261,7 +273,7 @@
 - (void)pushMessageListView
 {
     TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/newZn.html"]];
-    vc.titleName = @"极品城购物返现说明";
+    vc.titleName = @"极品城省钱攻略";
     CURRENTVC(currentVc);
     [currentVc.navigationController pushViewController:vc animated:YES];
 }

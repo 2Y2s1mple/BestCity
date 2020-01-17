@@ -39,7 +39,6 @@
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/update"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         
-//        NSLog(@"result ----- %@", result);
         if ([result[@"msg"] isEqualToString:@"success"]) {
             [CZProgressHUD showProgressHUDWithText:@"修改成功"];
             

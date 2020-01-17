@@ -121,7 +121,6 @@
         _navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"" rightBtnTitle:[UIImage imageNamed:@"Forward"] rightBtnAction:^{
            // 分享
             CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-            share.cententText = @"";
             share.param = @{
                             @"shareUrl" : [NSString stringWithFormat:@"https://www.jipincheng.cn/share/question.html?id=%@", self.model.ID],
                             @"shareTitle" : self.model.title,

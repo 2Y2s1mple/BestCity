@@ -188,9 +188,15 @@
          CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
          if ([model.typeNumber isEqual: @(100)]) {
              self.dataSource = self.downDataSource;
+//             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+//             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
              [self.tableView reloadData];
          } else if ([model.typeNumber isEqual: @(101)]) {
              self.dataSource = self.upDataSource;
+//             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+//             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
              [self.tableView reloadData];
          }
      } else {
@@ -217,15 +223,23 @@
 #pragma mark -- 数据处理
 - (void)upArrowData:(NSArray *)list
 {
+//    self.upDataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
+//    [self.upDataSource removeObjectsInRange:NSMakeRange(2, self.upDataSource.count - 2)];
+//    CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
+//    model1.officialWeChat = self.officialWeChat;
+//    model1.typeNumber = @(1);
+//    [self.upDataSource insertObject:model1 atIndex:0];
+//    CZSubFreeChargeModel *model2 = [[CZSubFreeChargeModel alloc] init];
+//    model2.typeNumber = @(100);
+//    [self.upDataSource addObject:model2];
+
     self.upDataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:list];
-    [self.upDataSource removeObjectsInRange:NSMakeRange(2, self.upDataSource.count - 2)];
     CZSubFreeChargeModel *model1 = [[CZSubFreeChargeModel alloc] init];
     model1.officialWeChat = self.officialWeChat;
     model1.typeNumber = @(1);
     [self.upDataSource insertObject:model1 atIndex:0];
-    CZSubFreeChargeModel *model2 = [[CZSubFreeChargeModel alloc] init];
-    model2.typeNumber = @(100);
-    [self.upDataSource addObject:model2];
+
+
 }
 
 - (void)downArrowData:(NSArray *)list
@@ -235,6 +249,7 @@
     model1.officialWeChat = self.officialWeChat;
     model1.typeNumber = @(1);
     [self.downDataSource insertObject:model1 atIndex:0];
+
     CZSubFreeChargeModel *model2 = [[CZSubFreeChargeModel alloc] init];
     model2.typeNumber = @(101);
     [self.downDataSource addObject:model2];

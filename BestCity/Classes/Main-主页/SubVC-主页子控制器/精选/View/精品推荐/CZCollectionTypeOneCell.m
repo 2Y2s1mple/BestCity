@@ -9,6 +9,8 @@
 #import "CZCollectionTypeOneCell.h"
 #import "UIImageView+WebCache.h"
 #import "CZUMConfigure.h"
+#import "CZShareView.h"
+#import "CZShareViewController.h"
 
 @interface CZCollectionTypeOneCell ()
 /** 最大的背景view */
@@ -98,13 +100,14 @@
 }
 
 - (IBAction)share:(id)sender {
-    [self shareBtnAction];
+    NSString *url = [NSString stringWithFormat:@"https://www.jipincheng.cn/share/tbGoodsDetail.html?id=%@", self.dataDic[@"otherGoodsId"]];
+    NSString *title = self.dataDic[@"otherName"];
+    NSString *subTitle = @"【分享来自极品城APP】看评测选好物，省心更省钱";
+    NSString *thumImage = self.dataDic[@"img"];
+    NSString *object = self.dataDic[@"otherGoodsId"];
+    [CZJIPINSynthesisTool jumpShareViewWithUrl:url Title:title subTitle:subTitle thumImage:thumImage object:object];
 }
 
-- (void)shareBtnAction
-{
-    CURRENTVC(currentVc);
-    [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.dataDic[@"otherName"] subTitle:@"分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.dataDic[@"img"] shareType:1125 object:self.dataDic[@"otherGoodsId"]];
-}
+
 
 @end

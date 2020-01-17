@@ -192,14 +192,8 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"删除");
-        CZUpdataView *backView = [CZUpdataView reminderView];
-        backView.frame = [UIScreen mainScreen].bounds;
-        backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-        [[UIApplication sharedApplication].keyWindow addSubview: backView];
-        [backView setConfirmBlock:^{
-            CZETestModel *model = self.dataSource[indexPath.row];
-            [self deleteItemID: model.articleId atIndexPath:indexPath];
-        }];
+        CZETestModel *model = self.dataSource[indexPath.row];
+        [self deleteItemID: model.articleId atIndexPath:indexPath];
     }
 }
 

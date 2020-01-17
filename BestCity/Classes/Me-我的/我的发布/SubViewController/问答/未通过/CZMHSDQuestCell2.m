@@ -58,14 +58,7 @@
 /** <#注释#> */
 - (IBAction)deleteAction
 {
-    CZUpdataView *backView = [CZUpdataView reminderView];
-    backView.frame = [UIScreen mainScreen].bounds;
-    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-    [[UIApplication sharedApplication].keyWindow addSubview: backView];
-    backView.textString = @"话题一旦删除，将无法找回";
-    [backView setConfirmBlock:^{
-        [self deleteQuest];
-    }];
+    [self deleteQuest];
 }
 
 // 删除接口

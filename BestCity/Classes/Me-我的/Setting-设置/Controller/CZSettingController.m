@@ -76,6 +76,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"user"];
         // 删除token
         [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"token"];
+
+        [[NSUserDefaults standardUserDefaults] synchronize];
         // 返回上一页
         CZLoginController *vc = [CZLoginController shareLoginController];
         vc.isLogin = NO;

@@ -80,6 +80,7 @@
 {
     // 转菊花
     [CZProgressHUD showProgressHUDWithText:nil];
+    [CZProgressHUD hideAfterDelay:5];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {

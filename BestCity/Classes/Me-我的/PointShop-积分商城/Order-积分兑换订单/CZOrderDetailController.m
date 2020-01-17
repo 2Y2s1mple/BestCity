@@ -10,6 +10,7 @@
 #import "CZNavigationView.h"
 #import "UIImageView+WebCache.h"
 #import "GXNetTool.h"
+#import "CZMyPointsController.h"
 
 
 @interface CZOrderDetailController ()
@@ -141,7 +142,11 @@ static CGFloat const likeAndShareHeight = 49;
 #pragma mark - 事件
 - (void)popViewController
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[CZMyPointsController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
 }
 
 /** 复制到剪切板 */

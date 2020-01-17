@@ -239,7 +239,7 @@ static id _instance;
     [[UIApplication sharedApplication].keyWindow addSubview:alertView];
 
 
-    [CZProgressHUD showProgressHUDWithText:@"正在启动微信, 请等待..."];
+    [CZProgressHUD showProgressHUDWithText:@"正在启动, 请等待..."];
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:vc completion:^(id data, NSError *error) {
         if (error) {

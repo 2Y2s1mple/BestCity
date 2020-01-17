@@ -156,11 +156,8 @@
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/question/addQuestion"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
             // 判断是否更新
-            CZUpdataView *backView = [CZUpdataView reviewView];
-            backView.frame = [UIScreen mainScreen].bounds;
-            backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-            [[UIApplication sharedApplication].keyWindow addSubview: backView];
-            [self.navigationController popViewControllerAnimated:YES];
+            [CZProgressHUD showProgressHUDWithText:@"提交成功"];
+            [CZProgressHUD hideAfterDelay:1.5];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"提交失败"];
             [CZProgressHUD hideAfterDelay:1.5];

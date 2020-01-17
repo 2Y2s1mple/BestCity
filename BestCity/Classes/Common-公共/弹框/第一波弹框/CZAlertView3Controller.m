@@ -8,6 +8,7 @@
 
 #import "CZAlertView3Controller.h"
 #import "UIImageView+WebCache.h"
+#import "CZSubFreePreferentialController.h"
 
 @interface CZAlertView3Controller ()
 @property (nonatomic, weak) IBOutlet UIImageView *imageView1;
@@ -72,6 +73,18 @@
 - (IBAction)dismiss:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)pushDetail:(id)sender {
+    CURRENTVC(currentVc);
+    if ([currentVc isKindOfClass:[CZSubFreePreferentialController class]]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
+        [currentVc.navigationController pushViewController:vc animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 
 
 @end

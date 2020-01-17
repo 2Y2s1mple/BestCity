@@ -14,6 +14,9 @@
 @property (nonatomic, weak) IBOutlet UIImageView *imageView1;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView2;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView3;
+
+/**  */
+@property (nonatomic, weak) IBOutlet UILabel *allowanceLabel;
 @end
 
 @implementation CZAlertView2Controller
@@ -30,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSArray *list = self.param[@"newAllowanceGoodsList"];
+    self.allowanceLabel.text = [NSString stringWithFormat:@"还有%@元津贴仍未使用下单立减当钱花", self.param[@"allowance"]];
 
     for (int i = 0; i < list.count; i++) {
 

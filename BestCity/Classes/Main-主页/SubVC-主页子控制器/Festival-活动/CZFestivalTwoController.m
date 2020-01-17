@@ -72,7 +72,6 @@
         shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/share/category11.html?id=%@", self.categoryId];
         shareDic[@"shareImg"] = [UIImage imageNamed:@"launchLogo.png"];
         CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
-        share.cententText = shareDic[@"content"];
         share.param = shareDic;
         [self.view addSubview:share];
     } ];

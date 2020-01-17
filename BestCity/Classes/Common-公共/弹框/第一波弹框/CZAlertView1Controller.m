@@ -48,6 +48,8 @@
 - (IBAction)caiBtnAction:(UIButton *)sender {
     if (sender.selected) {
         [self dismissViewControllerAnimated:YES completion:nil];
+        // 记录新人邀请点击
+        didClickedNewPeople = YES;
         if ([JPTOKEN length] <= 0) {
             CZLoginController *vc = [CZLoginController shareLoginController];
             UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];

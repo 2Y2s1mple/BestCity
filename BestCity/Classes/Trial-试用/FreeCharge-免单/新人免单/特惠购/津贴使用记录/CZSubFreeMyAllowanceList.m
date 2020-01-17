@@ -14,6 +14,7 @@
 
 // 工具
 #import "GXNetTool.h"
+#import "CZNoDataView.h"
 
 @interface CZSubFreeMyAllowanceList () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -23,10 +24,22 @@
 @property (nonatomic, assign) NSInteger page;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+/** 无数据 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 
 @end
 
 @implementation CZSubFreeMyAllowanceList
+
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 170;
+    }
+    return _noDataView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,6 +78,13 @@
     //获取数据
     [GXNetTool GetNetWithUrl:urlStr body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            if ([result[@"data"] count] > 0) {
+                // 没有数据图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 没有数据图片
+                [self.tableView addSubview:self.noDataView];
+            }
             self.dataSource = result[@"data"];
             [self.tableView reloadData];
             // 结束刷新
@@ -110,6 +130,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 160;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *model = self.dataSource[indexPath.row];
+    [CZJIPINSynthesisTool jumpTaobaoWithUrlString:model[@"allowanceUrl"]];
 }
 
 

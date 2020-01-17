@@ -17,7 +17,7 @@
 #import "CZMeController.h"
 #import "CZSettingController.h"
 #import "CZSubFreeChargeController.h" // 新人专区
-#import "CZBusinessTool.h"
+
 // 工具
 #import <TCWebCodesSDK/TCWebCodesBridge.h> // 腾讯验证码
 
@@ -246,6 +246,7 @@ static id instancet_;
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    return;
     self.recoredClickedCount++;
     NSLog(@"-----");
     if (self.recoredClickedCount == 15 && ![JPSERVER_URL  isEqual: @"http://192.168.1.84:8081/qualityshop-api/"]) {
@@ -310,7 +311,7 @@ static id instancet_;
 
 - (void)loadUserAlert
 {
-    [CZBusinessTool loadAlertView];
+    [CZJIPINSynthesisTool loadAlertView];
 
 }
 

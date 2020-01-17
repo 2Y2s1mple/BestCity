@@ -13,7 +13,7 @@
 #import "CZMainViewSearch.h"
 #import "CZLabel.h"
 #import "CZRemindLoginView.h"
-#import "CZAlertTool.h"
+#import "CZJIPINSynthesisTool.h"
 #import "CZGuideTool.h" // 新人弹框
 
 // 子视图
@@ -123,7 +123,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [CZAlertTool alertRule];
+    [CZJIPINSynthesisTool pasteboardAlertViewRule];
 }
 
 #pragma mark - UI创建
@@ -248,7 +248,7 @@
 // 复制弹出搜索弹框
 - (void)showSearchAlert
 {
-    [CZAlertTool alertRule];
+    [CZJIPINSynthesisTool pasteboardAlertViewRule];
 }
 
 
