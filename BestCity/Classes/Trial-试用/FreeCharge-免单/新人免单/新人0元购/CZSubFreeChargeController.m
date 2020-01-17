@@ -213,6 +213,7 @@
 {
     if (section == 0) {
         CZFreeChargeHeaderView *v = [CZFreeChargeHeaderView freeChargeHeaderView];
+        v.officialWeChat = self.officialWeChat;
         return v;
     } else {
         return nil;

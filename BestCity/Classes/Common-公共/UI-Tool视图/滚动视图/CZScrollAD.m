@@ -57,7 +57,7 @@
 - (NSTimer *)timer
 {
     if (_timer == nil ) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 + arc4random_uniform(10) / 10.0 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(nextpage) userInfo:nil repeats:YES];
     }
     return _timer;
 }
@@ -89,7 +89,9 @@
 {
     [self addSubview:self.collectionView];
 //    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:100 / 2] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
-    [self.timer fire];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(arc4random_uniform(10) / 10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self timer];
+    });
 }
 
 -(UICollectionView *)collectionView {

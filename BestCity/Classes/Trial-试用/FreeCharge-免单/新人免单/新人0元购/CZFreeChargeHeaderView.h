@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZSubFreeChargeModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZFreeChargeHeaderView : UIView
-/** 数据 */
-@property (nonatomic, strong) CZSubFreeChargeModel *model;
+/** 官方微信 */
+@property (nonatomic, strong) NSString *officialWeChat;
 + (instancetype)freeChargeHeaderView;
 @end
 
