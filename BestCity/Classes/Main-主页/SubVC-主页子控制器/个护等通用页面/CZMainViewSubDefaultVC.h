@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZMainViewSubDefaultVC : UIViewController
 /** <#注释#> */
 @property (nonatomic, strong) NSString *category1Id;
+/** 代号 */
+@property (nonatomic, strong) NSString *statistics;
 @end
 
 NS_ASSUME_NONNULL_END

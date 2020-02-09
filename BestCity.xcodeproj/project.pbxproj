@@ -279,6 +279,7 @@
 		97705CD52108495D00485D64 /* CZHotSaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97705CD32108495D00485D64 /* CZHotSaleCell.xib */; };
 		97705CD82108595600485D64 /* CALayer+LayerColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CD72108595600485D64 /* CALayer+LayerColor.m */; };
 		97705CE92108733F00485D64 /* CZNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97705CE82108733F00485D64 /* CZNavigationController.m */; };
+		9771BD9B23ED154200D35E48 /* CZJIPINStatisticsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9771BD9A23ED154200D35E48 /* CZJIPINStatisticsTool.m */; };
 		97731C3222424AC700826F8E /* CZTrialMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97731C2F22424AC700826F8E /* CZTrialMainCell.m */; };
 		97731C3322424AC700826F8E /* CZTrialMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97731C3022424AC700826F8E /* CZTrialMainCell.xib */; };
 		977607CC22D57E3200F846BE /* CZMHSDListNewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977607CB22D57E3200F846BE /* CZMHSDListNewController.m */; };
@@ -1140,6 +1141,8 @@
 		97705CD72108595600485D64 /* CALayer+LayerColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LayerColor.m"; sourceTree = "<group>"; };
 		97705CE72108733F00485D64 /* CZNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZNavigationController.h; sourceTree = "<group>"; };
 		97705CE82108733F00485D64 /* CZNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZNavigationController.m; sourceTree = "<group>"; };
+		9771BD9923ED154200D35E48 /* CZJIPINStatisticsTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZJIPINStatisticsTool.h; sourceTree = "<group>"; };
+		9771BD9A23ED154200D35E48 /* CZJIPINStatisticsTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZJIPINStatisticsTool.m; sourceTree = "<group>"; };
 		97731C2F22424AC700826F8E /* CZTrialMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZTrialMainCell.m; sourceTree = "<group>"; };
 		97731C3022424AC700826F8E /* CZTrialMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CZTrialMainCell.xib; sourceTree = "<group>"; };
 		97731C3122424AC700826F8E /* CZTrialMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZTrialMainCell.h; sourceTree = "<group>"; };
@@ -3600,6 +3603,15 @@
 			path = WMMenuView;
 			sourceTree = "<group>";
 		};
+		9771BD9823ED14A200D35E48 /* 统计 */ = {
+			isa = PBXGroup;
+			children = (
+				9771BD9923ED154200D35E48 /* CZJIPINStatisticsTool.h */,
+				9771BD9A23ED154200D35E48 /* CZJIPINStatisticsTool.m */,
+			);
+			path = "统计";
+			sourceTree = "<group>";
+		};
 		977607C822D5731100F846BE /* 详情列表 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4327,6 +4339,7 @@
 		97B2B5AC23BF2B0F00FE9ED9 /* 业务类工具 */ = {
 			isa = PBXGroup;
 			children = (
+				9771BD9823ED14A200D35E48 /* 统计 */,
 				977E82D3223CA96600C8C01B /* CZGetJIBITool.h */,
 				977E82D4223CA96600C8C01B /* CZGetJIBITool.m */,
 				97BDE5C92195B232005FB405 /* CZConst.h */,
@@ -6233,6 +6246,7 @@
 				97CDCB35211D76CC00521ED5 /* UIFont+CZExtension.m in Sources */,
 				9706A8BF23D0444A00A939C6 /* CZShareViewController.m in Sources */,
 				97705C6F2107172A00485D64 /* AFSecurityPolicy.m in Sources */,
+				9771BD9B23ED154200D35E48 /* CZJIPINStatisticsTool.m in Sources */,
 				97420DDD21ECB1B200FE3D9F /* CZSearchSubDetailTwoController.m in Sources */,
 				974A3426212C30EA009192E3 /* GXNetTool.m in Sources */,
 				9710E61222D8789600AA5D87 /* CZMHSAskQuestionController.m in Sources */,

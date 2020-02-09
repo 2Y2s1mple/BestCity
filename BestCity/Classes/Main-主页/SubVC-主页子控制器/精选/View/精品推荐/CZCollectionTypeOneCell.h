@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZCollectionTypeOneCell : UICollectionViewCell
 /** 总数据 */
 @property (nonatomic, strong) NSDictionary *dataDic;
+
 @end
 
 NS_ASSUME_NONNULL_END

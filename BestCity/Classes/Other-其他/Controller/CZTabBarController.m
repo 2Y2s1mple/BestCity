@@ -53,12 +53,6 @@
     self.delegate = self;
     [self createSubController:YES];
 
-
-
-
-
-
-
 }
 
 - (void)createSubController:(BOOL)isFestiva
@@ -83,6 +77,11 @@
     [MobClick event:ID attributes:@{@"Tab" : context}];
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
 
+    if (tabBarController.selectedIndex == 1) {
+        [CZJIPINStatisticsTool statisticsToolWithID:@"pingce"];
+    } else if (tabBarController.selectedIndex == 2) {
+        [CZJIPINStatisticsTool statisticsToolWithID:@"bangdan"];
+    }
     NSString *token = JPTOKEN;
     UINavigationController *nav = viewController;
     if ([JPTOKEN length] <= 0 && [nav.topViewController isKindOfClass:[CZMeController class]]) {

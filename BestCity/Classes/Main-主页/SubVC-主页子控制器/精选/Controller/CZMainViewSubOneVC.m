@@ -25,6 +25,8 @@
 // 数据
 #import "CZMainViewSubOneVCModel.h"
 
+
+
 @interface CZMainViewSubOneVC ()
 /** <#注释#> */
 @property (nonatomic, strong) UICollectionView *collectView;
@@ -87,6 +89,7 @@
 {
     [super viewDidAppear:animated];
     self.collectView.height = self.view.height;
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_xinren"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -163,6 +166,7 @@
 
 - (void)loadMoreTrailDataSorce
 {
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_loding"];
     [self.collectView.mj_header endRefreshing];
     self.page++;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];

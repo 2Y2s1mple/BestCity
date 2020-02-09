@@ -151,6 +151,8 @@
             [_headerView addSubview:imageView];
             [imageView setSelectedIndexBlock:^(NSInteger index) {
                 NSLog(@"-----%ld", index);
+
+                [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"%@.banner.%ld", self.statistics, (index + 1)]];
                 NSDictionary *dic = self.adList[index];
                 NSDictionary *param = @{
                     @"targetType" : dic[@"type"],
@@ -165,13 +167,13 @@
                 [imgs addObject:imgDic[@"img"]];
             }
             imageView.imgList = imgs;
-
         }
 
         // 分类的按钮
         NSArray *list = [CZCategoryLineLayoutView categoryItems:self.categoryList setupNameKey:@"categoryName" imageKey:@"img" IdKey:@"categoryId" objectKey:@""];
         CGRect frame = CGRectMake(24, CZGetY(imageView) + 12, SCR_WIDTH - 48, 0);
         CZCategoryLineLayoutView *categoryView = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:list type:0 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
+            [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"%@.gongge.%ld", self.statistics, (item.index + 1)]];
             CZMainProjectGeneralView *vc = [[CZMainProjectGeneralView alloc] init];
             vc.titleText = item.categoryName;
             vc.category2Id = item.categoryId;
@@ -194,6 +196,32 @@
         [titleView setBlcok:^(BOOL isLine, BOOL isAsc, NSInteger index) {
             // orderByType : 0综合，1价格，2返现，3销量
             [[NSNotificationCenter defaultCenter] postNotificationName:@"CZMVSDefaultVCDelegate" object:nil userInfo:@{@"orderByType" : @(index), @"asc" : @(isAsc), @"layoutType" : @(isLine)}];
+            NSString *str;
+            switch (index) {
+                case 0:
+                {
+                    str = @"zh";
+                    break;
+                }
+                case 1:
+                {
+                    str = @"jg";
+                    break;
+                }
+                case 2:
+                {
+                    str = @"bt";
+                    break;
+                }
+                case 3:
+                {
+                    str = @"xl";
+                    break;
+                }
+                default:
+                    break;
+            }
+            [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"%@.liebiao.%@", self.statistics, str]];
         }];
         [_headerView addSubview:titleView];
 

@@ -200,11 +200,14 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *param = self.qualityGoods[indexPath.item];
-    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-    vc.otherGoodsId = param[@"otherGoodsId"];
-    CURRENTVC(currentVc)
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 3) {
+        [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_tuijian.%ld", indexPath.item + 1]];
+        NSDictionary *param = self.qualityGoods[indexPath.item];
+        CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+        vc.otherGoodsId = param[@"otherGoodsId"];
+        CURRENTVC(currentVc)
+        [currentVc.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

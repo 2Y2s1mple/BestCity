@@ -39,6 +39,32 @@
     [view setBlcok:^(BOOL isLine, BOOL isAsc, NSInteger index) {
         // orderByType : 0综合，1价格，2返现，3销量
         [[NSNotificationCenter defaultCenter] postNotificationName:@"mainSameTitleAction" object:nil userInfo:@{@"orderByType" : @(index), @"asc" : @(isAsc), @"layoutType" : @(isLine)}];
+        NSString *str;
+        switch (index) {
+            case 0:
+            {
+                str = @"zh";
+                break;
+            }
+            case 1:
+            {
+                str = @"jg";
+                break;
+            }
+            case 2:
+            {
+                str = @"bt";
+                break;
+            }
+            case 3:
+            {
+                str = @"xl";
+                break;
+            }
+            default:
+                break;
+        }
+        [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_tuijian.%@", str]];
     }];
 
     [self.backView addSubview:view];

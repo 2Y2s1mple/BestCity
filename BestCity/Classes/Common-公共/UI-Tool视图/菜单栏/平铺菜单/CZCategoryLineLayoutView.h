@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * categoryId;
 @property (nonatomic, strong) NSString *categoryImage;
 @property (nonatomic, strong) NSString *categoryName;
+@property (nonatomic, assign) NSInteger index;
 /** 存储的各种数据 */
 @property (nonatomic, strong) id objectInfo;
 @end

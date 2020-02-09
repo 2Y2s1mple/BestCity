@@ -58,6 +58,7 @@
 - (void)pushSearchView:(UIGestureRecognizer *)sender
 {
     CZFestivalGoodsColLayoutView *view = sender.view;
+    [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_bangdan.%ld", (view.index + 1)]];
     CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
     vc.otherGoodsId = view.dataDic[@"otherGoodsId"];
     CURRENTVC(currentVc)

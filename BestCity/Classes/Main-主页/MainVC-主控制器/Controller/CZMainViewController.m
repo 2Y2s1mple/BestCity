@@ -133,6 +133,7 @@
     CZMainViewSearch *searchView = [[CZMainViewSearch alloc] init];
     searchView.y = self.STATUSBAR_MAX_ORIGIN_Y + 4;
     [searchView setBlock:^{
+        [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_sousuo"];
         CZTaobaoSearchController *vc = [[CZTaobaoSearchController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
@@ -175,6 +176,8 @@
         {
             CZMainViewSubDefaultVC *vc = [[CZMainViewSubDefaultVC alloc] init];
             vc.category1Id = self.viewModel.mainTitles[index][@"categoryId"];
+            NSString *statistics = [NSString stringWithFormat:@"shouye_fenlei.%ld", (index + 1)];
+            vc.statistics = statistics;
             return vc;
         }
     }
@@ -194,6 +197,7 @@
 
 - (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
 {
+    [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_fenlei.%d", (self.selectIndex + 1)]];
     NSString *text = [NSString stringWithFormat:@"测评--%@", info[@"title"]];
     NSDictionary *context = @{@"oneTab" : text};
     [MobClick event:@"ID3" attributes:context];

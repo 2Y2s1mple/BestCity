@@ -122,6 +122,7 @@
 - (void)categoryButtonAction:(CZCategoryButton *)sender
 {
     self.categoryItem = self.categoryItems[sender.tag];
+    self.categoryItem.index = sender.tag;
     !self.block ? : self.block(self.categoryItem);
 }
 

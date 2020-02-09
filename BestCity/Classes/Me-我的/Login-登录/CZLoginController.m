@@ -211,7 +211,6 @@ static id instancet_;
         [self.verificationCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
         self.isReadSecond = NO;
     }
-
 }
 
 - (void)viewDidLoad {

@@ -249,6 +249,7 @@
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
     }
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_xinren"];
     CURRENTVC(currentVc);
     CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
     [currentVc.navigationController pushViewController:vc animated:YES];
@@ -264,6 +265,7 @@
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
     }
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_tehui"];
     CURRENTVC(currentVc);
     CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
     [currentVc.navigationController pushViewController:vc animated:YES];
@@ -272,6 +274,7 @@
 // 跳到极品城购物返现说明
 - (void)pushMessageListView
 {
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_pmd"];
     TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/newZn.html"]];
     vc.titleName = @"极品城省钱攻略";
     CURRENTVC(currentVc);
@@ -281,6 +284,7 @@
 // 爆款主
 - (void)mainHighBackViewAction
 {
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_zhuanti"];
     NSDictionary *dic =  self.hotActivity;
     NSDictionary *param = @{
         @"targetType" : dic[@"type"],
@@ -320,6 +324,7 @@
 // 广告位
 - (void)adImageViewTapAction
 {
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_banner.huodong"];
     if([self.ad2[@"type"]  isEqual: @(0)]) return;
     NSDictionary *dic = self.ad2;
     NSDictionary *param = @{

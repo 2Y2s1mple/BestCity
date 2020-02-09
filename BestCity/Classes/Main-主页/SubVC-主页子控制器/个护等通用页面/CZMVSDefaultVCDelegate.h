@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *categoryList;
 /** 是否是条形布局 */
 @property (nonatomic, assign) BOOL layoutType;
-
+/** 埋点代号 */
+@property (nonatomic, strong) NSString *statistics;
 @end
 
 NS_ASSUME_NONNULL_END

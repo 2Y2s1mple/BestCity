@@ -104,6 +104,7 @@
                 @"targetTitle" : dic[@"name"],
             };
             [CZFreePushTool bannerPushToVC:param];
+            [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_banner.%ld", (index + 1)]];
         }];
         imageView.imgList = imgs;
     }
@@ -120,6 +121,7 @@
                 @"targetTitle" : item.categoryName,
             };
             NSLog(@"%@", param);
+            [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_gongge.%ld", (item.index + 1)]];
             [CZFreePushTool categoryPushToVC:param];
         }];
         [self.headerView addSubview:categoryView];

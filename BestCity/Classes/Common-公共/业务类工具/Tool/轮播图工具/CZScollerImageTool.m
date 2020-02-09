@@ -34,6 +34,9 @@
             imageView.frame = CGRectMake(0, 0, self.width, self.height);
             [imageView sd_setImageWithURL:[NSURL URLWithString:[self.imgList firstObject]] placeholderImage:nil];
             [self addSubview:imageView];
+            imageView.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClicked)];
+            [imageView addGestureRecognizer:tap];
         } else {
             // 初始化控件
             PlanADScrollView *ad = [[PlanADScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height) imageUrls:self.imgList placeholderimage:nil];

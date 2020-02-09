@@ -50,6 +50,7 @@
 {
     [super viewDidAppear:animated];
     self.collectionView.height = self.view.height;
+    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye.cnxh"];
 }
 
 
@@ -68,7 +69,7 @@
     NSDictionary *dic = self.dataSource[indexPath.row];
     CZguessWhatYouLikeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessWhatYouLikeCell" forIndexPath:indexPath];
     cell.dataDic = dic;
-    //
+    
     return cell;
 }
 
@@ -79,15 +80,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye.cnxh_liebiao.%ld", (indexPath.row + 1)]];
     NSDictionary *param = self.dataSource[indexPath.row];
     CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
     vc.otherGoodsId = param[@"otherGoodsId"];
     CURRENTVC(currentVc)
     [currentVc.navigationController pushViewController:vc animated:YES];
-
 }
-
-
 
 #pragma mark - 数据
 
@@ -117,6 +116,8 @@
 
 - (void)loadMoreTrailDataSorce
 {
+
+    [CZJIPINStatisticsTool statisticsToolWithID:@"cnxh_loding"];
     [self.collectionView.mj_header endRefreshing];
     self.page++;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];

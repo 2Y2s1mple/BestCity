@@ -54,7 +54,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
     self.collectView.height = self.view.height;
 }
 
@@ -79,6 +78,7 @@
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor clearColor];
         self.collectDataSurce = [[CZMVSDefaultVCDelegate alloc] initWithCollectView:_collectView];
+        self.collectDataSurce.statistics = self.statistics;
     }
     return _collectView;
 }
