@@ -16,11 +16,11 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"eventId"] = ID;
     //获取详情数据
-    NSString *urlStr = @"http://47.99.243.255:8081/qualityshop-api/api/addEvent";
+    NSString *urlStr = [JPSERVER_URL stringByAppendingPathComponent:@"api/addEvent"];
     [GXNetTool GetNetWithUrl:urlStr body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            [CZProgressHUD showProgressHUDWithText:[NSString stringWithFormat:@"%@", ID]];
-            [CZProgressHUD hideAfterDelay:1.0];
+//            [CZProgressHUD showProgressHUDWithText:[NSString stringWithFormat:@"%@", ID]];
+//            [CZProgressHUD hideAfterDelay:1.0];
         }
     } failure:^(NSError *error) {// 结束刷新
     }];

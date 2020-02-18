@@ -33,6 +33,8 @@
 @property (nonatomic, strong)  CZLabel *remindLabel;
 /** 提示登录按钮 */
 @property (nonatomic, strong) CZRemindLoginView *remindView;
+/** 百万红包瓜分 */
+@property (nonatomic, weak) UIButton *redPacketsBtn;
 @end
 
 @implementation CZMainViewController
@@ -118,12 +120,16 @@
 {
     [super viewDidDisappear:animated];
     self.remindView.hidden = YES;
+    // 百万红包
+    self.redPacketsBtn.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [CZJIPINSynthesisTool pasteboardAlertViewRule];
+    // 百万红包
+    self.redPacketsBtn.hidden = NO;
 }
 
 #pragma mark - UI创建
@@ -145,6 +151,16 @@
     self.remindLabel.y = CZGetY(searchView) + 10;
     self.remindLabel.size = CGSizeMake(SCR_WIDTH, 14);
     [self.view addSubview:self.remindLabel];
+
+
+    UIButton *redPacketsBtn = [[UIButton alloc] init];
+    redPacketsBtn.x = SCR_WIDTH - 140;
+    redPacketsBtn.y = SCR_HEIGHT - 202 - 77;
+    redPacketsBtn.size = CGSizeMake(140, 77);
+    [redPacketsBtn setBackgroundImage:[UIImage imageNamed:@"redPackets-honn"] forState:UIControlStateNormal];
+    [redPacketsBtn addTarget:self action:@selector(gotoRedPacketsBtn) forControlEvents:UIControlEventTouchUpInside];
+    [[UIApplication sharedApplication].keyWindow addSubview:redPacketsBtn];
+    self.redPacketsBtn = redPacketsBtn;
 
 }
 
@@ -212,6 +228,13 @@
 }
 
 #pragma mark - 事件
+// 跳转百万红包
+- (void)gotoRedPacketsBtn
+{
+    UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    tabbar.selectedIndex = 2;
+}
+
 // 改变颜色
 - (void)imageColorChange:(NSNotification *)sender
 {

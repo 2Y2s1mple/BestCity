@@ -365,7 +365,6 @@
         } else {
             [self pAlertViewRuleData];
             [recordSearchTextArray addObject:string];
-            posteboard.string = @"";
         }
     }
 }
