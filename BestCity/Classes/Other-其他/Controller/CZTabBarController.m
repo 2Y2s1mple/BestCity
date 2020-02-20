@@ -9,6 +9,9 @@
 #import "CZTabBarController.h"
 
 #import "CZMainViewController.h" // 主页
+
+#import "CZRedPacketsController.h" // 百万红包
+
 #import "CZMainHotSaleController.h"
 #import "CZDiscoverController.h"
 #import "CZEvaluationController.h"
@@ -59,7 +62,9 @@
 {
     [self setupWithController:[[CZMainViewController alloc] init] title:@"首页" image:@"tab-main-nor" selectedImage:@"tab-main-sel"];
     [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
-    [self setupWithController:[[CZFreeChargeController alloc] init] title:@"" image:@"tab-redP-nor" selectedImage:@"tab-redP-sel"];
+
+    [self setupWithController:[[CZRedPacketsController alloc] init] title:@"" image:@"tab-redP-nor" selectedImage:@"tab-redP-sel"];
+
     [self setupWithController:[[CZMainHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
 
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];

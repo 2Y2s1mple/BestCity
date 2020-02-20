@@ -184,6 +184,9 @@
 		97481AE52304275400230367 /* CZEInventoryAddGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97481AE32304275400230367 /* CZEInventoryAddGoodsCell.m */; };
 		97481AE62304275400230367 /* CZEInventoryAddGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97481AE42304275400230367 /* CZEInventoryAddGoodsCell.xib */; };
 		974A3426212C30EA009192E3 /* GXNetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 974A3424212C30EA009192E3 /* GXNetTool.m */; };
+		974BF52823FBE6030015C2A6 /* CZRedPacketsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 974BF52723FBE6030015C2A6 /* CZRedPacketsController.m */; };
+		974BF52B23FC485F0015C2A6 /* CZRedPacketsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 974BF52A23FC485F0015C2A6 /* CZRedPacketsView.m */; };
+		974BF52D23FC48790015C2A6 /* CZRedPacketsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974BF52C23FC48790015C2A6 /* CZRedPacketsView.xib */; };
 		974C559422C070C9001A1E1C /* CZFreeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 974C559322C070C9001A1E1C /* CZFreeAlertView.m */; };
 		974C559622C070DA001A1E1C /* CZFreeAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974C559522C070DA001A1E1C /* CZFreeAlertView.xib */; };
 		974C586321229F6D008B3E6A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974C586221229F6D008B3E6A /* CFNetwork.framework */; };
@@ -977,6 +980,11 @@
 		97481AE42304275400230367 /* CZEInventoryAddGoodsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEInventoryAddGoodsCell.xib; sourceTree = "<group>"; };
 		974A3424212C30EA009192E3 /* GXNetTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXNetTool.m; sourceTree = "<group>"; };
 		974A3425212C30EA009192E3 /* GXNetTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXNetTool.h; sourceTree = "<group>"; };
+		974BF52623FBE6030015C2A6 /* CZRedPacketsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRedPacketsController.h; sourceTree = "<group>"; };
+		974BF52723FBE6030015C2A6 /* CZRedPacketsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRedPacketsController.m; sourceTree = "<group>"; };
+		974BF52923FC485F0015C2A6 /* CZRedPacketsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRedPacketsView.h; sourceTree = "<group>"; };
+		974BF52A23FC485F0015C2A6 /* CZRedPacketsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRedPacketsView.m; sourceTree = "<group>"; };
+		974BF52C23FC48790015C2A6 /* CZRedPacketsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZRedPacketsView.xib; sourceTree = "<group>"; };
 		974C559222C070C9001A1E1C /* CZFreeAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeAlertView.h; sourceTree = "<group>"; };
 		974C559322C070C9001A1E1C /* CZFreeAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeAlertView.m; sourceTree = "<group>"; };
 		974C559522C070DA001A1E1C /* CZFreeAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZFreeAlertView.xib; sourceTree = "<group>"; };
@@ -2923,6 +2931,18 @@
 			path = "添加商品";
 			sourceTree = "<group>";
 		};
+		974BF52523FBE5A50015C2A6 /* RedPackets-百万红包 */ = {
+			isa = PBXGroup;
+			children = (
+				974BF52623FBE6030015C2A6 /* CZRedPacketsController.h */,
+				974BF52723FBE6030015C2A6 /* CZRedPacketsController.m */,
+				974BF52923FC485F0015C2A6 /* CZRedPacketsView.h */,
+				974BF52A23FC485F0015C2A6 /* CZRedPacketsView.m */,
+				974BF52C23FC48790015C2A6 /* CZRedPacketsView.xib */,
+			);
+			path = "RedPackets-百万红包";
+			sourceTree = "<group>";
+		};
 		974C559122C0709B001A1E1C /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3286,6 +3306,7 @@
 		97705C30210716A300485D64 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				974BF52523FBE5A50015C2A6 /* RedPackets-百万红包 */,
 				97C52A6C2254B82A00787BC5 /* Common-公共 */,
 				970D0B5521ACE84900649FC2 /* 百川 */,
 				97E6C4F9238F6956002541F4 /* Main-主页 */,
@@ -5796,6 +5817,7 @@
 				977D8CFD22ACEB4F005E7ACB /* CZMyWalletCell.xib in Resources */,
 				97FEBF1822D46824007BF592 /* CZMHSDCommodityCell1.xib in Resources */,
 				97D8FCD62111BA2A00D8ED8F /* CZMyProfileCell.xib in Resources */,
+				974BF52D23FC48790015C2A6 /* CZRedPacketsView.xib in Resources */,
 				97B9E80023ACCFE90063D667 /* CZScrollADCell.xib in Resources */,
 				977607D122D5892E00F846BE /* CZMHSDListNewCell.xib in Resources */,
 				9723076221AD77000004C00C /* CZNoDataView.xib in Resources */,
@@ -6111,6 +6133,7 @@
 				97C6F82023B06AAB00A14812 /* CZRemindLoginView.m in Sources */,
 				97ED11FE211598210003E0F7 /* CZAttentionBtn.m in Sources */,
 				97BFD13F235DB58D00493F28 /* CZETestViewModel.m in Sources */,
+				974BF52823FBE6030015C2A6 /* CZRedPacketsController.m in Sources */,
 				97F41E0523A08C62003C656C /* CZMainViewController.m in Sources */,
 				9778F9E9230196660019138A /* CZERecommendViewModel.m in Sources */,
 				9754C87022FBBEDD008C2D98 /* CZEAttentionCommendCell.m in Sources */,
@@ -6152,6 +6175,7 @@
 				97420DDA21EC918800FE3D9F /* CZSearchSubDetailOneController.m in Sources */,
 				97911058222FAE3B00C2DE5B /* CZEditAddressController.m in Sources */,
 				97643485221BF31000EB0291 /* CZSubButton.m in Sources */,
+				974BF52B23FC485F0015C2A6 /* CZRedPacketsView.m in Sources */,
 				97798CC6212D0FC90052CE94 /* UIImage+MultiFormat.m in Sources */,
 				97F41E1723A1048D003C656C /* GXWindow.m in Sources */,
 				97F4D4812249BD7600A82B14 /* CZTestReportController.m in Sources */,
