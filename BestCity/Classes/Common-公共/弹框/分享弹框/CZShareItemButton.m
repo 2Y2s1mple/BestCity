@@ -29,9 +29,9 @@
     self.imageView.y = 0;
     self.imageView.width = self.width - 10;
     self.imageView.height = self.imageView.width;
-    self.titleLabel.x = 0;
+    self.titleLabel.x = -5;
     self.titleLabel.y = self.imageView.height + 10;
-    self.titleLabel.width = self.width;
+    self.titleLabel.width = self.width + 10;
     self.titleLabel.height = self.height - self.width;
 }
 

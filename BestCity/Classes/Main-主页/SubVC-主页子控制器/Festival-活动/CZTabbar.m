@@ -78,7 +78,7 @@
         if (![btn isKindOfClass:[UIControl class]]) continue;
         // 计算按钮的x值
         if (barItem.title.length == 0 && index == 2) {
-//            btn.center = CGPointMake(width / 2.0, height / 2.0 + 7);
+            btn.center = CGPointMake(width / 2.0, height / 2.0 + 7);
             self.imageView.hidden = NO;
         }
         // 增加索引

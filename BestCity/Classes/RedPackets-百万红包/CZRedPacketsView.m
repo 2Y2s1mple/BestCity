@@ -7,12 +7,27 @@
 //
 
 #import "CZRedPacketsView.h"
+#import "UIImageView+WebCache.h"
+#import "CZRedPacketsShareView.h"
+#import "GXNetTool.h"
 
 @interface CZRedPacketsView ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *invitationCodeLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *currentMoneyLabel;
+/** 累计获得红包 */
+@property (nonatomic, weak) IBOutlet UILabel *totalMoneyLabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *teamCountLabel;
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIImageView *image1;
+@property (nonatomic, weak) IBOutlet UIImageView *image2;
+@property (nonatomic, weak) IBOutlet UIImageView *image3;
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIView *bottomView;
 
 @end
 
@@ -22,16 +37,39 @@
 {
     CZRedPacketsView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] firstObject];
     view.width = SCR_WIDTH;
-//    view.height = 364 + 33;
     return view;
 }
 
 - (void)setModel:(NSDictionary *)model
 {
-    _model = model;
-    self.invitationCodeLabel.text = model[@"invitationCode"];
-    self.currentMoneyLabel.text = [NSString stringWithFormat:@"%@", model[@"currentMoney"]];
+    _model = [model deleteAllNullValue];
 
+    self.invitationCodeLabel.text = _model[@"invitationCode"];
+    self.currentMoneyLabel.text = [NSString stringWithFormat:@"%@", _model[@"currentMoney"]];
+
+    self.totalMoneyLabel.text = [NSString stringWithFormat:@"累计获得现金红%.2f元", [_model[@"totalMoney"] floatValue]];
+    // 团队数量
+    self.teamCountLabel.text = [NSString stringWithFormat:@"等%ld人加入我的团队", [_model[@"avatarList"] count]];
+
+    for (int i = 0; i < [_model[@"avatarList"] count]; i++) {
+        switch (i) {
+            case 0:
+                [self.image1 sd_setImageWithURL:[NSURL URLWithString:_model[@"avatarList"][i]]];
+                break;
+            case 1:
+                [self.image2 sd_setImageWithURL:[NSURL URLWithString:_model[@"avatarList"][i]]];
+                break;
+            case 2:
+                [self.image3 sd_setImageWithURL:[NSURL URLWithString:_model[@"avatarList"][i]]];
+                break;
+            default:
+                break;
+        }
+    }
+
+    self.height = CZGetY(self.bottomView);
+
+    [self layoutIfNeeded];
 }
 
 - (void)awakeFromNib
@@ -62,5 +100,27 @@
 - (IBAction)ImmediatelyInvited
 {
     NSLog(@"立即邀请");
+    [CZProgressHUD showProgressHUDWithText:nil];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/user/getShareInfo"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            CZRedPacketsShareView *view = [[CZRedPacketsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
+            [[UIApplication sharedApplication].keyWindow addSubview:view];
+        }
+        [CZProgressHUD hideAfterDelay:0.15];
+    } failure:^(NSError *error) {
+
+    }];
+
+}
+
+/** 前往查看 */
+- (IBAction)voteBtnAction:(UIButton *)sender {
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *vc = nav.topViewController;
+    UIViewController *toVc = [[NSClassFromString(@"CZMeTeamMembersController") alloc] init];
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 @end

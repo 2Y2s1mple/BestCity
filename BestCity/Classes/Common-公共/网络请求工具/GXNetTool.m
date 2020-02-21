@@ -105,6 +105,8 @@
             [nav presentViewController:vc animated:YES completion:nil];
         }
         if ([result[@"code"] isEqualToNumber:@(602)] && ![url containsString:@"api/user/getUserInfo"]) {
+            // 删除token
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"token"];
             CZLoginController *vc = [[CZLoginController alloc] init];
             UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
             UINavigationController *nav = tabbar.selectedViewController;

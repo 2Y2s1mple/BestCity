@@ -238,6 +238,8 @@
 		975DB212217AFF1100A062AB /* CZAlertViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DB211217AFF1100A062AB /* CZAlertViewTool.m */; };
 		975DB215217B14FA00A062AB /* CZUserInfoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975DB214217B14FA00A062AB /* CZUserInfoTool.m */; };
 		975E761421E73CCD00B0819B /* CZScollerImageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 975E761321E73CCD00B0819B /* CZScollerImageTool.m */; };
+		9760532F23FFD1ED002E41D6 /* CZRedPacketsShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9760532E23FFD1ED002E41D6 /* CZRedPacketsShareView.m */; };
+		9760533123FFD1F9002E41D6 /* CZRedPacketsShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9760533023FFD1F9002E41D6 /* CZRedPacketsShareView.xib */; };
 		9761EE0B219940D100E3276D /* CZEvaluateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE0A219940D100E3276D /* CZEvaluateModel.m */; };
 		9761EE0E2199669700E3276D /* CZEvaluateToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE0D2199669700E3276D /* CZEvaluateToolBar.m */; };
 		9763A1F1225225F200F1A8FF /* CZMyTrialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9763A1F0225225F200F1A8FF /* CZMyTrialController.m */; };
@@ -1066,6 +1068,9 @@
 		975DB214217B14FA00A062AB /* CZUserInfoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZUserInfoTool.m; sourceTree = "<group>"; };
 		975E761221E73CCD00B0819B /* CZScollerImageTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZScollerImageTool.h; sourceTree = "<group>"; };
 		975E761321E73CCD00B0819B /* CZScollerImageTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZScollerImageTool.m; sourceTree = "<group>"; };
+		9760532D23FFD1ED002E41D6 /* CZRedPacketsShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRedPacketsShareView.h; sourceTree = "<group>"; };
+		9760532E23FFD1ED002E41D6 /* CZRedPacketsShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRedPacketsShareView.m; sourceTree = "<group>"; };
+		9760533023FFD1F9002E41D6 /* CZRedPacketsShareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZRedPacketsShareView.xib; sourceTree = "<group>"; };
 		9761EE09219940D100E3276D /* CZEvaluateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEvaluateModel.h; sourceTree = "<group>"; };
 		9761EE0A219940D100E3276D /* CZEvaluateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEvaluateModel.m; sourceTree = "<group>"; };
 		9761EE0C2199669700E3276D /* CZEvaluateToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEvaluateToolBar.h; sourceTree = "<group>"; };
@@ -2936,6 +2941,9 @@
 			children = (
 				974BF52623FBE6030015C2A6 /* CZRedPacketsController.h */,
 				974BF52723FBE6030015C2A6 /* CZRedPacketsController.m */,
+				9760532D23FFD1ED002E41D6 /* CZRedPacketsShareView.h */,
+				9760532E23FFD1ED002E41D6 /* CZRedPacketsShareView.m */,
+				9760533023FFD1F9002E41D6 /* CZRedPacketsShareView.xib */,
 				974BF52923FC485F0015C2A6 /* CZRedPacketsView.h */,
 				974BF52A23FC485F0015C2A6 /* CZRedPacketsView.m */,
 				974BF52C23FC48790015C2A6 /* CZRedPacketsView.xib */,
@@ -5840,6 +5848,7 @@
 				97773A7722C1DBBB00314E42 /* CZFreeTakePartInCell.xib in Resources */,
 				970AD8CD232A3BD600CCE9F9 /* AlipaySDK.bundle in Resources */,
 				976EB08723D169DE0080C246 /* CZFreeChargeFooterView.xib in Resources */,
+				9760533123FFD1F9002E41D6 /* CZRedPacketsShareView.xib in Resources */,
 				9708492222434239000D5528 /* CZTrialReportMainCell.xib in Resources */,
 				97D8FCBE2111505000D8ED8F /* CZMeCell.xib in Resources */,
 				97BC394A223BB0F800DC4D67 /* CZAffirmPointController.xib in Resources */,
@@ -5995,6 +6004,7 @@
 				97C7FF49216DDDB50091DC07 /* MJRefreshBackFooter.m in Sources */,
 				972E41B72114636100BC751C /* CZMyPointsCell.m in Sources */,
 				9723075D21AD73850004C00C /* CZOpenAlibcTrade.m in Sources */,
+				9760532F23FFD1ED002E41D6 /* CZRedPacketsShareView.m in Sources */,
 				97AC559122C9D3C100D7F2DA /* CZTableView.m in Sources */,
 				9726336D22CDA51E00995341 /* CZMainHotSaleCell.m in Sources */,
 				97C51C6823C5FD9000CE8867 /* CZAlertView3Controller.m in Sources */,

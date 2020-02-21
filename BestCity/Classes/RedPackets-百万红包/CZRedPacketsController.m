@@ -38,8 +38,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // 获取数据
-    [self getDataSource];
+    if ([JPTOKEN length] <= 0) {
+        
+    } else {
+        // 获取数据
+        [self getDataSource];
+    }
 }
 
 #pragma mark - 数据
@@ -62,7 +66,13 @@
     _dataSource = dataSource;
     self.redView.model = dataSource;
 
-    if ([self.redView.hongbaoView.subviews count] > 0) {
+
+
+    for (UIView *subView in self.redView.hongbaoView.subviews) {
+        [subView removeFromSuperview];
+    }
+
+    if ([dataSource[@"hongbaoList"] isKindOfClass:[NSNull class]]) {
         return;
     }
 
@@ -77,17 +87,17 @@
         switch ([dic[@"status"] integerValue]) {
             case 0: // 待邀请
             {
-                hongbaoView = [self createCaiHongBaoViewWithImageName:@"redPackets-7" status:0];
+                hongbaoView = [self createCaiHongBaoViewWithImageName:@"redPackets-7" model:dic];
                 break;
             }
             case 1: // 待领取
             {
-                hongbaoView = [self createCaiHongBaoViewWithImageName:@"redPackets-8" status:1];
+                hongbaoView = [self createCaiHongBaoViewWithImageName:@"redPackets-8" model:dic];
                 break;
             }
             case 2: // 已领取
             {
-                hongbaoView = [self createCaiHongBaoViewWithImageName:@"redPackets-8" status:2];
+                hongbaoView = [self createCaiHongBaoViewWithImageName:@"redPackets-8" model:dic];
                 break;
             }
             default:
@@ -100,6 +110,12 @@
 
         [self.redView.hongbaoView addSubview:hongbaoView];
     }
+
+
+    UIView *topView = [self.scrollView.subviews lastObject];
+    topView.height = CZGetY(self.redView);
+    CGFloat maxHeight = CZGetY([self.scrollView.subviews lastObject]);
+    self.scrollView.contentSize = CGSizeMake(0, maxHeight);
 
 
 }
@@ -146,7 +162,7 @@
 }
 
 // 创建拆红包视图
-- (UIView *)createCaiHongBaoViewWithImageName:(NSString *)imageName status:(NSInteger)status
+- (UIView *)createCaiHongBaoViewWithImageName:(NSString *)imageName model:(NSDictionary *)model
 {
     // 最外第一层
     UIView *backView = [[UIView alloc] init];
@@ -160,36 +176,70 @@
     [backView addSubview:image];
 
     // 第三层
-    switch (status) {
+    NSString *text;
+
+    switch ([model[@"status"] integerValue]) {
         case 0: // 待邀请
         {
-
+            text = [NSString stringWithFormat:@"%@元/位",model[@"addHongbao"]];
             break;
         }
         case 1: // 待领取
         {
-
+            text = [NSString stringWithFormat:@"%@元",model[@"addHongbao"]];
             break;
         }
         case 2: // 已领取
         {
-
+            text = [NSString stringWithFormat:@"%@元",model[@"addHongbao"]];
             break;
         }
         default:
             break;
     }
-    NSString *text = [NSString stringWithFormat:@"%@元/位", @"7"];
 
     UILabel *label = [[UILabel alloc] init];
     label.textColor = UIColorFromRGB(0xFDE9D0);
     label.font = [UIFont fontWithName:@"PingFangSC-Bold" size: 15];
-    label.attributedText = [text addAttributeFont:[UIFont fontWithName:@"PingFangSC-Semibold" size: 23]  Range:[text rangeOfString:@"7"]];
+    label.attributedText = [text addAttributeFont:[UIFont fontWithName:@"PingFangSC-Semibold" size: 23]  Range:[text rangeOfString:[NSString stringWithFormat:@"%@",model[@"addHongbao"]]]];
     [label sizeToFit];
     label.y = 17;
     label.centerX = 83 / 2.0;
 
     [backView addSubview:label];
+
+
+    UILabel *label2 = [[UILabel alloc] init];
+    label2.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 14];
+    label2.text = [NSString stringWithFormat:@"邀请第%@位", model[@"orderNum"]];
+    label2.textColor = [UIColor whiteColor];
+    [label2 sizeToFit];
+    label2.y = 78;
+    label2.centerX = 83 / 2.0;
+    [backView addSubview:label2];
+
+
+    switch ([model[@"status"] integerValue]) {
+        case 2: // 已领取
+        {
+            UIView *maskView = [[UIView alloc] init];
+            maskView.frame = backView.bounds;
+            maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+            maskView.layer.cornerRadius = 5;
+            [backView addSubview:maskView];
+
+            UILabel *label = [[UILabel alloc] init];
+            label.text = @"已拆";
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont systemFontOfSize:18];
+            [label sizeToFit];
+            label.center = image.center;
+            [maskView addSubview:label];
+            break;
+        }
+        default:
+            break;
+    }
 
     return backView;
 }

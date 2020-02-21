@@ -133,6 +133,7 @@ static id _instance;
 {
     // 设置网页
     UMShareWebpageObject *shareUrlObject = [UMShareWebpageObject shareObjectWithTitle:title descr:subTitle thumImage:thumImage];
+
     //设置网页地址
     shareUrlObject.webpageUrl = webUrl;
     return shareUrlObject;
