@@ -9,6 +9,7 @@
 #import "CZRedPacketsController.h"
 #import "CZRedPacketsView.h"
 #import "GXNetTool.h"
+#import "CZRedPacketsAlertView.h"
 
 
 @interface CZRedPacketsController ()
@@ -32,7 +33,6 @@
 
     // 创建上部view
     [self topView];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -43,6 +43,8 @@
     } else {
         // 获取数据
         [self getDataSource];
+        // 获取弹框
+        [self popAlert];
     }
 }
 
@@ -54,6 +56,26 @@
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.dataSource = result[@"data"];
+        }
+    } failure:^(NSError *error) {
+
+    }];
+}
+
+// 获取弹框
+- (void)popAlert
+{
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/getPopInfo"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            if ([result[@"data"][@"popId"] length] > 0) {
+                // 显示获得新人红包
+                CURRENTVC(currentVc);
+                CZRedPacketsAlertView *alert1 = [[CZRedPacketsAlertView alloc] init];
+                alert1.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                [currentVc presentViewController:alert1 animated:YES completion:nil];
+            }
         }
     } failure:^(NSError *error) {
 
@@ -165,9 +187,13 @@
 - (UIView *)createCaiHongBaoViewWithImageName:(NSString *)imageName model:(NSDictionary *)model
 {
     // 最外第一层
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openHongbao:)];
     UIView *backView = [[UIView alloc] init];
+    backView.tag = [model[@"orderNum"] integerValue];
     backView.width = 83;
     backView.height = 104;
+    [backView addGestureRecognizer:tap];
+
 
     // 第二层
     UIImageView *image = [[UIImageView alloc] init];
@@ -242,5 +268,33 @@
     }
 
     return backView;
+}
+
+#pragma mark - 事件
+- (void)openHongbao:(UIGestureRecognizer *)tap
+{
+    NSLog(@"%ld", tap.view.tag);
+    NSString *ID = self.dataSource[@"hongbaoList"][tap.view.tag - 1][@"id"];
+
+
+    [self openHongbaoWithId:ID];
+
+}
+
+- (void)openHongbaoWithId:(NSString *)ID
+{
+
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/open"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"id"] = ID;
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            [self getDataSource];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        // 取消菊花
+        [CZProgressHUD hideAfterDelay:1.5];
+    } failure:nil];
 }
 @end

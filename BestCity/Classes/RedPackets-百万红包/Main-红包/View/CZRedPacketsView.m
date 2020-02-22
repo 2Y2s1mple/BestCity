@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "CZRedPacketsShareView.h"
 #import "GXNetTool.h"
+#import "CZScrollAD.h"
+#import "CZRedPacketsWithdrawalController.h"
 
 @interface CZRedPacketsView ()
 /** <#注释#> */
@@ -29,6 +31,11 @@
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *bottomView;
 
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger shareCount;
+
+@property (nonatomic, weak) IBOutlet CZScrollAD *HotStyleTop; // 第一个轮播图载体
+
 @end
 
 @implementation CZRedPacketsView
@@ -46,6 +53,8 @@
 
     self.invitationCodeLabel.text = _model[@"invitationCode"];
     self.currentMoneyLabel.text = [NSString stringWithFormat:@"%@", _model[@"currentMoney"]];
+
+    self.HotStyleTop.dataSource = _model[@"messageList"];
 
     self.totalMoneyLabel.text = [NSString stringWithFormat:@"累计获得现金红%.2f元", [_model[@"totalMoney"] floatValue]];
     // 团队数量
@@ -75,6 +84,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.HotStyleTop.type = 333;
 }
 
 /** 复制到剪切板 */
@@ -94,24 +104,37 @@
 - (IBAction)ImmediateWithdrawal
 {
     NSLog(@"立即提现");
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *vc = nav.topViewController;
+    CZRedPacketsWithdrawalController *toVc = [[CZRedPacketsWithdrawalController alloc] init];
+    toVc.model = _model;
+    [vc.navigationController pushViewController:toVc animated:YES];
 }
 
 /** 立即邀请 */
 - (IBAction)ImmediatelyInvited
 {
     NSLog(@"立即邀请");
-    [CZProgressHUD showProgressHUDWithText:nil];
-    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/user/getShareInfo"];
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            CZRedPacketsShareView *view = [[CZRedPacketsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
-            [[UIApplication sharedApplication].keyWindow addSubview:view];
-        }
-        [CZProgressHUD hideAfterDelay:0.15];
-    } failure:^(NSError *error) {
+    if (self.shareCount == 0) {
+        self.shareCount++;
+        [CZProgressHUD showProgressHUDWithText:nil];
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/user/getShareInfo"];
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"msg"] isEqualToString:@"success"]) {
+                CZRedPacketsShareView *view = [[CZRedPacketsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
+                view.paramDic = result[@"data"];
+                [[UIApplication sharedApplication].keyWindow addSubview:view];
+            }
+            [CZProgressHUD hideAfterDelay:0.15];
+            self.shareCount = 0;
+        } failure:^(NSError *error) {
 
-    }];
+        }];
+    }
+
+
 
 }
 

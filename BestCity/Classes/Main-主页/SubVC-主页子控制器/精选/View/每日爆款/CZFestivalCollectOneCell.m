@@ -87,6 +87,9 @@
     self.messageListView.type = 0;
     self.messageListView.layer.cornerRadius = 4;
     self.messageListView.layer.masksToBounds = YES;
+    
+    self.HotStyleTop.type = 1;
+    self.HotStyleBottom.type = 1;
 
     self.peopleNewViewLabel.font = [UIFont fontWithName:@"PingFangSC-Semibold" size: 18];
     self.title4.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
@@ -110,8 +113,7 @@
     UITapGestureRecognizer *HotStyleBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainHighBackViewAction)];
     [self.HotStyleBackView addGestureRecognizer:HotStyleBackViewTap];
     self.HotStyleTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
-    self.HotStyleTop.type = 100;
-    self.HotStyleBottom.type = 100;
+   
 
     // 高反专区
     self.titleLabel1.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];

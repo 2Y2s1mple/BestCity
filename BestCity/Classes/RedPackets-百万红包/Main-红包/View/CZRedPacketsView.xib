@@ -135,7 +135,7 @@
                                 <action selector="ImmediatelyInvited" destination="iN0-l3-epB" eventType="touchUpInside" id="LFQ-ba-rFv"/>
                             </connections>
                         </button>
-                        <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDN-eM-kNk">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDN-eM-kNk" customClass="CZScrollAD">
                             <rect key="frame" x="0.0" y="485.5" width="375" height="33"/>
                             <color key="backgroundColor" red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -292,6 +292,12 @@
                                         <constraint firstAttribute="height" constant="33" id="78W-av-jXa"/>
                                         <constraint firstAttribute="width" constant="33" id="uV3-tV-dBF"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <real key="value" value="12.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </imageView>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uh4-wM-ZAW">
                                     <rect key="frame" x="68" y="2" width="33" height="33"/>
@@ -299,6 +305,12 @@
                                         <constraint firstAttribute="width" constant="33" id="VbI-y4-41R"/>
                                         <constraint firstAttribute="height" constant="33" id="mKL-5D-ZPA"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <real key="value" value="12.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </imageView>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yiw-e3-dKX">
                                     <rect key="frame" x="91" y="2" width="33" height="33"/>
@@ -306,6 +318,12 @@
                                         <constraint firstAttribute="width" constant="33" id="f0x-By-XWP"/>
                                         <constraint firstAttribute="height" constant="33" id="mWQ-AG-ZZd"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <real key="value" value="12.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -443,6 +461,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="HotStyleTop" destination="XDN-eM-kNk" id="86d-ll-jPB"/>
                 <outlet property="bottomView" destination="6nu-j7-ZoA" id="ssL-oH-H6p"/>
                 <outlet property="currentMoneyLabel" destination="evV-Lr-bqw" id="5gk-vr-k8a"/>
                 <outlet property="hongbaoView" destination="36d-dV-psv" id="w7F-4k-SHK"/>

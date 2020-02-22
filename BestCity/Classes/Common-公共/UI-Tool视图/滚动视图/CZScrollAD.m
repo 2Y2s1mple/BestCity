@@ -9,6 +9,7 @@
 #import "CZScrollAD.h"
 #import "CZScrollADCell.h"
 #import "CZScrollADCell1.h"
+#import "CZScrollADCell2.h"
 
 @interface CZScrollAD () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -115,6 +116,7 @@
 
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZScrollADCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZScrollADCell"];
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZScrollADCell1 class]) bundle:nil] forCellWithReuseIdentifier:@"CZScrollADCell1"];
+        [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZScrollADCell2 class]) bundle:nil] forCellWithReuseIdentifier:@"CZScrollADCell2"];
     }
     return  _collectionView;
 }
@@ -137,8 +139,12 @@
         CZScrollADCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZScrollADCell" forIndexPath:indexPath];
         cell.paramDic = model;
         return cell;
-    } else {
+    } else if (self.type == 1) {
         CZScrollADCell1 *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZScrollADCell1" forIndexPath:indexPath];
+        cell.paramDic = model;
+        return cell;
+    } else {
+        CZScrollADCell2 *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZScrollADCell2" forIndexPath:indexPath];
         cell.paramDic = model;
         return cell;
     }
