@@ -7,9 +7,11 @@
 //
 
 #import "CZRedPacketsAlertView.h"
+#import "GXNetTool.h"
 
 @interface CZRedPacketsAlertView ()
-
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *hongbaoLabel;
 @end
 
 @implementation CZRedPacketsAlertView
@@ -25,7 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    self.hongbaoLabel.text = [NSString stringWithFormat:@"%@", self.model[@"addHongbao"]];
+    
 }
 
 - (IBAction)closeAction:(UIButton *)sender {
@@ -33,10 +37,20 @@
 }
 
 - (IBAction)caiBtnAction:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/openAll"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            [CZProgressHUD showProgressHUDWithText:@"领取成功"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+        }
+        [CZProgressHUD hideAfterDelay:1.5];
+    } failure:^(NSError *error) {
 
-
+    }];
 }
 
 

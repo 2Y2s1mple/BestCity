@@ -10,6 +10,7 @@
 #import "CZNavigationView.h"
 #import "CZRedPacketsWithdrawalView.h"
 #import "GXNetTool.h"
+#import "CZRWBindingController.h"
 
 UIKIT_EXTERN NSString *moneyCount;
 
@@ -99,8 +100,6 @@ UIKIT_EXTERN NSString *moneyCount;
         // 取消菊花
         [CZProgressHUD hideAfterDelay:1.5];
     }
-
-
 }
 
 

@@ -326,7 +326,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Uh4-wM-ZAW" firstAttribute="leading" secondItem="dNv-Ql-5Ta" secondAttribute="trailing" constant="-10" id="1iu-Hl-EZA"/>
                                 <constraint firstItem="izv-ag-7N6" firstAttribute="leading" secondItem="Vy0-Yr-g48" secondAttribute="leading" constant="1" id="2IY-P2-xyg"/>
@@ -381,7 +381,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="pk2-Id-Ue5" firstAttribute="top" secondItem="9Wc-UZ-GaW" secondAttribute="bottom" constant="14" id="GZp-TT-Y5w"/>
                                 <constraint firstItem="1DQ-I0-qhU" firstAttribute="centerX" secondItem="zfi-Aa-HVn" secondAttribute="centerX" id="GdT-ah-lMx"/>

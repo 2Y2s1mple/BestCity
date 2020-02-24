@@ -209,6 +209,9 @@
 		974C586F21229FAB008B3E6A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 974C586E21229FAB008B3E6A /* libz.tbd */; };
 		974C587121229FC4008B3E6A /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 974C587021229FC4008B3E6A /* libresolv.tbd */; };
 		974C587321229FD0008B3E6A /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974C587221229FD0008B3E6A /* UserNotifications.framework */; };
+		974EBB3424036B3800D43785 /* CZRWBindingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 974EBB3224036B3800D43785 /* CZRWBindingController.m */; };
+		974EBB3824036FB500D43785 /* CZRWBindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 974EBB3724036FB500D43785 /* CZRWBindingView.m */; };
+		974EBB3A24036FC100D43785 /* CZRWBindingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974EBB3924036FC000D43785 /* CZRWBindingView.xib */; };
 		974F488D21A3B03600E1ED1A /* CZAttentionDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 974F488C21A3B03600E1ED1A /* CZAttentionDetailModel.m */; };
 		974F489121A3B5BE00E1ED1A /* CZAttentionDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 974F488F21A3B5BD00E1ED1A /* CZAttentionDetailCell.m */; };
 		974F489221A3B5BE00E1ED1A /* CZAttentionDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974F489021A3B5BD00E1ED1A /* CZAttentionDetailCell.xib */; };
@@ -1028,6 +1031,11 @@
 		974C587221229FD0008B3E6A /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		974C588F2122D4DD008B3E6A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		974C58912122D4F7008B3E6A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		974EBB3124036B3800D43785 /* CZRWBindingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRWBindingController.h; sourceTree = "<group>"; };
+		974EBB3224036B3800D43785 /* CZRWBindingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRWBindingController.m; sourceTree = "<group>"; };
+		974EBB3624036FB500D43785 /* CZRWBindingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZRWBindingView.h; sourceTree = "<group>"; };
+		974EBB3724036FB500D43785 /* CZRWBindingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZRWBindingView.m; sourceTree = "<group>"; };
+		974EBB3924036FC000D43785 /* CZRWBindingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZRWBindingView.xib; sourceTree = "<group>"; };
 		974F488B21A3B03600E1ED1A /* CZAttentionDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAttentionDetailModel.h; sourceTree = "<group>"; };
 		974F488C21A3B03600E1ED1A /* CZAttentionDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAttentionDetailModel.m; sourceTree = "<group>"; };
 		974F488E21A3B5BD00E1ED1A /* CZAttentionDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZAttentionDetailCell.h; sourceTree = "<group>"; };
@@ -3015,6 +3023,7 @@
 		974BF52523FBE5A50015C2A6 /* RedPackets-百万红包 */ = {
 			isa = PBXGroup;
 			children = (
+				974EBB3024036AF000D43785 /* 绑定 */,
 				97419A7824012CB100AFDFEC /* Main-红包 */,
 				97419A7924012CD400AFDFEC /* 立即提现 */,
 				97419A7A24012D1E00AFDFEC /* 提现记录 */,
@@ -3074,6 +3083,26 @@
 				974C586221229F6D008B3E6A /* CFNetwork.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		974EBB3024036AF000D43785 /* 绑定 */ = {
+			isa = PBXGroup;
+			children = (
+				974EBB3B2403827900D43785 /* 支付宝SDK */,
+				974EBB3124036B3800D43785 /* CZRWBindingController.h */,
+				974EBB3224036B3800D43785 /* CZRWBindingController.m */,
+				974EBB3624036FB500D43785 /* CZRWBindingView.h */,
+				974EBB3724036FB500D43785 /* CZRWBindingView.m */,
+				974EBB3924036FC000D43785 /* CZRWBindingView.xib */,
+			);
+			path = "绑定";
+			sourceTree = "<group>";
+		};
+		974EBB3B2403827900D43785 /* 支付宝SDK */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "支付宝SDK";
 			sourceTree = "<group>";
 		};
 		974F489321A3D30100E1ED1A /* MainVc-主控制器 */ = {
@@ -5849,6 +5878,7 @@
 				97D8FCC82111796600D8ED8F /* CZMeArrow.plist in Resources */,
 				9708492B22447771000D5528 /* CZTrialDetailTopController.xib in Resources */,
 				97A6DDDD23C6E96600C2CFC7 /* getPopInfo.json in Resources */,
+				974EBB3A24036FC100D43785 /* CZRWBindingView.xib in Resources */,
 				97ED11F3211582910003E0F7 /* CZAttentionCell.xib in Resources */,
 				972F4BAE22AE5AAE00F30F6B /* CZTeamMembersCell.xib in Resources */,
 				9768FAEF2368130D00019B4E /* CZLaunchViewController.xib in Resources */,
@@ -6010,6 +6040,7 @@
 				97705C9D2108225A00485D64 /* UIButton+CZExtension.m in Sources */,
 				97BC05CC21129ECC001ED65A /* CZChangeNicknameController.m in Sources */,
 				979110762231131400C2DE5B /* MOFSPickerManager.m in Sources */,
+				974EBB3424036B3800D43785 /* CZRWBindingController.m in Sources */,
 				97FF6DF8211862EF00376435 /* CZfeedbackController.m in Sources */,
 				97C51C4723C47E8800CE8867 /* CZFestivalCollectMillionsView.m in Sources */,
 				972BDC9723A38ADD00C3F8BF /* CZFestivalCollectTwoCell.m in Sources */,
@@ -6102,6 +6133,7 @@
 				974759B7239205E60026C56C /* CZGuessWhatYouLikeView.m in Sources */,
 				979110782231131400C2DE5B /* AddressModel.m in Sources */,
 				97BC05DA2112B122001ED65A /* DLIDEKeyboardView.m in Sources */,
+				974EBB3824036FB500D43785 /* CZRWBindingView.m in Sources */,
 				97FA0B352376BB9C001D1B70 /* CZFreeOrderController.m in Sources */,
 				97C7FF04216DDDAB0091DC07 /* MJConst.m in Sources */,
 				975BCF1122D81C1A0031F3AC /* CZMHSDQDetailController.m in Sources */,

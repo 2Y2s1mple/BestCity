@@ -73,6 +73,7 @@
                 // 显示获得新人红包
                 CURRENTVC(currentVc);
                 CZRedPacketsAlertView *alert1 = [[CZRedPacketsAlertView alloc] init];
+                alert1.model = result[@"data"];
                 alert1.modalPresentationStyle = UIModalPresentationOverFullScreen;
                 [currentVc presentViewController:alert1 animated:YES completion:nil];
             }
