@@ -40,22 +40,38 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="去授权" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrG-31-Q5Z">
-                                    <rect key="frame" x="317" y="28" width="46" height="18"/>
+                                    <rect key="frame" x="287" y="28" width="46" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redPackets-17" translatesAutoresizingMaskIntoConstraints="NO" id="RQT-zJ-cg6">
+                                    <rect key="frame" x="338" y="30.5" width="7" height="13"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIp-4O-TC6">
+                                    <rect key="frame" x="0.0" y="0.0" width="363" height="54"/>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="doAPAuth" destination="iN0-l3-epB" eventType="touchUpInside" id="PLi-2Q-ZfK"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="yyT-09-rxB" firstAttribute="leading" secondItem="IFB-mO-gAd" secondAttribute="leading" constant="2" id="6sz-Zc-nHt"/>
                                 <constraint firstAttribute="trailing" secondItem="H9e-lP-mJD" secondAttribute="trailing" id="BdT-3z-deO"/>
+                                <constraint firstItem="RQT-zJ-cg6" firstAttribute="leading" secondItem="wrG-31-Q5Z" secondAttribute="trailing" constant="5" id="CgN-X1-PaN"/>
                                 <constraint firstAttribute="trailing" secondItem="DGn-lH-TL6" secondAttribute="trailing" id="MVp-Tu-h3R"/>
                                 <constraint firstItem="DGn-lH-TL6" firstAttribute="centerY" secondItem="yyT-09-rxB" secondAttribute="centerY" id="P6L-qr-II4"/>
+                                <constraint firstItem="dIp-4O-TC6" firstAttribute="leading" secondItem="IFB-mO-gAd" secondAttribute="leading" constant="0.01" id="SMC-RU-w9F"/>
                                 <constraint firstItem="DGn-lH-TL6" firstAttribute="leading" secondItem="yyT-09-rxB" secondAttribute="trailing" constant="10" id="T2v-e4-pHQ"/>
+                                <constraint firstItem="RQT-zJ-cg6" firstAttribute="centerY" secondItem="wrG-31-Q5Z" secondAttribute="centerY" id="Uxy-yw-3Oc"/>
                                 <constraint firstItem="H9e-lP-mJD" firstAttribute="leading" secondItem="IFB-mO-gAd" secondAttribute="leading" id="Vxc-Td-HcF"/>
+                                <constraint firstAttribute="trailing" secondItem="dIp-4O-TC6" secondAttribute="trailing" constant="0.01" id="Wt2-8v-KZb"/>
+                                <constraint firstAttribute="bottom" secondItem="dIp-4O-TC6" secondAttribute="bottom" constant="0.01" id="aP5-NW-shh"/>
                                 <constraint firstAttribute="height" constant="54" id="exR-Gl-Maz"/>
-                                <constraint firstAttribute="trailing" secondItem="wrG-31-Q5Z" secondAttribute="trailing" id="iU1-yi-rJI"/>
+                                <constraint firstItem="dIp-4O-TC6" firstAttribute="top" secondItem="IFB-mO-gAd" secondAttribute="top" constant="0.01" id="iS3-sX-Oj5"/>
+                                <constraint firstAttribute="trailing" secondItem="wrG-31-Q5Z" secondAttribute="trailing" constant="30" id="iU1-yi-rJI"/>
                                 <constraint firstAttribute="bottom" secondItem="H9e-lP-mJD" secondAttribute="bottom" id="qsC-eT-rjR"/>
                                 <constraint firstItem="wrG-31-Q5Z" firstAttribute="centerY" secondItem="yyT-09-rxB" secondAttribute="centerY" id="ym3-iF-SXw"/>
                                 <constraint firstItem="H9e-lP-mJD" firstAttribute="top" secondItem="yyT-09-rxB" secondAttribute="bottom" constant="6" id="z5T-ah-LVw"/>
@@ -173,7 +189,13 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="textField" destination="00A-Va-aM8" id="ztx-Fc-Hzk"/>
+            </connections>
             <point key="canvasLocation" x="164" y="-88.605697151424295"/>
         </view>
     </objects>
+    <resources>
+        <image name="redPackets-17" width="6.5" height="13"/>
+    </resources>
 </document>

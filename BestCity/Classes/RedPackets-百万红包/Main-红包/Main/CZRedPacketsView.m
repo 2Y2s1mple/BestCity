@@ -36,6 +36,18 @@
 
 @property (nonatomic, weak) IBOutlet CZScrollAD *HotStyleTop; // 第一个轮播图载体
 
+/** 未登录状态 */
+@property (nonatomic, weak) IBOutlet UIView *noLoginView;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *label1;
+@property (nonatomic, weak) IBOutlet UILabel *label2;
+/** 立即提现 */
+@property (nonatomic, weak) IBOutlet UIButton *btn;
+/** 立即提现提示 */
+@property (nonatomic, weak) IBOutlet UILabel *label3;
+/** 我的好友 */
+@property (nonatomic, weak) IBOutlet UIView *myFriendView;
+
 @end
 
 @implementation CZRedPacketsView
@@ -103,13 +115,21 @@
 /** 立即提现 */
 - (IBAction)ImmediateWithdrawal
 {
-    NSLog(@"立即提现");
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    UIViewController *vc = nav.topViewController;
-    CZRedPacketsWithdrawalController *toVc = [[CZRedPacketsWithdrawalController alloc] init];
-    toVc.model = _model;
-    [vc.navigationController pushViewController:toVc animated:YES];
+    if (_isNoLogin) {
+        CZLoginController *vc = [[CZLoginController alloc] init];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        UINavigationController *nav = tabbar.selectedViewController;
+        UIViewController *currentVc = nav.topViewController;
+        [nav presentViewController:vc animated:YES completion:nil];
+    } else {
+        NSLog(@"立即提现");
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        UINavigationController *nav = tabbar.selectedViewController;
+        UIViewController *vc = nav.topViewController;
+        CZRedPacketsWithdrawalController *toVc = [[CZRedPacketsWithdrawalController alloc] init];
+        toVc.model = _model;
+        [vc.navigationController pushViewController:toVc animated:YES];
+    }
 }
 
 /** 立即邀请 */
@@ -142,5 +162,30 @@
     UIViewController *vc = nav.topViewController;
     UIViewController *toVc = [[NSClassFromString(@"CZMeTeamMembersController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
+}
+
+// 判断是否登录
+- (void)setIsNoLogin:(BOOL)isNoLogin
+{
+    _isNoLogin = isNoLogin;
+    if (_isNoLogin) { // 未登录
+        self.noLoginView.hidden = NO;
+        self.invitationCodeLabel.hidden = YES;
+        self.label1.hidden = YES;
+        self.label2.hidden = YES;
+        self.label3.text = @"登陆后领取现金红包";
+        [self.btn setTitle:@"立即登录" forState:UIControlStateNormal];
+        self.myFriendView.hidden = NO;
+
+    } else {
+        self.noLoginView.hidden = YES;
+        self.invitationCodeLabel.hidden = NO;
+        self.label1.hidden = NO;
+        self.label2.hidden = NO;
+        self.label3.text = @"邀请好友奖励可以立即提现";
+        [self.btn setTitle:@"立即提现" forState:UIControlStateNormal];
+        self.myFriendView.hidden = YES;
+    }
+
 }
 @end

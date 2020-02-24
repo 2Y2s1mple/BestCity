@@ -52,7 +52,7 @@
     self.label4.textColor = UIColorFromRGB(0xE25838);
     if ([_model[@"status"] integerValue] == 4) {
         self.label3.text = [NSString stringWithFormat:@"%@", @"已转账"];
-    } else if ([_model[@"status"] integerValue] == -2) {
+    } else if ([_model[@"status"] integerValue] == -2 || [_model[@"status"] integerValue] == -1) {
         self.label3.text = [NSString stringWithFormat:@"%@", @"提现超时"];
         self.label3.textColor = UIColorFromRGB(0xFFB829);
         self.label4.textColor = UIColorFromRGB(0x9D9D9D);

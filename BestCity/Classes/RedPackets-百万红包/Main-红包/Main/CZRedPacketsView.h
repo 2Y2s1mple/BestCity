@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIView *hongbaoView;
 /** <#注释#> */
 @property (nonatomic, strong) NSDictionary *model;
+/** <#注释#> */
+@property (nonatomic, assign) BOOL isNoLogin;
 @end
 
 NS_ASSUME_NONNULL_END

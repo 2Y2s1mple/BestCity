@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = RANDOMCOLOR;
+    self.view.backgroundColor = [UIColor whiteColor];
 
     // 创建滚动视图
     [self.view addSubview:self.scrollView];
@@ -38,11 +38,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    // 获取数据
+    [self getDataSource];
     if ([JPTOKEN length] <= 0) {
-        
+        self.redView.isNoLogin = YES;
     } else {
-        // 获取数据
-        [self getDataSource];
+        self.redView.isNoLogin = NO;
         // 获取弹框
         [self popAlert];
     }
@@ -284,7 +285,6 @@
 
 - (void)openHongbaoWithId:(NSString *)ID
 {
-
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/open"];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"id"] = ID;

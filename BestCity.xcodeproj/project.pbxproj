@@ -2932,27 +2932,24 @@
 			path = Lib;
 			sourceTree = "<group>";
 		};
-		97419A682400FC5700AFDFEC /* View */ = {
+		97419A682400FC5700AFDFEC /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				9760532D23FFD1ED002E41D6 /* CZRedPacketsShareView.h */,
-				9760532E23FFD1ED002E41D6 /* CZRedPacketsShareView.m */,
+				974BF52623FBE6030015C2A6 /* CZRedPacketsController.h */,
+				974BF52723FBE6030015C2A6 /* CZRedPacketsController.m */,
 				974BF52923FC485F0015C2A6 /* CZRedPacketsView.h */,
 				974BF52A23FC485F0015C2A6 /* CZRedPacketsView.m */,
 				974BF52C23FC48790015C2A6 /* CZRedPacketsView.xib */,
 			);
-			path = View;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		97419A7824012CB100AFDFEC /* Main-红包 */ = {
 			isa = PBXGroup;
 			children = (
-				97419A682400FC5700AFDFEC /* View */,
-				974BF52623FBE6030015C2A6 /* CZRedPacketsController.h */,
-				974BF52723FBE6030015C2A6 /* CZRedPacketsController.m */,
-				97419A80240132C700AFDFEC /* CZRedPacketsAlertView.h */,
-				97419A81240132C700AFDFEC /* CZRedPacketsAlertView.m */,
-				97419A82240132C700AFDFEC /* CZRedPacketsAlertView.xib */,
+				974EBB3D2403A29B00D43785 /* 分享 */,
+				974EBB3C2403A25700D43785 /* 弹框 */,
+				97419A682400FC5700AFDFEC /* Main */,
 			);
 			path = "Main-红包";
 			sourceTree = "<group>";
@@ -3103,6 +3100,25 @@
 			children = (
 			);
 			path = "支付宝SDK";
+			sourceTree = "<group>";
+		};
+		974EBB3C2403A25700D43785 /* 弹框 */ = {
+			isa = PBXGroup;
+			children = (
+				97419A80240132C700AFDFEC /* CZRedPacketsAlertView.h */,
+				97419A81240132C700AFDFEC /* CZRedPacketsAlertView.m */,
+				97419A82240132C700AFDFEC /* CZRedPacketsAlertView.xib */,
+			);
+			path = "弹框";
+			sourceTree = "<group>";
+		};
+		974EBB3D2403A29B00D43785 /* 分享 */ = {
+			isa = PBXGroup;
+			children = (
+				9760532D23FFD1ED002E41D6 /* CZRedPacketsShareView.h */,
+				9760532E23FFD1ED002E41D6 /* CZRedPacketsShareView.m */,
+			);
+			path = "分享";
 			sourceTree = "<group>";
 		};
 		974F489321A3D30100E1ED1A /* MainVc-主控制器 */ = {

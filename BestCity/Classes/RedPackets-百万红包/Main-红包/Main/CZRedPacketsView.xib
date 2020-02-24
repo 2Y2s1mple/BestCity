@@ -90,16 +90,48 @@
                                     <color key="textColor" red="0.72156862745098038" green="0.15686274509803921" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Bb-IM-pae">
+                                    <rect key="frame" x="0.0" y="0.0" width="230" height="208"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgD-al-dv9">
+                                            <rect key="frame" x="45.5" y="24" width="139" height="38.5"/>
+                                            <string key="text">登录后复制邀请码
+邀请好友</string>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分分钟赚满152元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIW-bK-hHR">
+                                            <rect key="frame" x="52" y="73.5" width="126.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" red="0.72156862745098038" green="0.15686274509803921" blue="0.0078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="SgD-al-dv9" firstAttribute="top" secondItem="3Bb-IM-pae" secondAttribute="top" constant="24" id="D4p-OL-ZKb"/>
+                                        <constraint firstItem="kIW-bK-hHR" firstAttribute="top" secondItem="SgD-al-dv9" secondAttribute="bottom" constant="11" id="GaB-3Z-2gM"/>
+                                        <constraint firstItem="SgD-al-dv9" firstAttribute="centerX" secondItem="3Bb-IM-pae" secondAttribute="centerX" id="QUa-6l-Azw"/>
+                                        <constraint firstAttribute="trailing" secondItem="SgD-al-dv9" secondAttribute="trailing" constant="45.5" id="SKo-v5-0o5"/>
+                                        <constraint firstItem="kIW-bK-hHR" firstAttribute="centerX" secondItem="3Bb-IM-pae" secondAttribute="centerX" id="hud-bL-VzJ"/>
+                                        <constraint firstItem="SgD-al-dv9" firstAttribute="leading" secondItem="3Bb-IM-pae" secondAttribute="leading" constant="45.5" id="jJJ-ae-sKL"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="3Bb-IM-pae" secondAttribute="trailing" constant="0.01" id="6El-0p-5Fa"/>
                                 <constraint firstItem="Oid-qN-pq1" firstAttribute="top" secondItem="xx5-aD-2b6" secondAttribute="top" constant="32" id="Cmb-6x-Bhj"/>
                                 <constraint firstItem="xx5-aD-2b6" firstAttribute="leading" secondItem="y8r-aZ-jCG" secondAttribute="leading" constant="0.01" id="ECF-Bi-DEK"/>
                                 <constraint firstItem="xx5-aD-2b6" firstAttribute="top" secondItem="y8r-aZ-jCG" secondAttribute="top" constant="0.01" id="Fdc-at-ME4"/>
                                 <constraint firstItem="ayf-fi-TYZ" firstAttribute="top" secondItem="Oid-qN-pq1" secondAttribute="bottom" constant="10" id="G2Y-UJ-vv2"/>
                                 <constraint firstItem="Oid-qN-pq1" firstAttribute="centerX" secondItem="y8r-aZ-jCG" secondAttribute="centerX" id="HsH-Au-uxT"/>
+                                <constraint firstItem="3Bb-IM-pae" firstAttribute="top" secondItem="y8r-aZ-jCG" secondAttribute="top" constant="0.01" id="PEm-1f-Vzm"/>
                                 <constraint firstItem="Nlw-4x-fxw" firstAttribute="centerX" secondItem="Oid-qN-pq1" secondAttribute="centerX" id="Pb1-jK-gNe"/>
+                                <constraint firstItem="3Bb-IM-pae" firstAttribute="leading" secondItem="y8r-aZ-jCG" secondAttribute="leading" constant="0.01" id="RlV-EU-urS"/>
                                 <constraint firstItem="ayf-fi-TYZ" firstAttribute="centerX" secondItem="Oid-qN-pq1" secondAttribute="centerX" id="V1n-bK-B2v"/>
+                                <constraint firstAttribute="bottom" secondItem="3Bb-IM-pae" secondAttribute="bottom" constant="0.01" id="VYK-5M-vqh"/>
                                 <constraint firstItem="Nlw-4x-fxw" firstAttribute="top" secondItem="ayf-fi-TYZ" secondAttribute="bottom" constant="10" id="eVg-8g-ykN"/>
                                 <constraint firstAttribute="width" constant="230" id="fho-UK-hBJ"/>
                                 <constraint firstAttribute="trailing" secondItem="xx5-aD-2b6" secondAttribute="trailing" constant="0.01" id="jLH-09-aR1"/>
@@ -376,8 +408,7 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="ImmediateWithdrawal" destination="iN0-l3-epB" eventType="touchUpInside" id="VGo-gl-vL1"/>
-                                        <action selector="voteBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="VBz-SE-Mzj"/>
+                                        <action selector="voteBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="8R7-Lw-O4t"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -408,6 +439,25 @@
                                 <constraint firstAttribute="bottom" secondItem="VkH-h7-PQC" secondAttribute="bottom" constant="0.01" id="lz4-gE-VHp"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJo-gz-wdx">
+                            <rect key="frame" x="15" y="1331.5" width="345" height="171"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOP-5i-Xol">
+                                    <rect key="frame" x="79.5" y="60.5" width="186" height="50.5"/>
+                                    <string key="text">太遗憾了，暂时还没有好友
+
+邀请好友赚外快，还不快试试</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.87761497499999996" green="0.27470183370000001" blue="0.14546644689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="dOP-5i-Xol" firstAttribute="centerX" secondItem="ZJo-gz-wdx" secondAttribute="centerX" id="Ijn-Rj-eaw"/>
+                                <constraint firstItem="dOP-5i-Xol" firstAttribute="centerY" secondItem="ZJo-gz-wdx" secondAttribute="centerY" id="t21-Gx-QKi"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <gestureRecognizers/>
@@ -417,7 +467,9 @@
                         <constraint firstItem="FfN-2k-U8S" firstAttribute="top" secondItem="Iqv-Uj-3El" secondAttribute="top" constant="0.01" id="5HJ-Xo-6uS"/>
                         <constraint firstItem="6nu-j7-ZoA" firstAttribute="leading" secondItem="Iqv-Uj-3El" secondAttribute="leading" constant="0.01" id="6xx-Rz-pvl"/>
                         <constraint firstItem="LaW-ga-jaC" firstAttribute="centerX" secondItem="Iqv-Uj-3El" secondAttribute="centerX" id="9su-M0-47z"/>
+                        <constraint firstItem="ZJo-gz-wdx" firstAttribute="leading" secondItem="Iqv-Uj-3El" secondAttribute="leading" constant="15" id="Bju-Ur-Ppy"/>
                         <constraint firstItem="XDN-eM-kNk" firstAttribute="top" secondItem="1tl-U8-4ZP" secondAttribute="bottom" constant="-15" id="DOc-0B-Cvl"/>
+                        <constraint firstItem="6nu-j7-ZoA" firstAttribute="top" secondItem="ZJo-gz-wdx" secondAttribute="bottom" constant="8" id="E7x-YU-Mi5"/>
                         <constraint firstItem="FBa-DK-9yI" firstAttribute="top" secondItem="LaW-ga-jaC" secondAttribute="bottom" constant="14" id="FQx-vt-ITy"/>
                         <constraint firstItem="1tl-U8-4ZP" firstAttribute="centerX" secondItem="Iqv-Uj-3El" secondAttribute="centerX" constant="20" id="FxV-z9-EwH"/>
                         <constraint firstAttribute="trailing" secondItem="FfN-2k-U8S" secondAttribute="trailing" constant="-14" id="JjV-EM-Cb6"/>
@@ -428,11 +480,13 @@
                         <constraint firstItem="FBa-DK-9yI" firstAttribute="centerX" secondItem="Iqv-Uj-3El" secondAttribute="centerX" id="W6l-ed-scN"/>
                         <constraint firstItem="OIs-il-JS1" firstAttribute="centerX" secondItem="Iqv-Uj-3El" secondAttribute="centerX" id="a13-X9-iM6"/>
                         <constraint firstItem="zfi-Aa-HVn" firstAttribute="top" secondItem="Vy0-Yr-g48" secondAttribute="bottom" constant="14" id="a28-Rv-Ys1"/>
+                        <constraint firstItem="ZJo-gz-wdx" firstAttribute="top" secondItem="YCU-cD-1uY" secondAttribute="bottom" constant="14" id="bCV-P4-1c5"/>
                         <constraint firstAttribute="trailing" secondItem="zfi-Aa-HVn" secondAttribute="trailing" constant="25" id="bvA-Zm-QTN"/>
                         <constraint firstItem="y8r-aZ-jCG" firstAttribute="top" secondItem="jA3-eM-ZpT" secondAttribute="bottom" constant="13.5" id="eEg-46-Pyg"/>
                         <constraint firstItem="8C2-Bv-uIP" firstAttribute="top" secondItem="eP1-RE-yyr" secondAttribute="bottom" constant="14" id="eNm-e1-1xr"/>
                         <constraint firstItem="OIs-il-JS1" firstAttribute="top" secondItem="1tl-U8-4ZP" secondAttribute="bottom" constant="-100" id="g48-P8-lTY"/>
                         <constraint firstItem="6nu-j7-ZoA" firstAttribute="top" secondItem="zfi-Aa-HVn" secondAttribute="bottom" constant="0.01" id="gNy-WI-Qbl"/>
+                        <constraint firstAttribute="trailing" secondItem="ZJo-gz-wdx" secondAttribute="trailing" constant="15" id="hST-JK-8Rm"/>
                         <constraint firstItem="1tl-U8-4ZP" firstAttribute="top" secondItem="y8r-aZ-jCG" secondAttribute="bottom" constant="-80" id="jlZ-Hq-iG8"/>
                         <constraint firstItem="6rE-5C-tck" firstAttribute="leading" secondItem="Iqv-Uj-3El" secondAttribute="leading" constant="25" id="juD-E4-2ge"/>
                         <constraint firstAttribute="trailing" secondItem="XDN-eM-kNk" secondAttribute="trailing" id="jzh-dS-tyj"/>
@@ -463,12 +517,18 @@
             <connections>
                 <outlet property="HotStyleTop" destination="XDN-eM-kNk" id="86d-ll-jPB"/>
                 <outlet property="bottomView" destination="6nu-j7-ZoA" id="ssL-oH-H6p"/>
+                <outlet property="btn" destination="Gcq-CB-CiD" id="kDC-wM-rQ3"/>
                 <outlet property="currentMoneyLabel" destination="evV-Lr-bqw" id="5gk-vr-k8a"/>
                 <outlet property="hongbaoView" destination="36d-dV-psv" id="w7F-4k-SHK"/>
                 <outlet property="image1" destination="dNv-Ql-5Ta" id="EqF-Og-Byx"/>
                 <outlet property="image2" destination="Uh4-wM-ZAW" id="oos-4q-GuQ"/>
                 <outlet property="image3" destination="Yiw-e3-dKX" id="t7U-xX-lrr"/>
                 <outlet property="invitationCodeLabel" destination="ayf-fi-TYZ" id="KzZ-R3-rji"/>
+                <outlet property="label1" destination="Nlw-4x-fxw" id="hh0-Lw-8Hg"/>
+                <outlet property="label2" destination="Oid-qN-pq1" id="oiX-fy-sUJ"/>
+                <outlet property="label3" destination="EOu-3f-dzt" id="zjE-PA-q2H"/>
+                <outlet property="myFriendView" destination="ZJo-gz-wdx" id="8Yz-Av-J33"/>
+                <outlet property="noLoginView" destination="3Bb-IM-pae" id="0Cm-fP-JCA"/>
                 <outlet property="teamCountLabel" destination="Ejq-rL-kp4" id="FfG-Qd-a93"/>
                 <outlet property="totalMoneyLabel" destination="1DQ-I0-qhU" id="bTV-y0-sH2"/>
             </connections>
