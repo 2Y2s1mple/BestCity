@@ -18,6 +18,8 @@
 #import "CZMyPointsController.h"
 #import "CZMyTrialController.h" // 试用
 #import "CZMePublishController.h" // 发布
+#import "CZScollerImageTool.h"
+#import "CZFreePushTool.h"
 
 @interface CZMeCell ()
 /** 邀请 */
@@ -28,6 +30,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *issueLabel;
 /** 钱包 */
 @property (weak, nonatomic) IBOutlet UILabel *walletLabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIView *imagesView;
+/** <#注释#> */
+@property (nonatomic, strong) CZScollerImageTool *scollerImage;
 
 @end
 
@@ -73,10 +79,6 @@
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -96,6 +98,7 @@
 - (void)setData:(NSDictionary *)data
 {
     _data = data;
+
 }
 
 - (void)setupMoney:(NSDictionary *)result
@@ -109,6 +112,42 @@
 - (NSString *)changeStr:(id)value
 {
     return [NSString stringWithFormat:@"%0.2f", [value floatValue]];
+}
+
+- (void)setAdList:(NSArray *)adList
+{
+    _adList = adList;
+    NSMutableArray *colors = [NSMutableArray array];
+    NSMutableArray *imgs = [NSMutableArray array];
+
+    for (NSDictionary *imgDic in _adList) {
+        [imgs addObject:imgDic[@"img"]];
+
+    }
+    [self.scollerImage setSelectedIndexBlock:^(NSInteger index) {
+        NSDictionary *dic = _adList[index];
+        NSDictionary *param = @{
+            @"targetType" : dic[@"type"],
+            @"targetId" : dic[@"objectId"],
+            @"targetTitle" : dic[@"name"],
+        };
+        [CZFreePushTool bannerPushToVC:param];
+    }];
+    self.scollerImage.imgList = imgs;
+
+
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    CZScollerImageTool *imageView = [[CZScollerImageTool alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH - 30, 93)];
+    self.scollerImage = imageView;
+    [self.imagesView addSubview:imageView];
+//    imageView.layer.cornerRadius = 15;
+//    imageView.layer.masksToBounds = YES;
+
+
 }
 
 @end

@@ -3020,8 +3020,8 @@
 		974BF52523FBE5A50015C2A6 /* RedPackets-百万红包 */ = {
 			isa = PBXGroup;
 			children = (
-				974EBB3024036AF000D43785 /* 绑定 */,
 				97419A7824012CB100AFDFEC /* Main-红包 */,
+				974EBB3024036AF000D43785 /* 绑定 */,
 				97419A7924012CD400AFDFEC /* 立即提现 */,
 				97419A7A24012D1E00AFDFEC /* 提现记录 */,
 			);

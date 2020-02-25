@@ -13,6 +13,7 @@
 #import "CZMeArrowCell.h"
 #import "CZMyProfileController.h"
 
+
 #import "WMPageController.h"
 #import "CZMutContentButton.h"
 
@@ -60,6 +61,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *preFeeLabel;
 /** 累计到账 */
 @property (nonatomic, weak) IBOutlet UILabel *finalFeeLabel;
+/** 轮播图 */
+@property (nonatomic, strong) NSArray *adList;
 @end
 
 @implementation CZMeController
@@ -228,6 +231,10 @@
 
     // 接收登录时候的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpUserInfo) name:loginChangeUserInfo object:nil];
+
+    // 获取广告
+    [self getDataAdlist];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -330,6 +337,9 @@
     NSDictionary *dic = self.dataSource[indexPath.section][indexPath.row];
     if (indexPath.section == 0) {
         CZMeCell *cell = [CZMeCell cellWithTabelView:tableView];
+        if (self.adList.count > 0) {
+            cell.adList = self.adList;
+        }
         return cell;
     } else {
         CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
@@ -342,7 +352,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return 82;
+        return 82 + 104;
     } else {
         return 205;
     }
@@ -391,6 +401,21 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/message/count"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)]) {
             self.messageCount = [NSString stringWithFormat:@"%@", [result[@"data"] integerValue] < 99 ? result[@"data"] : @"99+"];
+            [self.tableView reloadData];
+        } else {
+
+        }
+    } failure:^(NSError *error) {}];
+}
+
+- (void)getDataAdlist
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"location"] = @"14";
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/adList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
+            self.adList = result[@"data"];
             [self.tableView reloadData];
         } else {
 

@@ -168,7 +168,7 @@
 + (void)oldFree
 {
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    tabbar.selectedIndex = 3;
+    tabbar.selectedIndex = 2;
 }
 
 #pragma mark - 新人免单主页

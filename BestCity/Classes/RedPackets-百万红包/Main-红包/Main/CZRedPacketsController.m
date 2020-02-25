@@ -285,6 +285,7 @@
 
 - (void)openHongbaoWithId:(NSString *)ID
 {
+    if ([ID isKindOfClass:[NSNull class]]) return;
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/open"];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"id"] = ID;

@@ -12,4 +12,6 @@
 + (instancetype)cellWithTabelView:(UITableView *)tableView;
 /** 数据 */
 @property (nonatomic, strong) NSDictionary *data;
+/** <#注释#> */
+@property (nonatomic, strong) NSArray *adList;
 @end
