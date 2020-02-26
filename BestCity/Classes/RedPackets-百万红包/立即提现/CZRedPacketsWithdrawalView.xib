@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -53,7 +52,7 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pm-BE-Qhw">
                             <rect key="frame" x="73.5" y="54.5" width="21.5" height="25.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                             <color key="textColor" red="1" green="0.93725490199999995" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -98,7 +97,6 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78t-by-QgP">
                             <rect key="frame" x="0.0" y="0.0" width="367" height="60"/>
-                            <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="bingzhifubao" destination="iN0-l3-epB" eventType="touchUpInside" id="fCc-SS-sPl"/>
                             </connections>
@@ -133,8 +131,8 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvv-En-ccR">
                             <rect key="frame" x="15" y="65.5" width="337" height="179.5"/>
-                            <string key="text">温馨提示：
-1.到账金额=提现金额-提现全额X手续费
+                            <string key="text">温馨提示
+1.到账金额=提现金额-提现服务费
 2.每个账号将与唯一一个提现支付宝账户绑定，本次填写后，提现账号无法进行修改。请仔细核对支付宝账户信息（若因信息填写不符而到账转账失败，极品城概不负责）
 3.提现申请将在7个工作日内审批到账，请耐心等待
 4.提现前需完善实名信息，此操作只为使您的提现符合我国相关规定，极品城将保护您的隐私数据</string>
@@ -173,8 +171,8 @@
                             <rect key="frame" x="26" y="57" width="150" height="58"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xE4-93-jfh">
-                                    <rect key="frame" x="54" y="8" width="42" height="22"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <rect key="frame" x="54.5" y="8" width="41" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -213,8 +211,8 @@
                             <rect key="frame" x="191" y="57" width="150" height="58"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVm-hr-wfX">
-                                    <rect key="frame" x="49.5" y="8" width="51" height="22"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <rect key="frame" x="50" y="8" width="49.5" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -252,8 +250,8 @@
                             <rect key="frame" x="26" y="127" width="150" height="58"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4BS-d7-1gD">
-                                    <rect key="frame" x="49.5" y="8" width="51" height="22"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <rect key="frame" x="50.5" y="8" width="49" height="22"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -307,26 +305,25 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="GiW-rA-OJB" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="5lb-4N-y3a"/>
+                <constraint firstItem="GiW-rA-OJB" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="5lb-4N-y3a"/>
                 <constraint firstItem="8Cd-q5-jvd" firstAttribute="top" secondItem="kyi-n7-OMy" secondAttribute="bottom" constant="0.01" id="AdV-Pb-yly"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8Cd-q5-jvd" secondAttribute="trailing" constant="0.01" id="DoC-7h-Im3"/>
+                <constraint firstAttribute="trailing" secondItem="8Cd-q5-jvd" secondAttribute="trailing" constant="0.01" id="DoC-7h-Im3"/>
                 <constraint firstItem="d9a-fc-b3C" firstAttribute="top" secondItem="8Cd-q5-jvd" secondAttribute="bottom" constant="0.01" id="Guv-qW-IbI"/>
-                <constraint firstItem="kyi-n7-OMy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LIh-zd-thV"/>
+                <constraint firstItem="kyi-n7-OMy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LIh-zd-thV"/>
                 <constraint firstItem="kyi-n7-OMy" firstAttribute="top" secondItem="GiW-rA-OJB" secondAttribute="bottom" id="Pde-Hb-PLA"/>
-                <constraint firstItem="8Cd-q5-jvd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="0.01" id="Wvx-fo-J4T"/>
-                <constraint firstItem="GiW-rA-OJB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ZNF-9A-Rqv"/>
-                <constraint firstItem="kyi-n7-OMy" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="cAG-8G-IqQ"/>
-                <constraint firstItem="GiW-rA-OJB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="chB-Yq-HQu"/>
-                <constraint firstItem="d9a-fc-b3C" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="0.01" id="o9K-ie-OgX"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="d9a-fc-b3C" secondAttribute="trailing" constant="0.01" id="pCI-r9-2as"/>
+                <constraint firstItem="8Cd-q5-jvd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="0.01" id="Wvx-fo-J4T"/>
+                <constraint firstItem="GiW-rA-OJB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZNF-9A-Rqv"/>
+                <constraint firstItem="kyi-n7-OMy" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="cAG-8G-IqQ"/>
+                <constraint firstItem="GiW-rA-OJB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="chB-Yq-HQu"/>
+                <constraint firstItem="d9a-fc-b3C" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="0.01" id="o9K-ie-OgX"/>
+                <constraint firstAttribute="trailing" secondItem="d9a-fc-b3C" secondAttribute="trailing" constant="0.01" id="pCI-r9-2as"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="alipayNicknameLabel" destination="KOO-PY-1hs" id="3bE-0B-irH"/>
                 <outlet property="currentMoneyLabel" destination="haz-lc-24j" id="Fjt-Q5-o0W"/>
             </connections>
-            <point key="canvasLocation" x="157.59999999999999" y="-36.431784107946029"/>
+            <point key="canvasLocation" x="201" y="-84"/>
         </view>
     </objects>
     <resources>

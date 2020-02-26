@@ -40,17 +40,16 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="去授权" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrG-31-Q5Z">
-                                    <rect key="frame" x="287" y="28" width="46" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <rect key="frame" x="305" y="28.5" width="43" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redPackets-17" translatesAutoresizingMaskIntoConstraints="NO" id="RQT-zJ-cg6">
-                                    <rect key="frame" x="338" y="30.5" width="7" height="13"/>
+                                    <rect key="frame" x="353" y="30.5" width="7" height="13"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIp-4O-TC6">
                                     <rect key="frame" x="0.0" y="0.0" width="363" height="54"/>
-                                    <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="doAPAuth" destination="iN0-l3-epB" eventType="touchUpInside" id="PLi-2Q-ZfK"/>
                                     </connections>
@@ -71,7 +70,7 @@
                                 <constraint firstAttribute="bottom" secondItem="dIp-4O-TC6" secondAttribute="bottom" constant="0.01" id="aP5-NW-shh"/>
                                 <constraint firstAttribute="height" constant="54" id="exR-Gl-Maz"/>
                                 <constraint firstItem="dIp-4O-TC6" firstAttribute="top" secondItem="IFB-mO-gAd" secondAttribute="top" constant="0.01" id="iS3-sX-Oj5"/>
-                                <constraint firstAttribute="trailing" secondItem="wrG-31-Q5Z" secondAttribute="trailing" constant="30" id="iU1-yi-rJI"/>
+                                <constraint firstAttribute="trailing" secondItem="wrG-31-Q5Z" secondAttribute="trailing" constant="15" id="iU1-yi-rJI"/>
                                 <constraint firstAttribute="bottom" secondItem="H9e-lP-mJD" secondAttribute="bottom" id="qsC-eT-rjR"/>
                                 <constraint firstItem="wrG-31-Q5Z" firstAttribute="centerY" secondItem="yyT-09-rxB" secondAttribute="centerY" id="ym3-iF-SXw"/>
                                 <constraint firstItem="H9e-lP-mJD" firstAttribute="top" secondItem="yyT-09-rxB" secondAttribute="bottom" constant="6" id="z5T-ah-LVw"/>
@@ -93,29 +92,21 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="00A-Va-aM8">
-                                    <rect key="frame" x="45" y="28.5" width="318" height="17"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入真实姓名" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="00A-Va-aM8">
+                                    <rect key="frame" x="45" y="28" width="318" height="18"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入真实姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJT-7q-W2e">
-                                    <rect key="frame" x="255.5" y="28" width="107.5" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="sJl-oc-9WI" firstAttribute="leading" secondItem="aRT-xQ-V4J" secondAttribute="leading" id="9Dd-XM-P77"/>
                                 <constraint firstItem="00A-Va-aM8" firstAttribute="centerY" secondItem="K2a-bs-lwG" secondAttribute="centerY" id="AXx-jP-NbD"/>
-                                <constraint firstAttribute="trailing" secondItem="HJT-7q-W2e" secondAttribute="trailing" id="Ay5-EJ-wXo"/>
                                 <constraint firstAttribute="height" constant="54" id="Bwf-fh-Nfd"/>
                                 <constraint firstAttribute="trailing" secondItem="sJl-oc-9WI" secondAttribute="trailing" id="EKo-JK-erX"/>
                                 <constraint firstAttribute="trailing" secondItem="00A-Va-aM8" secondAttribute="trailing" id="IRh-Ly-JzQ"/>
                                 <constraint firstItem="K2a-bs-lwG" firstAttribute="leading" secondItem="aRT-xQ-V4J" secondAttribute="leading" constant="2" id="Ndd-vF-6Dq"/>
-                                <constraint firstItem="HJT-7q-W2e" firstAttribute="centerY" secondItem="K2a-bs-lwG" secondAttribute="centerY" id="UjH-py-UX6"/>
                                 <constraint firstItem="00A-Va-aM8" firstAttribute="leading" secondItem="K2a-bs-lwG" secondAttribute="trailing" constant="10" id="YQK-xg-Cqi"/>
                                 <constraint firstItem="sJl-oc-9WI" firstAttribute="top" secondItem="K2a-bs-lwG" secondAttribute="bottom" constant="6" id="edj-yj-lKQ"/>
                                 <constraint firstAttribute="bottom" secondItem="sJl-oc-9WI" secondAttribute="bottom" id="hIy-Cr-Nxb"/>
@@ -190,9 +181,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="aliPayLabel" destination="wrG-31-Q5Z" id="mas-LD-NL2"/>
                 <outlet property="textField" destination="00A-Va-aM8" id="ztx-Fc-Hzk"/>
             </connections>
-            <point key="canvasLocation" x="164" y="-88.605697151424295"/>
+            <point key="canvasLocation" x="-218" y="-296"/>
         </view>
     </objects>
     <resources>

@@ -3085,7 +3085,6 @@
 		974EBB3024036AF000D43785 /* 绑定 */ = {
 			isa = PBXGroup;
 			children = (
-				974EBB3B2403827900D43785 /* 支付宝SDK */,
 				974EBB3124036B3800D43785 /* CZRWBindingController.h */,
 				974EBB3224036B3800D43785 /* CZRWBindingController.m */,
 				974EBB3624036FB500D43785 /* CZRWBindingView.h */,
@@ -3093,13 +3092,6 @@
 				974EBB3924036FC000D43785 /* CZRWBindingView.xib */,
 			);
 			path = "绑定";
-			sourceTree = "<group>";
-		};
-		974EBB3B2403827900D43785 /* 支付宝SDK */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "支付宝SDK";
 			sourceTree = "<group>";
 		};
 		974EBB3C2403A25700D43785 /* 弹框 */ = {

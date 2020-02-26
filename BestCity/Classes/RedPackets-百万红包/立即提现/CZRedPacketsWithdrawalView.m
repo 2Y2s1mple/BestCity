@@ -70,11 +70,13 @@ NSString *moneyCount;
 // 绑定提现
 - (IBAction)bingzhifubao
 {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    UIViewController *vc = nav.topViewController;
-    CZRWBindingController *toVc = [[CZRWBindingController alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
-
+    if ([self.model[@"realname"] length] == 0 || [self.model[@"alipayNickname"] length] == 0) {
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        UINavigationController *nav = tabbar.selectedViewController;
+        UIViewController *vc = nav.topViewController;
+        CZRWBindingController *toVc = [[CZRWBindingController alloc] init];
+        toVc.model = self.model;
+        [vc.navigationController pushViewController:toVc animated:YES];
+    }
 }
 @end

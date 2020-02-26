@@ -41,7 +41,10 @@
     self.view.backgroundColor = [UIColor redColor];
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"提现记录" rightBtnTitle:@"帮助" rightBtnAction:^{
-
+        CURRENTVC(currentVc);
+        TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/tixian_help.html"]];
+        webVc.titleName = @"提现帮助";
+        [currentVc presentViewController:webVc animated:YES completion:nil];
     } ];
     navigationView.backgroundColor = CZGlobalWhiteBg;
     [self.view addSubview:navigationView];
@@ -81,8 +84,6 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/withdrawLog"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = result[@"data"];
-
-
             [self.tableView reloadData];
         }
         // 结束刷新

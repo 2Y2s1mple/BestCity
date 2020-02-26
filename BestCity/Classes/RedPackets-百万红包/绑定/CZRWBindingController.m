@@ -31,6 +31,7 @@
 
     CZRWBindingView *topView = [CZRWBindingView RWBindingView];
     topView.y = CZGetY(navigationView);
+    topView.model = self.model;
     [self.view addSubview:topView];
     
 }

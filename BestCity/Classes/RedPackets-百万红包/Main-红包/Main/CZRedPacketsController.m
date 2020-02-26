@@ -10,6 +10,7 @@
 #import "CZRedPacketsView.h"
 #import "GXNetTool.h"
 #import "CZRedPacketsAlertView.h"
+#import "CZRedPacketsShareView.h"
 
 
 @interface CZRedPacketsController ()
@@ -20,6 +21,8 @@
 
 /** <#注释#> */
 @property (nonatomic, weak) CZRedPacketsView *redView;
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger shareCount;
 @end
 
 @implementation CZRedPacketsController
@@ -285,7 +288,10 @@
 
 - (void)openHongbaoWithId:(NSString *)ID
 {
-    if ([ID isKindOfClass:[NSNull class]]) return;
+    if ([ID isKindOfClass:[NSNull class]]) {
+        [self ImmediatelyInvited];
+        return;
+    };
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/open"];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"id"] = ID;
@@ -298,5 +304,29 @@
         // 取消菊花
         [CZProgressHUD hideAfterDelay:1.5];
     } failure:nil];
+}
+
+
+/** 立即邀请 */
+- (void)ImmediatelyInvited
+{
+    NSLog(@"立即邀请");
+    if (self.shareCount == 0) {
+        self.shareCount++;
+        [CZProgressHUD showProgressHUDWithText:nil];
+        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/user/getShareInfo"];
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+            if ([result[@"msg"] isEqualToString:@"success"]) {
+                CZRedPacketsShareView *view = [[CZRedPacketsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
+                view.paramDic = result[@"data"];
+                [[UIApplication sharedApplication].keyWindow addSubview:view];
+            }
+            [CZProgressHUD hideAfterDelay:0.15];
+            self.shareCount = 0;
+        } failure:^(NSError *error) {
+
+        }];
+    }
 }
 @end

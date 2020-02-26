@@ -13,6 +13,10 @@
 @interface CZRWBindingView ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UITextField *textField;
+/** <#注释#> */
+@property (nonatomic, assign) BOOL isAuth;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *aliPayLabel;
 @end
 
 
@@ -24,13 +28,32 @@
     return view;
 }
 
+- (void)setModel:(NSDictionary *)model
+{
+    _model = model;
+    if ([self.model[@"alipayNickname"] length] > 0) {
+        self.isAuth = YES;
+    }
+    if ([model[@"realname"] length] > 0) {
+        self.textField.text = model[@"realname"];
+    }
+    if ([model[@"alipayNickname"] length] > 0) {
+        self.aliPayLabel.text = @"已绑定";
+    } else {
+        self.aliPayLabel.text = @"去授权";
+    }
+}
+
 // 去授权
 - (IBAction)doAPAuth
 {
     NSLog(@"去授权");
-
-    [self getAuthAlipayData];
-
+    if (self.isAuth) {
+        [CZProgressHUD showProgressHUDWithText:@"已绑定支付宝账号，请勿重复绑定"];
+        [CZProgressHUD hideAfterDelay:1.5];
+    } else {
+        [self getAuthAlipayData];
+    }
 }
 
 // 绑定账号
@@ -109,7 +132,13 @@
     param[@"authCode"] = str;
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-
+            self.isAuth = YES;
+            [CZProgressHUD showProgressHUDWithText:@"授权成功"];
+            [CZProgressHUD hideAfterDelay:1.5];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                CURRENTVC(currentVc);
+                [currentVc.navigationController popViewControllerAnimated:YES];
+            });
         }
     } failure:^(NSError *error) {
 

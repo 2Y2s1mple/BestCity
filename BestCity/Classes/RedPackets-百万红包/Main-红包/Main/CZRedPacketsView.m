@@ -88,6 +88,12 @@
         }
     }
 
+    if ([_model[@"avatarList"] count] == 0) {
+        self.myFriendView.hidden = NO;
+    } else {
+        self.myFriendView.hidden = YES;
+    }
+
     self.height = CZGetY(self.bottomView);
 
     [self layoutIfNeeded];
@@ -98,6 +104,17 @@
     [super awakeFromNib];
     self.HotStyleTop.type = 333;
 }
+
+
+- (IBAction)activityRules
+{
+    CURRENTVC(currentVc);
+    TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/xianjin_rule.html"]];
+    webVc.titleName = @"活动规则";
+    [currentVc presentViewController:webVc animated:YES completion:nil];
+}
+
+
 
 /** 复制到剪切板 */
 - (IBAction)generalPaste
@@ -186,6 +203,9 @@
         [self.btn setTitle:@"立即提现" forState:UIControlStateNormal];
         self.myFriendView.hidden = YES;
     }
+
+
+
 
 }
 @end

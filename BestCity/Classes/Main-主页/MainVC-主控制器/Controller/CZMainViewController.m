@@ -154,9 +154,9 @@
 
 
     UIButton *redPacketsBtn = [[UIButton alloc] init];
-    redPacketsBtn.x = SCR_WIDTH - 140;
-    redPacketsBtn.y = SCR_HEIGHT - 202 - 77;
-    redPacketsBtn.size = CGSizeMake(140, 77);
+    redPacketsBtn.x = SCR_WIDTH - 110;
+    redPacketsBtn.y = SCR_HEIGHT - 202 - 62;
+    redPacketsBtn.size = CGSizeMake(110, 62);
     [redPacketsBtn setBackgroundImage:[UIImage imageNamed:@"redPackets-honn"] forState:UIControlStateNormal];
     [redPacketsBtn addTarget:self action:@selector(gotoRedPacketsBtn) forControlEvents:UIControlEventTouchUpInside];
     [[UIApplication sharedApplication].keyWindow addSubview:redPacketsBtn];
