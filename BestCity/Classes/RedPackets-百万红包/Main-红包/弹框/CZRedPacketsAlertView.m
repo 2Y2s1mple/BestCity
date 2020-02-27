@@ -40,17 +40,15 @@
 
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/openAll"];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            [CZProgressHUD showProgressHUDWithText:@"领取成功"];
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-        }
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+         if ([result[@"msg"] isEqualToString:@"success"]) {
+             [CZProgressHUD showProgressHUDWithText:@"领取成功"];
+             [self dismissViewControllerAnimated:YES completion:nil];
+         } else {
+             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+         }
         [CZProgressHUD hideAfterDelay:1.5];
-    } failure:^(NSError *error) {
-
-    }];
+    } failure:nil];
 }
 
 

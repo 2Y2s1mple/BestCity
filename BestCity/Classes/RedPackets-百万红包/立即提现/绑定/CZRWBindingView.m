@@ -66,7 +66,12 @@
         param[@"realname"] = self.textField.text;
         [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"code"] isEqual:@(0)]) {
-
+                [CZProgressHUD showProgressHUDWithText:@"绑定成功"];
+                [CZProgressHUD hideAfterDelay:1.5];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    CURRENTVC(currentVc);
+                    [currentVc.navigationController popViewControllerAnimated:YES];
+                });
             } else {
                 [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             }
@@ -135,10 +140,6 @@
             self.isAuth = YES;
             [CZProgressHUD showProgressHUDWithText:@"授权成功"];
             [CZProgressHUD hideAfterDelay:1.5];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                CURRENTVC(currentVc);
-                [currentVc.navigationController popViewControllerAnimated:YES];
-            });
         }
     } failure:^(NSError *error) {
 

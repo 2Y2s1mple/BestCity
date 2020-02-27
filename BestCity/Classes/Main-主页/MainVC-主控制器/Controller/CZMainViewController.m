@@ -255,7 +255,6 @@
             self.scrollView.y -= 14;
         }];
     }
-
 }
 
 // 显示最上面的label

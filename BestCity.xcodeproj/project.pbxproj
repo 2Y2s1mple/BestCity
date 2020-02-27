@@ -2957,6 +2957,8 @@
 		97419A7924012CD400AFDFEC /* 立即提现 */ = {
 			isa = PBXGroup;
 			children = (
+				974EBB3024036AF000D43785 /* 绑定 */,
+				97419A7A24012D1E00AFDFEC /* 提现记录 */,
 				97419A632400FAB300AFDFEC /* CZRedPacketsWithdrawalController.h */,
 				97419A642400FAB300AFDFEC /* CZRedPacketsWithdrawalController.m */,
 				97419A692400FCB600AFDFEC /* CZRedPacketsWithdrawalView.h */,
@@ -3021,9 +3023,7 @@
 			isa = PBXGroup;
 			children = (
 				97419A7824012CB100AFDFEC /* Main-红包 */,
-				974EBB3024036AF000D43785 /* 绑定 */,
 				97419A7924012CD400AFDFEC /* 立即提现 */,
-				97419A7A24012D1E00AFDFEC /* 提现记录 */,
 			);
 			path = "RedPackets-百万红包";
 			sourceTree = "<group>";

@@ -19,6 +19,8 @@ UIKIT_EXTERN NSString *moneyCount;
 @property (nonatomic, strong) UIScrollView *scrollView;
 /** <#注释#> */
 @property (nonatomic, strong) CZRedPacketsWithdrawalView *withdrawalView;
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *synchronizeModel;
 
 @end
 
@@ -83,23 +85,30 @@ UIKIT_EXTERN NSString *moneyCount;
 /** 提现 */
 - (void)withdrawal
 {
+    self.model = self.synchronizeModel;
     if ([self.model[@"alipayNickname"] length] > 0) {
         if (moneyCount.length > 0) {
-            NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/withdraw"];
-               NSMutableDictionary *param = [NSMutableDictionary dictionary];
-               param[@"amount"] = moneyCount;
-               [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-                   if ([result[@"code"] isEqual:@(0)]) {
-                       [CZProgressHUD showProgressHUDWithText:@"提现成功"];
-                       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                           [self.navigationController popViewControllerAnimated:YES];
-                       });
-                   } else {
-                       [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-                   }
-                   // 取消菊花
-                   [CZProgressHUD hideAfterDelay:1.5];
-               } failure:nil];
+            NSString *message = [NSString stringWithFormat:@"是否提现到支付宝账户%@", self.model[@"alipayNickname"]];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/withdraw"];
+                NSMutableDictionary *param = [NSMutableDictionary dictionary];
+                param[@"amount"] = moneyCount;
+                [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+                    if ([result[@"code"] isEqual:@(0)]) {
+                        [CZProgressHUD showProgressHUDWithText:@"提现成功"];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [self.navigationController popViewControllerAnimated:YES];
+                        });
+                    } else {
+                        [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+                    }
+                    // 取消菊花
+                    [CZProgressHUD hideAfterDelay:1.5];
+                } failure:nil];
+            }]];
+            [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:alert animated:NO completion:nil];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"请选择提现金额"];
             // 取消菊花
@@ -110,8 +119,6 @@ UIKIT_EXTERN NSString *moneyCount;
         [CZProgressHUD hideAfterDelay:1.5];
         return;
     }
-
-
 }
 
 #pragma mark - 同步数据
@@ -122,6 +129,7 @@ UIKIT_EXTERN NSString *moneyCount;
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.withdrawalView.model = result[@"data"];
+            self.synchronizeModel = result[@"data"];
         }
     } failure:^(NSError *error) {
 

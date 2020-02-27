@@ -22,6 +22,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *totalMoneyLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *teamCountLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *teamCountLabelMargin;
+
 
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIImageView *image1;
@@ -47,6 +49,13 @@
 @property (nonatomic, weak) IBOutlet UILabel *label3;
 /** 我的好友 */
 @property (nonatomic, weak) IBOutlet UIView *myFriendView;
+
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIButton *invitingNowBtn;
+
+/** <#注释#> */
+@property (nonatomic, assign) BOOL isAnimate;
 
 @end
 
@@ -76,17 +85,21 @@
         switch (i) {
             case 0:
                 [self.image1 sd_setImageWithURL:[NSURL URLWithString:_model[@"avatarList"][i]]];
+                self.teamCountLabelMargin.constant = -(33 + 33 - 20);
                 break;
             case 1:
                 [self.image2 sd_setImageWithURL:[NSURL URLWithString:_model[@"avatarList"][i]]];
+                self.teamCountLabelMargin.constant = -(33 - 10);
                 break;
             case 2:
                 [self.image3 sd_setImageWithURL:[NSURL URLWithString:_model[@"avatarList"][i]]];
+                self.teamCountLabelMargin.constant = 0;
                 break;
             default:
                 break;
         }
     }
+
 
     if ([_model[@"avatarList"] count] == 0) {
         self.myFriendView.hidden = NO;
@@ -103,6 +116,26 @@
 {
     [super awakeFromNib];
     self.HotStyleTop.type = 333;
+    if (@available(iOS 10.0, *)) {
+        [NSTimer scheduledTimerWithTimeInterval:1.5 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [self scaleImageView];
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
+- (void)scaleImageView
+{
+    [UIView animateWithDuration:1.5 animations:^{
+        if (self.isAnimate) {
+            self.invitingNowBtn.transform = CGAffineTransformScale(self.invitingNowBtn.transform, 1.1, 1.1);
+            self.isAnimate = NO;
+        } else {
+            self.invitingNowBtn.transform = CGAffineTransformMakeScale(1, 1);
+            self.isAnimate = YES;
+        }
+    }];
 }
 
 
@@ -113,8 +146,6 @@
     webVc.titleName = @"活动规则";
     [currentVc presentViewController:webVc animated:YES completion:nil];
 }
-
-
 
 /** 复制到剪切板 */
 - (IBAction)generalPaste
@@ -166,9 +197,7 @@
             }
             [CZProgressHUD hideAfterDelay:0.15];
             self.shareCount = 0;
-        } failure:^(NSError *error) {
-
-        }];
+        } failure:^(NSError *error) {}];
     }
 }
 
@@ -203,9 +232,6 @@
         [self.btn setTitle:@"立即提现" forState:UIControlStateNormal];
         self.myFriendView.hidden = YES;
     }
-
-
-
-
 }
+
 @end

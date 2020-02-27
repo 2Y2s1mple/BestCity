@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZRWBindingController : UIViewController
 /** <#注释#> */
 @property (nonatomic, strong) NSDictionary *model;
+
 @end
 
 NS_ASSUME_NONNULL_END

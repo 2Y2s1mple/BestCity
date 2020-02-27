@@ -24,7 +24,7 @@
 {
     if (self = [super initWithCoder:coder]) {
         NSLog(@"%@", self);
-        [self creatrUI];
+//        [self creatrUI];
     }
     return self;
 }
@@ -32,7 +32,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    NSLog(@"%@", self);
+    
 
 }
 
@@ -52,6 +52,11 @@
 - (void)setDataSource:(NSArray *)dataSource
 {
     _dataSource = dataSource;
+    [self layoutIfNeeded];
+    if (_collectionView == nil) {
+        [self creatrUI];
+    }
+
     [self.collectionView reloadData];
 }
 
@@ -106,7 +111,7 @@
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:flowLayout];
-        _collectionView.backgroundColor = UIColorFromRGB(0xF5F5F5);
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.scrollEnabled = NO;
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
@@ -133,7 +138,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NSDictionary *model = self.dataSource[indexPath.item];
     if (self.type == 0) {
         CZScrollADCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZScrollADCell" forIndexPath:indexPath];

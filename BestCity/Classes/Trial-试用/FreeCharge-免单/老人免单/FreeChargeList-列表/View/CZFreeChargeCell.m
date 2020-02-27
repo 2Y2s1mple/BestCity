@@ -69,7 +69,6 @@
                self.invitingNowBtn.transform = CGAffineTransformMakeScale(1, 1);
                self.isAnimate = YES;
            }
-
        }];
 }
 

@@ -11,14 +11,23 @@
 
 @interface CZRedPacketsWithdrawalView ()
 /** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIButton *btn1;
+/** <#注释#> */
 @property (nonatomic, strong) UIButton *recoredBtn;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *currentMoneyLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *alipayNicknameLabel;
 @end
-NSString *moneyCount;
+NSString *moneyCount = @"50";
 @implementation CZRedPacketsWithdrawalView
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self WithdrawalAmount:self.btn1];
+}
+
 + (instancetype)redPacketsWithdrawalView
 {
     CZRedPacketsWithdrawalView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] firstObject];

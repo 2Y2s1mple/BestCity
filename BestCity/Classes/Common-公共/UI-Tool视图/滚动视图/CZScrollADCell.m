@@ -31,4 +31,12 @@
     self.label.text = paramDic[@"content"];
 
 }
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self layoutIfNeeded];
+}
+
+
 @end

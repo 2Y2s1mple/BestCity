@@ -29,7 +29,6 @@
     self.label1.text = [NSString stringWithFormat:@"%@支付宝", paramDic[@"mobile"]];
     self.label2.text = [NSString stringWithFormat:@"提现%@元", paramDic[@"money"]];
     self.label3.text = [NSString stringWithFormat:@"%@分钟前", paramDic[@"time"]];
-
 }
 
 @end

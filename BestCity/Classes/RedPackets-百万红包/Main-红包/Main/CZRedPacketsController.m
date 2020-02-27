@@ -280,8 +280,6 @@
 {
     NSLog(@"%ld", tap.view.tag);
     NSString *ID = self.dataSource[@"hongbaoList"][tap.view.tag - 1][@"id"];
-
-
     [self openHongbaoWithId:ID];
 
 }
