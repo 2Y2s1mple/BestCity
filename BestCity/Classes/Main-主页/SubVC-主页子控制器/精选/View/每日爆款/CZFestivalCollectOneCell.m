@@ -102,25 +102,25 @@
 
     // 百万返现
     self.millionsView = [CZFestivalCollectMillionsView festivalCollectMillionsView];
-    self.millionsView.width = self.peopleNewView.width;
+    self.millionsView.width = SCR_WIDTH - 30;
     self.millionsView.height = 118;
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushPreferential)];
     self.millionsView.userInteractionEnabled = YES;
     [self.millionsView addGestureRecognizer:tap1];
 
-
     // 每日爆款
     UITapGestureRecognizer *HotStyleBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainHighBackViewAction)];
     [self.HotStyleBackView addGestureRecognizer:HotStyleBackViewTap];
     self.HotStyleTitleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
-   
 
     // 高反专区
     self.titleLabel1.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
     self.titleLabel2.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 14];
+
     // 上
     UITapGestureRecognizer *topHighBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topHighBackViewAction)];
     [self.topHighBackView addGestureRecognizer:topHighBackViewTap];
+
     //下
     UITapGestureRecognizer *bottomHighBackViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomHighBackViewAction)];
     [self.bottomHighBackView addGestureRecognizer:bottomHighBackViewTap];

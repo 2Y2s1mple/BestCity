@@ -143,8 +143,6 @@
     topView.height = CZGetY(self.redView);
     CGFloat maxHeight = CZGetY([self.scrollView.subviews lastObject]);
     self.scrollView.contentSize = CGSizeMake(0, maxHeight);
-
-
 }
 
 #pragma mark - 创建UI
@@ -153,7 +151,7 @@
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.size = CGSizeMake(SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 83 : 49));
-        _scrollView.backgroundColor = [UIColor redColor];
+        _scrollView.backgroundColor = UIColorFromRGB(0xE04625);
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
     }

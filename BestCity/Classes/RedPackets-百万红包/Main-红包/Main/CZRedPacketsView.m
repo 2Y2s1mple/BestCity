@@ -150,14 +150,22 @@
 /** 复制到剪切板 */
 - (IBAction)generalPaste
 {
-    NSString *text = @"我的--点击复制（邀请码）";
-    NSDictionary *context = @{@"mine" : text};
-    [MobClick event:@"ID5" attributes:context];
+    if (_isNoLogin) {
+        CZLoginController *vc = [[CZLoginController alloc] init];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        UINavigationController *nav = tabbar.selectedViewController;
+        UIViewController *currentVc = nav.topViewController;
+        [nav presentViewController:vc animated:YES completion:nil];
+    } else {
+        NSString *text = @"我的--点击复制（邀请码）";
+        NSDictionary *context = @{@"mine" : text};
+        [MobClick event:@"ID5" attributes:context];
 
-    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-    posteboard.string = JPUSERINFO[@"invitationCode"];
-    [CZProgressHUD showProgressHUDWithText:@"复制成功"];
-    [CZProgressHUD hideAfterDelay:1.5];
+        UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+        posteboard.string = JPUSERINFO[@"invitationCode"];
+        [CZProgressHUD showProgressHUDWithText:@"复制成功"];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }
 }
 
 /** 立即提现 */
@@ -222,7 +230,6 @@
         self.label3.text = @"登陆后领取现金红包";
         [self.btn setTitle:@"立即登录" forState:UIControlStateNormal];
         self.myFriendView.hidden = NO;
-
     } else {
         self.noLoginView.hidden = YES;
         self.invitationCodeLabel.hidden = NO;

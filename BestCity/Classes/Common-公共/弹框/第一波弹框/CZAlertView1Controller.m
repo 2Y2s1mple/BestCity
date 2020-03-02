@@ -20,9 +20,6 @@
 /** 背景图片 */
 @property (nonatomic, weak) IBOutlet UIImageView *backImageView;
 
-/** <#注释#> */
-@property (nonatomic, weak) IBOutlet UIView *titleViews;
-
 @end
 
 @implementation CZAlertView1Controller
@@ -63,9 +60,8 @@
         [nav pushViewController:vc animated:YES];
 
     } else {
-        self.backImageView.image = [UIImage imageNamed:@"alert-3"];
+        self.backImageView.image = [UIImage imageNamed:@"alert-9"];
         [self.caiBtn setImage:[UIImage imageNamed:@"alert-4"] forState:UIControlStateNormal];
-        self.titleViews.hidden = NO;
         self.caiBtnBottomMargin.constant = 100;
         sender.selected = YES;
     }

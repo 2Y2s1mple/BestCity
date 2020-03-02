@@ -123,7 +123,7 @@
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZScrollADCell1 class]) bundle:nil] forCellWithReuseIdentifier:@"CZScrollADCell1"];
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZScrollADCell2 class]) bundle:nil] forCellWithReuseIdentifier:@"CZScrollADCell2"];
     }
-    return  _collectionView;
+    return _collectionView;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

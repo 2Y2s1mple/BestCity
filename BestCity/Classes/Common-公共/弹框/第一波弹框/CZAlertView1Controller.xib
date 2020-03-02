@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,7 +14,6 @@
                 <outlet property="caiBtn" destination="X9c-JH-GpI" id="Tpg-Ai-wb3"/>
                 <outlet property="caiBtnBottomMargin" destination="cQk-Oo-GiT" id="psU-Da-tnD"/>
                 <outlet property="closeBtn" destination="Ygv-w8-hdM" id="wth-qO-qgK"/>
-                <outlet property="titleViews" destination="HoR-ry-WUe" id="qSh-ND-lRe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,42 +39,14 @@
                         <action selector="caiBtnAction:" destination="-1" eventType="touchUpInside" id="p8J-ad-a6B"/>
                     </connections>
                 </button>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HoR-ry-WUe">
-                    <rect key="frame" x="137.5" y="264" width="100" height="68"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3C-KF-WWM">
-                            <rect key="frame" x="0.0" y="9" width="59" height="58.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="49"/>
-                            <color key="textColor" red="0.92549019610000005" green="0.30588235289999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HF-TB-IlY">
-                            <rect key="frame" x="71" y="24" width="29" height="34"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                            <color key="textColor" red="0.92549019610000005" green="0.30588235289999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="x3C-KF-WWM" firstAttribute="leading" secondItem="HoR-ry-WUe" secondAttribute="leading" constant="0.01" id="4Fq-C5-mo9"/>
-                        <constraint firstAttribute="trailing" secondItem="2HF-TB-IlY" secondAttribute="trailing" constant="0.01" id="VWD-t6-guo"/>
-                        <constraint firstAttribute="bottom" secondItem="x3C-KF-WWM" secondAttribute="bottom" constant="0.01" id="YjP-Zz-UhR"/>
-                        <constraint firstAttribute="width" constant="100" id="dKT-5J-y74"/>
-                        <constraint firstAttribute="height" constant="68" id="dQv-RF-8U0"/>
-                        <constraint firstAttribute="bottom" secondItem="2HF-TB-IlY" secondAttribute="bottom" constant="10" id="jFy-03-khM"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.61485980308219179" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="OIi-3N-dwn" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="1u2-Hw-kun"/>
                 <constraint firstItem="OIi-3N-dwn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7KB-5V-haM"/>
                 <constraint firstItem="Ygv-w8-hdM" firstAttribute="top" secondItem="OIi-3N-dwn" secondAttribute="bottom" constant="44" id="KqT-6y-hp2"/>
-                <constraint firstItem="Ygv-w8-hdM" firstAttribute="top" secondItem="HoR-ry-WUe" secondAttribute="bottom" constant="200" id="NCM-Wa-gNc"/>
                 <constraint firstItem="Ygv-w8-hdM" firstAttribute="top" secondItem="X9c-JH-GpI" secondAttribute="bottom" constant="80" id="cQk-Oo-GiT"/>
                 <constraint firstItem="X9c-JH-GpI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fJ1-Oc-VNz"/>
-                <constraint firstItem="HoR-ry-WUe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ugq-oj-zrx"/>
                 <constraint firstItem="Ygv-w8-hdM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="w7c-ds-ifn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

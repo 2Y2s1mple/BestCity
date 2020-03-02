@@ -116,6 +116,8 @@
 //        layout.minimumLineSpacing = 0;
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+        _collectView.showsVerticalScrollIndicator = NO;
+        _collectView.showsHorizontalScrollIndicator = NO;
         _collectView.backgroundColor = [UIColor clearColor];
         self.collectDataSurce = [[CZFestivalCollectDelegate alloc] initWithCollectView:_collectView];
         self.collectDataSurce.iconImageView = self.icon;

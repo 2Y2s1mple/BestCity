@@ -283,7 +283,6 @@
                 return;
             }
 
-
             // 判断数组中有几个
             if (list.count > 1) { // 两个以上
                 alertList_ = [NSMutableArray array];
@@ -329,23 +328,19 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getInfoByKeyword"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             if ([result[@"data"][@"type"] isEqual: @(1)]) {
-                if ([result[@"data"] isKindOfClass:[NSDictionary class]]){
-                    CZGuessTypeTowView *view1 = [CZGuessTypeTowView createView];
-                    view1.dataDic = result[@"data"][@"data"];
-                    [[UIApplication sharedApplication].keyWindow addSubview:view1];
-                } else {
-                    CZGuessTypeOneView *view1 = [CZGuessTypeOneView createView];
-                    view1.text = param[@"keyword"];
-                    [[UIApplication sharedApplication].keyWindow addSubview:view1];
-                }
+                CZGuessTypeTowView *view1 = [CZGuessTypeTowView createView];
+                view1.dataDic = result[@"data"][@"data"];
+                [[UIApplication sharedApplication].keyWindow addSubview:view1];
+            } else if ([result[@"data"][@"type"] isEqual: @(2)]) {
+                CZAlertView4Controller *vc = [[CZAlertView4Controller alloc] init];
+                vc.param = result;
+                vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                CURRENTVC(currentVc);
+                [currentVc presentViewController:vc animated:YES completion:nil];
             } else {
-                if (result[@"data"]) {
-                    CZAlertView4Controller *vc = [[CZAlertView4Controller alloc] init];
-                    vc.param = result;
-                    vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-                    CURRENTVC(currentVc);
-                    [currentVc presentViewController:vc animated:YES completion:nil];
-                }
+                CZGuessTypeOneView *view1 = [CZGuessTypeOneView createView];
+                view1.text = param[@"keyword"];
+                [[UIApplication sharedApplication].keyWindow addSubview:view1];
             }
         }
     } failure:^(NSError *error) {// 结束刷新

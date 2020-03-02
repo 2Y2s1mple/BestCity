@@ -336,6 +336,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    posteboard.string = nil;
 }
 
 @end
