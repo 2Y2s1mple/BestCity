@@ -26,6 +26,9 @@
                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9g-Du-mDA">
                         <rect key="frame" x="15" y="60" width="400" height="142"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main-icon1" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-ST-xD9">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="142"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CW8-ab-Ax0" userLabel="第1个">
                                 <rect key="frame" x="9" y="64" width="69" height="73"/>
                                 <subviews>
@@ -368,9 +371,6 @@
                                     <constraint firstAttribute="height" constant="50" id="uTC-Sr-6wa"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main-icon1" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-ST-xD9">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="142"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
