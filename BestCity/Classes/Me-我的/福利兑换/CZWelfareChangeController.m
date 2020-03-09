@@ -33,6 +33,16 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
+        UILabel *label = [[UILabel alloc] init];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = UIColorFromRGB(0xFFE4E4);
+        label.height = 40;
+        label.width = SCR_WIDTH;
+        label.text = @"您可以前往各平台将【积分商城】内获得的会员码进行兑换";
+        label.font = [UIFont systemFontOfSize:13];
+        label.textColor = UIColorFromRGB(0xE25838);
+        self.tableView.tableHeaderView = label;
     }
     return _tableView;
 }

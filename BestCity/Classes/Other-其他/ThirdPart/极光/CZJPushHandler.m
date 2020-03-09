@@ -13,6 +13,7 @@
 #import "WMPageController.h"
 #import "CZTrialDetailController.h" // 新品试用
 #import "CZFreeChargeDetailController.h"
+#import "CZFreePushTool.h"
 
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
@@ -56,6 +57,7 @@ static id _instance;
 //    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
 
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+
     // 初始化JPush代码
     [JPUSHService setupWithOption:launchOptions appKey:@"09099048e2130ae6ff8151bc"
                           channel:@"App Store"
@@ -127,11 +129,19 @@ static id _instance;
 
 - (void)pushToVC:(NSDictionary *)param
 {
-//0默认消息，1榜单首页，11榜单详情，12商品详情，2评测主页，21评测文章，23清单文章web，24清单文章json，3新品主页，31新品详情，4免单主页，41免单详情
+    NSDictionary *dic = param;
+    NSDictionary *param1 = @{
+        @"targetType" : dic[@"type"],
+        @"targetId" : dic[@"objectId"],
+        @"targetTitle" : dic[@"name"],
+    };
+    [CZFreePushTool bannerPushToVC:param1];
+    return;
+
+    //0默认消息，1榜单首页，11榜单详情，12商品详情，2评测主页，21评测文章，23清单文章web，24清单文章json，3新品主页，31新品详情，4免单主页，41免单详情
     NSInteger targetType  = [param[@"targetType"] integerValue];
     NSString *targetId = param[@"targetId"];
     NSString *targetTitle = param[@"targetTitle"];
-
     switch (targetType) {
         case 11:
         {

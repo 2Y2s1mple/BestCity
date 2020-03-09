@@ -67,6 +67,12 @@
     //        mask.frame = cell.bounds;
     //        mask.path = bezierPath.CGPath;
     //        cell.layer.mask = mask;
+        } else {
+            UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCR_WIDTH - 20 , 140) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(0, 0)];
+            CAShapeLayer *maskLayer = [[CAShapeLayer  alloc]  init];
+            maskLayer.frame = cell.bounds;
+            maskLayer.path = maskPath.CGPath;
+            cell.layer.mask = maskLayer;
         }
     return cell;
 }

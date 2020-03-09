@@ -50,6 +50,7 @@
     _webview.delegate = self;
     _webview.backgroundColor = CZGlobalWhiteBg;
     [_webview setScalesPageToFit:YES];
+    _webview.mediaPlaybackRequiresUserAction = NO;
     [self.view addSubview:_webview];
     
 

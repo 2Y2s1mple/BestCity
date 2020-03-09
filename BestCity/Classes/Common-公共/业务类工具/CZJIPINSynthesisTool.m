@@ -403,5 +403,33 @@
     [currentVc presentViewController:modalVc animated:YES completion:nil];
 }
 
+/** 判断界面是否该版本下的第一次加载 */
++ (BOOL)isFirstIntoWithIdentifier:(NSString *)identifier
+{
+    //获取当前的版本号
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+
+    //获取存储的版本号
+    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
+
+    //比较
+    if (![curVersion isEqualToString:lastVersion]) {
+        //新版本
+        [CZSaveTool setObject:@"www" forKey:identifier];
+    }
+
+
+
+//    [CZSaveTool setObject:@"0rrrr" forKey:identifier];
+    if ([[CZSaveTool objectForKey:identifier] isEqualToString:@"0"]) {
+        // 老人
+        return NO;
+    } else {
+        // 新人
+        [CZSaveTool setObject:@"0" forKey:identifier];
+        return YES;
+    }
+}
+
 
 @end

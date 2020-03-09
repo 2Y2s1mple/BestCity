@@ -31,6 +31,9 @@ BOOL didClickedNewPeople;
 /** 存弹框的数组 */
 NSMutableArray *alertList_;
 
+/** 广告数据 */
+NSArray *aDImage;
+
 
 
 

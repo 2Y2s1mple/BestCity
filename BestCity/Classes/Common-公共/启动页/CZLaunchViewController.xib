@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZLaunchViewController">
             <connections>
+                <outlet property="backImageView" destination="zN2-4G-wkU" id="ijs-sB-1B7"/>
+                <outlet property="btn" destination="P9P-9m-lH4" id="jIc-ke-Wu7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,18 +19,41 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="启动页" translatesAutoresizingMaskIntoConstraints="NO" id="zN2-4G-wkU">
+                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="启动页" translatesAutoresizingMaskIntoConstraints="NO" id="zN2-4G-wkU">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9P-9m-lH4">
+                    <rect key="frame" x="328" y="40" width="70" height="30"/>
+                    <color key="backgroundColor" red="0.47058823529411764" green="0.47450980392156861" blue="0.47843137254901957" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="0VN-bU-oVf"/>
+                        <constraint firstAttribute="width" constant="70" id="RsJ-87-qkD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="跳过3s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="jump" destination="-1" eventType="touchUpInside" id="xBF-qw-sac"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="zN2-4G-wkU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="58B-eT-3AU"/>
+                <constraint firstItem="P9P-9m-lH4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="C4b-Rs-zQK"/>
+                <constraint firstAttribute="trailing" secondItem="P9P-9m-lH4" secondAttribute="trailing" constant="16" id="TL6-jL-xZu"/>
                 <constraint firstAttribute="bottom" secondItem="zN2-4G-wkU" secondAttribute="bottom" id="bMc-Cq-atp"/>
                 <constraint firstAttribute="trailing" secondItem="zN2-4G-wkU" secondAttribute="trailing" id="ebJ-5A-8VM"/>
                 <constraint firstItem="zN2-4G-wkU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yJJ-Ij-FiY"/>
             </constraints>
-            <point key="canvasLocation" x="131.8840579710145" y="103.53260869565219"/>
+            <point key="canvasLocation" x="84" y="-25"/>
         </view>
     </objects>
     <resources>

@@ -51,6 +51,7 @@
 
 /** 分享控件高度 */
 static CGFloat const likeAndShareHeight = 49;
+
 @implementation CZTaobaoDetailController
 
 //实现带有场景参数的初始化方法，并根据场景参数还原该控制器：
@@ -119,6 +120,7 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self getSourceData];
@@ -136,7 +138,6 @@ static CGFloat const likeAndShareHeight = 49;
 {
     // goodsType 1: 极品城 2: 淘宝
     // 如果极品城以前的样式, 淘宝的是现在样式
-
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"otherGoodsId"] = self.otherGoodsId;
@@ -157,7 +158,6 @@ static CGFloat const likeAndShareHeight = 49;
         }
         [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
-
 
     NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
     param1[@"otherGoodsId"] = self.otherGoodsId;
@@ -360,7 +360,6 @@ static CGFloat const likeAndShareHeight = 49;
     topImage.x = 7.5;
     topImage.y = 7.5;
 
-
     NSString *contextStr = context;
 
     UILabel *contentLabel = [[UILabel alloc] init];
@@ -376,8 +375,6 @@ static CGFloat const likeAndShareHeight = 49;
 
     contentLabel.height = height;
     [subView addSubview:contentLabel];
-
-
 
     NSNumber *count = @((height) / contentLabel.font.lineHeight);
     // 判断
@@ -498,11 +495,6 @@ static CGFloat const likeAndShareHeight = 49;
 
     self.recordHeight += guess.height;
 }
-
-
-
-
-
 
 #pragma mark - 事件
 // 显示全部推荐
@@ -668,7 +660,6 @@ static CGFloat const likeAndShareHeight = 49;
     }];
 }
 
-
 // 获取购买的URL
 - (void)getGoodsURl
 {
@@ -713,7 +704,5 @@ static CGFloat const likeAndShareHeight = 49;
 {
     [self changeSubViewFrame];
 }
-
- 
 
 @end

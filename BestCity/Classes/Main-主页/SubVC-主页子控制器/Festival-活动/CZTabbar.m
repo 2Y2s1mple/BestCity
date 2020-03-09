@@ -29,10 +29,9 @@
         imageView.image = image;
         imageView.size = CGSizeMake(80, 46.5);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
-
 //        [self addSubview:imageView];
+
         self.imageView = imageView;
-        
     }
     return self;
 }
@@ -78,7 +77,17 @@
         if (![btn isKindOfClass:[UIControl class]]) continue;
         // 计算按钮的x值
         if (barItem.title.length == 0 && index == 2) {
-            btn.center = CGPointMake(width / 2.0, height / 2.0 + 7);
+
+            UIImage *image =[UIImage imageNamed:@"tab-redP-sel"];
+            CGFloat imageH = image.size.height - 49;
+            
+
+            if (SCR_WIDTH == 375) {
+                btn.center = CGPointMake(width / 2.0, 49 / 2.0);
+            } else {
+                btn.center = CGPointMake(width / 2.0, 49 / 2.0 - imageH / 2);
+            }
+
             self.imageView.hidden = NO;
         }
         // 增加索引

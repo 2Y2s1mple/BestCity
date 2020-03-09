@@ -27,3 +27,6 @@ UIKIT_EXTERN NSString *JPSERVER_URL;
 /** 存弹框的数组 */
 UIKIT_EXTERN NSMutableArray *alertList_;
 
+/** 广告数据 */
+UIKIT_EXTERN NSArray *aDImage;
+

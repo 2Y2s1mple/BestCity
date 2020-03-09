@@ -314,7 +314,6 @@ static id instancet_;
 - (void)loadUserAlert
 {
     [CZJIPINSynthesisTool loadAlertView];
-
 }
 
 @end

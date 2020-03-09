@@ -52,8 +52,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
 
-    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
-//    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
+//    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
+    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
 //    JPSERVER_URL = @"http://47.99.243.255:8081/qualityshop-api/"; // 测试
 //    http://47.99.243.255:8081/qualityshop-api/swagger-ui.html
 //    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
@@ -62,9 +62,7 @@
 //        JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/";
 //    }
 
-
-    // 设置跟视图
-    [CZGuideTool chooseRootViewController:self.window];
+#pragma
 
     // 加载极光推送
     [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
@@ -81,6 +79,9 @@
     [self.window makeKeyAndVisible];
 
     recordSearchTextArray = [NSMutableArray array];
+
+    // 设置跟视图
+    [CZGuideTool chooseRootViewController:self.window];
 
     return YES;
 }

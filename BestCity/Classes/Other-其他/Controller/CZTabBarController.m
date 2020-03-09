@@ -70,7 +70,7 @@
     [self setupWithController:[[CZMeController alloc] init] title:@"我的" image:@"tab-people-nor" selectedImage:@"tab-people-sel"];
 
     [self setValue:[[CZTabbar alloc] init] forKey:@"tabBar"];
-    self.tabBar.clipsToBounds = YES;
+    self.tabBar.clipsToBounds = NO;
     self.selectedIndex = 0;
 }
 

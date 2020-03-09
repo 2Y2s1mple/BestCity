@@ -9,6 +9,7 @@
 #import "CZMainViewSubOneVC.h"
 // 工具
 #import "GXNetTool.h"
+#import "CZFreePushTool.h"
 
 // 视图
 #import <AdSupport/AdSupport.h>
@@ -95,11 +96,23 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 新用户指导
-        [CZGuideTool newpPeopleGuide];
-    });
+    if (aDImage.count > 0) {
+        NSDictionary *dic = [[aDImage firstObject] deleteAllNullValue];
+        NSDictionary *param = @{
+            @"targetType" : dic[@"type"],
+            @"targetId" : dic[@"objectId"],
+            @"targetTitle" : dic[@"name"],
+        };
+        [CZFreePushTool bannerPushToVC:param];
+        aDImage = nil;
+    } else {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            // 新用户指导
+            [CZGuideTool newpPeopleGuide];
+        });
+    }
+
 
     // 全局弹框在全局, 显示一个删除一个
     if (alertList_.count > 0) {
@@ -134,7 +147,6 @@
     self.collectView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
 }
 
-
 #pragma mark - 数据
 // 精品推荐数据
 - (NSMutableArray *)qualityGoods
@@ -148,22 +160,22 @@
 - (void)reloadNewTrailDataSorce
 {
     // 结束尾部刷新
-       [self.collectView.mj_footer endRefreshing];
-       NSMutableDictionary *param = [NSMutableDictionary dictionary];
-       //获取详情数据
-       [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-           if ([result[@"msg"] isEqualToString:@"success"]) {
-               self.totalDataModel = [CZMainViewSubOneVCModel objectWithKeyValues:result[@"data"]];
-               self.collectDataSurce.totalDataModel = self.totalDataModel;
-               // 获取精品推荐
-               [self getProductsRecommendedData:@{@"orderByType" : self.orderByType, @"asc" : self.asc}];
-           } else {
-               // 结束刷新
-               [self.collectView.mj_header endRefreshing];
-           }
-       } failure:^(NSError *error) {// 结束刷新
-           [self.collectView.mj_header endRefreshing];
-       }];
+    [self.collectView.mj_footer endRefreshing];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            self.totalDataModel = [CZMainViewSubOneVCModel objectWithKeyValues:result[@"data"]];
+            self.collectDataSurce.totalDataModel = self.totalDataModel;
+            // 获取精品推荐
+            [self getProductsRecommendedData:@{@"orderByType" : self.orderByType, @"asc" : self.asc}];
+        } else {
+            // 结束刷新
+            [self.collectView.mj_header endRefreshing];
+        }
+    } failure:^(NSError *error) {// 结束刷新
+        [self.collectView.mj_header endRefreshing];
+    }];
 }
 
 - (void)loadMoreTrailDataSorce

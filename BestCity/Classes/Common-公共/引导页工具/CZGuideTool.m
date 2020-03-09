@@ -16,6 +16,8 @@
 
 #import "CZAlertView1Controller.h"
 
+#import "CZLaunchViewController.h"
+
 
 BOOL oldUser;
 @implementation CZGuideTool
@@ -55,12 +57,15 @@ BOOL oldUser;
     //比较
     if ([curVersion isEqualToString:lastVersion]) {
         //没有新版本
-        window.rootViewController = [[CZTabBarController alloc] init];
+        window.rootViewController = [[CZLaunchViewController alloc] initWithWindow:window];;
     } else {
         //有新版本
         CZGuideController *vc = [[CZGuideController alloc] init];
         window.rootViewController = vc;
     }
 }
+
+
+
 
 @end

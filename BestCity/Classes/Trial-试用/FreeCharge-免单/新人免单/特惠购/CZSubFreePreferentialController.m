@@ -18,6 +18,8 @@
 #import "GXNetTool.h"
 
 #import "CZAlertView3Controller.h"
+#import "CZSubFreePreferentialAlertView.h"
+#import "CZTaobaoDetailNewController.h"
 
 
 
@@ -80,6 +82,14 @@
             }
         } failure:^(NSError *error) {}];
     }
+
+    if ([CZJIPINSynthesisTool isFirstIntoWithIdentifier:NSStringFromClass([self class])]) {
+        // 第一次
+        CZSubFreePreferentialAlertView *vc = [[CZSubFreePreferentialAlertView alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+
+    }
 }
 
 - (void)setupRefresh
@@ -132,7 +142,6 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
     }
     return _tableView;
 }

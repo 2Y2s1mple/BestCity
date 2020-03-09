@@ -47,6 +47,9 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 
 /** 弹出分享的弹框: 仅限分享淘宝商品 */
 + (void)jumpShareViewWithUrl:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(id)thumImage object:(id)object;
+
+/** 判断界面是否该版本下的第一次加载 */
++ (BOOL)isFirstIntoWithIdentifier:(NSString *)identifier;
 @end
 
 NS_ASSUME_NONNULL_END

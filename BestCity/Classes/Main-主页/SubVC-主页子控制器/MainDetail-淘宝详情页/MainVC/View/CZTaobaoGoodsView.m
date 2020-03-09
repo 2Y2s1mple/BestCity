@@ -13,7 +13,6 @@
 
 @interface CZTaobaoGoodsView ()
 
-@property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 /** 标题 */
 @property (nonatomic, weak) IBOutlet UILabel *titleName;
 
@@ -24,8 +23,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 /**  其他平台价格 */
 @property (nonatomic, weak) IBOutlet UILabel *otherPrice;
-/** 优惠券 */
-@property (nonatomic, weak) IBOutlet UILabel *couponPrice;
+
 /** 优惠券View */
 @property (nonatomic, weak) IBOutlet UIView *couponView;
 /** 下边线 */
@@ -44,6 +42,11 @@
 /** 发货地 */
 @property (nonatomic, weak) IBOutlet UILabel *provcity;
 @property (nonatomic, weak) IBOutlet UILabel *volume;
+
+
+
+
+
 @end
 
 @implementation CZTaobaoGoodsView
@@ -59,7 +62,6 @@
     _model = model;
     NSString *actualPrice = [NSString stringWithFormat:@"到手价 ¥%.2f", [model[@"buyPrice"] floatValue]];
     self.actualPriceLabel.attributedText = [actualPrice addAttributeFont:[UIFont fontWithName:@"PingFangSC-Semibold" size: 21]  Range:[actualPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model[@"buyPrice"] floatValue]]]];
-
 
     if ([model[@"otherPrice"] floatValue] > 0 && ![model[@"buyPrice"] isEqual:model[@"otherPrice"]]) {
         self.otherPrice.hidden = NO;
@@ -79,9 +81,7 @@
     }
 
     self.titleName.text = model[@"otherName"];
-
     self.volume.text = [NSString stringWithFormat:@"%@人已买", model[@"volume"]];
-
     self.provcity.text = model[@"provcity"];
 
     if ([model[@"couponPrice"] floatValue] > 0) { // 有优惠券
@@ -100,6 +100,10 @@
             self.titleLabelTop.constant = - 30;
         }
     }
+
+
+    self.label3.text = [NSString stringWithFormat:@"领%@元优惠券，津贴%.2f元", model[@"couponPrice"], [self.allDetailModel[@"allowanceGoods"][@"useAllowancePrice"] floatValue]];
+
     [self layoutIfNeeded];
     self.commodityH = CGRectGetMaxY(self.pointView.frame);
     self.height = self.commodityH;

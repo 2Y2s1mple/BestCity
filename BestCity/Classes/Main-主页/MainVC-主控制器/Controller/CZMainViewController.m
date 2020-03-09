@@ -23,6 +23,8 @@
 
 // 跳转
 #import "CZTaobaoSearchController.h"
+#import "GXNetTool.h"
+#import "CZLaunchViewController.h"
 
 @interface CZMainViewController ()
 /** viewModel */
@@ -276,6 +278,5 @@
 {
     [CZJIPINSynthesisTool pasteboardAlertViewRule];
 }
-
 
 @end

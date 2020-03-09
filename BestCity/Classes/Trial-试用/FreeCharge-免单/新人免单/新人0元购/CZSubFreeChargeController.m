@@ -22,6 +22,8 @@
 #import "CZFreeChargeCell7.h"
 #import "CZAlertView2Controller.h"
 
+#import "CZTaobaoDetailNewController.h"
+
 @interface CZSubFreeChargeController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 /** <#注释#> */
@@ -42,7 +44,7 @@
 /** 给弹框的数据 */
 @property (nonatomic, strong) NSDictionary *alertViewParam;
 
-/** <#注释#> */
+/** */
 @property (nonatomic, strong) CZFreeChargeFooterView *footerView;
 
 @end
@@ -92,14 +94,11 @@
     //创建刷新控件
     [self setupRefresh];
 
-    // 第一次离开新人0元购
-    if (![CZSaveTool leaveOnceNew0yuan]) {
-        UIButton *btn = [[UIButton alloc] init];
-        btn.size = CGSizeMake(100, 100);
-        btn.backgroundColor = [RANDOMCOLOR colorWithAlphaComponent:0.01];
-        [self.view addSubview:btn];
-        [btn addTarget:self action:@selector(pushALert2ViewController:) forControlEvents:UIControlEventTouchUpInside];
-    }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (UITableView *)tableView
@@ -128,7 +127,6 @@
 #pragma mark - 数据
 - (void)reloadNewTrailDataSorce
 {
-
     self.footerView.isUpArrow = NO;
 
     // 结束尾部刷新
@@ -162,6 +160,14 @@
         [self.tableView.mj_header endRefreshing];
         //隐藏菊花
         [CZProgressHUD hideAfterDelay:0];
+
+        // 添加弹窗
+
+#pragma mark - 测试代码
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self addAlertEvent];
+        });
     } failure:^(NSError *error) {
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
@@ -257,7 +263,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     
+    if (indexPath.section == 0) {
+        CZSubFreeChargeModel *model = self.dataSource[indexPath.row];
+        CZTaobaoDetailNewController *vc = [[CZTaobaoDetailNewController alloc] init];
+        vc.allowanceGoodsId = model.Id;
+        vc.otherGoodsId = model.otherGoodsId;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
+        CZTaobaoDetailNewController *vc = [[CZTaobaoDetailNewController alloc] init];
+        vc.allowanceGoodsId = model.Id;
+        vc.otherGoodsId = model.otherGoodsId;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -270,7 +288,6 @@
         return model.cellHeight;
     }
 }
-
 
 #pragma mark -- UI创建
 
@@ -295,5 +312,70 @@
     [self presentViewController:vc animated:YES completion:^{
     }];
 }
+
+// 添加弹窗逻辑
+- (void)addAlertEvent
+{
+    self.tableView.scrollEnabled = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 第一次离开新人0元购
+           if ([CZSaveTool leaveOnceNew0yuan]) {
+               UIButton *btn = [[UIButton alloc] init];
+               btn.size = CGSizeMake(100, 100);
+               btn.backgroundColor = [RANDOMCOLOR colorWithAlphaComponent:0.01];
+               [self.view addSubview:btn];
+               [btn addTarget:self action:@selector(pushALert2ViewController:) forControlEvents:UIControlEventTouchUpInside];
+
+               // 上部d挡板
+               UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+               NSLog(@"%@", cell);
+
+               UIView *topView = [[UIView alloc] init];
+               topView.width = SCR_WIDTH;
+               topView.height = cell.y + self.tableView.y;
+               topView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+               [self.view addSubview:topView];
+               topView.tag = 100;
+
+               UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-13"]];
+               imageView.centerX = SCR_WIDTH / 2;
+               imageView.y = topView.height - 130;
+               [topView addSubview:imageView];
+
+               // 下部挡板
+               UITableViewCell *bottomCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+               UIView *bottomView = [[UIView alloc] init];
+               bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+               bottomView.y = bottomCell.y + self.tableView.y;
+               bottomView.width = SCR_WIDTH;
+               bottomView.height = SCR_HEIGHT - bottomCell.y - self.tableView.y;
+               [self.view addSubview:bottomView];
+               bottomView.tag = 200;
+
+               UIButton *btn1 = [[UIButton alloc] init];
+               [btn1 setBackgroundImage:[UIImage imageNamed:@"alert-12"] forState:UIControlStateNormal];
+               [btn1 sizeToFit];
+               btn1.centerX = SCR_WIDTH / 2;
+               btn1.y = 20;
+               [bottomView addSubview:btn1];
+               [btn1 addTarget:self action:@selector(removeAlertView:) forControlEvents:UIControlEventTouchUpInside];
+           } else {
+               // 0.25秒激活, 因为一开始不让tableView动
+               self.tableView.scrollEnabled = YES;
+           }
+    });
+}
+
+// 删除提示框
+- (void)removeAlertView:(UIButton *)sender
+{
+    [sender removeFromSuperview];
+    UIView *view1 = [self.view viewWithTag:100];
+    UIView *view2 = [self.view viewWithTag:200];
+    [view1 removeFromSuperview];
+    [view2 removeFromSuperview];
+    self.tableView.scrollEnabled = YES;
+}
+
 
 @end

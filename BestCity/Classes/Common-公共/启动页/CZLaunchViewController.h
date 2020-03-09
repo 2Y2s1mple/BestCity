@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZLaunchViewController : UIViewController
-- (instancetype)initWithWidow:(UIWindow *)window;
+- (instancetype)initWithWindow:(UIWindow *)window;
+/** <#注释#> */
+@property (nonatomic, strong) NSDictionary *adDic;
 @end
 
 NS_ASSUME_NONNULL_END
