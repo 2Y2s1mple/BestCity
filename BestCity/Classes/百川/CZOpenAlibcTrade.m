@@ -61,7 +61,7 @@
                                     openByUrl:urlStr
                                     identity:@"trade"
                                     webView:webVc.webView
-                                    parentController:parentController
+                                    parentController:tabbar
                                     showParams:showParam
                                     taoKeParams:nil
                                     trackParam:nil

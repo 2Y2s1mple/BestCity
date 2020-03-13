@@ -47,8 +47,6 @@
 
 @end
 
-
-
 @interface CZTBSubOneView ()
 /** 记录点击的btn */
 @property (nonatomic, strong) CZTBSubOneViewBtn *recordBtn;

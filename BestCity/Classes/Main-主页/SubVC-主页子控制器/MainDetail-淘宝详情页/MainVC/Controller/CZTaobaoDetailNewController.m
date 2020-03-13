@@ -10,11 +10,12 @@
 #import "CZScollerImageTool.h"
 #import "GXNetTool.h"
 #import "UIButton+CZExtension.h" // 按钮扩展
-#import "CZCollectButton.h"
+
 // 工具
 #import "UIImageView+WebCache.h"
 #import "CZUserInfoTool.h"
 #import "CZUMConfigure.h"
+#import"CZJIPINSynthesisTool.h"
 // 视图
 #import "CZTaobaoGoodsView.h"
 #import "CZTaoBaoShopNameView.h" // 淘宝商家标题
@@ -42,8 +43,6 @@
 @property (nonatomic, strong) NSDictionary *allDetailModel;
 /** 返回键 */
 @property (nonatomic, strong) UIButton *popButton;
-/** 收藏 */
-@property (nonatomic, strong) CZCollectButton *collectButton;
 /** <#注释#> */
 @property (nonatomic, assign) CGFloat recordHeight;
 /** <#注释#> */
@@ -107,22 +106,6 @@ static CGFloat const likeAndShareHeight = 49;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (CZCollectButton *)collectButton
-{
-    if (_collectButton == nil) {
-        _collectButton = [CZCollectButton collectButton];
-        _collectButton.frame = CGRectMake(SCR_WIDTH - 14 - 30, (IsiPhoneX ? 54 : 30), 30, 30);
-        [_collectButton setImage:[UIImage imageNamed:@"hot-list-favor"] forState:UIControlStateNormal];
-        [_collectButton setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
-        _collectButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
-        _collectButton.layer.cornerRadius = 15;
-        _collectButton.layer.masksToBounds = YES;
-        _collectButton.type = @"8";
-        _collectButton.commodityID = self.otherGoodsId;
-    }
-    return _collectButton;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -134,17 +117,7 @@ static CGFloat const likeAndShareHeight = 49;
 
     // 加载pop按钮
     [self.view addSubview:self.popButton];
-
-    // 加载收藏按钮
-    [self.view addSubview:self.collectButton];
-
-    if ([CZJIPINSynthesisTool isFirstIntoWithIdentifier:NSStringFromClass([self class])]) {
-        // 第一次
-        CZTaobaoDetailNewAlertView *vc = [[CZTaobaoDetailNewAlertView alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-    } else {
-
-    }
+   
 }
 
 - (void)getSourceData
@@ -203,6 +176,11 @@ static CGFloat const likeAndShareHeight = 49;
     titlesView.width = SCR_WIDTH;
     titlesView.allDetailModel = self.allDetailModel;
     titlesView.model = self.detailModel;
+
+    NSString *titleName = [NSString stringWithFormat:@"         %@", self.detailModel[@"otherName"]];
+    titlesView.titleName.text = titleName;
+    titlesView.peopleNewImage.hidden = NO;
+
     titlesView.BottomImageView.hidden = NO;
     [titlesView.couponBtn setBackgroundImage:[UIImage imageNamed:@"taobaoDetail-2"] forState:UIControlStateNormal];
     titlesView.label3.hidden = NO;
@@ -592,66 +570,8 @@ static CGFloat const likeAndShareHeight = 49;
 // 购买
 - (void)buyBtnAction
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-
-    // 为了同步关联的淘宝账号
-    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        UINavigationController *naVc = tabbar.selectedViewController;
-        UIViewController *toVC = naVc.topViewController;
-        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-        if ([specialId isEqualToString:@""]) {
-            [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
-            [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
-                NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
-                NSLog(@"%@", tip);
-                TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
-                    [CZProgressHUD showProgressHUDWithText:@"授权成功"];
-                    [CZProgressHUD hideAfterDelay:1.5];
-                    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
-                }];
-                [tabbar presentViewController:webVc animated:YES completion:nil];
-
-                //拉起淘宝
-                AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
-                showParam.openType = AlibcOpenTypeAuto;
-                showParam.backUrl = @"tbopen25267281://xx.xx.xx";
-                showParam.isNeedPush = YES;
-                showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
-
-                [CZProgressHUD hideAfterDelay:1.5];
-
-                [[AlibcTradeSDK sharedInstance].tradeService
-                 openByUrl:[NSString stringWithFormat:@"https://oauth.m.taobao.com/authorize?response_type=code&client_id=25612235&redirect_uri=https://www.jipincheng.cn/qualityshop-api/api/taobao/returnUrl&state=%@&view=wap", JPTOKEN]
-                 identity:@"trade"
-                 webView:webVc.webView
-                 parentController:tabbar
-                 showParams:showParam
-                 taoKeParams:nil
-                 trackParam:nil
-                 tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
-                     NSLog(@"-----AlibcTradeSDK------");
-                     if(result.result == AlibcTradeResultTypeAddCard){
-                         NSLog(@"交易成功");
-                     } else if(result.result == AlibcTradeResultTypeAddCard){
-                         NSLog(@"加入购物车");
-                     }
-                 } tradeProcessFailedCallback:^(NSError * _Nullable error) {
-                     NSLog(@"----------退出交易流程----------");
-                 }];
-            } failureCallback:^(ALBBSession *session, NSError *error) {
-                NSString *tip = [NSString stringWithFormat:@"登录失败:%@", @""];
-                NSLog(@"%@", tip);
-            }];
-        } else {
-            // 打开淘宝
-            [self getGoodsURl];
-        }
-    }];
+    NSString *ID = self.allDetailModel[@"allowanceGoods"][@"id"];
+    [CZJIPINSynthesisTool buyBtnActionWithId:ID alertTitle:@"您将前往淘宝0元购买此商品，仅限首单"];
 }
 
 // 获取购买的URL

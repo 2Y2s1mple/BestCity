@@ -141,7 +141,7 @@
     subOne.selectIndex = 0;
     [subOne setBtnBlock:^(NSInteger index) {
         // （1搜索极品城，2搜索淘宝）
-        self.type = [NSString stringWithFormat:@"%ld", (index + 1)];
+        self.type = [NSString stringWithFormat:@"%d", (index + 1)];
     }];
     [containsView addSubview:subOne];
 

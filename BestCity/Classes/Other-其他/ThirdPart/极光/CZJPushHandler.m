@@ -63,6 +63,17 @@ static id _instance;
                           channel:@"App Store"
                  apsForProduction:0
             advertisingIdentifier:nil];
+
+//    // 添加tag
+//    NSSet *set = [NSSet setWithObject:@"cjxx"];
+//    [JPUSHService addTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+//        NSLog(@"iResCode = %ld, iTags = %@, seq = %ld", (long)iResCode, iTags, (long)seq);
+//    } seq:1122];
+//
+//    // 添加别名
+//    [JPUSHService setAlias:@"test1" completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//        NSLog(@"iResCode = %ld, iAlias = %@, seq = %ld", (long)iResCode, iAlias, (long)seq);
+//    } seq:1122];
 }
 
 //- (void)networkDidReceiveMessage:(NSNotification *)notification {
@@ -91,7 +102,7 @@ static id _instance;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         NSLog(@"iOS10 前台收到远程通知:%@", userInfo);
-        [self pushToVC:userInfo];
+//        [self pushToVC:userInfo];
     }
     else {
         // 判断为本地通知
@@ -117,133 +128,28 @@ static id _instance;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         NSLog(@"iOS10 收到远程通知:%@", userInfo);
-        [self pushToVC:userInfo];
+        PushData_ = userInfo;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"JiGuangPushNotifi" object:nil];
+
     }
     else {
         // 判断为本地通知
-        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}", body, title, subtitle, badge, sound, userInfo);
     }
     completionHandler();  // 系统要求执行这个方法
 }
 #endif
 
-- (void)pushToVC:(NSDictionary *)param
-{
-    NSDictionary *dic = param;
-    NSDictionary *param1 = @{
-        @"targetType" : dic[@"type"],
-        @"targetId" : dic[@"objectId"],
-        @"targetTitle" : dic[@"name"],
-    };
-    [CZFreePushTool bannerPushToVC:param1];
-    return;
-
-    //0默认消息，1榜单首页，11榜单详情，12商品详情，2评测主页，21评测文章，23清单文章web，24清单文章json，3新品主页，31新品详情，4免单主页，41免单详情
-    NSInteger targetType  = [param[@"targetType"] integerValue];
-    NSString *targetId = param[@"targetId"];
-    NSString *targetTitle = param[@"targetTitle"];
-    switch (targetType) {
-        case 11:
-        {
-            CZMainHotSaleDetailController *vc = [[CZMainHotSaleDetailController alloc] init];
-            vc.ID = targetId;
-            vc.titleText = [NSString stringWithFormat:@"%@榜单", targetTitle];
-           UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-            break;
-        }
-        case 12:
-        {
-            CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
-            vc.goodsId = targetId;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-            break;
-        }
-        case 2:
-        {
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabbar.selectedIndex = 1;
-            break;
-        }
-        case 21:
-        {
-            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-            vc.detailType = CZJIPINModuleEvaluation;
-            vc.findgoodsId = targetId;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-            break;
-        }
-        case 23:
-        {
-            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-            vc.detailType = CZJIPINModuleQingDan;
-            vc.findgoodsId = targetId;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-            break;
-        }
-        case 24:
-        {
-            CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-            vc.detailType = CZJIPINModuleQingDan;
-            vc.findgoodsId = targetId;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-            break;
-        }
-        case 3:
-        {
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabbar.selectedIndex = 2;
-            UINavigationController *nav = tabbar.selectedViewController;
-            WMPageController *hotVc = (WMPageController *)nav.topViewController;
-            hotVc.selectIndex = 0;
-            break;
-        }
-        case 31:
-        {
-            CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
-            vc.trialId = targetId;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabbar.selectedIndex = 2;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-            break;
-        }
-        case 4:
-        {
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabbar.selectedIndex = 2;
-            UINavigationController *nav = tabbar.selectedViewController;
-            WMPageController *hotVc = (WMPageController *)nav.topViewController;
-            hotVc.selectIndex = 1;
-            break;
-        }
-        case 41:
-        {
-            CZFreeChargeDetailController *vc = [[CZFreeChargeDetailController alloc] init];
-            vc.Id = targetId;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabbar.selectedIndex = 2;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-        }
-        default:
-            break;
-    }
-
-
-
-
-
-}
+//- (void)pushToVC:(NSDictionary *)param
+//{
+//    NSDictionary *dic = param;
+//    NSDictionary *param1 = @{
+//        @"targetType" : dic[@"targetType"] == nil ? @"" : dic[@"targetType"],
+//        @"targetId" : dic[@"targetId"] == nil ? @"" : dic[@"targetId"],
+//        @"targetTitle" : dic[@"targetTitle"] == nil ? @"" : dic[@"targetTitle"],
+//    };
+//    [CZFreePushTool bannerPushToVC:param1];
+//}
 
 
 @end

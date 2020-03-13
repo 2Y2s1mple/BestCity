@@ -35,7 +35,7 @@
     return self;
 }
 
-- (void)setDataSource:(NSArray *)dataSource
+- (void)setDataSource:(NSArray *)dataSource 
 {
     _dataSource = dataSource;
     [self mainHotSaleCategoryWithData:dataSource];

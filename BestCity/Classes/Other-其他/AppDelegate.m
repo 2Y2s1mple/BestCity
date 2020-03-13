@@ -13,6 +13,7 @@
 #import "CZOpenAlibcTrade.h"
 //#import "UMSocialSnsService.h"
 #import "GXNetTool.h"
+#import "CZFreePushTool.h"
 
 #import "CZLaunchViewController.h"
 
@@ -52,8 +53,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
 
-//    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
-    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
+    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
+//    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
 //    JPSERVER_URL = @"http://47.99.243.255:8081/qualityshop-api/"; // 测试
 //    http://47.99.243.255:8081/qualityshop-api/swagger-ui.html
 //    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
@@ -63,9 +64,6 @@
 //    }
 
 #pragma
-
-    // 加载极光推送
-    [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
 
     // 加载友盟分享
    [[CZUMConfigure shareConfigure] configure];
@@ -82,6 +80,12 @@
 
     // 设置跟视图
     [CZGuideTool chooseRootViewController:self.window];
+
+    // 加载极光推送
+    [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
+
+
+//    [NSThread sleepForTimeInterval:6];
 
     return YES;
 }
@@ -331,7 +335,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"--------didBecomeActive------");
 }
 
 

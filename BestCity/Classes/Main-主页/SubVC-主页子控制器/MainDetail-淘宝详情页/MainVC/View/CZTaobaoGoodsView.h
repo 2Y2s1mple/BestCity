@@ -32,6 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *label3;
+/** 券后价 */
+@property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIImageView *peopleNewImage;
+/** 标题 */
+@property (nonatomic, weak) IBOutlet UILabel *titleName;
 @end
 
 NS_ASSUME_NONNULL_END

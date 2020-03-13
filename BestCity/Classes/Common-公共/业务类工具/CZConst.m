@@ -34,6 +34,9 @@ NSMutableArray *alertList_;
 /** 广告数据 */
 NSArray *aDImage;
 
+/** 推动数据 */
+NSDictionary *PushData_;
+
 
 
 

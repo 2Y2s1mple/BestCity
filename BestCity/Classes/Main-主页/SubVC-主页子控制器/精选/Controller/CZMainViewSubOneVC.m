@@ -82,8 +82,15 @@
     // 接收登录时候的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadNewTrailDataSorce) name:loginChangeUserInfo object:nil];
 
+    // 接收极光的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jiGuangPushNotifi) name:@"JiGuangPushNotifi" object:nil];
+
+
     // 数据
     [self setupRefresh];
+
+    // 极光推送的信息
+    [self jiGuangPushNotifi];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -99,9 +106,9 @@
     if (aDImage.count > 0) {
         NSDictionary *dic = [[aDImage firstObject] deleteAllNullValue];
         NSDictionary *param = @{
-            @"targetType" : dic[@"type"],
-            @"targetId" : dic[@"objectId"],
-            @"targetTitle" : dic[@"name"],
+            @"targetType" : dic[@"type"] == nil ? @"" : dic[@"type"],
+            @"targetId" : dic[@"objectId"] == nil ? @"" : dic[@"objectId"],
+            @"targetTitle" : dic[@"name"] == nil ? @"" : dic[@"type"],
         };
         [CZFreePushTool bannerPushToVC:param];
         aDImage = nil;
@@ -112,7 +119,6 @@
             [CZGuideTool newpPeopleGuide];
         });
     }
-
 
     // 全局弹框在全局, 显示一个删除一个
     if (alertList_.count > 0) {
@@ -265,6 +271,19 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jiGuangPushNotifi
+{
+    if (PushData_) {
+        NSDictionary *dic = PushData_;
+        NSDictionary *param1 = @{
+            @"targetType" : dic[@"targetType"] == nil ? @"" : dic[@"targetType"],
+            @"targetId" : dic[@"targetId"] == nil ? @"" : dic[@"targetId"],
+            @"targetTitle" : dic[@"targetTitle"] == nil ? @"" : dic[@"targetTitle"],
+        };
+        [CZFreePushTool bannerPushToVC:param1];
+        PushData_ = nil;
+    }
+}
 
 
 

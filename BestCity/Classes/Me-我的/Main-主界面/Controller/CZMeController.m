@@ -339,6 +339,9 @@
         CZMeCell *cell = [CZMeCell cellWithTabelView:tableView];
         if (self.adList.count > 0) {
             cell.adList = self.adList;
+            cell.contentView.backgroundColor = UIColorFromRGB(0xF7F4F8);
+        } else {
+            cell.contentView.backgroundColor = UIColorFromRGB(0xFFFFFF);
         }
         return cell;
     } else {
@@ -352,7 +355,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return 82 + 104;
+        if (self.adList.count > 0) {
+            return 82 + 104;
+        } else {
+            return 82;
+        }
     } else {
         return 205;
     }

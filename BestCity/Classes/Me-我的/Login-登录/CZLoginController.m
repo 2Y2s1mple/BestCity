@@ -48,6 +48,15 @@
 static id instancet_;
 @implementation CZLoginController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    return self;
+}
+
 + (instancetype)shareLoginController
 {
     static dispatch_once_t onceToken;
@@ -88,6 +97,7 @@ static id instancet_;
             if ([result[@"code"] isEqualToNumber:@(700)])
             {
                 CZBindingController *vc = [[CZBindingController alloc] init];
+                vc.modalPresentationStyle = UIModalPresentationFullScreen;
                 vc.openid = param[@"openid"];
                 [self presentViewController:vc animated:NO completion:nil];
             } else if ([result[@"code"] isEqualToNumber:@(0)]){
@@ -139,6 +149,7 @@ static id instancet_;
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
 
             if (didClickedNewPeople && [JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
+                didClickedNewPeople = NO;
                 UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
                 UINavigationController *nav = tabbar.selectedViewController;
                 CZMeController *vc = (CZMeController *)nav.topViewController;
@@ -231,11 +242,20 @@ static id instancet_;
     
     // 接收登录时候的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissViewController) name:loginChangeUserInfo object:nil];
+
 }
 
 - (void)dismissViewController
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
+    if (didClickedNewPeople && [JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
+        didClickedNewPeople = NO;
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        UINavigationController *nav = tabbar.selectedViewController;
+        CZMeController *vc = (CZMeController *)nav.topViewController;
+        CZSubFreeChargeController *toVc = [[CZSubFreeChargeController alloc] init];
+        [vc.navigationController pushViewController:toVc animated:YES];
+    }
 }
 
 /** 跳转用户协议 */

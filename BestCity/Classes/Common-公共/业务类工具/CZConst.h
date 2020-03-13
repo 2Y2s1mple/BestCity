@@ -30,3 +30,6 @@ UIKIT_EXTERN NSMutableArray *alertList_;
 /** 广告数据 */
 UIKIT_EXTERN NSArray *aDImage;
 
+/** 推动数据 */
+UIKIT_EXTERN NSDictionary *PushData_;
+

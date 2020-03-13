@@ -60,7 +60,8 @@
             // 存储用户信息, 都TM存储上了
             [CZSaveTool setObject:userDic forKey:@"user"];
 
-            [self dismissViewControllerAnimated:YES completion:nil];
+            CURRENTVC(currentVc);
+            [currentVc.navigationController dismissViewControllerAnimated:YES completion:nil];
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
         } else {

@@ -32,7 +32,7 @@
         self.tableView.estimatedSectionFooterHeight = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
         UILabel *label = [[UILabel alloc] init];
         label.textAlignment = NSTextAlignmentCenter;

@@ -14,6 +14,7 @@
 #import "CZMainProjectGeneralView.h" // 专题页面
 #import "CZCoinCenterController.h" // 任务中心
 #import "CZSubFreeChargeController.h" // 新人免单页
+#import "CZSubFreePreferentialController.h" // 特惠购
 
 @implementation CZFreePushTool
 // 轮播图广告跳转
@@ -23,7 +24,7 @@
     NSString *targetId = param[@"targetId"];
     NSString *targetTitle = param[@"targetTitle"];
 
-   // 轮播图跳转类型：0不跳转, 2评测详情，11.专题页面 12.淘宝客详情页面, 13.H5页面，14.极币商城，15.任务中心，16.免单主页，17.榜单主页
+   // 轮播图跳转类型：0不跳转, 2评测详情，11.专题页面 12.淘宝客详情页面, 13.H5页面，14.极币商城，15.任务中心，16.榜单主页，17.榜单主页 18.新人0元购
 
     switch (targetType) {
         case 2:
@@ -50,6 +51,10 @@
         case 17:
             [self hotSale];
             break;
+        case 18:
+            [self FreePreferential];
+            break;
+
 
 
         default:
@@ -185,7 +190,16 @@
 + (void)hotSale
 {
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    tabbar.selectedIndex = 1;
+    tabbar.selectedIndex = 0;
+}
+
+#pragma mark - 特惠购
++ (void)FreePreferential
+{
+    CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
+    UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *nav = tabbar.selectedViewController;
+    [nav pushViewController:vc animated:YES];
 }
 
 @end

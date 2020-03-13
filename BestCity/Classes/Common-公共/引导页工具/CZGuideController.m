@@ -30,19 +30,19 @@
     [self.view addSubview:scrollerView];
     
     
-    
-    for (int i = 0; i  < 4; i++) {
+    NSInteger count = 3;
+    for (int i = 0; i  <= count; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.x = SCR_WIDTH * i;
         imageView.size = CGSizeMake(SCR_WIDTH, SCR_HEIGHT);
         [scrollerView addSubview:imageView];
         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guide%d", i]];
     }
-    scrollerView.contentSize = CGSizeMake(SCR_WIDTH * 4, 0);
+    scrollerView.contentSize = CGSizeMake(SCR_WIDTH * count, 0);
     
     
     UIButton *btn = [[UIButton alloc] init];
-    btn.x = SCR_WIDTH * 3 + SCR_WIDTH / 2 - 75;
+    btn.x = SCR_WIDTH * 2 + SCR_WIDTH / 2 - 75;
     btn.y = SCR_HEIGHT - 44 - 20;
     btn.width = 150;
     btn.height = 44;

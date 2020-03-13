@@ -87,9 +87,11 @@
                 self.window.rootViewController = self.tabbarVc;
                 return;
             }
-            [self.backImageView sd_setImageWithURL:[NSURL URLWithString:self.adDic[@"img"]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+
+            [self.backImageView sd_setImageWithURL:[NSURL URLWithString:self.adDic[@"img"]] placeholderImage:[UIImage imageNamed:@"启动页"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 [self setupTimer];
             }];
+
         } else {
 
         }

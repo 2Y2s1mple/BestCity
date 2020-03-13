@@ -31,6 +31,8 @@
 #import <MobLinkPro/MLSDKScene.h>
 #import <MobLinkPro/UIViewController+MLSDKRestore.h>
 
+#import "CZTaobaoDetailNewAlertView.h"
+
 @interface CZTaobaoDetailController ()<UIScrollViewDelegate, CZGuessWhatYouLikeViewDelegate>
 /** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollerView;
@@ -132,6 +134,14 @@ static CGFloat const likeAndShareHeight = 49;
 
     // 加载收藏按钮
     [self.view addSubview:self.collectButton];
+
+    if ([CZJIPINSynthesisTool isFirstIntoWithIdentifier:NSStringFromClass([self class])]) {
+           // 第一次
+           CZTaobaoDetailNewAlertView *vc = [[CZTaobaoDetailNewAlertView alloc] init];
+           [self presentViewController:vc animated:YES completion:nil];
+       } else {
+
+       }
 }
 
 - (void)getSourceData

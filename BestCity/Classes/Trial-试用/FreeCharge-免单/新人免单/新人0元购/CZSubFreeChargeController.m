@@ -64,7 +64,7 @@
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 //                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
             } else {
-                self.dataCount = 2;
+                self.dataCount = 4;
 //                [self.tableView reloadData];
                 _footerView.isUpArrow = NO;
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
@@ -84,6 +84,12 @@
                  };
     }];
     //导航条
+    UIView *tmpView = [[UIView alloc] init];
+    tmpView.backgroundColor = [UIColor whiteColor];
+    tmpView.height = (IsiPhoneX ? 26 : 0);
+    tmpView.width = SCR_WIDTH;
+    [self.view addSubview:tmpView];
+
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"新人0元专区" rightBtnTitle:nil rightBtnAction:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
     self.navigationView = navigationView;
@@ -149,7 +155,7 @@
 
             // 组1
             self.dataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"][@"newAllowanceGoodsList"]];
-            self.dataCount = 2;
+            self.dataCount = 4;
 
             // 组2
             [self group2Data:result[@"data"][@"allowanceGoodsList"]];
@@ -184,7 +190,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (self.dataSource.count > 2) {
+        if (self.dataSource.count > 4) {
             return self.dataCount;
         } else {
             return self.dataSource.count;
@@ -251,7 +257,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (self.dataSource.count > 2) {
+        if (self.dataSource.count > 4) {
             return 55;
         } else {
             return 0.01;
@@ -270,12 +276,13 @@
         vc.otherGoodsId = model.otherGoodsId;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
-        CZTaobaoDetailNewController *vc = [[CZTaobaoDetailNewController alloc] init];
-        vc.allowanceGoodsId = model.Id;
-        vc.otherGoodsId = model.otherGoodsId;
-        [self.navigationController pushViewController:vc animated:YES];
+//        CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
+//        CZTaobaoDetailNewController *vc = [[CZTaobaoDetailNewController alloc] init];
+//        vc.allowanceGoodsId = model.Id;
+//        vc.otherGoodsId = model.otherGoodsId;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
+    [self touchesBegan:nil withEvent:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -319,6 +326,7 @@
     self.tableView.scrollEnabled = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 第一次离开新人0元购
+//        [CZSaveTool setObject:@"www" forKey:@"leaveOnceNew0yuan"];
            if ([CZSaveTool leaveOnceNew0yuan]) {
                UIButton *btn = [[UIButton alloc] init];
                btn.size = CGSizeMake(100, 100);
@@ -357,6 +365,7 @@
                [btn1 sizeToFit];
                btn1.centerX = SCR_WIDTH / 2;
                btn1.y = 20;
+               btn1.tag = 100;
                [bottomView addSubview:btn1];
                [btn1 addTarget:self action:@selector(removeAlertView:) forControlEvents:UIControlEventTouchUpInside];
            } else {
@@ -375,6 +384,13 @@
     [view1 removeFromSuperview];
     [view2 removeFromSuperview];
     self.tableView.scrollEnabled = YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UIView *view2 = [self.view viewWithTag:200];
+    UIButton *btn = [view2 viewWithTag:100];
+    [self removeAlertView:btn];
 }
 
 

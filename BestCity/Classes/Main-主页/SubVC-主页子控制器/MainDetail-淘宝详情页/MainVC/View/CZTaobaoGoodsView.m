@@ -13,14 +13,7 @@
 
 @interface CZTaobaoGoodsView ()
 
-/** 标题 */
-@property (nonatomic, weak) IBOutlet UILabel *titleName;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelTop;
-
-
-/** 券后价 */
-@property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 /**  其他平台价格 */
 @property (nonatomic, weak) IBOutlet UILabel *otherPrice;
 
@@ -60,8 +53,25 @@
 - (void)setModel:(NSDictionary *)model
 {
     _model = model;
-    NSString *actualPrice = [NSString stringWithFormat:@"到手价 ¥%.2f", [model[@"buyPrice"] floatValue]];
-    self.actualPriceLabel.attributedText = [actualPrice addAttributeFont:[UIFont fontWithName:@"PingFangSC-Semibold" size: 21]  Range:[actualPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model[@"buyPrice"] floatValue]]]];
+
+    CGFloat useAllowancePrice = [self.allDetailModel[@"allowanceGoods"][@"useAllowancePrice"] floatValue];
+    CGFloat couponPrice = [model[@"couponPrice"] floatValue];
+
+    if (couponPrice > 0) {
+        self.label3.text = [NSString stringWithFormat:@"领%.2f元优惠券，津贴%.2f元", couponPrice, useAllowancePrice];
+    } else {
+        self.label3.text = [NSString stringWithFormat:@"领津贴%.2f元", useAllowancePrice];
+    }
+
+
+    if (useAllowancePrice > 0) {
+        NSString *actualPrice = @"¥0.00";
+        self.actualPriceLabel.attributedText = [actualPrice addAttributeFont:[UIFont fontWithName:@"PingFangSC-Semibold" size: 21]  Range:NSMakeRange(0, actualPrice.length)];
+    } else {
+        NSString *actualPrice = [NSString stringWithFormat:@"到手价 ¥%.2f", [model[@"buyPrice"] floatValue]];
+        self.actualPriceLabel.attributedText = [actualPrice addAttributeFont:[UIFont fontWithName:@"PingFangSC-Semibold" size: 21]  Range:[actualPrice rangeOfString:[NSString stringWithFormat:@"¥%.2f", [model[@"buyPrice"] floatValue]]]];
+    }
+
 
     if ([model[@"otherPrice"] floatValue] > 0 && ![model[@"buyPrice"] isEqual:model[@"otherPrice"]]) {
         self.otherPrice.hidden = NO;
@@ -84,25 +94,30 @@
     self.volume.text = [NSString stringWithFormat:@"%@人已买", model[@"volume"]];
     self.provcity.text = model[@"provcity"];
 
-    if ([model[@"couponPrice"] floatValue] > 0) { // 有优惠券
-        self.couponView.hidden = NO;
-        // 优惠券信息
-        self.couponPrice.text = [NSString stringWithFormat:@"%@", model[@"couponPrice"]];
-        self.bottomLabel.text = [NSString stringWithFormat:@"%@ - %@", model[@"couponStartTime"], model[@"couponEndTime"]];
-    } else { // 无优惠券
-        self.titleLabelTop.constant = 15;
-        self.couponView.hidden = YES;
-        [self.couponView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@(0));
-        }];
-        // 无券无返现
-        if ([model[@"couponPrice"] floatValue] > 0) {
-            self.titleLabelTop.constant = - 30;
+
+    if (useAllowancePrice > 0) {
+
+    } else {
+        if ([model[@"couponPrice"] floatValue] > 0) { // 有优惠券
+            self.couponView.hidden = NO;
+            // 优惠券信息
+            self.couponPrice.text = [NSString stringWithFormat:@"%@", model[@"couponPrice"]];
+            self.bottomLabel.text = [NSString stringWithFormat:@"%@ - %@", model[@"couponStartTime"], model[@"couponEndTime"]];
+        } else { // 无优惠券
+            self.titleLabelTop.constant = 15;
+            self.couponView.hidden = YES;
+            [self.couponView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.equalTo(@(0));
+            }];
+            // 无券无返现
+            if ([model[@"couponPrice"] floatValue] > 0) {
+                self.titleLabelTop.constant = - 30;
+            }
         }
     }
 
 
-    self.label3.text = [NSString stringWithFormat:@"领%@元优惠券，津贴%.2f元", model[@"couponPrice"], [self.allDetailModel[@"allowanceGoods"][@"useAllowancePrice"] floatValue]];
+
 
     [self layoutIfNeeded];
     self.commodityH = CGRectGetMaxY(self.pointView.frame);
@@ -129,16 +144,21 @@
 
 - (IBAction)ticketBugLink
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-    // 打开淘宝
-    [self getGoodsURl];
-}
 
+    CGFloat useAllowancePrice = [self.allDetailModel[@"allowanceGoods"][@"useAllowancePrice"] floatValue];
+    if (useAllowancePrice > 0) {
+        NSString *ID = self.allDetailModel[@"allowanceGoods"][@"id"];
+        [CZJIPINSynthesisTool buyBtnActionWithId:ID alertTitle:@"您将前往淘宝0元购买此商品，仅限首单"];
+    } else {
+        if ([JPTOKEN length] <= 0) {
+            CZLoginController *vc = [CZLoginController shareLoginController];
+            [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+            return;
+        }
+        // 打开淘宝
+        [self getGoodsURl];
+    }
+}
 
 // 获取购买的URL
 - (void)getGoodsURl

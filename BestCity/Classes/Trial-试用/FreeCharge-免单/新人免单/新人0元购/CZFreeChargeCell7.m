@@ -89,6 +89,7 @@
 
 - (IBAction)bugBtnClicked:(UIButton *)sender {
     NSLog(@"----");
-    [CZJIPINSynthesisTool buyBtnActionWithId:self.model.Id alertTitle:@"您将前往淘宝购买此商品，下单立减"];
+   NSString *title = [NSString stringWithFormat:@"您将前往淘宝购买此商品\n 使用津贴立减￥%@，无需等待返现", _model.useAllowancePrice];
+    [CZJIPINSynthesisTool buyBtnActionWithId:self.model.Id alertTitle:title];
 }
 @end
