@@ -1,0 +1,92 @@
+[
+    {
+        "categoryId": "40d4e725f4644002a452866ce33e63b0",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "电动牙刷",
+        "img": "http://jipincheng.cn/category/img/20191223/06f785d763874720ae7c6bc42303fe2a",
+        "orderNum": 1,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "792b785473b945a1bebe0fbd3d68bb9c",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "剃须刀",
+        "img": "http://jipincheng.cn/category/img/20191223/9a5d6ee8e02f4286ba0fab568e464021",
+        "orderNum": 2,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "7c9ee77496e840418c6e1db0319615a4",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "电吹风",
+        "img": "http://jipincheng.cn/category/img/20191223/486c22e387df4821824bdac63ef62b87",
+        "orderNum": 3,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "8fed6c9202a14859b94756935a66d3ca",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "卷发棒",
+        "img": "http://jipincheng.cn/category/img/20191223/aef7ed829c104f69ac503c4be00ea46b",
+        "orderNum": 4,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "919995434b144041ae0fd379c6103235",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "理发器",
+        "img": "http://jipincheng.cn/category/img/20191223/d0f76562612d442ea7ee21c3ec4417af",
+        "orderNum": 5,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "a4a2ac3d11014f12ae0ae1a9c9a0c77a",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "美容仪",
+        "img": "http://jipincheng.cn/category/img/20191223/ee3775e966e5438cac914d2f1a4e1059",
+        "orderNum": 6,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "a96126dbecd14906a34c1762dafb8720",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "洁面仪",
+        "img": "http://jipincheng.cn/category/img/20191223/22e3a714299d446cadaa398b3ff04db0",
+        "orderNum": 7,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "b17626e5898b491392e0763c3ecb3134",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "电子秤",
+        "img": "http://jipincheng.cn/category/img/20191223/aa7d276c1a49495aa2e5555df438ef2e",
+        "orderNum": 8,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "b4397722cad8495ab006cf1ea4951061",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "脱毛仪",
+        "img": "http://jipincheng.cn/category/img/20191223/13ee3ecebe9e41b6999bf77d030d0577",
+        "orderNum": 9,
+        "status": 1,
+        "type": 10
+    },
+    {
+        "categoryId": "b9ea22d162424770a3ec889963ae46f6",
+        "parentId": "12adcd21cfbb4958851198a7a98c22ae",
+        "categoryName": "足浴盆",
+        "img": "http://jipincheng.cn/category/img/20191223/5b98701027e84556a4e88e67acf8b04b",
+        "orderNum": 10,
+        "status": 1,
+        "type": 10
+    }
+]
