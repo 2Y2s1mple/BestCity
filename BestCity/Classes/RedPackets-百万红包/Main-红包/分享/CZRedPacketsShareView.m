@@ -66,7 +66,6 @@
         make.top.left.right.equalTo(self);
         make.bottom.equalTo(shareView.mas_top);
     }];
-
 }
 
 - (void)dismiss
@@ -116,7 +115,6 @@
             break;
     }
 }
-
 
 // 分享纯文字
 - (void)shareTextWithType:(UMSocialPlatformType)type text:(NSString *)text
