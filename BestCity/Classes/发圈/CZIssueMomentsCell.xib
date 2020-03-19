@@ -10,11 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="519" id="KGk-i7-Jjw" customClass="CZIssueMomentsCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="519"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="579" id="KGk-i7-Jjw" customClass="CZIssueMomentsCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="579"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="519"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="579"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headDefault" translatesAutoresizingMaskIntoConstraints="NO" id="w6n-6h-L75">
@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVZ-Hh-4pj">
-                        <rect key="frame" x="69" y="52.5" width="291" height="100.5"/>
+                        <rect key="frame" x="69" y="52.5" width="226" height="100.5"/>
                         <string key="text">快快快‼️女王节大福利
 每个妈妈都想给宝宝好的爱💕
 babycare专注婴儿用品
@@ -49,13 +49,13 @@ babycare专注婴儿用品
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JA-Lq-Pl9">
-                        <rect key="frame" x="277" y="17" width="81" height="26"/>
+                        <rect key="frame" x="285" y="17" width="73" height="26"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moments-3" translatesAutoresizingMaskIntoConstraints="NO" id="iPB-qd-hCs">
-                                <rect key="frame" x="5" y="4" width="18" height="18"/>
+                                <rect key="frame" x="5" y="-5" width="36" height="36"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2222" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oo9-pK-1KH">
-                                <rect key="frame" x="42.5" y="4.5" width="33.5" height="17"/>
+                                <rect key="frame" x="34.5" y="4.5" width="33.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.87843137250000003" green="0.2784313725" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -63,7 +63,7 @@ babycare专注婴儿用品
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.92156862745098034" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="81" id="3ac-t1-zvq"/>
+                            <constraint firstAttribute="width" constant="73" id="3ac-t1-zvq"/>
                             <constraint firstItem="oo9-pK-1KH" firstAttribute="centerY" secondItem="8JA-Lq-Pl9" secondAttribute="centerY" id="4DH-eb-027"/>
                             <constraint firstAttribute="trailing" secondItem="oo9-pK-1KH" secondAttribute="trailing" constant="5" id="7GM-5e-OHG"/>
                             <constraint firstItem="iPB-qd-hCs" firstAttribute="centerY" secondItem="8JA-Lq-Pl9" secondAttribute="centerY" id="Gcc-Nz-sN7"/>
@@ -77,9 +77,9 @@ babycare专注婴儿用品
                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQt-a4-rDO">
+                    <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQt-a4-rDO">
                         <rect key="frame" x="69" y="163" width="259" height="180"/>
-                        <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="180" id="g61-h2-F7C"/>
                         </constraints>
@@ -100,23 +100,23 @@ babycare专注婴儿用品
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蓝月亮洗衣液机洗专用瓶装家…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCC-6v-ZPj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蓝月亮洗衣液机洗专用瓶装家…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCC-6v-ZPj">
                                 <rect key="frame" x="84" y="11" width="199" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rh1-tt-qjx">
-                                <rect key="frame" x="84" y="32" width="43" height="26"/>
+                                <rect key="frame" x="84" y="30" width="107" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="券 ¥300">
+                                <state key="normal" title="券 ¥300" backgroundImage="moments-4">
                                     <color key="titleColor" red="0.87843137250000003" green="0.2784313725" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="券后价¥29.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGn-uD-IFU">
                                 <rect key="frame" x="84" y="63" width="76" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.87843137250000003" green="0.2784313725" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.88627450980392153" green="0.34509803921568627" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFw-ls-iNJ">
@@ -152,7 +152,7 @@ babycare专注婴儿用品
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="VCC-6v-ZPj" secondAttribute="trailing" constant="8" id="9HS-vV-fCq"/>
                             <constraint firstItem="VCC-6v-ZPj" firstAttribute="leading" secondItem="6pU-kc-K7I" secondAttribute="trailing" constant="8" id="BRG-pm-nZj"/>
@@ -167,18 +167,33 @@ babycare专注婴儿用品
                             <constraint firstItem="rh1-tt-qjx" firstAttribute="centerY" secondItem="iFp-AX-kzL" secondAttribute="centerY" id="jj5-Yk-k8I"/>
                             <constraint firstItem="6pU-kc-K7I" firstAttribute="leading" secondItem="iFp-AX-kzL" secondAttribute="leading" constant="8" id="xmK-ca-Lnr"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                <integer key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ox-WB-rX6">
-                        <rect key="frame" x="0.0" y="509" width="375" height="10"/>
+                        <rect key="frame" x="0.0" y="569" width="375" height="10"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="Eyo-Hs-xYZ"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHj-PR-gaS">
+                        <rect key="frame" x="69" y="453" width="291" height="71"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="71" id="0NQ-hT-Ien"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="5Ox-WB-rX6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="0.01" id="0Me-p0-AXg"/>
+                    <constraint firstItem="fHj-PR-gaS" firstAttribute="top" secondItem="iFp-AX-kzL" secondAttribute="bottom" constant="10" id="3Ld-bM-fNM"/>
                     <constraint firstItem="w6n-6h-L75" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="43e-jR-gv1"/>
+                    <constraint firstItem="fHj-PR-gaS" firstAttribute="leading" secondItem="iFp-AX-kzL" secondAttribute="leading" id="6aE-hg-zf7"/>
                     <constraint firstItem="8JA-Lq-Pl9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="Av6-ph-ORO"/>
                     <constraint firstItem="CP8-Ub-fuL" firstAttribute="leading" secondItem="w6n-6h-L75" secondAttribute="trailing" constant="12" id="C1X-cS-H4y"/>
                     <constraint firstAttribute="trailing" secondItem="8JA-Lq-Pl9" secondAttribute="trailing" constant="17" id="GiI-6G-yDh"/>
@@ -193,16 +208,42 @@ babycare专注婴儿用品
                     <constraint firstAttribute="trailing" secondItem="gQt-a4-rDO" secondAttribute="trailing" constant="47" id="m5x-mV-f6P"/>
                     <constraint firstItem="fVZ-Hh-4pj" firstAttribute="leading" secondItem="CP8-Ub-fuL" secondAttribute="leading" id="tEB-9j-o4O"/>
                     <constraint firstItem="iFp-AX-kzL" firstAttribute="top" secondItem="gQt-a4-rDO" secondAttribute="bottom" constant="10" id="tsB-p4-JyM"/>
-                    <constraint firstAttribute="trailing" secondItem="fVZ-Hh-4pj" secondAttribute="trailing" constant="15" id="wOV-oR-NIs"/>
+                    <constraint firstAttribute="trailing" secondItem="fVZ-Hh-4pj" secondAttribute="trailing" constant="80" id="wOV-oR-NIs"/>
                     <constraint firstAttribute="trailing" secondItem="iFp-AX-kzL" secondAttribute="trailing" constant="15" id="x7X-Wr-ESv"/>
+                    <constraint firstAttribute="trailing" secondItem="fHj-PR-gaS" secondAttribute="trailing" constant="15" id="zR3-YP-Tfw"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
-            <point key="canvasLocation" x="42.753623188405797" y="78.683035714285708"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                    <integer key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="actualPrice" destination="EGn-uD-IFU" id="Rw9-FU-eO4"/>
+                <outlet property="commentView" destination="fHj-PR-gaS" id="0tu-qG-Ptf"/>
+                <outlet property="commentViewHeight" destination="0NQ-hT-Ien" id="CVa-D1-5Ry"/>
+                <outlet property="content" destination="fVZ-Hh-4pj" id="0Jj-DX-5PB"/>
+                <outlet property="couponPrice" destination="rh1-tt-qjx" id="mMc-wS-amA"/>
+                <outlet property="fee" destination="nPf-um-vgL" id="l69-br-KMk"/>
+                <outlet property="goodsView" destination="iFp-AX-kzL" id="ATt-dk-hIe"/>
+                <outlet property="goodsViewHeight" destination="aZQ-xW-NbY" id="TqL-i2-VRf"/>
+                <outlet property="imageBackViewHeight" destination="g61-h2-F7C" id="hBU-rf-WHT"/>
+                <outlet property="imagesBackView" destination="gQt-a4-rDO" id="p68-wI-deY"/>
+                <outlet property="img" destination="6pU-kc-K7I" id="3w5-e3-abd"/>
+                <outlet property="otherName" destination="VCC-6v-ZPj" id="f9W-Tn-kUL"/>
+                <outlet property="shareNumber" destination="oo9-pK-1KH" id="78F-pK-sOk"/>
+                <outlet property="shareNumberView" destination="8JA-Lq-Pl9" id="ZQd-9s-8XJ"/>
+                <outlet property="userAvatar" destination="w6n-6h-L75" id="x0X-M3-IHh"/>
+                <outlet property="userNickname" destination="CP8-Ub-fuL" id="tDJ-vC-StA"/>
+            </connections>
+            <point key="canvasLocation" x="-472" y="-398"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="headDefault" width="180" height="180"/>
         <image name="moments-3" width="18" height="18"/>
+        <image name="moments-4" width="53.5" height="15"/>
     </resources>
 </document>

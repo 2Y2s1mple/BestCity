@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZIssueMomentsModel.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZIssueMomentsCell : UITableViewCell
 + (instancetype)cellwithTableView:(UITableView *)tableView;
 /** <#注释#> */
-@property (nonatomic, strong) NSDictionary *param;
+@property (nonatomic, strong) CZIssueMomentsModel *param;
 @end
 
 NS_ASSUME_NONNULL_END

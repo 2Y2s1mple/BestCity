@@ -11,36 +11,41 @@
 #import "CZCategoryLineLayoutView.h"
 #import "GXNetTool.h"
 #import "CZIssueMomentsCell.h"
-
+#import "CZIssueMomentsModel.h"
 
 @interface CZIssueMomentsController ()  <UITableViewDelegate, UITableViewDataSource>
-/** <#注释#> */
+/** 顶部的红条 */
 @property (nonatomic, strong) UIView *topview;
 /** 表单 */
 @property (nonatomic, strong) UITableView *tableView;
-
 /** 1级 */
 @property (nonatomic, strong) CZCategoryLineLayoutView *categoryView1;
-/** 1级数据 */
-@property (nonatomic, strong) NSArray *categoryView1Data;
-
 /** 2级 */
 @property (nonatomic, strong) CZCategoryLineLayoutView *categoryView2;
-/** 2级数据 */
-@property (nonatomic, strong) NSArray *categoryView2Data;
-
 /** 3级 */
 @property (nonatomic, strong) CZCategoryLineLayoutView *categoryView3;
 /** 3级数据 */
 @property (nonatomic, strong) NSArray *categoryView3Data;
 
-/** <#注释#> */
+/** 弹窗 */
 @property (nonatomic, strong) UIView *backView;
 /** 页数 */
 @property (nonatomic, assign) NSInteger page;
-/** <#注释#> */
+/** 总数据 */
 @property (nonatomic, strong) NSArray *dataSource;
 
+/** 模块 */
+@property (nonatomic, strong) NSNumber *paramType; // 1精选 2.素材
+/** 一级 */
+@property (nonatomic, strong) NSString *paramCategoryId2;
+/** 二级 */
+@property (nonatomic, strong) NSString *paramCategoryId3;
+
+/** <#注释#> */
+@property (nonatomic, strong) NSMutableArray *listData;
+
+/** 设置选中的第几个 */
+@property (nonatomic, assign) NSInteger selecedIndex;
 
 
 @end
@@ -50,6 +55,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0xFAFAFA);
+
+
 
 
 
@@ -68,6 +75,7 @@
 
 }
 
+#pragma mark - 获取数据
 // 获取标题数据
 - (void)getTitles
 {
@@ -87,7 +95,6 @@
 
 - (void)getTitlesWithType:(NSNumber *)type
 {
-
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = type;
@@ -97,12 +104,31 @@
             [self.categoryView2 removeFromSuperview];
             [self.categoryView3 removeFromSuperview];
             [self createView2];
-
-
         }
     } failure:^(NSError *error) {}];
 }
 
+// 获取列表数据
+- (void)getListData
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"type"] = self.paramType;
+    param[@"categoryId1"] = self.paramCategoryId2;
+    param[@"categoryId2"] = self.paramCategoryId3;
+
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            self.listData = [NSMutableArray array];
+            for (NSDictionary *dic in result[@"data"]) {
+                CZIssueMomentsModel *model = [[CZIssueMomentsModel alloc] init];
+                model.param = dic;
+                [self.listData addObject:model];
+            }
+
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *error) {}];
+}
 
 - (void)createView1
 {
@@ -120,17 +146,16 @@
     [self.view addSubview:topview];
     self.topview = topview;
 
+    self.paramType = @(1);
     NSArray *categoryList = [CZCategoryLineLayoutView categoryItems:@[@"每日精选", @"宣传素材"] setupNameKey:@"categoryName" imageKey:@"img" IdKey:@"categoryId" objectKey:@""];
     CGRect frame = CGRectMake(0, 9, SCR_WIDTH, 0);
     self.categoryView1 = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:categoryList type:2 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
         NSLog(@"%@", item.categoryName);
         [self getTitlesWithType:@(item.index + 1)];
+        self.paramType = @(item.index + 1);
     }];
     self.categoryView1.backgroundColor = [UIColor clearColor];
     [topview addSubview:self.categoryView1];
-
-    // 创建二级菜单数据
-    self.categoryView2Data = self.dataSource;
 }
 
 - (void)createView2
@@ -138,18 +163,22 @@
     NSArray *list = self.dataSource;
     CGRect frame = CGRectMake(0, CZGetY(self.topview), SCR_WIDTH, 50);
     // 分类的按钮
-    NSArray *categoryList = [CZCategoryLineLayoutView categoryItems:list setupNameKey:@"title" imageKey:@"img" IdKey:@"categoryId" objectKey:@"children"];
+    NSArray *categoryList = [CZCategoryLineLayoutView categoryItems:list setupNameKey:@"title" imageKey:@"img" IdKey:@"id" objectKey:@"children"];
+    self.paramCategoryId2 = [[categoryList firstObject] categoryId];
     self.categoryView2 = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:categoryList type:3 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
         NSLog(@"%@", item.categoryName);
+        self.paramCategoryId2 =  item.categoryId;
         self.categoryView3Data = item.objectInfo;
         [self.categoryView3 removeFromSuperview];
         if (self.categoryView3Data.count == 0) {
+            // 获取列表数据
+            [self getListData];
             self.tableView.y = self.categoryView3.y;
-            self.tableView.height += 45;
+            self.tableView.height = SCR_HEIGHT - CZGetY(self.categoryView2) - (IsiPhoneX ? 83 : 49);
         } else {
             [self createView3];
             self.tableView.y =  CZGetY(self.categoryView3);
-            self.tableView.height -= 45;
+            self.tableView.height = SCR_HEIGHT - CZGetY(self.categoryView3) - (IsiPhoneX ? 83 : 49);
         }
 
     }];
@@ -160,34 +189,47 @@
     self.categoryView3Data = self.dataSource[0][@"children"];
     if (self.categoryView3Data.count == 0) {
         self.tableView.y = self.categoryView3.y;
-        self.tableView.height += 45;
+        self.tableView.height = SCR_HEIGHT - CZGetY(self.categoryView2) - (IsiPhoneX ? 83 : 49);
     } else {
         [self createView3];
         self.tableView.y =  CZGetY(self.categoryView3);
-        self.tableView.height -= 45;
+        self.tableView.height = SCR_HEIGHT - CZGetY(self.categoryView3) - (IsiPhoneX ? 83 : 49);
     }
-
 }
 
 - (void)createView3
 {
     CGRect frame = CGRectMake(0, CZGetY(self.categoryView2), SCR_WIDTH, 45);
     // 分类的按钮
-    NSArray *categoryList = [CZCategoryLineLayoutView categoryItems:self.categoryView3Data setupNameKey:@"title" imageKey:@"img" IdKey:@"categoryId" objectKey:@""];
+    NSArray *categoryList = [CZCategoryLineLayoutView categoryItems:self.categoryView3Data setupNameKey:@"title" imageKey:@"img" IdKey:@"id" objectKey:@""];
+
+    for (CZCategoryItem *item in categoryList) {
+        item.selecedIndex = self.selecedIndex;
+    }
+
+    self.paramCategoryId3 = [categoryList[self.selecedIndex] categoryId];
     self.categoryView3 = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:categoryList type:4 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
         NSLog(@"%@", item.categoryName);
+        self.paramCategoryId3 = item.categoryId;
+        // 获取列表数据
+        [self getListData];
     }];
     self.categoryView3.backgroundColor = UIColorFromRGB(0xF5F5F5);
     [self.view addSubview:self.categoryView3];
 
-    UIButton *btn = [[UIButton alloc] init];
-    [self.categoryView3 addSubview:btn];
-    [btn setBackgroundImage:[UIImage imageNamed:@"moments-2"] forState:UIControlStateNormal];
-    btn.x = SCR_WIDTH - 50;
-    btn.width = 50;
-    btn.height = self.categoryView3.height;
-    btn.backgroundColor = [UIColor whiteColor];
-    [btn addTarget:self action:@selector(alerView) forControlEvents:UIControlEventTouchUpInside];
+    // 获取列表数据
+    [self getListData];
+
+    if (1) {
+        UIButton *btn = [[UIButton alloc] init];
+        [self.categoryView3 addSubview:btn];
+        [btn setBackgroundImage:[UIImage imageNamed:@"moments-2"] forState:UIControlStateNormal];
+        btn.x = SCR_WIDTH - 50;
+        btn.width = 50;
+        btn.height = self.categoryView3.height;
+        btn.backgroundColor = [UIColor whiteColor];
+        [btn addTarget:self action:@selector(alerView) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 
@@ -258,18 +300,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.listData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 606;
+    CZIssueMomentsModel *model = self.listData[indexPath.row];
+    return model.cellHeight;
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
     CZIssueMomentsCell *cell = [CZIssueMomentsCell cellwithTableView:tableView];
+    cell.param = self.listData[indexPath.row];
     return cell;
 }
 
@@ -289,7 +334,7 @@
     UIView *top = [[UIView alloc] init];
     top.width = SCR_WIDTH;
     top.height = self.categoryView3.y;
-    top.backgroundColor = [UIColor redColor];
+//    top.backgroundColor = [UIColor redColor];
     [backView addSubview:top];
 
 
@@ -319,10 +364,13 @@
     UIButton *recoredBtn;
     NSInteger colIndex = 0;
     NSInteger rowIndex = 0;
-    for (int i = 0; i < 10; i++) {
 
+    for (int i = 0; i < self.categoryView3Data.count; i++) {
+
+        NSString *title = self.categoryView3Data[i][@"title"];
         UIButton *btn = [[UIButton alloc] init];
-        [btn setTitle:@"收入素材" forState:UIControlStateNormal];
+        btn.tag = i + 100;
+        [btn setTitle:title forState:UIControlStateNormal];
         [btn setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
         [btn setTitleColor:UIColorFromRGB(0xE25838) forState:UIControlStateSelected];
         btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];
@@ -347,7 +395,7 @@
         btn.x = 10 + colIndex * (btn.width + 17);
         btn.y = 54 + rowIndex * (btn.height + 20);
         btn.backgroundColor = [UIColor whiteColor];
-        [btn addTarget:self action:@selector(alerViewAction:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(alertViewDidClicked:) forControlEvents:UIControlEventTouchUpInside];
 
         [alertView addSubview:btn];
         recoredBtn = btn;
@@ -359,7 +407,7 @@
     bottom.y = CZGetY(alertView);
     bottom.width = SCR_WIDTH;
     bottom.height = SCR_HEIGHT - bottom.y;
-    bottom.backgroundColor = [UIColor redColor];
+    bottom.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     [backView addSubview:bottom];
 }
 
@@ -368,6 +416,16 @@
     [self.backView removeFromSuperview];
 }
 
+
+- (void)alertViewDidClicked:(UIButton *)sender
+{
+    NSInteger tag = sender.tag - 100;
+    [self.categoryView3 removeFromSuperview];
+    self.selecedIndex = tag;
+    [self createView3];
+    [self.backView removeFromSuperview];
+
+}
 
 
 @end

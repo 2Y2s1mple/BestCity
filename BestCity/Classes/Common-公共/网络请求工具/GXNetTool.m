@@ -60,7 +60,7 @@
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-//    manager.requestSerializer.timeoutInterval = 10.f;
+    manager.requestSerializer.timeoutInterval = 5.0f;
 //    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 
     //(2)请求头的设置
@@ -121,7 +121,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         !failure ? : failure(error);
         NSLog(@"%@", error);
-        [CZProgressHUD showProgressHUDWithText:@"网络出错! 请查看网络设置!"];
+        [CZProgressHUD showProgressHUDWithText:@"系统繁忙, 服务器无响应"];
         [CZProgressHUD hideAfterDelay:2];
     }];
     return manager;

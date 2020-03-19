@@ -438,6 +438,9 @@
 		97A30BDC242067DB009D7089 /* CZIssueMomentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A30BDA242067DB009D7089 /* CZIssueMomentsCell.m */; };
 		97A30BDD242067DB009D7089 /* CZIssueMomentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A30BDB242067DB009D7089 /* CZIssueMomentsCell.xib */; };
 		97A30BE02420763E009D7089 /* CZIssueMomentsShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A30BDF2420763E009D7089 /* CZIssueMomentsShareView.m */; };
+		97A30BE32421D31D009D7089 /* CZIssueMomentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A30BE22421D31D009D7089 /* CZIssueMomentsModel.m */; };
+		97A30BE824221310009D7089 /* CZIssueMomentsAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A30BE624221310009D7089 /* CZIssueMomentsAlertView.m */; };
+		97A30BE924221310009D7089 /* CZIssueMomentsAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A30BE724221310009D7089 /* CZIssueMomentsAlertView.xib */; };
 		97A5078F239E0C4C00EF670F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A5078D239E0C4B00EF670F /* libWeChatSDK.a */; };
 		97A5B95F230D17AE00014E90 /* CZMePublishOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A5B95E230D17AE00014E90 /* CZMePublishOneController.m */; };
 		97A5B96A230D1BFB00014E90 /* CZMePublishOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A5B967230D1BFA00014E90 /* CZMePublishOneCell.m */; };
@@ -1461,6 +1464,11 @@
 		97A30BDB242067DB009D7089 /* CZIssueMomentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZIssueMomentsCell.xib; sourceTree = "<group>"; };
 		97A30BDE2420763E009D7089 /* CZIssueMomentsShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZIssueMomentsShareView.h; sourceTree = "<group>"; };
 		97A30BDF2420763E009D7089 /* CZIssueMomentsShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZIssueMomentsShareView.m; sourceTree = "<group>"; };
+		97A30BE12421D31D009D7089 /* CZIssueMomentsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZIssueMomentsModel.h; sourceTree = "<group>"; };
+		97A30BE22421D31D009D7089 /* CZIssueMomentsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZIssueMomentsModel.m; sourceTree = "<group>"; };
+		97A30BE524221310009D7089 /* CZIssueMomentsAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZIssueMomentsAlertView.h; sourceTree = "<group>"; };
+		97A30BE624221310009D7089 /* CZIssueMomentsAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZIssueMomentsAlertView.m; sourceTree = "<group>"; };
+		97A30BE724221310009D7089 /* CZIssueMomentsAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZIssueMomentsAlertView.xib; sourceTree = "<group>"; };
 		97A5078C239E0C4B00EF670F /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		97A5078D239E0C4B00EF670F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		97A5078E239E0C4C00EF670F /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -4356,6 +4364,7 @@
 		97A30BA8241F439C009D7089 /* 发圈 */ = {
 			isa = PBXGroup;
 			children = (
+				97A30BE4242212EF009D7089 /* AlertView */,
 				97A30BD7241F7601009D7089 /* titlesViewDataSource.json */,
 				97A30BA9241F4461009D7089 /* CZIssueMomentsController.h */,
 				97A30BAA241F4461009D7089 /* CZIssueMomentsController.m */,
@@ -4365,6 +4374,8 @@
 				97A30BDB242067DB009D7089 /* CZIssueMomentsCell.xib */,
 				97A30BDE2420763E009D7089 /* CZIssueMomentsShareView.h */,
 				97A30BDF2420763E009D7089 /* CZIssueMomentsShareView.m */,
+				97A30BE12421D31D009D7089 /* CZIssueMomentsModel.h */,
+				97A30BE22421D31D009D7089 /* CZIssueMomentsModel.m */,
 			);
 			path = "发圈";
 			sourceTree = "<group>";
@@ -4376,6 +4387,16 @@
 				97A30BB5241F4C14009D7089 /* CZCategoryLineLayoutView.m */,
 			);
 			path = otherProject;
+			sourceTree = "<group>";
+		};
+		97A30BE4242212EF009D7089 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				97A30BE524221310009D7089 /* CZIssueMomentsAlertView.h */,
+				97A30BE624221310009D7089 /* CZIssueMomentsAlertView.m */,
+				97A30BE724221310009D7089 /* CZIssueMomentsAlertView.xib */,
+			);
+			path = AlertView;
 			sourceTree = "<group>";
 		};
 		97A5078B239E0C0200EF670F /* 微信 */ = {
@@ -5937,6 +5958,7 @@
 				97BC05DE2112B122001ED65A /* keyboard.png in Resources */,
 				97421B602271A718007E5A72 /* CZUnusualController.xib in Resources */,
 				977E82D2223C9B4700C8C01B /* CZInvitationController.xib in Resources */,
+				97A30BE924221310009D7089 /* CZIssueMomentsAlertView.xib in Resources */,
 				9707DAC92390B4CA00A307A8 /* CZTaoBaoShopNameView.xib in Resources */,
 				97BC05DD2112B122001ED65A /* key.png in Resources */,
 				97D0C63323605C2000F3B994 /* CZUserUpdataView.xib in Resources */,
@@ -6397,6 +6419,7 @@
 				9708492A22447771000D5528 /* CZTrialDetailTopController.m in Sources */,
 				97F71BA121AD21A7005BCAC3 /* PlanADCollectionViewCell.m in Sources */,
 				97798CD5212D0FC90052CE94 /* UIView+WebCacheOperation.m in Sources */,
+				97A30BE32421D31D009D7089 /* CZIssueMomentsModel.m in Sources */,
 				97D0C63123605BEC00F3B994 /* CZUserUpdataView.m in Sources */,
 				97FC29F32109C62D003AE857 /* CZPointView.m in Sources */,
 				97C39255230BEFD1002EA036 /* CZSubCollectThreeController.m in Sources */,
@@ -6409,6 +6432,7 @@
 				97705CBE2108230F00485D64 /* WMProgressView.m in Sources */,
 				97C7FF40216DDDB50091DC07 /* MJRefreshBackNormalFooter.m in Sources */,
 				97CDCB32211D625700521ED5 /* UILabel+CZAdapter.m in Sources */,
+				97A30BE824221310009D7089 /* CZIssueMomentsAlertView.m in Sources */,
 				974F488D21A3B03600E1ED1A /* CZAttentionDetailModel.m in Sources */,
 				97BDB84D21100B8800966FF0 /* CZChoicenessCell.m in Sources */,
 				977E8094225B69830041A126 /* CZMyTrialApplyForFailedController.m in Sources */,

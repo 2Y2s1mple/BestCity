@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZIssueMomentsShareView : UIView
-
+/** <#注释#> */
+@property (nonatomic, strong) NSMutableArray *images;
 @end
 
 NS_ASSUME_NONNULL_END
