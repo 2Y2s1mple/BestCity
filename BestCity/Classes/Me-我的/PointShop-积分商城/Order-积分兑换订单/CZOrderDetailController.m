@@ -156,6 +156,7 @@ static CGFloat const likeAndShareHeight = 49;
     posteboard.string = self.model.expresssn;
     [CZProgressHUD showProgressHUDWithText:@"复制成功"];
     [CZProgressHUD hideAfterDelay:1.5];
+    [recordSearchTextArray addObject:posteboard.string];
 }
 
 /** 复制到剪切板 */
@@ -165,6 +166,7 @@ static CGFloat const likeAndShareHeight = 49;
     posteboard.string = self.model.remark;
     [CZProgressHUD showProgressHUDWithText:@"复制成功"];
     [CZProgressHUD hideAfterDelay:1.5];
+    [recordSearchTextArray addObject:posteboard.string];
 }
 
 // 给控件赋值

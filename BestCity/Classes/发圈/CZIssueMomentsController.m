@@ -12,6 +12,7 @@
 #import "GXNetTool.h"
 #import "CZIssueMomentsCell.h"
 #import "CZIssueMomentsModel.h"
+#import "CZTaobaoDetailController.h"
 
 @interface CZIssueMomentsController ()  <UITableViewDelegate, UITableViewDataSource>
 /** 顶部的红条 */
@@ -47,31 +48,31 @@
 /** 设置选中的第几个 */
 @property (nonatomic, assign) NSInteger selecedIndex;
 
+/** 没有数据图片 */
+@property (nonatomic, strong) CZNoDataView *noDataView;
 
+/** 记录参数 */
+@property (nonatomic, strong) NSDictionary *recordParam;
 @end
 
 @implementation CZIssueMomentsController
+#pragma mark - 懒加载
+- (CZNoDataView *)noDataView
+{
+    if (_noDataView == nil) {
+        self.noDataView = [CZNoDataView noDataView];
+        self.noDataView.centerX = SCR_WIDTH / 2.0;
+        self.noDataView.y = 180;
+        self.noDataView.backgroundColor = [UIColor clearColor];
+    }
+    return _noDataView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0xFAFAFA);
-
-
-
-
-
     [self getTitles];
-
-
-//    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"发圈" rightBtnTitle:nil rightBtnAction:nil];
-//    navigationView.backgroundColor = [UIColor whiteColor];
-//    self.navigationView = navigationView;
-//    [self.view addSubview:navigationView];
-
-
-
-    // 获取数据
-//    [self setupRefresh];
+    [self setupRefresh];
 
 }
 
@@ -79,9 +80,10 @@
 // 获取标题数据
 - (void)getTitles
 {
+
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"type"] = @(2);
+    param[@"type"] = @(1);
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/categoryList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = result[@"data"];
@@ -90,6 +92,8 @@
             [self.view addSubview:self.tableView];
 
         }
+
+
     } failure:^(NSError *error) {}];
 }
 
@@ -98,6 +102,8 @@
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = type;
+    self.paramCategoryId2 = @"";
+    self.paramCategoryId3 = @"";
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/categoryList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = result[@"data"];
@@ -111,14 +117,29 @@
 // 获取列表数据
 - (void)getListData
 {
+    self.page = 0;
+    [self.tableView.mj_footer endRefreshing];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = self.paramType;
     param[@"categoryId1"] = self.paramCategoryId2;
     param[@"categoryId2"] = self.paramCategoryId3;
+    param[@"page"] = @(self.page);
+
+    self.recordParam = param;
 
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (self.recordParam != param) return;
+
         if ([result[@"code"] isEqual:@(0)]) {
             self.listData = [NSMutableArray array];
+            if ([result[@"data"] count] > 0) {
+                // 删除noData图片
+                [self.noDataView removeFromSuperview];
+            } else {
+                // 加载NnoData图片
+                [self.tableView addSubview:self.noDataView];
+            }
+
             for (NSDictionary *dic in result[@"data"]) {
                 CZIssueMomentsModel *model = [[CZIssueMomentsModel alloc] init];
                 model.param = dic;
@@ -126,10 +147,13 @@
             }
 
             [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
         }
     } failure:^(NSError *error) {}];
 }
 
+
+#pragma mark - 创建UI
 - (void)createView1
 {
     UIView *toptop = [[UIView alloc] init];
@@ -167,13 +191,15 @@
     self.paramCategoryId2 = [[categoryList firstObject] categoryId];
     self.categoryView2 = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:categoryList type:3 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
         NSLog(@"%@", item.categoryName);
+        self.paramCategoryId2 = @"";
+        self.paramCategoryId3 = @"";
         self.paramCategoryId2 =  item.categoryId;
         self.categoryView3Data = item.objectInfo;
         [self.categoryView3 removeFromSuperview];
         if (self.categoryView3Data.count == 0) {
             // 获取列表数据
-            [self getListData];
-            self.tableView.y = self.categoryView3.y;
+            [self.tableView.mj_header beginRefreshing];
+            self.tableView.y = CZGetY(self.categoryView2);;
             self.tableView.height = SCR_HEIGHT - CZGetY(self.categoryView2) - (IsiPhoneX ? 83 : 49);
         } else {
             [self createView3];
@@ -188,8 +214,10 @@
     // 创建三级数据
     self.categoryView3Data = self.dataSource[0][@"children"];
     if (self.categoryView3Data.count == 0) {
-        self.tableView.y = self.categoryView3.y;
+        self.tableView.y = CZGetY(self.categoryView2);
         self.tableView.height = SCR_HEIGHT - CZGetY(self.categoryView2) - (IsiPhoneX ? 83 : 49);
+        // 获取列表数据
+        [self.tableView.mj_header beginRefreshing];
     } else {
         [self createView3];
         self.tableView.y =  CZGetY(self.categoryView3);
@@ -212,13 +240,13 @@
         NSLog(@"%@", item.categoryName);
         self.paramCategoryId3 = item.categoryId;
         // 获取列表数据
-        [self getListData];
+        [self.tableView.mj_header beginRefreshing];
     }];
     self.categoryView3.backgroundColor = UIColorFromRGB(0xF5F5F5);
     [self.view addSubview:self.categoryView3];
 
     // 获取列表数据
-    [self getListData];
+    [self.tableView.mj_header beginRefreshing];
 
     if (1) {
         UIButton *btn = [[UIButton alloc] init];
@@ -248,52 +276,46 @@
 #pragma mark - 获取数据
 - (void)setupRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
-    [self.tableView.mj_header beginRefreshing];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getListData)];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
 }
 
-
-- (void)reloadNewTrailDataSorce
-{
-    // 结束尾部刷新
-    [self.tableView.mj_footer endRefreshing];
-    self.page = 1;
-    //获取数据
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"status"] = @(0);
-    param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/goodsCategoryList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
-
-            [self.tableView reloadData];
-        }
-        // 结束刷新
-        [self.tableView.mj_header endRefreshing];
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
-    } failure:^(NSError *error) {}];
-}
 
 - (void)loadMoreTrailDataSorce
 {
     // 先结束头部刷新
     [self.tableView.mj_header endRefreshing];
     self.page++;
-    //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"status"] = @(0);
+    param[@"type"] = self.paramType;
+    param[@"categoryId1"] = self.paramCategoryId2;
+    param[@"categoryId2"] = self.paramCategoryId3;
     param[@"page"] = @(self.page);
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/my/trial/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"code"] isEqual:@(0)]) {
 
+    self.recordParam = param;
+
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if (self.recordParam != param) return;
+
+
+
+        if ([result[@"code"] isEqual:@(0)]) {
+            for (NSDictionary *dic in result[@"data"]) {
+                CZIssueMomentsModel *model = [[CZIssueMomentsModel alloc] init];
+                model.param = dic;
+                [self.listData addObject:model];
+            }
 
             [self.tableView reloadData];
+
+            if ([result[@"data"] count] > 0) {
+                // 删除noData图片
+                [self.tableView.mj_footer endRefreshing];
+            } else {
+                // 加载NnoData图片
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
         }
-        // 结束刷新
-        [self.tableView.mj_footer endRefreshing];
-        //隐藏菊花
-        [CZProgressHUD hideAfterDelay:0];
     } failure:^(NSError *error) {}];
 }
 
@@ -307,18 +329,27 @@
 {
     CZIssueMomentsModel *model = self.listData[indexPath.row];
     return model.cellHeight;
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     CZIssueMomentsCell *cell = [CZIssueMomentsCell cellwithTableView:tableView];
     cell.param = self.listData[indexPath.row];
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CZIssueMomentsModel *model = self.listData[indexPath.row];
+    if (![model.param[@"goodsInfo"] isKindOfClass:[NSNull class]]) {
+        CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+        vc.otherGoodsId = model.param[@"goodsInfo"][@"otherGoodsId"];
+        CURRENTVC(currentVc)
+        [currentVc.navigationController pushViewController:vc animated:YES];
+    }
+}
 
+#pragma mark - 弹窗
 - (void)alerView
 {
     UIView *backView = [[UIView alloc] init];

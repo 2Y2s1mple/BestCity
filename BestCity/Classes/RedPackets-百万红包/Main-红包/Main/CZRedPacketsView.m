@@ -165,6 +165,7 @@
         posteboard.string = JPUSERINFO[@"invitationCode"];
         [CZProgressHUD showProgressHUDWithText:@"复制成功"];
         [CZProgressHUD hideAfterDelay:1.5];
+        [recordSearchTextArray addObject:posteboard.string];
     }
 }
 

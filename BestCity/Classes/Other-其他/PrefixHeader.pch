@@ -129,6 +129,7 @@ UIViewController *currentVc = nav.topViewController;
 #import "CZJIPINStatisticsTool.h" // 统计
 #import "TSLWebViewController.h" // webView
 #import "CZUILayoutTool.h" // UI尺寸
+#import "CZIssueCreateMoments.h"
 
 /************************************************************/
 #endif 

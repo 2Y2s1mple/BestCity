@@ -50,6 +50,12 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 
 /** 判断界面是否该版本下的第一次加载 */
 + (BOOL)isFirstIntoWithIdentifier:(NSString *)identifier;
+
+/** 友盟分享纯图片*/
++ (void)UMShareImageWithType:(UMSocialPlatformType)type thumImage:(NSString *)thumImage;
+
+/** 全局分享统一UI*/
++ (void)UMShareUIWithTarget:(id)target Action:(SEL)action;
 @end
 
 NS_ASSUME_NONNULL_END

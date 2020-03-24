@@ -42,6 +42,7 @@
         _centerTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH - 100, 20)];
         _centerTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 17];
         _centerTitle.textColor = [UIColor colorWithRed:32/255.0 green:32/255.0 blue:32/255.0 alpha:1.0];
+        _centerTitle.textColor = UIColorFromRGB(0x0E0402);
         _centerTitle.center = CGPointMake(self.width / 2, self.popBtn.center.y);
         _centerTitle.textAlignment = NSTextAlignmentCenter;
     }

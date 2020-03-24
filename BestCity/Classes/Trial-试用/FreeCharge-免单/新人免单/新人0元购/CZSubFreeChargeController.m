@@ -24,6 +24,9 @@
 
 #import "CZTaobaoDetailNewController.h"
 
+#import "CZShareView.h"
+#import "UIImageView+WebCache.h"
+
 @interface CZSubFreeChargeController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 /** <#注释#> */
@@ -100,6 +103,14 @@
     //创建刷新控件
     [self setupRefresh];
 
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setBackgroundImage:[UIImage imageNamed:@"festival-qiang-1"] forState:UIControlStateNormal];
+    btn.width = SCR_WIDTH;
+    btn.height = 55;
+    btn.x = 0;
+    btn.y = SCR_HEIGHT - (IsiPhoneX ? 34 + 55 : 55);
+    [btn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -308,7 +319,140 @@
     [self.group2DataSource insertObject:model1 atIndex:0];
 }
 
-#pragma mark -- 事件
+#pragma mark - 事件
+- (void)share
+{
+    [CZJIPINSynthesisTool UMShareUIWithTarget:self Action:@selector(shareAction:)];
+}
+
+- (void)shareAction:(UIGestureRecognizer *)tap
+{
+    UIView *backView = tap.view.superview.superview;
+
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+           [backView removeFromSuperview];
+       });
+
+    UMSocialPlatformType type = UMSocialPlatformType_UnKnown;//未知的
+    switch (tap.view.tag - 100) {
+        case 0:
+        {
+            [CZProgressHUD showProgressHUDWithText:nil];
+            [CZProgressHUD hideAfterDelay:2];
+            type = UMSocialPlatformType_WechatSession;//微信好友
+            [self UMShareWebWithType:type];
+            break;
+        }
+        case 1: // 朋友圈
+        {
+            [CZProgressHUD showProgressHUDWithText:nil];
+            [CZProgressHUD hideAfterDelay:2];
+            type = UMSocialPlatformType_WechatTimeLine;//微信朋友圈
+            [self getPosterImage:type];
+            break;
+        }
+        case 2:
+        {
+            [CZProgressHUD showProgressHUDWithText:nil];
+            [CZProgressHUD hideAfterDelay:2];
+            type = UMSocialPlatformType_QQ;//QQ好友
+            [self UMShareWebWithType:type];
+            break;
+        }
+        case 3:
+        {
+            [CZProgressHUD showProgressHUDWithText:nil];
+            [CZProgressHUD hideAfterDelay:2];
+            type = UMSocialPlatformType_Sina;//新浪微博
+            [self UMShareWebWithType:type];
+            break;
+        }
+        case 4:
+        {
+            [CZProgressHUD showProgressHUDWithText:nil];
+            [self saveImageWithImage];
+            break;
+        }
+        default:
+            break;
+    }
+
+}
+
+- (void)UMShareWebWithType:(UMSocialPlatformType)type
+{
+    if (![[UMSocialManager defaultManager] isInstall:type]) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
+        [CZProgressHUD hideAfterDelay:2];
+        return;
+    }
+    NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
+    shareDic[@"shareTitle"] = @"新人0元购，仅剩2天!";
+    shareDic[@"shareContent"] = @"价值30元免单礼品任意选";
+    shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/new-free?query=%@", JPUSERINFO[@"userId"]];
+    shareDic[@"shareImg"] = @"https://jipincheng.cn/share_newFree.png";
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    // 设置网页
+    UMShareWebpageObject *shareUrlObject = [UMShareWebpageObject shareObjectWithTitle:shareDic[@"shareTitle"] descr:shareDic[@"shareContent"] thumImage:shareDic[@"shareImg"]];
+    //设置网页地址
+    shareUrlObject.webpageUrl = shareDic[@"shareUrl"];
+    //调用分享接口
+    messageObject.shareObject = shareUrlObject;
+    [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            UMSocialShareResponse *dataResponse = data;
+            NSLog(@"response data is %@", dataResponse.message);
+        }
+    }];
+}
+
+- (void)getPosterImage:(UMSocialPlatformType)type
+{
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/allowance/getIndexPosterImg"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+         if ([result[@"msg"] isEqualToString:@"success"]) {
+             [self shareImageWithType:type thumImage:result[@"data"]];
+         } else {
+
+         }
+        [CZProgressHUD hideAfterDelay:1.5];
+    } failure:nil];
+}
+
+// 分享图片
+- (void)shareImageWithType:(UMSocialPlatformType)type thumImage:(NSString *)thumImage
+{
+    if (![[UMSocialManager defaultManager] isInstall:type]) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
+        [CZProgressHUD hideAfterDelay:2];
+        return;
+    }
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    shareObject.thumbImage = [UIImage imageNamed:@"launchLogo.png"];//如果有缩略图，则设置缩略图
+    [shareObject setShareImage:thumImage];
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:currentVc completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
+
 - (void)pushALert2ViewController:(UIButton *)sender
 {
     [sender removeFromSuperview];
@@ -393,5 +537,43 @@
     [self removeAlertView:btn];
 }
 
+// 保存图片
+- (void)saveImageWithImage
+{
+    //参数1:图片对象
+    //参数2:成功方法绑定的target
+    //参数3:成功后调用方法
+    //参数4:需要传递信息(成功后调用方法的参数)
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/allowance/getIndexPosterImg"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
+         if ([result[@"msg"] isEqualToString:@"success"]) {
+             // 保存图片
+             [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:result[@"data"]] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
 
+             } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                 UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+             }];
+
+         } else {
+
+         }
+    } failure:nil];
+
+}
+
+#pragma mark -- <保存到相册>
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+        [CZProgressHUD showProgressHUDWithText:msg];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }else{
+        msg = @"保存图片成功" ;
+        [CZProgressHUD showProgressHUDWithText:msg];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }
+
+}
 @end

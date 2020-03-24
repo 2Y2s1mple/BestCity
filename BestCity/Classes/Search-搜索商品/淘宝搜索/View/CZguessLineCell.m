@@ -99,12 +99,27 @@
 }
 
 - (IBAction)share:(id)sender {
-    [self shareBtnAction];
+    [self createComment];
+    
 }
 
 - (void)shareBtnAction
 {
     CURRENTVC(currentVc);
     [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:@"https://www.jipincheng.cn" Title:self.dataDic[@"otherName"] subTitle:@"【分享来自极品城APP】看评测选好物，省心更省钱" thumImage:self.dataDic[@"img"] shareType:1125 object:self.dataDic[@"otherGoodsId"]];
+}
+
+// 创建发圈
+- (void)createComment
+{
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    CURRENTVC(currentVc);
+    CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
+    vc.otherGoodsId = self.dataDic[@"otherGoodsId"];
+    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 @end

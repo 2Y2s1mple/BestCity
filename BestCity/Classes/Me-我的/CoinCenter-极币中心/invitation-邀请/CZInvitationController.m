@@ -123,6 +123,7 @@ static NSString *ID = @"PhotoCell";
             posteboard.string = self.shareImageDic[@"linkUrlContent"];
             [CZProgressHUD showProgressHUDWithText:@"复制链接成功"];
             [CZProgressHUD hideAfterDelay:1.5];
+            [recordSearchTextArray addObject:posteboard.string];
             return;
         }
         default:

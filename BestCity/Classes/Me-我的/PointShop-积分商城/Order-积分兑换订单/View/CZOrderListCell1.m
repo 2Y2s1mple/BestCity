@@ -125,6 +125,7 @@
     posteboard.string = self.model.remark;
     [CZProgressHUD showProgressHUDWithText:@"复制成功"];
     [CZProgressHUD hideAfterDelay:1.5];
+    [recordSearchTextArray addObject:posteboard.string];
 }
 
 - (void)uploadTableView

@@ -235,6 +235,7 @@ babycare专注婴儿用品
                 <outlet property="otherName" destination="VCC-6v-ZPj" id="f9W-Tn-kUL"/>
                 <outlet property="shareNumber" destination="oo9-pK-1KH" id="78F-pK-sOk"/>
                 <outlet property="shareNumberView" destination="8JA-Lq-Pl9" id="ZQd-9s-8XJ"/>
+                <outlet property="shareNumberViewBtn" destination="fFw-ls-iNJ" id="RHR-PB-SWE"/>
                 <outlet property="userAvatar" destination="w6n-6h-L75" id="x0X-M3-IHh"/>
                 <outlet property="userNickname" destination="CP8-Ub-fuL" id="tDJ-vC-StA"/>
             </connections>

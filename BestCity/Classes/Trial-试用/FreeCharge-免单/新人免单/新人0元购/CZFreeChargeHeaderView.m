@@ -23,6 +23,7 @@
     posteboard.string = self.officialWeChat;
     [CZProgressHUD showProgressHUDWithText:@"复制微信成功"];
     [CZProgressHUD hideAfterDelay:1.5];
+    [recordSearchTextArray addObject:posteboard.string];
 }
 
 - (IBAction)freeDescAction:(id)sender {

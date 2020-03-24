@@ -9,8 +9,8 @@
 #import "CZIssueMomentsCell.h"
 #import "CZIssueMomentsShareView.h"
 #import "UIImageView+WebCache.h"
-#import "CZIssueMomentsShareView.h"
 #import "GXNetTool.h"
+#import "CZZoomImageView.h"
 
 @interface CZIssueMomentsCell ()
 /** 图片视图 */
@@ -27,6 +27,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *shareNumber;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *shareNumberView;
+@property (nonatomic, weak) IBOutlet UIView *shareNumberViewBtn;
 
 // 商品信息
 /** <#注释#> */
@@ -46,6 +47,9 @@
 /** 评论视图 */
 @property (nonatomic, weak) IBOutlet UIView *commentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentViewHeight;
+
+/** <#注释#> */
+@property (nonatomic, strong) UIImage *shareImg;
 
 @end
 
@@ -86,6 +90,9 @@
         NSString *url = images[i];
         // 创建按钮
         UIImageView *btn = [[UIImageView alloc] init];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImage:)];
+        btn.userInteractionEnabled = YES;
+        [btn addGestureRecognizer:tap];
         btn.image = [UIImage imageNamed:@"testImage1"];
         btn.contentMode = UIViewContentModeScaleAspectFit;
         [btn sd_setImageWithURL:[NSURL URLWithString:url]];
@@ -102,10 +109,12 @@
     // 商品详情
     [self layoutIfNeeded];
     if (![dic[@"goodsInfo"] isKindOfClass:[NSNull class]]) {
+        // 获取和合成图
+        [self getShareImage:self.param.param[@"goodsInfo"][@"otherGoodsId"]];
         [self.img sd_setImageWithURL:[NSURL URLWithString: dic[@"goodsInfo"][@"img"]]] ;
         self.otherName.text = dic[@"goodsInfo"][@"otherName"];
         [self.couponPrice setTitle:[NSString stringWithFormat:@"券 ¥%@", dic[@"goodsInfo"][@"couponPrice"]] forState:UIControlStateNormal];
-        self.actualPrice.text = [NSString stringWithFormat:@"券后价¥%@", dic[@"goodsInfo"][@"actualPrice"]];
+        self.actualPrice.text = [NSString stringWithFormat:@"券后价¥%.2f", [dic[@"goodsInfo"][@"actualPrice"] floatValue]];
         self.fee.text = [NSString stringWithFormat:@"¥%@", dic[@"goodsInfo"][@"fee"]];
         self.goodsView.hidden = NO;
         self.goodsViewHeight.constant = 90;
@@ -119,9 +128,9 @@
     // 评论
     NSArray *commentList = dic[@"commentList"];
     if (commentList.count > 0) {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < commentList.count; i++) {
             CGFloat y = i * (83 + 10);
-            [self createCommentView:commentList[0] index:0 y:y];
+            [self createCommentView:commentList[i] index:0 y:y];
         }
     } else {
 
@@ -135,7 +144,9 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareView)];
-    [self.goodsView addGestureRecognizer:tap1];
+    [self.shareNumberViewBtn addGestureRecognizer:tap1];
+
+
 
 }
 
@@ -169,12 +180,13 @@
         }
     }
     view.images = images;
+    view.shareNumber = self.shareNumber;
+    view.momentId = self.param.param[@"id"];
     [[UIApplication sharedApplication].keyWindow addSubview:view];
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
     posteboard.string = self.param.param[@"content"];
+    [recordSearchTextArray addObject:posteboard.string];
 
-    // 分享加一
-    [self addComment];
 }
 
 
@@ -199,7 +211,7 @@
     label.text = param[@"content"];
     label.x = 10;
     label.y = 5;
-    label.width = comment.width;
+    label.width = comment.width - 20;
     label.height = 40;
     [comment addSubview:label];
 
@@ -242,18 +254,37 @@
     posteboard.string = self.param.param[@"commentList"][sender.view.tag][@"copyContent"];
     [CZProgressHUD showProgressHUDWithText:@"文案已复制到粘贴板, 分享后长按粘贴"];
     [CZProgressHUD hideAfterDelay:1.5];
+    [recordSearchTextArray addObject:posteboard.string];
 }
 
 
-// 增加访问量
-- (void)addComment
+
+
+- (void)showImage:(UIGestureRecognizer *)tap
 {
+    UIImageView *imageView = (UIImageView *)tap.view;
+    [CZZoomImageView showImage:imageView];
+}
+
+// 获取合成图片
+- (void)getShareImage:(NSString *)otherGoodsId
+{
+    //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"momentId"] = self.param.param[@"id"];
-
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/addShare"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    param[@"otherGoodsId"] = otherGoodsId;
+    param[@"shareImgLocation"] = @"1";
+    [CZProgressHUD showProgressHUDWithText:nil];
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsShareInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
+            // 保存图片
+            [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:result[@"data"][@"shareImg"]] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
 
+            } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                self.shareImg = image;
+                UIImageView *firstImage = [self.imagesBackView.subviews firstObject];
+                firstImage.image = image;
+            }];
+            [CZProgressHUD hideAfterDelay:0];
         }
     } failure:^(NSError *error) {}];
 }

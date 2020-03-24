@@ -31,6 +31,7 @@
 		9708492522438C5B000D5528 /* CZJIPINSynthesisTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */; };
 		9708492A22447771000D5528 /* CZTrialDetailTopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9708492822447771000D5528 /* CZTrialDetailTopController.m */; };
 		9708492B22447771000D5528 /* CZTrialDetailTopController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9708492922447771000D5528 /* CZTrialDetailTopController.xib */; };
+		97084BB524235387009504A0 /* CZIssueCreateMoments.m in Sources */ = {isa = PBXBuildFile; fileRef = 97084BB424235387009504A0 /* CZIssueCreateMoments.m */; };
 		970959BD230561BC00D2AE67 /* CZSearchOneSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 970959BC230561BC00D2AE67 /* CZSearchOneSubView.m */; };
 		970AD8CC232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970AD8B7232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle */; };
 		970AD8CD232A3BD600CCE9F9 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 970AD8B8232A3BD600CCE9F9 /* AlipaySDK.bundle */; };
@@ -594,6 +595,7 @@
 		97C85137211C174F005540D8 /* CZLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C85136211C174F005540D8 /* CZLabel.m */; };
 		97C8513B211C1BDC005540D8 /* CZProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C8513A211C1BDC005540D8 /* CZProgressHUD.m */; };
 		97C8513E211C3B1B005540D8 /* NSString+CZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C8513D211C3B1B005540D8 /* NSString+CZExtension.m */; };
+		97C980F7242857DA00A7639E /* CZZoomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C980F6242857DA00A7639E /* CZZoomImageView.m */; };
 		97CA2D79230E84C4004FC257 /* CZMePublishDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CA2D77230E84C3004FC257 /* CZMePublishDetailController.m */; };
 		97CAE7C021194C5D00858749 /* CZMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CAE7BE21194C5D00858749 /* CZMessageCell.m */; };
 		97CAE7C121194C5D00858749 /* CZMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CAE7BF21194C5D00858749 /* CZMessageCell.xib */; };
@@ -761,6 +763,8 @@
 		9708492722447771000D5528 /* CZTrialDetailTopController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTrialDetailTopController.h; sourceTree = "<group>"; };
 		9708492822447771000D5528 /* CZTrialDetailTopController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZTrialDetailTopController.m; sourceTree = "<group>"; };
 		9708492922447771000D5528 /* CZTrialDetailTopController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZTrialDetailTopController.xib; sourceTree = "<group>"; };
+		97084BB324235387009504A0 /* CZIssueCreateMoments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZIssueCreateMoments.h; sourceTree = "<group>"; };
+		97084BB424235387009504A0 /* CZIssueCreateMoments.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZIssueCreateMoments.m; sourceTree = "<group>"; };
 		970959BB230561BC00D2AE67 /* CZSearchOneSubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSearchOneSubView.h; sourceTree = "<group>"; };
 		970959BC230561BC00D2AE67 /* CZSearchOneSubView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSearchOneSubView.m; sourceTree = "<group>"; };
 		970AD8B7232A3BD600CCE9F9 /* AlibabaAuthSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlibabaAuthSDK.bundle; sourceTree = "<group>"; };
@@ -1734,6 +1738,8 @@
 		97C8513A211C1BDC005540D8 /* CZProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZProgressHUD.m; sourceTree = "<group>"; };
 		97C8513C211C3B1B005540D8 /* NSString+CZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CZExtension.h"; sourceTree = "<group>"; };
 		97C8513D211C3B1B005540D8 /* NSString+CZExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CZExtension.m"; sourceTree = "<group>"; };
+		97C980F5242857DA00A7639E /* CZZoomImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZZoomImageView.h; sourceTree = "<group>"; };
+		97C980F6242857DA00A7639E /* CZZoomImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZZoomImageView.m; sourceTree = "<group>"; };
 		97CA2D77230E84C3004FC257 /* CZMePublishDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZMePublishDetailController.m; sourceTree = "<group>"; };
 		97CA2D78230E84C3004FC257 /* CZMePublishDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZMePublishDetailController.h; sourceTree = "<group>"; };
 		97CAE7BD21194C5D00858749 /* CZMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMessageCell.h; sourceTree = "<group>"; };
@@ -4376,6 +4382,10 @@
 				97A30BDF2420763E009D7089 /* CZIssueMomentsShareView.m */,
 				97A30BE12421D31D009D7089 /* CZIssueMomentsModel.h */,
 				97A30BE22421D31D009D7089 /* CZIssueMomentsModel.m */,
+				97084BB324235387009504A0 /* CZIssueCreateMoments.h */,
+				97084BB424235387009504A0 /* CZIssueCreateMoments.m */,
+				97C980F5242857DA00A7639E /* CZZoomImageView.h */,
+				97C980F6242857DA00A7639E /* CZZoomImageView.m */,
 			);
 			path = "发圈";
 			sourceTree = "<group>";
@@ -6427,6 +6437,7 @@
 				9780B0B023069F53002F5CC8 /* CZSearchThreeSubView.m in Sources */,
 				97532FAB23AA37E300D8AB1C /* CZMainViewSubDefaultVC.m in Sources */,
 				97C53DFC2302BA7E002B1F76 /* CZERecommendHeaderView.m in Sources */,
+				97C980F7242857DA00A7639E /* CZZoomImageView.m in Sources */,
 				97572A852119862C00FB42DE /* CZSystemMessageDetailController.m in Sources */,
 				97FD7E1C2276B2C200F5DFFC /* CZReachabilityHandle.m in Sources */,
 				97705CBE2108230F00485D64 /* WMProgressView.m in Sources */,
@@ -6503,6 +6514,7 @@
 				97419A83240132C700AFDFEC /* CZRedPacketsAlertView.m in Sources */,
 				97ED11F2211582910003E0F7 /* CZAttentionCell.m in Sources */,
 				979110742231131400C2DE5B /* MOFSDatePicker.m in Sources */,
+				97084BB524235387009504A0 /* CZIssueCreateMoments.m in Sources */,
 				97BFD138235D7CE200493F28 /* CZCustomGifHeader.m in Sources */,
 				9734840D237EA4A900087877 /* CZSubFreeChargeController.m in Sources */,
 				97C7FF3D216DDDB50091DC07 /* UIView+MJExtension.m in Sources */,

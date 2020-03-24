@@ -105,7 +105,7 @@
 }
 
 - (IBAction)share:(id)sender {
-    [self shareBtnAction];
+    [self createComment];
 }
 
 - (void)shareBtnAction
@@ -117,6 +117,20 @@
     NSString *thumImage = self.dataDic[@"img"];
     NSString *object = self.dataDic[@"otherGoodsId"];
     [CZJIPINSynthesisTool jumpShareViewWithUrl:url Title:title subTitle:subTitle thumImage:thumImage object:object];
+}
+
+// 创建发圈
+- (void)createComment
+{
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    CURRENTVC(currentVc);
+    CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
+    vc.otherGoodsId = self.dataDic[@"otherGoodsId"];
+    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -121,7 +121,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         !failure ? : failure(error);
         NSLog(@"%@", error);
-        [CZProgressHUD showProgressHUDWithText:@"系统繁忙, 服务器无响应"];
+        [CZProgressHUD showProgressHUDWithText:@"系统繁忙, 请稍候再试..."];
         [CZProgressHUD hideAfterDelay:2];
     }];
     return manager;

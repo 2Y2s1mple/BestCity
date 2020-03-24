@@ -40,8 +40,7 @@
 @property (nonatomic, strong) NSDictionary *detailModel;
 /** 返回键 */
 @property (nonatomic, strong) UIButton *popButton;
-/** 收藏 */
-@property (nonatomic, strong) CZCollectButton *collectButton;
+
 /** <#注释#> */
 @property (nonatomic, assign) CGFloat recordHeight;
 /** <#注释#> */
@@ -103,22 +102,22 @@ static CGFloat const likeAndShareHeight = 49;
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (CZCollectButton *)collectButton
-{
-    if (_collectButton == nil) {
-        _collectButton = [CZCollectButton collectButton];
-        _collectButton.frame = CGRectMake(SCR_WIDTH - 14 - 30, (IsiPhoneX ? 54 : 30), 30, 30);
-        [_collectButton setImage:[UIImage imageNamed:@"hot-list-favor"] forState:UIControlStateNormal];
-        [_collectButton setImage:[UIImage imageNamed:@"nav-favor-sel"] forState:UIControlStateSelected];
-        _collectButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
-        _collectButton.layer.cornerRadius = 15;
-        _collectButton.layer.masksToBounds = YES;
-        _collectButton.type = @"8";
-        _collectButton.commodityID = self.otherGoodsId;
-    }
-    return _collectButton;
-}
+//
+//- (CZCollectButton *)collectButton
+//{
+//    if (_collectButton == nil) {
+//        _collectButton = [CZCollectButton collectButton];
+//        _collectButton.frame = CGRectMake(SCR_WIDTH - 14 - 30, (IsiPhoneX ? 54 : 30), 30, 30);
+//        [_collectButton setImage:[UIImage imageNamed:@"tab-favor-nor"] forState:UIControlStateNormal];
+//        [_collectButton setImage:[UIImage imageNamed:@"tab-favor-sel"] forState:UIControlStateSelected];
+//        _collectButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
+//        _collectButton.layer.cornerRadius = 15;
+//        _collectButton.layer.masksToBounds = YES;
+//        _collectButton.type = @"8";
+//        _collectButton.commodityID = self.otherGoodsId;
+//    }
+//    return _collectButton;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,7 +132,7 @@ static CGFloat const likeAndShareHeight = 49;
     [self.view addSubview:self.popButton];
 
     // 加载收藏按钮
-    [self.view addSubview:self.collectButton];
+//    [self.view addSubview:self.collectButton];
 
     if ([CZJIPINSynthesisTool isFirstIntoWithIdentifier:NSStringFromClass([self class])]) {
            // 第一次
@@ -297,41 +296,81 @@ static CGFloat const likeAndShareHeight = 49;
 
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     shareBtn.frame = CGRectMake(17, 0, 25, bottomView.height);
-    [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+    [shareBtn setTitle:@"首页" forState:UIControlStateNormal];
     [shareBtn setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
     shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
-    [shareBtn setImage:[UIImage imageNamed:@"Forward-3"] forState:UIControlStateNormal];
-    [shareBtn addTarget:self action:@selector(shareBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [shareBtn setImage:[UIImage imageNamed:@"taobaoDetai_upstage-sel"] forState:UIControlStateNormal];
+    [shareBtn addTarget:self action:@selector(mainIndexBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [shareView addSubview:shareBtn];
     shareBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
     shareBtn.titleEdgeInsets = UIEdgeInsetsMake(30, -26, 0, 0);
 
-    UIButton *shareBtn1 = [UIButton buttonWithType:UIButtonTypeSystem];
+
+
+    CZCollectButton *shareBtn1 = [CZCollectButton collectButton];
     shareBtn1.frame = CGRectMake(CZGetX(shareBtn) + 45, 0, 25, bottomView.height);
-    [shareBtn1 setTitle:@"首页" forState:UIControlStateNormal];
-    [shareBtn1 setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
+    [shareBtn1 setImage:[UIImage imageNamed:@"tab-favor-nor"] forState:UIControlStateNormal];
+    [shareBtn1 setImage:[UIImage imageNamed:@"tab-favor-sel"] forState:UIControlStateSelected];
+    [shareBtn1 setTitle:@"收藏" forState:UIControlStateNormal];
     shareBtn1.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
-    [shareBtn1 setImage:[UIImage imageNamed:@"taobaoDetai_upstage-sel"] forState:UIControlStateNormal];
+    [shareBtn1 setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
+    shareBtn1.type = @"8";
+    shareBtn1.commodityID = self.otherGoodsId;
     shareBtn1.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
     shareBtn1.titleEdgeInsets = UIEdgeInsetsMake(30, -26, 0, 0);
-    [shareBtn1 addTarget:self action:@selector(mainIndexBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [shareView addSubview:shareBtn1];
 
 
+
+    UIView *buyView = [[UIView alloc] init];
+    buyView.frame = CGRectMake(shareView.width, shareView.y + 5, SCR_WIDTH - shareView.width - 15, shareView.height - 10);
+    buyView.backgroundColor = RANDOMCOLOR;
+    buyView.layer.cornerRadius = 6;
+    buyView.layer.masksToBounds = YES;
+    [bottomView addSubview:buyView];
+
+    UIButton *btn1 = [self bottomBtnViewWithFrame:CGRectMake(0, 0, buyView.width / 2.0, buyView.height) titleParam:@{
+        @"title1" :  @"立即分享",
+        @"title2" : [NSString stringWithFormat:@"（赚¥%.2f）", [self.detailModel[@"fee"] floatValue]],
+    } action:@selector(createComment)];
+    [buyView addSubview:btn1];
+
+    UIButton *btn2 = [self bottomBtnViewWithFrame:CGRectMake(buyView.width / 2.0, 0, buyView.width / 2.0, buyView.height) titleParam:@{
+        @"title1" :  @"立即购买",
+        @"title2" : [NSString stringWithFormat:@"（省¥%.2lf）", ([self.detailModel[@"fee"] floatValue] + [self.detailModel[@"couponPrice"] floatValue])],
+    } action:@selector(buyBtnAction)] ;
+    btn2.backgroundColor = UIColorFromRGB(0xE25838);
+    [buyView addSubview:btn2];
+}
+
+- (UIButton *)bottomBtnViewWithFrame:(CGRect)frame titleParam:(NSDictionary *)titleParam action:(SEL)action
+{
     UIButton *buyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    buyBtn.frame = CGRectMake(shareView.width, shareView.y, SCR_WIDTH - shareView.width, shareView.height);
-    NSString *buyBtnStr = @"立即购买（省¥%.2lf）";
-    buyBtnStr = [NSString stringWithFormat:buyBtnStr, ([self.detailModel[@"fee"] floatValue] + [self.detailModel[@"couponPrice"] floatValue])];
+    buyBtn.frame = frame;
+    buyBtn.backgroundColor = UIColorFromRGB(0xFFD224);
+    [buyBtn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
 
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:buyBtnStr];
-    [attrStr addAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} range:NSMakeRange(0, attrStr.length)];
-    [attrStr addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"PingFangSC-Medium" size: 18]} range:NSMakeRange(0, 4)];
+    UILabel *label1 = [[UILabel alloc] init];
+    label1.text = titleParam[@"title1"];
+    label1.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
+    label1.textColor = [UIColor whiteColor];
+    label1.textAlignment = NSTextAlignmentCenter;
+    label1.y = 3;
+    label1.width = buyBtn.width;
+    label1.height = 20;
+    [buyBtn addSubview:label1];
 
-    [buyBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
-    [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    buyBtn.backgroundColor = CZREDCOLOR;
-    [buyBtn addTarget:self action:@selector(buyBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [bottomView addSubview:buyBtn];
+    UILabel *label2 = [[UILabel alloc] init];
+    label2.text = titleParam[@"title2"];
+    label2.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 15];
+    label2.textColor = [UIColor whiteColor];
+    label2.textAlignment = NSTextAlignmentCenter;
+    label2.y = 18;
+    label2.width = buyBtn.width;
+    label2.height = 20;
+    [buyBtn addSubview:label2];
+
+    return buyBtn;
 }
 
 // 推荐理由
@@ -603,6 +642,19 @@ static CGFloat const likeAndShareHeight = 49;
         }
     }
     [self changeSubViewFrame];
+}
+
+// 创建发圈
+- (void)createComment
+{
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
+    vc.otherGoodsId = self.otherGoodsId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 // 购买

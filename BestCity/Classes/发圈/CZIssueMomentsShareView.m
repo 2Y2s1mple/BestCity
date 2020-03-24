@@ -12,6 +12,7 @@
 #import "CZShareItemButton.h"
 #import "UIImageView+WebCache.h"
 #import "CZIssueMomentsAlertView.h"
+#import "GXNetTool.h"
 
 @implementation CZIssueMomentsShareView
 
@@ -83,6 +84,11 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self removeFromSuperview];
     });
+
+//    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+//    posteboard.string = self.mutStr;
+    // 增加访问量
+    [self addComment];
 
     UMSocialPlatformType type = UMSocialPlatformType_UnKnown;//未知的
     switch (tap.view.tag - 100) {
@@ -219,19 +225,6 @@
 
 -(void)shareToSocial
 {
-
-//    NSString *shareTitle = @"分享的标题";
-//    UIImage *shareImage1 = [UIImage imageNamed:@"moments-6"];
-//    UIImage *shareImage2 = [UIImage imageNamed:@"moments-6"];
-//    UIImage *shareImage3 = [UIImage imageNamed:@"moments-6"];
-//    UIImage *shareImage4 = [UIImage imageNamed:@"moments-6"];
-//    NSArray *activityItems = @[
-//        shareImage1,
-//        shareImage2,
-//        shareImage3,
-//        shareImage4,
-//    ]; // 必须要提供url 才会显示分享标签否则只显示图片
-
     NSArray *activityItems = self.images;
 
     UIActivityViewController * activityViewController = [[UIActivityViewController alloc]
@@ -251,6 +244,10 @@
                                             NSError * _Nullable activityError) {
 
         NSLog(@"activityType: %@,\n completed: %d,\n returnedItems:%@,\n activityError:%@",activityType,completed,returnedItems,activityError);
+        // 增加访问量
+        if (completed) {
+            [self addComment];
+        }
     };
 
 
@@ -259,6 +256,20 @@
 
 }
 
+
+// 增加访问量
+- (void)addComment
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"momentId"] = self.momentId;
+
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/addShare"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+             NSInteger count = [self.shareNumber.text integerValue];
+            self.shareNumber.text = [NSString stringWithFormat:@"%ld", ++count];
+        }
+    } failure:^(NSError *error) {}];
+}
 
 
 @end
