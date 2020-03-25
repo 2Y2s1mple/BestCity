@@ -49,13 +49,13 @@ babycare专注婴儿用品
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JA-Lq-Pl9">
-                        <rect key="frame" x="285" y="17" width="73" height="26"/>
+                        <rect key="frame" x="268.5" y="17" width="89.5" height="26"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moments-3" translatesAutoresizingMaskIntoConstraints="NO" id="iPB-qd-hCs">
                                 <rect key="frame" x="5" y="-5" width="36" height="36"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2222" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oo9-pK-1KH">
-                                <rect key="frame" x="34.5" y="4.5" width="33.5" height="17"/>
+                                <rect key="frame" x="51" y="4.5" width="33.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.87843137250000003" green="0.2784313725" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -63,12 +63,12 @@ babycare专注婴儿用品
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.92156862745098034" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="73" id="3ac-t1-zvq"/>
                             <constraint firstItem="oo9-pK-1KH" firstAttribute="centerY" secondItem="8JA-Lq-Pl9" secondAttribute="centerY" id="4DH-eb-027"/>
                             <constraint firstAttribute="trailing" secondItem="oo9-pK-1KH" secondAttribute="trailing" constant="5" id="7GM-5e-OHG"/>
                             <constraint firstItem="iPB-qd-hCs" firstAttribute="centerY" secondItem="8JA-Lq-Pl9" secondAttribute="centerY" id="Gcc-Nz-sN7"/>
                             <constraint firstItem="iPB-qd-hCs" firstAttribute="leading" secondItem="8JA-Lq-Pl9" secondAttribute="leading" constant="5" id="bPe-oR-oNe"/>
                             <constraint firstAttribute="height" constant="26" id="cc4-a8-04q"/>
+                            <constraint firstItem="oo9-pK-1KH" firstAttribute="leading" secondItem="iPB-qd-hCs" secondAttribute="trailing" constant="10" id="vRv-P1-up2"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">

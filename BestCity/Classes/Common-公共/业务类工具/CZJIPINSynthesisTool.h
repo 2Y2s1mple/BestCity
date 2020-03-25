@@ -36,8 +36,11 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 跳淘宝购买 */
 + (void)buyBtnActionWithId:(NSString *)Id alertTitle:(NSString *)alertTitle;
 
+/** 淘宝授权 */
++ (void)jipin_authTaobao;
+
 /** 根据url跳淘宝*/
-+ (void)jumpTaobaoWithUrlString:(NSString *)urlString;
++ (void)jipin_jumpTaobaoWithUrlString:(NSString *)urlString;
 
 /** 弹窗工具 */
 + (void)loadAlertView;
@@ -51,11 +54,17 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 判断界面是否该版本下的第一次加载 */
 + (BOOL)isFirstIntoWithIdentifier:(NSString *)identifier;
 
-/** 友盟分享纯图片*/
-+ (void)UMShareImageWithType:(UMSocialPlatformType)type thumImage:(NSString *)thumImage;
-
 /** 全局分享统一UI*/
 + (void)UMShareUIWithTarget:(id)target Action:(SEL)action;
+
+/** 友盟分享纯图片*/
++ (void)JINPIN_UMShareImage:(id)thumImage Type:(UMSocialPlatformType)type;
+
+/** 友盟分享web*/
++ (void)JINPIN_UMShareWeb:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage Type:(UMSocialPlatformType)type;
+
+/** 保存图片到本地 */
++ (void)jipin_saveImage:(id)image;
 @end
 
 NS_ASSUME_NONNULL_END

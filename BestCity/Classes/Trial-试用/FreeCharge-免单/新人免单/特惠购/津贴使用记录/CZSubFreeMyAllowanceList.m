@@ -135,7 +135,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *model = self.dataSource[indexPath.row];
-    [CZJIPINSynthesisTool jumpTaobaoWithUrlString:model[@"allowanceUrl"]];
+    [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:model[@"allowanceUrl"]];
 }
 
 

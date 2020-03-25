@@ -14,6 +14,7 @@
 #import "CZIssueMomentsAlertView.h"
 #import "GXNetTool.h"
 
+
 @implementation CZIssueMomentsShareView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -95,13 +96,6 @@
         case 0:
         {
             [self shareToSocial];
-
-//            type = UMSocialPlatformType_WechatSession;//微信好友
-//            [CZProgressHUD showProgressHUDWithText:@"文案已复制到粘贴板, 分享后长按粘贴"];
-//            [CZProgressHUD hideAfterDelay:1.5];
-//            type = UMSocialPlatformType_QQ;//QQ好友
-//            UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-//            [self shareTextWithType:type text:posteboard.string];
             break;
         }
         case 1: // 朋友圈
@@ -150,9 +144,9 @@
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:currentVc completion:^(id data, NSError *error) {
         if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            NSLog(@"response data is %@",data);
+            NSLog(@"************Share fail with error %@*********", error);
+        } else {
+            NSLog(@"response data is %@", data);
         }
     }];
 }
@@ -186,7 +180,6 @@
         }
     }];
 }
-
 
 // 保存图片
 - (void)saveImageWithImage
@@ -228,12 +221,16 @@
     NSArray *activityItems = self.images;
 
     UIActivityViewController * activityViewController = [[UIActivityViewController alloc]
-                               initWithActivityItems:activityItems applicationActivities:nil];
+                                                         initWithActivityItems:activityItems applicationActivities:nil];
 
 //    设定不想显示的平台和功能
-    NSMutableArray *excludeArray = [@[UIActivityTypeAirDrop,
-                                      UIActivityTypePrint,
-                                      UIActivityTypePostToVimeo] mutableCopy];
+    NSArray *excludeArray = @[
+        UIActivityTypeAirDrop,
+        UIActivityTypePrint,
+        UIActivityTypePostToVimeo,
+        UIActivityTypeMessage,
+        UIActivityTypeMail,
+    ];
 //不需要分享的图标
     activityViewController.excludedActivityTypes = excludeArray;
 

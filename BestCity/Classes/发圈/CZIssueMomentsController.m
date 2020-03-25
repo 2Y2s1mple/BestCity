@@ -14,6 +14,9 @@
 #import "CZIssueMomentsModel.h"
 #import "CZTaobaoDetailController.h"
 
+//测试
+#import "CZJIPINSynthesisView.h"
+
 @interface CZIssueMomentsController ()  <UITableViewDelegate, UITableViewDataSource>
 /** 顶部的红条 */
 @property (nonatomic, strong) UIView *topview;
@@ -73,14 +76,13 @@
     self.view.backgroundColor = UIColorFromRGB(0xFAFAFA);
     [self getTitles];
     [self setupRefresh];
-
+    
 }
 
 #pragma mark - 获取数据
 // 获取标题数据
 - (void)getTitles
 {
-
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = @(1);
@@ -92,8 +94,6 @@
             [self.view addSubview:self.tableView];
 
         }
-
-
     } failure:^(NSError *error) {}];
 }
 
@@ -117,7 +117,7 @@
 // 获取列表数据
 - (void)getListData
 {
-    self.page = 0;
+    self.page = 1;
     [self.tableView.mj_footer endRefreshing];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"type"] = self.paramType;
@@ -296,9 +296,6 @@
 
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if (self.recordParam != param) return;
-
-
-
         if ([result[@"code"] isEqual:@(0)]) {
             for (NSDictionary *dic in result[@"data"]) {
                 CZIssueMomentsModel *model = [[CZIssueMomentsModel alloc] init];

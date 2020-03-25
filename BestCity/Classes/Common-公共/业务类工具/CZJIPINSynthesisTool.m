@@ -11,6 +11,8 @@
 #import "Masonry.h"
 #import "CZShareItemButton.h"
 
+#import "UIImageView+WebCache.h"
+
 
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
@@ -177,7 +179,7 @@
             NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
             if ([specialId isEqualToString:@""]) { // 没有关联
                 // 淘宝授权
-                [self authTaobaoWithId:Id];
+                [self jipin_authTaobao];
             } else {
                 // 打开淘宝
                 [self openAlibcTradeWithId:Id];
@@ -190,7 +192,7 @@
 }
 
 // 淘宝授权
-+ (void)authTaobaoWithId:(NSString *)Id
++ (void)jipin_authTaobao
 {
     CURRENTVC(currentVc);
     [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
@@ -202,7 +204,6 @@
             [CZProgressHUD hideAfterDelay:1.5];
             // 为了同步关联的淘宝账号
             [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
-
         }];
         webVc.modalPresentationStyle = UIModalPresentationFullScreen;
         [tabbar presentViewController:webVc animated:YES completion:nil];
@@ -248,7 +249,7 @@
 
     [GXNetTool PostNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/allowance/apply"] body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
-            [self jumpTaobaoWithUrlString:result[@"data"]];
+            [self jipin_jumpTaobaoWithUrlString:result[@"data"]];
             // 1.5s我进特惠购
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 CURRENTVC(currentVc);
@@ -269,8 +270,8 @@
     }];
 }
 
-// 跳淘宝
-+ (void)jumpTaobaoWithUrlString:(NSString *)urlString
+// 根据url跳淘宝
++ (void)jipin_jumpTaobaoWithUrlString:(NSString *)urlString
 {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *naVc = tabbar.selectedViewController;
@@ -358,8 +359,11 @@
 {
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
     NSString *string = posteboard.string;
+    NSString *rrecordS = string;
+    rrecordS = [rrecordS stringByReplacingOccurrencesOfString:@" " withString:@""];
+    rrecordS = [rrecordS stringByReplacingOccurrencesOfString:@"　" withString:@""];
 
-    if (string == nil) {
+    if (string == nil || [rrecordS isEqualToString:@""]) {
         return;
     } else {
         if ([recordSearchTextArray containsObject:string]) {
@@ -438,41 +442,10 @@
     }
 }
 
-
-#pragma mark -  /** 友盟分享纯图片*/
-+ (void)UMShareImageWithType:(UMSocialPlatformType)type thumImage:(NSString *)thumImage
-{
-    if (![[UMSocialManager defaultManager] isInstall:type]) {
-        [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
-        [CZProgressHUD hideAfterDelay:2];
-        return;
-    }
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    UIViewController *currentVc = nav.topViewController;
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-
-    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-    shareObject.thumbImage = [UIImage imageNamed:@"launchLogo.png"];//如果有缩略图，则设置缩略图
-    [shareObject setShareImage:thumImage];
-    messageObject.shareObject = shareObject;
-
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:currentVc completion:^(id data, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            NSLog(@"response data is %@",data);
-        }
-    }];
-}
-
 #pragma mark -  /** 全局分享统一UI*/
 + (void)UMShareUIWithTarget:(id)target Action:(SEL)action
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-
 
     UIView *backView = [[UIView alloc] init];
     backView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
@@ -529,5 +502,95 @@
 {
     UIView *backView = tap.view;
     [backView removeFromSuperview];
+}
+
+
+#pragma mark -  /** 友盟分享web*/
++ (void)JINPIN_UMShareWeb:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage Type:(UMSocialPlatformType)type
+{
+    if (![[UMSocialManager defaultManager] isInstall:type]) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
+        [CZProgressHUD hideAfterDelay:2];
+        return;
+    }
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    // 设置网页
+    UMShareWebpageObject *shareUrlObject = [UMShareWebpageObject shareObjectWithTitle:title descr:subTitle thumImage:thumImage];
+    //设置网页地址
+    shareUrlObject.webpageUrl = url;
+    //调用分享接口
+    messageObject.shareObject = shareUrlObject;
+    [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:currentVc completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            UMSocialShareResponse *dataResponse = data;
+            NSLog(@"response data is %@", dataResponse.message);
+        }
+    }];
+}
+
+#pragma mark -  /** 友盟分享纯图片*/
++ (void)JINPIN_UMShareImage:(id)thumImage Type:(UMSocialPlatformType)type
+{
+    if (![[UMSocialManager defaultManager] isInstall:type]) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
+        [CZProgressHUD hideAfterDelay:2];
+        return;
+    }
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    shareObject.thumbImage = [UIImage imageNamed:@"launchLogo.png"];//如果有缩略图，则设置缩略图
+    [shareObject setShareImage:thumImage];
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:currentVc completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
+
+
+#pragma mark - /** 保存图片到本地 */
++ (void)jipin_saveImage:(id)image
+{
+    if ([image isKindOfClass:[NSString class]]) {
+        // 保存图片
+        [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:image] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+
+        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }];
+    } else if ([image isKindOfClass:[UIImage class]]) {
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
+}
+
+// <保存到相册> -对象和+类方法都行
++ (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+        [CZProgressHUD showProgressHUDWithText:msg];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }else{
+        msg = @"保存图片成功" ;
+        [CZProgressHUD showProgressHUDWithText:msg];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }
+
 }
 @end

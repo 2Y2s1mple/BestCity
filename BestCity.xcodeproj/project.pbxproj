@@ -65,6 +65,7 @@
 		970E618C22BA1D6A00E68BE3 /* CZFreeChargeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618B22BA1D6A00E68BE3 /* CZFreeChargeModel.m */; };
 		970E619022BA20A100E68BE3 /* CZCZFreeChargeCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 970E618E22BA20A100E68BE3 /* CZCZFreeChargeCell2.m */; };
 		970E619122BA20A100E68BE3 /* CZCZFreeChargeCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */; };
+		970F8BAF2429D35800D0B0F4 /* CZJIPINSynthesisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 970F8BAE2429D35800D0B0F4 /* CZJIPINSynthesisView.m */; };
 		97101AC4230433920061F83C /* CZEInventoryAddGoodsCellViewMdoel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97101AC3230433920061F83C /* CZEInventoryAddGoodsCellViewMdoel.m */; };
 		9710E61222D8789600AA5D87 /* CZMHSAskQuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9710E61122D8789600AA5D87 /* CZMHSAskQuestionController.m */; };
 		97115C9322EFE71B00C45665 /* CZNavigationViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 97115C9222EFE71B00C45665 /* CZNavigationViewFactory.m */; };
@@ -805,6 +806,10 @@
 		970E618D22BA20A100E68BE3 /* CZCZFreeChargeCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCZFreeChargeCell2.h; sourceTree = "<group>"; };
 		970E618E22BA20A100E68BE3 /* CZCZFreeChargeCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCZFreeChargeCell2.m; sourceTree = "<group>"; };
 		970E618F22BA20A100E68BE3 /* CZCZFreeChargeCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCZFreeChargeCell2.xib; sourceTree = "<group>"; };
+		970F8BAD2429D35800D0B0F4 /* CZJIPINSynthesisView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZJIPINSynthesisView.h; sourceTree = "<group>"; };
+		970F8BAE2429D35800D0B0F4 /* CZJIPINSynthesisView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZJIPINSynthesisView.m; sourceTree = "<group>"; };
+		970F8BB0242A027700D0B0F4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		970F8BB1242A027700D0B0F4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		97101AC2230433920061F83C /* CZEInventoryAddGoodsCellViewMdoel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZEInventoryAddGoodsCellViewMdoel.h; sourceTree = "<group>"; };
 		97101AC3230433920061F83C /* CZEInventoryAddGoodsCellViewMdoel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZEInventoryAddGoodsCellViewMdoel.m; sourceTree = "<group>"; };
 		9710E61022D8789600AA5D87 /* CZMHSAskQuestionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMHSAskQuestionController.h; sourceTree = "<group>"; };
@@ -4577,6 +4582,8 @@
 				977E82D4223CA96600C8C01B /* CZGetJIBITool.m */,
 				97BDE5C92195B232005FB405 /* CZConst.h */,
 				97BDE5CA2195B232005FB405 /* CZConst.m */,
+				970F8BAD2429D35800D0B0F4 /* CZJIPINSynthesisView.h */,
+				970F8BAE2429D35800D0B0F4 /* CZJIPINSynthesisView.m */,
 				9708492322438C5B000D5528 /* CZJIPINSynthesisTool.h */,
 				9708492422438C5B000D5528 /* CZJIPINSynthesisTool.m */,
 				9789945D23B1BD150038AEDF /* Localization-数据的本地化 */,
@@ -5924,6 +5931,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 97705BFE2107068E00485D64;
 			productRefGroup = 97705C082107068E00485D64 /* Products */;
@@ -6256,6 +6264,7 @@
 				97C78FBB21196A8F00374CCD /* CZTestWinController.m in Sources */,
 				97AB0C1C22532A6900072426 /* CZTrialApplyForCell.m in Sources */,
 				97798CC9212D0FC90052CE94 /* SDWebImagePrefetcher.m in Sources */,
+				970F8BAF2429D35800D0B0F4 /* CZJIPINSynthesisView.m in Sources */,
 				97FEBF3122D4C806007BF592 /* CZMHSDRecommendController.m in Sources */,
 				97F632D923BDFEF900D58B16 /* CZSubFreeChargeModel.m in Sources */,
 				9778649D211A7AD6001B41F1 /* MASLayoutConstraint.m in Sources */,
@@ -6624,6 +6633,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				97705C112107068E00485D64 /* Base */,
+				970F8BB0242A027700D0B0F4 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -6632,6 +6642,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				97705C162107068F00485D64 /* Base */,
+				970F8BB1242A027700D0B0F4 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -6643,6 +6654,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -6701,6 +6713,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

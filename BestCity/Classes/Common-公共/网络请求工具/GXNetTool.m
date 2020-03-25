@@ -116,8 +116,14 @@
 //            }
             [nav presentViewController:vc animated:YES completion:nil];
         }
+        if ([result[@"code"] isEqualToNumber:@(500)]) {
+            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+            [CZProgressHUD hideAfterDelay:2.5];
+            success([result deleteAllNullValue]);
+        } else {
+            success([result deleteAllNullValue]);
+        }
 
-        success([result deleteAllNullValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         !failure ? : failure(error);
         NSLog(@"%@", error);

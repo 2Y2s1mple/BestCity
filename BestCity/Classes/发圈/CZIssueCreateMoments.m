@@ -106,7 +106,6 @@
     [self getShareData];
 
     [self setupSubView];
-
 }
 
 - (UIView *)createView1
@@ -129,11 +128,8 @@
         label.text = [NSString stringWithFormat:@"分享后复制【评论区文案】，预估收益%.2f元！", [dic[@"fee"] floatValue]];;
         [label sizeToFit];
     };
-
-
     return view1;
 }
-
 
 - (void)createScrollerview
 {
@@ -387,6 +383,7 @@
 {
     CGFloat Y = CZGetY([self.scrollerView.subviews lastObject]);
     UIView *backView = [[UIView alloc] init];
+    backView.tag = 100;
     backView.y = Y ;
     backView.height = 50;;
     backView.width = SCR_WIDTH;
@@ -440,8 +437,17 @@
 - (void)createView4BtnClicked:(UIButton *)sender
 {
     // 设置选中
+
     sender.selected = !sender.selected;
 
+    UIButton *btn1 = sender.superview.subviews[0];
+    UIButton *btn2 = sender.superview.subviews[1];
+    if (!btn1.isSelected && !btn2.isSelected) {
+        sender.selected = !sender.selected;
+        [CZProgressHUD showProgressHUDWithText:@"淘口令和下载链接必须选择一个"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    }
     self.block1(sender.tag, sender.selected);
 }
 

@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "GXNetTool.h"
 #import "CZZoomImageView.h"
+#import "CZUserInfoTool.h"
 
 @interface CZIssueMomentsCell ()
 /** 图片视图 */
@@ -145,9 +146,6 @@
 
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareView)];
     [self.shareNumberViewBtn addGestureRecognizer:tap1];
-
-
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -171,22 +169,32 @@
         return;
     }
 
-    CZIssueMomentsShareView *view = [[CZIssueMomentsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
+    // 为了同步关联的淘宝账号
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+        if ([specialId isEqualToString:@""]) { // 没有关联
+            [CZJIPINSynthesisTool jipin_authTaobao];
+            // 淘宝授权
+        } else {
+            CZIssueMomentsShareView *view = [[CZIssueMomentsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
 
-    NSMutableArray *images = [NSMutableArray array];
-    for (UIImageView *imageView in self.imagesBackView.subviews) {
-        if (imageView.image) {
-            [images addObject:imageView.image];
+            NSMutableArray *images = [NSMutableArray array];
+            for (UIImageView *imageView in self.imagesBackView.subviews) {
+                if (imageView.image) {
+                    [images addObject:imageView.image];
+                }
+            }
+            view.images = images;
+            view.shareNumber = self.shareNumber;
+            view.momentId = self.param.param[@"id"];
+            [[UIApplication sharedApplication].keyWindow addSubview:view];
+
+
+            UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+            posteboard.string = self.param.param[@"content"];
+            [recordSearchTextArray addObject:posteboard.string];
         }
-    }
-    view.images = images;
-    view.shareNumber = self.shareNumber;
-    view.momentId = self.param.param[@"id"];
-    [[UIApplication sharedApplication].keyWindow addSubview:view];
-    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-    posteboard.string = self.param.param[@"content"];
-    [recordSearchTextArray addObject:posteboard.string];
-
+    }];
 }
 
 
@@ -242,22 +250,49 @@
     copyLabel.height = 15;
     [copyView addSubview:copyLabel];
 
-
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(generalPaste:)];
     [comment addGestureRecognizer:tap];
-
 }
 
 - (void)generalPaste:(UIGestureRecognizer *)sender
 {
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    // 为了同步关联的淘宝账号
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+        if ([specialId isEqualToString:@""]) { // 没有关联
+            [CZJIPINSynthesisTool jipin_authTaobao];
+            // 淘宝授权
+        } else {
+
+        }
+    }];
+
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
     posteboard.string = self.param.param[@"commentList"][sender.view.tag][@"copyContent"];
-    [CZProgressHUD showProgressHUDWithText:@"文案已复制到粘贴板, 分享后长按粘贴"];
-    [CZProgressHUD hideAfterDelay:1.5];
     [recordSearchTextArray addObject:posteboard.string];
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"淘口令复制成功" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"去微信粘贴" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL * url = [NSURL URLWithString:@"weixin://"];
+        BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+        //先判断是否能打开该url
+        if (canOpen)
+        {   //打开微信
+            [[UIApplication sharedApplication] openURL:url];
+        }else {
+            [CZProgressHUD showProgressHUDWithText:@"您的设备未安装微信APP"];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
+    }]];
+    [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:alert animated:NO completion:nil];
 }
-
-
 
 
 - (void)showImage:(UIGestureRecognizer *)tap
@@ -273,7 +308,6 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"otherGoodsId"] = otherGoodsId;
     param[@"shareImgLocation"] = @"1";
-    [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsShareInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             // 保存图片
@@ -284,7 +318,6 @@
                 UIImageView *firstImage = [self.imagesBackView.subviews firstObject];
                 firstImage.image = image;
             }];
-            [CZProgressHUD hideAfterDelay:0];
         }
     } failure:^(NSError *error) {}];
 }

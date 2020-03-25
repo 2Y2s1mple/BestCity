@@ -295,11 +295,11 @@ static CGFloat const likeAndShareHeight = 49;
     [bottomView addSubview:shareView];
 
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    shareBtn.frame = CGRectMake(17, 0, 25, bottomView.height);
+    shareBtn.frame = CGRectMake(20, 0, 25, bottomView.height);
     [shareBtn setTitle:@"首页" forState:UIControlStateNormal];
     [shareBtn setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
     shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
-    [shareBtn setImage:[UIImage imageNamed:@"taobaoDetai_upstage-sel"] forState:UIControlStateNormal];
+    [shareBtn setImage:[UIImage imageNamed:@"taobaoDetail-7"] forState:UIControlStateNormal];
     [shareBtn addTarget:self action:@selector(mainIndexBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [shareView addSubview:shareBtn];
     shareBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
@@ -308,9 +308,9 @@ static CGFloat const likeAndShareHeight = 49;
 
 
     CZCollectButton *shareBtn1 = [CZCollectButton collectButton];
-    shareBtn1.frame = CGRectMake(CZGetX(shareBtn) + 45, 0, 25, bottomView.height);
-    [shareBtn1 setImage:[UIImage imageNamed:@"tab-favor-nor"] forState:UIControlStateNormal];
-    [shareBtn1 setImage:[UIImage imageNamed:@"tab-favor-sel"] forState:UIControlStateSelected];
+    shareBtn1.frame = CGRectMake(CZGetX(shareBtn) + 34, 0, 25, bottomView.height);
+    [shareBtn1 setImage:[UIImage imageNamed:@"taobaoDetail-5"] forState:UIControlStateNormal];
+    [shareBtn1 setImage:[UIImage imageNamed:@"taobaoDetail-6"] forState:UIControlStateSelected];
     [shareBtn1 setTitle:@"收藏" forState:UIControlStateNormal];
     shareBtn1.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 11];
     [shareBtn1 setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
@@ -355,7 +355,7 @@ static CGFloat const likeAndShareHeight = 49;
     label1.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     label1.textColor = [UIColor whiteColor];
     label1.textAlignment = NSTextAlignmentCenter;
-    label1.y = 3;
+    label1.y = 2;
     label1.width = buyBtn.width;
     label1.height = 20;
     [buyBtn addSubview:label1];
@@ -652,9 +652,19 @@ static CGFloat const likeAndShareHeight = 49;
         [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
         return;
     }
-    CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
-    vc.otherGoodsId = self.otherGoodsId;
-    [self.navigationController pushViewController:vc animated:YES];
+
+    // 为了同步关联的淘宝账号
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+        if ([specialId isEqualToString:@""]) { // 没有关联
+            [CZJIPINSynthesisTool jipin_authTaobao];
+            // 淘宝授权
+        } else {
+            CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
+            vc.otherGoodsId = self.otherGoodsId;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
 }
 
 // 购买
@@ -668,53 +678,9 @@ static CGFloat const likeAndShareHeight = 49;
 
     // 为了同步关联的淘宝账号
     [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        UINavigationController *naVc = tabbar.selectedViewController;
-        UIViewController *toVC = naVc.topViewController;
         NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
         if ([specialId isEqualToString:@""]) {
-            [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
-            [[ALBBSDK sharedInstance] auth:toVC successCallback:^(ALBBSession *session) {
-                NSString *tip=[NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
-                NSLog(@"%@", tip);
-                TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
-                    [CZProgressHUD showProgressHUDWithText:@"授权成功"];
-                    [CZProgressHUD hideAfterDelay:1.5];
-                    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {}];
-                }];
-                [tabbar presentViewController:webVc animated:YES completion:nil];
-
-                //拉起淘宝
-                AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
-                showParam.openType = AlibcOpenTypeAuto;
-                showParam.backUrl = @"tbopen25267281://xx.xx.xx";
-                showParam.isNeedPush = YES;
-                showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
-
-                [CZProgressHUD hideAfterDelay:1.5];
-
-                [[AlibcTradeSDK sharedInstance].tradeService
-                 openByUrl:[NSString stringWithFormat:@"https://oauth.m.taobao.com/authorize?response_type=code&client_id=25612235&redirect_uri=https://www.jipincheng.cn/qualityshop-api/api/taobao/returnUrl&state=%@&view=wap", JPTOKEN]
-                 identity:@"trade"
-                 webView:webVc.webView
-                 parentController:tabbar
-                 showParams:showParam
-                 taoKeParams:nil
-                 trackParam:nil
-                 tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable result) {
-                     NSLog(@"-----AlibcTradeSDK------");
-                     if(result.result == AlibcTradeResultTypeAddCard){
-                         NSLog(@"交易成功");
-                     } else if(result.result == AlibcTradeResultTypeAddCard){
-                         NSLog(@"加入购物车");
-                     }
-                 } tradeProcessFailedCallback:^(NSError * _Nullable error) {
-                     NSLog(@"----------退出交易流程----------");
-                 }];
-            } failureCallback:^(ALBBSession *session, NSError *error) {
-                NSString *tip = [NSString stringWithFormat:@"登录失败:%@", @""];
-                NSLog(@"%@", tip);
-            }];
+            [CZJIPINSynthesisTool jipin_authTaobao];
         } else {
             // 打开淘宝
             [self getGoodsURl];
@@ -732,7 +698,7 @@ static CGFloat const likeAndShareHeight = 49;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:self];
+            [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:result[@"data"]];
         } else {
 
             [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
