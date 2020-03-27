@@ -147,15 +147,8 @@ static id instancet_;
             
             // 登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:loginChangeUserInfo object:nil];
-
-            if (didClickedNewPeople && [JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
-                didClickedNewPeople = NO;
-                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-                UINavigationController *nav = tabbar.selectedViewController;
-                CZMeController *vc = (CZMeController *)nav.topViewController;
-                CZSubFreeChargeController *toVc = [[CZSubFreeChargeController alloc] init];
-                [vc.navigationController pushViewController:toVc animated:YES];
-            }
+            // 新人
+//            [JPUSERINFO[@"isNewUser"] isEqual:@(0)];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             [CZProgressHUD hideAfterDelay:2];
@@ -248,14 +241,6 @@ static id instancet_;
 - (void)dismissViewController
 {
     [self dismissViewControllerAnimated:NO completion:nil];
-    if (didClickedNewPeople && [JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
-        didClickedNewPeople = NO;
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        UINavigationController *nav = tabbar.selectedViewController;
-        CZMeController *vc = (CZMeController *)nav.topViewController;
-        CZSubFreeChargeController *toVc = [[CZSubFreeChargeController alloc] init];
-        [vc.navigationController pushViewController:toVc animated:YES];
-    }
 }
 
 /** 跳转用户协议 */

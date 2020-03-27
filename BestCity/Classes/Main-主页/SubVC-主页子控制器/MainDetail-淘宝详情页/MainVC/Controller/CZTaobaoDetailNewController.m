@@ -153,8 +153,6 @@ static CGFloat const likeAndShareHeight = 49;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/getGoodsDescImgs"] body:param1 header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.descImgList = result[@"data"];
-
-
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         }
@@ -280,7 +278,6 @@ static CGFloat const likeAndShareHeight = 49;
     bottomView.size = CGSizeMake(SCR_WIDTH, 49);
     bottomView.y = SCR_HEIGHT - (IsiPhoneX ? 83 : 49);
     [self.view addSubview:bottomView];
-
 
     UIButton *buyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     buyBtn.frame = CGRectMake(0, 0, SCR_WIDTH, bottomView.height);
@@ -571,7 +568,7 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)buyBtnAction
 {
     NSString *ID = self.allDetailModel[@"allowanceGoods"][@"id"];
-    [CZJIPINSynthesisTool buyBtnActionWithId:ID alertTitle:@"您将前往淘宝0元购买此商品，仅限首单"];
+    [CZJIPINSynthesisTool buyBtnActionWithId:ID alertTitle:nil];
 }
 
 // 获取购买的URL
@@ -584,7 +581,7 @@ static CGFloat const likeAndShareHeight = 49;
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:self];
+            [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:result[@"data"]];
         } else {
 
             [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];

@@ -36,8 +36,9 @@ static id _instance;
         UILabel *label = [[UILabel alloc] init];
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont systemFontOfSize:13];
-        label.layer.cornerRadius = 13;
+        label.layer.cornerRadius = 5;
         label.layer.masksToBounds = YES;
+        label.numberOfLines = 0;
         label.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.87];
         _textLabel = label;
     }
@@ -59,9 +60,13 @@ static id _instance;
         [hud addSubview:hud.textLabel];
         hud.textLabel.text = [NSString stringWithFormat:@"　%@　", text];
         hud.textLabel.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.87];
+
+
+
         [hud.textLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(hud);
-            make.height.equalTo(@(26));
+            make.width.lessThanOrEqualTo(@(300));
+            make.height.greaterThanOrEqualTo(@(26));
         }];
         return hud;
         

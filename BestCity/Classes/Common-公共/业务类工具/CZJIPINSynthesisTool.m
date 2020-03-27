@@ -22,6 +22,8 @@
 #import "CZAlertView3Controller.h"
 #import "CZSubFreePreferentialController.h" // 特惠购
 
+#import "GXSaveImageToPhone.h" //保存图片
+#import "GXZoomImageView.h" // 图片放大
 
 
 #import "CZGuessTypeTowView.h"
@@ -158,8 +160,31 @@
     }];
 }
 
-#pragma mark - 购买跳淘宝, 之后弹出特惠购
+#pragma mark - 0元购, 跳淘宝购买, 之后弹出特惠购
 + (void)buyBtnActionWithId:(NSString *)Id alertTitle:(NSString *)alertTitle
+{
+    [self jipin_authTaobaoSuccess:^(BOOL isAuth){
+        if (isAuth) {
+            if (alertTitle == nil ) {
+                // 打开淘宝, 购买跳淘宝, 之后弹出特惠购
+                [self openAlibcTradeWithId:Id];
+            } else {
+                UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"" message:alertTitle preferredStyle:UIAlertControllerStyleAlert];
+
+                [alertView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}]];
+                [alertView addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    // 打开淘宝, 购买跳淘宝, 之后弹出特惠购
+                    [self openAlibcTradeWithId:Id];
+                }]];
+                UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+                [tabbar presentViewController:alertView animated:NO completion:nil];
+            }
+        }
+    }];
+}
+
+#pragma mark - /** 淘宝授权 */
++ (void)jipin_authTaobaoSuccess:(void (^)(BOOL isAuthTaobao))block
 {
     if ([JPTOKEN length] <= 0) {
         CZLoginController *vc = [CZLoginController shareLoginController];
@@ -167,28 +192,19 @@
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
     }
+    // 为了同步关联的淘宝账号
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+        if ([specialId isEqualToString:@""]) { // 没有关联
+            block(NO);
+            // 淘宝授权
+            [self jipin_authTaobao];
+        } else {
+            block(YES);
+        }
+    }];
 
-    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"" message:alertTitle preferredStyle:UIAlertControllerStyleAlert];
-
-    [alertView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-
-    }]];
-    [alertView addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // 为了同步关联的淘宝账号
-        [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-            NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-            if ([specialId isEqualToString:@""]) { // 没有关联
-                // 淘宝授权
-                [self jipin_authTaobao];
-            } else {
-                // 打开淘宝
-                [self openAlibcTradeWithId:Id];
-            }
-        }];
-    }]];
-
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    [tabbar presentViewController:alertView animated:NO completion:nil];
+//    block(YES);
 }
 
 // 淘宝授权
@@ -241,9 +257,15 @@
     }];
 }
 
-// 获取备用金得到淘宝路径
+// 0元购, 跳淘宝购买, 之后弹出特惠购, 获取备用金得到淘宝路径
 + (void)openAlibcTradeWithId:(NSString *)ID
 {
+    if (![JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
+        [CZProgressHUD showProgressHUDWithText:@"您已不是新用户，无法参加0元购活动"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    };
+
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"allowanceGoodsId"] = ID;
 
@@ -428,9 +450,6 @@
         //新版本
         [CZSaveTool setObject:@"www" forKey:identifier];
     }
-
-
-
 //    [CZSaveTool setObject:@"0rrrr" forKey:identifier];
     if ([[CZSaveTool objectForKey:identifier] isEqualToString:@"0"]) {
         // 老人
@@ -441,69 +460,6 @@
         return YES;
     }
 }
-
-#pragma mark -  /** 全局分享统一UI*/
-+ (void)UMShareUIWithTarget:(id)target Action:(SEL)action
-{
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-
-    UIView *backView = [[UIView alloc] init];
-    backView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss:)];
-    [backView addGestureRecognizer:tap];
-
-    [window addSubview:backView];
-    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.equalTo(window);
-    }];
-
-    UIView *shareView = [[UIView alloc] init];
-    shareView.backgroundColor = [UIColor whiteColor];
-    [backView addSubview:shareView];
-    [shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(backView);
-        make.bottom.equalTo(backView);
-        make.width.equalTo(@(SCR_WIDTH));
-        make.height.equalTo(@(130));
-    }];
-
-    UILabel *titleLabel = [[UILabel alloc] init];
-    [shareView addSubview:titleLabel];
-    titleLabel.text = @"分享到";
-    titleLabel.textColor = UIColorFromRGB(0x565252);
-    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 16];
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(shareView);
-        make.top.equalTo(@(8));
-    }];
-
-    CGFloat space = (SCR_WIDTH - 50 * 5) / 6.0;
-    NSArray *imageArr = @[
-        @{@"icon" : @"share-1", @"name" : @"微信"},
-        @{@"icon" : @"share-3", @"name" : @"朋友圈"},
-        @{@"icon" : @"share-4", @"name" : @"QQ"},
-        @{@"icon" : @"moments-6", @"name" : @"微博"},
-        @{@"icon" : @"share-5", @"name" : @"保存图片"},
-                        ];
-    [imageArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CZShareItemButton *imageView = [CZShareItemButton buttonWithType:UIButtonTypeCustom];
-        imageView.adjustsImageWhenHighlighted = NO;
-        [imageView setImage:[UIImage imageNamed:obj[@"icon"]] forState:UIControlStateNormal];
-        [imageView setTitle:obj[@"name"] forState:UIControlStateNormal];
-        imageView.frame = CGRectMake((space + 50) * idx + 25, 47, 50, 60);
-        imageView.tag = idx + 100;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
-        [imageView addGestureRecognizer:tap];
-        [shareView addSubview:imageView];
-    }];
-}
-
-+ (void)dismiss:(UIGestureRecognizer *)tap
-{
-    UIView *backView = tap.view;
-    [backView removeFromSuperview];
-}
-
 
 #pragma mark -  /** 友盟分享web*/
 + (void)JINPIN_UMShareWeb:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage Type:(UMSocialPlatformType)type
@@ -534,7 +490,7 @@
     }];
 }
 
-#pragma mark -  /** 友盟分享纯图片*/
+#pragma mark - /** 友盟分享纯图片*/
 + (void)JINPIN_UMShareImage:(id)thumImage Type:(UMSocialPlatformType)type
 {
     if (![[UMSocialManager defaultManager] isInstall:type]) {
@@ -563,34 +519,141 @@
     }];
 }
 
+#pragma mark -  友盟分享纯文字
++ (void)JINPIN_UMShareText:(NSString *)text Type:(UMSocialPlatformType)type
+{
+    if (![[UMSocialManager defaultManager] isInstall:type]) {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
+        [CZProgressHUD hideAfterDelay:2];
+        return;
+    }
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //设置文本
+    messageObject.text = text;
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:currentVc completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********", error);
+        } else {
+            NSLog(@"response data is %@", data);
+        }
+    }];
+}
+
+#pragma mark -  友盟分享小程序
++ (void)JINPIN_UMShareMiniPath:(NSString *)path Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage userName:(NSString *)userName failureUrl:(NSString *)url
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+//    thumImage = [UIImage imageNamed:@"launchLogo.png"];
+    NSData *currentImageData;
+    if ([thumImage isKindOfClass:[UIImage class]]) {
+        UIImage * newImage = (UIImage *)thumImage;
+        NSData *imageData =  UIImagePNGRepresentation(newImage);
+        NSInteger length = [imageData length];
+        CGFloat compression;
+        if ([imageData length] > 127000) {
+            compression =  127000.0 / length;
+        } else {
+            compression = 1;
+        }
+        currentImageData =  UIImageJPEGRepresentation(newImage, compression);
+    } else {
+
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:thumImage]];
+        UIImage* newImage = [UIImage imageWithData:data];
+        NSData *imageData =  UIImagePNGRepresentation(newImage);
+        NSInteger length = [imageData length];
+        CGFloat compression;
+        if ([imageData length] > 127000) {
+            compression =  127000.0 / length;
+        } else {
+            compression = 0.9;
+        }
+        currentImageData =  UIImageJPEGRepresentation(newImage, compression);
+    }
+
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+    UINavigationController *nav = tabbar.selectedViewController;
+    UIViewController *currentVc = nav.topViewController;
+    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:title descr:subTitle thumImage:[UIImage imageWithData:currentImageData]];
+    shareObject.webpageUrl = url;
+    shareObject.userName = userName;
+    shareObject.path = path;
+    shareObject.hdImageData = currentImageData;
+    shareObject.miniProgramType = UShareWXMiniProgramTypeRelease; // 可选体验版和开发板
+
+    messageObject.shareObject = shareObject;
+
+     //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_WechatSession messageObject:messageObject currentViewController:currentVc completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            UMSocialShareResponse *dataResponse = data;
+            NSLog(@"response data is %@", dataResponse.message);
+            //            [CZGetJIBITool getJiBiWitType:@(5)];
+        }
+    }];
+}
+
+#pragma mark -  调用系统分享多图片
++ (void)JINPIN_systemShareImages:(NSArray *)images success:(void (^)(BOOL completed))block
+{
+    NSArray *activityItems = images;
+
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+
+    // 设定不想显示的平台和功能
+    NSArray *excludeArray = @[
+        UIActivityTypeAirDrop,
+        UIActivityTypePrint,
+        UIActivityTypePostToVimeo,
+        UIActivityTypeMessage,
+        UIActivityTypeMail,
+    ];
+    // 不需要分享的图标
+    activityVC.excludedActivityTypes = excludeArray;
+
+    [activityVC setCompletionWithItemsHandler:^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        NSLog(@"activityType: %@,\n completed: %d,\n returnedItems:%@,\n activityError:%@",activityType, completed, returnedItems, activityError);
+        // 增加访问量
+        !block ? : block(completed);
+    }];
+    CURRENTVC(currentVc)
+    [currentVc presentViewController:activityVC animated: YES completion: nil];
+
+}
+
 
 #pragma mark - /** 保存图片到本地 */
 + (void)jipin_saveImage:(id)image
 {
-    if ([image isKindOfClass:[NSString class]]) {
-        // 保存图片
-        [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:image] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    [GXSaveImageToPhone saveBatchImage:image];
+}
 
-        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        }];
-    } else if ([image isKindOfClass:[UIImage class]]) {
-        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+
+#pragma mark - /** 点击图片放大 */
++ (void)jipin_showZoomImage:(__kindof UIView * _Nonnull)obj
+{
+    [GXZoomImageView showZoomImage:obj];
+}
+
+
+#pragma mark - /** 判断未登录, 之后弹出登录页面 */
++ (void)jipin_jumpLogin
+{
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
+        [tabbar presentViewController:vc animated:NO completion:nil];
+        return;
     }
 }
 
-// <保存到相册> -对象和+类方法都行
-+ (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-    NSString *msg = nil ;
-    if(error){
-        msg = @"保存图片失败" ;
-        [CZProgressHUD showProgressHUDWithText:msg];
-        [CZProgressHUD hideAfterDelay:1.5];
-    }else{
-        msg = @"保存图片成功" ;
-        [CZProgressHUD showProgressHUDWithText:msg];
-        [CZProgressHUD hideAfterDelay:1.5];
-    }
-
-}
 @end

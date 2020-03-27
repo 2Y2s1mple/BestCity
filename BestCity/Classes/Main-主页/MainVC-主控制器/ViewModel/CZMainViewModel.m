@@ -17,7 +17,7 @@
 
 #pragma mark - 获取数据
 // 刷新时候调用
-- (void)getMainTitles:(void (^)(void))callback
+- (void)getMainTitles:(void (^)(BOOL isFailure))callback
 {
     static NSString *key = @"mainTitlesKey";
     //获取数据
@@ -26,12 +26,11 @@
         if ([result[@"code"] isEqual:@(0)]) {
             self.mainTitles = result[@"data"];
             [CZSaveTool setObject:self.mainTitles forKey:key];
-
         }
-        callback();
+        callback(YES);
     } failure:^(NSError *error) {
         self.mainTitles = [CZSaveTool objectForKey:key];
-        callback();
+        callback(NO);
     }];
 }
 

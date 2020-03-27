@@ -245,12 +245,6 @@
 // 跳转到新人专区
 - (void)pushPeopleNew
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
     [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_xinren"];
     CURRENTVC(currentVc);
     CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];

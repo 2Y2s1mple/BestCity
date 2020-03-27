@@ -60,7 +60,7 @@
     //(1)获取网络管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    manager.requestSerializer.timeoutInterval = 5.0f;
+    manager.requestSerializer.timeoutInterval = 10.0f;
 //    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 
     //(2)请求头的设置
@@ -126,9 +126,14 @@
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         !failure ? : failure(error);
-        NSLog(@"%@", error);
-        [CZProgressHUD showProgressHUDWithText:@"系统繁忙, 请稍候再试..."];
-        [CZProgressHUD hideAfterDelay:2];
+        NSLog(@"%@", error.userInfo);
+        if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"似乎已断开与互联网的连接。"]) {
+//            NSString *string = error.userInfo[NSErrorFailingURLStringKey];
+//            [CZProgressHUD showProgressHUDWithText:[NSString stringWithFormat:@"----%@----接口卡住了", string]];
+//            [CZProgressHUD hideAfterDelay:5];
+            [CZProgressHUD showProgressHUDWithText:@"似乎已断开与互联网的连接。"];
+            [CZProgressHUD hideAfterDelay:5];
+        }
     }];
     return manager;
 }

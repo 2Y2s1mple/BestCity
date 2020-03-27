@@ -144,11 +144,10 @@
 
 - (IBAction)ticketBugLink
 {
-
     CGFloat useAllowancePrice = [self.allDetailModel[@"allowanceGoods"][@"useAllowancePrice"] floatValue];
     if (useAllowancePrice > 0) {
         NSString *ID = self.allDetailModel[@"allowanceGoods"][@"id"];
-        [CZJIPINSynthesisTool buyBtnActionWithId:ID alertTitle:@"您将前往淘宝0元购买此商品，仅限首单"];
+        [CZJIPINSynthesisTool buyBtnActionWithId:ID alertTitle:nil];
     } else {
         if ([JPTOKEN length] <= 0) {
             CZLoginController *vc = [CZLoginController shareLoginController];
@@ -163,10 +162,6 @@
 // 获取购买的URL
 - (void)getGoodsURl
 {
-    UITabBarController *tabVc = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabVc.selectedViewController;
-    UIViewController *vc = nav.topViewController;
-
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"goodsBuyLink"] = self.model[@"goodsBuyLink"];
     param[@"otherGoodsId"] = self.model[@"otherGoodsId"];
@@ -174,7 +169,7 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:self];
+            [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:result[@"data"]];
         } else {
 
             [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];

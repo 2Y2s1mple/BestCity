@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert-1" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-3N-dwn">
-                    <rect key="frame" x="52.5" y="179.5" width="270.5" height="308.5"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert-17" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-3N-dwn">
+                    <rect key="frame" x="17" y="179" width="341" height="309"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ygv-w8-hdM">
                     <rect key="frame" x="172" y="532" width="31" height="31"/>
@@ -33,8 +33,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9c-JH-GpI">
-                    <rect key="frame" x="140" y="357" width="95" height="95"/>
-                    <state key="normal" image="alert-2"/>
+                    <rect key="frame" x="87.5" y="292" width="200" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="DxM-JG-eHf"/>
+                        <constraint firstAttribute="width" constant="200" id="wdd-aW-ZG2"/>
+                    </constraints>
                     <connections>
                         <action selector="caiBtnAction:" destination="-1" eventType="touchUpInside" id="p8J-ad-a6B"/>
                     </connections>
@@ -45,7 +48,7 @@
                 <constraint firstItem="OIi-3N-dwn" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="1u2-Hw-kun"/>
                 <constraint firstItem="OIi-3N-dwn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7KB-5V-haM"/>
                 <constraint firstItem="Ygv-w8-hdM" firstAttribute="top" secondItem="OIi-3N-dwn" secondAttribute="bottom" constant="44" id="KqT-6y-hp2"/>
-                <constraint firstItem="Ygv-w8-hdM" firstAttribute="top" secondItem="X9c-JH-GpI" secondAttribute="bottom" constant="80" id="cQk-Oo-GiT"/>
+                <constraint firstItem="Ygv-w8-hdM" firstAttribute="top" secondItem="X9c-JH-GpI" secondAttribute="bottom" constant="40" id="cQk-Oo-GiT"/>
                 <constraint firstItem="X9c-JH-GpI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fJ1-Oc-VNz"/>
                 <constraint firstItem="Ygv-w8-hdM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="w7c-ds-ifn"/>
             </constraints>
@@ -54,8 +57,7 @@
         </view>
     </objects>
     <resources>
-        <image name="alert-1" width="270.5" height="308.5"/>
-        <image name="alert-2" width="95" height="95"/>
+        <image name="alert-17" width="340.5" height="309"/>
         <image name="hat-close" width="31" height="31"/>
     </resources>
 </document>

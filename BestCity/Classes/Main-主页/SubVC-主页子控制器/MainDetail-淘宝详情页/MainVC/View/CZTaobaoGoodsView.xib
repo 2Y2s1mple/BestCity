@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,10 +33,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNq-eC-krH" userLabel="CouponView">
-                    <rect key="frame" x="14" y="171" width="384" height="77"/>
+                    <rect key="frame" x="14" y="171" width="384" height="65"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R19-eJ-BgQ">
-                            <rect key="frame" x="0.0" y="0.0" width="384" height="77"/>
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="65"/>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="10"/>
                             <state key="normal" backgroundImage="hot-list-coupon">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,7 +46,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0099999997764825821" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即领券" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5js-c9-kUK">
-                            <rect key="frame" x="277" y="25.5" width="87" height="26"/>
+                            <rect key="frame" x="277" y="19.5" width="87" height="26"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="87" id="x7y-F3-ITw"/>
@@ -63,31 +63,31 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4F-fb-PpZ">
-                            <rect key="frame" x="117.5" y="26.5" width="40" height="16"/>
+                            <rect key="frame" x="122" y="20.5" width="40" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9K-gh-1gq">
-                            <rect key="frame" x="46" y="39" width="10.5" height="19.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <rect key="frame" x="46" y="31.5" width="10" height="22.5"/>
+                            <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="16"/>
                             <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiY-1L-0VP">
-                            <rect key="frame" x="60.5" y="18.5" width="53" height="46.5"/>
-                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="33"/>
+                            <rect key="frame" x="60" y="10.5" width="58" height="50.5"/>
+                            <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="36"/>
                             <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07月18日- 08月18日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTL-9g-6bk">
-                            <rect key="frame" x="117.5" y="44" width="111.5" height="17"/>
+                            <rect key="frame" x="122" y="38" width="111.5" height="17"/>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
                             <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="领5元优惠券，津贴3.6元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6t-QA-AJk">
-                            <rect key="frame" x="25" y="30.5" width="146.5" height="16"/>
+                            <rect key="frame" x="25" y="24.5" width="146.5" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.8862745098" green="0.34509803919999998" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -104,7 +104,6 @@
                         <constraint firstItem="z4F-fb-PpZ" firstAttribute="leading" secondItem="hiY-1L-0VP" secondAttribute="trailing" constant="4" id="Ra2-29-LuD"/>
                         <constraint firstAttribute="trailing" secondItem="R19-eJ-BgQ" secondAttribute="trailing" id="Ste-Ax-69j"/>
                         <constraint firstItem="5js-c9-kUK" firstAttribute="centerY" secondItem="WNq-eC-krH" secondAttribute="centerY" id="Zii-Iv-sFs"/>
-                        <constraint firstAttribute="height" constant="77" id="cjF-Ey-lTK"/>
                         <constraint firstItem="hiY-1L-0VP" firstAttribute="centerY" secondItem="d9K-gh-1gq" secondAttribute="centerY" constant="-7" id="e6o-eq-iQw"/>
                         <constraint firstItem="d6t-QA-AJk" firstAttribute="centerY" secondItem="WNq-eC-krH" secondAttribute="centerY" id="eSD-yR-S3s"/>
                         <constraint firstItem="d9K-gh-1gq" firstAttribute="centerY" secondItem="WNq-eC-krH" secondAttribute="centerY" constant="10" id="fBy-sN-DVx"/>
@@ -115,7 +114,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D7w-0p-aq8">
-                    <rect key="frame" x="0.0" y="266" width="412" height="0.0"/>
+                    <rect key="frame" x="0.0" y="254" width="412" height="0.0"/>
                     <color key="backgroundColor" red="0.96070021390000004" green="0.96083813910000004" blue="0.96067017320000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" id="r7x-Rg-yhr"/>
@@ -161,7 +160,7 @@
                             </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list-right-3" translatesAutoresizingMaskIntoConstraints="NO" id="sMm-gJ-95u">
-                            <rect key="frame" x="363" y="2" width="13" height="26"/>
+                            <rect key="frame" x="369.5" y="8.5" width="6.5" height="13"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -197,13 +196,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taobaoDetail-1" translatesAutoresizingMaskIntoConstraints="NO" id="dQ9-kD-GJh">
-                    <rect key="frame" x="14" y="258" width="384" height="90"/>
+                    <rect key="frame" x="14" y="246" width="384" height="90"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="90" id="zXb-wn-lPT"/>
                     </constraints>
                 </imageView>
                 <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taobaoDetail-4" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-xm-XlZ">
-                    <rect key="frame" x="14" y="94.5" width="90" height="34"/>
+                    <rect key="frame" x="14" y="94.5" width="45" height="17"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -259,7 +258,7 @@
                 <outlet property="titleName" destination="cAe-Qy-mMX" id="tZl-Ct-Jls"/>
                 <outlet property="volume" destination="BcJ-qn-R6h" id="bRE-Qb-A27"/>
             </connections>
-            <point key="canvasLocation" x="-4736" y="-2901"/>
+            <point key="canvasLocation" x="-4754" y="-2904"/>
         </view>
     </objects>
     <resources>

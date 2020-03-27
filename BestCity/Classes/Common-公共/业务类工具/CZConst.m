@@ -26,8 +26,6 @@ NSMutableArray *recordSearchTextArray;
 /** 根路径 */
 NSString *JPSERVER_URL;
 
-
-BOOL didClickedNewPeople;
 /** 存弹框的数组 */
 NSMutableArray *alertList_;
 

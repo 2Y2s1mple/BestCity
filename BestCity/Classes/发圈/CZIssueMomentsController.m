@@ -76,7 +76,11 @@
     self.view.backgroundColor = UIColorFromRGB(0xFAFAFA);
     [self getTitles];
     [self setupRefresh];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 #pragma mark - 获取数据
@@ -92,9 +96,10 @@
             [self createView1];
             [self createView2];
             [self.view addSubview:self.tableView];
-
         }
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 - (void)getTitlesWithType:(NSNumber *)type
@@ -111,7 +116,9 @@
             [self.categoryView3 removeFromSuperview];
             [self createView2];
         }
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 // 获取列表数据
@@ -149,7 +156,9 @@
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
         }
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 
@@ -291,7 +300,6 @@
     param[@"categoryId1"] = self.paramCategoryId2;
     param[@"categoryId2"] = self.paramCategoryId3;
     param[@"page"] = @(self.page);
-
     self.recordParam = param;
 
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/moment/list"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -313,7 +321,9 @@
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
         }
-    } failure:^(NSError *error) {}];
+    } failure:^(NSError *error) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    }];
 }
 
 

@@ -125,13 +125,13 @@
        }
    }
 
-   if ([JPUSERINFO[@"isNewUser"] integerValue] != 0) { // 0 新用户
-       for (NSDictionary *dic in dataSource[@"titles"]) {
-           if ([dic[@"title"] isEqualToString:@"新人专区"]) {
-               [self.collectionArr removeObject:dic];
-           }
-       }
-    }
+//   if ([JPUSERINFO[@"isNewUser"] integerValue] != 0) { // 0 新用户
+//       for (NSDictionary *dic in dataSource[@"titles"]) {
+//           if ([dic[@"title"] isEqualToString:@"新人专区"]) {
+//               [self.collectionArr removeObject:dic];
+//           }
+//       }
+//    }
 
     [self.collectionView reloadData];
 }

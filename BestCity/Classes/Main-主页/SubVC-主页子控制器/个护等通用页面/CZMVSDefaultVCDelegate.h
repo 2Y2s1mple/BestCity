@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol CZMVSDefaultVCDelegate <NSObject>
+@optional
+- (void)defaultVCDelegateReload:(NSDictionary *_Nullable)param;
+@end
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZMVSDefaultVCDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -22,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL layoutType;
 /** 埋点代号 */
 @property (nonatomic, strong) NSString *statistics;
+/** <#注释#> */
+@property (nonatomic, assign) id <CZMVSDefaultVCDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

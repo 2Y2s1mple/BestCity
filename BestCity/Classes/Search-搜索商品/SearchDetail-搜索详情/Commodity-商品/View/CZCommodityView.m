@@ -206,7 +206,7 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getGoodsBuyLink"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 打开淘宝
-            [CZOpenAlibcTrade openAlibcTradeWithUrlString:result[@"data"] parentController:vc];
+            [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:result[@"data"]];
         } else {
             [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
             [CZProgressHUD hideAfterDelay:1.5];

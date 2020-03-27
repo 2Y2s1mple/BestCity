@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** <#注释#> */
 @property (nonatomic, strong) NSMutableArray *mainTitles;
 
-- (void)getMainTitles:(void (^)(void))callback;
+- (void)getMainTitles:(void (^)(BOOL isFailure))callback;
 @end
 
 NS_ASSUME_NONNULL_END

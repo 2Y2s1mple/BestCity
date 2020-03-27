@@ -9,6 +9,7 @@
 #import "CZJIPINSynthesisView.h"
 #import "Masonry.h"
 #import "CZShareItemButton.h"
+#import "CZJIPINSynthesisTool.h"
 
 @interface CZJIPINSynthesisView ()
 /** <#注释#> */
@@ -18,6 +19,16 @@
 @implementation CZJIPINSynthesisView
 #pragma mark -  /** 全局分享统一UI*/
 + (void)JIPIN_UMShareUIWithAction:(void (^)(CZJIPINSynthesisView *view, NSInteger index))action
+{
+    ISPUSHLOGIN;
+    [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuth){
+        if (isAuth) {
+            [self UMShareUIWithAction:action];
+        }
+    }];
+}
+
++ (void)UMShareUIWithAction:(void (^)(CZJIPINSynthesisView *view, NSInteger index))action
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
 

@@ -121,7 +121,7 @@
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
-       CGRect frame = CGRectMake(0, CZGetY(self.navigationView), SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0) - CZGetY(self.navigationView));
+       CGRect frame = CGRectMake(0, CZGetY(self.navigationView), SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0) - CZGetY(self.navigationView) - 55);
         self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
         self.tableView.backgroundColor = UIColorFromRGB(0xEA4F17);
         self.tableView.estimatedRowHeight = 0;
@@ -286,6 +286,7 @@
         vc.allowanceGoodsId = model.Id;
         vc.otherGoodsId = model.otherGoodsId;
         [self.navigationController pushViewController:vc animated:YES];
+        [self touchesBegan:nil withEvent:nil];
     } else {
 //        CZSubFreeChargeModel *model = self.group2DataSource[indexPath.row];
 //        CZTaobaoDetailNewController *vc = [[CZTaobaoDetailNewController alloc] init];
@@ -293,7 +294,7 @@
 //        vc.otherGoodsId = model.otherGoodsId;
 //        [self.navigationController pushViewController:vc animated:YES];
     }
-    [self touchesBegan:nil withEvent:nil];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -360,6 +361,7 @@
             }
             case 4:
             {
+                type = 4;
                 [self getPosterImage:type];
                 break;
             }
@@ -374,7 +376,7 @@
     NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
     shareDic[@"shareTitle"] = @"新人0元购，仅剩2天!";
     shareDic[@"shareContent"] = @"价值30元免单礼品任意选";
-    shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/new-free?query=%@", JPUSERINFO[@"userId"]];
+    shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/new-free?query=""%@""", JPUSERINFO[@"userId"]];
     shareDic[@"shareImg"] = @"https://jipincheng.cn/share_newFree.png";
     [CZJIPINSynthesisTool JINPIN_UMShareWeb:shareDic[@"shareUrl"] Title:shareDic[@"shareTitle"] subTitle:shareDic[@"shareContent"] thumImage:shareDic[@"shareImg"] Type:type];
 }
@@ -392,9 +394,9 @@
                  [self shareImageWithType:type thumImage:result[@"data"]];
              }
          } else {
-
+             [CZProgressHUD hideAfterDelay:0];
          }
-        [CZProgressHUD hideAfterDelay:0];
+
     } failure:nil];
 }
 

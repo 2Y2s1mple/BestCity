@@ -40,6 +40,8 @@
 @property (nonatomic, strong) NSDictionary *detailModel;
 /** 返回键 */
 @property (nonatomic, strong) UIButton *popButton;
+/** <#注释#> */
+@property (nonatomic, strong) CZCollectButton *collectButton;
 
 /** <#注释#> */
 @property (nonatomic, assign) CGFloat recordHeight;
@@ -141,6 +143,12 @@ static CGFloat const likeAndShareHeight = 49;
        } else {
 
        }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.collectButton.commodityID = self.otherGoodsId;
 }
 
 - (void)getSourceData
@@ -305,9 +313,8 @@ static CGFloat const likeAndShareHeight = 49;
     shareBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
     shareBtn.titleEdgeInsets = UIEdgeInsetsMake(30, -26, 0, 0);
 
-
-
     CZCollectButton *shareBtn1 = [CZCollectButton collectButton];
+    self.collectButton = shareBtn1;
     shareBtn1.frame = CGRectMake(CZGetX(shareBtn) + 34, 0, 25, bottomView.height);
     [shareBtn1 setImage:[UIImage imageNamed:@"taobaoDetail-5"] forState:UIControlStateNormal];
     [shareBtn1 setImage:[UIImage imageNamed:@"taobaoDetail-6"] forState:UIControlStateSelected];
@@ -319,8 +326,6 @@ static CGFloat const likeAndShareHeight = 49;
     shareBtn1.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
     shareBtn1.titleEdgeInsets = UIEdgeInsetsMake(30, -26, 0, 0);
     [shareView addSubview:shareBtn1];
-
-
 
     UIView *buyView = [[UIView alloc] init];
     buyView.frame = CGRectMake(shareView.width, shareView.y + 5, SCR_WIDTH - shareView.width - 15, shareView.height - 10);
@@ -483,7 +488,6 @@ static CGFloat const likeAndShareHeight = 49;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleBackImage addSubview:titleLabel];
 
-
     self.recordHeight += 75;
     UIView *subView = [[UIView alloc] init];
     subView.tag = 101;
@@ -509,8 +513,6 @@ static CGFloat const likeAndShareHeight = 49;
     [showAll sizeToFit];
     showAll.centerX = subView.width / 2.0;
     [showAll addTarget:self action:@selector(showAllDeatilImages:) forControlEvents:UIControlEventTouchUpInside];
-
-
 
     self.recordHeight += (22 + showAll.height);
     backView.height = CZGetY(showAll) + 12;
@@ -652,14 +654,10 @@ static CGFloat const likeAndShareHeight = 49;
         [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
         return;
     }
-
     // 为了同步关联的淘宝账号
-    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-        if ([specialId isEqualToString:@""]) { // 没有关联
-            [CZJIPINSynthesisTool jipin_authTaobao];
-            // 淘宝授权
-        } else {
+    [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
+        if (isAuthTaobao) {
+            // 打开淘宝
             CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
             vc.otherGoodsId = self.otherGoodsId;
             [self.navigationController pushViewController:vc animated:YES];
@@ -675,13 +673,9 @@ static CGFloat const likeAndShareHeight = 49;
         [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
         return;
     }
-
     // 为了同步关联的淘宝账号
-    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-        if ([specialId isEqualToString:@""]) {
-            [CZJIPINSynthesisTool jipin_authTaobao];
-        } else {
+    [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
+        if (isAuthTaobao) {
             // 打开淘宝
             [self getGoodsURl];
         }
@@ -700,7 +694,6 @@ static CGFloat const likeAndShareHeight = 49;
             // 打开淘宝
             [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:result[@"data"]];
         } else {
-
             [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
             [CZProgressHUD hideAfterDelay:1.5];
         }

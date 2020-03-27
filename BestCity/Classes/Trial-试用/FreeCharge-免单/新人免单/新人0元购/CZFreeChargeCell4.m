@@ -86,12 +86,13 @@
         imageview.layer.cornerRadius = 3;
         imageview.clipsToBounds = YES;
     }
+    self.btn.enabled = NO;
 }
 
 - (IBAction)bugBtnClicked:(UIButton *)sender {
     NSLog(@"----");
     
-    [CZJIPINSynthesisTool buyBtnActionWithId:self.model.Id alertTitle:@"您将前往淘宝0元购买此商品，仅限首单"];
+    [CZJIPINSynthesisTool buyBtnActionWithId:self.model.Id alertTitle:nil];
 }
 
 - (void)setFrame:(CGRect)frame

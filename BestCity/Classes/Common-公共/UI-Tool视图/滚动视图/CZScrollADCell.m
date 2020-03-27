@@ -12,7 +12,7 @@
 
 @interface CZScrollADCell ()
 /** <#注释#> */
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView1;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *label;
 @end
@@ -27,7 +27,7 @@
 - (void)setParamDic:(NSDictionary *)paramDic
 {
     _paramDic = paramDic;
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:paramDic[@"avatar"]]];
+    [self.imageView1 sd_setImageWithURL:[NSURL URLWithString:paramDic[@"avatar"]]];
     self.label.text = paramDic[@"content"];
 
 }

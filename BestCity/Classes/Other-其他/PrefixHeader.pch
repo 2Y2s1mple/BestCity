@@ -94,10 +94,10 @@ UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, 1)]; \
 line.backgroundColor = CZGlobalLightGray; \
 [self.view addSubview:line]
 
-#define ISPUSHLOGIN if ([JPTOKEN length] <= 0)\
-{\
+#define ISPUSHLOGIN \
+if ([JPTOKEN length] <= 0) {\
     CZLoginController *vc = [CZLoginController shareLoginController];\
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication\ sharedApplication].keyWindow rootViewController];\
+    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];\
     [tabbar presentViewController:vc animated:NO completion:nil];\
     return;\
 }

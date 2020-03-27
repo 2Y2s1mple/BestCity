@@ -36,6 +36,8 @@
 
 - (void)collectAction:(CZCollectButton *)sender
 {
+    ISPUSHLOGIN;
+
     if (sender.isSelected) { //选中, 已收藏
         [self collectDelete]; // 取消收藏
     } else { //未选中, 要收藏

@@ -43,28 +43,18 @@
 }
 
 - (IBAction)caiBtnAction:(UIButton *)sender {
-    if (sender.selected) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-        // 记录新人邀请点击
-        didClickedNewPeople = YES;
-        if ([JPTOKEN length] <= 0) {
-            CZLoginController *vc = [CZLoginController shareLoginController];
-            UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-            [tabbar presentViewController:vc animated:NO completion:nil];
-            return;
-        }
-
+//    if (sender.selected) {
         CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
         UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *nav = tabbar.selectedViewController;
         [nav pushViewController:vc animated:YES];
-
-    } else {
-        self.backImageView.image = [UIImage imageNamed:@"alert-9"];
-        [self.caiBtn setImage:[UIImage imageNamed:@"alert-4"] forState:UIControlStateNormal];
-        self.caiBtnBottomMargin.constant = 100;
-        sender.selected = YES;
-    }
+        [self dismissViewControllerAnimated:YES completion:nil];
+//    } else {
+//        self.backImageView.image = [UIImage imageNamed:@"alert-9"];
+//        [self.caiBtn setImage:[UIImage imageNamed:@"alert-4"] forState:UIControlStateNormal];
+//        self.caiBtnBottomMargin.constant = 100;
+//        sender.selected = YES;
+//    }
 }
 
 @end

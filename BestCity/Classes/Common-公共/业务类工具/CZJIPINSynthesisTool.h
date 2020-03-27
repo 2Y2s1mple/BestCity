@@ -33,11 +33,11 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 新增关注 */
 + (void)addAttentionWithID:(NSString *)attentionUserId action:(void (^)(void))action;
 
-/** 跳淘宝购买 */
+/** 0元购跳淘宝购买 */
 + (void)buyBtnActionWithId:(NSString *)Id alertTitle:(NSString *)alertTitle;
 
 /** 淘宝授权 */
-+ (void)jipin_authTaobao;
++ (void)jipin_authTaobaoSuccess:(void (^)(BOOL isAuthTaobao))block;
 
 /** 根据url跳淘宝*/
 + (void)jipin_jumpTaobaoWithUrlString:(NSString *)urlString;
@@ -54,17 +54,32 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 判断界面是否该版本下的第一次加载 */
 + (BOOL)isFirstIntoWithIdentifier:(NSString *)identifier;
 
-/** 全局分享统一UI*/
-+ (void)UMShareUIWithTarget:(id)target Action:(SEL)action;
+/** 保存图片到本地 */
++ (void)jipin_saveImage:(id)image;
 
+/** 点击图片放大 */
++ (void)jipin_showZoomImage:(__kindof UIView * _Nonnull)obj;
+
+/** 判断未登录, 之后弹出登录页面 */
++ (void)jipin_jumpLogin;
+
+
+#pragma mark - 分享模块
 /** 友盟分享纯图片*/
 + (void)JINPIN_UMShareImage:(id)thumImage Type:(UMSocialPlatformType)type;
 
 /** 友盟分享web*/
 + (void)JINPIN_UMShareWeb:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage Type:(UMSocialPlatformType)type;
 
-/** 保存图片到本地 */
-+ (void)jipin_saveImage:(id)image;
+/** 友盟分享纯文字 */
++ (void)JINPIN_UMShareText:(NSString *)text Type:(UMSocialPlatformType)type;
+
+/** 友盟分享小程序 */
++ (void)JINPIN_UMShareMiniPath:(NSString *)path Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage userName:(NSString *)userName failureUrl:(NSString *)url;
+
+/** 调用系统分享多图片 */
++ (void)JINPIN_systemShareImages:(NSArray *)images success:(void (^)(BOOL completed))block;
+
 @end
 
 NS_ASSUME_NONNULL_END

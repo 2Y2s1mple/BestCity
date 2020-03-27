@@ -14,7 +14,7 @@
 // 视图
 #import "CZMVSDefaultVCDelegate.h"
 
-@interface CZMainViewSubDefaultVC ()
+@interface CZMainViewSubDefaultVC () <CZMVSDefaultVCDelegate>
 @property (nonatomic, strong) NSDictionary *dataSource;
 /** 广告 */
 @property (nonatomic, strong) NSArray *adList;
@@ -46,9 +46,6 @@
 
     [self.view addSubview:self.collectView];
     [self setupRefresh];
-
-    // 监听按钮的点击事件
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsRecommendedBtnsAction:) name:@"CZMVSDefaultVCDelegate" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -79,6 +76,7 @@
         _collectView.backgroundColor = [UIColor clearColor];
         self.collectDataSurce = [[CZMVSDefaultVCDelegate alloc] initWithCollectView:_collectView];
         self.collectDataSurce.statistics = self.statistics;
+        self.collectDataSurce.delegate = self;
     }
     return _collectView;
 }
@@ -160,10 +158,8 @@
 
 #pragma mark - 事件
 // 精品推荐的按钮
-- (void)productsRecommendedBtnsAction:(NSNotification *)sender
+- (void)defaultVCDelegateReload:(NSDictionary *)param
 {
-    NSDictionary *param = sender.userInfo;
-
     if (self.layoutType != [param[@"layoutType"] boolValue]) {
         self.layoutType = [param[@"layoutType"] boolValue];
         self.collectDataSurce.layoutType = self.layoutType;

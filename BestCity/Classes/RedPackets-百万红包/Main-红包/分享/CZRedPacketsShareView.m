@@ -107,7 +107,7 @@
             } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
 
                 NSLog(@"%@", image);
-                [self saveImageWithImage:image];
+                [CZJIPINSynthesisTool jipin_saveImage:image];
             }];
             break;
         }
@@ -170,30 +170,5 @@
         }
     }];
 }
-
-
-// 保存图片
-- (void)saveImageWithImage:(UIImage *)image
-{
-    //参数1:图片对象
-    //参数2:成功方法绑定的target
-    //参数3:成功后调用方法
-    //参数4:需要传递信息(成功后调用方法的参数)
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-}
-
-#pragma mark -- <保存到相册>
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-    NSString *msg = nil ;
-    if(error){
-        msg = @"保存图片失败" ;
-        [CZProgressHUD showProgressHUDWithText:msg];
-    }else{
-        msg = @"保存图片成功" ;
-        [CZProgressHUD showProgressHUDWithText:msg];
-    }
-    [CZProgressHUD hideAfterDelay:1.5];
-}
-
 
 @end

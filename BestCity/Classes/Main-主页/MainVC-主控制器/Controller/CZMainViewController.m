@@ -71,15 +71,25 @@
     self.titleSizeSelected = 14;
 }
 
+- (void)recursionReloadData
+{
+    // 数据
+       [self.viewModel getMainTitles:^(BOOL isFailure) {
+           if (isFailure) {
+               [self reloadData];
+           } else {
+               [self recursionReloadData];
+           }
+       }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0x143030);
 
     // 数据
-    [self.viewModel getMainTitles:^{
-        [self reloadData];
-    }];
-
+    [self recursionReloadData];
+    
     // UI
     [self createUI];
 
