@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WMPageController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CZIssueMomentsController : UIViewController
+@interface CZIssueMomentsController : WMPageController
 
 @end
 
