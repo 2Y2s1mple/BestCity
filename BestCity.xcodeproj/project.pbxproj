@@ -271,6 +271,7 @@
 		9768FAEF2368130D00019B4E /* CZLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9768FAED2368130D00019B4E /* CZLaunchViewController.xib */; };
 		976BAD5F237260E300AEFCFA /* CZEvaluateToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976BAD5E237260E300AEFCFA /* CZEvaluateToolBar.xib */; };
 		976D7823242E250500BF84AF /* CZSubIssueMomentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976D7822242E250500BF84AF /* CZSubIssueMomentsController.m */; };
+		976D7826242E36DD00BF84AF /* CZSubSubIssueMomentsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976D7825242E36DD00BF84AF /* CZSubSubIssueMomentsListController.m */; };
 		976EB08023D164B80080C246 /* CZFreeChargeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976EB07F23D164B80080C246 /* CZFreeChargeHeaderView.m */; };
 		976EB08223D164C40080C246 /* CZFreeChargeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976EB08123D164C40080C246 /* CZFreeChargeHeaderView.xib */; };
 		976EB08523D169D50080C246 /* CZFreeChargeFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976EB08423D169D50080C246 /* CZFreeChargeFooterView.m */; };
@@ -1157,6 +1158,8 @@
 		976BAD5E237260E300AEFCFA /* CZEvaluateToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZEvaluateToolBar.xib; sourceTree = "<group>"; };
 		976D7821242E250500BF84AF /* CZSubIssueMomentsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSubIssueMomentsController.h; sourceTree = "<group>"; };
 		976D7822242E250500BF84AF /* CZSubIssueMomentsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSubIssueMomentsController.m; sourceTree = "<group>"; };
+		976D7824242E36DD00BF84AF /* CZSubSubIssueMomentsListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSubSubIssueMomentsListController.h; sourceTree = "<group>"; };
+		976D7825242E36DD00BF84AF /* CZSubSubIssueMomentsListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSubSubIssueMomentsListController.m; sourceTree = "<group>"; };
 		976EB07E23D164B80080C246 /* CZFreeChargeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeChargeHeaderView.h; sourceTree = "<group>"; };
 		976EB07F23D164B80080C246 /* CZFreeChargeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeChargeHeaderView.m; sourceTree = "<group>"; };
 		976EB08123D164C40080C246 /* CZFreeChargeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZFreeChargeHeaderView.xib; sourceTree = "<group>"; };
@@ -4385,6 +4388,8 @@
 				97A30BAA241F4461009D7089 /* CZIssueMomentsController.m */,
 				976D7821242E250500BF84AF /* CZSubIssueMomentsController.h */,
 				976D7822242E250500BF84AF /* CZSubIssueMomentsController.m */,
+				976D7824242E36DD00BF84AF /* CZSubSubIssueMomentsListController.h */,
+				976D7825242E36DD00BF84AF /* CZSubSubIssueMomentsListController.m */,
 				97A30BD9242067DB009D7089 /* CZIssueMomentsCell.h */,
 				97A30BDA242067DB009D7089 /* CZIssueMomentsCell.m */,
 				97A30BDB242067DB009D7089 /* CZIssueMomentsCell.xib */,
@@ -6253,6 +6258,7 @@
 				979B05D3210F07EF0023292D /* CZShareAndlikeView.m in Sources */,
 				97D8FCCB2111A67700D8ED8F /* CZMyProfileController.m in Sources */,
 				9745082F21F807FE006A71EF /* KCUtilMd5.m in Sources */,
+				976D7826242E36DD00BF84AF /* CZSubSubIssueMomentsListController.m in Sources */,
 				974759B7239205E60026C56C /* CZGuessWhatYouLikeView.m in Sources */,
 				979110782231131400C2DE5B /* AddressModel.m in Sources */,
 				97BC05DA2112B122001ED65A /* DLIDEKeyboardView.m in Sources */,

@@ -60,9 +60,6 @@
 /** 记录参数 */
 @property (nonatomic, strong) NSDictionary *recordParam;
 
-
-/** <#注释#> */
-@property (nonatomic, strong) NSArray *datas;
 @end
 
 @implementation CZIssueMomentsController
@@ -101,7 +98,7 @@
     self.view.backgroundColor = UIColorFromRGB(0xE25838);
 
 //    self.view.backgroundColor = UIColorFromRGB(0xFAFAFA);
-    [self getTitles];
+//    [self getTitles];
 //    [self setupRefresh];
 }
 
@@ -123,9 +120,6 @@
 //            [self createView1];
 //            [self createView2];
 //            [self.view addSubview:self.tableView];
-
-            self.datas = result[@"data"];
-            [self reloadData];
         }
     } failure:^(NSError *error) {
 
@@ -509,20 +503,12 @@
         {
             CZSubIssueMomentsController *vc = [[CZSubIssueMomentsController alloc] init];
             vc.paramType = @(1);
-            if (self.datas.count > 0) {
-                vc.mainTitles = self.datas[index][@"children"];
-            }
-            vc.view.backgroundColor = RANDOMCOLOR;
             return vc;
         }
         case 1:
         {
             CZSubIssueMomentsController *vc = [[CZSubIssueMomentsController alloc] init];
             vc.paramType = @(2);
-            if (self.datas.count > 0) {
-                vc.mainTitles = self.datas[index][@"children"];
-            }
-            vc.view.backgroundColor = RANDOMCOLOR;
             return vc;
         }
         default:
