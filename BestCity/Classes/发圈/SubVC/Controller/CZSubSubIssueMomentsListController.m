@@ -27,9 +27,12 @@
 @property (nonatomic, assign) NSInteger page;
 /** 记录参数 */
 @property (nonatomic, strong) NSDictionary *recordParam;
+
 @property (nonatomic, strong) NSMutableArray *listData;
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
+/** 弹窗 */
+@property (nonatomic, strong) UIView *alertBackView;
 @end
 
 @implementation CZSubSubIssueMomentsListController
@@ -44,6 +47,7 @@
     }
     return _noDataView;
 }
+
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
@@ -68,7 +72,13 @@
 
     // 获取列表数据
     [self.tableView.mj_header beginRefreshing];
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    CGFloat y = CZGetY(self.categoryView3);
+    self.tableView.frame = CGRectMake(0, y, SCR_WIDTH, self.view.height - y);
 }
 
 - (void)createView3
@@ -110,7 +120,7 @@
 #pragma mark - 获取数据
 - (void)setupRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getListData)];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
 }
 
@@ -152,7 +162,7 @@
 }
 
 // 获取列表数据
-- (void)getListData
+- (void)reloadNewTrailDataSorce
 {
     self.page = 1;
     [self.tableView.mj_footer endRefreshing];
@@ -220,4 +230,110 @@
     }
 }
 
+#pragma mark - 弹窗
+- (void)alerView
+{
+    UIView *backView = [[UIView alloc] init];
+    backView.width = SCR_WIDTH;
+    backView.height = SCR_HEIGHT;
+    [self.view addSubview:backView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(alerViewAction:)];
+    [backView addGestureRecognizer:tap];
+    self.alertBackView = backView;
+
+
+    // 上蒙版
+    UIView *top = [[UIView alloc] init];
+    top.width = SCR_WIDTH;
+    top.height = self.categoryView3.y;
+//    top.backgroundColor = [UIColor redColor];
+    [backView addSubview:top];
+
+
+    //
+    UIView *alertView = [[UIView alloc] init];
+    alertView.y = self.categoryView3.y;
+    alertView.width = SCR_WIDTH;
+    alertView.height = 200;
+    alertView.backgroundColor = UIColorFromRGB(0xf5f5f5);
+    [backView addSubview:alertView];
+
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(15, 15, 53.0, 18.2);
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"全部频道"attributes: @{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size: 13],NSForegroundColorAttributeName: [UIColor colorWithRed:157/255.0 green:157/255.0 blue:157/255.0 alpha:1.0]}];
+    label.attributedText = string;
+    [alertView addSubview:label];
+
+    UIButton *btn = [[UIButton alloc] init];
+    [alertView addSubview:btn];
+    [btn setBackgroundImage:[UIImage imageNamed:@"moments-1"] forState:UIControlStateNormal];
+    btn.x = SCR_WIDTH - 50;
+    btn.width = 50;
+    btn.height = 50;
+    btn.backgroundColor = [UIColor whiteColor];
+    [btn addTarget:self action:@selector(alerViewAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *recoredBtn;
+    NSInteger colIndex = 0;
+    NSInteger rowIndex = 0;
+
+    for (int i = 0; i < self.categoryView2Data.count; i++) {
+
+        NSString *title = self.categoryView2Data[i][@"title"];
+        UIButton *btn = [[UIButton alloc] init];
+        btn.tag = i + 100;
+        [btn setTitle:title forState:UIControlStateNormal];
+        [btn setTitleColor:UIColorFromRGB(0x565252) forState:UIControlStateNormal];
+        [btn setTitleColor:UIColorFromRGB(0xE25838) forState:UIControlStateSelected];
+        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 13];
+        [btn sizeToFit];
+        btn.height = 25;
+        btn.contentEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
+        btn.width += 10;
+
+        CGFloat maxW = CZGetX(recoredBtn);
+
+        if (i == 0) { // 第一次什么也不做
+
+        } else {
+            if (SCR_WIDTH - maxW > (btn.width + 15)) { // 还能放
+                colIndex++;
+            } else {
+                colIndex = 0;
+                rowIndex++;
+            }
+        }
+
+        btn.x = 10 + colIndex * (btn.width + 17);
+        btn.y = 54 + rowIndex * (btn.height + 20);
+        btn.backgroundColor = [UIColor whiteColor];
+        [btn addTarget:self action:@selector(alertViewDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+        [alertView addSubview:btn];
+        recoredBtn = btn;
+
+        alertView.height = CZGetY(btn) + 23;
+    }
+
+    UIView *bottom = [[UIView alloc] init];
+    bottom.y = CZGetY(alertView);
+    bottom.width = SCR_WIDTH;
+    bottom.height = SCR_HEIGHT - bottom.y;
+    bottom.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    [backView addSubview:bottom];
+}
+
+- (void)alerViewAction:(UIButton *)sender
+{
+    [self.alertBackView removeFromSuperview];
+}
+
+- (void)alertViewDidClicked:(UIButton *)sender
+{
+    NSInteger tag = sender.tag - 100;
+    [self.categoryView3 removeFromSuperview];
+    self.selecedIndex = tag;
+    [self createView3];
+    [self.alertBackView removeFromSuperview];
+}
 @end

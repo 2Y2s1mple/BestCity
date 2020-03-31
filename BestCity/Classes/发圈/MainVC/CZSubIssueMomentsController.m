@@ -37,8 +37,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getTitles];
-    
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.mainDataSource.count <= 0) {
+        [self getTitles];
+    }
 }
 
 #pragma mark - 获取数据

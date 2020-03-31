@@ -258,8 +258,8 @@
             [recordSearchTextArray addObject:posteboard.string];
 
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"评论内容复制成功" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"暂不粘贴" style:UIAlertActionStyleCancel handler:nil]];
-            [alert addAction:[UIAlertAction actionWithTitle:@"去微信粘贴" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert addAction:[UIAlertAction actionWithTitle:@"暂不粘贴" style:UIAlertActionStyleDefault handler:nil]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"去微信粘贴" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSURL * url = [NSURL URLWithString:@"weixin://"];
                 BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
                 //先判断是否能打开该url
