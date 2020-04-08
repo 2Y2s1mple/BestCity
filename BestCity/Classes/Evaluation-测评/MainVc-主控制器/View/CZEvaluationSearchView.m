@@ -8,6 +8,7 @@
 
 #import "CZEvaluationSearchView.h"
 
+
 @implementation CZEvaluationSearchView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -23,13 +24,13 @@
 {
     UIView *searchView = [[UIView alloc] init];
     searchView.backgroundColor = UIColorFromRGB(0xF5F5F5);
-    searchView.x = 14;
-    searchView.size = CGSizeMake(SCR_WIDTH - searchView.x * 2, self.height);
+    searchView.size = CGSizeMake(self.width, self.height);
+    searchView.layer.cornerRadius = self.height / 2.0;
     [self addSubview:searchView];
 
     UILabel *sLabel = [[UILabel alloc] init];
     sLabel.text = @"搜索你感兴趣的内容";
-    sLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
+    sLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 13];
     sLabel.textColor = UIColorFromRGB(0x9D9D9D);
     [sLabel sizeToFit];
     sLabel.x = 10;
@@ -37,7 +38,7 @@
     [searchView addSubview:sLabel];
 
     UIImageView *sImage = [[UIImageView alloc] init];
-    sImage.image = [UIImage imageNamed:@"search"];
+    sImage.image = [UIImage imageNamed:@"search-1"];
     [sImage sizeToFit];
     sImage.centerY = sLabel.centerY;
     sImage.x = searchView.width - 20 - sImage.size.width;

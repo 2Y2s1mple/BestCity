@@ -52,9 +52,8 @@
     }
     return self;
 }
+
 #pragma mark - 创建视图
-
-
 - (UITableView *)tableView
 {
     if (_tableView == nil) {

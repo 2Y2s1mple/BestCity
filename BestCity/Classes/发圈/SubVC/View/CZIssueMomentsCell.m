@@ -77,7 +77,6 @@
     [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:dic[@"userAvatar"]]];
     self.userNickname.text = dic[@"userNickname"];
     self.content.text = dic[@"content"];
-
     self.shareNumber.text = [NSString stringWithFormat:@"%@", dic[@"shareNumber"]];
 
     CGFloat backViewWidth = SCR_WIDTH - 69 - 15;

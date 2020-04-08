@@ -19,7 +19,7 @@
 #import "CZFreeChargeController.h"
 #import "CZMeController.h"
 #import "CZNavigationController.h"
-//#import "CZFestivalController.h"// 活动
+//#import "CZFestivalController.h" // 活动
 #import "CZLoginController.h"
 // 视图
 #import "CZTabbar.h"
@@ -62,9 +62,7 @@
 {
     [self setupWithController:[[CZMainViewController alloc] init] title:@"首页" image:@"tab-main-nor" selectedImage:@"tab-main-sel"];
 
-    [self setupWithController:[[CZEvaluationController alloc] init] title:@"评测" image:@"tab-edit-nor" selectedImage:@"tab-edit-sel"];
-
-//    [self setupWithController:[[CZRedPacketsController alloc] init] title:@"" image:@"tab-redP-nor" selectedImage:@"tab-redP-sel"];
+    [self setupWithController:[[CZRedPacketsController alloc] init] title:@"红包" image:@"tab-red-packet-nor" selectedImage:@"tab-red-packet-sel"];
 
     [self setupWithController:[[CZMemberOfCenterController alloc] init] title:@"会员" image:@"tab-members-nor" selectedImage:@"tab-members-sel"];
 
@@ -104,19 +102,6 @@
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
-    if (![vc isKindOfClass:[CZMeController class]] && ![vc isKindOfClass:[CZMainHotSaleController class]] && [vc isKindOfClass:[WMPageController class]]) {
-        WMPageController *hotVc = (WMPageController *)vc;
-        hotVc.selectIndex = 0;
-        hotVc.menuViewStyle = WMMenuViewStyleDefault;
-        hotVc.menuItemWidth = 40;
-        NSString *margin = [NSString stringWithFormat:@"%lf", (SCR_WIDTH - 160 - 44) / 3.0];
-        hotVc.itemsMargins = @[@"22", margin, margin, margin, @"22"];
-        hotVc.titleFontName = @"PingFangSC-Medium";
-        hotVc.titleColorNormal = CZGlobalGray;
-        hotVc.titleColorSelected = [UIColor blackColor];
-        hotVc.titleSizeNormal = 18;
-        hotVc.titleSizeSelected = 18;
-    }
     if ([vc isKindOfClass:[CZTrialMainController class]]) {
         WMPageController *hotVc = (WMPageController *)vc;
         hotVc.selectIndex = 0;

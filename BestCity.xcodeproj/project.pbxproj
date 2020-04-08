@@ -502,6 +502,7 @@
 		97BA859822FAD0040013CE7F /* CZEAttentionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BA859722FAD0040013CE7F /* CZEAttentionViewModel.m */; };
 		97BB1E22237EB5CE00827CB4 /* CZFreeChargeCell4.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BB1E20237EB5CE00827CB4 /* CZFreeChargeCell4.m */; };
 		97BB1E23237EB5CE00827CB4 /* CZFreeChargeCell4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97BB1E21237EB5CE00827CB4 /* CZFreeChargeCell4.xib */; };
+		97BB337D243DC98700C32F1D /* GXButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BB337C243DC98600C32F1D /* GXButtons.m */; };
 		97BB48092133AB6B006AE982 /* CZCommoditySubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BB48082133AB6B006AE982 /* CZCommoditySubController.m */; };
 		97BB480C2133AD9B006AE982 /* CZTestSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BB480B2133AD9B006AE982 /* CZTestSubController.m */; };
 		97BB480F2133BDA3006AE982 /* CZEvaluateSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BB480E2133BDA3006AE982 /* CZEvaluateSubController.m */; };
@@ -1598,6 +1599,8 @@
 		97BB1E1F237EB5CE00827CB4 /* CZFreeChargeCell4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZFreeChargeCell4.h; sourceTree = "<group>"; };
 		97BB1E20237EB5CE00827CB4 /* CZFreeChargeCell4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZFreeChargeCell4.m; sourceTree = "<group>"; };
 		97BB1E21237EB5CE00827CB4 /* CZFreeChargeCell4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZFreeChargeCell4.xib; sourceTree = "<group>"; };
+		97BB337B243DC98600C32F1D /* GXButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GXButtons.h; path = "../../各种小按钮/GXButtons.h"; sourceTree = "<group>"; };
+		97BB337C243DC98600C32F1D /* GXButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GXButtons.m; path = "../../各种小按钮/GXButtons.m"; sourceTree = "<group>"; };
 		97BB48072133AB6B006AE982 /* CZCommoditySubController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommoditySubController.h; sourceTree = "<group>"; };
 		97BB48082133AB6B006AE982 /* CZCommoditySubController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommoditySubController.m; sourceTree = "<group>"; };
 		97BB480A2133AD9B006AE982 /* CZTestSubController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZTestSubController.h; sourceTree = "<group>"; };
@@ -4997,6 +5000,8 @@
 				97BCE4E22435AFF800004BFD /* PlanADScrollView */,
 				97BCE4E32435AFF800004BFD /* GXScrollADPageControl.h */,
 				97BCE4EA2435AFF800004BFD /* GXScrollADPageControl.m */,
+				97BB337B243DC98600C32F1D /* GXButtons.h */,
+				97BB337C243DC98600C32F1D /* GXButtons.m */,
 				97BCE4E42435AFF800004BFD /* GXScrollAD.h */,
 				97BCE4E92435AFF800004BFD /* GXScrollAD.m */,
 				97BCE4E52435AFF800004BFD /* 滚动样式 */,
@@ -6630,6 +6635,7 @@
 				97C51C4323C46CB900CE8867 /* CZSubFreeMyAllowanceListCell.m in Sources */,
 				979B05C7210E9CC70023292D /* CZRecommendNav.m in Sources */,
 				97705CBD2108230F00485D64 /* WMMenuView.m in Sources */,
+				97BB337D243DC98700C32F1D /* GXButtons.m in Sources */,
 				9765649921A53BF2008A0293 /* CZCollectButton.m in Sources */,
 				979585262293DF5A005FC54D /* CZTrialSuccessReportController.m in Sources */,
 				97A5B95F230D17AE00014E90 /* CZMePublishOneController.m in Sources */,

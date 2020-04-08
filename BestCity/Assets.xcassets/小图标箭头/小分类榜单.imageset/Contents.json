@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "nav-back.png",
+      "filename" : "小分类榜单.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "nav-back@2x.png",
+      "filename" : "小分类榜单@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "nav-back@3x.png",
+      "filename" : "小分类榜单@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "original"
   }
 }

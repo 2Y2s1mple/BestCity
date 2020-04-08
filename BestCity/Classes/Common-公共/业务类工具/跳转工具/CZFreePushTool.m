@@ -18,6 +18,7 @@
 #import "CZMainHotSaleController.h" // 榜单
 #import "CZInvitationController.h" // 邀请好友
 #import "CZMemberOfCenterController.h" // 会员中心
+#import "CZEvaluationController.h" // 测评
 
 @implementation CZFreePushTool
 // 轮播图广告跳转
@@ -72,7 +73,7 @@
     NSInteger targetType  = [param[@"targetType"] integerValue];
      NSString *targetId = param[@"targetId"];
      NSString *targetTitle = param[@"targetTitle"];
-    // 1.专题页，2.淘宝客商品详情页，3.评测详情页，4.H5页面，5.极币商城，6.任务中心，7.免单主页，8.榜单主页
+    // 1.专题页，2.淘宝客商品详情页，3.评测详情页，4.H5页面，5.极币商城，6.任务中心，7.免单主页，8.榜单主页, 9.测评
 
      switch (targetType) {
          case 3:
@@ -98,6 +99,9 @@
              break;
          case 8:
              [self hotSale];
+             break;
+         case 9:
+             [self push_evaluation];
              break;
 
 
@@ -265,6 +269,15 @@
     CURRENTVC(currentVc);
     CZMemberOfCenterController *vc = [[CZMemberOfCenterController alloc] init];
     vc.isNavPush = YES;
+    [currentVc.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 测评
++ (void)push_evaluation
+{
+    // 是否push进来的
+    CURRENTVC(currentVc);
+    CZEvaluationController *vc = [[CZEvaluationController alloc] init];
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 

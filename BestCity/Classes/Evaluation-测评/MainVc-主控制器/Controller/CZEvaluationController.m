@@ -20,6 +20,7 @@
 
 // 视图
 #import "CZEvaluationSearchView.h"
+#import "GXButtons.h"
 
 // 视图模型
 #import "CZEvaluationViewModel.h"
@@ -50,7 +51,7 @@
 - (CZEvaluationSearchView *)searchView
 {
     if (_searchView == nil) {
-        CZEvaluationSearchView *search = [[CZEvaluationSearchView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 54 : 30), SCR_WIDTH, 40)];
+        CZEvaluationSearchView *search = [[CZEvaluationSearchView alloc] initWithFrame:CGRectMake(50, (IsiPhoneX ? 54 : 30), SCR_WIDTH - 60, 30)];
         search.didClickedSearchView = ^{
             [self pushSearchView];
         };
@@ -73,12 +74,27 @@
 - (void)loadView
 {
     [super loadView];
+    WMPageController *hotVc = (WMPageController *)self;
+    hotVc.selectIndex = 0;
+    hotVc.menuViewStyle = WMMenuViewStyleDefault;
+    hotVc.menuItemWidth = 40;
+    NSString *margin = [NSString stringWithFormat:@"%lf", (SCR_WIDTH - 160 - 44) / 3.0];
+    hotVc.itemsMargins = @[@"22", margin, margin, margin, @"22"];
+    hotVc.titleFontName = @"PingFangSC-Medium";
+    hotVc.titleColorNormal = CZGlobalGray;
+    hotVc.titleColorSelected = [UIColor blackColor];
+    hotVc.titleSizeNormal = 18;
+    hotVc.titleSizeSelected = 18;
     self.selectIndex = 1;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
+    GXButtons *popBtn = [GXButtons buttonWithFrame:CGRectMake(10, (IsiPhoneX ? 54 : 30), 30, 30) backImage:[UIImage imageNamed:@"小分类榜单"] bColor:[UIColor whiteColor] cornerRadius:0 eventBlock:^(UIButton * _Nonnull sender) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    [self.view addSubview:popBtn];
     // 创建视图
     [self.view addSubview:self.searchView];
 }
@@ -127,7 +143,7 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, CZGetY(self.searchView) + 18 + 26 + 18, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.searchView) + 18 + 26 + 18 + (IsiPhoneX ? 83 : 49)));
+    return CGRectMake(0, CZGetY(self.searchView) + 18 + 26 + 18, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.searchView) + 18 + 26 + 18 + (IsiPhoneX ? 34 : 0)));
 }
 
 - (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info
