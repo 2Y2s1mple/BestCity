@@ -14,6 +14,7 @@
 #import "CZGuideTool.h"
 
 
+
 // 视图
 #import "CZMainHotSaleHeaderView.h"
 #import "CZMainHotSaleCategoryView.h"
@@ -52,6 +53,8 @@
     return self;
 }
 #pragma mark - 创建视图
+
+
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
@@ -130,7 +133,6 @@
     // 隐藏和显示的头部view
     [self.view addSubview:self.navTopView];
     self.navTopView.hidden = YES;
-
 
 }
 

@@ -25,6 +25,7 @@
 #import "CZTabbar.h"
 
 #import "CZEInventoryEditorController.h"
+#import "CZMemberOfCenterController.h" // 会员中心
 
 
 @interface CZTabBarController ()<UITabBarControllerDelegate>
@@ -55,7 +56,6 @@
     [super viewDidLoad];
     self.delegate = self;
     [self createSubController:YES];
-
 }
 
 - (void)createSubController:(BOOL)isFestiva
@@ -66,7 +66,7 @@
 
 //    [self setupWithController:[[CZRedPacketsController alloc] init] title:@"" image:@"tab-redP-nor" selectedImage:@"tab-redP-sel"];
 
-    [self setupWithController:[[CZMainHotSaleController alloc] init] title:@"榜单" image:@"tab-upstage-nor" selectedImage:@"tab-upstage-sel"];
+    [self setupWithController:[[CZMemberOfCenterController alloc] init] title:@"会员" image:@"tab-members-nor" selectedImage:@"tab-members-sel"];
 
     [self setupWithController:[[CZIssueMomentsController alloc] init] title:@"发圈" image:@"tab-moments-nor" selectedImage:@"tab-moments-sel"];
 
@@ -95,7 +95,11 @@
     if ([JPTOKEN length] <= 0 && [nav.topViewController isKindOfClass:[CZMeController class]]) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
-    } else {}
+    } else if ([JPTOKEN length] <= 0 && [nav.topViewController isKindOfClass:[CZMemberOfCenterController class]]) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [self presentViewController:vc animated:YES completion:nil];
+        self.selectedIndex = 0;
+    }
 }
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage

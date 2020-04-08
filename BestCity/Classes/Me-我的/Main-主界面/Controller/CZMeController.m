@@ -26,6 +26,7 @@
 #import "CZMePublishController.h"
 #import "CZMyWalletController.h" // 我的钱包
 #import "CZSubFreePreferentialController.h" // 特惠购
+#import "CZMemberOfCenterTool.h"
 
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
@@ -63,6 +64,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *finalFeeLabel;
 /** 轮播图 */
 @property (nonatomic, strong) NSArray *adList;
+/** 会员 */
+@property (nonatomic, weak) IBOutlet UIImageView *memberIcon;
 @end
 
 @implementation CZMeController
@@ -300,6 +303,9 @@
 
     // 头像
     [self.headImage sd_setImageWithURL:[NSURL URLWithString:JPUSERINFO[@"avatar"]] placeholderImage:[UIImage imageNamed:@"headDefault"]];
+
+    // 会员标识
+    self.memberIcon.image = [CZMemberOfCenterTool toolUserStatus:JPUSERINFO][4];
     
     // 用户名字
     [self.loginBtn setTitle:JPUSERINFO[@"nickname"] forState:UIControlStateNormal];
@@ -429,6 +435,11 @@
 
         }
     } failure:^(NSError *error) {}];
+}
+
+#pragma mark - 事件
+- (IBAction)pushMumbleCenter:(UITapGestureRecognizer *)sender {
+    [CZFreePushTool push_memberOfCenter];
 }
 
 @end

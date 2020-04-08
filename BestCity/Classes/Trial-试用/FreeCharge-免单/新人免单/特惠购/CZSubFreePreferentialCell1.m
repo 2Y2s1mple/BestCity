@@ -17,6 +17,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *totalUsedAllowanceLabel;
 /** 津贴 */
 @property (nonatomic, weak) IBOutlet UIButton *AllowanceListBtn;
+/** 图片的父视图 */
+@property (nonatomic, weak) IBOutlet UIView *backView;
 @end
 
 @implementation CZSubFreePreferentialCell1
@@ -26,7 +28,7 @@
     _model = model;
     self.allowanceLabel.text = [NSString stringWithFormat:@"%@", model.allowance];
     self.totalUsedAllowanceLabel.text = [NSString stringWithFormat:@"%@", model.totalUsedAllowance];
-    _model.cellHeight = 276;
+    _model.cellHeight = CZGetY(self.backView) + 5;
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView

@@ -53,7 +53,7 @@
 
 - (void)clicked
 {
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[CZTabBarController alloc] init];;
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[CZTabBarController alloc] init];
 }
 
 /*

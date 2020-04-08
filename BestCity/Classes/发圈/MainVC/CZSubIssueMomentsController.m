@@ -23,9 +23,6 @@
     self.menuViewStyle = WMMenuViewStyleDefault;
     self.menuViewLayoutMode = WMMenuViewLayoutModeLeft;
 
-//    self.progressHeight = 2.5;
-//    self.progressColor = UIColorFromRGB(0xFFD224);
-//    self.progressViewBottomSpace = 5;
     self.itemMargin = 20;
     self.automaticallyCalculatesItemWidths = YES;
     self.titleFontName = @"PingFangSC-Medium";

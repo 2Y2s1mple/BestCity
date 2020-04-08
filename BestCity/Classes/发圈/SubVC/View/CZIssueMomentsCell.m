@@ -176,8 +176,31 @@
     // 为了同步关联的淘宝账号
     [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
         if (isAuthTaobao) {
-            // 获取和合成图
-            [self getShareImage:self.param.param[@"goodsInfo"][@"otherGoodsId"]];
+            if (![self.param.param[@"goodsInfo"] isKindOfClass:[NSNull class]]) {
+                // 获取和合成图
+                [self getShareImage:self.param.param[@"goodsInfo"][@"otherGoodsId"]];
+            } else {
+                CZIssueMomentsShareView *view = [[CZIssueMomentsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
+
+                NSMutableArray *images = [NSMutableArray array];
+                for (UIImageView *imageView in self.imagesBackView.subviews) {
+                    if (imageView.image) {
+                        [images addObject:imageView.image];
+                    }
+                }
+                view.images = images;
+                view.shareNumber = self.shareNumber;
+                view.momentId = self.param.param[@"id"];
+                [[UIApplication sharedApplication].keyWindow addSubview:view];
+
+                // 文案
+                UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+                posteboard.string = self.param.param[@"content"];
+                [recordSearchTextArray addObject:posteboard.string];
+
+                [CZProgressHUD hideAfterDelay:0];
+                self.flag = 0;
+            }
         } else {
             self.flag = 0;
         }

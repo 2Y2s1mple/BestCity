@@ -28,9 +28,9 @@
 #import "CZDChoiceDetailController.h"
 
 #import "GXWindow.h"
-
-
 #import <AlipaySDK/AlipaySDK.h>
+#import "CZTabBarController.h"
+
 
 @interface AppDelegate () <IMLSDKRestoreDelegate, WXApiDelegate>
 
@@ -48,13 +48,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-
-    self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-
-
-    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
-//    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
+//    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
+    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
 //    JPSERVER_URL = @"http://47.99.243.255:8081/qualityshop-api/"; // 测试
 //    http://47.99.243.255:8081/qualityshop-api/swagger-ui.html
 //    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
@@ -63,6 +58,8 @@
 //        JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/";
 //    }
 
+    self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
 #pragma
 
     // 加载友盟分享
@@ -88,6 +85,17 @@
 //    [NSThread sleepForTimeInterval:6];
 
     return YES;
+}
+
+- (void)testCode
+{
+    recordSearchTextArray = [NSMutableArray array];
+    self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    CZTabBarController *tabbar = [[CZTabBarController alloc] init];
+//    tabbar.selectedIndex = 2;
+    self.window.rootViewController = tabbar;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)IMLSDKWillRestoreScene:(MLSDKScene *)scene Restore:(void (^)(BOOL, RestoreStyle))restoreHandler
