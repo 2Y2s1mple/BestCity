@@ -7,6 +7,12 @@
 //
 
 #import "CZMainHotSaleHeaderView.h"
+#import "UIButton+CZExtension.h" // 按钮扩展
+
+@interface CZMainHotSaleHeaderView ()
+/** 返回键 */
+@property (nonatomic, strong) UIButton *popButton;
+@end
 
 @interface CZMainHotSaleHeaderView ()
 @property (nonatomic, strong) void (^actionBlock)(void);
@@ -25,11 +31,30 @@
     return self;
 }
 
+- (UIButton *)popButton
+{
+    if (_popButton == nil) {
+        _popButton = [UIButton buttonWithFrame:CGRectMake(14, (IsiPhoneX ? 44 : 20), 30, 30) backImage:@"nav-back-1" target:self action:@selector(popAction)];
+//        _popButton.backgroundColor = [UIColor colorWithRed:21/255.0 green:21/255.0 blue:21/255.0 alpha:0.3];
+//        _popButton.layer.cornerRadius = 15;
+//        _popButton.layer.masksToBounds = YES;
+    }
+    return _popButton;
+}
+
+- (void)popAction
+{
+    CURRENTVC(currentVc);
+    [currentVc.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)setupSubViews
 {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action:)];
     self.userInteractionEnabled = YES;
     [self addGestureRecognizer:tap];
+
+    [self addSubview:self.popButton];
 
     UILabel *label = [[UILabel alloc] init];
     label.text = @"榜单";

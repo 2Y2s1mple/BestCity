@@ -34,6 +34,7 @@
 #import "CZShareViewController.h"
 #import "CZUMConfigure.h"
 
+
 @interface CZJIPINSynthesisTool ()
 /** <#注释#> */
 @property (nonatomic, strong) void (^block)(void);
@@ -630,20 +631,17 @@
 
 }
 
-
 #pragma mark - /** 保存图片到本地 */
 + (void)jipin_saveImage:(id)image
 {
     [GXSaveImageToPhone saveBatchImage:image];
 }
 
-
 #pragma mark - /** 点击图片放大 */
 + (void)jipin_showZoomImage:(__kindof UIView * _Nonnull)obj
 {
     [GXZoomImageView showZoomImage:obj];
 }
-
 
 #pragma mark - /** 判断未登录, 之后弹出登录页面 */
 + (void)jipin_jumpLogin
@@ -655,5 +653,6 @@
         return;
     }
 }
+
 
 @end

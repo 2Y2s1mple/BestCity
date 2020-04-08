@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,11 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CZFreeChargeHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="454" height="362"/>
+            <rect key="frame" x="0.0" y="0.0" width="454" height="401"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JbW-W3-5ZC">
-                    <rect key="frame" x="0.0" y="0.0" width="454" height="362"/>
+                    <rect key="frame" x="0.0" y="0.0" width="454" height="401"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDV-aA-5eg">
                             <rect key="frame" x="0.0" y="0.0" width="454" height="38"/>
@@ -58,11 +58,8 @@
                                 <constraint firstItem="0yA-jG-MPy" firstAttribute="centerY" secondItem="eDV-aA-5eg" secondAttribute="centerY" id="zlp-Fq-sdD"/>
                             </constraints>
                         </view>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trail-1" translatesAutoresizingMaskIntoConstraints="NO" id="rLx-Zu-R2K">
-                            <rect key="frame" x="0.0" y="38" width="454" height="213"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="213" id="eU9-8j-vdk"/>
-                            </constraints>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trail-1" translatesAutoresizingMaskIntoConstraints="NO" id="rLx-Zu-R2K">
+                            <rect key="frame" x="0.0" y="38" width="454" height="194"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDF-ah-GCD">
                             <rect key="frame" x="385.5" y="58" width="82.5" height="28"/>
@@ -86,11 +83,17 @@
                                 <action selector="freeDescAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ia0-Wh-vts"/>
                             </connections>
                         </button>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trail-2" translatesAutoresizingMaskIntoConstraints="NO" id="agx-5b-yZJ">
-                            <rect key="frame" x="46.5" y="231" width="361" height="82.5"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trail-2" translatesAutoresizingMaskIntoConstraints="NO" id="agx-5b-yZJ">
+                            <rect key="frame" x="10" y="215" width="434" height="91"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*新人专享商品仅限从未在极品城中购买过任何商品的用户享受，仅有一次购买机会。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5u-nA-pDJ">
-                            <rect key="frame" x="15" y="321" width="424" height="29"/>
+                            <rect key="frame" x="15" y="313.5" width="424" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="1" green="0.96078431369999995" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -99,16 +102,17 @@
                     <color key="backgroundColor" red="0.91764705879999997" green="0.30980392159999998" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="rLx-Zu-R2K" secondAttribute="trailing" id="0Mi-uQ-ef5"/>
+                        <constraint firstItem="agx-5b-yZJ" firstAttribute="leading" secondItem="JbW-W3-5ZC" secondAttribute="leading" constant="10" id="53j-lX-4l1"/>
                         <constraint firstItem="rLx-Zu-R2K" firstAttribute="top" secondItem="JbW-W3-5ZC" secondAttribute="top" constant="38" id="8pD-Rd-UTh"/>
                         <constraint firstAttribute="trailing" secondItem="eDV-aA-5eg" secondAttribute="trailing" id="FDR-Ps-Aab"/>
-                        <constraint firstItem="agx-5b-yZJ" firstAttribute="centerX" secondItem="w5u-nA-pDJ" secondAttribute="centerX" id="Frs-pq-uxx"/>
                         <constraint firstItem="rLx-Zu-R2K" firstAttribute="leading" secondItem="JbW-W3-5ZC" secondAttribute="leading" id="GSB-qD-Ywr"/>
                         <constraint firstItem="eDV-aA-5eg" firstAttribute="top" secondItem="JbW-W3-5ZC" secondAttribute="top" id="L9l-v4-oSM"/>
                         <constraint firstItem="BDF-ah-GCD" firstAttribute="top" secondItem="eDV-aA-5eg" secondAttribute="bottom" constant="20" id="Smw-EJ-Nil"/>
-                        <constraint firstItem="agx-5b-yZJ" firstAttribute="top" secondItem="JbW-W3-5ZC" secondAttribute="top" constant="231" id="T3p-zY-CvY"/>
+                        <constraint firstItem="agx-5b-yZJ" firstAttribute="top" secondItem="JbW-W3-5ZC" secondAttribute="top" constant="215" id="T3p-zY-CvY"/>
                         <constraint firstItem="w5u-nA-pDJ" firstAttribute="leading" secondItem="JbW-W3-5ZC" secondAttribute="leading" constant="15" id="b1K-xL-cFw"/>
                         <constraint firstItem="eDV-aA-5eg" firstAttribute="leading" secondItem="JbW-W3-5ZC" secondAttribute="leading" id="eDU-Bf-Tcw"/>
                         <constraint firstAttribute="trailing" secondItem="BDF-ah-GCD" secondAttribute="trailing" constant="-14" id="fBI-ya-N7x"/>
+                        <constraint firstAttribute="trailing" secondItem="agx-5b-yZJ" secondAttribute="trailing" constant="10" id="nOr-sl-36z"/>
                         <constraint firstAttribute="trailing" secondItem="w5u-nA-pDJ" secondAttribute="trailing" constant="15" id="qjy-47-adc"/>
                         <constraint firstItem="w5u-nA-pDJ" firstAttribute="top" secondItem="agx-5b-yZJ" secondAttribute="bottom" constant="7.5" id="x11-Ej-6Mh"/>
                     </constraints>
@@ -125,11 +129,11 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="156.80000000000001" y="-95.352323838080963"/>
+            <point key="canvasLocation" x="162" y="-221"/>
         </view>
     </objects>
     <resources>
-        <image name="trail-1" width="375" height="213"/>
-        <image name="trail-2" width="361" height="82.5"/>
+        <image name="trail-1" width="375" height="194"/>
+        <image name="trail-2" width="355" height="91"/>
     </resources>
 </document>

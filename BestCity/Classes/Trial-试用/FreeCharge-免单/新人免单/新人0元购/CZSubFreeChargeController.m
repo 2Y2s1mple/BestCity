@@ -46,9 +46,11 @@
 
 /** 给弹框的数据 */
 @property (nonatomic, strong) NSDictionary *alertViewParam;
-
 /** */
 @property (nonatomic, strong) CZFreeChargeFooterView *footerView;
+
+/** 新人商品默认6个 */
+@property (nonatomic, assign) NSInteger currentCount;
 
 @end
 
@@ -67,7 +69,7 @@
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 //                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:(UITableViewScrollPositionNone) animated:NO];
             } else {
-                self.dataCount = 4;
+                self.dataCount = self.currentCount;
 //                [self.tableView reloadData];
                 _footerView.isUpArrow = NO;
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
@@ -80,6 +82,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentCount = 6;
+
     self.view.backgroundColor = UIColorFromRGB(0xEA4F17);
     [CZSubFreeChargeModel setupReplacedKeyFromPropertyName:^NSDictionary *{
         return @{
@@ -93,7 +97,7 @@
     tmpView.width = SCR_WIDTH;
     [self.view addSubview:tmpView];
 
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"新人0元专区" rightBtnTitle:nil rightBtnAction:nil];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"新人福利专区" rightBtnTitle:nil rightBtnAction:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
     self.navigationView = navigationView;
     [self.view addSubview:navigationView];
@@ -166,12 +170,13 @@
 
             // 组1
             self.dataSource = [CZSubFreeChargeModel objectArrayWithKeyValuesArray:result[@"data"][@"newAllowanceGoodsList"]];
-            self.dataCount = 4;
+            self.dataCount = self.currentCount;
 
             // 组2
             [self group2Data:result[@"data"][@"allowanceGoodsList"]];
 
             [self.tableView reloadData];
+
             // 结束刷新
         }
         [self.tableView.mj_header endRefreshing];
@@ -201,7 +206,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (self.dataSource.count > 4) {
+        if (self.dataSource.count > self.currentCount) {
             return self.dataCount;
         } else {
             return self.dataSource.count;
@@ -268,7 +273,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (self.dataSource.count > 4) {
+        if (self.dataSource.count > self.currentCount) {
             return 55;
         } else {
             return 0.01;

@@ -46,7 +46,7 @@
     }];
 
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"百万返现特惠购" rightBtnTitle:nil rightBtnAction:nil];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"百万补贴特惠购" rightBtnTitle:nil rightBtnAction:nil];
     navigationView.backgroundColor = [UIColor whiteColor];
     self.navigationView = navigationView;
     [self.view addSubview:navigationView];
@@ -135,7 +135,7 @@
     if (_tableView == nil) {
        CGRect frame = CGRectMake(0, CZGetY(self.navigationView), SCR_WIDTH, SCR_HEIGHT - (IsiPhoneX ? 34 : 0) - CZGetY(self.navigationView));
         self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-        self.tableView.backgroundColor = UIColorFromRGB(0xEA4F17);
+        self.tableView.backgroundColor = UIColorFromRGB(0xE34310);
         self.tableView.estimatedRowHeight = 0;
         self.tableView.estimatedSectionHeaderHeight = 0;
         self.tableView.estimatedSectionFooterHeight = 0;
