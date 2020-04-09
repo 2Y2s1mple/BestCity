@@ -53,6 +53,15 @@
         self.rightTitle.hidden = NO;
         self.rightTitle.text = [NSString stringWithFormat:@"v%@", infoDic[@"CFBundleShortVersionString"]];
         
+    } else if ([title isEqualToString:@"微信"]) {
+         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        self.rightTitle.hidden = NO;
+        if ([JPUSERINFO[@"wechat"] length] > 0) {
+            self.rightTitle.text = @"已填写";
+        } else {
+            self.rightTitle.text = @"未填写";
+        }
+
     }
 }
 

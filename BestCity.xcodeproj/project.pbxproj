@@ -440,6 +440,7 @@
 		979EFD8521E085B5000FE466 /* CZHotSaleDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8421E085B5000FE466 /* CZHotSaleDetailModel.m */; };
 		979EFD8921E08923000FE466 /* CZCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8821E08923000FE466 /* CZCommodityModel.m */; };
 		979EFD8D21E0AC9B000FE466 /* CZCouponsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */; };
+		97A05101243F0D5400031361 /* CZChangeWeChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A05100243F0D5400031361 /* CZChangeWeChatController.m */; };
 		97A30BAC241F4461009D7089 /* CZIssueMomentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A30BAA241F4461009D7089 /* CZIssueMomentsController.m */; };
 		97A30BB6241F4C14009D7089 /* CZCategoryLineLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A30BB5241F4C14009D7089 /* CZCategoryLineLayoutView.m */; };
 		97A30BD8241F7601009D7089 /* titlesViewDataSource.json in Resources */ = {isa = PBXBuildFile; fileRef = 97A30BD7241F7601009D7089 /* titlesViewDataSource.json */; };
@@ -1497,6 +1498,8 @@
 		979EFD8821E08923000FE466 /* CZCommodityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCommodityModel.m; sourceTree = "<group>"; };
 		979EFD8B21E0AC9B000FE466 /* CZCouponsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCouponsModel.h; sourceTree = "<group>"; };
 		979EFD8C21E0AC9B000FE466 /* CZCouponsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCouponsModel.m; sourceTree = "<group>"; };
+		97A050FF243F0D5400031361 /* CZChangeWeChatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZChangeWeChatController.h; sourceTree = "<group>"; };
+		97A05100243F0D5400031361 /* CZChangeWeChatController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZChangeWeChatController.m; sourceTree = "<group>"; };
 		97A30BA9241F4461009D7089 /* CZIssueMomentsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZIssueMomentsController.h; sourceTree = "<group>"; };
 		97A30BAA241F4461009D7089 /* CZIssueMomentsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZIssueMomentsController.m; sourceTree = "<group>"; };
 		97A30BB4241F4C14009D7089 /* CZCategoryLineLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZCategoryLineLayoutView.h; path = "../../../../MyProject/MyRepository/GXLCodeRepository/Classes/UI控件/各种菜单样式/平铺菜单/CZCategoryLineLayoutView.h"; sourceTree = "<group>"; };
@@ -6048,6 +6051,8 @@
 				97FF6DF5211862EF00376435 /* CZfeedbackController.h */,
 				97FF6DF6211862EF00376435 /* CZfeedbackController.m */,
 				97FF6DF7211862EF00376435 /* CZfeedbackController.xib */,
+				97A050FF243F0D5400031361 /* CZChangeWeChatController.h */,
+				97A05100243F0D5400031361 /* CZChangeWeChatController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6471,6 +6476,7 @@
 				97A30BDC242067DB009D7089 /* CZIssueMomentsCell.m in Sources */,
 				97530AA52313A3FC00185C40 /* CZMHSDQuestCell1.m in Sources */,
 				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
+				97A05101243F0D5400031361 /* CZChangeWeChatController.m in Sources */,
 				977E8090225B23660041A126 /* CZTrialApplySuccessModel.m in Sources */,
 				979B05D3210F07EF0023292D /* CZShareAndlikeView.m in Sources */,
 				97D8FCCB2111A67700D8ED8F /* CZMyProfileController.m in Sources */,

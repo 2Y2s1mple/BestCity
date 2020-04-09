@@ -15,6 +15,8 @@
 #import "CZAlertViewTool.h"
 #import "GXNetTool.h"
 #import "CZAddressController.h"
+#import "CZChangeWeChatController.h"
+#import "CZUserInfoTool.h"
 
 @interface CZSettingController ()<UITableViewDelegate, UITableViewDataSource>
 /** 标题数组 */
@@ -27,7 +29,7 @@
 - (NSArray *)contentTitles
 {
     if (_contentTitles == nil) {
-        _contentTitles = @[@"收货地址", @"我要反馈", @"清除缓存", @"客服微信", @"鼓励一下", @"用户协议", @"关于极品城",];
+        _contentTitles = @[@"收货地址", @"微信", @"我要反馈", @"清除缓存", @"客服微信", @"鼓励一下", @"用户协议", @"关于极品城",];
     }
     return _contentTitles;
 }
@@ -37,6 +39,14 @@
     self.view.backgroundColor = CZGlobalWhiteBg;
     // 初始化界面内容
     [self setupView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
+
+    }];
 }
 
 #pragma mark - 设置界面
@@ -116,12 +126,20 @@
             break;
         case 1:
         {
+            /** 微信 */
+            CZChangeWeChatController *vc = [[CZChangeWeChatController alloc] init];
+            vc.name = JPUSERINFO[@"wechat"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 2:
+        {
             /** 跳转到反馈 */
             CZfeedbackController *vc = [[CZfeedbackController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 2:
+        case 3:
         {
             [CZAlertViewTool showSheetAlertAction:^{
                 //响应事件
@@ -133,7 +151,7 @@
             }];
         }
             break;
-        case 3:
+        case 4:
         {
             [CZAlertViewTool showAlertWithTitle:[@"官方客服微信: " stringByAppendingString:JPUSERINFO[@"officialWeChat"]] actionBtns:@[@"取消", @"复制"] action:^{
                 UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
@@ -144,13 +162,13 @@
             }];
         }
             break;
-        case 4:
+        case 5:
         {
             // 跳转App Store评分
              [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1450707933&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"]];
             break;
         }
-        case 5:
+        case 6:
         {
             /** 跳转到用户协议 */
             TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserAgreement_url]];

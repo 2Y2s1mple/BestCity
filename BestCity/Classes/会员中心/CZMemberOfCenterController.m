@@ -296,7 +296,8 @@
         // 结束刷新
         [self.scrollView.mj_header endRefreshing];
     } failure:^(NSError *error) {
-
+        // 结束刷新
+        [self.scrollView.mj_header endRefreshing];
     }];
 }
 
