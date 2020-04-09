@@ -176,7 +176,12 @@
     [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
         if (isAuthTaobao) {
             // 获取和合成图
-            [self getShareImage:self.param.param[@"goodsInfo"][@"otherGoodsId"]];
+            if (![self.param.param[@"goodsInfo"] isKindOfClass:[NSNull class]]) {
+                [self getShareImage:self.param.param[@"goodsInfo"][@"otherGoodsId"]];
+            } else {
+                [self jumpShareViewWithImage:nil];
+                self.flag = 0;
+            }
         } else {
             self.flag = 0;
         }
@@ -257,7 +262,7 @@
             [recordSearchTextArray addObject:posteboard.string];
 
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"评论内容复制成功" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"暂不粘贴" style:UIAlertActionStyleCancel handler:nil]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"暂不粘贴" style:UIAlertActionStyleDefault handler:nil]];
             [alert addAction:[UIAlertAction actionWithTitle:@"去微信粘贴" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSURL * url = [NSURL URLWithString:@"weixin://"];
                 BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
@@ -295,32 +300,39 @@
             [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:result[@"data"][@"shareImg"]] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
 
             } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-
-                CZIssueMomentsShareView *view = [[CZIssueMomentsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
-
-                NSMutableArray *images = [NSMutableArray array];
-                for (UIImageView *imageView in self.imagesBackView.subviews) {
-                    if (imageView.image) {
-                        [images addObject:imageView.image];
-                    }
-                }
-                [images replaceObjectAtIndex:0 withObject:image];
-
-                view.images = images;
-                view.shareNumber = self.shareNumber;
-                view.momentId = self.param.param[@"id"];
-                [[UIApplication sharedApplication].keyWindow addSubview:view];
-
-                // 文案
-                UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-                posteboard.string = self.param.param[@"content"];
-                [recordSearchTextArray addObject:posteboard.string];
-
-                [CZProgressHUD hideAfterDelay:0];
+                [self jumpShareViewWithImage:image];
                 self.flag = 0;
             }];
         }
     } failure:^(NSError *error) {}];
+}
+
+#pragma mark - 弹出分享
+- (void)jumpShareViewWithImage:(UIImage *)image
+{
+    CZIssueMomentsShareView *view = [[CZIssueMomentsShareView alloc] initWithFrame:CGRectMake(0, 0, SCR_WIDTH, SCR_HEIGHT)];
+
+    NSMutableArray *images = [NSMutableArray array];
+    for (UIImageView *imageView in self.imagesBackView.subviews) {
+        if (imageView.image) {
+            [images addObject:imageView.image];
+        }
+    }
+    if (image) {
+        [images replaceObjectAtIndex:0 withObject:image];
+    }
+
+    view.images = images;
+    view.shareNumber = self.shareNumber;
+    view.momentId = self.param.param[@"id"];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
+
+    // 文案
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    posteboard.string = self.param.param[@"content"];
+    [recordSearchTextArray addObject:posteboard.string];
+    [CZProgressHUD hideAfterDelay:0];
+
 }
 
 @end

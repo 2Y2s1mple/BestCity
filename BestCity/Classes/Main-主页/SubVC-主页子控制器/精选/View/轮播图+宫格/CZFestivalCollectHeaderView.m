@@ -114,7 +114,7 @@
         // 分类的按钮
        NSArray *list = [CZCategoryLineLayoutView categoryItems:self.boxList setupNameKey:@"title" imageKey:@"iconUrl" IdKey:@"targetId" objectKey:@"type"];
         CGRect frame = CGRectMake(0, 170, SCR_WIDTH, 80);;
-        CZCategoryLineLayoutView *categoryView = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:list type:1 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
+        CZCategoryLineLayoutView *categoryView = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:list type:CZCategoryLineLayoutViewTypeLine didClickedIndex:^(CZCategoryItem * _Nonnull item) {
             NSDictionary *param = @{
                 @"targetType" : item.objectInfo,
                 @"targetId" : item.categoryId,

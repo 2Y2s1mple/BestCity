@@ -172,7 +172,7 @@
         // 分类的按钮
         NSArray *list = [CZCategoryLineLayoutView categoryItems:self.categoryList setupNameKey:@"categoryName" imageKey:@"img" IdKey:@"categoryId" objectKey:@""];
         CGRect frame = CGRectMake(24, CZGetY(imageView) + 12, SCR_WIDTH - 48, 0);
-        CZCategoryLineLayoutView *categoryView = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:list type:0 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
+        CZCategoryLineLayoutView *categoryView = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:list type:CZCategoryLineLayoutViewTypeVertical didClickedIndex:^(CZCategoryItem * _Nonnull item) {
             [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"%@.gongge.%ld", self.statistics, (item.index + 1)]];
             CZMainProjectGeneralView *vc = [[CZMainProjectGeneralView alloc] init];
             vc.titleText = item.categoryName;

@@ -92,7 +92,7 @@
     }
 
     self.paramCategoryId2 = [categoryList[self.selecedIndex] categoryId];
-    self.categoryView3 = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:categoryList type:4 didClickedIndex:^(CZCategoryItem * _Nonnull item) {
+    self.categoryView3 = [CZCategoryLineLayoutView categoryLineLayoutViewWithFrame:frame Items:categoryList type:CZCategoryLineLayoutViewTypeDefault didClickedIndex:^(CZCategoryItem * _Nonnull item) {
         NSLog(@"%@", item.categoryName);
         self.paramCategoryId2 = item.categoryId;
         // 获取列表数据
