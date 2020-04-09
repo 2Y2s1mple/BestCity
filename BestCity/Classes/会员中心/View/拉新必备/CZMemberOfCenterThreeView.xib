@@ -19,10 +19,16 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFb-5S-CZX">
                     <rect key="frame" x="10" y="49" width="175" height="90"/>
                     <state key="normal" backgroundImage="MemberOfCenter-3"/>
+                    <connections>
+                        <action selector="aaa" destination="iN0-l3-epB" eventType="touchUpInside" id="r8Y-03-7qT"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DG0-nu-rd2">
                     <rect key="frame" x="229" y="49" width="175" height="90"/>
                     <state key="normal" backgroundImage="MemberOfCenter-4"/>
+                    <connections>
+                        <action selector="freeMoney" destination="iN0-l3-epB" eventType="touchUpInside" id="AUa-cs-RFI"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

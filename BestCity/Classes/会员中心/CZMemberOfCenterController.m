@@ -287,7 +287,7 @@
                 // 专属导师
                 [self createTeacherView];
 
-                self.scrollView.contentSize = CGSizeMake(0, CZGetY([self.scrollView.subviews lastObject]) + 100);
+                self.scrollView.contentSize = CGSizeMake(0, CZGetY([self.scrollView.subviews lastObject]) + 20);
             } else {
                 [self loadNewData];
             }
