@@ -60,21 +60,30 @@
 /** 申请升级 */
 - (IBAction)ApplyUpgrade:(UIButton *)sender
 {
-    if ([self.param[@"invitedUserCount"] isEqual:self.param[@"levelInvitedUserCount"]] && [self.param[@"commission"] isEqual:self.param[@"levelCommission"]]) {
-        if ([self.param[@"level"] integerValue] == 2) {
-            [CZProgressHUD showProgressHUDWithText:@"已为最高等级"];
+    // 最高等级
+    if ([self.param[@"level"] integerValue] == 2) {
+        [CZProgressHUD showProgressHUDWithText:@"已为最高等级"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    }
+    
+    if ([self isUpgrade]) {
+        // 符合条件
+        if ([self.param[@"levelStatus"] integerValue] == 0) {
+            [CZProgressHUD showProgressHUDWithText:@"您的申请正在审核中，请耐心等待"];
             [CZProgressHUD hideAfterDelay:1.5];
         } else {
-            if ([self.param[@"levelStatus"] integerValue] == 0) {
-                [CZProgressHUD showProgressHUDWithText:@"您的申请正在审核中，请耐心等待"];
-                [CZProgressHUD hideAfterDelay:1.5];
-            } else {
-                [self upgrade];
-            }
+            [self upgrade];
         }
     } else {
-        [CZProgressHUD showProgressHUDWithText:@"您还未完成任务，请继续努力"];
-        [CZProgressHUD hideAfterDelay:1.5];
+        // 不符合条件
+        if ([self.param[@"levelStatus"] integerValue] == 0) {
+            [CZProgressHUD showProgressHUDWithText:@"您的申请正在审核中，请耐心等待"];
+            [CZProgressHUD hideAfterDelay:1.5];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"您还未完成任务，请继续努力"];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
     }
 }
 
@@ -100,5 +109,16 @@
 
         } failure:nil];
 }
+
+- (BOOL)isUpgrade
+{
+    if ([self.param[@"invitedUserCount"] floatValue] >= [self.param[@"levelInvitedUserCount"] floatValue] && [self.param[@"commission"] floatValue] >= [self.param[@"levelCommission"] floatValue]) {
+        return YES;
+    } else {
+        return NO;
+    }
+        
+}
+
 
 @end

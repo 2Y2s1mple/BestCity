@@ -21,6 +21,7 @@
                 <outlet property="preFeeLabel" destination="Aoo-wc-roy" id="W7a-Yc-Toi"/>
                 <outlet property="scrollerView" destination="D8s-nW-E3e" id="DVG-4N-h2V"/>
                 <outlet property="tableView" destination="zJo-aO-yIP" id="27T-nf-eoD"/>
+                <outlet property="tableViewTop" destination="3lg-AJ-0nf" id="K09-Lm-QDW"/>
                 <outlet property="totalFeeLabel" destination="3jT-cY-kbO" id="qSK-6V-56s"/>
                 <outlet property="view" destination="iN0-l3-epB" id="txH-4S-A6Q"/>
                 <outlet property="voteLabel" destination="Wse-2f-Y8Q" id="AXo-Eq-5pB"/>
@@ -297,17 +298,6 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
-                            <rect key="frame" x="15" y="377" width="345" height="450"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="450" id="nbk-yn-gRV"/>
-                            </constraints>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="iG4-fn-ILy"/>
-                                <outlet property="delegate" destination="-1" id="fm1-kZ-DyM"/>
-                            </connections>
-                        </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2s-se-hww">
                             <rect key="frame" x="15" y="212" width="345" height="105"/>
                             <subviews>
@@ -546,6 +536,17 @@
                                 <outletCollection property="gestureRecognizers" destination="tlu-Gq-LFf" appends="YES" id="OzN-Kz-bkx"/>
                             </connections>
                         </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-aO-yIP">
+                            <rect key="frame" x="15" y="377" width="345" height="450"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="450" id="nbk-yn-gRV"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="iG4-fn-ILy"/>
+                                <outlet property="delegate" destination="-1" id="fm1-kZ-DyM"/>
+                            </connections>
+                        </tableView>
                     </subviews>
                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -576,7 +577,7 @@
                 <constraint firstAttribute="bottom" secondItem="D8s-nW-E3e" secondAttribute="bottom" id="y56-Lb-PNe"/>
                 <constraint firstItem="D8s-nW-E3e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yEx-AN-H95"/>
             </constraints>
-            <point key="canvasLocation" x="-7322" y="-2927"/>
+            <point key="canvasLocation" x="-7556" y="-2944"/>
         </view>
         <tapGestureRecognizer id="tlu-Gq-LFf">
             <connections>

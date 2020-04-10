@@ -64,7 +64,7 @@
             <connections>
                 <outlet property="popBtn" destination="m4W-vk-HnJ" id="iyY-9p-S8P"/>
             </connections>
-            <point key="canvasLocation" x="-142" y="-118"/>
+            <point key="canvasLocation" x="5" y="-123"/>
         </view>
     </objects>
     <resources>

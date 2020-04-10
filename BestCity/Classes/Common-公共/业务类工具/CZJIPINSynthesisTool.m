@@ -193,17 +193,15 @@
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
     }
-    // 为了同步关联的淘宝账号
-    [CZUserInfoTool userInfoInformation:^(NSDictionary *param) {
-        NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
-        if ([specialId isEqualToString:@""]) { // 没有关联
-            block(NO);
-            // 淘宝授权
-            [self jipin_authTaobao];
-        } else {
-            block(YES);
-        }
-    }];
+
+    NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
+    if ([specialId isEqualToString:@""]) { // 没有关联
+        block(NO);
+        // 淘宝授权
+        [self jipin_authTaobao];
+    } else {
+        block(YES);
+    }
 
 //    block(YES);
 }

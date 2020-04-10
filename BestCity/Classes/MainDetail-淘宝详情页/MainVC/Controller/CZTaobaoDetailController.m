@@ -202,15 +202,22 @@ static CGFloat const likeAndShareHeight = 49;
     self.recordHeight += imageView.height; // 高度
 
     // vip条
-    CZTaoBaoShopVipView *vipView = [CZTaoBaoShopVipView taoBaoShopVipView];
-    vipView.y = self.recordHeight;
-    vipView.width = SCR_WIDTH;
-    vipView.height = 28;
-    vipView.param = self.detailModel;
-    [self.scrollerView addSubview:vipView];
+    // 最高级, 合伙人
+    if ([JPUSERINFO[@"level"] integerValue] == 2) {
+    
+    } else {
+        CZTaoBaoShopVipView *vipView = [CZTaoBaoShopVipView taoBaoShopVipView];
+        vipView.y = self.recordHeight;
+        vipView.width = SCR_WIDTH;
+        vipView.height = 28;
+        vipView.param = self.detailModel;
+        [self.scrollerView addSubview:vipView];
+        self.recordHeight += 28;
+    }
+    
 
     CZTaobaoGoodsView *titlesView = [CZTaobaoGoodsView taobaoGoodsView];
-    titlesView.y = self.recordHeight + 28;
+    titlesView.y = self.recordHeight;
     titlesView.width = SCR_WIDTH;
     titlesView.model = self.detailModel;
     [self.scrollerView addSubview:titlesView];

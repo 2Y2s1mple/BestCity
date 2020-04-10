@@ -26,10 +26,6 @@
 @property (nonatomic, strong) NSDictionary *dataSource;
 /** <#注释#> */
 @property (nonatomic, strong) CZNavigationView *navigationView;
-/** <#注释#> */
-//@property (nonatomic, strong) UIButton *recordElement;
-/** <#注释#> */
-@property (nonatomic, strong) NSMutableString *mutStr;
 @property (nonatomic, strong) void (^blockSourceData1)(NSDictionary *);
 @property (nonatomic, strong) void (^blockSourceData2)(NSDictionary *);
 @property (nonatomic, strong) void (^blockSourceData3)(NSDictionary *);
@@ -45,6 +41,10 @@
 @property (nonatomic, strong) NSMutableArray *recordImageArr;
 /** <#注释#> */
 @property (nonatomic, assign) NSInteger recordIndex;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *tklStr;
+@property (nonatomic, strong) NSString *downloadUrlStr;
+@property (nonatomic, strong) NSString *invitationCodeStr;
 @end
 
 @implementation CZIssueCreateMoments
@@ -72,14 +72,6 @@
         _mutImages = [NSMutableArray array];
     }
     return _mutImages;
-}
-
-- (NSMutableString *)mutStr
-{
-    if (_mutStr == nil) {
-        _mutStr = [NSMutableString string];
-    }
-    return _mutStr;
 }
 
 - (void)viewDidLoad {
@@ -331,41 +323,43 @@
     WS(weakself)
     self.blockSourceData2 = ^(NSDictionary *dic) {
         textView.text = dic[@"content"];
-//        code.text = [NSString stringWithFormat:@"%@\n", dic[@"tkl"]];
-//        [weakself.mutStr setString:code.text];
     };
 
     self.block1 = ^(NSInteger index, BOOL isSelected) {
-        NSString *appendStr;
+        // 淘口令
         if (index == 0) {
-            appendStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"tkl"]];
             if (isSelected) {
-                [weakself.mutStr appendString:appendStr];
+                weakself.tklStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"tkl"]];
             } else {
-                [weakself.mutStr deleteCharactersInRange:[weakself.mutStr rangeOfString:appendStr]];
+                weakself.tklStr = @"";
             }
-            code.text = weakself.mutStr;
         }
 
+        // 下载链接
         if (index == 1) {
-            appendStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"downloadUrl"]];
             if (isSelected) {
-                [weakself.mutStr appendString:appendStr];
+                weakself.downloadUrlStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"downloadUrl"]];
             } else {
-                [weakself.mutStr deleteCharactersInRange:[weakself.mutStr rangeOfString:appendStr]];
+                weakself.downloadUrlStr = @"";
             }
-            code.text = weakself.mutStr;
         }
 
+        // 邀请码
         if (index == 2) {
-            appendStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"invitationCode"]];
             if (isSelected) {
-                [weakself.mutStr appendString:appendStr];
+                weakself.invitationCodeStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"invitationCode"]];
             } else {
-                [weakself.mutStr deleteCharactersInRange:[weakself.mutStr rangeOfString:appendStr]];
+                weakself.invitationCodeStr = @"";
             }
-            code.text = weakself.mutStr;
         }
+        
+        NSString *mainTitle = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"baseComment"]];
+        
+        // 标题 -> 下载链接 -> 邀请码 -> 淘口令
+        NSString *finallyStr = [NSString stringWithFormat:@"%@%@%@%@", mainTitle, weakself.downloadUrlStr, weakself.invitationCodeStr, weakself.tklStr];
+        
+        code.text = finallyStr;
+        
 
         if (index == 4) {
             UIPasteboard *posteboard = [UIPasteboard generalPasteboard];

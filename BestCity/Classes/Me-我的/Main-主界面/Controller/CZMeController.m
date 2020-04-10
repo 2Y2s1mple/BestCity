@@ -66,6 +66,8 @@
 @property (nonatomic, strong) NSArray *adList;
 /** 会员 */
 @property (nonatomic, weak) IBOutlet UIImageView *memberIcon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTop;
+
 @end
 
 @implementation CZMeController
@@ -306,6 +308,13 @@
 
     // 会员标识
     self.memberIcon.image = [CZMemberOfCenterTool toolUserStatus:JPUSERINFO][4];
+    
+    // 最高级, 合伙人
+    if ([JPUSERINFO[@"level"] integerValue] == 2) {
+        self.tableViewTop.constant = 10;
+    } else {
+        self.tableViewTop.constant = 60;
+    }
     
     // 用户名字
     [self.loginBtn setTitle:JPUSERINFO[@"nickname"] forState:UIControlStateNormal];

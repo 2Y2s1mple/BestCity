@@ -10,7 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CZMemberOfCenterTwoCommonView">
-            <rect key="frame" x="0.0" y="0.0" width="405" height="268"/>
+            <rect key="frame" x="0.0" y="0.0" width="405" height="229"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MemberOfCenter-0" translatesAutoresizingMaskIntoConstraints="NO" id="Plj-VB-NiQ">
@@ -67,7 +67,7 @@
                 <outlet property="levelImage" destination="aKL-gL-T0R" id="cIS-et-Ojz"/>
                 <outlet property="nickname" destination="0Ml-AL-gM2" id="qPt-9I-a8f"/>
             </connections>
-            <point key="canvasLocation" x="-493" y="-329"/>
+            <point key="canvasLocation" x="-629.71014492753625" y="-363.179347826087"/>
         </view>
     </objects>
     <resources>
