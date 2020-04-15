@@ -47,7 +47,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
     JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
 //    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
 //    JPSERVER_URL = @"http://47.99.243.255:8081/qualityshop-api/"; // 测试

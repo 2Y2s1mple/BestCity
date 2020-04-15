@@ -38,7 +38,7 @@
 {
     _param = param;
     self.vipImageView.image = [CZMemberOfCenterTool toolUserStatus:param][3];
-    self.title1.text = [NSString stringWithFormat:@"邀请有效直属粉丝%@人", param[@"levelInvitedUserCount"]];
+    self.title1.text = [NSString stringWithFormat:@"直接邀请有效用户%@人", param[@"levelInvitedUserCount"]];
     self.subTitle1.text = [NSString stringWithFormat:@"%@/%@人", param[@"invitedUserCount"], param[@"levelInvitedUserCount"]];
 
    CGFloat scale1 = [param[@"invitedUserCount"] floatValue] / [param[@"levelInvitedUserCount"] floatValue];

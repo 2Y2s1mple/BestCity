@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,14 +26,13 @@
                     <rect key="frame" x="0.0" y="67.5" width="375" height="524.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcZ-bH-QXV">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIG-uT-Mk2">
-                                    <rect key="frame" x="10" y="10" width="355" height="72"/>
+                                    <rect key="frame" x="10" y="10" width="355" height="36"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <string key="text">1.分享给好友，好友通过分享链接下载注册、填写邀
- 请码；邀请一人可获得200极币; 2.被邀请的好友在“极品城”购买任何商品，您都会获
- 得50%佣金.</string>
+ 请码；邀请一人可获得200极币;</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -49,10 +48,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eS2-VD-cCs">
-                            <rect key="frame" x="0.0" y="92" width="375" height="432.5"/>
+                            <rect key="frame" x="0.0" y="56" width="375" height="468.5"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yCJ-nF-nHW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="432.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="468.5"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <collectionViewLayout key="collectionViewLayout" id="45W-HR-ZoT" customClass="GXLineLayout"/>
                                 </collectionView>

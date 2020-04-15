@@ -22,7 +22,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8a-WD-xbg">
                             <rect key="frame" x="0.0" y="24" width="394" height="33"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请有效直属粉丝50人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-LY-BjO">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="直接邀请有效用户50人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-LY-BjO">
                                     <rect key="frame" x="20" y="0.0" width="133" height="19"/>
                                     <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="13"/>
                                     <color key="textColor" red="0.25879758600000002" green="0.25884014370000002" blue="0.2587882876" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -105,7 +105,7 @@
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9n-zN-3Tm">
                             <rect key="frame" x="20" y="126" width="354" height="72"/>
-                            <string key="text">*有效粉丝：成功登录极品城App并存在购物订单的用户视为有效粉丝。购物订单中的活动订单不包括在内（0元购、特惠购等活动）
+                            <string key="text">*有效用户：成功登录极品城App并存在购物订单的用户视为有效粉丝。购物订单中的活动订单不包括在内（0元购、特惠购等活动）
 *升级说明：两个目标进度达到100%后，即可申请为VIP会员，审核需要1-3个工作日内完成。</string>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
