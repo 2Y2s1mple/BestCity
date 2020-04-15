@@ -28,7 +28,7 @@
 {
     _model = model;
     self.allowanceLabel.text = [NSString stringWithFormat:@"%@", model.allowance];
-    _model.cellHeight = 167;
+    _model.cellHeight = 210;
 }
 
 

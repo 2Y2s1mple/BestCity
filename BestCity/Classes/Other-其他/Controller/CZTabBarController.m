@@ -62,7 +62,7 @@
 {
     [self setupWithController:[[CZMainViewController alloc] init] title:@"首页" image:@"tab-main-nor" selectedImage:@"tab-main-sel"];
 
-    [self setupWithController:[[CZRedPacketsController alloc] init] title:@"红包" image:@"tab-red-packet-nor" selectedImage:@"tab-red-packet-sel"];
+//    [self setupWithController:[[CZRedPacketsController alloc] init] title:@"红包" image:@"tab-red-packet-nor" selectedImage:@"tab-red-packet-sel"];
 
     [self setupWithController:[[CZMemberOfCenterController alloc] init] title:@"会员" image:@"tab-members-nor" selectedImage:@"tab-members-sel"];
 

@@ -8,6 +8,7 @@
 
 #import "CZIssueMomentsController.h"
 #import "CZSubIssueMomentsController.h"
+#import "CZSubSubIssueMomentsListController.h"
 
 @interface CZIssueMomentsController ()
 
@@ -50,13 +51,19 @@
     switch (index) {
         case 0:
         {
-            CZSubIssueMomentsController *vc = [[CZSubIssueMomentsController alloc] init];
+//            CZSubIssueMomentsController *vc = [[CZSubIssueMomentsController alloc] init];
+//            vc.paramType = @(1);
+            CZSubSubIssueMomentsListController *vc = [[CZSubSubIssueMomentsListController alloc] init];
+            vc.view.backgroundColor = RANDOMCOLOR;
             vc.paramType = @(1);
             return vc;
         }
         case 1:
         {
-            CZSubIssueMomentsController *vc = [[CZSubIssueMomentsController alloc] init];
+//            CZSubIssueMomentsController *vc = [[CZSubIssueMomentsController alloc] init];
+//            vc.paramType = @(2);
+            CZSubSubIssueMomentsListController *vc = [[CZSubSubIssueMomentsListController alloc] init];
+            vc.view.backgroundColor = RANDOMCOLOR;
             vc.paramType = @(2);
             return vc;
         }

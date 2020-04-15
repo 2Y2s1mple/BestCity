@@ -78,14 +78,14 @@ babycare专注婴儿用品
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQt-a4-rDO">
-                        <rect key="frame" x="69" y="163" width="259" height="180"/>
+                        <rect key="frame" x="69" y="183" width="259" height="180"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="180" id="g61-h2-F7C"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFp-AX-kzL">
-                        <rect key="frame" x="69" y="353" width="291" height="90"/>
+                        <rect key="frame" x="69" y="373" width="291" height="90"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headDefault" translatesAutoresizingMaskIntoConstraints="NO" id="6pU-kc-K7I">
                                 <rect key="frame" x="8" y="11" width="68" height="68"/>
@@ -182,12 +182,19 @@ babycare专注婴儿用品
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHj-PR-gaS">
-                        <rect key="frame" x="69" y="453" width="291" height="71"/>
+                        <rect key="frame" x="69" y="473" width="291" height="71"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="71" id="0NQ-hT-Ien"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0j-Lk-f5T">
+                        <rect key="frame" x="69" y="153" width="58" height="29"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="查看详情">
+                            <color key="titleColor" red="0.88620406389999995" green="0.3453732431" blue="0.21861878039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="5Ox-WB-rX6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="0.01" id="0Me-p0-AXg"/>
@@ -201,10 +208,12 @@ babycare专注婴儿用品
                     <constraint firstAttribute="trailing" secondItem="5Ox-WB-rX6" secondAttribute="trailing" constant="0.01" id="KFt-tG-cpC"/>
                     <constraint firstItem="fVZ-Hh-4pj" firstAttribute="top" secondItem="CP8-Ub-fuL" secondAttribute="bottom" constant="15" id="LjU-ul-gT5"/>
                     <constraint firstItem="iFp-AX-kzL" firstAttribute="leading" secondItem="gQt-a4-rDO" secondAttribute="leading" id="QEa-ic-B4N"/>
+                    <constraint firstItem="x0j-Lk-f5T" firstAttribute="top" secondItem="fVZ-Hh-4pj" secondAttribute="bottom" id="ZAJ-41-kE9"/>
                     <constraint firstAttribute="bottom" secondItem="5Ox-WB-rX6" secondAttribute="bottom" constant="0.01" id="a1x-p2-mkA"/>
-                    <constraint firstItem="gQt-a4-rDO" firstAttribute="top" secondItem="fVZ-Hh-4pj" secondAttribute="bottom" constant="10" id="aRf-63-eLN"/>
+                    <constraint firstItem="gQt-a4-rDO" firstAttribute="top" secondItem="fVZ-Hh-4pj" secondAttribute="bottom" constant="30" id="aRf-63-eLN"/>
                     <constraint firstItem="CP8-Ub-fuL" firstAttribute="top" secondItem="w6n-6h-L75" secondAttribute="top" id="f3C-5x-2Cp"/>
                     <constraint firstItem="gQt-a4-rDO" firstAttribute="leading" secondItem="fVZ-Hh-4pj" secondAttribute="leading" id="gCp-MT-xN8"/>
+                    <constraint firstItem="x0j-Lk-f5T" firstAttribute="leading" secondItem="fVZ-Hh-4pj" secondAttribute="leading" id="kJj-bn-kuH"/>
                     <constraint firstAttribute="trailing" secondItem="gQt-a4-rDO" secondAttribute="trailing" constant="47" id="m5x-mV-f6P"/>
                     <constraint firstItem="fVZ-Hh-4pj" firstAttribute="leading" secondItem="CP8-Ub-fuL" secondAttribute="leading" id="tEB-9j-o4O"/>
                     <constraint firstItem="iFp-AX-kzL" firstAttribute="top" secondItem="gQt-a4-rDO" secondAttribute="bottom" constant="10" id="tsB-p4-JyM"/>
@@ -230,6 +239,7 @@ babycare专注婴儿用品
                 <outlet property="goodsView" destination="iFp-AX-kzL" id="ATt-dk-hIe"/>
                 <outlet property="goodsViewHeight" destination="aZQ-xW-NbY" id="TqL-i2-VRf"/>
                 <outlet property="imageBackViewHeight" destination="g61-h2-F7C" id="hBU-rf-WHT"/>
+                <outlet property="imageBackViewTop" destination="aRf-63-eLN" id="eGQ-Hb-egf"/>
                 <outlet property="imagesBackView" destination="gQt-a4-rDO" id="p68-wI-deY"/>
                 <outlet property="img" destination="6pU-kc-K7I" id="3w5-e3-abd"/>
                 <outlet property="otherName" destination="VCC-6v-ZPj" id="f9W-Tn-kUL"/>
@@ -238,8 +248,9 @@ babycare专注婴儿用品
                 <outlet property="shareNumberViewBtn" destination="fFw-ls-iNJ" id="RHR-PB-SWE"/>
                 <outlet property="userAvatar" destination="w6n-6h-L75" id="x0X-M3-IHh"/>
                 <outlet property="userNickname" destination="CP8-Ub-fuL" id="tDJ-vC-StA"/>
+                <outlet property="watchBtn" destination="x0j-Lk-f5T" id="th3-bl-ByP"/>
             </connections>
-            <point key="canvasLocation" x="-472" y="-398"/>
+            <point key="canvasLocation" x="-827" y="-452"/>
         </tableViewCell>
     </objects>
     <resources>

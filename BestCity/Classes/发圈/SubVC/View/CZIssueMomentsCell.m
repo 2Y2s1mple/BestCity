@@ -17,6 +17,7 @@
 /** 图片视图 */
 @property (nonatomic, weak) IBOutlet UIView *imagesBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageBackViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageBackViewTop;
 
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIImageView *userAvatar;
@@ -29,7 +30,8 @@
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *shareNumberView;
 @property (nonatomic, weak) IBOutlet UIView *shareNumberViewBtn;
-
+/** 参看详情 */
+@property (nonatomic, weak) IBOutlet UIButton *watchBtn;
 // 商品信息
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIImageView *img;
@@ -112,6 +114,10 @@
     // 商品详情
     [self layoutIfNeeded];
     if (![dic[@"goodsInfo"] isKindOfClass:[NSNull class]]) {
+        // 显示参看更多
+        self.imageBackViewTop.constant = 30;
+        self.watchBtn.hidden = NO;
+        
         [self.img sd_setImageWithURL:[NSURL URLWithString: dic[@"goodsInfo"][@"img"]]] ;
         self.otherName.text = dic[@"goodsInfo"][@"otherName"];
         [self.couponPrice setTitle:[NSString stringWithFormat:@"券 ¥%@", dic[@"goodsInfo"][@"couponPrice"]] forState:UIControlStateNormal];
@@ -121,6 +127,9 @@
         self.goodsViewHeight.constant = 90;
         self.param.cellHeight = CZGetY(self.goodsView) + 20;
     } else {
+        // 隐藏更多
+        self.watchBtn.hidden = YES;
+        self.imageBackViewTop.constant = 10;
         self.goodsViewHeight.constant = 0;
         self.goodsView.hidden = YES;
         self.param.cellHeight = CZGetY(self.imagesBackView) + 20;
