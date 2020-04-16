@@ -16,6 +16,8 @@
     NSURL *_url;
 }
 @property (nonatomic, copy) WebViewBlock block;
+/** <#注释#> */
+@property (nonatomic, strong) id rightBtnTitle;
 @end
 
 @implementation TSLWebViewController
@@ -29,11 +31,13 @@
     return self;
 }
 
-- (instancetype)initWithURL:(NSURL *)url actionblock:(WebViewBlock)block
+- (instancetype)initWithURL:(NSURL *)url rightBtnTitle:(id)rightBtnTitle actionblock:(WebViewBlock)block
 {
     self = [super init];
     if (self) {
         _url = url;
+        self.rightBtnTitle = rightBtnTitle;
+        [self setModalPresentationStyle:UIModalPresentationFullScreen];
         self.block = block;
     }
     return self;
@@ -43,7 +47,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleName rightBtnTitle:nil rightBtnAction:nil ];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleName rightBtnTitle:self.rightBtnTitle rightBtnAction:^{
+        !self.block ? : self.block();
+    } ];
     [self.view addSubview:navigationView];
     
     _webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 67 + (IsiPhoneX ? 24 : 0), SCR_WIDTH, SCR_HEIGHT - 67 - (IsiPhoneX ? 24 : 0))];

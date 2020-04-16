@@ -14,7 +14,7 @@
 #import "CZLabel.h"
 #import "CZRemindLoginView.h"
 #import "CZJIPINSynthesisTool.h"
-#import "CZGuideTool.h" // 新人弹框
+
 
 // 子视图
 #import "CZMainViewSubOneVC.h"
@@ -24,7 +24,9 @@
 // 跳转
 #import "CZTaobaoSearchController.h"
 #import "GXNetTool.h"
-#import "CZLaunchViewController.h"
+
+
+
 
 @interface CZMainViewController ()
 /** viewModel */
@@ -126,6 +128,8 @@
     } else {
         self.remindView.hidden = YES;
     }
+    
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated

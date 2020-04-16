@@ -93,7 +93,7 @@
             }];
 
         } else {
-
+            self.window.rootViewController = self.tabbarVc;
         }
     } failure:^(NSError *error) {
         self.window.rootViewController = self.tabbarVc;

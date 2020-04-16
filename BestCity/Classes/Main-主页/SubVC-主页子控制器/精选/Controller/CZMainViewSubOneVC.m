@@ -17,7 +17,6 @@
 
 // 跳转
 #import "CZTaobaoSearchController.h"
-#import "CZGuideTool.h"
 
 //------------------
 // viewModel
@@ -25,6 +24,9 @@
 
 // 数据
 #import "CZMainViewSubOneVCModel.h"
+
+// 弹框
+#import "CZAlertMainViewController.h"
 
 
 
@@ -113,11 +115,20 @@
         [CZFreePushTool bannerPushToVC:param];
         aDImage = nil;
     } else {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            // 新用户指导
-            [CZGuideTool newpPeopleGuide];
-        });
+        // 如果是新版本
+        if ([CZJIPINSynthesisTool jipin_isNewVersion]) { // 新版本
+            CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{
+                // 开启弹框
+                [CZJIPINSynthesisTool jipin_openGlobalAlertView];
+            }];
+            [self presentViewController:alertView animated:NO completion:nil];
+        } else { // 旧版本
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                // 开启弹框
+                [CZJIPINSynthesisTool jipin_openGlobalAlertView];
+            });
+        }
     }
 
     // 全局弹框在全局, 显示一个删除一个

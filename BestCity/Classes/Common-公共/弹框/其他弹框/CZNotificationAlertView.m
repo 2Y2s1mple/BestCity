@@ -12,10 +12,6 @@
 #import "CZUpdataView.h"
 #import "CZAlertView3Controller.h"
 
-
-
-UIKIT_EXTERN BOOL oldUser;
-
 @implementation CZNotificationAlertView
 /** 退出 */
 - (IBAction)delete
@@ -43,7 +39,7 @@ UIKIT_EXTERN BOOL oldUser;
 
 -(void) checkCurrentNotificationStatus
 {
-    if (oldUser) {
+    if (![CZJIPINSynthesisTool jipin_isNewVersion]) {
         [self loadUserAlert];
         return;
     }
@@ -95,7 +91,7 @@ UIKIT_EXTERN BOOL oldUser;
 
 - (void)loadUserAlert
 {
-    [CZJIPINSynthesisTool loadAlertView];
+    [CZJIPINSynthesisTool jipin_loadAlertView];
 }
 
 

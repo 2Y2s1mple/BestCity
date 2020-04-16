@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZAlertMainViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXS-NH-0Sg">
+                    <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.59575814260563376" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert_01" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-ik-IVB">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert_01-1" translatesAutoresizingMaskIntoConstraints="NO" id="mFk-Ur-jjU">
+                    <rect key="frame" x="19.666666666666657" y="46" width="375" height="321.66666666666669"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLN-9G-gjp">
+                    <rect key="frame" x="60" y="377.66666666666669" width="294" height="40"/>
+                    <color key="backgroundColor" red="0.88620406389999995" green="0.3453732431" blue="0.21861878039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="V0k-bp-Jyc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="试试搜索该商品">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="jumpImageview" destination="-1" eventType="touchUpInside" id="tD4-RW-cXN"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3RL-9x-xhe">
+                    <rect key="frame" x="193" y="450.66666666666669" width="28" height="28"/>
+                    <state key="normal" backgroundImage="alert_01-2"/>
+                    <connections>
+                        <action selector="dismiss:" destination="-1" eventType="touchUpInside" id="Upi-n6-cfR"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="jXS-NH-0Sg" secondAttribute="bottom" id="2Ci-vk-DbL"/>
+                <constraint firstItem="3RL-9x-xhe" firstAttribute="top" secondItem="fLN-9G-gjp" secondAttribute="bottom" constant="33" id="3SW-Ul-djy"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Mz0-ik-IVB" secondAttribute="trailing" id="AOq-aj-T2F"/>
+                <constraint firstItem="Mz0-ik-IVB" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="GaT-q0-gOx"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="jXS-NH-0Sg" secondAttribute="trailing" id="H8B-Vf-M4L"/>
+                <constraint firstItem="jXS-NH-0Sg" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Ktq-eR-Uno"/>
+                <constraint firstItem="Mz0-ik-IVB" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="OBn-PL-usf"/>
+                <constraint firstItem="fLN-9G-gjp" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="60" id="UHn-to-5gL"/>
+                <constraint firstItem="jXS-NH-0Sg" firstAttribute="top" secondItem="Mz0-ik-IVB" secondAttribute="bottom" id="W6W-9h-6HR"/>
+                <constraint firstItem="3RL-9x-xhe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XEB-Lg-lyi"/>
+                <constraint firstItem="mFk-Ur-jjU" firstAttribute="top" secondItem="Mz0-ik-IVB" secondAttribute="bottom" constant="2" id="flP-c0-ZUR"/>
+                <constraint firstItem="mFk-Ur-jjU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="s9j-r6-OVB"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="fLN-9G-gjp" secondAttribute="trailing" constant="60" id="tJn-8y-YDs"/>
+                <constraint firstItem="fLN-9G-gjp" firstAttribute="top" secondItem="mFk-Ur-jjU" secondAttribute="bottom" constant="10" id="z1d-Tv-v3q"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="-1375" y="-318"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="alert_01" width="375" height="44"/>
+        <image name="alert_01-1" width="375" height="321.66665649414062"/>
+        <image name="alert_01-2" width="28" height="28"/>
+    </resources>
+</document>

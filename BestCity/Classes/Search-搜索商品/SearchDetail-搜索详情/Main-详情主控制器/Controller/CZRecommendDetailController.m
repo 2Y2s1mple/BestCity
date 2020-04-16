@@ -66,8 +66,6 @@
 
 @property (nonatomic, strong) MLSDKScene *scene;
 
-UIKIT_EXTERN BOOL oldUser;
-
 @end
 
 /** 分享控件高度 */
@@ -306,13 +304,12 @@ static NSString * const type = @"1";
     // 设置滚动高度
     self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height + self.recommen.view.height);
 
-    // 如果是新用户提示
-    if (!oldUser) {
+    // 如果是新版本
+    if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
         CZGoodsDetailGuidanceView *guide = [CZGoodsDetailGuidanceView goodsDetailGuidanceView];
         guide.frame = [UIScreen mainScreen].bounds;
         guide.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
         [[UIApplication sharedApplication].keyWindow addSubview:guide];
-        oldUser = YES;
     }
 
 }

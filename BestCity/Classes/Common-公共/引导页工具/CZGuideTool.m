@@ -8,64 +8,75 @@
 
 #import "CZGuideTool.h"
 #import "CZSaveTool.h"
-#import "CZTabBarController.h"
-#define CZVERSION @"CZVersion"
 #import "GXNetTool.h"
-#import "CZUpdataManger.h"
+
 #import "CZGuideController.h"
-
 #import "CZAlertView1Controller.h"
-
 #import "CZLaunchViewController.h"
+#import "CZUserUpdataView.h"
+#import "CZNotificationAlertView.h"
 
 
-BOOL oldUser;
+#define CZVERSION @"CZVersion"
 @implementation CZGuideTool
++ (void)chooseRootViewController:(UIWindow *)window
+{
+    if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
+        // 有新版本
+        CZGuideController *vc = [[CZGuideController alloc] init];
+        window.rootViewController = vc;
+    } else {
+        // 没有新版本
+        window.rootViewController = [[CZLaunchViewController alloc] initWithWindow:window];
+    }
+}
+
 + (void)newpPeopleGuide
 {
-    //获取当前的版本号
-
-    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
-    
-    //获取存储的版本号
-    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
-    
-    //比较
-    if ([curVersion isEqualToString:lastVersion]) {
-        oldUser = YES;
-        // 显示版本更新
-        [CZUpdataManger ShowUpdataViewWithNetworkService];
-    } else {
-        oldUser = NO;
-        [CZSaveTool setObject:curVersion forKey:CZVERSION];
-        // 显示获得新人红包
+    if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
+        // 是新版本, 显示获得新人红包
         CURRENTVC(currentVc);
         CZAlertView1Controller *alert1 = [[CZAlertView1Controller alloc] init];
         alert1.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [currentVc presentViewController:alert1 animated:YES completion:nil];
-    }
-}
-
-+ (void)chooseRootViewController:(UIWindow *)window
-{
-    //获取当前的版本号
-    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
-
-    //获取存储的版本号
-    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
-
-    //比较
-    if ([curVersion isEqualToString:lastVersion]) {
-        //没有新版本
-        window.rootViewController = [[CZLaunchViewController alloc] initWithWindow:window];;
     } else {
-        //有新版本
-        CZGuideController *vc = [[CZGuideController alloc] init];
-        window.rootViewController = vc;
+        // 没有新版本, 请求服务器判断是否版本更新
+        [self ShowUpdataViewWithNetworkService];
     }
 }
 
 
+// 服务器获取最新版本
++ (void)ShowUpdataViewWithNetworkService
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"type"] = @"0";
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    param[@"clientVersionCode"] = curVersion;
+    
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSDictionary *versionInfo = [result[@"data"] deleteAllNullValue];
+            //有新版本
+            [CZSaveTool setObject:versionInfo forKey:requiredVersionCode];
+            //比较
+            BOOL isAscending = [curVersion compare:result[@"data"][@"versionCode"]] == NSOrderedAscending;
+            BOOL isOpen = [result[@"data"][@"open"] isEqualToNumber:@(1)];
+            if (isAscending && isOpen) {
+                // 更新弹框
+                CZUserUpdataView *alertView = [CZUserUpdataView userUpdataView];
+                alertView.frame = [UIScreen mainScreen].bounds;
+                alertView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                alertView.versionMessage = result[@"data"];
+                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+            } else {
+                // 推送弹框
+                CZNotificationAlertView *NotiView = [CZNotificationAlertView notificationAlertView];
+                [NotiView checkCurrentNotificationStatus];
+            }
+        }
+    } failure:^(NSError *error) {}];
+}
 
 
 @end

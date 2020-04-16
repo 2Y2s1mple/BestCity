@@ -9,13 +9,10 @@
 #import "AppDelegate.h"
 #import "CZJPushHandler.h"
 #import "CZUMConfigure.h"
-#import "CZGuideTool.h"
 #import "CZOpenAlibcTrade.h"
 //#import "UMSocialSnsService.h"
 #import "GXNetTool.h"
 #import "CZFreePushTool.h"
-
-#import "CZLaunchViewController.h"
 
 #import <MobLinkPro/IMLSDKRestoreDelegate.h>
 #import <MobLinkPro/MobLink.h>
@@ -76,7 +73,7 @@
     recordSearchTextArray = [NSMutableArray array];
 
     // 设置跟视图
-    [CZGuideTool chooseRootViewController:self.window];
+    [CZJIPINSynthesisTool jipin_projectEngine:self.window];
 
     // 加载极光推送
     [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];

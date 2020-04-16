@@ -20,7 +20,7 @@ typedef void(^WebViewBlock)(void);
 @property (nonatomic, strong) NSString *titleName;
 
 - (instancetype)initWithURL:(NSURL *)url;
-- (instancetype)initWithURL:(NSURL *)url actionblock:(WebViewBlock)block;
+- (instancetype)initWithURL:(NSURL *)url rightBtnTitle:(id)rightBtnTitle actionblock:(WebViewBlock)block;
 /** html */
 @property (nonatomic, strong) NSString *stringHtml;
 @end

@@ -42,9 +42,6 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 根据url跳淘宝*/
 + (void)jipin_jumpTaobaoWithUrlString:(NSString *)urlString;
 
-/** 弹窗工具 */
-+ (void)loadAlertView;
-
 /** 复制搜索弹框规则 */
 + (void)pasteboardAlertViewRule;
 
@@ -63,7 +60,6 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 判断未登录, 之后弹出登录页面 */
 + (void)jipin_jumpLogin;
 
-
 #pragma mark - 分享模块
 /** 友盟分享纯图片*/
 + (void)JINPIN_UMShareImage:(id)thumImage Type:(UMSocialPlatformType)type;
@@ -79,6 +75,21 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 
 /** 调用系统分享多图片 */
 + (void)JINPIN_systemShareImages:(NSArray *)images success:(void (^)(BOOL completed))block;
+
+/** 统一UI样式2, 分享网页*/
++ (void)JIPIN_UMShareUI2_Web:(NSDictionary *)webParam;
+
+#pragma mark - 启动有关
+/** 项目启动 */
++ (void)jipin_projectEngine:(UIWindow *)window;
+/** 开启弹窗 */
++ (void)jipin_openGlobalAlertView;
+/** 弹窗工具 */
++ (void)jipin_loadAlertView;
+/** 是否是新版本 */
++ (BOOL)jipin_isNewVersion;
+/** 是否是新人 */
++ (BOOL)jipin_isNewUser;
 
 @end
 

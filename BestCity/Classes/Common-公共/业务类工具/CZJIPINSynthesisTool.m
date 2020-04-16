@@ -24,6 +24,7 @@
 
 #import "GXSaveImageToPhone.h" //保存图片
 #import "GXZoomImageView.h" // 图片放大
+#import "CZGuideTool.h" // 引导页
 
 
 #import "CZGuessTypeTowView.h"
@@ -214,7 +215,7 @@
     [[ALBBSDK sharedInstance] auth:currentVc successCallback:^(ALBBSession *session) {
         NSString *tip = [NSString stringWithFormat:@"登录的用户信息:%@",[session getUser]];
         NSLog(@"%@", tip);
-        TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] actionblock:^{
+        TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@""] rightBtnTitle:nil actionblock:^{
             [CZProgressHUD showProgressHUDWithText:@"授权成功"];
             [CZProgressHUD hideAfterDelay:1.5];
             // 为了同步关联的淘宝账号
@@ -259,11 +260,11 @@
 // 0元购, 跳淘宝购买, 之后弹出特惠购, 获取备用金得到淘宝路径
 + (void)openAlibcTradeWithId:(NSString *)ID
 {
-    if (![JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
-        [CZProgressHUD showProgressHUDWithText:@"您已不是新用户，无法参加0元购活动"];
-        [CZProgressHUD hideAfterDelay:1.5];
-        return;
-    };
+//    if (![JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
+//        [CZProgressHUD showProgressHUDWithText:@"您已不是新用户，无法参加0元购活动"];
+//        [CZProgressHUD hideAfterDelay:1.5];
+//        return;
+//    };
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"allowanceGoodsId"] = ID;
@@ -301,7 +302,7 @@
 }
 
 #pragma mark - 弹窗工具
-+ (void)loadAlertView
++ (void)jipin_loadAlertView
 {
     //获取数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/getPopInfo"] body:nil header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -348,6 +349,26 @@
 
 
 #pragma mark - 复制搜索弹框规则
++ (void)pasteboardAlertViewRule
+{
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    NSString *string = posteboard.string;
+    NSString *rrecordS = string;
+    rrecordS = [rrecordS stringByReplacingOccurrencesOfString:@" " withString:@""];
+    rrecordS = [rrecordS stringByReplacingOccurrencesOfString:@"　" withString:@""];
+
+    if (string == nil || [rrecordS isEqualToString:@""]) {
+        return;
+    } else {
+        if ([recordSearchTextArray containsObject:string]) {
+            return;
+        } else {
+            [self pAlertViewRuleData];
+            [recordSearchTextArray addObject:string];
+        }
+    }
+}
+
 + (void)pAlertViewRuleData
 {
     UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
@@ -376,25 +397,7 @@
     }];
 }
 
-+ (void)pasteboardAlertViewRule
-{
-    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
-    NSString *string = posteboard.string;
-    NSString *rrecordS = string;
-    rrecordS = [rrecordS stringByReplacingOccurrencesOfString:@" " withString:@""];
-    rrecordS = [rrecordS stringByReplacingOccurrencesOfString:@"　" withString:@""];
 
-    if (string == nil || [rrecordS isEqualToString:@""]) {
-        return;
-    } else {
-        if ([recordSearchTextArray containsObject:string]) {
-            return;
-        } else {
-            [self pAlertViewRuleData];
-            [recordSearchTextArray addObject:string];
-        }
-    }
-}
 
 #pragma mark -  弹出分享的弹框: 仅限分享淘宝商品
 + (void)jumpShareViewWithUrl:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(id)thumImage object:(id)object
@@ -447,15 +450,15 @@
     //比较
     if (![curVersion isEqualToString:lastVersion]) {
         //新版本
-        [CZSaveTool setObject:@"www" forKey:identifier];
+        [CZSaveTool setObject:@"jipin_new_people" forKey:identifier];
     }
 //    [CZSaveTool setObject:@"0rrrr" forKey:identifier];
-    if ([[CZSaveTool objectForKey:identifier] isEqualToString:@"0"]) {
+    if ([[CZSaveTool objectForKey:identifier] isEqualToString:@"jipin_old_people"]) {
         // 老人
         return NO;
     } else {
         // 新人
-        [CZSaveTool setObject:@"0" forKey:identifier];
+        [CZSaveTool setObject:@"jipin_old_people" forKey:identifier];
         return YES;
     }
 }
@@ -601,6 +604,28 @@
     }];
 }
 
+#pragma mark - /** 统一UI样式2, 分享网页*/
++ (void)JIPIN_UMShareUI2_Web:(NSDictionary *)webParam
+{
+    [CZJIPINSynthesisView JIPIN_UMShareUI2WithAction:^(CZJIPINSynthesisView * _Nonnull view, NSInteger index) {
+        UMSocialPlatformType type = UMSocialPlatformType_UnKnown;//未知的
+        switch (index) {
+            case 0: // 微信好友
+                type = UMSocialPlatformType_WechatSession;
+                break;
+            case 1: // 朋友圈
+                type = UMSocialPlatformType_WechatTimeLine;
+                break;
+            case 2: // 新浪微博
+                type = UMSocialPlatformType_Sina;
+                break;
+            default:
+                break;
+        }
+        [CZJIPINSynthesisTool JINPIN_UMShareWeb:webParam[@"shareUrl"] Title:webParam[@"shareTitle"] subTitle:webParam[@"shareContent"] thumImage:webParam[@"shareImg"] Type:type];
+    }];
+}
+
 #pragma mark -  调用系统分享多图片
 + (void)JINPIN_systemShareImages:(NSArray *)images success:(void (^)(BOOL completed))block
 {
@@ -649,6 +674,49 @@
         UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
         [tabbar presentViewController:vc animated:NO completion:nil];
         return;
+    }
+}
+
+#pragma mark - /** 项目启动 */
++ (void)jipin_projectEngine:(UIWindow *)window
+{
+    // 设置跟视图
+    [CZGuideTool chooseRootViewController:window];
+}
+
+#pragma mark - /** 开启弹窗 */
++ (void)jipin_openGlobalAlertView
+{
+    // 一波弹窗
+    [CZGuideTool newpPeopleGuide];
+}
+
+#pragma mark - /** 是否是新版本 */
++ (BOOL)jipin_isNewVersion
+{
+    //获取当前的版本号
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    
+    //获取存储的版本号
+    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
+    
+    //比较
+    if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
+        return NO;
+    } else { // 是新版本
+        [CZSaveTool setObject:curVersion forKey:CZVERSION];
+        return YES;
+    }
+}
+
+
+#pragma mark - /** 是否是新人 */
++ (BOOL)jipin_isNewUser
+{
+    if (![JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
+        return NO;
+    } else {
+        return YES;
     }
 }
 

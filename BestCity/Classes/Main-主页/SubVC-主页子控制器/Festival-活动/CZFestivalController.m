@@ -25,7 +25,7 @@
 #import "CZFestivalTwoController.h"
 #import "CZTaobaoDetailController.h" // 淘宝详情页
 #import "CZTaobaoSearchController.h"
-#import "CZGuideTool.h"
+
 
 
 
@@ -109,7 +109,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         // 新用户指导
-        [CZGuideTool newpPeopleGuide];
+        [CZJIPINSynthesisTool jipin_openGlobalAlertView];
     });
 }
 

@@ -11,4 +11,5 @@
 @interface CZGuideTool : NSObject
 + (void)newpPeopleGuide;
 + (void)chooseRootViewController:(UIWindow *)window;
+
 @end
