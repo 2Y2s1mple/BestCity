@@ -30,10 +30,30 @@
 
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
+/** 已抢光 */
+@property (nonatomic, strong) UIView *maskView;
 
 @end
 
 @implementation CZFreeChargeCell4
+- (UIView *)maskView
+{
+    if (_maskView == nil) {
+        UIView *maskView = [[UIView alloc] init];
+        maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        maskView.layer.cornerRadius = 5;
+        maskView.x = 10;
+        maskView.y = 15;
+        maskView.size = self.bigImageView.size;
+        UIImageView *maskImage = [[UIImageView alloc] init];
+        maskImage.contentMode = UIViewContentModeScaleAspectFit;
+        maskImage.size = self.bigImageView.size;
+        maskImage.image = [UIImage imageNamed:@"festival-qiang-2"];
+        [maskView addSubview:maskImage];
+        _maskView = maskView;
+    }
+    return _maskView;
+}
 
 - (void)setModel:(CZSubFreeChargeModel *)model
 {
@@ -43,8 +63,20 @@
 
     NSString *otherPrice = [NSString stringWithFormat:@"淘宝价¥%.2f", [_model.otherPrice floatValue]];
     self.oldPriceLabel.attributedText = [otherPrice addStrikethroughWithRange:[otherPrice rangeOfString:otherPrice]];
-    [self.progressView setProgress:(model.count / 100.0) animated:YES];
-    self.qiangLabel.text = [NSString stringWithFormat:@"已抢%.0lf%%", (self.progressView.progress * 100)];
+    
+    if ([model.total integerValue] > 0 ) {
+        [self.progressView setProgress:(model.count / 100.0) animated:YES];
+        self.qiangLabel.text = [NSString stringWithFormat:@"已抢%.0lf%%", (self.progressView.progress * 100)];
+        [self.btn setTitle:@"0元购" forState:UIControlStateNormal];
+        [self.btn setBackgroundColor:UIColorFromRGB(0xE25838)];
+        [self.maskView removeFromSuperview];
+    } else { // 抢光
+        [self.progressView setProgress:0.0 animated:YES];
+        self.qiangLabel.text = @"已抢完";
+        [self.btn setTitle:@"已抢完" forState:UIControlStateNormal];
+        [self.btn setBackgroundColor:UIColorFromRGB(0x9D9D9D)];
+        [self.contentView addSubview:self.maskView];
+    }
     _model.cellHeight = 140;
 }
 

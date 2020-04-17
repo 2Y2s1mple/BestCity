@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *typeNumber;
 
 /** 数据 */
-/** <#注释#> */
 @property (nonatomic, strong) NSString *Id;
 @property (nonatomic, strong) NSString *otherGoodsId;
 @property (nonatomic, strong) NSString *img;
@@ -38,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *couponPrice;
 /** 现价 */
 @property (nonatomic, strong) NSNumber *buyPrice;
+/** 总个数 */
+@property (nonatomic, strong) NSNumber *total;
 
 
 @end

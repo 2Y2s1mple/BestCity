@@ -199,7 +199,6 @@
             }
         }
     }
-
 }
 
 // 每日爆款
@@ -285,10 +284,8 @@
 - (void)pushMessageListView
 {
     [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_pmd"];
-    TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/newZn.html"]];
-    vc.titleName = @"极品城省钱攻略";
-    CURRENTVC(currentVc);
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    // push省钱攻略
+    [CZFreePushTool push_freeMoney];
 }
 
 // 爆款主

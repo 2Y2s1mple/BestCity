@@ -282,5 +282,21 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - 赚钱攻略
++ (void)push_freeMoney
+{
+    TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/newZn.html"] rightBtnTitle:[UIImage imageNamed:@"Forward"] actionblock:^{
+        NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
+        shareDic[@"shareTitle"] = @"新人惊喜二重礼，限时活动速抢！";
+        shareDic[@"shareContent"] = @"新人首单0元购，更有30元大额津贴下单立减当钱花~！";
+        shareDic[@"shareUrl"] = @"https://www.jipincheng.cn/newZn.html";
+        shareDic[@"shareImg"] = [UIImage imageNamed:@"MemberOfCenter-16"];
+        [CZJIPINSynthesisTool JIPIN_UMShareUI2_Web:shareDic];
+    }];
+    vc.titleName = @"极品城省钱攻略";
+    CURRENTVC(currentVc);
+    [currentVc.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end
