@@ -7,7 +7,7 @@
 //
 
 #import "CZTaoBaoShopVipView.h"
-#import "CZMemberOfCenterController.h"
+
 @interface CZTaoBaoShopVipView ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;

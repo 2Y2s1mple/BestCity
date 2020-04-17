@@ -206,13 +206,14 @@ static CGFloat const likeAndShareHeight = 49;
     if ([JPUSERINFO[@"level"] integerValue] == 2) {
     
     } else {
-        CZTaoBaoShopVipView *vipView = [CZTaoBaoShopVipView taoBaoShopVipView];
-        vipView.y = self.recordHeight;
-        vipView.width = SCR_WIDTH;
-        vipView.height = 28;
-        vipView.param = self.detailModel;
-        [self.scrollerView addSubview:vipView];
-        self.recordHeight += 28;
+        // 暂时去掉
+//        CZTaoBaoShopVipView *vipView = [CZTaoBaoShopVipView taoBaoShopVipView];
+//        vipView.y = self.recordHeight;
+//        vipView.width = SCR_WIDTH;
+//        vipView.height = 28;
+//        vipView.param = self.detailModel;
+//        [self.scrollerView addSubview:vipView];
+//        self.recordHeight += 28;
     }
     
 

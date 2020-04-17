@@ -310,11 +310,14 @@
     self.memberIcon.image = [CZMemberOfCenterTool toolUserStatus:JPUSERINFO][4];
     
     // 最高级, 合伙人
-    if ([JPUSERINFO[@"level"] integerValue] == 2) {
-        self.tableViewTop.constant = 10;
-    } else {
-        self.tableViewTop.constant = 60;
-    }
+    self.tableViewTop.constant = 10;
+    
+    // 暂时去掉会员
+//    if ([JPUSERINFO[@"level"] integerValue] == 2) {
+//        self.tableViewTop.constant = 10;
+//    } else {
+//        self.tableViewTop.constant = 60;
+//    }
     
     // 用户名字
     [self.loginBtn setTitle:JPUSERINFO[@"nickname"] forState:UIControlStateNormal];
@@ -362,7 +365,15 @@
         return cell;
     } else {
         CZMeArrowCell *cell =[CZMeArrowCell cellWithTabelView:tableView indexPath:indexPath];
-        cell.dataSource = dic;
+        NSMutableArray *list = [NSMutableArray arrayWithArray:dic[@"titles"]];
+        if ([JPUSERINFO[@"pid"] integerValue] != 0) {
+            for (NSDictionary *dic in list) {
+                if ([dic[@"title"] isEqualToString:@"邀请码"]) {
+                    [list removeObject:dic];
+                }
+            }
+        }
+        cell.list = list;
         return cell;
     }
 }

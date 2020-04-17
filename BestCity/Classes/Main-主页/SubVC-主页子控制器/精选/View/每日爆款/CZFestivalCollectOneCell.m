@@ -138,8 +138,30 @@
     // 跑马灯
     self.messageListView.dataSource = self.messageList;
 
+    // 如果是未登陆状态
+    if ([JPTOKEN length] <= 0) {
+        // 新人0元和百万补贴互换
+        [self changeNewPeopleAndMillion:_allowanceGoodsList isNewUser:YES];
+    } else {
+        // 新人0元和百万补贴互换
+        [self changeNewPeopleAndMillion:_allowanceGoodsList isNewUser:self.newUser];
+    }
+    
+    // 每日爆款
+    [self DailyHotStyle];
+
+    // 高反专区
+    [self HighCashback];
+
+    // 广告位
+    [self createAdImageView];
+}
+
+// 新人0元和百万补贴互换
+- (void)changeNewPeopleAndMillion:(NSArray *)allowanceGoodsList isNewUser:(BOOL)isNewUser
+{
     // 老人
-    if (self.newUser == NO) {
+    if (isNewUser == NO) {
         self.peopleNewViewHeight.constant = 118;
         self.millionsView.allowanceGoodsList = allowanceGoodsList;
         [self.peopleNewView addSubview:self.millionsView];
@@ -178,14 +200,6 @@
         }
     }
 
-    // 每日爆款
-    [self DailyHotStyle];
-
-    // 高反专区
-    [self HighCashback];
-
-    // 广告位
-    [self createAdImageView];
 }
 
 // 每日爆款

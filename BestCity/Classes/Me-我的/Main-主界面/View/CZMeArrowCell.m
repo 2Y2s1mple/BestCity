@@ -31,7 +31,6 @@
     layout.minimumInteritemSpacing = 0;
     layout.itemSize = CGSizeMake((SCR_WIDTH - 30) / 4.0, 82);
 
-
     CGRect frame = CGRectMake(0, 35, SCR_WIDTH - 30, 205 - 35);
     self.collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -43,9 +42,6 @@
     self.collectionView.dataSource = self;
 
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CZMeArrowCell2 class]) bundle:nil] forCellWithReuseIdentifier:@"CZMeArrowCell2"];
-
-    
-
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -109,21 +105,10 @@
     return cell;
 }
 
-
-
-
-- (void)setDataSource:(NSDictionary *)dataSource
+- (void)setList:(NSArray *)list
 {
-    _dataSource = dataSource;
-    self.collectionArr = [NSMutableArray arrayWithArray:dataSource[@"titles"]];
-
-   if ([JPUSERINFO[@"pid"] integerValue] != 0) {
-       for (NSDictionary *dic in dataSource[@"titles"]) {
-           if ([dic[@"title"] isEqualToString:@"邀请码"]) {
-               [self.collectionArr removeObject:dic];
-           }
-       }
-   }
+    _list = list;
+    self.collectionArr = list;
 
 //   if ([JPUSERINFO[@"isNewUser"] integerValue] != 0) { // 0 新用户
 //       for (NSDictionary *dic in dataSource[@"titles"]) {

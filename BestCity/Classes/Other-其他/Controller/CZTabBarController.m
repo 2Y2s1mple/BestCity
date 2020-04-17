@@ -14,7 +14,7 @@
 #import "CZIssueMomentsController.h" // 发圈
 #import "CZMainHotSaleController.h"
 #import "CZDiscoverController.h"
-#import "CZEvaluationController.h"
+#import "CZEvaluationController.h" // 评测
 #import "CZTrialMainController.h"
 #import "CZFreeChargeController.h"
 #import "CZMeController.h"
@@ -64,7 +64,11 @@
 
 //    [self setupWithController:[[CZRedPacketsController alloc] init] title:@"红包" image:@"tab-red-packet-nor" selectedImage:@"tab-red-packet-sel"];
 
-    [self setupWithController:[[CZMemberOfCenterController alloc] init] title:@"会员" image:@"tab-members-nor" selectedImage:@"tab-members-sel"];
+    CZEvaluationController *vc = [[CZEvaluationController alloc] init];
+    vc.isTabbarPush = YES;
+    [self setupWithController:vc title:@"评测" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
+    
+//    [self setupWithController:[[CZMemberOfCenterController alloc] init] title:@"会员" image:@"tab-members-nor" selectedImage:@"tab-members-sel"];
 
     [self setupWithController:[[CZIssueMomentsController alloc] init] title:@"发圈" image:@"tab-moments-nor" selectedImage:@"tab-moments-sel"];
 

@@ -91,10 +91,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = CZGlobalWhiteBg;
-    GXButtons *popBtn = [GXButtons buttonWithFrame:CGRectMake(10, (IsiPhoneX ? 54 : 30), 30, 30) backImage:[UIImage imageNamed:@"小分类榜单"] bColor:[UIColor whiteColor] cornerRadius:0 eventBlock:^(UIButton * _Nonnull sender) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    [self.view addSubview:popBtn];
+    if (!self.isTabbarPush) {
+        GXButtons *popBtn = [GXButtons buttonWithFrame:CGRectMake(10, (IsiPhoneX ? 54 : 30), 30, 30) backImage:[UIImage imageNamed:@"小分类榜单"] bColor:[UIColor whiteColor] cornerRadius:0 eventBlock:^(UIButton * _Nonnull sender) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [self.view addSubview:popBtn];
+    }
     // 创建视图
     [self.view addSubview:self.searchView];
 }
@@ -143,7 +145,13 @@
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
-    return CGRectMake(0, CZGetY(self.searchView) + 18 + 26 + 18, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.searchView) + 18 + 26 + 18 + (IsiPhoneX ? 34 : 0)));
+    
+    if (self.isTabbarPush) {
+        return CGRectMake(0, CZGetY(self.searchView) + 18 + 26 + 18, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.searchView) + 18 + 26 + 18 + (IsiPhoneX ? 34 + 49 : 49)));
+    } else {
+        return CGRectMake(0, CZGetY(self.searchView) + 18 + 26 + 18, SCR_WIDTH, SCR_HEIGHT - (CZGetY(self.searchView) + 18 + 26 + 18 + (IsiPhoneX ? 34 : 0)));
+    }
+    
 }
 
 - (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info

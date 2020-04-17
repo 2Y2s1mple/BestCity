@@ -11,6 +11,6 @@
 @interface CZMeArrowCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *messageCountLabel;
 /** shuju */
-@property (nonatomic, strong) NSDictionary *dataSource;
+@property (nonatomic, strong) NSArray *list;
 + (instancetype)cellWithTabelView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 @end

@@ -266,10 +266,10 @@
 + (void)push_memberOfCenter
 {
     // 是否push进来的
-    CURRENTVC(currentVc);
-    CZMemberOfCenterController *vc = [[CZMemberOfCenterController alloc] init];
-    vc.isNavPush = YES;
-    [currentVc.navigationController pushViewController:vc animated:YES];
+//    CURRENTVC(currentVc);
+//    CZMemberOfCenterController *vc = [[CZMemberOfCenterController alloc] init];
+//    vc.isNavPush = YES;
+//    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 测评
@@ -278,6 +278,7 @@
     // 是否push进来的
     CURRENTVC(currentVc);
     CZEvaluationController *vc = [[CZEvaluationController alloc] init];
+    vc.isTabbarPush = NO;
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 

@@ -9,4 +9,6 @@
 #import "WMPageController.h"
 
 @interface CZEvaluationController : WMPageController
+/** <#注释#> */
+@property (nonatomic, assign) BOOL isTabbarPush;
 @end

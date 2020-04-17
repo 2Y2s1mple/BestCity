@@ -709,14 +709,13 @@
     }
 }
 
-
 #pragma mark - /** 是否是新人 */
 + (BOOL)jipin_isNewUser
 {
-    if (![JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
-        return NO;
-    } else {
+    if ([JPUSERINFO[@"isNewUser"] isEqual:@(0)]) { // 0是新人
         return YES;
+    } else { // 1是老人
+        return NO;
     }
 }
 
