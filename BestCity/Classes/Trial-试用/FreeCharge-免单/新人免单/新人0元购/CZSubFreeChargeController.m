@@ -379,8 +379,8 @@
 - (void)UMShareWebWithType:(UMSocialPlatformType)type
 {
     NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
-    shareDic[@"shareTitle"] = @"新人0元购，仅剩2天!";
-    shareDic[@"shareContent"] = @"价值30元免单礼品任意选";
+    shareDic[@"shareTitle"] = @"新人惊喜二重礼，限时活动速抢！";
+    shareDic[@"shareContent"] = @"新人首单0元购，更有30元大额津贴下单立减当钱花~！";
     shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/new-free?query=""%@""", JPUSERINFO[@"userId"]];
     shareDic[@"shareImg"] = @"https://jipincheng.cn/share_newFree.png";
     [CZJIPINSynthesisTool JINPIN_UMShareWeb:shareDic[@"shareUrl"] Title:shareDic[@"shareTitle"] subTitle:shareDic[@"shareContent"] thumImage:shareDic[@"shareImg"] Type:type];

@@ -287,8 +287,8 @@
 {
     TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/newZn.html"] rightBtnTitle:[UIImage imageNamed:@"Forward"] actionblock:^{
         NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
-        shareDic[@"shareTitle"] = @"新人惊喜二重礼，限时活动速抢！";
-        shareDic[@"shareContent"] = @"新人首单0元购，更有30元大额津贴下单立减当钱花~！";
+        shareDic[@"shareTitle"] = @"如何查找淘宝隐藏优惠券及下单返利？";
+        shareDic[@"shareContent"] = @"淘宝天猫90%的商品都能省，同时还有高额返利，淘好物，更省钱！";
         shareDic[@"shareUrl"] = @"https://www.jipincheng.cn/newZn.html";
         shareDic[@"shareImg"] = [UIImage imageNamed:@"MemberOfCenter-16"];
         [CZJIPINSynthesisTool JIPIN_UMShareUI2_Web:shareDic];

@@ -1,0 +1,38 @@
+{
+  "images" : [
+    {
+      "filename" : "编组 4.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "graphics-feature-set" : "metal3v1",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "编组 4@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "graphics-feature-set" : "metal3v1",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "编组 4@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "graphics-feature-set" : "metal3v1",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

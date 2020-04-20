@@ -19,6 +19,7 @@
 
 #define CZVERSION @"CZVersion"
 @implementation CZGuideTool
+#pragma mark - 选择跟视图
 + (void)chooseRootViewController:(UIWindow *)window
 {
     if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
@@ -31,6 +32,7 @@
     }
 }
 
+#pragma mark - 加载弹框
 + (void)newpPeopleGuide
 {
     if ([CZJIPINSynthesisTool jipin_isNewVersion]) {

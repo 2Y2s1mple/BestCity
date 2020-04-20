@@ -733,6 +733,8 @@
 		97FF6DF8211862EF00376435 /* CZfeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FF6DF6211862EF00376435 /* CZfeedbackController.m */; };
 		97FF6DF9211862EF00376435 /* CZfeedbackController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97FF6DF7211862EF00376435 /* CZfeedbackController.xib */; };
 		97FFA9F3230FF05200154BD8 /* CZMeAnswersPublishOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FFA9F2230FF05200154BD8 /* CZMeAnswersPublishOneController.m */; };
+		C8091F15244D515800CC86B7 /* 12秒nn.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C8091F14244D515800CC86B7 /* 12秒nn.mp4 */; };
+		C8091F25244D760400CC86B7 /* GXAVPlayerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C8091F23244D760400CC86B7 /* GXAVPlayerTool.m */; };
 		C84B402424482D0F00C5168A /* CZAlertMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C84B402224482D0F00C5168A /* CZAlertMainViewController.m */; };
 		C84B402524482D0F00C5168A /* CZAlertMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C84B402324482D0F00C5168A /* CZAlertMainViewController.xib */; };
 		C84B40292448396000C5168A /* CZAlertMain2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C84B40272448396000C5168A /* CZAlertMain2ViewController.m */; };
@@ -2000,6 +2002,9 @@
 		97FF6DF7211862EF00376435 /* CZfeedbackController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZfeedbackController.xib; sourceTree = "<group>"; };
 		97FFA9F1230FF05200154BD8 /* CZMeAnswersPublishOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMeAnswersPublishOneController.h; sourceTree = "<group>"; };
 		97FFA9F2230FF05200154BD8 /* CZMeAnswersPublishOneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMeAnswersPublishOneController.m; sourceTree = "<group>"; };
+		C8091F14244D515800CC86B7 /* 12秒nn.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "12秒nn.mp4"; sourceTree = "<group>"; };
+		C8091F23244D760400CC86B7 /* GXAVPlayerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GXAVPlayerTool.m; path = "../../../../MyProject/MyRepository/GXLCodeRepository/Classes/Function常用功能/AVPlayer使用/GXAVPlayerTool.m"; sourceTree = "<group>"; };
+		C8091F24244D760400CC86B7 /* GXAVPlayerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GXAVPlayerTool.h; path = "../../../../MyProject/MyRepository/GXLCodeRepository/Classes/Function常用功能/AVPlayer使用/GXAVPlayerTool.h"; sourceTree = "<group>"; };
 		C84B402124482D0F00C5168A /* CZAlertMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAlertMainViewController.h; sourceTree = "<group>"; };
 		C84B402224482D0F00C5168A /* CZAlertMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAlertMainViewController.m; sourceTree = "<group>"; };
 		C84B402324482D0F00C5168A /* CZAlertMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAlertMainViewController.xib; sourceTree = "<group>"; };
@@ -2650,6 +2655,7 @@
 		971CDFF421E449E600DE3883 /* 引导页工具 */ = {
 			isa = PBXGroup;
 			children = (
+				C8091F14244D515800CC86B7 /* 12秒nn.mp4 */,
 				9768FAF02368133000019B4E /* 启动页 */,
 				9735528523B22385005253A5 /* CZGuideController.h */,
 				9735528423B22385005253A5 /* CZGuideController.m */,
@@ -6075,6 +6081,8 @@
 		C8F2644624404DC8009475F6 /* otherProject */ = {
 			isa = PBXGroup;
 			children = (
+				C8091F24244D760400CC86B7 /* GXAVPlayerTool.h */,
+				C8091F23244D760400CC86B7 /* GXAVPlayerTool.m */,
 				C8F2645E24404E2A009475F6 /* CZCategoryLineLayoutView.h */,
 				C8F2645D24404E2A009475F6 /* CZCategoryLineLayoutView.m */,
 				C8F2645A24404E20009475F6 /* GXButtons.h */,
@@ -6330,6 +6338,7 @@
 				970AD8CE232A3BD600CCE9F9 /* SmartLink.bundle in Resources */,
 				97D8FCC32111612200D8ED8F /* CZMeArrowCell.xib in Resources */,
 				972E41CC21147C3A00BC751C /* CZAttentionController.xib in Resources */,
+				C8091F15244D515800CC86B7 /* 12秒nn.mp4 in Resources */,
 				97203759236293FB00C0ACAB /* CZGoodsDetailGuidanceView.xib in Resources */,
 				97F4D487224A127300A82B14 /* CZvoteUserController.xib in Resources */,
 				97705CD52108495D00485D64 /* CZHotSaleCell.xib in Resources */,
@@ -6584,6 +6593,7 @@
 				972E41CB21147C3A00BC751C /* CZAttentionController.m in Sources */,
 				9723076021AD76F80004C00C /* CZNoDataView.m in Sources */,
 				972E41BB21146CD600BC751C /* CZMyPointDetailController.m in Sources */,
+				C8091F25244D760400CC86B7 /* GXAVPlayerTool.m in Sources */,
 				97524675230A7DE100A1A334 /* CZMeIntelligentController.m in Sources */,
 				9794FC5C2193E761003C6AA6 /* CZBaseRecommendController.m in Sources */,
 				97798CD2212D0FC90052CE94 /* NSImage+WebCache.m in Sources */,
