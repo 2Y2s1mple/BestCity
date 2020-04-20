@@ -134,6 +134,9 @@
     if (scrollView.contentOffset.x == SCR_WIDTH) {
         [self.playerView start];
     }
+    if (scrollView.contentOffset.x == 0) {
+        [self.playerView pause];
+    }
 }
 
 @end

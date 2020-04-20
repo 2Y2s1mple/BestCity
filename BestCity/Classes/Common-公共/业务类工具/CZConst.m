@@ -35,6 +35,9 @@ NSArray *aDImage;
 /** 推动数据 */
 NSDictionary *PushData_;
 
+/** 全局版本号KEY */
+NSString * const CZVERSION_ = @"CZVersion";
+
 
 
 

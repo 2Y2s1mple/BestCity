@@ -31,3 +31,6 @@ UIKIT_EXTERN NSArray *aDImage;
 /** 推动数据 */
 UIKIT_EXTERN NSDictionary *PushData_;
 
+/** 全局版本号KEY */
+UIKIT_EXTERN NSString * const CZVERSION_;
+

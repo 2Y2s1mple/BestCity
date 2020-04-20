@@ -83,7 +83,7 @@
         } failure:^(NSError *error) {}];
     }
 
-    if ([CZJIPINSynthesisTool isFirstIntoWithIdentifier:NSStringFromClass([self class])]) {
+    if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) {
         // 第一次
         CZSubFreePreferentialAlertView *vc = [[CZSubFreePreferentialAlertView alloc] init];
         [self presentViewController:vc animated:YES completion:nil];

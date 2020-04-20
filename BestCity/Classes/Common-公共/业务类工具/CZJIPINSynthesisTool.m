@@ -438,30 +438,7 @@
     [currentVc presentViewController:modalVc animated:YES completion:nil];
 }
 
-#pragma mark -   /** 判断界面是否该版本下的第一次加载 */
-+ (BOOL)isFirstIntoWithIdentifier:(NSString *)identifier
-{
-    //获取当前的版本号
-    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
 
-    //获取存储的版本号
-    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
-
-    //比较
-    if (![curVersion isEqualToString:lastVersion]) {
-        //新版本
-        [CZSaveTool setObject:@"jipin_new_people" forKey:identifier];
-    }
-//    [CZSaveTool setObject:@"0rrrr" forKey:identifier];
-    if ([[CZSaveTool objectForKey:identifier] isEqualToString:@"jipin_old_people"]) {
-        // 老人
-        return NO;
-    } else {
-        // 新人
-        [CZSaveTool setObject:@"jipin_old_people" forKey:identifier];
-        return YES;
-    }
-}
 
 #pragma mark -  /** 友盟分享web*/
 + (void)JINPIN_UMShareWeb:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(NSString *)thumImage Type:(UMSocialPlatformType)type
@@ -692,19 +669,21 @@
 }
 
 #pragma mark - /** 是否是新版本 */
-+ (BOOL)jipin_isNewVersion
++ (BOOL)jipin_isNewVersionIs_Syn:(BOOL)isSyn
 {
     //获取当前的版本号
     NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     
     //获取存储的版本号
-    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION];
+    NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION_];
     
     //比较
     if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
-        return NO;
+        return  NO;
     } else { // 是新版本
-        [CZSaveTool setObject:curVersion forKey:CZVERSION];
+        if (isSyn) {
+            [CZSaveTool setObject:curVersion forKey:CZVERSION_];
+        }
         return YES;
     }
 }
@@ -716,6 +695,27 @@
         return YES;
     } else { // 1是老人
         return NO;
+    }
+}
+
+#pragma mark -   /** 判断界面是否该版本下的第一次加载 */
++ (BOOL)jipin_isFirstIntoWithIdentifier:(Class)currentClass
+{
+    NSString *identifier = NSStringFromClass(currentClass);
+    
+    // 如果是新版本删除所有存储的key值
+    if ([self jipin_isNewVersionIs_Syn:NO]) {
+        // 新版本
+        [CZSaveTool setObject:@"jipin_new_page" forKey:identifier];
+    }
+
+    if ([[CZSaveTool objectForKey:identifier] isEqualToString:@"jipin_old_page"]) {
+        // 第二次进
+        return NO;
+    } else {
+        // 第一次进
+        [CZSaveTool setObject:@"jipin_old_page" forKey:identifier];
+        return YES;
     }
 }
 

@@ -22,7 +22,7 @@
 #pragma mark - 选择跟视图
 + (void)chooseRootViewController:(UIWindow *)window
 {
-    if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
+    if ([CZJIPINSynthesisTool jipin_isNewVersionIs_Syn:NO]) {
         // 有新版本
         CZGuideController *vc = [[CZGuideController alloc] init];
         window.rootViewController = vc;
@@ -35,7 +35,7 @@
 #pragma mark - 加载弹框
 + (void)newpPeopleGuide
 {
-    if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
+    if ([CZJIPINSynthesisTool jipin_isNewVersionIs_Syn:NO]) {
         // 是新版本, 显示获得新人红包
         CURRENTVC(currentVc);
         CZAlertView1Controller *alert1 = [[CZAlertView1Controller alloc] init];

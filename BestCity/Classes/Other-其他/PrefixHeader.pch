@@ -77,7 +77,6 @@
 #define HOTTitleH 50
 //首页滚动视图的内容尺寸
 #define HOTContentY (HOTTitleY + HOTTitleH + 2)
-#define CZVERSION @"CZVersion"
 
 /************************************************************/
 /**

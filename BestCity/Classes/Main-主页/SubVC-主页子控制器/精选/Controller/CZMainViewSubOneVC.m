@@ -116,7 +116,7 @@
         aDImage = nil;
     } else {
         // 如果是新版本
-        if ([CZJIPINSynthesisTool jipin_isNewVersion]) { // 新版本
+        if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) { // 新版本
             CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{
                 // 开启弹框
                 [CZJIPINSynthesisTool jipin_openGlobalAlertView];

@@ -48,9 +48,6 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 弹出分享的弹框: 仅限分享淘宝商品 */
 + (void)jumpShareViewWithUrl:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(id)thumImage object:(id)object;
 
-/** 判断界面是否该版本下的第一次加载 */
-+ (BOOL)isFirstIntoWithIdentifier:(NSString *)identifier;
-
 /** 保存图片到本地 */
 + (void)jipin_saveImage:(id)image;
 
@@ -82,14 +79,21 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 #pragma mark - 启动有关
 /** 项目启动 */
 + (void)jipin_projectEngine:(UIWindow *)window;
+
 /** 开启弹窗 */
 + (void)jipin_openGlobalAlertView;
+
 /** 弹窗工具 */
 + (void)jipin_loadAlertView;
+
 /** 是否是新版本 */
-+ (BOOL)jipin_isNewVersion;
++ (BOOL)jipin_isNewVersionIs_Syn:(BOOL)isSyn;
+
 /** 是否是新人 */
 + (BOOL)jipin_isNewUser;
+
+/** 判断界面是否该版本下的第一次加载 */
++ (BOOL)jipin_isFirstIntoWithIdentifier:(Class)currentClass;
 
 @end
 
