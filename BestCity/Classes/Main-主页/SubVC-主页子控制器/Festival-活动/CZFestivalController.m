@@ -106,11 +106,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 新用户指导
-        [CZJIPINSynthesisTool jipin_openGlobalAlertView];
-    });
+    
+    // 如果是新版本
+    if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) { // 新版本
+        // 开启弹框
+        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
+    } else {
+        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:NO];
+    }
 }
 
 // 上拉加载, 下拉刷新

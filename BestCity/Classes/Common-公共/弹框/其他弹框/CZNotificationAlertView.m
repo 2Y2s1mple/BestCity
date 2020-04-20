@@ -39,7 +39,7 @@
 
 -(void) checkCurrentNotificationStatus
 {
-    if (![CZJIPINSynthesisTool jipin_isNewVersionIs_Syn:YES]) {
+    if (![CZJIPINSynthesisTool jipin_isNewVersion]) {
         [self loadUserAlert];
         return;
     }

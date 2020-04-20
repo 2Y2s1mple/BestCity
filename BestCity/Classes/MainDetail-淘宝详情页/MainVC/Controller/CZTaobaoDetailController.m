@@ -140,7 +140,7 @@ static CGFloat const likeAndShareHeight = 49;
     if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) {
            // 第一次
            CZTaobaoDetailNewAlertView *vc = [[CZTaobaoDetailNewAlertView alloc] init];
-           [self presentViewController:vc animated:YES completion:nil];
+           [self presentViewController:vc animated:NO completion:nil];
        } else {
 
        }

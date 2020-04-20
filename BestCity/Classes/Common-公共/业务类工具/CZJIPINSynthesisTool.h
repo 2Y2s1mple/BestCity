@@ -81,13 +81,13 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 + (void)jipin_projectEngine:(UIWindow *)window;
 
 /** 开启弹窗 */
-+ (void)jipin_openGlobalAlertView;
++ (void)jipin_globalAlertWithNewVersion:(BOOL)isNewVersion;
 
 /** 弹窗工具 */
 + (void)jipin_loadAlertView;
 
 /** 是否是新版本 */
-+ (BOOL)jipin_isNewVersionIs_Syn:(BOOL)isSyn;
++ (BOOL)jipin_isNewVersion;
 
 /** 是否是新人 */
 + (BOOL)jipin_isNewUser;

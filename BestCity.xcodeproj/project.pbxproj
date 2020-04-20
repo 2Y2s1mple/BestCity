@@ -666,7 +666,6 @@
 		97F0EC2F21251E6B000FE1DC /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974C58912122D4F7008B3E6A /* Photos.framework */; };
 		97F0EC32212529F5000FE1DC /* CZUMConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F0EC31212529F5000FE1DC /* CZUMConfigure.m */; };
 		97F0EC35212559A3000FE1DC /* CZShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F0EC34212559A3000FE1DC /* CZShareView.m */; };
-		97F0EC392125692B000FE1DC /* CZGuideTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F0EC382125692B000FE1DC /* CZGuideTool.m */; };
 		97F0EC3C212569C4000FE1DC /* CZSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F0EC3B212569C4000FE1DC /* CZSaveTool.m */; };
 		97F152FF21097A24009F7922 /* CZCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F152FE21097A24009F7922 /* CZCommodityView.m */; };
 		97F1530121097A75009F7922 /* CZCommodityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F1530021097A75009F7922 /* CZCommodityView.xib */; };
@@ -1882,8 +1881,6 @@
 		97F0EC31212529F5000FE1DC /* CZUMConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZUMConfigure.m; sourceTree = "<group>"; };
 		97F0EC33212559A3000FE1DC /* CZShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZShareView.h; sourceTree = "<group>"; };
 		97F0EC34212559A3000FE1DC /* CZShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZShareView.m; sourceTree = "<group>"; };
-		97F0EC372125692B000FE1DC /* CZGuideTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZGuideTool.h; sourceTree = "<group>"; };
-		97F0EC382125692B000FE1DC /* CZGuideTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZGuideTool.m; sourceTree = "<group>"; };
 		97F0EC3A212569C4000FE1DC /* CZSaveTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZSaveTool.h; sourceTree = "<group>"; };
 		97F0EC3B212569C4000FE1DC /* CZSaveTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZSaveTool.m; sourceTree = "<group>"; };
 		97F152FD21097A24009F7922 /* CZCommodityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCommodityView.h; sourceTree = "<group>"; };
@@ -2659,8 +2656,6 @@
 				9768FAF02368133000019B4E /* 启动页 */,
 				9735528523B22385005253A5 /* CZGuideController.h */,
 				9735528423B22385005253A5 /* CZGuideController.m */,
-				97F0EC372125692B000FE1DC /* CZGuideTool.h */,
-				97F0EC382125692B000FE1DC /* CZGuideTool.m */,
 			);
 			path = "引导页工具";
 			sourceTree = "<group>";
@@ -6446,7 +6441,6 @@
 				97FF57E8238281B900373DD1 /* CZFreeAlertView4.m in Sources */,
 				9723075A21AD50D50004C00C /* NSDictionary+CZExtension.m in Sources */,
 				97A5B974230D2DF500014E90 /* CZMePublishThreeController.m in Sources */,
-				97F0EC392125692B000FE1DC /* CZGuideTool.m in Sources */,
 				97C3925E230C109D002EA036 /* CZSubCollectFiveController.m in Sources */,
 				97FA0B2023769F71001D1B70 /* CZAllOrderController.m in Sources */,
 				97798C7B212CF4430052CE94 /* SVIndefiniteAnimatedView.m in Sources */,
@@ -7038,7 +7032,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7076,7 +7070,7 @@
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
 				);
-				MARKETING_VERSION = 2.10.1;
+				MARKETING_VERSION = 2.10.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",
@@ -7139,7 +7133,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7177,7 +7171,7 @@
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
 				);
-				MARKETING_VERSION = 2.10.1;
+				MARKETING_VERSION = 2.10.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-force_load",

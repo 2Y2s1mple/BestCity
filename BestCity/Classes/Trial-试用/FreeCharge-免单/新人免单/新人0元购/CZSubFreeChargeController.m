@@ -52,6 +52,9 @@
 /** 新人商品默认6个 */
 @property (nonatomic, assign) NSInteger currentCount;
 
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger recordPopCount;
+
 @end
 
 @implementation CZSubFreeChargeController
@@ -107,14 +110,20 @@
     //创建刷新控件
     [self setupRefresh];
 
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setBackgroundImage:[UIImage imageNamed:@"festival-qiang-1"] forState:UIControlStateNormal];
-    btn.width = SCR_WIDTH;
-    btn.height = 55;
-    btn.x = 0;
-    btn.y = SCR_HEIGHT - (IsiPhoneX ? 34 + 55 : 55);
-    [btn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+    UIButton *share = [UIButton buttonWithType:UIButtonTypeCustom];
+    [share setBackgroundImage:[UIImage imageNamed:@"festival-qiang-1"] forState:UIControlStateNormal];
+    share.width = SCR_WIDTH;
+    share.height = 55;
+    share.x = 0;
+    share.y = SCR_HEIGHT - (IsiPhoneX ? 34 + 55 : 55);
+    [share addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:share];
+    
+    UIButton *leaveBtn = [[UIButton alloc] init];
+    leaveBtn.size = CGSizeMake(100, 100);
+    leaveBtn.backgroundColor = [RANDOMCOLOR colorWithAlphaComponent:0.01];
+    [self.view addSubview:leaveBtn];
+    [leaveBtn addTarget:self action:@selector(pushALert2ViewController:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -411,15 +420,24 @@
     [CZJIPINSynthesisTool JINPIN_UMShareImage:thumImage Type:type];
 }
 
+
+#pragma mark - 弹框退出0元购
 - (void)pushALert2ViewController:(UIButton *)sender
 {
-    [sender removeFromSuperview];
-    CZAlertView2Controller *vc = [[CZAlertView2Controller alloc] init];
-    vc.param = self.alertViewParam;
-    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:vc animated:YES completion:^{
-    }];
+    self.recordPopCount++;
+    
+    if (self.recordPopCount == 1) {
+        CZAlertView2Controller *vc = [[CZAlertView2Controller alloc] init];
+        vc.param = self.alertViewParam;
+        vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [self presentViewController:vc animated:YES completion:^{
+        }];
+    } else {
+        self.recordPopCount = 0;
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 // 添加弹窗逻辑
@@ -427,15 +445,8 @@
 {
     self.tableView.scrollEnabled = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // 第一次离开新人0元购
-//        [CZSaveTool setObject:@"www" forKey:@"leaveOnceNew0yuan"];
-           if ([CZSaveTool leaveOnceNew0yuan]) {
-               UIButton *btn = [[UIButton alloc] init];
-               btn.size = CGSizeMake(100, 100);
-               btn.backgroundColor = [RANDOMCOLOR colorWithAlphaComponent:0.01];
-               [self.view addSubview:btn];
-               [btn addTarget:self action:@selector(pushALert2ViewController:) forControlEvents:UIControlEventTouchUpInside];
-
+        // 第一次进入新人0元购
+           if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) {
                // 上部d挡板
                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
                NSLog(@"%@", cell);

@@ -7,29 +7,34 @@
 //
 
 #import "CZJIPINSynthesisTool.h"
+#import "UIImageView+WebCache.h"
 #import "GXNetTool.h"
 #import "Masonry.h"
+#import "CZUserInfoTool.h" // 用户信息
 #import "CZShareItemButton.h"
-
-#import "UIImageView+WebCache.h"
-
 
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
 #import "CZOpenAlibcTrade.h"
-#import "CZUserInfoTool.h" // 用户信息
-#import "CZUpdataView.h"
-#import "CZAlertView3Controller.h"
-#import "CZSubFreePreferentialController.h" // 特惠购
 
 #import "GXSaveImageToPhone.h" //保存图片
 #import "GXZoomImageView.h" // 图片放大
-#import "CZGuideTool.h" // 引导页
 
+#import "CZGuideController.h" // 引导页
+#import "CZLaunchViewController.h" // 启动页
+
+
+#import "CZAlertView1Controller.h" // 新人弹窗
+#import "CZNotificationAlertView.h" // 推动弹框
+#import "CZUserUpdataView.h" // 版本更新弹框
+#import "CZAlertView3Controller.h"
+#import "CZAlertView4Controller.h"
+#import "CZUpdataView.h"
+
+#import "CZSubFreePreferentialController.h" // 特惠购
 
 #import "CZGuessTypeTowView.h"
 #import "CZGuessTypeOneView.h"
-#import "CZAlertView4Controller.h"
 
 
 #import "CZShareViewController.h"
@@ -658,18 +663,67 @@
 + (void)jipin_projectEngine:(UIWindow *)window
 {
     // 设置跟视图
-    [CZGuideTool chooseRootViewController:window];
+    if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
+        // 有新版本
+        CZGuideController *vc = [[CZGuideController alloc] init];
+        window.rootViewController = vc;
+    } else {
+        // 没有新版本
+        window.rootViewController = [[CZLaunchViewController alloc] initWithWindow:window];
+    }
 }
 
 #pragma mark - /** 开启弹窗 */
-+ (void)jipin_openGlobalAlertView
++ (void)jipin_globalAlertWithNewVersion:(BOOL)isNewVersion
 {
     // 一波弹窗
-    [CZGuideTool newpPeopleGuide];
+    if (isNewVersion) {
+        // 是新版本, 显示获得新人红包
+        CURRENTVC(currentVc);
+        CZAlertView1Controller *alert1 = [[CZAlertView1Controller alloc] init];
+        alert1.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [currentVc presentViewController:alert1 animated:YES completion:nil];
+    } else {
+        // 没有新版本, 请求服务器判断是否版本更新
+        [self ShowUpdataViewWithNetworkService];
+    }
 }
 
+// 服务器获取最新版本
++ (void)ShowUpdataViewWithNetworkService
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"type"] = @"0";
+    NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    param[@"clientVersionCode"] = curVersion;
+    
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/getAppVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSDictionary *versionInfo = [result[@"data"] deleteAllNullValue];
+            //有新版本
+            [CZSaveTool setObject:versionInfo forKey:requiredVersionCode];
+            //比较
+            BOOL isAscending = [curVersion compare:result[@"data"][@"versionCode"]] == NSOrderedAscending;
+            BOOL isOpen = [result[@"data"][@"open"] isEqualToNumber:@(1)];
+            if (isAscending && isOpen) {
+                // 更新弹框
+                CZUserUpdataView *alertView = [CZUserUpdataView userUpdataView];
+                alertView.frame = [UIScreen mainScreen].bounds;
+                alertView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                alertView.versionMessage = result[@"data"];
+                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+            } else {
+                // 推送弹框
+                CZNotificationAlertView *NotiView = [CZNotificationAlertView notificationAlertView];
+                [NotiView checkCurrentNotificationStatus];
+            }
+        }
+    } failure:^(NSError *error) {}];
+}
+
+
 #pragma mark - /** 是否是新版本 */
-+ (BOOL)jipin_isNewVersionIs_Syn:(BOOL)isSyn
++ (BOOL)jipin_isNewVersion
 {
     //获取当前的版本号
     NSString *curVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
@@ -681,9 +735,9 @@
     if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
         return  NO;
     } else { // 是新版本
-        if (isSyn) {
-            [CZSaveTool setObject:curVersion forKey:CZVERSION_];
-        }
+        [CZSaveTool setObject:curVersion forKey:CZVERSION_];
+        // 如果有新版本, 删除所有KEY值列表
+        [CZSaveTool setObject:@{} forKey:@"CZFirstIntoDic"];
         return YES;
     }
 }
@@ -703,18 +757,16 @@
 {
     NSString *identifier = NSStringFromClass(currentClass);
     
-    // 如果是新版本删除所有存储的key值
-    if ([self jipin_isNewVersionIs_Syn:NO]) {
-        // 新版本
-        [CZSaveTool setObject:@"jipin_new_page" forKey:identifier];
-    }
-
-    if ([[CZSaveTool objectForKey:identifier] isEqualToString:@"jipin_old_page"]) {
+    // 获取记录的key值列表
+    NSDictionary *localKeyDic = [CZSaveTool objectForKey:@"CZFirstIntoDic"];
+    if ([localKeyDic[identifier] isEqualToString:@"jipin_old_page"]) {
         // 第二次进
         return NO;
     } else {
         // 第一次进
-        [CZSaveTool setObject:@"jipin_old_page" forKey:identifier];
+        NSMutableDictionary *keyDic = [NSMutableDictionary dictionaryWithDictionary:[CZSaveTool objectForKey:@"CZFirstIntoDic"]];
+        keyDic[identifier] = @"jipin_old_page";
+        [CZSaveTool setObject:keyDic forKey:@"CZFirstIntoDic"];
         return YES;
     }
 }

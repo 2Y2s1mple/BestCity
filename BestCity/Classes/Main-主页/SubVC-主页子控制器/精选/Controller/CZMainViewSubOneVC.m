@@ -119,15 +119,12 @@
         if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) { // 新版本
             CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{
                 // 开启弹框
-                [CZJIPINSynthesisTool jipin_openGlobalAlertView];
+                [self globalAlertWithNewVersion:YES];
             }];
             [self presentViewController:alertView animated:NO completion:nil];
         } else { // 旧版本
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                // 开启弹框
-                [CZJIPINSynthesisTool jipin_openGlobalAlertView];
-            });
+            // 开启弹框
+            [self globalAlertWithNewVersion:NO];
         }
     }
 
@@ -135,6 +132,15 @@
     if (alertList_.count > 0) {
         [[UIApplication sharedApplication].keyWindow addSubview:alertList_[0]];
     }
+}
+
+- (void)globalAlertWithNewVersion:(BOOL)isVersion
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 开启弹框
+        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:isVersion];
+    });
 }
 
 #pragma mark - UI创建
