@@ -732,14 +732,14 @@
     NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION_];
     
     //比较
-    if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
-        return  NO;
-    } else { // 是新版本
+//    if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
+//        return  NO;
+//    } else { // 是新版本
         [CZSaveTool setObject:curVersion forKey:CZVERSION_];
         // 如果有新版本, 删除所有KEY值列表
         [CZSaveTool setObject:@{} forKey:@"CZFirstIntoDic"];
         return YES;
-    }
+//    }
 }
 
 #pragma mark - /** 是否是新人 */

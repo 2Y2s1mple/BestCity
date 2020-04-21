@@ -36,12 +36,14 @@
     
     
     NSInteger count = 1;
-    for (int i = 0; i  <= count; i++) {
+    for (int i = 0; i < count; i++) {
+        
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.x = SCR_WIDTH * i;
-        imageView.size = CGSizeMake(SCR_WIDTH, SCR_HEIGHT);
         [scrollerView addSubview:imageView];
         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guide%d", i]];
+        imageView.width = SCR_WIDTH;
+        imageView.height = imageView.width * imageView.image.size.height / imageView.image.size.width;
+        imageView.center = CGPointMake(SCR_WIDTH / 2.0, SCR_HEIGHT / 2.0);
     }
     
     // 加载视频
@@ -54,7 +56,7 @@
     [btn setBackgroundImage:[UIImage imageNamed:@"guide0-3"] forState:UIControlStateNormal];
     [btn sizeToFit];
     btn.x = SCR_WIDTH + 30;
-    btn.y = SCR_HEIGHT - 44 - 40;
+    btn.y = SCR_HEIGHT - 44 - 40 - (IsiPhoneX ? 34 : 0);
     [scrollerView addSubview:btn];
     [btn addTarget:self action:@selector(videoPlay) forControlEvents:UIControlEventTouchUpInside];
     
@@ -62,7 +64,7 @@
     [btn1 setBackgroundImage:[UIImage imageNamed:@"guide0-4"] forState:UIControlStateNormal];
     [btn1 sizeToFit];
     btn1.x = SCR_WIDTH * 2 - 30 - btn1.width;
-    btn1.y = SCR_HEIGHT - 44 - 40;
+    btn1.y = SCR_HEIGHT - 44 - 40 - (IsiPhoneX ? 34 : 0);
     [scrollerView addSubview:btn1];
     [btn1 addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
     
@@ -88,15 +90,19 @@
     backView.backgroundColor = [UIColor whiteColor];
     
     UIView *videoView = [[UIView alloc] init];
-    videoView.size = CGSizeMake(245, 490);
-    videoView.centerX = SCR_WIDTH / 2.0;
-    videoView.y = 65;
+    videoView.x = 65;
+    videoView.y = (IsiPhoneX ? (24 + 65) : 65);
+    videoView.size = CGSizeMake(SCR_WIDTH - 130, SCR_HEIGHT - videoView.y - 120);
 //    videoView.backgroundColor = RANDOMCOLOR;
     [backView addSubview:videoView];
     
     UIImage *image = [UIImage imageNamed:@"guide0-2"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.width = videoView.width;  // image.size.width
+    imageView.height = videoView.width * image.size.height / image.size.width; // image.size.height
     [videoView addSubview:imageView];
+    
+    videoView.height = imageView.height;
     
     NSString *localFilePath1 = [[NSBundle mainBundle] pathForResource:@"12秒nn" ofType:@"mp4"];
     GXAVPlayerTool *playerView = [GXAVPlayerTool aVPlayerFrame:CGRectMake(17, 10, videoView.width - 34, videoView.height) andURLStr:localFilePath1];
