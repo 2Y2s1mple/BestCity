@@ -13,6 +13,7 @@
 #import "CZSearchOneSubViewCell.h"
 // 跳转
 #import "CZRecommendDetailController.h"
+#import "CZTaobaoDetailController.h"
 
 @interface CZSubCollectOneController () <UITableViewDelegate, UITableViewDataSource>
 /** 表单 */
@@ -115,7 +116,7 @@
 #pragma mark - 加载更多数据
 - (void)loadMoreDiscover
 {
-    //    1商品，2评测，4试用,5问答，7清单
+    // 1商品，2评测，4试用, 5问答，7清单, 8淘宝
     // 先结束头部刷新
     [self.tableView.mj_header endRefreshing];
     self.page++;
@@ -170,9 +171,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *model = self.dataSource[indexPath.row];
-    CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
-    vc.goodsId = model[@"goodsId"];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([model[@"type"] isEqual:@(8)]) {
+        CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
+        vc.otherGoodsId = model[@"otherGoodsId"];;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
+        vc.goodsId = model[@"goodsId"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 

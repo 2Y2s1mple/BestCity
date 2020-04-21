@@ -738,11 +738,11 @@
 		C84B402524482D0F00C5168A /* CZAlertMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C84B402324482D0F00C5168A /* CZAlertMainViewController.xib */; };
 		C84B40292448396000C5168A /* CZAlertMain2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C84B40272448396000C5168A /* CZAlertMain2ViewController.m */; };
 		C84B402A2448396000C5168A /* CZAlertMain2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C84B40282448396000C5168A /* CZAlertMain2ViewController.xib */; };
+		C8F10411244EAFED00DA1235 /* GXSaveImageToPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F1040F244EAFED00DA1235 /* GXSaveImageToPhone.m */; };
 		C8F2645024404DC8009475F6 /* GXScrollADImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2644C24404DC8009475F6 /* GXScrollADImageCell.m */; };
 		C8F2645124404DC8009475F6 /* GXScrollADImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8F2644D24404DC8009475F6 /* GXScrollADImageCell.xib */; };
 		C8F2645224404DC8009475F6 /* GXScrollAD.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2644E24404DC8009475F6 /* GXScrollAD.m */; };
 		C8F2645324404DC8009475F6 /* GXScrollADPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2644F24404DC8009475F6 /* GXScrollADPageControl.m */; };
-		C8F2645624404E03009475F6 /* GXSaveImageToPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2645424404E02009475F6 /* GXSaveImageToPhone.m */; };
 		C8F2645924404E11009475F6 /* GXZoomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2645824404E11009475F6 /* GXZoomImageView.m */; };
 		C8F2645C24404E20009475F6 /* GXButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2645B24404E20009475F6 /* GXButtons.m */; };
 		C8F2645F24404E2B009475F6 /* CZCategoryLineLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2645D24404E2A009475F6 /* CZCategoryLineLayoutView.m */; };
@@ -2008,6 +2008,8 @@
 		C84B40262448396000C5168A /* CZAlertMain2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAlertMain2ViewController.h; sourceTree = "<group>"; };
 		C84B40272448396000C5168A /* CZAlertMain2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAlertMain2ViewController.m; sourceTree = "<group>"; };
 		C84B40282448396000C5168A /* CZAlertMain2ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZAlertMain2ViewController.xib; sourceTree = "<group>"; };
+		C8F1040F244EAFED00DA1235 /* GXSaveImageToPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GXSaveImageToPhone.m; path = "../../../../MyProject/MyRepository/GXLCodeRepository/Classes/Function常用功能/保存图片/GXSaveImageToPhone.m"; sourceTree = "<group>"; };
+		C8F10410244EAFED00DA1235 /* GXSaveImageToPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GXSaveImageToPhone.h; path = "../../../../MyProject/MyRepository/GXLCodeRepository/Classes/Function常用功能/保存图片/GXSaveImageToPhone.h"; sourceTree = "<group>"; };
 		C8F2644824404DC8009475F6 /* GXScrollADPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXScrollADPageControl.h; sourceTree = "<group>"; };
 		C8F2644924404DC8009475F6 /* GXScrollAD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXScrollAD.h; sourceTree = "<group>"; };
 		C8F2644B24404DC8009475F6 /* GXScrollADImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXScrollADImageCell.h; sourceTree = "<group>"; };
@@ -2015,8 +2017,6 @@
 		C8F2644D24404DC8009475F6 /* GXScrollADImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GXScrollADImageCell.xib; sourceTree = "<group>"; };
 		C8F2644E24404DC8009475F6 /* GXScrollAD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXScrollAD.m; sourceTree = "<group>"; };
 		C8F2644F24404DC8009475F6 /* GXScrollADPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXScrollADPageControl.m; sourceTree = "<group>"; };
-		C8F2645424404E02009475F6 /* GXSaveImageToPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSaveImageToPhone.m; sourceTree = "<group>"; };
-		C8F2645524404E03009475F6 /* GXSaveImageToPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSaveImageToPhone.h; sourceTree = "<group>"; };
 		C8F2645724404E11009475F6 /* GXZoomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXZoomImageView.h; sourceTree = "<group>"; };
 		C8F2645824404E11009475F6 /* GXZoomImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXZoomImageView.m; sourceTree = "<group>"; };
 		C8F2645A24404E20009475F6 /* GXButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXButtons.h; sourceTree = "<group>"; };
@@ -6082,10 +6082,10 @@
 				C8F2645D24404E2A009475F6 /* CZCategoryLineLayoutView.m */,
 				C8F2645A24404E20009475F6 /* GXButtons.h */,
 				C8F2645B24404E20009475F6 /* GXButtons.m */,
+				C8F10410244EAFED00DA1235 /* GXSaveImageToPhone.h */,
+				C8F1040F244EAFED00DA1235 /* GXSaveImageToPhone.m */,
 				C8F2645724404E11009475F6 /* GXZoomImageView.h */,
 				C8F2645824404E11009475F6 /* GXZoomImageView.m */,
-				C8F2645524404E03009475F6 /* GXSaveImageToPhone.h */,
-				C8F2645424404E02009475F6 /* GXSaveImageToPhone.m */,
 				C8F2644724404DC8009475F6 /* Lib */,
 			);
 			path = otherProject;
@@ -6661,8 +6661,8 @@
 				97C51C4323C46CB900CE8867 /* CZSubFreeMyAllowanceListCell.m in Sources */,
 				979B05C7210E9CC70023292D /* CZRecommendNav.m in Sources */,
 				97705CBD2108230F00485D64 /* WMMenuView.m in Sources */,
+				C8F10411244EAFED00DA1235 /* GXSaveImageToPhone.m in Sources */,
 				9765649921A53BF2008A0293 /* CZCollectButton.m in Sources */,
-				C8F2645624404E03009475F6 /* GXSaveImageToPhone.m in Sources */,
 				979585262293DF5A005FC54D /* CZTrialSuccessReportController.m in Sources */,
 				97A5B95F230D17AE00014E90 /* CZMePublishOneController.m in Sources */,
 				97BA859422FAAA590013CE7F /* CZEvaluationViewModel.m in Sources */,
@@ -7032,7 +7032,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7133,7 +7133,7 @@
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

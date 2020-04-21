@@ -109,7 +109,7 @@
         imageView.imgList = imgs;
     }
 
-    // 分类的按钮
+    // 宫格按钮
     if (self.categoryView == nil) {
         // 分类的按钮
        NSArray *list = [CZCategoryLineLayoutView categoryItems:self.boxList setupNameKey:@"title" imageKey:@"iconUrl" IdKey:@"targetId" objectKey:@"type"];
