@@ -66,9 +66,9 @@
 
     CZEvaluationController *vc = [[CZEvaluationController alloc] init];
     vc.isTabbarPush = YES;
-    [self setupWithController:vc title:@"评测" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
+//    [self setupWithController:vc title:@"评测" image:@"tab-try-nor" selectedImage:@"tab-try-sel"];
     
-//    [self setupWithController:[[CZMemberOfCenterController alloc] init] title:@"会员" image:@"tab-members-nor" selectedImage:@"tab-members-sel"];
+    [self setupWithController:[[CZMemberOfCenterController alloc] init] title:@"会员" image:@"tab-members-nor" selectedImage:@"tab-members-sel"];
 
     [self setupWithController:[[CZIssueMomentsController alloc] init] title:@"发圈" image:@"tab-moments-nor" selectedImage:@"tab-moments-sel"];
 
