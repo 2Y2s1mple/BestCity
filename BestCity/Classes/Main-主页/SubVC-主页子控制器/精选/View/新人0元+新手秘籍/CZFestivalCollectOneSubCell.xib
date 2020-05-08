@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KH-54-wS5">
                         <rect key="frame" x="15" y="0.0" width="353" height="225"/>
-                        <color key="backgroundColor" red="0.91609901189999998" green="0.35059052709999999" blue="0.1430818737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </subviews>
             </view>
@@ -34,7 +34,7 @@
             <connections>
                 <outlet property="bottomView" destination="2KH-54-wS5" id="Drf-hE-AiJ"/>
             </connections>
-            <point key="canvasLocation" x="-592" y="21"/>
+            <point key="canvasLocation" x="-559" y="-14"/>
         </collectionViewCell>
     </objects>
 </document>

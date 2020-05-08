@@ -126,11 +126,11 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 {
     if (indexPath.section == 0) { // 新人0元购
         if (self.totalDataModel.newUser == NO) {
-            return CGSizeMake(SCR_WIDTH,  327 - 24);
+            return CGSizeMake(SCR_WIDTH,  327 - 24 + 10);
         } else {
-            return CGSizeMake(SCR_WIDTH,  327);
+            return CGSizeMake(SCR_WIDTH,  327 + 10);
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == 1) { // 图片
         NSInteger count = self.totalDataModel.activityList.count;
         count = (count + 1) / 2;
         CGFloat height = 10 + count * (10 + 80) + 10;

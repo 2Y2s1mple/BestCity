@@ -316,7 +316,7 @@
 
 - (void)setupRefresh
 {
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoredata)];
+    self.tableView.mj_footer = [CZCustomGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoredata)];
 }
 
 - (void)popAction

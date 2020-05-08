@@ -118,7 +118,8 @@ UIViewController *currentVc = nav.topViewController;
 #import "MBProgressHUD.h"
 #import "CZProgressHUD.h"
 #import "CZConst.h"
-#import "CZCustomGifHeader.h"
+#import "CZCustomGifHeader.h" // 刷新
+#import "CZCustomGifFooter.h" // 刷新
 #import "CZLoginController.h" // 登录页面
 #import "CZNoDataView.h" // 没有数据的view
 #import "CZSaveTool.h" // 自定义的储存

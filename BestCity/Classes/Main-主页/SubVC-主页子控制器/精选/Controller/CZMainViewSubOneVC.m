@@ -143,8 +143,6 @@
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumInteritemSpacing = 0;
-//        layout.estimatedItemSize = CGSizeMake(SCR_WIDTH, 0);;
-//        layout.minimumLineSpacing = 0;
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
         _collectView.showsVerticalScrollIndicator = NO;
@@ -162,7 +160,9 @@
 {
     self.collectView.mj_header = [CZCustomGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNewTrailDataSorce)];
     [self.collectView.mj_header beginRefreshing];
-    self.collectView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
+//    self.collectView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
+    
+    self.collectView.mj_footer = [CZCustomGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
 }
 
 #pragma mark - 数据

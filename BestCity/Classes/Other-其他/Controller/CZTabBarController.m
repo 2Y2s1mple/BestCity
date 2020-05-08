@@ -50,8 +50,6 @@
     [[UITabBar appearance] setBarTintColor: CZRGBColor(254, 254, 254)];
     // 设配iOS12, tabbar抖动问题
     [[UITabBar appearance] setTranslucent:NO];
-    
-    
 }
 
 - (void)viewDidLoad {
@@ -83,10 +81,6 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    NSArray *configureList = @[@"tab栏榜单", @"tab栏发现", @"tab栏评测", @"tab栏试用", @"tab栏我的"];
-    NSString *ID = [NSString stringWithFormat:@"ID%ld", (tabBarController.selectedIndex + 1)];
-    NSDictionary *context = configureList[tabBarController.selectedIndex];
-    [MobClick event:ID attributes:@{@"Tab" : context}];
     NSLog(@"%lu", (unsigned long)tabBarController.selectedIndex);
 
     if (tabBarController.selectedIndex == 1) {
@@ -94,12 +88,12 @@
     } else if (tabBarController.selectedIndex == 2) {
         [CZJIPINStatisticsTool statisticsToolWithID:@"bangdan"];
     }
-    NSString *token = JPTOKEN;
-    UINavigationController *nav = viewController;
-    if ([JPTOKEN length] <= 0 && [nav.topViewController isKindOfClass:[CZMeController class]]) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [self presentViewController:vc animated:YES completion:nil];
-    } else if ([JPTOKEN length] <= 0 && [nav.topViewController isKindOfClass:[CZMemberOfCenterController class]]) {
+    UINavigationController *nav = (UINavigationController *)viewController;
+    BOOL isLogin = ([JPTOKEN length] <= 0);
+    BOOL isCZMeController = [nav.topViewController isKindOfClass:[CZMeController class]];
+    BOOL isCZMemberOfCenterController = [nav.topViewController isKindOfClass:[CZMemberOfCenterController class]];
+    
+    if (isLogin && (isCZMeController || isCZMemberOfCenterController)) {
         CZLoginController *vc = [CZLoginController shareLoginController];
         [self presentViewController:vc animated:YES completion:nil];
         self.selectedIndex = 0;
@@ -108,24 +102,10 @@
 
 - (void)setupWithController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
-    if ([vc isKindOfClass:[CZTrialMainController class]]) {
-        WMPageController *hotVc = (WMPageController *)vc;
-        hotVc.selectIndex = 0;
-        hotVc.menuViewStyle = WMMenuViewStyleDefault;
-        hotVc.itemMargin = 10;
-        hotVc.automaticallyCalculatesItemWidths = YES;
-        hotVc.titleFontName = @"PingFangSC-Medium";
-        hotVc.titleColorNormal = CZGlobalGray;
-        hotVc.titleColorSelected = [UIColor blackColor];
-        hotVc.titleSizeNormal = 18;
-        hotVc.titleSizeSelected = 18;
-    }
     vc.tabBarItem.title = title;
     vc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     CZNavigationController *nav = [[CZNavigationController alloc] initWithRootViewController:vc];
-//    vc.modalPresentationStyle =  UIModalPresentationFullScreen;
-//    [vc.navigationController setNavigationBarHidden:YES];
     [self addChildViewController:nav];
 }
 

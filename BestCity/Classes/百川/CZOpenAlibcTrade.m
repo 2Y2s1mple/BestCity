@@ -76,16 +76,6 @@
          NSLog(@"----------退出交易流程----------");
      }];
 
-//    [[AlibcTradeSDK sharedInstance].tradeService show:parentController page:page showParams:showParam taoKeParams:nil trackParam:nil tradeProcessSuccessCallback:^(AlibcTradeResult * _Nullable tradeProcessResult) {
-//        NSLog(@"-----AlibcTradeSDK------");
-//            if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){
-//                NSLog(@"交易成功");
-//            } else if(tradeProcessResult.result == AlibcTradeResultTypeAddCard){
-//                NSLog(@"加入购物车");
-//            }
-//    } tradeProcessFailedCallback:^(NSError * _Nullable error) {
-//        NSLog(@"----------退出交易流程----------");
-//    }];
 }
 
 @end

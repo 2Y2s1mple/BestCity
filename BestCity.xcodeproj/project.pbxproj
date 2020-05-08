@@ -752,6 +752,7 @@
 		C861D0F32451B06E00E3E409 /* CZFestivalCollectOneSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C861D0F12451B06E00E3E409 /* CZFestivalCollectOneSubCell.m */; };
 		C861D0F42451B06E00E3E409 /* CZFestivalCollectOneSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C861D0F22451B06E00E3E409 /* CZFestivalCollectOneSubCell.xib */; };
 		C883CEF92462557100E56F6A /* CZIssueCreate1Moments.m in Sources */ = {isa = PBXBuildFile; fileRef = C883CEF82462557100E56F6A /* CZIssueCreate1Moments.m */; };
+		C8B6E97824650A1400B612A4 /* CZCustomGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B6E97724650A1400B612A4 /* CZCustomGifFooter.m */; };
 		C8BF91F52452CD7600359EE3 /* CZWechatTeacherView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BF91F32452CD7600359EE3 /* CZWechatTeacherView.m */; };
 		C8BF91F62452CD7600359EE3 /* CZWechatTeacherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8BF91F42452CD7600359EE3 /* CZWechatTeacherView.xib */; };
 		C8D813B22455618E0060DDE8 /* CZCategoryLineLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D813B02455618E0060DDE8 /* CZCategoryLineLayoutView.m */; };
@@ -2048,6 +2049,8 @@
 		C861D0F22451B06E00E3E409 /* CZFestivalCollectOneSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZFestivalCollectOneSubCell.xib; sourceTree = "<group>"; };
 		C883CEF72462557100E56F6A /* CZIssueCreate1Moments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZIssueCreate1Moments.h; sourceTree = "<group>"; };
 		C883CEF82462557100E56F6A /* CZIssueCreate1Moments.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZIssueCreate1Moments.m; sourceTree = "<group>"; };
+		C8B6E97624650A1400B612A4 /* CZCustomGifFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCustomGifFooter.h; sourceTree = "<group>"; };
+		C8B6E97724650A1400B612A4 /* CZCustomGifFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCustomGifFooter.m; sourceTree = "<group>"; };
 		C8BF91F22452CD7600359EE3 /* CZWechatTeacherView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZWechatTeacherView.h; sourceTree = "<group>"; };
 		C8BF91F32452CD7600359EE3 /* CZWechatTeacherView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZWechatTeacherView.m; sourceTree = "<group>"; };
 		C8BF91F42452CD7600359EE3 /* CZWechatTeacherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZWechatTeacherView.xib; sourceTree = "<group>"; };
@@ -2410,15 +2413,15 @@
 		970AD8BB232A3BD600CCE9F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				970AD8C4232A3BD600CCE9F9 /* AlibcTradeBiz.framework */,
+				970AD8C0232A3BD600CCE9F9 /* AlibcTradeSDK.framework */,
 				970AD8BC232A3BD600CCE9F9 /* AlibabaAuthExt.framework */,
 				970AD8BD232A3BD600CCE9F9 /* MtopSDK.framework */,
 				970AD8BE232A3BD600CCE9F9 /* mtopext.framework */,
 				970AD8BF232A3BD600CCE9F9 /* AlibabaAuthSDK.framework */,
-				970AD8C0232A3BD600CCE9F9 /* AlibcTradeSDK.framework */,
 				970AD8C1232A3BD600CCE9F9 /* AlibcLinkPartnerSDK.framework */,
 				970AD8C2232A3BD600CCE9F9 /* SecurityGuardSDK.framework */,
 				970AD8C3232A3BD600CCE9F9 /* UTDID.framework */,
-				970AD8C4232A3BD600CCE9F9 /* AlibcTradeBiz.framework */,
 				970AD8C5232A3BD600CCE9F9 /* SGMain.framework */,
 				970AD8C6232A3BD600CCE9F9 /* mtopcoreopen.framework */,
 				970AD8C7232A3BD600CCE9F9 /* UTMini.framework */,
@@ -2735,12 +2738,12 @@
 		971D71C423ADB88E00EDD19C /* 新人0元+新手秘籍 */ = {
 			isa = PBXGroup;
 			children = (
-				972BDC8F23A36ADF00C3F8BF /* CZFestivalCollectOneCell.h */,
-				972BDC9023A36ADF00C3F8BF /* CZFestivalCollectOneCell.m */,
-				972BDC9123A36ADF00C3F8BF /* CZFestivalCollectOneCell.xib */,
 				97C51C4523C47E8800CE8867 /* CZFestivalCollectMillionsView.h */,
 				97C51C4623C47E8800CE8867 /* CZFestivalCollectMillionsView.m */,
 				97C51C4823C47EA300CE8867 /* CZFestivalCollectMillionsView.xib */,
+				972BDC8F23A36ADF00C3F8BF /* CZFestivalCollectOneCell.h */,
+				972BDC9023A36ADF00C3F8BF /* CZFestivalCollectOneCell.m */,
+				972BDC9123A36ADF00C3F8BF /* CZFestivalCollectOneCell.xib */,
 				C861D0F02451B06E00E3E409 /* CZFestivalCollectOneSubCell.h */,
 				C861D0F12451B06E00E3E409 /* CZFestivalCollectOneSubCell.m */,
 				C861D0F22451B06E00E3E409 /* CZFestivalCollectOneSubCell.xib */,
@@ -2852,8 +2855,8 @@
 		972BDCA623A39EFD00C3F8BF /* 精选 */ = {
 			isa = PBXGroup;
 			children = (
-				9733E55623A86838002F8E7C /* Model */,
 				9733E55A23A8C3B3002F8E7C /* Controller */,
+				9733E55623A86838002F8E7C /* Model */,
 				9733E55B23A8C3C1002F8E7C /* ViewModel */,
 				9733E55C23A8C3CC002F8E7C /* View */,
 			);
@@ -5413,12 +5416,14 @@
 		97C7FF18216DDDB50091DC07 /* Back */ = {
 			isa = PBXGroup;
 			children = (
-				97C7FF19216DDDB50091DC07 /* MJRefreshBackGifFooter.h */,
 				97C7FF1A216DDDB50091DC07 /* MJRefreshBackStateFooter.h */,
-				97C7FF1B216DDDB50091DC07 /* MJRefreshBackNormalFooter.h */,
-				97C7FF1C216DDDB50091DC07 /* MJRefreshBackGifFooter.m */,
 				97C7FF1D216DDDB50091DC07 /* MJRefreshBackStateFooter.m */,
+				97C7FF1B216DDDB50091DC07 /* MJRefreshBackNormalFooter.h */,
 				97C7FF1E216DDDB50091DC07 /* MJRefreshBackNormalFooter.m */,
+				97C7FF19216DDDB50091DC07 /* MJRefreshBackGifFooter.h */,
+				97C7FF1C216DDDB50091DC07 /* MJRefreshBackGifFooter.m */,
+				C8B6E97624650A1400B612A4 /* CZCustomGifFooter.h */,
+				C8B6E97724650A1400B612A4 /* CZCustomGifFooter.m */,
 			);
 			path = Back;
 			sourceTree = "<group>";
@@ -6631,6 +6636,7 @@
 				97530AA52313A3FC00185C40 /* CZMHSDQuestCell1.m in Sources */,
 				97D68C68219054E000802B30 /* CZHotTagLabel.m in Sources */,
 				97A05101243F0D5400031361 /* CZChangeWeChatController.m in Sources */,
+				C8B6E97824650A1400B612A4 /* CZCustomGifFooter.m in Sources */,
 				977E8090225B23660041A126 /* CZTrialApplySuccessModel.m in Sources */,
 				979B05D3210F07EF0023292D /* CZShareAndlikeView.m in Sources */,
 				97D8FCCB2111A67700D8ED8F /* CZMyProfileController.m in Sources */,

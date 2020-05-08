@@ -284,6 +284,7 @@
 #pragma mark - 特惠购
 + (void)FreePreferential
 {
+    ISPUSHLOGIN;
     CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *nav = tabbar.selectedViewController;

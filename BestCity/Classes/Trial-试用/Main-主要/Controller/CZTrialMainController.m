@@ -15,6 +15,23 @@
 @end
 
 @implementation CZTrialMainController
+
+- (void)loadView
+{
+    [super loadView];
+    self.selectIndex = 0;
+    self.automaticallyCalculatesItemWidths = YES;
+    self.menuViewStyle = WMMenuViewStyleDefault;
+    
+    self.itemMargin = 10;
+    
+    self.titleFontName = @"PingFangSC-Medium";
+    self.titleColorNormal = CZGlobalGray;
+    self.titleColorSelected = [UIColor blackColor];
+    self.titleSizeNormal = 18;
+    self.titleSizeSelected = 18;
+}
+
 #pragma mark - 控制器的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];

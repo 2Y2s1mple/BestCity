@@ -28,6 +28,8 @@
     CGFloat height = 80;
     CGFloat space = 10; //(SCR_WIDTH - 30 - 20 - width * 2)
     
+    self.bottomView.backgroundColor = [UIColor gx_colorWithHexString:self.model.ad2[@"color"]];
+    
     // 根据返回的图片加载
     for (int i = 0; i < 6; i++) {
         NSDictionary *dic = model.activityList[i];

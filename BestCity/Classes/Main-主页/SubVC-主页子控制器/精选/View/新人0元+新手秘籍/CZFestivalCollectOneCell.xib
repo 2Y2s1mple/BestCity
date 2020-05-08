@@ -10,17 +10,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CZFestivalCollectOneCell" id="gTV-IL-0wX" customClass="CZFestivalCollectOneCell">
-            <rect key="frame" x="0.0" y="0.0" width="430" height="327"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="360"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="430" height="327"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="360"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9g-Du-mDA">
-                        <rect key="frame" x="15" y="10" width="400" height="142"/>
+                        <rect key="frame" x="15" y="10" width="384" height="142"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main-icon1" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-ST-xD9">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="142"/>
+                                <rect key="frame" x="0.0" y="0.0" width="384" height="142"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CW8-ab-Ax0" userLabel="第1个">
                                 <rect key="frame" x="9" y="64" width="69" height="73"/>
@@ -97,7 +97,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwm-bb-2Up" userLabel="第2个">
-                                <rect key="frame" x="113.5" y="65" width="69" height="73"/>
+                                <rect key="frame" x="108" y="65" width="69" height="73"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbU-hB-PdI">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
@@ -171,7 +171,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AZ-iu-kXl" userLabel="第3个">
-                                <rect key="frame" x="217.5" y="65" width="69" height="73"/>
+                                <rect key="frame" x="207" y="65" width="69" height="73"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A9Z-E8-4hS">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
@@ -245,7 +245,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUe-cb-hWL" userLabel="第4个">
-                                <rect key="frame" x="322" y="65" width="69" height="73"/>
+                                <rect key="frame" x="306" y="65" width="69" height="73"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0M-Rn-J3T">
                                         <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
@@ -325,7 +325,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看更多&gt;&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcG-MD-Wgd">
-                                <rect key="frame" x="331" y="10" width="60" height="13.5"/>
+                                <rect key="frame" x="315" y="10" width="60" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -337,21 +337,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wl4-j6-HqO">
-                                <rect key="frame" x="182.5" y="87" width="35" height="50"/>
+                                <rect key="frame" x="177" y="87" width="30" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2hD-gL-EHa"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJ2-k1-WE4">
-                                <rect key="frame" x="286.5" y="87" width="35.5" height="50"/>
+                                <rect key="frame" x="276" y="87" width="30" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Jnk-Fv-JKO"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2T-fw-Dhe">
-                                <rect key="frame" x="78" y="87" width="35.5" height="50"/>
+                                <rect key="frame" x="78" y="87" width="30" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="uTC-Sr-6wa"/>
@@ -397,16 +397,16 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SmI-es-MSj" customClass="CZScrollAD">
-                        <rect key="frame" x="15" y="164" width="400" height="38"/>
+                        <rect key="frame" x="15" y="164" width="384" height="38"/>
                         <color key="backgroundColor" red="0.96462148430000005" green="0.96475988629999998" blue="0.96459132430000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="38" id="TEb-ow-VaY"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main-icon7-1" translatesAutoresizingMaskIntoConstraints="NO" id="NJF-wD-dxD">
-                        <rect key="frame" x="15" y="207" width="400" height="120"/>
+                        <rect key="frame" x="15" y="207" width="384" height="130"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="120" id="kfQ-ea-v15"/>
+                            <constraint firstAttribute="height" constant="130" id="KL1-qX-rEJ"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -422,7 +422,7 @@
                 <constraint firstItem="NJF-wD-dxD" firstAttribute="top" secondItem="SmI-es-MSj" secondAttribute="bottom" constant="5" id="orf-rQ-CPh"/>
                 <constraint firstAttribute="trailing" secondItem="SmI-es-MSj" secondAttribute="trailing" constant="15" id="zLv-6I-WHn"/>
             </constraints>
-            <size key="customSize" width="500" height="327"/>
+            <size key="customSize" width="500" height="360"/>
             <connections>
                 <outlet property="goImageVeiw" destination="NJF-wD-dxD" id="WkK-cg-QcU"/>
                 <outlet property="image1" destination="yEz-bi-BhA" id="ot9-xp-NFT"/>
@@ -442,7 +442,7 @@
                 <outlet property="title3" destination="qMq-SG-AUJ" id="axJ-BB-T5V"/>
                 <outlet property="title4" destination="gEA-DQ-cMD" id="Mya-FM-dDb"/>
             </connections>
-            <point key="canvasLocation" x="-698.55072463768124" y="-201.89732142857142"/>
+            <point key="canvasLocation" x="-698.55072463768124" y="-190.84821428571428"/>
         </collectionViewCell>
     </objects>
     <resources>

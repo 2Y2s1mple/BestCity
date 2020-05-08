@@ -160,7 +160,7 @@ int addGoodsNumber = 0;
 #pragma mark - 获取数据
 - (void)setupRefresh
 {
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
+    self.tableView.mj_footer = [CZCustomGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTrailDataSorce)];
 }
 
 #pragma mark - 获取数据
