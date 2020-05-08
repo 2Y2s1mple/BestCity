@@ -28,6 +28,8 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "CZTabBarController.h"
 
+#import "KeplerApiManager.h"
+
 
 @interface AppDelegate () <IMLSDKRestoreDelegate, WXApiDelegate>
 
@@ -45,8 +47,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
-//    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
+//    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
+    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
 //    JPSERVER_URL = @"http://47.99.243.255:8081/qualityshop-api/"; // 测试
 //    http://47.99.243.255:8081/qualityshop-api/swagger-ui.html
 //    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
@@ -58,6 +60,12 @@
     self.window = [[GXWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
 #pragma
+    // 京东
+    [[KeplerApiManager sharedKPService] asyncInitSdk:@"dc7460a32867d066f8f2770d23e13760" secretKey:@"fdce678f736647138bf220fa24363426" sucessCallback:^(){
+        NSLog(@"------");
+    }failedCallback:^(NSError *error){
+        NSLog(@"-----%@", error);
+    }];
 
     // 加载友盟分享
    [[CZUMConfigure shareConfigure] configure];
@@ -77,7 +85,6 @@
 
     // 加载极光推送
     [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
-
 
 //    [NSThread sleepForTimeInterval:6];
 
@@ -278,12 +285,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         }
         case 2:
         {
-            CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-            vc.otherGoodsId = ID;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-            break;
+//            NSDictionary *bannerParam = @{
+//                @"targetType" : @"12",
+//                @"targetId" : ID,
+//                @"targetTitle" : @"",
+//                @"source" : @"2",
+//            };
+//            [CZFreePushTool bannerPushToVC:bannerParam];
+//            break;
         }
         case 3:
         {

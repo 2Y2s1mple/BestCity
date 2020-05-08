@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *boxList;
 /** 新人专区 */
 @property (nonatomic, strong) NSArray *allowanceGoodsList;
-/** 高反专区 */
+/** 右边单独圆角专区 */
 @property (nonatomic, strong) NSArray *activityList;
 /** 今日爆款 */
 @property (nonatomic, strong) NSDictionary *hotActivity;
@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *messageList;
 /** 是否是新人 */
 @property (nonatomic, assign) BOOL newUser;
+/** 新手必看高度 */
+@property (nonatomic, assign) CGFloat peopleNewZeroViewHeight;
+/** 新人0元购高度 */
+@property (nonatomic, assign) CGFloat peopleNewCellHeight;
 @end
 
 NS_ASSUME_NONNULL_END

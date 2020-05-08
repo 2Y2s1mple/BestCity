@@ -20,7 +20,7 @@
 #import "CZCategoryLineLayoutView.h"
 
 #import "CZMainProjectGeneralView.h" // 专题通用界面
-#import "CZFreePushTool.h""
+#import "CZFreePushTool.h"
 
 @interface CZMVSDefaultVCDelegate ()
 /** <#注释#> */
@@ -131,10 +131,13 @@
 {
     NSLog(@"%ld", indexPath.item);
     NSDictionary *param = self.dataSource[indexPath.row];
-    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-    vc.otherGoodsId = param[@"otherGoodsId"];
-    CURRENTVC(currentVc)
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    NSDictionary *bannerParam = @{
+        @"targetType" : @"12",
+        @"targetId" : param[@"otherGoodsId"],
+        @"targetTitle" : @"",
+        @"source" : [NSString stringWithFormat:@"%@", param[@"source"]],
+    };
+    [CZFreePushTool bannerPushToVC:bannerParam];
 }
 
 

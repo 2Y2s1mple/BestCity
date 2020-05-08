@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CZTaobaoGoodsView : UIView
 + (instancetype)taobaoGoodsView;
 /** <#注释#> */
+@property (nonatomic, strong) NSString *source;
+/** <#注释#> */
 @property (nonatomic, strong) NSDictionary *model;
 /** 总数据 */
 @property (nonatomic, strong) NSDictionary *allDetailModel;
@@ -38,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIImageView *peopleNewImage;
 /** 标题 */
 @property (nonatomic, weak) IBOutlet UILabel *titleName;
+/** 标题距上面尺寸 */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelTop;
+/** 极品城返现 */
+@property (nonatomic, weak) IBOutlet UIView *feeView;
 @end
 
 NS_ASSUME_NONNULL_END

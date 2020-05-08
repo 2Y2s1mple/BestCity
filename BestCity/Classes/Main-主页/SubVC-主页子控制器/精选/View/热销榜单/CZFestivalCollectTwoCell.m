@@ -59,9 +59,13 @@
 {
     CZFestivalGoodsColLayoutView *view = sender.view;
     [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_bangdan.%ld", (view.index + 1)]];
-    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-    vc.otherGoodsId = view.dataDic[@"otherGoodsId"];
-    CURRENTVC(currentVc)
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    
+    NSDictionary *bannerParam = @{
+        @"targetType" : @"12",
+        @"targetId" : view.dataDic[@"otherGoodsId"],
+        @"targetTitle" : @"",
+        @"source" : [NSString stringWithFormat:@"%@", view.dataDic[@"source"]],
+    };
+    [CZFreePushTool bannerPushToVC:bannerParam];
 }
 @end

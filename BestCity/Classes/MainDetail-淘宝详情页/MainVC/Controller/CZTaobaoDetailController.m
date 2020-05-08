@@ -155,13 +155,17 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)getSourceData
 {
     // goodsType 1: 极品城 2: 淘宝
-    // 如果极品城以前的样式, 淘宝的是现在样式
+    // 如果极品城: 以前的样式, 淘宝: 是现在样式
+    // 商品来源source: (1京东,2淘宝，4拼多多)
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"otherGoodsId"] = self.otherGoodsId;
+    if (self.source.length > 0) {
+        param[@"source"] = self.source;
+    }
     [CZProgressHUD showProgressHUDWithText:nil];
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/goodsDetail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/goodsDetail"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.detailModel = result[@"data"];
 
@@ -170,20 +174,6 @@ static CGFloat const likeAndShareHeight = 49;
 
             // 最下面购买视图
             [self setupBottomView];
-
-        } else {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-        }
-        [CZProgressHUD hideAfterDelay:1.5];
-    } failure:^(NSError *error) {}];
-
-    NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
-    param1[@"otherGoodsId"] = self.otherGoodsId;
-    [CZProgressHUD showProgressHUDWithText:nil];
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/getGoodsDescImgs"] body:param1 header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.descImgList = result[@"data"];
 
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
@@ -218,9 +208,26 @@ static CGFloat const likeAndShareHeight = 49;
     
 
     CZTaobaoGoodsView *titlesView = [CZTaobaoGoodsView taobaoGoodsView];
+    
     titlesView.y = self.recordHeight;
     titlesView.width = SCR_WIDTH;
+    titlesView.source = self.source;
     titlesView.model = self.detailModel;
+    
+    NSString *titleName = [NSString stringWithFormat:@"       %@", self.detailModel[@"otherName"]];
+    titlesView.titleName.text = titleName;
+    titlesView.peopleNewImage.hidden = NO;
+    // (1京东,2淘宝,3天猫,4拼多多)
+    if ([self.detailModel[@"tag"] integerValue] == 1) {
+        titlesView.peopleNewImage.image = [UIImage imageNamed:@"Main-京东"];
+    } else if ([self.detailModel[@"tag"] integerValue] == 2) {
+        titlesView.peopleNewImage.image = [UIImage imageNamed:@"Main-淘宝"];
+    } else if ([self.detailModel[@"tag"] integerValue] == 3) {
+        titlesView.peopleNewImage.image = [UIImage imageNamed:@"Main-天猫"];
+    } else if ([self.detailModel[@"tag"] integerValue] == 4) {
+        titlesView.peopleNewImage.image = [UIImage imageNamed:@"Main-拼多多"];
+    }
+    
     [self.scrollerView addSubview:titlesView];
     self.recordHeight += titlesView.commodityH; // 高度
 
@@ -298,7 +305,10 @@ static CGFloat const likeAndShareHeight = 49;
 
 
     // 猜你喜欢
-    [self guessView];
+    if ([self.source isEqual: @"2"]) { // 1:京东 2:淘宝 4拼多多
+        // 猜你喜欢
+        [self guessView];
+    }
 
 
     [self changeSubViewFrame];
@@ -619,48 +629,63 @@ static CGFloat const likeAndShareHeight = 49;
         imagesView.height = 0;
         sender.y = CZGetY(imagesView) + 10;
         backView.height = CZGetY(sender) + 12;
-
+        [self changeSubViewFrame];
     } else {
         sender.selected = YES;
-        if (self.descImgList.count > 0) {
-            NSMutableArray *imageList = [NSMutableArray arrayWithArray:self.descImgList];
-            for (NSString *imageUrl in imageList) {
-                UIImageView *bigImage = [[UIImageView alloc] init];
-                bigImage.width = SCR_WIDTH;
-                bigImage.height = 200;
-                [imagesView addSubview:bigImage];
-                NSString *strUrl = [imageUrl stringByReplacingOccurrencesOfString:@"_.webp" withString:@""];
-                [bigImage sd_setImageWithURL:[NSURL URLWithString:strUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                    if (image == nil) {
-                        return ;
-                    };
-                    CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
-                    bigImage.height = imageHeight;
+        if (self.descImgList.count == 0) {
+            NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
+            param1[@"otherGoodsId"] = self.otherGoodsId;
+            [CZProgressHUD showProgressHUDWithText:nil];
+            //获取详情数据
+            [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/getGoodsDescImgs"] body:param1 header:nil response:GXResponseStyleJSON success:^(id result) {
+                if ([result[@"msg"] isEqualToString:@"success"]) {
+                    self.descImgList = result[@"data"];
+                    if (self.descImgList.count > 0) {
+                        NSMutableArray *imageList = [NSMutableArray arrayWithArray:self.descImgList];
+                        for (NSString *imageUrl in imageList) {
+                            UIImageView *bigImage = [[UIImageView alloc] init];
+                            bigImage.width = SCR_WIDTH;
+                            bigImage.height = 200;
+                            [imagesView addSubview:bigImage];
+                            NSString *strUrl = [imageUrl stringByReplacingOccurrencesOfString:@"_.webp" withString:@""];
+                            [bigImage sd_setImageWithURL:[NSURL URLWithString:strUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                                if (image == nil) {
+                                    return ;
+                                };
+                                CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
+                                bigImage.height = imageHeight;
 
-                    for (int i = 0; i < imagesView.subviews.count; i++) {
-                        UIView *view = imagesView.subviews[i];
-                        if (i == 0) {
-                            view.y = 0;
-                            continue;
+                                for (int i = 0; i < imagesView.subviews.count; i++) {
+                                    UIView *view = imagesView.subviews[i];
+                                    if (i == 0) {
+                                        view.y = 0;
+                                        continue;
+                                    }
+                                    view.y = CZGetY(imagesView.subviews[i - 1]);
+                                }
+                                imagesView.height = CZGetY([imagesView.subviews lastObject]);
+                                sender.y = CZGetY(imagesView) + 10;
+                                backView.height = CZGetY(sender) + 12;
+                                [self changeSubViewFrame];
+                            }];
                         }
-                        view.y = CZGetY(imagesView.subviews[i - 1]);
-                    }
-                    imagesView.height = CZGetY([imagesView.subviews lastObject]);
-                    sender.y = CZGetY(imagesView) + 10;
-                    backView.height = CZGetY(sender) + 12;
-                    [self changeSubViewFrame];
-                }];
-            }
 
-            imagesView.height = CZGetY([imagesView.subviews lastObject]);
-            sender.y = CZGetY(imagesView) + 10;
-            backView.height = CZGetY(sender) + 12;
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"暂无详情"];
-            [CZProgressHUD hideAfterDelay:1.5];
+                        imagesView.height = CZGetY([imagesView.subviews lastObject]);
+                        sender.y = CZGetY(imagesView) + 10;
+                        backView.height = CZGetY(sender) + 12;
+                    } else {
+                        [CZProgressHUD showProgressHUDWithText:@"暂无详情"];
+                        [CZProgressHUD hideAfterDelay:1.5];
+                    }
+                    [self changeSubViewFrame];
+                } else {
+                    [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+                }
+                [CZProgressHUD hideAfterDelay:1.5];
+            } failure:^(NSError *error) {}];
         }
     }
-    [self changeSubViewFrame];
+    
 }
 
 // 创建发圈
@@ -671,15 +696,8 @@ static CGFloat const likeAndShareHeight = 49;
         [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
         return;
     }
-    // 为了同步关联的淘宝账号
-    [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
-        if (isAuthTaobao) {
-            // 打开淘宝
-            CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
-            vc.otherGoodsId = self.otherGoodsId;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }];
+    NSString *source = [NSString stringWithFormat:@"%@", self.detailModel[@"source"]];
+    [CZFreePushTool push_createMomentsWithId:self.detailModel[@"otherGoodsId"] source:source];
 }
 
 // 购买
@@ -702,21 +720,7 @@ static CGFloat const likeAndShareHeight = 49;
 // 获取购买的URL
 - (void)getGoodsURl
 {
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"goodsBuyLink"] = self.detailModel[@"goodsBuyLink"];
-    param[@"otherGoodsId"] = self.detailModel[@"otherGoodsId"];
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            // 打开淘宝
-            [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:result[@"data"]];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
-            [CZProgressHUD hideAfterDelay:1.5];
-        }
-    } failure:^(NSError *error) {
-
-    }];
+    [CZJIPINSynthesisTool jipin_buyLinkById:self.detailModel[@"otherGoodsId"] andSource:self.source];
 }
 
 // 分享

@@ -188,14 +188,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *model = self.listData[indexPath.row];
-    //类型：0不跳转，1商品详情，2评测详情 3发现详情, 4试用  5评测类目，7清单详情
-    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-    vc.otherGoodsId = model[@"otherGoodsId"];
-
-//    CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-//    vc.detailType = [CZJIPINSynthesisTool getModuleType:2];
-//    vc.findgoodsId = model[@"articleId"];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    NSDictionary *bannerParam = @{
+        @"targetType" : @"12",
+        @"targetId" : model[@"otherGoodsId"],
+        @"targetTitle" : @"",
+        @"source" : [NSString stringWithFormat:@"%@", model[@"source"]],
+    };
+    [CZFreePushTool bannerPushToVC:bannerParam];
 }
 
 @end

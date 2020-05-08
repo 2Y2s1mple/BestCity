@@ -26,6 +26,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 赚钱攻略
 + (void)push_freeMoney;
+
+// 京东
++ (void)push_jingDongGeneralView:(NSInteger)type;
+
+// 淘宝客详情页面
++ (void)tabbaokeDetailWithId:(NSString *)Id title:(NSString *)title source:(NSString *)source;
+
+// 搜索
++ (void)push_searchView;
+
+// 创建订单
++ (void)push_createMomentsWithId:(NSString *)ID source:(NSString *)source;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -313,11 +313,11 @@
     self.tableViewTop.constant = 10;
     
     // 暂时去掉会员
-//    if ([JPUSERINFO[@"level"] integerValue] == 2) {
-//        self.tableViewTop.constant = 10;
-//    } else {
-//        self.tableViewTop.constant = 60;
-//    }
+    if ([JPUSERINFO[@"level"] integerValue] == 2) {
+        self.tableViewTop.constant = 10;
+    } else {
+        self.tableViewTop.constant = 60;
+    }
     
     // 用户名字
     [self.loginBtn setTitle:JPUSERINFO[@"nickname"] forState:UIControlStateNormal];

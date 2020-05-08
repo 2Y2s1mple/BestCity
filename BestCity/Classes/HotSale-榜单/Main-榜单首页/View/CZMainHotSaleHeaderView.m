@@ -24,7 +24,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.actionBlock = action;
-        self.size = CGSizeMake(SCR_WIDTH, 209);
+        self.size = CGSizeMake(SCR_WIDTH, 209 + (IsiPhoneX ? 24 : 0));
         self.backgroundColor = UIColorFromRGB(0xE25838);
         [self setupSubViews];
     }
@@ -62,7 +62,7 @@
     label.font = [UIFont fontWithName:@"PingFangSC-Medium" size: 36];
     [label sizeToFit];
     label.x = 14;
-    label.y = 46;
+    label.y = 46 + (IsiPhoneX ? 24 : 0);
     [self addSubview:label];
 
     UILabel *otherLabel = [[UILabel alloc] init];

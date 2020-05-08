@@ -109,48 +109,15 @@
 {
     _list = list;
     self.collectionArr = list;
-
-//   if ([JPUSERINFO[@"isNewUser"] integerValue] != 0) { // 0 新用户
-//       for (NSDictionary *dic in dataSource[@"titles"]) {
-//           if ([dic[@"title"] isEqualToString:@"新人专区"]) {
-//               [self.collectionArr removeObject:dic];
-//           }
-//       }
-//    }
-
     [self.collectionView reloadData];
 }
 
 //邀请码
 - (void)action5
 {
-    CZFreeAlertView4 *alertView = [CZFreeAlertView4 freeAlertView:^(NSString * _Nonnull text) {
-        if (text.length == 0) {
-            [CZProgressHUD showProgressHUDWithText:@"邀请码为空"];
-            // 取消菊花
-            [CZProgressHUD hideAfterDelay:1.5];
-            return;
-        }
-
-        NSLog(@"%@", text);
-        NSMutableDictionary *param = [NSMutableDictionary dictionary];
-        // 要关注对象ID
-        param[@"invitationCode"] = text;
-        NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/addInvitationCode"];
-        [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-            if ([result[@"code"] isEqualToNumber:@(630)]) {
-                [alertView hide];
-            }
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-            // 取消菊花
-            [CZProgressHUD hideAfterDelay:1.5];
-
-        } failure:^(NSError *error) {
-            // 取消菊花
-            [CZProgressHUD hideAfterDelay:0];
-        }];
-    }];
-    [alertView show];
+    CURRENTVC(currentVc);
+    CZFreeAlertView4 *alert = [[CZFreeAlertView4 alloc] init];
+    [currentVc presentViewController:alert animated:NO completion:nil];
 }
 
 

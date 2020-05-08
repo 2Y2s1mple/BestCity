@@ -78,6 +78,14 @@
 				<string>jpc</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sdkbackdc7460a32867d066f8f2770d23e13760</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -185,6 +193,9 @@
 		<string>tbopen</string>
 		<string>tmall</string>
 		<string>taobao</string>
+		<string>pinduoduo</string>
+		<string>jdlogin</string>
+		<string>openapp.jdmobile</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -36,23 +36,28 @@
 
 - (void)setModel:(NSDictionary *)model {
     _model = [model changeAllNnmberValue];
+    if ([_model[@"source"] integerValue] == 1) { // (0全部,1京东,2淘宝，4拼多多)
+        self.statusLabel.text = @"京东";
+    } else if ([_model[@"source"] integerValue] == 2) {
+        self.statusLabel.text = @"淘宝";
+    } else if ([_model[@"source"] integerValue] == 4) {
+        self.statusLabel.text = @"拼多多";
+    }
+    
     if ([_model[@"status"] integerValue] == 1) { // 0全部 1即将到账，2已到账，3订单失效
-        self.statusLabel.text = @"即将到账";
         self.appEarningTime.text = @"收货后次月结算";
     } else if ([_model[@"status"] integerValue] == 2) {
-        self.statusLabel.text = @"已到账";
         self.appEarningTime.text = [NSString stringWithFormat:@"%@已到账", _model[@"appEarningTime"]];
     } else if ([_model[@"status"] integerValue] == 3) {
-        self.statusLabel.text = @"订单失效";
         self.appEarningTime.text = @"失效订单无返现";
     }
 
-    self.tkCreateTimeLabel.text = [NSString stringWithFormat:@"下单时间：%@", _model[@"tkCreateTime"]]; //下单时间
+    self.tkCreateTimeLabel.text = [NSString stringWithFormat:@"下单时间：%@", _model[@"tkPaidTime"]]; //下单时间
     [self.itemImgView sd_setImageWithURL:[NSURL URLWithString:_model[@"itemImg"]]];
     self.itemTitle.text = _model[@"itemTitle"];
-    self.itemNum.text = [NSString stringWithFormat:@"x%@", _model[@"itemNum"]];
-    self.alipayTotalPrice.text = [NSString stringWithFormat:@"付款：%@元", _model[@"alipayTotalPrice"]];
-    self.preFee.text = [NSString stringWithFormat:@"返现：%@元", _model[@"preFee"]];
+    self.itemNum.text = [NSString stringWithFormat:@"x%ld", [_model[@"itemNum"] integerValue]];
+    self.alipayTotalPrice.text = [NSString stringWithFormat:@"付款：%@元", _model[@"payPrice"]];
+    self.preFee.text = [NSString stringWithFormat:@" 返现：%@元 ", _model[@"preFee"]];
     self.tradeId.text = [NSString stringWithFormat:@"订单号：%@", _model[@"tradeId"]];
 }
 

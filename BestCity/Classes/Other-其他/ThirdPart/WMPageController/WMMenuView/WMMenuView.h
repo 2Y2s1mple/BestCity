@@ -33,6 +33,9 @@ typedef NS_ENUM(NSUInteger, WMMenuViewLayoutMode) {
 
 @protocol WMMenuViewDelegate <NSObject>
 @optional
+
+- (void)menuView:(WMMenuView *)menu didSelectedItem:(WMMenuItem *)indexItem currentItem:(WMMenuItem *)currentItem;
+
 - (BOOL)menuView:(WMMenuView *)menu shouldSelesctedIndex:(NSInteger)index;
 - (void)menuView:(WMMenuView *)menu didSelectedIndex:(NSInteger)index currentIndex:(NSInteger)currentIndex;
 - (CGFloat)menuView:(WMMenuView *)menu widthForItemAtIndex:(NSInteger)index;

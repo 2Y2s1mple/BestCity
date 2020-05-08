@@ -15,9 +15,6 @@
 #import <AdSupport/AdSupport.h>
 #import "KCUtilMd5.h"
 
-// 跳转
-#import "CZTaobaoSearchController.h"
-
 //------------------
 // viewModel
 #import "CZFestivalCollectDelegate.h"
@@ -37,10 +34,8 @@
 @property (nonatomic, strong) CZFestivalCollectDelegate *collectDataSurce;
 /** <#注释#> */
 @property (nonatomic, assign) NSInteger page;
-@property (nonatomic, strong) NSString *asc; // (1正序，0倒序);
+
 @property (nonatomic, strong) NSString *orderByType;  // 0综合，1价格，2返现，3销量
-/** 是否是条形布局 */
-@property (nonatomic, assign) BOOL layoutType;
 /** <#注释#> */
 @property (nonatomic, strong) UIImageView *icon;
 
@@ -63,9 +58,8 @@
     }
 
     // 数据初始化
-    self.asc = @"1"; // (1正序，0倒序);
-    self.orderByType = @"0";
-    self.layoutType = YES;
+    self.orderByType = @"2";
+    
 
     // 创建UI
     self.icon = [[UIImageView alloc] init];
@@ -149,6 +143,7 @@
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumInteritemSpacing = 0;
+//        layout.estimatedItemSize = CGSizeMake(SCR_WIDTH, 0);;
 //        layout.minimumLineSpacing = 0;
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
@@ -186,12 +181,13 @@
     [self.collectView.mj_footer endRefreshing];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/index"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.totalDataModel = [CZMainViewSubOneVCModel objectWithKeyValues:result[@"data"]];
             self.collectDataSurce.totalDataModel = self.totalDataModel;
+            [self.collectView reloadData];
             // 获取精品推荐
-            [self getProductsRecommendedData:@{@"orderByType" : self.orderByType, @"asc" : self.asc}];
+            [self getProductsRecommendedData:@{@"orderByType" : self.orderByType}];
         } else {
             // 结束刷新
             [self.collectView.mj_header endRefreshing];
@@ -207,12 +203,10 @@
     [self.collectView.mj_header endRefreshing];
     self.page++;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"asc"] = self.asc; // (1正序，0倒序);
-    param[@"orderByType"] = self.orderByType; // 0综合，1价格，2返现，3销量
-    param[@"page"] = @(self.page);
+    param[@"source"] = @(1); // 1:京东 2:淘宝 4拼多多
 
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             if ([result[@"data"] count] != 0) {
                 [self.qualityGoods addObjectsFromArray:result[@"data"]];
@@ -233,24 +227,25 @@
     }];
 }
 
-// 获取精品推荐
+// 获取今日推荐
 - (void)getProductsRecommendedData:(NSDictionary *)dataParam
 {
     self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"asc"] = dataParam[@"asc"]; // (1正序，0倒序);
-    param[@"orderByType"] = dataParam[@"orderByType"]; // 0综合，1价格，2返现，3销量
+    param[@"source"] = dataParam[@"orderByType"]; // 1:京东 2:淘宝 4拼多多
     param[@"page"] = @(self.page);
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             self.qualityGoods = [NSMutableArray arrayWithArray:result[@"data"]];
             self.collectDataSurce.qualityGoods = self.qualityGoods;
-            [self.collectView reloadData];
+            
+            NSIndexSet *index = [NSIndexSet indexSetWithIndex:4];
+            [self.collectView reloadSections:index];
         }
         // 结束刷新
         [self.collectView.mj_header endRefreshing];
-    } failure:^(NSError *error) {// 结束刷新
+    } failure:^(NSError *error) { // 结束刷新
         [self.collectView.mj_header endRefreshing];
     }];
 }
@@ -269,23 +264,14 @@
 - (void)productsRecommendedBtnsAction:(NSNotification *)sender
 {
     NSDictionary *param = sender.userInfo;
-
-    if (self.layoutType != [param[@"layoutType"] boolValue]) {
-        self.layoutType = [param[@"layoutType"] boolValue];
-        self.collectDataSurce.layoutType = self.layoutType;
-        [self.collectView reloadData];
-    } else {
-        self.asc =  param[@"asc"]; // (1正序，0倒序);
-        self.orderByType = param[@"orderByType"];
-        [self getProductsRecommendedData:param];
-    }
+    self.orderByType = param[@"orderByType"];
+    [self getProductsRecommendedData:param];
 }
 
 // 跳转搜索
 - (void)pushSearchView
 {
-    CZTaobaoSearchController *vc = [[CZTaobaoSearchController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [CZFreePushTool push_searchView];
 }
 
 - (void)jiGuangPushNotifi

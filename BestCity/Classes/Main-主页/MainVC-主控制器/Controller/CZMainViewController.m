@@ -22,7 +22,6 @@
 #import "CZMainViewSubDefaultVC.h" // 通用界面
 
 // 跳转
-#import "CZTaobaoSearchController.h"
 #import "GXNetTool.h"
 
 
@@ -153,11 +152,11 @@
 {
     // 搜索
     CZMainViewSearch *searchView = [[CZMainViewSearch alloc] init];
+//    searchView.backgroundColor = RANDOMCOLOR;
     searchView.y = self.STATUSBAR_MAX_ORIGIN_Y + 4;
     [searchView setBlock:^{
         [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_sousuo"];
-        CZTaobaoSearchController *vc = [[CZTaobaoSearchController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [CZFreePushTool push_searchView];
     }];
     [self.view addSubview:searchView];
 

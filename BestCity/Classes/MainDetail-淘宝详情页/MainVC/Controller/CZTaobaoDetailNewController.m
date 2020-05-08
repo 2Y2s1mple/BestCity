@@ -124,7 +124,6 @@ static CGFloat const likeAndShareHeight = 49;
 {
     // goodsType 1: 极品城 2: 淘宝
     // 如果极品城以前的样式, 淘宝的是现在样式
-
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"allowanceGoodsId"] = self.allowanceGoodsId;
     [CZProgressHUD showProgressHUDWithText:nil];
@@ -145,19 +144,6 @@ static CGFloat const likeAndShareHeight = 49;
         }
         [CZProgressHUD hideAfterDelay:1.5];
     } failure:^(NSError *error) {}];
-
-    NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
-    param1[@"otherGoodsId"] = self.otherGoodsId;
-    [CZProgressHUD showProgressHUDWithText:nil];
-    //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/getGoodsDescImgs"] body:param1 header:nil response:GXResponseStyleJSON success:^(id result) {
-        if ([result[@"msg"] isEqualToString:@"success"]) {
-            self.descImgList = result[@"data"];
-        } else {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-        }
-        [CZProgressHUD hideAfterDelay:1.5];
-    } failure:^(NSError *error) {}];
 }
 
 #pragma mark - 轮播图和详情
@@ -172,8 +158,12 @@ static CGFloat const likeAndShareHeight = 49;
     CZTaobaoGoodsView *titlesView = [CZTaobaoGoodsView taobaoGoodsView];
     titlesView.y = self.recordHeight;
     titlesView.width = SCR_WIDTH;
+    titlesView.source = self.source;
     titlesView.allDetailModel = self.allDetailModel;
     titlesView.model = self.detailModel;
+    
+    titlesView.feeView.hidden = YES;
+    titlesView.titleLabelTop.constant = -30;
 
     NSString *titleName = [NSString stringWithFormat:@"         %@", self.detailModel[@"otherName"]];
     titlesView.titleName.text = titleName;
@@ -186,7 +176,7 @@ static CGFloat const likeAndShareHeight = 49;
     titlesView.bottomLabel.hidden = YES;
     titlesView.label1.hidden = YES;
     titlesView.label2.hidden = YES;
-    titlesView.height = titlesView.commodityH + 95;
+    titlesView.height = titlesView.commodityH + 95 - 30;
     [self.scrollerView addSubview:titlesView];
     self.recordHeight += titlesView.height; // 高度
 
@@ -520,48 +510,63 @@ static CGFloat const likeAndShareHeight = 49;
         imagesView.height = 0;
         sender.y = CZGetY(imagesView) + 10;
         backView.height = CZGetY(sender) + 12;
-
+        [self changeSubViewFrame];
     } else {
         sender.selected = YES;
-        if (self.descImgList.count > 0) {
-            NSMutableArray *imageList = [NSMutableArray arrayWithArray:self.descImgList];
-            for (NSString *imageUrl in imageList) {
-                UIImageView *bigImage = [[UIImageView alloc] init];
-                bigImage.width = SCR_WIDTH;
-                bigImage.height = 200;
-                [imagesView addSubview:bigImage];
-                NSString *strUrl = [imageUrl stringByReplacingOccurrencesOfString:@"_.webp" withString:@""];
-                [bigImage sd_setImageWithURL:[NSURL URLWithString:strUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                    if (image == nil) {
-                        return ;
-                    };
-                    CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
-                    bigImage.height = imageHeight;
+        if (self.descImgList.count == 0) {
+            NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
+            param1[@"otherGoodsId"] = self.otherGoodsId;
+            [CZProgressHUD showProgressHUDWithText:nil];
+            //获取详情数据
+            [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/getGoodsDescImgs"] body:param1 header:nil response:GXResponseStyleJSON success:^(id result) {
+                if ([result[@"msg"] isEqualToString:@"success"]) {
+                    self.descImgList = result[@"data"];
+                    if (self.descImgList.count > 0) {
+                        NSMutableArray *imageList = [NSMutableArray arrayWithArray:self.descImgList];
+                        for (NSString *imageUrl in imageList) {
+                            UIImageView *bigImage = [[UIImageView alloc] init];
+                            bigImage.width = SCR_WIDTH;
+                            bigImage.height = 200;
+                            [imagesView addSubview:bigImage];
+                            NSString *strUrl = [imageUrl stringByReplacingOccurrencesOfString:@"_.webp" withString:@""];
+                            [bigImage sd_setImageWithURL:[NSURL URLWithString:strUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                                if (image == nil) {
+                                    return ;
+                                };
+                                CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
+                                bigImage.height = imageHeight;
 
-                    for (int i = 0; i < imagesView.subviews.count; i++) {
-                        UIView *view = imagesView.subviews[i];
-                        if (i == 0) {
-                            view.y = 0;
-                            continue;
+                                for (int i = 0; i < imagesView.subviews.count; i++) {
+                                    UIView *view = imagesView.subviews[i];
+                                    if (i == 0) {
+                                        view.y = 0;
+                                        continue;
+                                    }
+                                    view.y = CZGetY(imagesView.subviews[i - 1]);
+                                }
+                                imagesView.height = CZGetY([imagesView.subviews lastObject]);
+                                sender.y = CZGetY(imagesView) + 10;
+                                backView.height = CZGetY(sender) + 12;
+                                [self changeSubViewFrame];
+                            }];
                         }
-                        view.y = CZGetY(imagesView.subviews[i - 1]);
-                    }
-                    imagesView.height = CZGetY([imagesView.subviews lastObject]);
-                    sender.y = CZGetY(imagesView) + 10;
-                    backView.height = CZGetY(sender) + 12;
-                    [self changeSubViewFrame];
-                }];
-            }
 
-            imagesView.height = CZGetY([imagesView.subviews lastObject]);
-            sender.y = CZGetY(imagesView) + 10;
-            backView.height = CZGetY(sender) + 12;
-        } else {
-            [CZProgressHUD showProgressHUDWithText:@"暂无详情"];
-            [CZProgressHUD hideAfterDelay:1.5];
+                        imagesView.height = CZGetY([imagesView.subviews lastObject]);
+                        sender.y = CZGetY(imagesView) + 10;
+                        backView.height = CZGetY(sender) + 12;
+                    } else {
+                        [CZProgressHUD showProgressHUDWithText:@"暂无详情"];
+                        [CZProgressHUD hideAfterDelay:1.5];
+                    }
+                    [self changeSubViewFrame];
+                } else {
+                    [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
+                }
+                [CZProgressHUD hideAfterDelay:1.5];
+            } failure:^(NSError *error) {}];
         }
     }
-    [self changeSubViewFrame];
+    
 }
 
 // 购买
@@ -575,15 +580,14 @@ static CGFloat const likeAndShareHeight = 49;
 - (void)getGoodsURl
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"goodsBuyLink"] = self.detailModel[@"goodsBuyLink"];
+    param[@"source"] = self.source;
     param[@"otherGoodsId"] = self.detailModel[@"otherGoodsId"];
     //获取详情数据
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             // 打开淘宝
             [CZJIPINSynthesisTool jipin_jumpTaobaoWithUrlString:result[@"data"]];
         } else {
-
             [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
             [CZProgressHUD hideAfterDelay:1.5];
         }

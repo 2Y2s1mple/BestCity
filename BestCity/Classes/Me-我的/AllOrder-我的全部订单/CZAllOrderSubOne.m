@@ -65,7 +65,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.tableView.frame = CGRectMake(0, 0, SCR_WIDTH, self.view.height);
+    self.tableView.frame = CGRectMake(0, -10, SCR_WIDTH, self.view.height);
 }
 
 - (void)setupRefresh
@@ -84,10 +84,11 @@
     self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"status"] = @(0);
+    param[@"status"] = self.status;
+    param[@"source"] = self.source;
 
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/user/myTaobaoOrderList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/user/myTaobaoOrderList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {
             if ([result[@"data"] count] > 0) {
                 // 没有数据图片
@@ -120,9 +121,10 @@
 
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"page"] = @(self.page);
-    param[@"type"] = @(0);
+    param[@"status"] = self.status;
+    param[@"source"] = self.source;
     [CZProgressHUD showProgressHUDWithText:nil];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/user/myTaobaoOrderList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/user/myTaobaoOrderList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"] && [result[@"data"] count] != 0) {
             [self.dataSource addObjectsFromArray:result[@"data"]];
             [self.tableView reloadData];

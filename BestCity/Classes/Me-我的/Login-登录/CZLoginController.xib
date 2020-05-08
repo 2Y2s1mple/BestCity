@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,7 +34,7 @@
                             </constraints>
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号 " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="97D-uD-M2e">
-                            <rect key="frame" x="34" y="21.5" width="271" height="17"/>
+                            <rect key="frame" x="34" y="21" width="271" height="18.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
@@ -73,7 +73,7 @@
                             </constraints>
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="短信验证码 " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qkc-S8-ve9">
-                            <rect key="frame" x="36" y="21.5" width="189" height="17"/>
+                            <rect key="frame" x="36" y="21" width="189" height="18.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
@@ -167,8 +167,13 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wer-hA-bnW">
-                    <rect key="frame" x="20" y="50" width="63" height="22"/>
-                    <state key="normal" title="Button" image="nav-back"/>
+                    <rect key="frame" x="0.0" y="25" width="50" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="8Jk-x3-jWl"/>
+                        <constraint firstAttribute="height" constant="50" id="FlW-uJ-v8m"/>
+                    </constraints>
+                    <state key="normal" image="nav-back"/>
                     <connections>
                         <action selector="popAction:" destination="-1" eventType="touchUpInside" id="VYL-1a-WCE"/>
                     </connections>
@@ -215,7 +220,7 @@
                             </constraints>
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入邀请码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lTu-cJ-WNU">
-                            <rect key="frame" x="38" y="21.5" width="197" height="17"/>
+                            <rect key="frame" x="38" y="21" width="197" height="18.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             <connections>
@@ -259,7 +264,7 @@
                 <constraint firstItem="FdZ-Fk-q54" firstAttribute="leading" secondItem="YP0-y1-S4k" secondAttribute="leading" id="4OK-jB-Lmd"/>
                 <constraint firstItem="AFc-09-HGt" firstAttribute="leading" secondItem="FdZ-Fk-q54" secondAttribute="leading" id="6d7-fs-2Rl"/>
                 <constraint firstItem="kCf-bk-aWJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7qv-Yt-sya"/>
-                <constraint firstItem="Wer-hA-bnW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="Ede-wV-TTB"/>
+                <constraint firstItem="Wer-hA-bnW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="Ede-wV-TTB"/>
                 <constraint firstItem="NMf-BX-C8K" firstAttribute="top" secondItem="kCf-bk-aWJ" secondAttribute="bottom" constant="50" id="Etm-Wz-VUl"/>
                 <constraint firstAttribute="trailing" secondItem="81M-ZP-HyG" secondAttribute="trailing" id="GE1-v4-2xw"/>
                 <constraint firstItem="NMf-BX-C8K" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="IGI-DZ-jZt"/>
@@ -272,7 +277,7 @@
                 <constraint firstItem="FdZ-Fk-q54" firstAttribute="top" secondItem="YP0-y1-S4k" secondAttribute="bottom" id="NIM-aT-yW9"/>
                 <constraint firstItem="NMf-BX-C8K" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SXz-3v-62s"/>
                 <constraint firstItem="YP0-y1-S4k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="180" id="Uap-1I-BDr"/>
-                <constraint firstItem="Wer-hA-bnW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="XgV-kQ-ojL"/>
+                <constraint firstItem="Wer-hA-bnW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XgV-kQ-ojL"/>
                 <constraint firstItem="WFq-eC-pac" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.5" id="cS0-U6-VdI"/>
                 <constraint firstItem="81M-ZP-HyG" firstAttribute="leading" secondItem="NMf-BX-C8K" secondAttribute="trailing" id="ci7-L2-VrN"/>
                 <constraint firstAttribute="bottom" secondItem="NMf-BX-C8K" secondAttribute="bottom" constant="30" id="e7J-6q-yyn"/>
@@ -283,7 +288,7 @@
                 <constraint firstAttribute="trailing" secondItem="P0s-45-rM1" secondAttribute="trailing" constant="30" id="xCF-Jh-4lk"/>
                 <constraint firstItem="81M-ZP-HyG" firstAttribute="centerY" secondItem="NMf-BX-C8K" secondAttribute="centerY" id="y89-TO-ZXY"/>
             </constraints>
-            <point key="canvasLocation" x="-3927" y="-219"/>
+            <point key="canvasLocation" x="-4351" y="-307"/>
         </view>
     </objects>
     <resources>

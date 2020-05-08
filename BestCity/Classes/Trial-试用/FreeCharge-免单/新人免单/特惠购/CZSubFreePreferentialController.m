@@ -44,6 +44,13 @@
                  @"Id" : @"id"
                  };
     }];
+    
+    //导航条
+    UIView *tmpView = [[UIView alloc] init];
+    tmpView.backgroundColor = [UIColor whiteColor];
+    tmpView.height = (IsiPhoneX ? 26 : 0);
+    tmpView.width = SCR_WIDTH;
+    [self.view addSubview:tmpView];
 
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"百万补贴特惠购" rightBtnTitle:nil rightBtnAction:nil];

@@ -12,7 +12,7 @@
 // 工具
 #import "GXNetTool.h"
 
-#import "CZguessLineCell.h" // 一行
+#import "CZCollectionTypeOneCell.h" // 一行
 #import "CZguessWhatYouLikeCell.h" // 横排
 
 // 跳转
@@ -100,7 +100,7 @@
         CGRect frame = CGRectMake(0, 0, SCR_WIDTH, 0);
         _collectView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor clearColor];
-         [_collectView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessLineCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessLineCell"]; // 一行
+         [_collectView registerNib:[UINib nibWithNibName:NSStringFromClass([CZCollectionTypeOneCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZCollectionTypeOneCell"]; // 一行
         [_collectView registerNib:[UINib nibWithNibName:NSStringFromClass([CZguessWhatYouLikeCell class]) bundle:nil] forCellWithReuseIdentifier:@"CZguessWhatYouLikeCell"]; // 两行
         _collectView.dataSource = self;
         _collectView.delegate = self;
@@ -217,7 +217,7 @@
 
         NSDictionary *dic = self.dataSource[indexPath.item];
         if (self.layoutType == YES) { // 一条
-            CZguessLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZguessLineCell" forIndexPath:indexPath];
+            CZCollectionTypeOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CZCollectionTypeOneCell" forIndexPath:indexPath];
             cell.dataDic = dic;
             return cell;
         } else { // 块
@@ -264,9 +264,13 @@
 {
     NSLog(@"%ld", indexPath.item);
     NSDictionary *param = self.dataSource[indexPath.row];
-    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-    vc.otherGoodsId = param[@"otherGoodsId"];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSDictionary *bannerParam = @{
+        @"targetType" : @"12",
+        @"targetId" : param[@"otherGoodsId"],
+        @"targetTitle" : @"",
+        @"source" : [NSString stringWithFormat:@"%@", param[@"source"]],
+    };
+    [CZFreePushTool bannerPushToVC:bannerParam];
 }
 
 @end

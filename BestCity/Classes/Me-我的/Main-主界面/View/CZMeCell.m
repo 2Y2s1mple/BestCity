@@ -12,7 +12,7 @@
 
 #import "CZInvitationController.h"
 #import "CZOrderController.h"
-#import "CZAllOrderController.h" // 我的全部订单
+#import "CZAllOrderMainController.h" // 我的全部订单
 
 #import "CZMyWalletController.h"
 #import "CZMyPointsController.h"
@@ -66,7 +66,7 @@
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *nav = tabbar.selectedViewController;
     CZMeController *vc = (CZMeController *)nav.topViewController;
-    UIViewController *toVc = [[NSClassFromString(@"CZAllOrderController") alloc] init];
+    UIViewController *toVc = [[NSClassFromString(@"CZAllOrderMainController") alloc] init];
     [vc.navigationController pushViewController:toVc animated:YES];
 }
 

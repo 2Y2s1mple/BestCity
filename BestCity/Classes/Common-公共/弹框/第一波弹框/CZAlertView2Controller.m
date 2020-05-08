@@ -25,7 +25,7 @@
     self = [super init];
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     }
     return self;
 }
@@ -60,21 +60,20 @@
                 break;
         }
     }
-
 }
 
 - (IBAction)pop:(id)sender {
     if ([self.presentingViewController isKindOfClass:[UITabBarController class]]) {
         UITabBarController *tabbar = (UITabBarController *)self.presentingViewController;
         UINavigationController *nav = tabbar.selectedViewController;
-
-        [nav popViewControllerAnimated:YES];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:NO completion:^{
+            [nav popViewControllerAnimated:YES];
+        }];
     }
 }
 
 - (IBAction)dismiss:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)setParam:(NSDictionary *)param

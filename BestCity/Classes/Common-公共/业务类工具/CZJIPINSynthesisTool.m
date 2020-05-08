@@ -39,6 +39,8 @@
 
 #import "CZShareViewController.h"
 #import "CZUMConfigure.h"
+#import "KeplerApiManager.h" // 京东
+
 
 
 @interface CZJIPINSynthesisTool ()
@@ -262,7 +264,7 @@
     }];
 }
 
-// 0元购, 跳淘宝购买, 之后弹出特惠购, 获取备用金得到淘宝路径
+#pragma mark - 获取备用金链接跳淘宝购买, 新人0元购, 之后弹出特惠购,
 + (void)openAlibcTradeWithId:(NSString *)ID
 {
 //    if (![JPUSERINFO[@"isNewUser"] isEqual:@(0)]) {
@@ -297,13 +299,76 @@
     }];
 }
 
-// 根据url跳淘宝
+#pragma mark - 根据url跳淘宝
 + (void)jipin_jumpTaobaoWithUrlString:(NSString *)urlString
 {
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
     UINavigationController *naVc = tabbar.selectedViewController;
     UIViewController *toVC = naVc.topViewController;
     [CZOpenAlibcTrade openAlibcTradeWithUrlString:urlString parentController:toVC];
+}
+
+#pragma mark - 跳转拼多多
++ (void)jipin_jumpPinduoduoWithUrlString:(NSString *)urlString
+{
+//    https://mobile.yangkeduo.com
+//    pinduoduo://com.xunmeng.pinduoduo/
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"pinduoduo://"]]) {
+        NSURL *skipUrl = [NSURL URLWithString:urlString];
+        [[UIApplication sharedApplication] openURL:skipUrl];
+    } else {
+        [CZProgressHUD showProgressHUDWithText:@"没有安装拼多多!"];
+        [CZProgressHUD hideAfterDelay:1.5];
+    }
+}
+
+#pragma mark - 跳转京东
++ (void)jipin_jumpJingdongWithUrlString:(NSString *)urlString
+{
+    [[KeplerApiManager sharedKPService] openKeplerPageWithURL:urlString userInfo:nil successCallback:^{
+        
+    } failedCallback:^(NSInteger code, NSString * _Nonnull url) {
+        NSLog(@"%@ --- code--%ld", url, (long)code);
+    }];
+}
+
+#pragma mark - 获取不是备用金的购买链接
++ (void)jipin_buyLinkById:(NSString *)Id andSource:(NSString *)source
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"source"] = source;
+    param[@"otherGoodsId"] = Id;
+    //获取详情数据
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/getGoodsClickUrl"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            // 打开(1京东,2淘宝，4拼多多)
+            [CZJIPINSynthesisTool jipin_jumpOtherAppParam:result[@"data"] andSource:source];
+        } else {
+            [CZProgressHUD showProgressHUDWithText:@"链接获取失败"];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
+    } failure:^(NSError *error) {
+
+    }];
+}
+
+#pragma mark - 跳转淘宝, 拼多多, 京东
++ (void)jipin_jumpOtherAppParam:(NSDictionary *)param andSource:(NSString *)source
+{
+    // (1京东,2淘宝，4拼多多)
+    switch ([source integerValue]) {
+        case 1:
+            [self jipin_jumpJingdongWithUrlString:param[@"mobileUrl"]];
+            break;
+        case 2:
+            [self jipin_jumpTaobaoWithUrlString:param[@"mobileUrl"]];
+            break;
+        case 4:
+            [self jipin_jumpPinduoduoWithUrlString:param[@"schemaUrl"]];
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - 弹窗工具

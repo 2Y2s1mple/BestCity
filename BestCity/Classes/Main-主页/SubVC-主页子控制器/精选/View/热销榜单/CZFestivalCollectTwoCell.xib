@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="10" width="499" height="247"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="热销榜单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDS-pL-h1F">
-                                <rect key="frame" x="15" y="20" width="70" height="21"/>
+                                <rect key="frame" x="224.5" y="20" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -30,15 +30,20 @@
                                 <rect key="frame" x="0.0" y="51" width="499" height="171"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main-icon12" translatesAutoresizingMaskIntoConstraints="NO" id="UBB-Io-twX">
+                                <rect key="frame" x="202.5" y="20.5" width="20" height="20"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="UBB-Io-twX" firstAttribute="centerY" secondItem="yDS-pL-h1F" secondAttribute="centerY" id="3H7-N3-r6o"/>
+                            <constraint firstItem="yDS-pL-h1F" firstAttribute="leading" secondItem="UBB-Io-twX" secondAttribute="trailing" constant="2" id="3JI-YI-NbW"/>
                             <constraint firstItem="14a-EM-cnH" firstAttribute="leading" secondItem="s2Y-YT-ecr" secondAttribute="leading" id="4if-bI-2Ko"/>
+                            <constraint firstItem="yDS-pL-h1F" firstAttribute="centerX" secondItem="s2Y-YT-ecr" secondAttribute="centerX" constant="10" id="8Fh-zp-IRk"/>
                             <constraint firstItem="yDS-pL-h1F" firstAttribute="top" secondItem="s2Y-YT-ecr" secondAttribute="top" constant="20" id="QWF-rg-ewI"/>
                             <constraint firstItem="14a-EM-cnH" firstAttribute="top" secondItem="yDS-pL-h1F" secondAttribute="bottom" constant="10" id="WQ8-vv-j7o"/>
                             <constraint firstAttribute="bottom" secondItem="14a-EM-cnH" secondAttribute="bottom" constant="25" id="lIM-Gc-x4m"/>
                             <constraint firstAttribute="trailing" secondItem="14a-EM-cnH" secondAttribute="trailing" id="shX-rf-WmH"/>
-                            <constraint firstItem="yDS-pL-h1F" firstAttribute="leading" secondItem="s2Y-YT-ecr" secondAttribute="leading" constant="15" id="yiK-nG-jSN"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -56,7 +61,10 @@
                 <outlet property="containView" destination="14a-EM-cnH" id="xPh-Yx-YAB"/>
                 <outlet property="titleLabel" destination="yDS-pL-h1F" id="lWe-An-qiL"/>
             </connections>
-            <point key="canvasLocation" x="-54.347826086956523" y="79.352678571428569"/>
+            <point key="canvasLocation" x="-99" y="76"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Main-icon12" width="20" height="20"/>
+    </resources>
 </document>

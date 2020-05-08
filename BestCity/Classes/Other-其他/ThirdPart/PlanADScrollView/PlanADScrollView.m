@@ -143,7 +143,7 @@
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     [self.delegate PlanADScrollViewCurrentAtIndex:self.pageControl.currentPage];
-    NSLog(@"%s", __func__);
+    
 }
 
 -(NSString *)controllerTitle{

@@ -123,7 +123,6 @@
 
 - (void)titleAction:(CZTVTLayoutBtn *)sender
 {
-
     if (sender.tag == 4) {
         if (sender.isSelected) { // 线性排布
             self.islayoutLine = YES;
@@ -154,7 +153,6 @@
     self.recordBtn.selected = NO;
     sender.selected = YES;
     self.recordBtn = sender;
-
 }
 
 

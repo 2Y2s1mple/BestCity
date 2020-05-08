@@ -100,6 +100,7 @@
     param[@"category1Id"] = self.category1Id;
     param[@"orderByType"] = self.orderByType; // 0综合，1价格，2返现，3销量
     param[@"page"] = @(self.page);
+    
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsListByCategory1"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {

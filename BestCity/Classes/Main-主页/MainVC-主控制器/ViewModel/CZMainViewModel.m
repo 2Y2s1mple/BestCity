@@ -22,7 +22,8 @@
     static NSString *key = @"mainTitlesKey";
     //获取数据
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/category1"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    param[@"source"] = @"2";
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/category1"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.mainTitles = result[@"data"];
             [CZSaveTool setObject:self.mainTitles forKey:key];

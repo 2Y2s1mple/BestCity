@@ -86,8 +86,8 @@
 {
     return ^(NSArray *category){
         // 创建菜单视图
-        CZMainHotSaleCategoryView *categoryView = [[CZMainHotSaleCategoryView alloc] initWithFrame:CGRectMake(0, 209, SCR_WIDTH, 0) action:^(CGFloat height) {
-            self.tableView.tableHeaderView.height = height + 209;
+        CZMainHotSaleCategoryView *categoryView = [[CZMainHotSaleCategoryView alloc] initWithFrame:CGRectMake(0, 209 + (IsiPhoneX ? 24 : 0), SCR_WIDTH, 0) action:^(CGFloat height) {
+            self.tableView.tableHeaderView.height = height + 209 + (IsiPhoneX ? 24 : 0);
             [self.tableView reloadData];
         }];
         categoryView.dataSource = category;

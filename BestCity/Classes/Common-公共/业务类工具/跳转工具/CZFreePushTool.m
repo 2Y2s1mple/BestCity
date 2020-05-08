@@ -19,6 +19,9 @@
 #import "CZInvitationController.h" // 邀请好友
 #import "CZMemberOfCenterController.h" // 会员中心
 #import "CZEvaluationController.h" // 测评
+#import "CZMainJingDongGeneralView.h" // 京东通用页
+#import "CZTaobaoSearchMainController.h" // 所搜
+#import "CZIssueCreate1Moments.h"
 
 @implementation CZFreePushTool
 // 轮播图广告跳转
@@ -27,8 +30,10 @@
     NSInteger targetType  = [param[@"targetType"] integerValue];
     NSString *targetId = param[@"targetId"];
     NSString *targetTitle = param[@"targetTitle"];
+    NSString *targetSource = param[@"source"]; // 商品来源(1京东,2淘宝，4拼多多)
 
-   // 轮播图跳转类型：0不跳转, 2评测详情，11.专题页面 12.淘宝客详情页面, 13.H5页面，14.极币商城，15.任务中心，16.榜单主页，17.榜单主页 18.新人0元购
+   //轮播图跳转类型：0不跳转, 1商品详情, 2评测详情, 3发现详情, 4试用报告web, 41试用报告json, 5评测类目, 6试用商品, 7清单详情, 71清单详情json, 8双11首页, 9双11文章详情, 10双11类目, 11.专题页面 12.淘宝客详情页面, 13.H5页面，14.极币商城，15.任务中心，16.红包主页，17.榜单主页，18特惠购列表, 19 0元购列表, 20邀请页面, 21京东, 22拼多多, 23评测主页，24新手教程
+    
 
     switch (targetType) {
         case 2:
@@ -38,7 +43,7 @@
             [self  projectPageWithId:targetId title:targetTitle];
             break;
         case 12:
-            [self tabbaokeDetailWithId:targetId title:targetTitle];
+            [self tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
             break;
         case 13:
             [self generalH5WithUrl:targetId title:targetTitle];
@@ -58,9 +63,25 @@
         case 18:
             [self FreePreferential];
             break;
-
-
-
+        case 19:
+            [self push_newPeopleFree];
+            break;
+        case 20:
+            [self push_inviteFriend];
+            break;
+        case 21:
+            [self push_jingDongGeneralView:1];// (1京东 2淘宝 4拼多多)
+            break;
+        case 22:
+            [self push_jingDongGeneralView:4];
+            break;
+        case 23:
+            [self push_evaluation];
+            break;
+        case 24:
+            [self push_freeMoney];
+            break;
+            
         default:
             break;
     }
@@ -73,17 +94,18 @@
     NSInteger targetType  = [param[@"targetType"] integerValue];
      NSString *targetId = param[@"targetId"];
      NSString *targetTitle = param[@"targetTitle"];
-    // 1.专题页，2.淘宝客商品详情页，3.评测详情页，4.H5页面，5.极币商城，6.任务中心，7.免单主页，8.榜单主页, 9.测评
-
+    NSString *targetSource = param[@"source"];
+    //跳转类型1.专题页，2.淘宝客商品详情页，3.评测详情页，4.H5页面，5.极币商城，6.任务中心，7.免单主页，8.榜单主页 9.评测首页,10特惠购列表,11 0元购列表 12京东 13拼多多,14新手教程,15邀请页面
+    
      switch (targetType) {
-         case 3:
-             [self testDetailWithId:targetId];
-             break;
          case 1:
              [self  projectPageWithId:targetId title:targetTitle];
              break;
          case 2:
-             [self tabbaokeDetailWithId:targetId title:targetTitle];
+             [self tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
+             break;
+         case 3:
+             [self testDetailWithId:targetId];
              break;
          case 4:
              [self generalH5WithUrl:targetId title:targetTitle];
@@ -103,7 +125,24 @@
          case 9:
              [self push_evaluation];
              break;
-
+         case 10:
+             [self FreePreferential];
+             break;
+         case 11:
+             [self push_newPeopleFree];
+             break;
+         case 12:
+             [self push_jingDongGeneralView:1];
+             break;
+         case 13:
+             [self push_jingDongGeneralView:4];
+             break;
+         case 14:
+             [self push_freeMoney];
+             break;
+         case 15:
+             [self push_inviteFriend];
+             break;
 
          default:
              break;
@@ -116,6 +155,7 @@
      NSInteger targetType  = [param[@"targetType"] integerValue];
      NSString *targetId = param[@"targetId"];
      NSString *targetTitle = param[@"targetTitle"];
+    NSString *targetSource = param[@"source"];
     //1.专题页，2.淘宝客商品详情页，3.评测详情页，4.H5页面，5.极币商城，6.任务中心，7.免单主页，8.榜单主页
 
      switch (targetType) {
@@ -126,7 +166,7 @@
              [self  projectPageWithId:targetId title:targetTitle];
              break;
          case 2:
-             [self tabbaokeDetailWithId:targetId title:targetTitle];
+             [self tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
              break;
          case 4:
              [self generalH5WithUrl:targetId title:targetTitle];
@@ -175,10 +215,11 @@
 }
 
 #pragma mark - 淘宝客详情页面
-+ (void)tabbaokeDetailWithId:(NSString *)Id title:(NSString *)title
++ (void)tabbaokeDetailWithId:(NSString *)Id title:(NSString *)title source:(NSString *)source
 {
     CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
     vc.otherGoodsId = Id;
+    vc.source = source;
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *nav = tabbar.selectedViewController;
     [nav pushViewController:vc animated:YES];
@@ -197,6 +238,7 @@
 #pragma mark - 极币商城
 + (void)pointsShop
 {
+    ISPUSHLOGIN;
     CZMyPointsController *vc = [[CZMyPointsController alloc] init];
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *nav = tabbar.selectedViewController;
@@ -206,12 +248,7 @@
 #pragma mark - 任务中心
 + (void)taskCenter
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
     UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *nav = tabbar.selectedViewController;
@@ -225,7 +262,7 @@
     tabbar.selectedIndex = 2;
 }
 
-#pragma mark - 新人免单主页
+#pragma mark - 0元购
 + (void)push_newPeopleFree
 {
     CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
@@ -265,11 +302,16 @@
 #pragma mark - 会员中心
 + (void)push_memberOfCenter
 {
+    CURRENTVC(currentVc);
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [currentVc presentViewController:vc animated:NO completion:nil];
+        return;
+    }
     // 是否push进来的
-//    CURRENTVC(currentVc);
-//    CZMemberOfCenterController *vc = [[CZMemberOfCenterController alloc] init];
-//    vc.isNavPush = YES;
-//    [currentVc.navigationController pushViewController:vc animated:YES];
+    CZMemberOfCenterController *vc = [[CZMemberOfCenterController alloc] init];
+    vc.isNavPush = YES;
+    [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 测评
@@ -282,7 +324,7 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 赚钱攻略
+#pragma mark - 赚钱攻略带视频
 + (void)push_freeMoney
 {
     TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:@"https://www.jipincheng.cn/newZn.html"] rightBtnTitle:[UIImage imageNamed:@"Forward"] actionblock:^{
@@ -298,5 +340,55 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - 京东
++ (void)push_jingDongGeneralView:(NSInteger)type
+{
+    CZMainJingDongGeneralView *vc = [[CZMainJingDongGeneralView alloc] init];
+    if (type == 1) { // (1京东 2淘宝 4拼多多)
+        vc.mainTitle = @"京东";
+    } else {
+        vc.mainTitle = @"拼多多";
+    }
+    vc.type = type;
+    CURRENTVC(currentVc);
+    [currentVc.navigationController pushViewController:vc animated:YES];
+}
 
+
+#pragma mark - 搜索
++ (void)push_searchView
+{
+    CZTaobaoSearchMainController *vc = [[CZTaobaoSearchMainController alloc] init];
+    CURRENTVC(currentVc);
+    [currentVc.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 创建订单
++ (void)push_createMomentsWithId:(NSString *)ID source:(NSString *)source
+{
+    CURRENTVC(currentVc);
+    if ([JPTOKEN length] <= 0) {
+        CZLoginController *vc = [CZLoginController shareLoginController];
+        [currentVc presentViewController:vc animated:NO completion:nil];
+        return;
+    }
+    
+    if ([source isEqualToString:@"2"]) { //(1京东,2淘宝，4拼多多)
+        // 淘宝授权
+        [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
+            if (isAuthTaobao) {
+                CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
+                vc.otherGoodsId = ID;
+                vc.source = source;
+                [currentVc.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+    } else {
+        CZIssueCreate1Moments *vc = [[CZIssueCreate1Moments alloc] init];
+        vc.otherGoodsId = ID;
+        vc.source = source;
+        [currentVc.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
 @end

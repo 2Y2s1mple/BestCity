@@ -19,7 +19,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 /** 标题 */
 @property (nonatomic, weak) IBOutlet UILabel *subTitleLabel;
-
+/** 店铺图标 */
+@property (nonatomic, weak) IBOutlet UIImageView *shopIcon;
 /** 当前价格 */
 @property (nonatomic, weak) IBOutlet UILabel *actualPriceLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *actualPriceLabelBottomMragin;
@@ -56,6 +57,9 @@
 {
     _dataDic = dataDic;
     [_bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"img"]]];
+    
+    [self.shopIcon sd_setImageWithURL:[NSURL URLWithString:dataDic[@"shopIcon"]]];
+    
     self.titleLabel.text = dataDic[@"otherName"];
     self.subTitleLabel.text = dataDic[@"shopName"];
 
@@ -122,15 +126,21 @@
 // 创建发圈
 - (void)createComment
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-    CURRENTVC(currentVc);
-    CZIssueCreateMoments *vc = [[CZIssueCreateMoments alloc] init];
-    vc.otherGoodsId = self.dataDic[@"otherGoodsId"];
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    NSString *source = [NSString stringWithFormat:@"%@", self.dataDic[@"source"]];
+    [CZFreePushTool push_createMomentsWithId:self.dataDic[@"otherGoodsId"] source:source];
+}
+
+
+- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    [super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+
+    UICollectionViewLayoutAttributes *attributes = [layoutAttributes copy];
+
+    attributes.size = CGSizeMake((SCR_WIDTH - 40) / 2.0, 312);
+ 
+    return layoutAttributes;
 }
 
 @end

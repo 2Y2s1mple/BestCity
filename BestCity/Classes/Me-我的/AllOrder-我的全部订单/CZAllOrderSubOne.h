@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CZAllOrderSubOne : UIViewController
-
+/** <#注释#> */
+@property (nonatomic, strong) NSString *source;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *status;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -390,7 +390,12 @@
     NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
     shareDic[@"shareTitle"] = @"新人惊喜二重礼，限时活动速抢！";
     shareDic[@"shareContent"] = @"新人首单0元购，更有30元大额津贴下单立减当钱花~！";
-    shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/new-free?query=""%@""", JPUSERINFO[@"userId"]];
+    
+//    NSString *url = @"9345a5dc869e40cd90dc827a203f607b";
+    
+    shareDic[@"shareUrl"] = [NSString stringWithFormat:@"https://www.jipincheng.cn/new-free?query=\"%@\"", JPUSERINFO[@"userId"]];
+    
+
     shareDic[@"shareImg"] = @"https://jipincheng.cn/share_newFree.png";
     [CZJIPINSynthesisTool JINPIN_UMShareWeb:shareDic[@"shareUrl"] Title:shareDic[@"shareTitle"] subTitle:shareDic[@"shareContent"] thumImage:shareDic[@"shareImg"] Type:type];
 }
@@ -429,9 +434,7 @@
     if (self.recordPopCount == 1) {
         CZAlertView2Controller *vc = [[CZAlertView2Controller alloc] init];
         vc.param = self.alertViewParam;
-        vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        vc.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        [self presentViewController:vc animated:YES completion:^{
+        [self presentViewController:vc animated:NO completion:^{
         }];
     } else {
         self.recordPopCount = 0;

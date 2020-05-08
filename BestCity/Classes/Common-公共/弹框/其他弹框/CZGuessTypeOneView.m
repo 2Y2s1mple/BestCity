@@ -7,7 +7,7 @@
 //
 
 #import "CZGuessTypeOneView.h"
-#import "CZTabbaoSearchDetailController.h"
+#import "CZTabbaoSearchMainDetailController.h"
 @interface CZGuessTypeOneView ()
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *title;
@@ -45,9 +45,9 @@
 }
 
 - (IBAction)searchAction:(UIButton *)sender {
-    CZTabbaoSearchDetailController *vc = [[CZTabbaoSearchDetailController alloc] init];
+    CZTabbaoSearchMainDetailController *vc = [[CZTabbaoSearchMainDetailController alloc] init];
     vc.searchText = self.contentText.text;
-    vc.type = @"1";
+    vc.type = @"2";
     CURRENTVC(currentVc);
     [currentVc.navigationController pushViewController:vc animated:YES];
     [self removeFromSuperview];

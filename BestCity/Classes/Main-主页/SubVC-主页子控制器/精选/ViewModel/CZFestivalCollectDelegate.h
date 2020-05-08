@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) CZMainViewSubOneVCModel *totalDataModel;
 
 /** 是否是条形布局 */
-@property (nonatomic, assign) BOOL layoutType;
+//@property (nonatomic, assign) BOOL layoutType;
 
 /** <#注释#> */
 @property (nonatomic, weak) UIImageView *iconImageView;

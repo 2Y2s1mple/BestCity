@@ -57,7 +57,9 @@
     param[@"invitationCode"] = self.param[@"data"][@"data"][@"invitationCode"];
     NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/user/addInvitationCode"];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
-
+        if ([result[@"code"] isEqualToNumber:@(0)]) {
+            
+        }
         [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
         // 取消菊花
         [CZProgressHUD hideAfterDelay:1.5];
@@ -65,7 +67,6 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
         });
-
     } failure:^(NSError *error) {
         // 取消菊花
         [CZProgressHUD hideAfterDelay:0];

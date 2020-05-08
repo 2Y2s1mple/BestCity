@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSString *searchText;
 /** 未读数量 */
 @property (nonatomic, assign) NSInteger unreaderCount;
+/** 是否禁用 */
+@property (nonatomic, assign) BOOL disable;
 
 - (instancetype)initWithFrame:(CGRect)frame msgAction:(void (^)(NSString *))block;
 @end

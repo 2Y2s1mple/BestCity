@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *subTitle3;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *subScoreTitle3;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleTopMargin;
 @end
 
 @implementation CZTaoBaoShopNameView
@@ -43,13 +44,22 @@
     _paramDic = paramDic;
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:paramDic[@"shopIcon"]]];
     self.title.text = paramDic[@"shopName"];
-    NSArray *list;// = paramDic[@"evaluateList"];
+    NSArray *list = [paramDic[@"evaluateList"] isKindOfClass:[NSNull class]] ? @[] : paramDic[@"evaluateList"];
+    
+    if (list.count > 0) {
+        self.titleTopMargin.constant = 0;
+    } else {
+        self.titleTopMargin.constant = 12;
+    }
 
     for (int i = 0; i < list.count; i++) {
         switch (i) {
             case 0:
             {
                 NSDictionary *dic = list[i];
+                self.subTitle1.hidden = NO;
+                self.subScoreTitle1.hidden = NO;
+                
                 self.subTitle1.text = dic[@"title"];
                 self.subScoreTitle1.text = dic[@"score"];
                 break;
@@ -57,6 +67,9 @@
             case 1:
             {
                 NSDictionary *dic = list[i];
+                self.subTitle2.hidden = NO;
+                self.subScoreTitle2.hidden = NO;
+                
                 self.subTitle2.text = dic[@"title"];
                 self.subScoreTitle2.text = dic[@"score"];
                 break;
@@ -64,6 +77,9 @@
             case 2:
             {
                 NSDictionary *dic = list[i];
+                self.subTitle3.hidden = NO;
+                self.subScoreTitle3.hidden = NO;
+                
                 self.subTitle3.text = dic[@"title"];
                 self.subScoreTitle3.text = dic[@"score"];
                 break;

@@ -172,9 +172,15 @@
 {
     NSDictionary *model = self.dataSource[indexPath.row];
     if ([model[@"type"] isEqual:@(8)]) {
-        CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-        vc.otherGoodsId = model[@"otherGoodsId"];;
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        NSDictionary *bannerParam = @{
+            @"targetType" : @"12",
+            @"targetId" : model[@"otherGoodsId"],
+            @"targetTitle" : @"",
+            @"source" : [NSString stringWithFormat:@"%@", model[@"source"]],
+        };
+        [CZFreePushTool bannerPushToVC:bannerParam];
+        
     } else {
         CZRecommendDetailController *vc = [[CZRecommendDetailController alloc] init];
         vc.goodsId = model[@"goodsId"];

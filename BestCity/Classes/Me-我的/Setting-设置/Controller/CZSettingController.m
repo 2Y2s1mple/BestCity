@@ -65,7 +65,7 @@
     
     //底部退出按钮
     UIButton *loginOut = [UIButton buttonWithType:UIButtonTypeCustom];
-    loginOut.frame = CGRectMake(0, SCR_HEIGHT - 50, SCR_WIDTH, 50);
+    loginOut.frame = CGRectMake(0, SCR_HEIGHT - 50 - (IsiPhoneX ? 34 : 0), SCR_WIDTH, 50);
     [self.view addSubview:loginOut];
     [loginOut setTitle:@"退出登录" forState:UIControlStateNormal];
     loginOut.titleLabel.font = [UIFont systemFontOfSize:16];

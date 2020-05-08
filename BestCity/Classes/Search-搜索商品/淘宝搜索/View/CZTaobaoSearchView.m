@@ -137,6 +137,16 @@
     }
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (self.disable) {
+        !self.msgBlock ? : self.msgBlock(self.msgTitle);
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 - (void)popAction
 {
     [self.viewController.navigationController popViewControllerAnimated:YES];

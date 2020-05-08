@@ -107,14 +107,17 @@
 
     NSLog(@"--------");
     [self removeFromSuperview];
-
 }
 
 - (IBAction)searchAction:(UIButton *)sender {
-    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-    vc.otherGoodsId = self.dataDic[@"otherGoodsId"];
-    CURRENTVC(currentVc);
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    NSDictionary *param = @{
+        @"targetType" : @"12",
+        @"targetId" : self.dataDic[@"otherGoodsId"],
+        @"targetTitle" : @"",
+        @"source" : [NSString stringWithFormat:@"%@", self.dataDic[@"source"]],
+    };
+    [CZFreePushTool bannerPushToVC:param];
+    
     [self removeFromSuperview];
 }
 

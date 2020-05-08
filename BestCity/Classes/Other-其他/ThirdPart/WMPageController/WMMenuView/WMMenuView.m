@@ -225,6 +225,10 @@
     WMMenuItem *nextItem = (WMMenuItem *)[self viewWithTag:tag+1];
 //    nextItem.font = [UIFont fontWithName:@"PingFangSC-Regular" size: 15];
     if (rate == 0.0) {
+        if ([self.delegate respondsToSelector:@selector(menuView:didSelectedItem:currentItem:)]) {
+            [self.delegate menuView:self didSelectedItem:currentItem currentItem:self.selItem];
+        }
+        
         [self.selItem setSelected:NO withAnimation:NO];
         self.selItem = currentItem;
         [self.selItem setSelected:YES withAnimation:NO];
@@ -237,11 +241,17 @@
 
 - (void)selectItemAtIndex:(NSInteger)index {
     NSInteger tag = index + WMMENUITEM_TAG_OFFSET;
+    WMMenuItem *item = (WMMenuItem *)[self viewWithTag:tag];
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectedItem:currentItem:)]) {
+        [self.delegate menuView:self didSelectedItem:item currentItem:self.selItem];
+    }
+    
     NSInteger currentIndex = self.selItem.tag - WMMENUITEM_TAG_OFFSET;
     self.selectIndex = index;
-    if (index == currentIndex || !self.selItem) { return; }
-    
-    WMMenuItem *item = (WMMenuItem *)[self viewWithTag:tag];
+    if (index == currentIndex || !self.selItem) {
+        return;
+    }
+
     [self.selItem setSelected:NO withAnimation:NO];
     self.selItem = item;
     [self.selItem setSelected:YES withAnimation:NO];
@@ -249,6 +259,7 @@
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectedIndex:currentIndex:)]) {
         [self.delegate menuView:self didSelectedIndex:index currentIndex:currentIndex];
     }
+    
     [self refreshContenOffset];
 }
 
@@ -603,6 +614,11 @@
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectedIndex:currentIndex:)]) {
         [self.delegate menuView:self didSelectedIndex:menuItem.tag - WMMENUITEM_TAG_OFFSET currentIndex:currentIndex];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectedItem:currentItem:)]) {
+        [self.delegate menuView:self didSelectedItem:menuItem currentItem:self.selItem];
+    }
+    
     
     [self.selItem setSelected:NO withAnimation:YES];
     [menuItem setSelected:YES withAnimation:YES];

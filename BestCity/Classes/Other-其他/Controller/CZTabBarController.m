@@ -50,6 +50,8 @@
     [[UITabBar appearance] setBarTintColor: CZRGBColor(254, 254, 254)];
     // 设配iOS12, tabbar抖动问题
     [[UITabBar appearance] setTranslucent:NO];
+    
+    
 }
 
 - (void)viewDidLoad {

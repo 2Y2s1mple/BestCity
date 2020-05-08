@@ -82,10 +82,14 @@
 {
     [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye.cnxh_liebiao.%ld", (indexPath.row + 1)]];
     NSDictionary *param = self.dataSource[indexPath.row];
-    CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
-    vc.otherGoodsId = param[@"otherGoodsId"];
-    CURRENTVC(currentVc)
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    
+    NSDictionary *bannerParam = @{
+        @"targetType" : @"12",
+        @"targetId" : param[@"otherGoodsId"],
+        @"targetTitle" : @"",
+        @"source" : [NSString stringWithFormat:@"%@", param[@"source"]],
+    };
+    [CZFreePushTool bannerPushToVC:bannerParam];
 }
 
 #pragma mark - 数据
