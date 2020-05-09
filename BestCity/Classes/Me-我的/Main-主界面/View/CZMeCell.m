@@ -15,7 +15,6 @@
 #import "CZAllOrderMainController.h" // 我的全部订单
 
 #import "CZMyWalletController.h"
-#import "CZMyPointsController.h"
 #import "CZMyTrialController.h" // 试用
 #import "CZMePublishController.h" // 发布
 #import "CZScollerImageTool.h"
@@ -71,12 +70,8 @@
 }
 
 - (IBAction)walletAction:(UITapGestureRecognizer *)sender {
-    UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    UINavigationController *nav = tabbar.selectedViewController;
-    CZMeController *vc = (CZMeController *)nav.topViewController;
     // 跳商城
-    UIViewController *toVc = [[NSClassFromString(@"CZMyPointsController") alloc] init];
-    [vc.navigationController pushViewController:toVc animated:YES];
+    [CZFreePushTool push_pointsShop];
 }
 
 

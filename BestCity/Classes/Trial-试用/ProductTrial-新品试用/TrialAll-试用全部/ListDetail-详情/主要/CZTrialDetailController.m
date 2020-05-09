@@ -23,16 +23,12 @@
 
 // 跳转
 #import "CZAllCriticalController.h"
-#import "CZOpenAlibcTrade.h" // 淘宝
 #import "CZCoinCenterController.h" // 极币
 #import "CZvoteUserController.h"//使用名单
 #import "CZTrialAllReportHotController.h" // 查看使用报告
 #import "CZShareView.h" // 分享
 #import "CZUserInfoTool.h"
 #import "TSLWebViewController.h"
-
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
 
 // universal links
 #import <MobLinkPro/MLSDKScene.h>
@@ -164,13 +160,7 @@ static CGFloat const likeAndShareHeight = 49;
 }
 - (void)shareButtonAction
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-
+    ISPUSHLOGIN;
     CZShareView *share = [[CZShareView alloc] initWithFrame:self.view.frame];
     share.param = @{
                     @"shareUrl" : self.dataSource[@"shareUrl"],
@@ -550,12 +540,7 @@ static CGFloat const likeAndShareHeight = 49;
 
 - (void)openAlibcTradeWithId:(NSString *)ID
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"goodsId"] = ID;
     //获取详情数据
@@ -572,12 +557,7 @@ static CGFloat const likeAndShareHeight = 49;
 /** 免费申请*/
 - (void)listBtnAction:(UIButton *)sender
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     if ([sender.titleLabel.text isEqualToString:@"免费申请"]) {
         NSString *text = @"试用--商品--申请试用";
         NSDictionary *context = @{@"goods" : text};

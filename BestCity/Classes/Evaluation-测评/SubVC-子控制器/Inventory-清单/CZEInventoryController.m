@@ -87,13 +87,7 @@
 
 - (void)pushEditorController
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     CZEInventoryEditorController *vc = [[CZEInventoryEditorController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

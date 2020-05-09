@@ -30,8 +30,8 @@
     self.titleFontName = @"PingFangSC-Medium";
     self.titleColorNormal = UIColorFromRGB(0x989898);
     self.titleColorSelected = UIColorFromRGB(0xE25838);
-    self.titleSizeNormal = 16;
-    self.titleSizeSelected = 16;
+    self.titleSizeNormal = 14;
+    self.titleSizeSelected = 14;
     [super loadView];
 }
 
@@ -58,7 +58,7 @@
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    NSArray *titles = @[@"全部订单", @"即将到账", @"已到账", @"失效订单"];
+    NSArray *titles = @[@"全部", @"即将到账", @"已到账", @"失效订单"];
     return titles[index];
 }
 

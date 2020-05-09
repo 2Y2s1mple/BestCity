@@ -24,10 +24,6 @@
 
 #import "CZParameterScoreView.h" // 功能评分和产品视图"
 
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
-#import "CZOpenAlibcTrade.h"
-
 // universal links
 #import <MobLinkPro/MLSDKScene.h>
 #import <MobLinkPro/UIViewController+MLSDKRestore.h>
@@ -635,9 +631,10 @@ static CGFloat const likeAndShareHeight = 49;
         if (self.descImgList.count == 0) {
             NSMutableDictionary *param1 = [NSMutableDictionary dictionary];
             param1[@"otherGoodsId"] = self.otherGoodsId;
+            param1[@"source"] = self.source;
             [CZProgressHUD showProgressHUDWithText:nil];
             //获取详情数据
-            [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v2/tbk/getGoodsDescImgs"] body:param1 header:nil response:GXResponseStyleJSON success:^(id result) {
+            [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/getGoodsDescImgs"] body:param1 header:nil response:GXResponseStyleJSON success:^(id result) {
                 if ([result[@"msg"] isEqualToString:@"success"]) {
                     self.descImgList = result[@"data"];
                     if (self.descImgList.count > 0) {
@@ -683,6 +680,41 @@ static CGFloat const likeAndShareHeight = 49;
                 }
                 [CZProgressHUD hideAfterDelay:1.5];
             } failure:^(NSError *error) {}];
+        } else {
+            if (self.descImgList.count > 0) {
+                NSMutableArray *imageList = [NSMutableArray arrayWithArray:self.descImgList];
+                for (NSString *imageUrl in imageList) {
+                    UIImageView *bigImage = [[UIImageView alloc] init];
+                    bigImage.width = SCR_WIDTH;
+                    bigImage.height = 200;
+                    
+                    NSString *strUrl = [imageUrl stringByReplacingOccurrencesOfString:@"_.webp" withString:@""];
+                    [bigImage sd_setImageWithURL:[NSURL URLWithString:strUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                        if (image == nil) {
+                            return ;
+                        };
+                        CGFloat imageHeight = bigImage.width * image.size.height / image.size.width;
+                        bigImage.height = imageHeight;
+
+                        for (int i = 0; i < imagesView.subviews.count; i++) {
+                            UIView *view = imagesView.subviews[i];
+                            if (i == 0) {
+                                view.y = 0;
+                                continue;
+                            }
+                            view.y = CZGetY(imagesView.subviews[i - 1]);
+                        }
+                        imagesView.height = CZGetY([imagesView.subviews lastObject]);
+                        sender.y = CZGetY(imagesView) + 10;
+                        backView.height = CZGetY(sender) + 12;
+                        [self changeSubViewFrame];
+                    }];
+                }
+
+                imagesView.height = CZGetY([imagesView.subviews lastObject]);
+                sender.y = CZGetY(imagesView) + 10;
+                backView.height = CZGetY(sender) + 12;
+            }
         }
     }
     
@@ -691,11 +723,7 @@ static CGFloat const likeAndShareHeight = 49;
 // 创建发圈
 - (void)createComment
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSString *source = [NSString stringWithFormat:@"%@", self.detailModel[@"source"]];
     [CZFreePushTool push_createMomentsWithId:self.detailModel[@"otherGoodsId"] source:source];
 }
@@ -703,11 +731,7 @@ static CGFloat const likeAndShareHeight = 49;
 // 购买
 - (void)buyBtnAction
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     // 为了同步关联的淘宝账号
     [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
         if (isAuthTaobao) {

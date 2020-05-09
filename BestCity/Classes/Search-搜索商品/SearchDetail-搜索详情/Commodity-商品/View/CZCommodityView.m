@@ -7,7 +7,7 @@
 //
 
 #import "CZCommodityView.h"
-#import "CZOpenAlibcTrade.h"
+
 #import "Masonry.h"
 #import "GXNetTool.h"
 #import "TSLWebViewController.h"
@@ -184,12 +184,7 @@
 
 - (IBAction)ticketBugLink
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     // 打开淘宝
     [self getGoodsURl];
 }

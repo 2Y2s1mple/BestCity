@@ -24,15 +24,11 @@
 #import "CZBuyView.h"
 #import "CZShareView.h"
 #import "CZEvaluationBottomView.h"
-#import "CZOpenAlibcTrade.h"
 
 // universal links
 #import <MobLinkPro/MLSDKScene.h>
 #import <MobLinkPro/UIViewController+MLSDKRestore.h>
 
-
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
 #import "TSLWebViewController.h"
 #import "CZUserInfoTool.h"
 

@@ -60,12 +60,7 @@
 
 - (IBAction)likeBtnAction:(UIButton *)sender
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     if (sender.isSelected) {
         sender.selected = NO;
         [self snapDelete:self.model.ID];

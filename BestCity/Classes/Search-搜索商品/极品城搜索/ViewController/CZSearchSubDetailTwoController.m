@@ -209,17 +209,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //push到详情
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [self presentViewController:vc animated:YES completion:nil];
-    } else {
-        CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
-        CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
-        vc.detailType = self.type;
-        vc.findgoodsId = model.articleId;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    ISPUSHLOGIN;
+    CZDiscoverDetailModel *model = self.dataSource[indexPath.row];
+    CZDChoiceDetailController *vc = [[CZDChoiceDetailController alloc] init];
+    vc.detailType = self.type;
+    vc.findgoodsId = model.articleId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - <UIScrollViewDelegate>

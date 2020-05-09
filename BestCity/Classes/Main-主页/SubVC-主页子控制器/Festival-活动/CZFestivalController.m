@@ -65,11 +65,7 @@
 
 - (void)pushEditorController
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
     shareDic[@"shareTitle"] = @"这里全是钱啊，我得个现金大额返现~";
     shareDic[@"shareContent"] = @"比官方还低，同商品，同店铺，这里竟然有这样的价格！";

@@ -84,13 +84,7 @@
 /** 关注按钮响应方法 */
 - (void)attentionAction:(UIButton *)sender
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     if (!self.viewModel.isShowAttention) {
         [CZJIPINSynthesisTool addAttentionWithID:self.viewModel.model.article[@"user"][@"userId"] action:^{
            [self attentionBtnStyle:self.attentionBtn];

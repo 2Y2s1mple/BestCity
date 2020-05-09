@@ -13,7 +13,7 @@
 #import "CZMyPointsController.h"
 
 
-@interface CZOrderDetailController ()
+@interface CZOrderDetailController () <CZNavigationViewDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topRadY;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UIView *addressView;
@@ -140,6 +140,7 @@ static CGFloat const likeAndShareHeight = 49;
 
 
 #pragma mark - 事件
+// CZNavigationViewDelegate
 - (void)popViewController
 {
     for (UIViewController *vc in self.navigationController.viewControllers) {

@@ -36,7 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //导航条
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我的订单" rightBtnTitle:nil rightBtnAction:nil ];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:@"我的订单" rightBtnTitle:@"提现说明" rightBtnAction:^{
+        [CZFreePushTool generalH5WithUrl:@"https://www.jipincheng.cn/commission-rule.html" title:@"提现说明"];
+    } ];
     [self.view addSubview:navigationView];
 }
 

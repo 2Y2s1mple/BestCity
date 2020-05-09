@@ -101,14 +101,9 @@
 #pragma mark - 响应事件
 - (void)pushSearchController
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [self presentViewController:vc animated:YES completion:nil];
-    } else {
-        CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    ISPUSHLOGIN;
+    CZHotsaleSearchController *vc = [[CZHotsaleSearchController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Datasource & Delegate

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 

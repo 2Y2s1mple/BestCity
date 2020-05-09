@@ -13,16 +13,18 @@
 #import "CZUserInfoTool.h" // 用户信息
 #import "CZShareItemButton.h"
 
+// 阿里
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/albbsdk.h>
 #import "CZOpenAlibcTrade.h"
+// 京东
+#import "KeplerApiManager.h"
 
 #import "GXSaveImageToPhone.h" //保存图片
 #import "GXZoomImageView.h" // 图片放大
 
 #import "CZGuideController.h" // 引导页
 #import "CZLaunchViewController.h" // 启动页
-
 
 #import "CZAlertView1Controller.h" // 新人弹窗
 #import "CZNotificationAlertView.h" // 推动弹框
@@ -36,10 +38,9 @@
 #import "CZGuessTypeTowView.h"
 #import "CZGuessTypeOneView.h"
 
-
 #import "CZShareViewController.h"
 #import "CZUMConfigure.h"
-#import "KeplerApiManager.h" // 京东
+
 
 
 
@@ -195,13 +196,7 @@
 #pragma mark - /** 淘宝授权 */
 + (void)jipin_authTaobaoSuccess:(void (^)(BOOL isAuthTaobao))block
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-
+    ISPUSHLOGIN;
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
     if ([specialId isEqualToString:@""]) { // 没有关联
         block(NO);
@@ -472,12 +467,7 @@
 #pragma mark -  弹出分享的弹框: 仅限分享淘宝商品
 + (void)jumpShareViewWithUrl:(NSString *)url Title:(NSString *)title subTitle:(NSString *)subTitle thumImage:(id)thumImage object:(id)object
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-
+    ISPUSHLOGIN;
     CURRENTVC(currentVc);
     CZShareViewController *modalVc = [[CZShareViewController alloc] initWithBlock:^(NSInteger index) {
         NSLog(@"------%ld", (long)index);
@@ -716,12 +706,7 @@
 #pragma mark - /** 判断未登录, 之后弹出登录页面 */
 + (void)jipin_jumpLogin
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
 }
 
 #pragma mark - /** 项目启动 */

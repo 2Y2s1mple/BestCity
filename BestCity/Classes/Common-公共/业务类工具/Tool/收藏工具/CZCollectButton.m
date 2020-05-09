@@ -90,12 +90,7 @@
 #pragma mark - 收藏
 - (void)collectInsert
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.commodityID;
     param[@"type"] = self.type;

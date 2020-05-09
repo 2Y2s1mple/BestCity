@@ -8,12 +8,11 @@
 
 #import "CZTableViewCell1.h"
 #import "UIImageView+WebCache.h"
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
+
 #import "GXNetTool.h"
 #import "TSLWebViewController.h"
 #import "CZUserInfoTool.h"
-#import "CZOpenAlibcTrade.h"
+
 
 @interface CZTableViewCell1 ()
 @property (nonatomic, weak) IBOutlet UIImageView *shopImg;
@@ -52,12 +51,7 @@
 // 购买
 - (IBAction)buyBtnAction
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     // 为了同步关联的淘宝账号
     [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
         if (isAuthTaobao) {

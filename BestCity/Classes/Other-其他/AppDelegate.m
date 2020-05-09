@@ -9,8 +9,7 @@
 #import "AppDelegate.h"
 #import "CZJPushHandler.h"
 #import "CZUMConfigure.h"
-#import "CZOpenAlibcTrade.h"
-//#import "UMSocialSnsService.h"
+
 #import "GXNetTool.h"
 #import "CZFreePushTool.h"
 
@@ -23,11 +22,16 @@
 #import "CZFreeChargeDetailController.h"
 #import "CZTaobaoDetailController.h"
 #import "CZDChoiceDetailController.h"
-
-#import "GXWindow.h"
-#import <AlipaySDK/AlipaySDK.h>
 #import "CZTabBarController.h"
 
+#import "GXWindow.h"
+
+// 阿里sdk
+#import "CZOpenAlibcTrade.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import <AlibcTradeSDK/AlibcTradeSDK.h>
+
+// 京东sdk
 #import "KeplerApiManager.h"
 
 

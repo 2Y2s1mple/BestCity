@@ -329,10 +329,11 @@
         // 抢购地址
         if (index == 0) {
             if (isSelected) {
-                weakself.downloadUrlStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"downloadUrl"]];
+                weakself.tklStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"tkl"]];
             } else {
-                weakself.downloadUrlStr = @"";
+                weakself.tklStr = @"";
             }
+            
         }
 
         // 邀请码
@@ -342,12 +343,17 @@
             } else {
                 weakself.invitationCodeStr = @"";
             }
+            if (isSelected) {
+                weakself.downloadUrlStr = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"downloadUrl"]];
+            } else {
+                weakself.downloadUrlStr = @"";
+            }
         }
         
         NSString *mainTitle = [NSString stringWithFormat:@"%@\n", weakself.dataSource[@"baseComment"]];
         
         // 标题 -> 抢购地址 -> 邀请码
-        NSString *finallyStr = [NSString stringWithFormat:@"%@%@%@", mainTitle, weakself.downloadUrlStr, weakself.invitationCodeStr];
+        NSString *finallyStr = [NSString stringWithFormat:@"%@%@%@%@", mainTitle, weakself.downloadUrlStr, weakself.tklStr, weakself.invitationCodeStr];
         
         code.text = finallyStr;
         
@@ -481,7 +487,8 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"otherGoodsId"] = self.otherGoodsId;
     param[@"shareImgLocation"] = index;
-    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/tbk/getGoodsShareInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+    param[@"source"] = self.source;
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/getGoodsShareInfo"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             self.dataSource = result[@"data"];
             // 保存图片
@@ -563,11 +570,15 @@
     if ((tap.view.tag - 100) != 4) {
         [CZProgressHUD showProgressHUDWithText:@"文案已复制到粘贴板, 分享后长按粘贴"];
     }
-    [CZProgressHUD showProgressHUDWithText:nil];
-    [self getShareDataWithIndex:[NSString stringWithFormat:@"%li", (long)self.recordIndex] action:^(UIImage *image) {
-        [CZProgressHUD hideAfterDelay:0];
+    if (self.recordIndex == 1) {
         [self shareWithIndex:tap.view.tag - 100];
-    }];
+    } else {
+        [CZProgressHUD showProgressHUDWithText:nil];
+        [self getShareDataWithIndex:[NSString stringWithFormat:@"%li", (long)self.recordIndex] action:^(UIImage *image) {
+            [CZProgressHUD hideAfterDelay:0];
+            [self shareWithIndex:tap.view.tag - 100];
+        }];
+    }
 }
 
 

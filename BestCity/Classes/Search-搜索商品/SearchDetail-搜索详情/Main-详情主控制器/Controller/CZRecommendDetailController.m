@@ -26,9 +26,6 @@
 
 #import "TSLWebViewController.h"
 
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
-
 // universal links
 #import <MobLinkPro/MLSDKScene.h>
 #import <MobLinkPro/UIViewController+MLSDKRestore.h>
@@ -104,11 +101,7 @@ static NSString * const type = @"1";
             NSString *text = @"榜单--商品详情--分享给好友";
             NSDictionary *context = @{@"mine" : text};
             [MobClick event:@"ID5" attributes:context];
-            if ([JPTOKEN length] <= 0) {
-                CZLoginController *vc = [CZLoginController shareLoginController];
-                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-                return;
-            }
+            ISPUSHLOGIN;
             CZShareView *share = [[CZShareView alloc] initWithFrame:weakSelf.view.frame];
             NSData *strData = [NSJSONSerialization dataWithJSONObject:weakSelf.shareDic[@"data"][@"goodsEntity"] options:NSJSONWritingPrettyPrinted error:nil];
             NSString *jsonStr = [[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding];
@@ -116,11 +109,7 @@ static NSString * const type = @"1";
             share.param = weakSelf.shareParam;
             [weakSelf.view addSubview:share];
         } rightBtnAction:^{
-            if ([JPTOKEN length] <= 0) {
-                CZLoginController *vc = [CZLoginController shareLoginController];
-                [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-                return;
-            }
+            ISPUSHLOGIN;
             NSString *text = @"榜单--商品详情--立即购买";
             NSDictionary *context = @{@"mine" : text};
             [MobClick event:@"ID5" attributes:context];

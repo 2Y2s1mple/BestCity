@@ -8,6 +8,7 @@
 
 #import "CZOpenAlibcTrade.h"
 #import "TSLWebViewController.h"
+#import <AlibcTradeSDK/AlibcTradeSDK.h>
 
 
 @implementation CZOpenAlibcTrade
@@ -27,15 +28,10 @@
 #pragma mark - 跳转到淘宝
 + (void)openAlibcTradeWithUrlString:(NSString *)urlStr parentController:(UIViewController *)parentController
 {
+    ISPUSHLOGIN;
     
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-    
+
     if ([parentController isKindOfClass:[UIViewController class]]) {
         parentController = tabbar;
     }
@@ -51,7 +47,7 @@
     //拉起淘宝
     AlibcTradeShowParams* showParam = [[AlibcTradeShowParams alloc] init];
     showParam.openType = AlibcOpenTypeNative;
-    showParam.backUrl = @"tbopen25267281";
+//    showParam.backUrl = @"tbopen25267281";
     showParam.isNeedPush = NO;
     showParam.nativeFailMode = AlibcNativeFailModeJumpH5;
 

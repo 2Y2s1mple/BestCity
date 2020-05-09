@@ -158,12 +158,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
      if (indexPath.row == 0) {
-         if ([JPTOKEN length] <= 0) {
-             CZLoginController *vc = [CZLoginController shareLoginController];
-             UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-             [tabbar presentViewController:vc animated:NO completion:nil];
-             return;
-         }
+         ISPUSHLOGIN;
          [self getShareImage];
      } else {
          //push到详情

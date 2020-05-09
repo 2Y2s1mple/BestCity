@@ -9,12 +9,11 @@
 #import "CZBuyView.h"
 #import "Masonry.h"
 #import "CZBuyViewCell.h"
-#import "CZOpenAlibcTrade.h"
+
 #import "TSLWebViewController.h"
 #import "CZUserInfoTool.h"
 #import "GXNetTool.h"
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
+
 
 @interface CZBuyView () <UITableViewDelegate, UITableViewDataSource>
 /** 表单 */

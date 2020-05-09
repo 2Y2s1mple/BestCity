@@ -391,12 +391,7 @@
 #pragma mark - 取消收藏
 - (void)collectDelete
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.model.ID;
     param[@"type"] = @"5";
@@ -423,12 +418,7 @@
 #pragma mark - 收藏
 - (void)collectInsert
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"targetId"] = self.model.ID;
     param[@"type"] = @"5";
@@ -531,13 +521,7 @@
 
 - (void)obtainDetailData
 {
-    [self.view endEditing:YES];
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"content"] = [self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     param[@"questionId"] = self.model.ID;

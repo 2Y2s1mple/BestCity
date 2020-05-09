@@ -26,11 +26,10 @@
 #import "TSLWebViewController.h"
 
 // 工具
-#import "CZOpenAlibcTrade.h"
+
 #import "CZUMConfigure.h"
 #import "CZUserInfoTool.h"
-#import <AlibcTradeSDK/AlibcTradeSDK.h>
-#import <AlibabaAuthSDK/albbsdk.h>
+
 #import "UIButton+CZExtension.h" // 按钮扩展
 #import "GXNetTool.h"
 
@@ -131,12 +130,7 @@
 
 - (void)shareButtonAction
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     [self getShareImage];
 }
 
@@ -467,13 +461,7 @@
 // 立即购买, 立即邀请
 - (void)rightBtnAction:(UIButton *)btn
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-
+    ISPUSHLOGIN;
     if ([btn.titleLabel.text isEqualToString:@"立即购买"]) {
 
         if (_isOldUser) {
@@ -525,12 +513,7 @@
 // 购买
 - (void)buyBtnAction
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     // 为了同步关联的淘宝账号
     [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
         if (isAuthTaobao) {

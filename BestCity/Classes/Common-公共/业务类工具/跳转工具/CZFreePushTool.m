@@ -49,7 +49,7 @@
             [self generalH5WithUrl:targetId title:targetTitle];
             break;
         case 14:
-            [self pointsShop];
+            [self push_pointsShop];
             break;
         case 15:
             [self taskCenter];
@@ -111,7 +111,7 @@
              [self generalH5WithUrl:targetId title:targetTitle];
              break;
          case 5:
-             [self pointsShop];
+             [self push_pointsShop];
              break;
          case 6:
              [self taskCenter];
@@ -172,7 +172,7 @@
              [self generalH5WithUrl:targetId title:targetTitle];
              break;
          case 5:
-             [self pointsShop];
+             [self push_pointsShop];
              break;
          case 6:
              [self taskCenter];
@@ -236,7 +236,7 @@
 
 
 #pragma mark - 极币商城
-+ (void)pointsShop
++ (void)push_pointsShop
 {
     ISPUSHLOGIN;
     CZMyPointsController *vc = [[CZMyPointsController alloc] init];
@@ -303,12 +303,8 @@
 #pragma mark - 会员中心
 + (void)push_memberOfCenter
 {
+    ISPUSHLOGIN;
     CURRENTVC(currentVc);
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [currentVc presentViewController:vc animated:NO completion:nil];
-        return;
-    }
     // 是否push进来的
     CZMemberOfCenterController *vc = [[CZMemberOfCenterController alloc] init];
     vc.isNavPush = YES;
@@ -367,13 +363,8 @@
 #pragma mark - 创建订单
 + (void)push_createMomentsWithId:(NSString *)ID source:(NSString *)source
 {
+    ISPUSHLOGIN;
     CURRENTVC(currentVc);
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [currentVc presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-    
     if ([source isEqualToString:@"2"]) { //(1京东,2淘宝，4拼多多)
         // 淘宝授权
         [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {

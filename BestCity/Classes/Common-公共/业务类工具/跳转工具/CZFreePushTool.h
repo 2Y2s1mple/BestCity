@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)bannerPushToVC:(NSDictionary *)param;
 + (void)categoryPushToVC:(NSDictionary *)param;
+// 极币商城
++ (void)push_pointsShop;
 
 // 邀请好友
 + (void)push_inviteFriend;
@@ -26,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 赚钱攻略
 + (void)push_freeMoney;
+
+// 通用的H5界面
++ (void)generalH5WithUrl:(NSString *)url title:(NSString *)title;
 
 // 京东
 + (void)push_jingDongGeneralView:(NSInteger)type;

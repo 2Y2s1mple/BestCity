@@ -44,6 +44,8 @@
 
 - (void)setupTimer
 {
+    
+    
     // 秒
     NSString *seconds1 = [NSString stringWithFormat:@"%.2ld", (self.secondsCount % 60)];
     self.seconds1.text = seconds1;
@@ -62,6 +64,11 @@
      NSString *day1 = [NSString stringWithFormat:@"%.2ld", (self.secondsCount / 60 / 60 / 24)];
     self.day1.text = [day1 substringToIndex:1];
     self.day2.text = [day1 substringFromIndex:1];
+    
+    
+    if (self.secondsCount == 0) {
+        [self.timer invalidate];
+    }
 
     self.secondsCount--;
 }

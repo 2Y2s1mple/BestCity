@@ -517,6 +517,11 @@
         if ([self.dataSource respondsToSelector:@selector(menuView:initialMenuItem:atIndex:)]) {
             item = [self.dataSource menuView:self initialMenuItem:item atIndex:i];
         }
+        // 新增
+        if ([self.delegate respondsToSelector:@selector(menuView:didSelectedItem:currentItem:)]) {
+            [self.delegate menuView:self didSelectedItem:self.selItem currentItem:item];
+        }
+        
         if (i == 0) {
             [item setSelected:YES withAnimation:NO];
             self.selItem = item;

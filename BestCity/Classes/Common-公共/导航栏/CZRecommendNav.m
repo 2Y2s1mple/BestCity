@@ -246,9 +246,6 @@
 #pragma mark - 收藏
 - (void)collectInsert
 {
-
-
-
     if ([JPTOKEN length] <= 0)
     {
         CZLoginController *vc = [CZLoginController shareLoginController];

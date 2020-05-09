@@ -118,12 +118,7 @@
 #pragma mark - 评论接口
 - (void)commentInsert:(NSString *)parentId
 {
-    if ([JPTOKEN length] <= 0)
-    {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if (self.goodsId) {
         param[@"targetId"] = self.goodsId;

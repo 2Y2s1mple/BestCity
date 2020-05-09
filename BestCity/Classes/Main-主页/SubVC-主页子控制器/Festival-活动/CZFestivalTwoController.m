@@ -61,11 +61,7 @@
 
     //导航条
     CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleName rightBtnTitle:[UIImage imageNamed:@"Forward-1"] rightBtnAction:^{
-        if ([JPTOKEN length] <= 0) {
-            CZLoginController *vc = [CZLoginController shareLoginController];
-            [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-            return;
-        }
+        ISPUSHLOGIN;
         NSMutableDictionary *shareDic = [NSMutableDictionary dictionary];
         shareDic[@"shareTitle"] = [NSString stringWithFormat:@"【%@】像我这样买才最低价！", self.titleName];
         shareDic[@"shareContent"] = @"官方正品抄底价，加券！加现金！额外返现现金转支付宝~";

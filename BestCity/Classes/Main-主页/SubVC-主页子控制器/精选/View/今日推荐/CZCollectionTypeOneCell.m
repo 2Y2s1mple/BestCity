@@ -114,12 +114,7 @@
 // 创建发圈
 - (void)createComment
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:vc animated:NO completion:nil];
-        return;
-    }
-    
+    ISPUSHLOGIN
     NSString *source = [NSString stringWithFormat:@"%@", self.dataDic[@"source"]];
     [CZFreePushTool push_createMomentsWithId:self.dataDic[@"otherGoodsId"] source:source];
 }

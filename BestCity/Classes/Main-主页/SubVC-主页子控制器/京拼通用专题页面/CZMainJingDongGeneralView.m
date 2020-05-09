@@ -230,7 +230,7 @@
     if ([self.categoryType isEqual: @(1)]) {
         param[@"source"] = @(self.type);
         param[@"page"] = @(self.page);
-        url = @"api/v2/tbk/commendGoodsList";
+        url = @"api/v3/tbk/commendGoodsList";
     } else {
         param[@"category1Id"] = self.categoryId;
         param[@"source"] = @(self.type);
@@ -265,7 +265,7 @@
     if ([self.categoryType isEqual: @(1)]) {
         param[@"source"] = @(self.type);
         param[@"page"] = @(self.page);
-        url = @"api/v2/tbk/commendGoodsList";
+        url = @"api/v3/tbk/commendGoodsList";
     } else {
         param[@"category1Id"] = self.categoryId;
         param[@"source"] = @(self.type);

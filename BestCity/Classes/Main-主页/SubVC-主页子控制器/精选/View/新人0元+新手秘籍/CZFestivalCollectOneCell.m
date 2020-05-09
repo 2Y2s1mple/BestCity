@@ -170,12 +170,7 @@
 // 跳特惠购
 - (void)pushPreferential
 {
-    if ([JPTOKEN length] <= 0) {
-        CZLoginController *vc = [CZLoginController shareLoginController];
-        UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];
-        [tabbar presentViewController:vc animated:NO completion:nil];
-        return;
-    }
+    ISPUSHLOGIN
     [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_tehui"];
     CURRENTVC(currentVc);
     CZSubFreePreferentialController *vc = [[CZSubFreePreferentialController alloc] init];
