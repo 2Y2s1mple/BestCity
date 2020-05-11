@@ -42,12 +42,6 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 根据url跳淘宝*/
 + (void)jipin_jumpTaobaoWithUrlString:(NSString *)urlString;
 
-/** 跳转拼多多 */
-+ (void)jipin_jumpPinduoduoWithUrlString:(NSString *)urlString;
-
-/** 跳转淘宝, 拼多多, 京东 */
-+ (void)jipin_jumpOtherAppParam:(NSDictionary *)param andSource:(NSString *)source;
-
 /** 获取不是备用金的购买链接 */
 + (void)jipin_buyLinkById:(NSString *)Id andSource:(NSString *)source;
 

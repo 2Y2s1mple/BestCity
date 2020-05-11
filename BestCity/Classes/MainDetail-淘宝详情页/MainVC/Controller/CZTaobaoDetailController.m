@@ -733,12 +733,18 @@ static CGFloat const likeAndShareHeight = 49;
 {
     ISPUSHLOGIN;
     // 为了同步关联的淘宝账号
-    [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
-        if (isAuthTaobao) {
-            // 打开淘宝
-            [self getGoodsURl];
-        }
-    }];
+    NSString *source = [NSString stringWithFormat:@"%@", self.detailModel[@"source"]];
+    if ([source isEqualToString:@"2"]) {
+        [CZJIPINSynthesisTool jipin_authTaobaoSuccess:^(BOOL isAuthTaobao) {
+            if (isAuthTaobao) {
+                // 打开淘宝
+                [self getGoodsURl];
+            }
+        }];
+    } else {
+        // 打开淘宝
+        [self getGoodsURl];
+    }
 }
 
 // 获取购买的URL

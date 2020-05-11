@@ -27,14 +27,19 @@
 // 轮播图广告跳转
 + (void)bannerPushToVC:(NSDictionary *)param
 {
-    NSInteger targetType  = [param[@"targetType"] integerValue];
+    NSInteger targetType = [param[@"targetType"] integerValue];
     NSString *targetId = param[@"targetId"];
     NSString *targetTitle = param[@"targetTitle"];
-    NSString *targetSource = param[@"source"]; // 商品来源(1京东,2淘宝，4拼多多)
-
-   //轮播图跳转类型：0不跳转, 1商品详情, 2评测详情, 3发现详情, 4试用报告web, 41试用报告json, 5评测类目, 6试用商品, 7清单详情, 71清单详情json, 8双11首页, 9双11文章详情, 10双11类目, 11.专题页面 12.淘宝客详情页面, 13.H5页面，14.极币商城，15.任务中心，16.红包主页，17.榜单主页，18特惠购列表, 19 0元购列表, 20邀请页面, 21京东, 22拼多多, 23评测主页，24新手教程
+    NSString *targetSource;
+    if (targetType == 12) { // 商品来源(1京东,2淘宝，4拼多多)
+        targetSource = @"2";
+    } else if (targetType == 25) {
+        targetSource = @"1";
+    } else if (targetType == 26) {
+        targetSource= @"4";
+    }
     
-
+   // 轮播图跳转类型：0不跳转, 1商品详情, 2评测详情, 3发现详情, 4试用报告web, 41试用报告json, 5评测类目, 6试用商品, 7清单详情, 71清单详情json, 8双11首页, 9双11文章详情, 10双11类目, 11.专题页面 12.淘宝客详情页面, 13.H5页面，14.极币商城，15.任务中心，16.红包主页，17.榜单主页，18特惠购列表, 19 0元购列表, 20邀请页面, 21京东, 22拼多多, 23评测主页, 24新手教程, 25京东商品详情, 26拼多多商品详情
     switch (targetType) {
         case 2:
             [self testDetailWithId:targetId];
@@ -43,7 +48,7 @@
             [self  projectPageWithId:targetId title:targetTitle];
             break;
         case 12:
-            [self tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
+            [self push_tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
             break;
         case 13:
             [self generalH5WithUrl:targetId title:targetTitle];
@@ -52,7 +57,7 @@
             [self push_pointsShop];
             break;
         case 15:
-            [self taskCenter];
+            [self push_taskCenter];
             break;
         case 16:
             [self oldFree];
@@ -81,6 +86,12 @@
         case 24:
             [self push_freeMoney];
             break;
+        case 25:
+            [self push_tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
+            break;
+        case 26:
+            [self push_tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
+            break;
             
         default:
             break;
@@ -92,9 +103,13 @@
 + (void)categoryPushToVC:(NSDictionary *)param
 {
     NSInteger targetType  = [param[@"targetType"] integerValue];
-     NSString *targetId = param[@"targetId"];
-     NSString *targetTitle = param[@"targetTitle"];
-    NSString *targetSource = param[@"source"];
+    NSString *targetId = param[@"targetId"];
+    NSString *targetTitle = param[@"targetTitle"];
+    
+    NSString *targetSource;
+    if (targetType == 2) { // 商品来源(1京东,2淘宝，4拼多多)
+        targetSource = @"2";
+    }
     //跳转类型1.专题页，2.淘宝客商品详情页，3.评测详情页，4.H5页面，5.极币商城，6.任务中心，7.免单主页，8.榜单主页 9.评测首页,10特惠购列表,11 0元购列表 12京东 13拼多多,14新手教程,15邀请页面
     
      switch (targetType) {
@@ -102,7 +117,7 @@
              [self  projectPageWithId:targetId title:targetTitle];
              break;
          case 2:
-             [self tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
+             [self push_tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
              break;
          case 3:
              [self testDetailWithId:targetId];
@@ -114,7 +129,7 @@
              [self push_pointsShop];
              break;
          case 6:
-             [self taskCenter];
+             [self push_taskCenter];
              break;
          case 7:
              [self oldFree];
@@ -166,7 +181,7 @@
              [self  projectPageWithId:targetId title:targetTitle];
              break;
          case 2:
-             [self tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
+             [self push_tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
              break;
          case 4:
              [self generalH5WithUrl:targetId title:targetTitle];
@@ -175,7 +190,7 @@
              [self push_pointsShop];
              break;
          case 6:
-             [self taskCenter];
+             [self push_taskCenter];
              break;
          case 7:
              [self oldFree];
@@ -214,9 +229,10 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 淘宝客详情页面
-+ (void)tabbaokeDetailWithId:(NSString *)Id title:(NSString *)title source:(NSString *)source
+#pragma mark - 淘宝, 拼多多, 京东客详情页面
++ (void)push_tabbaokeDetailWithId:(NSString *)Id title:(NSString *)title source:(NSString *)source
 {
+//    12.淘宝客详情页面, 25京东商品详情, 26拼多多商品详情
     CZTaobaoDetailController *vc = [[CZTaobaoDetailController alloc] init];
     vc.otherGoodsId = Id;
     vc.source = source;
@@ -246,7 +262,7 @@
 }
 
 #pragma mark - 任务中心
-+ (void)taskCenter
++ (void)push_taskCenter
 {
     ISPUSHLOGIN;
     CZCoinCenterController *vc = [[CZCoinCenterController alloc] init];
@@ -337,7 +353,7 @@
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 京东
+#pragma mark - 京东专题
 + (void)push_jingDongGeneralView:(NSInteger)type
 {
     CZMainJingDongGeneralView *vc = [[CZMainJingDongGeneralView alloc] init];
@@ -353,10 +369,11 @@
 
 
 #pragma mark - 搜索
-+ (void)push_searchView
++ (void)push_searchViewType:(NSInteger)source
 {
-    CZTaobaoSearchMainController *vc = [[CZTaobaoSearchMainController alloc] init];
     CURRENTVC(currentVc);
+    CZTaobaoSearchMainController *vc = [[CZTaobaoSearchMainController alloc] init];
+    vc.source = source;
     [currentVc.navigationController pushViewController:vc animated:YES];
 }
 

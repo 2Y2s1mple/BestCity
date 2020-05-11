@@ -333,7 +333,6 @@
             } else {
                 weakself.tklStr = @"";
             }
-            
         }
 
         // 邀请码
@@ -568,7 +567,12 @@
     NSLog(@"%ld", (long)self.recordIndex);
 
     if ((tap.view.tag - 100) != 4) {
+        // 文案已复制到粘贴板
+        UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+        posteboard.string = self.dataSource[@"content"];
+        [recordSearchTextArray addObject:posteboard.string];
         [CZProgressHUD showProgressHUDWithText:@"文案已复制到粘贴板, 分享后长按粘贴"];
+        [CZProgressHUD hideAfterDelay:1.5];
     }
     if (self.recordIndex == 1) {
         [self shareWithIndex:tap.view.tag - 100];

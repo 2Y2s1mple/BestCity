@@ -293,13 +293,7 @@
 {
     NSDictionary *model = self.listData[indexPath.row];
     if ([model[@"type"] isEqual:@(1)]) {
-        NSDictionary *bannerParam = @{
-            @"targetType" : @"12",
-            @"targetId" : model[@"goods"][@"otherGoodsId"],
-            @"targetTitle" : @"",
-            @"source" : [NSString stringWithFormat:@"%@", model[@"goods"][@"source"]],
-        };
-        [CZFreePushTool bannerPushToVC:bannerParam];
+        [CZFreePushTool push_tabbaokeDetailWithId:model[@"goods"][@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", model[@"goods"][@"source"]]];
         
     } else {
         CZFestivalTwoController *vc = [[CZFestivalTwoController alloc] init];
@@ -358,7 +352,7 @@
 
 - (void)pushSearchView
 {
-    [CZFreePushTool push_searchView];
+    [CZFreePushTool push_searchViewType:2];
 }
 
 

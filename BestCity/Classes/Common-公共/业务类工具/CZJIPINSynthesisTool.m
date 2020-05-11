@@ -304,26 +304,38 @@
 }
 
 #pragma mark - 跳转拼多多
-+ (void)jipin_jumpPinduoduoWithUrlString:(NSString *)urlString
++ (void)jipin_jumpPinduoduoWithUrlParam:(NSDictionary *)param
 {
 //    https://mobile.yangkeduo.com
 //    pinduoduo://com.xunmeng.pinduoduo/
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"pinduoduo://"]]) {
-        NSURL *skipUrl = [NSURL URLWithString:urlString];
+        NSURL *skipUrl = [NSURL URLWithString:param[@"schemaUrl"]];
         [[UIApplication sharedApplication] openURL:skipUrl];
     } else {
-        [CZProgressHUD showProgressHUDWithText:@"没有安装拼多多!"];
+        [CZProgressHUD showProgressHUDWithText:@"未安装拼多多App"];
         [CZProgressHUD hideAfterDelay:1.5];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [CZFreePushTool  generalH5WithUrl:param[@"mobileUrl"] title:@"拼多多"];
+        });
+        
     }
+    
 }
 
 #pragma mark - 跳转京东
-+ (void)jipin_jumpJingdongWithUrlString:(NSString *)urlString
++ (void)jipin_jumpJingdongWithUrlParam:(NSDictionary *)param
 {
-    [[KeplerApiManager sharedKPService] openKeplerPageWithURL:urlString userInfo:nil successCallback:^{
+    [[KeplerApiManager sharedKPService] openKeplerPageWithURL:param[@"mobileUrl"] userInfo:nil successCallback:^{
         
     } failedCallback:^(NSInteger code, NSString * _Nonnull url) {
         NSLog(@"%@ --- code--%ld", url, (long)code);
+        if (code == 422) { // 未安装京东App
+            [CZProgressHUD showProgressHUDWithText:@"未安装京东App"];
+            [CZProgressHUD hideAfterDelay:1.5];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [CZFreePushTool  generalH5WithUrl:param[@"mobileUrl"] title:@"京东"];
+            });
+        }
     }];
 }
 
@@ -353,13 +365,13 @@
     // (1京东,2淘宝，4拼多多)
     switch ([source integerValue]) {
         case 1:
-            [self jipin_jumpJingdongWithUrlString:param[@"mobileUrl"]];
+            [self jipin_jumpJingdongWithUrlParam:param];
             break;
         case 2:
             [self jipin_jumpTaobaoWithUrlString:param[@"mobileUrl"]];
             break;
         case 4:
-            [self jipin_jumpPinduoduoWithUrlString:param[@"schemaUrl"]];
+            [self jipin_jumpPinduoduoWithUrlParam:param];
             break;
         default:
             break;

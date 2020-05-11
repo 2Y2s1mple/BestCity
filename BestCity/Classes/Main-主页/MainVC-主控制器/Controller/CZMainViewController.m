@@ -142,7 +142,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [CZJIPINSynthesisTool pasteboardAlertViewRule];
     // 百万红包
     self.redPacketsBtn.hidden = NO;
 }
@@ -156,7 +155,7 @@
     searchView.y = self.STATUSBAR_MAX_ORIGIN_Y + 4;
     [searchView setBlock:^{
         [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_sousuo"];
-        [CZFreePushTool push_searchView];
+        [CZFreePushTool push_searchViewType:2];
     }];
     [self.view addSubview:searchView];
 
@@ -284,7 +283,6 @@
         }];
     }
 }
-
 
 // 复制弹出搜索弹框
 - (void)showSearchAlert

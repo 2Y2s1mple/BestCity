@@ -57,15 +57,8 @@
 
 - (void)pushSearchView:(UIGestureRecognizer *)sender
 {
+    // 淘宝, 拼多多, 京东客详情页面
     CZFestivalGoodsColLayoutView *view = sender.view;
-    [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_bangdan.%ld", (view.index + 1)]];
-    
-    NSDictionary *bannerParam = @{
-        @"targetType" : @"12",
-        @"targetId" : view.dataDic[@"otherGoodsId"],
-        @"targetTitle" : @"",
-        @"source" : [NSString stringWithFormat:@"%@", view.dataDic[@"source"]],
-    };
-    [CZFreePushTool bannerPushToVC:bannerParam];
+    [CZFreePushTool push_tabbaokeDetailWithId:view.dataDic[@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", view.dataDic[@"source"]]];
 }
 @end

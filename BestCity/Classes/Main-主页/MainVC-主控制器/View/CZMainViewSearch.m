@@ -84,10 +84,8 @@
 // 跳转签到
 - (void)pushSignInView
 {
-    NSDictionary *param = @{
-        @"targetType" : @"15",
-    };
-    [CZFreePushTool bannerPushToVC:param];
+    // 任务中心
+    [CZFreePushTool push_taskCenter];
 }
 
 // 添加微信导师

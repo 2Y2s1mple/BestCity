@@ -51,8 +51,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
-    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
+    JPSERVER_URL = @"https://www.jipincheng.cn/qualityshop-api/"; // 正式
+//    JPSERVER_URL = @"http://192.168.1.84:8081/qualityshop-api/";//公司的路由
 //    JPSERVER_URL = @"http://47.99.243.255:8081/qualityshop-api/"; // 测试
 //    http://47.99.243.255:8081/qualityshop-api/swagger-ui.html
 //    if ([[CZSaveTool objectForKey:@"currentPath"] length] > 0) {
@@ -215,7 +215,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         // 解析 auth code
         NSString *result = resultDic[@"result"];
         NSString *authCode = nil;
-        if (result.length>0) {
+        if (result.length > 0) {
             NSArray *resultArr = [result componentsSeparatedByString:@"&"];
             for (NSString *subResult in resultArr) {
                 if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
@@ -233,7 +233,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 
--(void) onReq:(BaseReq*)req
+-(void)onReq:(BaseReq*)req
 {
     if([req isKindOfClass:[LaunchFromWXReq class]])
     {
@@ -252,7 +252,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *type = [[[textArr firstObject] componentsSeparatedByString:@"="] lastObject];
     NSString *ID = [[textArr[1] componentsSeparatedByString:@"="] lastObject];
     NSString *articleType = [[[textArr lastObject] componentsSeparatedByString:@"="] lastObject];
-
 
     //        1.免单新人详情页  type=0&id=xxx
     //        2.免单老人免单详情页 type=1&id=xxx

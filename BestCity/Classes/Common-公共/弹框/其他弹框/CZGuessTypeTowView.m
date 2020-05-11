@@ -110,13 +110,7 @@
 }
 
 - (IBAction)searchAction:(UIButton *)sender {
-    NSDictionary *param = @{
-        @"targetType" : @"12",
-        @"targetId" : self.dataDic[@"otherGoodsId"],
-        @"targetTitle" : @"",
-        @"source" : [NSString stringWithFormat:@"%@", self.dataDic[@"source"]],
-    };
-    [CZFreePushTool bannerPushToVC:param];
+    [CZFreePushTool push_tabbaokeDetailWithId:self.dataDic[@"otherGoodsId"]  title:@"" source:[NSString stringWithFormat:@"%@", self.dataDic[@"source"]]];
     
     [self removeFromSuperview];
 }

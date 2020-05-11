@@ -169,16 +169,9 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 4) {
-        [CZJIPINStatisticsTool statisticsToolWithID:[NSString stringWithFormat:@"shouye_tuijian.%ld", indexPath.item + 1]];
-        
         NSDictionary *param = self.qualityGoods[indexPath.item];
-        NSDictionary *bannerParam = @{
-            @"targetType" : @"12",
-            @"targetId" : param[@"otherGoodsId"],
-            @"targetTitle" : @"",
-            @"source" : [NSString stringWithFormat:@"%@", param[@"source"]],
-        };
-        [CZFreePushTool bannerPushToVC:bannerParam];
+        // 商品来源(1京东,2淘宝，4拼多多)
+        [CZFreePushTool push_tabbaokeDetailWithId:param[@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", param[@"source"]]];
     }
 }
 

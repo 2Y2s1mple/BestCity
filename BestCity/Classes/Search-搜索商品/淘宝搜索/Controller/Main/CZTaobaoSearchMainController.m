@@ -48,8 +48,21 @@
 - (void)loadView
 {
     [super loadView];
+    switch (self.source) { // (1京东 2淘宝 4拼多多)
+        case 1:
+            self.selectIndex = 1; // 京东
+            break;
+        case 2:
+            self.selectIndex = 0; // 淘宝
+            break;
+        case 4:
+            self.selectIndex = 2; // 拼多多
+            break;
+        default:
+            self.selectIndex = 0; // 淘宝
+            break;
+    }
 
-    self.selectIndex = 0;
     self.menuViewStyle = WMMenuViewStyleLine;
     self.menuViewLayoutMode = WMMenuViewLayoutModeScatter;
 

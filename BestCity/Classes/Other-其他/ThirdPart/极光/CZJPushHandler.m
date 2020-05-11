@@ -140,16 +140,17 @@ static id _instance;
 }
 #endif
 
-//- (void)pushToVC:(NSDictionary *)param
-//{
-//    NSDictionary *dic = param;
-//    NSDictionary *param1 = @{
-//        @"targetType" : dic[@"targetType"] == nil ? @"" : dic[@"targetType"],
-//        @"targetId" : dic[@"targetId"] == nil ? @"" : dic[@"targetId"],
-//        @"targetTitle" : dic[@"targetTitle"] == nil ? @"" : dic[@"targetTitle"],
-//    };
-//    [CZFreePushTool bannerPushToVC:param1];
-//}
+- (void)pushToVC:(NSDictionary *)param
+{
+    // 跳转类型：0不跳转(默认首页)，11.专题页面 12.淘宝客详情页面,13.H5页面，14.极币商城，15.任务中心，16.红包主页(暂时榜单主页)，17.榜单主页(隐藏)，18特惠购列表,19京东商品详情,20拼多多商品详情
+    NSDictionary *dic = param;
+    NSDictionary *param1 = @{
+        @"targetType" : dic[@"targetType"] == nil ? @"" : dic[@"targetType"],
+        @"targetId" : dic[@"targetId"] == nil ? @"" : dic[@"targetId"],
+        @"targetTitle" : dic[@"targetTitle"] == nil ? @"" : dic[@"targetTitle"],
+    };
+    [CZFreePushTool bannerPushToVC:param1];
+}
 
 
 @end

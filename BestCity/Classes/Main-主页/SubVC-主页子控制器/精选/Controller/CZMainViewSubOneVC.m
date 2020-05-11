@@ -203,7 +203,8 @@
     [self.collectView.mj_header endRefreshing];
     self.page++;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"source"] = @(1); // 1:京东 2:淘宝 4拼多多
+    param[@"source"] = self.orderByType; // 1:京东 2:淘宝 4拼多多
+    param[@"page"] = @(self.page);
 
     //获取详情数据
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/tbk/commendGoodsList"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -230,6 +231,7 @@
 // 获取今日推荐
 - (void)getProductsRecommendedData:(NSDictionary *)dataParam
 {
+    [self.collectView.mj_header endRefreshing];
     self.page = 1;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"source"] = dataParam[@"orderByType"]; // 1:京东 2:淘宝 4拼多多
@@ -244,9 +246,9 @@
             [self.collectView reloadSections:index];
         }
         // 结束刷新
-        [self.collectView.mj_header endRefreshing];
+        [self.collectView.mj_footer endRefreshing];
     } failure:^(NSError *error) { // 结束刷新
-        [self.collectView.mj_header endRefreshing];
+        [self.collectView.mj_footer endRefreshing];
     }];
 }
 
@@ -264,6 +266,7 @@
 - (void)productsRecommendedBtnsAction:(NSNotification *)sender
 {
     NSDictionary *param = sender.userInfo;
+    [self.collectView.mj_footer endRefreshing];
     self.orderByType = param[@"orderByType"];
     [self getProductsRecommendedData:param];
 }
@@ -271,7 +274,7 @@
 // 跳转搜索
 - (void)pushSearchView
 {
-    [CZFreePushTool push_searchView];
+    [CZFreePushTool push_searchViewType:2];
 }
 
 - (void)jiGuangPushNotifi

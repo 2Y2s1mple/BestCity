@@ -108,13 +108,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dic = self.dataSource[indexPath.item];
-    NSDictionary *bannerParam = @{
-        @"targetType" : @"12",
-        @"targetId" : dic[@"otherGoodsId"],
-        @"targetTitle" : @"",
-        @"source" : [NSString stringWithFormat:@"%@", dic[@"source"]],
-    };
-    [CZFreePushTool bannerPushToVC:bannerParam];
+    [CZFreePushTool push_tabbaokeDetailWithId:dic[@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", dic[@"source"]]];
 }
 
 
@@ -299,7 +293,7 @@
 #pragma mark - 事件
 - (void)pushSearchVC
 {
-    [CZFreePushTool push_searchView];
+    [CZFreePushTool push_searchViewType:self.type];
 }
 
 @end

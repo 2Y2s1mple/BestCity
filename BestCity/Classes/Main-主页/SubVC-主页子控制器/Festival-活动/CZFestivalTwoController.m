@@ -184,14 +184,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *model = self.listData[indexPath.row];
-    
-    NSDictionary *bannerParam = @{
-        @"targetType" : @"12",
-        @"targetId" : model[@"otherGoodsId"],
-        @"targetTitle" : @"",
-        @"source" : [NSString stringWithFormat:@"%@", model[@"source"]],
-    };
-    [CZFreePushTool bannerPushToVC:bannerParam];
+    [CZFreePushTool push_tabbaokeDetailWithId:model[@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", model[@"source"]]];
 }
 
 @end

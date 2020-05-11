@@ -539,8 +539,6 @@
     [shareView addSubview:titleLabel1];
 
 
-
-
     CGFloat space = (SCR_WIDTH - 50 * 5) / 6.0;
     NSArray *imageArr = @[
         @{@"icon" : @"share-1", @"name" : @"微信"},
@@ -571,7 +569,12 @@
     NSLog(@"%ld", (long)self.recordIndex);
 
     if ((tap.view.tag - 100) != 4) {
+        // 文案已复制到粘贴板
+        UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+        posteboard.string = self.dataSource[@"content"];
+        [recordSearchTextArray addObject:posteboard.string];
         [CZProgressHUD showProgressHUDWithText:@"文案已复制到粘贴板, 分享后长按粘贴"];
+        [CZProgressHUD hideAfterDelay:1.5];
     }
     
     if (self.recordIndex == 1) {

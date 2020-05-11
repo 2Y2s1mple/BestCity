@@ -26,20 +26,23 @@ NS_ASSUME_NONNULL_BEGIN
 // 会员中心
 + (void)push_memberOfCenter;
 
+// 任务中心
++ (void)push_taskCenter;
+
 // 赚钱攻略
 + (void)push_freeMoney;
 
 // 通用的H5界面
 + (void)generalH5WithUrl:(NSString *)url title:(NSString *)title;
 
-// 京东
+// 京东专题
 + (void)push_jingDongGeneralView:(NSInteger)type;
 
-// 淘宝客详情页面
-+ (void)tabbaokeDetailWithId:(NSString *)Id title:(NSString *)title source:(NSString *)source;
+// 淘宝, 京东, 拼多多客详情页面
++ (void)push_tabbaokeDetailWithId:(NSString *)Id title:(NSString *)title source:(NSString *)source;
 
 // 搜索
-+ (void)push_searchView;
++ (void)push_searchViewType:(NSInteger)source;
 
 // 创建订单
 + (void)push_createMomentsWithId:(NSString *)ID source:(NSString *)source;

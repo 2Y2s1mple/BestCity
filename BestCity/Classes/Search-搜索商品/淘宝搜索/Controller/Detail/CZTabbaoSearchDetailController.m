@@ -391,13 +391,7 @@
 {
     NSArray *list = @[self.dataSource, self.guessList];
     NSDictionary *param = list[indexPath.section][indexPath.item];
-    NSDictionary *bannerParam = @{
-        @"targetType" : @"12",
-        @"targetId" : param[@"otherGoodsId"],
-        @"targetTitle" : @"",
-        @"source" : [NSString stringWithFormat:@"%@", param[@"source"]],
-    };
-    [CZFreePushTool bannerPushToVC:bannerParam];
+    [CZFreePushTool push_tabbaokeDetailWithId:param[@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", param[@"source"]]];
 }
 
 

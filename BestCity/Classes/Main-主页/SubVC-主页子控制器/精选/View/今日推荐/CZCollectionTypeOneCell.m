@@ -49,6 +49,9 @@
 
 -(void)setDataDic:(NSDictionary *)dataDic
 {
+    
+     dataDic = [dataDic deleteAllNullValue];
+    
     _dataDic = dataDic;
     [_bigImageView sd_setImageWithURL:[NSURL URLWithString:dataDic[@"img"]]];
     self.titleLabel.text = dataDic[@"otherName"];

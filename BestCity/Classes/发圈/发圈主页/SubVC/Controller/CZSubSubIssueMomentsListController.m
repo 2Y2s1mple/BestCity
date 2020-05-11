@@ -223,13 +223,7 @@
 {
     CZIssueMomentsModel *model = self.listData[indexPath.row];
     if (![model.param[@"goodsInfo"] isKindOfClass:[NSNull class]]) {
-        NSDictionary *bannerParam = @{
-            @"targetType" : @"12",
-            @"targetId" : model.param[@"goodsInfo"][@"otherGoodsId"],
-            @"targetTitle" : @"",
-            @"source" : [NSString stringWithFormat:@"%@", model.param[@"goodsInfo"][@"source"]],
-        };
-        [CZFreePushTool bannerPushToVC:bannerParam];
+        [CZFreePushTool push_tabbaokeDetailWithId:model.param[@"goodsInfo"][@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", model.param[@"goodsInfo"][@"source"]]];
     }
 }
 
