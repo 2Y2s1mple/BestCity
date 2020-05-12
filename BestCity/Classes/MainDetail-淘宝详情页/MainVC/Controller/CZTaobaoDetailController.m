@@ -753,17 +753,6 @@ static CGFloat const likeAndShareHeight = 49;
     [CZJIPINSynthesisTool jipin_buyLinkById:self.detailModel[@"otherGoodsId"] andSource:self.source];
 }
 
-// 分享
-- (void)shareBtnAction
-{
-    NSString *url = [NSString stringWithFormat:@"https://www.jipincheng.cn/share/tbGoodsDetail.html?id=%@", self.detailModel[@"otherGoodsId"]];
-    NSString *title = self.detailModel[@"otherName"];
-    NSString *subTitle = @"【分享来自极品城APP】看评测选好物，省心更省钱";
-    NSString *thumImage = self.detailModel[@"img"];
-    NSString *object = self.detailModel[@"otherGoodsId"];
-    [CZJIPINSynthesisTool jumpShareViewWithUrl:url Title:title subTitle:subTitle thumImage:thumImage object:object];
-}
-
 // 跳转到首页
 - (void)mainIndexBtnAction
 {

@@ -113,17 +113,6 @@
     [self createComment];
 }
 
-- (void)shareBtnAction
-{
-    [CZJIPINStatisticsTool statisticsToolWithID:@"shouye.cnxh_liebiao.zf"];
-    NSString *url = [NSString stringWithFormat:@"https://www.jipincheng.cn/share/tbGoodsDetail.html?id=%@", self.dataDic[@"otherGoodsId"]];
-    NSString *title = self.dataDic[@"otherName"];
-    NSString *subTitle = @"【分享来自极品城APP】看评测选好物，省心更省钱";
-    NSString *thumImage = self.dataDic[@"img"];
-    NSString *object = self.dataDic[@"otherGoodsId"];
-    [CZJIPINSynthesisTool jumpShareViewWithUrl:url Title:title subTitle:subTitle thumImage:thumImage object:object];
-}
-
 // 创建发圈
 - (void)createComment
 {

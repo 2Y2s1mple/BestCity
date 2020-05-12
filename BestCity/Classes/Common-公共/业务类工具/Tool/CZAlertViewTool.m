@@ -33,12 +33,13 @@
 
 + (void)showAlertWithTitle:(NSString *)title action:(CZActionBlock)block
 {
+    CURRENTVC(currentVc);
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:title preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         block();
     }]];
-    [[[UIApplication sharedApplication].keyWindow rootViewController] presentViewController:alert animated:NO completion:nil];
+    [currentVc presentViewController:alert animated:NO completion:nil];
 }
 
 + (void)showAlertWithTitle:(NSString *)title actionBtns:(NSArray *)btns action:(CZActionBlock)block

@@ -35,6 +35,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIView *bottomView = [[UIView alloc] init];
+    bottomView.backgroundColor = [UIColor whiteColor];
+    bottomView.y = SCR_HEIGHT - 34;
+    bottomView.width = SCR_WIDTH;
+    bottomView.height = 34;
+    [self.view addSubview:bottomView];
+    
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action:)];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action:)];
     UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(action:)];
@@ -42,7 +49,6 @@
     [self.imageView1 addGestureRecognizer:tap1];
     [self.imageView2 addGestureRecognizer:tap2];
     [self.imageView3 addGestureRecognizer:tap3];
-
 }
 
 - (void)action:(UITapGestureRecognizer *)tap

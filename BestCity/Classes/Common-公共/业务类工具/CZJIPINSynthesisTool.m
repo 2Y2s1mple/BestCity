@@ -34,6 +34,7 @@
 #import "CZUpdataView.h"
 
 #import "CZSubFreePreferentialController.h" // 特惠购
+#import "CZAuthTaobaoAlertView.h" // 淘宝授权弹框
 
 #import "CZGuessTypeTowView.h"
 #import "CZGuessTypeOneView.h"
@@ -200,8 +201,12 @@
     NSString *specialId = [NSString stringWithFormat:@"%@", JPUSERINFO[@"relationId"]];
     if ([specialId isEqualToString:@""]) { // 没有关联
         block(NO);
-        // 淘宝授权
-        [self jipin_authTaobao];
+        CURRENTVC(currentVc);
+        CZAuthTaobaoAlertView *alert = [[CZAuthTaobaoAlertView alloc] initWithAction:^{
+            // 淘宝授权
+            [self jipin_authTaobao];
+        }];
+        [currentVc presentViewController:alert animated:YES completion:nil];
     } else {
         block(YES);
     }
@@ -317,9 +322,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [CZFreePushTool  generalH5WithUrl:param[@"mobileUrl"] title:@"拼多多"];
         });
-        
     }
-    
 }
 
 #pragma mark - 跳转京东
@@ -489,7 +492,7 @@
                 [CZProgressHUD hideAfterDelay:2];
                 return;
             }
-            [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:url Title:title subTitle:subTitle thumImage:thumImage shareType:1125 object:object];
+            [[CZUMConfigure shareConfigure] sharePlatform:UMSocialPlatformType_WechatSession controller:currentVc url:url Title:title subTitle:subTitle thumImage:thumImage shareType:CZUMConfigureTypeWeb object:object];
         } else if (index == 1) {
             if (![[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatTimeLine]) {
                 [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];

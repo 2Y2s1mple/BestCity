@@ -43,7 +43,9 @@
     self.layoutType = YES;
 
     // 创建UI
-    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:nil rightBtnAction:nil ];
+    CZNavigationView *navigationView = [[CZNavigationView alloc] initWithFrame:CGRectMake(0, (IsiPhoneX ? 24 : 0), SCR_WIDTH, 67) title:self.titleText rightBtnTitle:[UIImage imageNamed:@"Forward-1"] rightBtnAction:^{
+        [self shareBtnAction];
+    }];
     [self.view addSubview:navigationView];
 
     CZTitlesViewTypeLayout *titleView = [[CZTitlesViewTypeLayout alloc] init];
@@ -265,6 +267,17 @@
     NSLog(@"%ld", indexPath.item);
     NSDictionary *param = self.dataSource[indexPath.row];
     [CZFreePushTool push_tabbaokeDetailWithId:param[@"otherGoodsId"] title:@"" source:[NSString stringWithFormat:@"%@", param[@"source"]]];
+}
+
+// 分享
+- (void)shareBtnAction
+{
+    NSString *url = @"https://www.jipincheng.cn/share/tbGoodsDetail.html";
+    NSString *title = [NSString stringWithFormat:@"我在极品城看%@", self.titleText];
+    NSString *subTitle = @"款款商品有优惠，总有一款适合你，速来围观";
+    UIImage *thumImage = [UIImage imageNamed:@"headDefault"];
+    NSString *object = @"";
+    [CZJIPINSynthesisTool jumpShareViewWithUrl:url Title:title subTitle:subTitle thumImage:thumImage object:object];
 }
 
 @end

@@ -17,6 +17,7 @@
 #import "CZAddressController.h"
 #import "CZChangeWeChatController.h"
 #import "CZUserInfoTool.h"
+#import "CZAboutJIPinChengController.h"
 
 @interface CZSettingController ()<UITableViewDelegate, UITableViewDataSource>
 /** 标题数组 */
@@ -174,6 +175,13 @@
             TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserAgreement_url]];
             webVc.titleName = @"用户协议";
             [self.navigationController pushViewController:webVc animated:YES];
+        }
+            break;
+        case 7:
+        {
+            /** 关于极品城 */
+            CZAboutJIPinChengController *vc = [[CZAboutJIPinChengController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
 

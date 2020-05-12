@@ -127,8 +127,6 @@
     } else {
         self.remindView.hidden = YES;
     }
-    
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
