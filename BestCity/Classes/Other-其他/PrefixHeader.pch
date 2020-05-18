@@ -35,6 +35,8 @@
 #define POINTSRULE_URL @"https://www.jipincheng.cn/rule.html"
 /** 用户规则web */
 #define UserAgreement_url @"https://www.jipincheng.cn/agreement.html"
+/** 隐私政策 */
+#define UserPrivacy_url @"https://www.jipincheng.cn/privacy.html"
 /** 支付宝提现账号记录 */
 #define ALIPAYPhone [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayPhone"]
 #define ALIPAYPREALNAME [[NSUserDefaults standardUserDefaults] objectForKey:@"alipayRealName"]

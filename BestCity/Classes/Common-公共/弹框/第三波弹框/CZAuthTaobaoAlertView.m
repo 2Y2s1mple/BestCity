@@ -34,7 +34,9 @@
 /** 淘宝授权 */
 - (IBAction)jipin_authTaobao
 {
-    self.blcok();
+    [self dismissViewControllerAnimated:NO completion:^{
+        self.blcok();
+    }];
 }
 
 

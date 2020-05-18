@@ -314,11 +314,4 @@ static id instancet_;
     btn.backgroundColor = CZBTNGRAY;
     btn.enabled = NO;
 }
-
-
-- (void)loadUserAlert
-{
-    [CZJIPINSynthesisTool jipin_loadAlertView];
-}
-
 @end

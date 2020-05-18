@@ -19,75 +19,54 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sp7-3b-eaG">
-                    <rect key="frame" x="57" y="267.5" width="300" height="361"/>
+                    <rect key="frame" x="67" y="280.5" width="280" height="335"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPA-9T-Y5d">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="114"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headDefault-1" translatesAutoresizingMaskIntoConstraints="NO" id="tKJ-1N-JC7">
-                                    <rect key="frame" x="45.5" y="27.5" width="59" height="59"/>
-                                </imageView>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list-right-10" translatesAutoresizingMaskIntoConstraints="NO" id="maD-2K-q10">
-                                    <rect key="frame" x="134.5" y="45" width="31" height="24"/>
-                                </imageView>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taobaoDetail-10" translatesAutoresizingMaskIntoConstraints="NO" id="ZbI-aA-eqs">
-                                    <rect key="frame" x="195.5" y="27.5" width="59" height="59"/>
-                                </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQ2-68-Y1f">
-                                    <rect key="frame" x="270" y="0.0" width="30" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="Pos-rU-4Kj"/>
-                                        <constraint firstAttribute="width" constant="30" id="fv1-ZE-zCq"/>
-                                    </constraints>
-                                    <state key="normal" image="close-5"/>
-                                    <connections>
-                                        <action selector="popAction:" destination="-1" eventType="touchUpInside" id="pU1-47-1vC"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="vQ2-68-Y1f" secondAttribute="trailing" id="1Bx-7R-VoA"/>
-                                <constraint firstItem="tKJ-1N-JC7" firstAttribute="centerY" secondItem="maD-2K-q10" secondAttribute="centerY" id="5Ko-CY-olv"/>
-                                <constraint firstItem="ZbI-aA-eqs" firstAttribute="leading" secondItem="maD-2K-q10" secondAttribute="trailing" constant="30" id="9q9-rk-fc0"/>
-                                <constraint firstAttribute="height" constant="114" id="BTh-yr-Djb"/>
-                                <constraint firstItem="vQ2-68-Y1f" firstAttribute="top" secondItem="SPA-9T-Y5d" secondAttribute="top" id="Qdb-gF-1Az"/>
-                                <constraint firstItem="maD-2K-q10" firstAttribute="leading" secondItem="tKJ-1N-JC7" secondAttribute="trailing" constant="30" id="nf8-OS-rNj"/>
-                                <constraint firstItem="ZbI-aA-eqs" firstAttribute="centerY" secondItem="maD-2K-q10" secondAttribute="centerY" id="tPN-Rd-fxw"/>
-                                <constraint firstItem="maD-2K-q10" firstAttribute="centerX" secondItem="SPA-9T-Y5d" secondAttribute="centerX" id="wMV-aq-84s"/>
-                                <constraint firstItem="maD-2K-q10" firstAttribute="centerY" secondItem="SPA-9T-Y5d" secondAttribute="centerY" id="xPr-Tq-pAK"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaP-vM-ahE">
-                            <rect key="frame" x="0.0" y="114" width="300" height="0.5"/>
-                            <color key="backgroundColor" red="0.84698414799999999" green="0.84710663559999999" blue="0.84695750469999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="0.5" id="tM3-E1-YPI"/>
-                            </constraints>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="必须淘宝授权才能获取佣金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4c0-NL-W6h">
-                            <rect key="frame" x="46" y="126.5" width="208" height="21"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <color key="textColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-WW-zto">
-                            <rect key="frame" x="12" y="159.5" width="276" height="78.5"/>
-                            <string key="text">应淘宝官方政策要求，必须先进行淘宝授权否则下单无法返还佣金。
-极品城是淘宝联盟官方认证合作伙伴，搜优惠券，拿返佣，使用更安心！</string>
-                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                            <color key="textColor" red="0.59602457279999999" green="0.59611296650000001" blue="0.59600526089999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert-image-6" translatesAutoresizingMaskIntoConstraints="NO" id="aCa-1w-oRC">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="335"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-WW-zto">
+                            <rect key="frame" x="35" y="161" width="210" height="21"/>
+                            <attributedString key="attributedText">
+                                <fragment content="授权">
+                                    <attributes>
+                                        <color key="NSColor" red="0.59602457279999999" green="0.59611296650000001" blue="0.59600526089999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="极品城">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="后即可">
+                                    <attributes>
+                                        <color key="NSColor" red="0.59602457279999999" green="0.59611296650000001" blue="0.59600526089999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="购买特价好物">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJM-TH-NRE">
-                            <rect key="frame" x="30" y="287" width="240" height="44"/>
+                            <rect key="frame" x="35" y="254" width="210" height="44"/>
                             <color key="backgroundColor" red="0.88620406389999995" green="0.3453732431" blue="0.21861878039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="240" id="4gT-fk-zEV"/>
-                                <constraint firstAttribute="height" constant="44" id="Las-Vc-d5A"/>
+                                <constraint firstAttribute="height" constant="44" id="GuR-kE-CQl"/>
+                                <constraint firstAttribute="width" constant="210" id="qf6-ki-Qb9"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <state key="normal" title="确认授权">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="前往淘宝授权">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -100,24 +79,33 @@
                                 <action selector="jipin_authTaobao" destination="-1" eventType="touchUpInside" id="45g-aM-Gmr"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请淘宝授权" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4c0-NL-W6h">
+                            <rect key="frame" x="88" y="120" width="104" height="21"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="授权极品城后即可购买特价好物" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORX-40-Mbj">
+                            <rect key="frame" x="42" y="198" width="196" height="20"/>
+                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                            <color key="textColor" red="0.59602457279999999" green="0.59611296650000001" blue="0.59600526089999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="aaP-vM-ahE" firstAttribute="top" secondItem="SPA-9T-Y5d" secondAttribute="bottom" id="32b-fA-g5H"/>
-                        <constraint firstItem="dJM-TH-NRE" firstAttribute="centerX" secondItem="sp7-3b-eaG" secondAttribute="centerX" id="482-iW-T3c"/>
-                        <constraint firstAttribute="trailing" secondItem="OCr-WW-zto" secondAttribute="trailing" constant="12" id="7DQ-A2-3j9"/>
-                        <constraint firstAttribute="width" constant="300" id="N0J-K0-0jU"/>
-                        <constraint firstAttribute="trailing" secondItem="SPA-9T-Y5d" secondAttribute="trailing" id="Nco-bt-I6Q"/>
-                        <constraint firstAttribute="height" constant="361" id="Oxd-Y6-ocw"/>
-                        <constraint firstItem="4c0-NL-W6h" firstAttribute="top" secondItem="aaP-vM-ahE" secondAttribute="bottom" constant="12" id="Vz0-he-z11"/>
-                        <constraint firstItem="OCr-WW-zto" firstAttribute="leading" secondItem="sp7-3b-eaG" secondAttribute="leading" constant="12" id="g2V-or-G12"/>
-                        <constraint firstAttribute="bottom" secondItem="dJM-TH-NRE" secondAttribute="bottom" constant="30" id="gz3-CX-eNh"/>
-                        <constraint firstItem="SPA-9T-Y5d" firstAttribute="top" secondItem="sp7-3b-eaG" secondAttribute="top" id="nor-3b-549"/>
-                        <constraint firstItem="aaP-vM-ahE" firstAttribute="leading" secondItem="sp7-3b-eaG" secondAttribute="leading" id="pDu-Gf-RxO"/>
-                        <constraint firstItem="4c0-NL-W6h" firstAttribute="centerX" secondItem="sp7-3b-eaG" secondAttribute="centerX" id="txx-lb-7WX"/>
-                        <constraint firstItem="SPA-9T-Y5d" firstAttribute="leading" secondItem="sp7-3b-eaG" secondAttribute="leading" id="u44-mb-O45"/>
-                        <constraint firstAttribute="trailing" secondItem="aaP-vM-ahE" secondAttribute="trailing" id="wKF-nf-VHN"/>
-                        <constraint firstItem="OCr-WW-zto" firstAttribute="top" secondItem="4c0-NL-W6h" secondAttribute="bottom" constant="12" id="ymU-ct-UzE"/>
+                        <constraint firstItem="ORX-40-Mbj" firstAttribute="top" secondItem="OCr-WW-zto" secondAttribute="bottom" constant="16" id="0ma-ae-YeR"/>
+                        <constraint firstItem="4c0-NL-W6h" firstAttribute="top" secondItem="sp7-3b-eaG" secondAttribute="top" constant="120" id="2ZU-0g-JKu"/>
+                        <constraint firstItem="aCa-1w-oRC" firstAttribute="leading" secondItem="sp7-3b-eaG" secondAttribute="leading" id="4Zh-69-qoe"/>
+                        <constraint firstAttribute="bottom" secondItem="aCa-1w-oRC" secondAttribute="bottom" id="9Gw-6n-gwD"/>
+                        <constraint firstAttribute="bottom" secondItem="dJM-TH-NRE" secondAttribute="bottom" constant="37" id="HZy-rF-p9B"/>
+                        <constraint firstItem="4c0-NL-W6h" firstAttribute="centerX" secondItem="sp7-3b-eaG" secondAttribute="centerX" id="KTQ-uI-JqS"/>
+                        <constraint firstItem="aCa-1w-oRC" firstAttribute="top" secondItem="sp7-3b-eaG" secondAttribute="top" id="Qta-i4-o0j"/>
+                        <constraint firstItem="dJM-TH-NRE" firstAttribute="centerX" secondItem="sp7-3b-eaG" secondAttribute="centerX" id="Z4F-58-04v"/>
+                        <constraint firstItem="OCr-WW-zto" firstAttribute="top" secondItem="4c0-NL-W6h" secondAttribute="bottom" constant="20" id="fe4-t2-Fyf"/>
+                        <constraint firstAttribute="trailing" secondItem="aCa-1w-oRC" secondAttribute="trailing" id="gB7-M3-MKl"/>
+                        <constraint firstItem="OCr-WW-zto" firstAttribute="centerX" secondItem="sp7-3b-eaG" secondAttribute="centerX" id="pgH-Fd-lTu"/>
+                        <constraint firstItem="ORX-40-Mbj" firstAttribute="centerX" secondItem="sp7-3b-eaG" secondAttribute="centerX" id="t7a-q6-OYe"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
@@ -137,9 +125,6 @@
         </view>
     </objects>
     <resources>
-        <image name="close-5" width="21" height="21.5"/>
-        <image name="headDefault-1" width="59" height="59"/>
-        <image name="list-right-10" width="31" height="24"/>
-        <image name="taobaoDetail-10" width="59" height="59"/>
+        <image name="alert-image-6" width="280" height="335"/>
     </resources>
 </document>

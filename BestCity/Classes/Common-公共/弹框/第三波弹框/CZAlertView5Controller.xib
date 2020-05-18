@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZAlertView5Controller">
+            <connections>
+                <outlet property="textView" destination="idD-EN-VvV" id="mQX-FA-q22"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AzY-qz-ud3">
+                    <rect key="frame" x="57" y="261" width="300" height="374"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whG-C9-StZ">
+                            <rect key="frame" x="107" y="20" width="86" height="26"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                            <color key="textColor" red="0.055932849649999998" green="0.016203733160000001" blue="0.0070364945569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCO-P2-Qgk">
+                            <rect key="frame" x="0.0" y="311" width="300" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="不同意">
+                                <color key="titleColor" red="0.61563080550000004" green="0.61572188139999995" blue="0.61561095710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancle" destination="-1" eventType="touchUpInside" id="HJh-VQ-If5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8p-VN-roy">
+                            <rect key="frame" x="77.5" y="248" width="145" height="44"/>
+                            <color key="backgroundColor" red="0.30564016100000002" green="0.53674972060000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="145" id="Mr3-Gj-423"/>
+                                <constraint firstAttribute="height" constant="44" id="dHN-t8-aJY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="同意并继续">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                    <integer key="value" value="22"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="Agreement" destination="-1" eventType="touchUpInside" id="S0z-Ph-2Rn"/>
+                            </connections>
+                        </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="idD-EN-VvV">
+                            <rect key="frame" x="15" y="66" width="270" height="174"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="174" id="P4c-p5-lWL"/>
+                            </constraints>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis </string>
+                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="374" id="0e2-rO-cyG"/>
+                        <constraint firstItem="whG-C9-StZ" firstAttribute="centerX" secondItem="AzY-qz-ud3" secondAttribute="centerX" id="8MT-St-gFa"/>
+                        <constraint firstAttribute="width" constant="300" id="AOB-Sd-8fv"/>
+                        <constraint firstItem="whG-C9-StZ" firstAttribute="top" secondItem="AzY-qz-ud3" secondAttribute="top" constant="20" id="Hu5-Hd-L4v"/>
+                        <constraint firstItem="FCO-P2-Qgk" firstAttribute="leading" secondItem="AzY-qz-ud3" secondAttribute="leading" id="LeD-77-BNM"/>
+                        <constraint firstItem="FCO-P2-Qgk" firstAttribute="top" secondItem="x8p-VN-roy" secondAttribute="bottom" constant="19" id="Ts7-PC-vFl"/>
+                        <constraint firstAttribute="trailing" secondItem="FCO-P2-Qgk" secondAttribute="trailing" id="VNu-cH-a5s"/>
+                        <constraint firstItem="x8p-VN-roy" firstAttribute="centerX" secondItem="AzY-qz-ud3" secondAttribute="centerX" id="Zbi-IR-gyt"/>
+                        <constraint firstAttribute="bottom" secondItem="FCO-P2-Qgk" secondAttribute="bottom" constant="30" id="gww-j6-06c"/>
+                        <constraint firstAttribute="trailing" secondItem="idD-EN-VvV" secondAttribute="trailing" constant="15" id="im8-xd-s5k"/>
+                        <constraint firstItem="idD-EN-VvV" firstAttribute="top" secondItem="whG-C9-StZ" secondAttribute="bottom" constant="20" id="nGj-fF-RMJ"/>
+                        <constraint firstItem="idD-EN-VvV" firstAttribute="leading" secondItem="AzY-qz-ud3" secondAttribute="leading" constant="15" id="qyf-LX-Wux"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69946632922535212" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="AzY-qz-ud3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9rz-g2-OpC"/>
+                <constraint firstItem="AzY-qz-ud3" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="qeu-Fs-Cqo"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="108.69565217391305" y="102.45535714285714"/>
+        </view>
+    </objects>
+</document>

@@ -24,6 +24,8 @@
 
 #import "CZParameterScoreView.h" // 功能评分和产品视图"
 
+#import "CZJumpThirdPartyAlertView.h"
+
 // universal links
 #import <MobLinkPro/MLSDKScene.h>
 #import <MobLinkPro/UIViewController+MLSDKRestore.h>
@@ -366,7 +368,7 @@ static CGFloat const likeAndShareHeight = 49;
     UIButton *btn2 = [self bottomBtnViewWithFrame:CGRectMake(buyView.width / 2.0, 0, buyView.width / 2.0, buyView.height) titleParam:@{
         @"title1" :  @"立即购买",
         @"title2" : [NSString stringWithFormat:@"（省¥%.2lf）", ([self.detailModel[@"fee"] floatValue] + [self.detailModel[@"couponPrice"] floatValue])],
-    } action:@selector(buyBtnAction)] ;
+    } action:@selector(buyBtnAction:)] ;
     btn2.backgroundColor = UIColorFromRGB(0xE25838);
     [buyView addSubview:btn2];
 }
@@ -729,7 +731,7 @@ static CGFloat const likeAndShareHeight = 49;
 }
 
 // 购买
-- (void)buyBtnAction
+- (void)buyBtnAction:(UIButton *)sender
 {
     ISPUSHLOGIN;
     // 为了同步关联的淘宝账号
@@ -750,6 +752,16 @@ static CGFloat const likeAndShareHeight = 49;
 // 获取购买的URL
 - (void)getGoodsURl
 {
+    CZJumpThirdPartyAlertView *alert = [[CZJumpThirdPartyAlertView alloc] init];
+    alert.param = @{
+        @"title" : [NSString stringWithFormat:@"可省¥%.2lf", ([self.detailModel[@"fee"] floatValue] + [self.detailModel[@"couponPrice"] floatValue])],
+        @"source" : self.source
+    };
+    [self presentViewController:alert animated:NO completion:nil];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:NO completion:nil];
+    });
     [CZJIPINSynthesisTool jipin_buyLinkById:self.detailModel[@"otherGoodsId"] andSource:self.source];
 }
 

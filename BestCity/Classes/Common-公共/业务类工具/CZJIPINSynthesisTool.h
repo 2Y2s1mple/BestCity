@@ -57,9 +57,6 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 /** 点击图片放大 */
 + (void)jipin_showZoomImage:(__kindof UIView * _Nonnull)obj;
 
-/** 判断未登录, 之后弹出登录页面 */
-+ (void)jipin_jumpLogin;
-
 #pragma mark - 分享模块
 /** 友盟分享纯图片*/
 + (void)JINPIN_UMShareImage:(id)thumImage Type:(UMSocialPlatformType)type;
@@ -85,6 +82,9 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 
 /** 开启弹窗 */
 + (void)jipin_globalAlertWithNewVersion:(BOOL)isNewVersion;
+
+/** 隐私政策弹框 */
++ (void)jipin_privacyPolicyAlertView;
 
 /** 弹窗工具 */
 + (void)jipin_loadAlertView;

@@ -60,7 +60,6 @@
     // 数据初始化
     self.orderByType = @"2";
     
-
     // 创建UI
     self.icon = [[UIImageView alloc] init];
     self.icon.image = [UIImage imageNamed:@"Main-矩形"];
@@ -73,14 +72,15 @@
 
     // 改变上部环形图片的颜色
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageColorChange:) name:@"mainImageColorChange" object:nil];
+    
     // 监听按钮的点击事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsRecommendedBtnsAction:) name:@"mainSameTitleAction" object:nil];
+    
     // 接收登录时候的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadNewTrailDataSorce) name:loginChangeUserInfo object:nil];
 
     // 接收极光的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jiGuangPushNotifi) name:@"JiGuangPushNotifi" object:nil];
-
 
     // 数据
     [self setupRefresh];
@@ -99,6 +99,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [CZJIPINSynthesisTool jipin_privacyPolicyAlertView];
+    
     if (aDImage.count > 0) {
         NSDictionary *dic = [[aDImage firstObject] deleteAllNullValue];
         NSDictionary *param = @{
@@ -113,12 +116,15 @@
         if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) { // 新版本
             CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{
                 // 开启弹框
-                [self globalAlertWithNewVersion:YES];
+                [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
             }];
             [self presentViewController:alertView animated:NO completion:nil];
         } else { // 旧版本
-            // 开启弹框
-            [self globalAlertWithNewVersion:NO];
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                // 开启弹框
+                [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:NO];
+            });
         }
     }
 
@@ -126,15 +132,6 @@
     if (alertList_.count > 0) {
         [[UIApplication sharedApplication].keyWindow addSubview:alertList_[0]];
     }
-}
-
-- (void)globalAlertWithNewVersion:(BOOL)isVersion
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 开启弹框
-        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:isVersion];
-    });
 }
 
 #pragma mark - UI创建
@@ -269,12 +266,6 @@
     [self.collectView.mj_footer endRefreshing];
     self.orderByType = param[@"orderByType"];
     [self getProductsRecommendedData:param];
-}
-
-// 跳转搜索
-- (void)pushSearchView
-{
-    [CZFreePushTool push_searchViewType:2];
 }
 
 - (void)jiGuangPushNotifi

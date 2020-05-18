@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZCancellationAccountController">
+            <connections>
+                <outlet property="mobileLabel" destination="zSh-gm-LHD" id="hek-Le-8q7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注销账号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ7-jy-57b">
+                    <rect key="frame" x="154.5" y="137" width="105" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000****0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSh-gm-LHD">
+                    <rect key="frame" x="128" y="186" width="158.5" height="29"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <color key="textColor" red="0.88620406389999995" green="0.3453732431" blue="0.21861878039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32l-8y-NRo">
+                    <rect key="frame" x="15" y="242" width="384" height="70.5"/>
+                    <attributedString key="attributedText">
+                        <fragment content="   ">
+                            <attributes>
+                                <font key="NSFont" metaFont="menu" size="14"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="   账号注销是不可恢复的操作，请你仔细考虑，谨慎操作。账户注销后，您账户中的积分、账户余额都将清空不予处理。">
+                            <attributes>
+                                <color key="NSColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" metaFont="menu" size="14"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFj-J7-iEE">
+                    <rect key="frame" x="15" y="752" width="160" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="AqF-2S-HFV"/>
+                        <constraint firstAttribute="width" constant="160" id="BQM-Ab-anO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="申请注销">
+                        <color key="titleColor" red="0.12547522780000001" green="0.1254997253" blue="0.12546992300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="CancellationAccount" destination="-1" eventType="touchUpInside" id="Umi-DQ-yl7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqa-sX-0H9">
+                    <rect key="frame" x="239" y="752" width="160" height="50"/>
+                    <color key="backgroundColor" red="0.88620406389999995" green="0.3453732431" blue="0.21861878039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="7xB-F6-9Bu"/>
+                        <constraint firstAttribute="width" constant="160" id="NEY-rr-Vzi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title=" 再想想">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="cancel" destination="-1" eventType="touchUpInside" id="HYQ-hL-fym"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.96070021390000004" green="0.96083813910000004" blue="0.96067017320000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="UJ7-jy-57b" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="93" id="0TR-h3-bi9"/>
+                <constraint firstAttribute="trailing" secondItem="32l-8y-NRo" secondAttribute="trailing" constant="15" id="1hS-qj-UnU"/>
+                <constraint firstItem="Pqa-sX-0H9" firstAttribute="centerY" secondItem="SFj-J7-iEE" secondAttribute="centerY" id="9nA-Pw-ANG"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="SFj-J7-iEE" secondAttribute="bottom" constant="60" id="ACr-Nm-Mod"/>
+                <constraint firstItem="32l-8y-NRo" firstAttribute="top" secondItem="zSh-gm-LHD" secondAttribute="bottom" constant="27" id="U6S-dR-9zG"/>
+                <constraint firstItem="zSh-gm-LHD" firstAttribute="top" secondItem="UJ7-jy-57b" secondAttribute="bottom" constant="20" id="UCH-GY-bHp"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Pqa-sX-0H9" secondAttribute="trailing" constant="15" id="V3m-Th-cAE"/>
+                <constraint firstItem="32l-8y-NRo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="VTq-7m-lC6"/>
+                <constraint firstItem="UJ7-jy-57b" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WIK-xn-Ck1"/>
+                <constraint firstItem="SFj-J7-iEE" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="iuD-H9-jzj"/>
+                <constraint firstItem="zSh-gm-LHD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sjx-mw-w6z"/>
+                <constraint firstItem="32l-8y-NRo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="txs-zp-8Oi"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="131.8840579710145" y="113.83928571428571"/>
+        </view>
+    </objects>
+</document>

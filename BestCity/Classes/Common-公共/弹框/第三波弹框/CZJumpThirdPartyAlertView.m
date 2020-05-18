@@ -9,7 +9,10 @@
 #import "CZJumpThirdPartyAlertView.h"
 
 @interface CZJumpThirdPartyAlertView ()
-
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIImageView *iconImage;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UILabel *subTitle;
 @end
 
 @implementation CZJumpThirdPartyAlertView
@@ -25,8 +28,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // (1京东,2淘宝，4拼多多)
+    switch ([self.param[@"source"] integerValue]) {
+        case 1:
+            self.iconImage.image = [UIImage imageNamed:@"alert-image-4"];
+            break;
+        case 2:
+            self.iconImage.image = [UIImage imageNamed:@"alert-image-3"];
+            break;
+        case 4:
+            self.iconImage.image = [UIImage imageNamed:@"alert-image-5"];
+            break;
+        default:
+            break;
+    }
+    self.subTitle.text = self.param[@"title"];
 }
+
+/** 推出 */
+- (IBAction)popAction
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
 
 
 

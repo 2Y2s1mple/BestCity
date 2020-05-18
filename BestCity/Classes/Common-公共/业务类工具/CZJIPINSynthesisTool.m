@@ -32,6 +32,7 @@
 #import "CZAlertView3Controller.h"
 #import "CZAlertView4Controller.h"
 #import "CZUpdataView.h"
+#import "CZAlertView5Controller.h" // 隐私政策
 
 #import "CZSubFreePreferentialController.h" // 特惠购
 #import "CZAuthTaobaoAlertView.h" // 淘宝授权弹框
@@ -718,12 +719,6 @@
     [GXZoomImageView showZoomImage:obj];
 }
 
-#pragma mark - /** 判断未登录, 之后弹出登录页面 */
-+ (void)jipin_jumpLogin
-{
-    ISPUSHLOGIN;
-}
-
 #pragma mark - /** 项目启动 */
 + (void)jipin_projectEngine:(UIWindow *)window
 {
@@ -753,6 +748,31 @@
         [self ShowUpdataViewWithNetworkService];
     }
 }
+
+#pragma mark - /** 隐私政策弹框 */
++ (void)jipin_privacyPolicyAlertView
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/getPrivateVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"msg"] isEqualToString:@"success"]) {
+            NSString *curVersion = result[@"data"];
+            //获取隐私政策版本号
+            NSString *lastVersion = [CZSaveTool objectForKey:@"getPrivateVersion"];
+            
+            //比较
+            if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
+                
+            } else { // 是新版本
+                CURRENTVC(currentVc);
+                CZAlertView5Controller *alert = [[CZAlertView5Controller alloc] initWithAgreementBlock:^{
+                    [CZSaveTool setObject:curVersion forKey:@"getPrivateVersion"];
+                }];
+                [currentVc presentViewController:alert animated:YES completion:nil];
+            }
+        }
+    } failure:^(NSError *error) {}];
+}
+
 
 // 服务器获取最新版本
 + (void)ShowUpdataViewWithNetworkService

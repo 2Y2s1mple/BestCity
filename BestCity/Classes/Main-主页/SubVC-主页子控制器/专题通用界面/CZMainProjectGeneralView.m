@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 /** 没有数据图片 */
 @property (nonatomic, strong) CZNoDataView *noDataView;
+/** 分享图片 */
+@property (nonatomic, strong) NSString *shareUrl;
 @end
 
 @implementation CZMainProjectGeneralView
@@ -141,6 +143,7 @@
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:api] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqual:@(0)]) {
             NSArray *list = result[@"data"];
+            self.shareUrl = result[@"shareUrl"];
             if (list.count > 0) {
                 // 没有数据图片
                 [self.noDataView removeFromSuperview];
@@ -230,7 +233,6 @@
 }
 
 // <UICollectionViewDelegateFlowLayout>
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.layoutType == YES) { // 一条
@@ -272,7 +274,7 @@
 // 分享
 - (void)shareBtnAction
 {
-    NSString *url = @"https://www.jipincheng.cn/share/tbGoodsDetail.html";
+    NSString *url = self.shareUrl;
     NSString *title = [NSString stringWithFormat:@"我在极品城看%@", self.titleText];
     NSString *subTitle = @"款款商品有优惠，总有一款适合你，速来围观";
     UIImage *thumImage = [UIImage imageNamed:@"headDefault"];
