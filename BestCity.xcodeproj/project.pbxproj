@@ -741,6 +741,18 @@
 		C834B948246E452500382733 /* CZCancellationAccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C834B946246E452500382733 /* CZCancellationAccountController.xib */; };
 		C834B94C246E51C700382733 /* CZCancellationAccount1Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = C834B94A246E51C700382733 /* CZCancellationAccount1Controller.m */; };
 		C834B94D246E51C700382733 /* CZCancellationAccount1Controller.xib in Resources */ = {isa = PBXBuildFile; fileRef = C834B94B246E51C700382733 /* CZCancellationAccount1Controller.xib */; };
+		C836E4F52472266F00090CF6 /* TYRZSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C836E4EF2472266F00090CF6 /* TYRZSDK.framework */; };
+		C836E4F62472266F00090CF6 /* account_login_sdk_noui_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C836E4F02472266F00090CF6 /* account_login_sdk_noui_core.framework */; };
+		C836E4F72472266F00090CF6 /* jverification-ios-2.6.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C836E4F12472266F00090CF6 /* jverification-ios-2.6.3.a */; };
+		C836E4F82472266F00090CF6 /* jcore-noidfa-ios-2.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C836E4F22472266F00090CF6 /* jcore-noidfa-ios-2.2.5.a */; };
+		C836E4F92472266F00090CF6 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C836E4F32472266F00090CF6 /* OAuth.framework */; };
+		C836E4FA2472266F00090CF6 /* EAccountApiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C836E4F42472266F00090CF6 /* EAccountApiSDK.framework */; };
+		C836E4FD247229DE00090CF6 /* CZMobileLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C836E4FC247229DE00090CF6 /* CZMobileLoginController.m */; };
+		C836E4FF24722A2700090CF6 /* CZMobileLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C836E4FE24722A2700090CF6 /* CZMobileLoginController.xib */; };
+		C836E5012472351700090CF6 /* JVerificationResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C836E5002472351700090CF6 /* JVerificationResource.bundle */; };
+		C836E5042472419600090CF6 /* CZJVerificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C836E5032472419600090CF6 /* CZJVerificationHandler.m */; };
+		C836E50824727ECE00090CF6 /* CZDestroyAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = C836E50624727ECE00090CF6 /* CZDestroyAlertController.m */; };
+		C836E50924727ECE00090CF6 /* CZDestroyAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C836E50724727ECE00090CF6 /* CZDestroyAlertController.xib */; };
 		C8392E75246A8AB7002759F5 /* CZAuthTaobaoAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8392E73246A8AB7002759F5 /* CZAuthTaobaoAlertView.m */; };
 		C8392E76246A8AB7002759F5 /* CZAuthTaobaoAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8392E74246A8AB7002759F5 /* CZAuthTaobaoAlertView.xib */; };
 		C84B402424482D0F00C5168A /* CZAlertMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C84B402224482D0F00C5168A /* CZAlertMainViewController.m */; };
@@ -2041,6 +2053,22 @@
 		C834B949246E51C700382733 /* CZCancellationAccount1Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCancellationAccount1Controller.h; sourceTree = "<group>"; };
 		C834B94A246E51C700382733 /* CZCancellationAccount1Controller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCancellationAccount1Controller.m; sourceTree = "<group>"; };
 		C834B94B246E51C700382733 /* CZCancellationAccount1Controller.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCancellationAccount1Controller.xib; sourceTree = "<group>"; };
+		C836E4EE2472266F00090CF6 /* JVERIFICATIONService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVERIFICATIONService.h; sourceTree = "<group>"; };
+		C836E4EF2472266F00090CF6 /* TYRZSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TYRZSDK.framework; sourceTree = "<group>"; };
+		C836E4F02472266F00090CF6 /* account_login_sdk_noui_core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = account_login_sdk_noui_core.framework; sourceTree = "<group>"; };
+		C836E4F12472266F00090CF6 /* jverification-ios-2.6.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jverification-ios-2.6.3.a"; sourceTree = "<group>"; };
+		C836E4F22472266F00090CF6 /* jcore-noidfa-ios-2.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-noidfa-ios-2.2.5.a"; sourceTree = "<group>"; };
+		C836E4F32472266F00090CF6 /* OAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OAuth.framework; sourceTree = "<group>"; };
+		C836E4F42472266F00090CF6 /* EAccountApiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EAccountApiSDK.framework; sourceTree = "<group>"; };
+		C836E4FB247229DE00090CF6 /* CZMobileLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZMobileLoginController.h; sourceTree = "<group>"; };
+		C836E4FC247229DE00090CF6 /* CZMobileLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZMobileLoginController.m; sourceTree = "<group>"; };
+		C836E4FE24722A2700090CF6 /* CZMobileLoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZMobileLoginController.xib; sourceTree = "<group>"; };
+		C836E5002472351700090CF6 /* JVerificationResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JVerificationResource.bundle; sourceTree = "<group>"; };
+		C836E5022472419600090CF6 /* CZJVerificationHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZJVerificationHandler.h; sourceTree = "<group>"; };
+		C836E5032472419600090CF6 /* CZJVerificationHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZJVerificationHandler.m; sourceTree = "<group>"; };
+		C836E50524727ECE00090CF6 /* CZDestroyAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZDestroyAlertController.h; sourceTree = "<group>"; };
+		C836E50624727ECE00090CF6 /* CZDestroyAlertController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZDestroyAlertController.m; sourceTree = "<group>"; };
+		C836E50724727ECE00090CF6 /* CZDestroyAlertController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZDestroyAlertController.xib; sourceTree = "<group>"; };
 		C836EF42245913F9002D6A79 /* KeplerApiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KeplerApiManager.h; path = BestCity/JDSDK.framework/Headers/KeplerApiManager.h; sourceTree = "<group>"; };
 		C8392E72246A8AB7002759F5 /* CZAuthTaobaoAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZAuthTaobaoAlertView.h; sourceTree = "<group>"; };
 		C8392E73246A8AB7002759F5 /* CZAuthTaobaoAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZAuthTaobaoAlertView.m; sourceTree = "<group>"; };
@@ -2138,13 +2166,19 @@
 				97F0EC22212512B6000FE1DC /* UMShare.framework in Frameworks */,
 				970AD8DB232A3BD600CCE9F9 /* UTMini.framework in Frameworks */,
 				970AD8D0232A3BD600CCE9F9 /* AlibabaAuthExt.framework in Frameworks */,
+				C836E4F72472266F00090CF6 /* jverification-ios-2.6.3.a in Frameworks */,
+				C836E4F62472266F00090CF6 /* account_login_sdk_noui_core.framework in Frameworks */,
 				974C586B21229F91008B3E6A /* CoreGraphics.framework in Frameworks */,
 				974C586521229F76008B3E6A /* CoreFoundation.framework in Frameworks */,
+				C836E4F82472266F00090CF6 /* jcore-noidfa-ios-2.2.5.a in Frameworks */,
 				97F0EC21212512B6000FE1DC /* UShareUI.framework in Frameworks */,
 				97A5078F239E0C4C00EF670F /* libWeChatSDK.a in Frameworks */,
 				970AD8DE232A3BD600CCE9F9 /* AlipaySDK.framework in Frameworks */,
 				970AD8DC232A3BD600CCE9F9 /* SGAVMP.framework in Frameworks */,
 				970AD8D3232A3BD600CCE9F9 /* AlibabaAuthSDK.framework in Frameworks */,
+				C836E4F52472266F00090CF6 /* TYRZSDK.framework in Frameworks */,
+				C836E4F92472266F00090CF6 /* OAuth.framework in Frameworks */,
+				C836E4FA2472266F00090CF6 /* EAccountApiSDK.framework in Frameworks */,
 				97F0EC1E212512B6000FE1DC /* UMCommonLog.framework in Frameworks */,
 				970AD8DA232A3BD600CCE9F9 /* mtopcoreopen.framework in Frameworks */,
 				975210132333973D00469023 /* MOBFoundation.framework in Frameworks */,
@@ -3292,9 +3326,12 @@
 		974C585721229E86008B3E6A /* 极光 */ = {
 			isa = PBXGroup;
 			children = (
+				C836E4D0247225C100090CF6 /* 一键登陆 */,
 				97418DBC21B11F39001F4E92 /* Lib */,
 				9729617021B11CB600648940 /* CZJPushHandler.h */,
 				9729616F21B11CB600648940 /* CZJPushHandler.m */,
+				C836E5022472419600090CF6 /* CZJVerificationHandler.h */,
+				C836E5032472419600090CF6 /* CZJVerificationHandler.m */,
 			);
 			path = "极光";
 			sourceTree = "<group>";
@@ -5534,6 +5571,9 @@
 				97572A8921198F7F00FB42DE /* CZLoginController.h */,
 				97572A8A21198F7F00FB42DE /* CZLoginController.m */,
 				97572A8B21198F7F00FB42DE /* CZLoginController.xib */,
+				C836E4FB247229DE00090CF6 /* CZMobileLoginController.h */,
+				C836E4FC247229DE00090CF6 /* CZMobileLoginController.m */,
+				C836E4FE24722A2700090CF6 /* CZMobileLoginController.xib */,
 			);
 			path = "Login-登录";
 			sourceTree = "<group>";
@@ -6160,8 +6200,34 @@
 				C834B949246E51C700382733 /* CZCancellationAccount1Controller.h */,
 				C834B94A246E51C700382733 /* CZCancellationAccount1Controller.m */,
 				C834B94B246E51C700382733 /* CZCancellationAccount1Controller.xib */,
+				C836E50524727ECE00090CF6 /* CZDestroyAlertController.h */,
+				C836E50624727ECE00090CF6 /* CZDestroyAlertController.m */,
+				C836E50724727ECE00090CF6 /* CZDestroyAlertController.xib */,
 			);
 			path = "注销";
+			sourceTree = "<group>";
+		};
+		C836E4D0247225C100090CF6 /* 一键登陆 */ = {
+			isa = PBXGroup;
+			children = (
+				C836E5002472351700090CF6 /* JVerificationResource.bundle */,
+				C836E4ED2472266F00090CF6 /* Lib-noidfa */,
+			);
+			path = "一键登陆";
+			sourceTree = "<group>";
+		};
+		C836E4ED2472266F00090CF6 /* Lib-noidfa */ = {
+			isa = PBXGroup;
+			children = (
+				C836E4EE2472266F00090CF6 /* JVERIFICATIONService.h */,
+				C836E4EF2472266F00090CF6 /* TYRZSDK.framework */,
+				C836E4F02472266F00090CF6 /* account_login_sdk_noui_core.framework */,
+				C836E4F12472266F00090CF6 /* jverification-ios-2.6.3.a */,
+				C836E4F22472266F00090CF6 /* jcore-noidfa-ios-2.2.5.a */,
+				C836E4F32472266F00090CF6 /* OAuth.framework */,
+				C836E4F42472266F00090CF6 /* EAccountApiSDK.framework */,
+			);
+			path = "Lib-noidfa";
 			sourceTree = "<group>";
 		};
 		C8392E71246A8AA1002759F5 /* 第三波弹框 */ = {
@@ -6470,6 +6536,7 @@
 				97481AE62304275400230367 /* CZEInventoryAddGoodsCell.xib in Resources */,
 				C84B402524482D0F00C5168A /* CZAlertMainViewController.xib in Resources */,
 				97BC05DF2112B122001ED65A /* key-blue@2x.png in Resources */,
+				C836E5012472351700090CF6 /* JVerificationResource.bundle in Resources */,
 				970E618922BA0E6B00E68BE3 /* CZFreeChargeCell.xib in Resources */,
 				9765333B21B8F007002F9308 /* apijipinchengcn.cer in Resources */,
 				97BC05E02112B122001ED65A /* key-pressed.png in Resources */,
@@ -6490,6 +6557,7 @@
 				97BC05DB2112B122001ED65A /* key-pressed@2x.png in Resources */,
 				97705C172107068F00485D64 /* LaunchScreen.storyboard in Resources */,
 				972F4BB622AF5A5F00F30F6B /* GXPhotoCell.xib in Resources */,
+				C836E4FF24722A2700090CF6 /* CZMobileLoginController.xib in Resources */,
 				97F632DE23BE0C5800D58B16 /* CZFreeChargeCell6.xib in Resources */,
 				9733E56323A8C52B002F8E7C /* CZFestivalGoodsColLayoutView.xib in Resources */,
 				97643482221AB2FD00EB0291 /* CZCZChangeMobileController.xib in Resources */,
@@ -6507,6 +6575,7 @@
 				C8BF91F62452CD7600359EE3 /* CZWechatTeacherView.xib in Resources */,
 				9723076221AD77000004C00C /* CZNoDataView.xib in Resources */,
 				97C51C6223C5D77400CE8867 /* CZWelfareChangeCell.xib in Resources */,
+				C836E50924727ECE00090CF6 /* CZDestroyAlertController.xib in Resources */,
 				97643477221AA27100EB0291 /* CZAdministratorAccountController.xib in Resources */,
 				97B466B9232A2539001316B4 /* mtopsdk_configuration.plist in Resources */,
 				97159B1622D6DB14008DC859 /* CZMHSDQuestCell.xib in Resources */,
@@ -6626,6 +6695,7 @@
 				972BDC9723A38ADD00C3F8BF /* CZFestivalCollectTwoCell.m in Sources */,
 				97705CBA2108230F00485D64 /* UIViewController+WMPageController.m in Sources */,
 				97B8760A21EED78A001CC393 /* CZMainAttentionController.m in Sources */,
+				C836E50824727ECE00090CF6 /* CZDestroyAlertController.m in Sources */,
 				97BDE5CB2195B232005FB405 /* CZConst.m in Sources */,
 				979B05CD210EBD270023292D /* CZMutContentButton.m in Sources */,
 				97350BCB23965200008A2D4E /* CZHotsaleSearchController.m in Sources */,
@@ -6786,6 +6856,7 @@
 				97798CCE212D0FC90052CE94 /* SDWebImageDownloaderOperation.m in Sources */,
 				97572A8C21198F7F00FB42DE /* CZLoginController.m in Sources */,
 				97FF57E523827AE900373DD1 /* CZFreeAlertView3.m in Sources */,
+				C836E4FD247229DE00090CF6 /* CZMobileLoginController.m in Sources */,
 				97705CB92108230F00485D64 /* WMPageController.m in Sources */,
 				9708492522438C5B000D5528 /* CZJIPINSynthesisTool.m in Sources */,
 				97481AD62303E84A00230367 /* CZEInventoryCell.m in Sources */,
@@ -6931,6 +7002,7 @@
 				97A30BE32421D31D009D7089 /* CZIssueMomentsModel.m in Sources */,
 				97D0C63123605BEC00F3B994 /* CZUserUpdataView.m in Sources */,
 				97FC29F32109C62D003AE857 /* CZPointView.m in Sources */,
+				C836E5042472419600090CF6 /* CZJVerificationHandler.m in Sources */,
 				97C39255230BEFD1002EA036 /* CZSubCollectThreeController.m in Sources */,
 				977864A2211A7AD6001B41F1 /* MASViewAttribute.m in Sources */,
 				9780B0B023069F53002F5CC8 /* CZSearchThreeSubView.m in Sources */,
@@ -7260,7 +7332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
@@ -7284,6 +7356,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/Required",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/MobLinkPro",
 					"$(PROJECT_DIR)/BestCity/Classes/JDKB",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -7300,6 +7374,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa",
 				);
 				MARKETING_VERSION = 2.11.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -7347,11 +7423,23 @@
 					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGSecurityBody.framework/SGSecurityBody\"",
 					"-force_load",
 					"\"$(SRCROOT)/BestCity/Classes/JDKB/JDSDK.framework/JDSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/TYRZSDK.framework/TYRZSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/account_login_sdk_noui_core.framework/account_login_sdk_noui_core\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/OAuth.framework/OAuth\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/EAccountApiSDK.framework/EAccountApiSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/jverification-ios-2.6.3.a\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/jcore-noidfa-ios-2.2.5.a\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.jipinshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c69694f4-0041-4bf3-aaea-e9357e2bb2bf";
-				PROVISIONING_PROFILE_SPECIFIER = JIPINDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = JIPINDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
@@ -7364,7 +7452,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_ENTITLEMENTS = BestCity/BestCity.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V59X68H8H2;
@@ -7388,6 +7476,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/Required",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/MobLink/SDK/MobLinkPro",
 					"$(PROJECT_DIR)/BestCity/Classes/JDKB",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BestCity/Classes/Other-其他/PrefixHeader.pch";
@@ -7404,6 +7494,8 @@
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/share/share_ios_6.9.4/SocialLibraries/QQ",
 					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib\"",
 					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/友盟/微信",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib",
+					"$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa",
 				);
 				MARKETING_VERSION = 2.11.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -7451,11 +7543,23 @@
 					"\"$(SRCROOT)/BestCity/Classes/百川/Frameworks/SGSecurityBody.framework/SGSecurityBody\"",
 					"-force_load",
 					"\"$(SRCROOT)/BestCity/Classes/JDKB/JDSDK.framework/JDSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/TYRZSDK.framework/TYRZSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/account_login_sdk_noui_core.framework/account_login_sdk_noui_core\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/OAuth.framework/OAuth\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/EAccountApiSDK.framework/EAccountApiSDK\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/jverification-ios-2.6.3.a\"",
+					"-force_load",
+					"\"$(SRCROOT)/BestCity/Classes/Other-其他/ThirdPart/极光/一键登陆/Lib-noidfa/jcore-noidfa-ios-2.2.5.a\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.jipinshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c69694f4-0041-4bf3-aaea-e9357e2bb2bf";
-				PROVISIONING_PROFILE_SPECIFIER = JIPINDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = JIPINDistribution;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/BestCity/Classes/Other-其他/ThirdPart/极光/Lib";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";

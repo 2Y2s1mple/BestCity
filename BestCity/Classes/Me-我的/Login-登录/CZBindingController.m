@@ -95,7 +95,7 @@
 // 获取验证码
 - (void)setupTencentCaptcha:(NSDictionary *)paramDic
 {
-    [self disabledAndGrayColor:self.verificationCodeBtn];
+    [self.verificationCodeBtn setTitleColor:CZBTNGRAY forState:UIControlStateNormal];
     self.count = 60;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
 
@@ -130,7 +130,7 @@
     [self.verificationCodeBtn setTitle:[NSString stringWithFormat:@"%lds后重发", (long)self.count] forState:UIControlStateNormal];
     if (_count == 0) {
         [self.timer invalidate];
-        [self enabledAndRedColor:self.verificationCodeBtn];
+        [self.verificationCodeBtn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
         //将用户text激活
         self.userTextField.enabled = YES;
          self.userTextField.textColor = [UIColor blackColor];
@@ -167,13 +167,10 @@
             self.userTextField.text = [self.userTextField.text substringToIndex:11];
         }
         if (self.userTextField.text.length == 11 && !self.isReadSecond) {
-            [self enabledAndRedColor:self.verificationCodeBtn];
+            [self.verificationCodeBtn setTitleColor:CZREDCOLOR forState:UIControlStateNormal];
         } else {
-            [self disabledAndGrayColor:self.verificationCodeBtn];
+            [self.verificationCodeBtn setTitleColor:CZBTNGRAY forState:UIControlStateNormal];
         }
-        
-        
-        
     }
 }
 

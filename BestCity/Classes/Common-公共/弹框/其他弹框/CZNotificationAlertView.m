@@ -37,7 +37,7 @@
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil][0];
 }
 
--(void) checkCurrentNotificationStatus
+- (void)checkCurrentNotificationStatus
 {
     if (![CZJIPINSynthesisTool jipin_isNewVersion]) {
         [self loadUserAlert];

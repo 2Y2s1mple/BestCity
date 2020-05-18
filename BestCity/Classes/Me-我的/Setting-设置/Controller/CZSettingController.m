@@ -30,7 +30,7 @@
 - (NSArray *)contentTitles
 {
     if (_contentTitles == nil) {
-        _contentTitles = @[@"收货地址", @"微信", @"我要反馈", @"清除缓存", @"客服微信", @"鼓励一下", @"用户协议", @"关于极品城",];
+        _contentTitles = @[@"收货地址", @"微信", @"我要反馈", @"清除缓存", @"客服微信", @"鼓励一下", @"关于极品城"];
     }
     return _contentTitles;
 }
@@ -170,14 +170,6 @@
             break;
         }
         case 6:
-        {
-            /** 跳转到用户协议 */
-            TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserAgreement_url]];
-            webVc.titleName = @"用户协议";
-            [self.navigationController pushViewController:webVc animated:YES];
-        }
-            break;
-        case 7:
         {
             /** 关于极品城 */
             CZAboutJIPinChengController *vc = [[CZAboutJIPinChengController alloc] init];

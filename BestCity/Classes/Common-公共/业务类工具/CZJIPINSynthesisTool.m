@@ -750,7 +750,7 @@
 }
 
 #pragma mark - /** 隐私政策弹框 */
-+ (void)jipin_privacyPolicyAlertView
++ (void)jipin_privacyPolicyAlertView:(void (^)(BOOL isAgree))block
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/getPrivateVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
@@ -760,9 +760,10 @@
             NSString *lastVersion = [CZSaveTool objectForKey:@"getPrivateVersion"];
             
             //比较
-            if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
-                
-            } else { // 是新版本
+            if ([curVersion isEqualToString:lastVersion]) {
+                block(YES); // 同意
+            } else { // 不同意
+                block(NO);
                 CURRENTVC(currentVc);
                 CZAlertView5Controller *alert = [[CZAlertView5Controller alloc] initWithAgreementBlock:^{
                     [CZSaveTool setObject:curVersion forKey:@"getPrivateVersion"];
@@ -817,9 +818,9 @@
     NSString *lastVersion = [CZSaveTool objectForKey:CZVERSION_];
     
     //比较
-    if ([curVersion isEqualToString:lastVersion]) { // 不是新版本
+    if ([curVersion isEqualToString:lastVersion]) { // 不是最新
         return  NO;
-    } else { // 是新版本
+    } else { // 最新
         [CZSaveTool setObject:curVersion forKey:CZVERSION_];
         // 如果有新版本, 删除所有KEY值列表
         [CZSaveTool setObject:@{} forKey:@"CZFirstIntoDic"];
@@ -838,10 +839,9 @@
 }
 
 #pragma mark -   /** 判断界面是否该版本下的第一次加载 */
-+ (BOOL)jipin_isFirstIntoWithIdentifier:(Class)currentClass
++ (BOOL)jipin_isFirstIntoWithIdentifier:(Class)currentClass info:(void (^)(BOOL isFirstInto, NSInteger count))infoBlcok
 {
     NSString *identifier = NSStringFromClass(currentClass);
-    
     // 获取记录的key值列表
     NSDictionary *localKeyDic = [CZSaveTool objectForKey:@"CZFirstIntoDic"];
     if ([localKeyDic[identifier] isEqualToString:@"jipin_old_page"]) {

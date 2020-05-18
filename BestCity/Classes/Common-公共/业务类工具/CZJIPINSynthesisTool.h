@@ -84,7 +84,7 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 + (void)jipin_globalAlertWithNewVersion:(BOOL)isNewVersion;
 
 /** 隐私政策弹框 */
-+ (void)jipin_privacyPolicyAlertView;
++ (void)jipin_privacyPolicyAlertView:(void (^)(BOOL isAgree))block;
 
 /** 弹窗工具 */
 + (void)jipin_loadAlertView;

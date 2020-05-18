@@ -99,39 +99,40 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [CZJIPINSynthesisTool jipin_privacyPolicyAlertView];
-    
-    if (aDImage.count > 0) {
-        NSDictionary *dic = [[aDImage firstObject] deleteAllNullValue];
-        NSDictionary *param = @{
-            @"targetType" : dic[@"type"] == nil ? @"" : dic[@"type"],
-            @"targetId" : dic[@"objectId"] == nil ? @"" : dic[@"objectId"],
-            @"targetTitle" : dic[@"name"] == nil ? @"" : dic[@"type"],
-        };
-        [CZFreePushTool bannerPushToVC:param];
-        aDImage = nil;
-    } else {
-        // 如果是新版本
-        if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) { // 新版本
-            CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{
-                // 开启弹框
-                [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
-            }];
-            [self presentViewController:alertView animated:NO completion:nil];
-        } else { // 旧版本
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                // 开启弹框
-                [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:NO];
-            });
-        }
-    }
+    [CZJIPINSynthesisTool jipin_privacyPolicyAlertView:^(BOOL isAgree) {
+        if (isAgree) {
+            if (aDImage.count > 0) {
+                NSDictionary *dic = [[aDImage firstObject] deleteAllNullValue];
+                NSDictionary *param = @{
+                    @"targetType" : dic[@"type"] == nil ? @"" : dic[@"type"],
+                    @"targetId" : dic[@"objectId"] == nil ? @"" : dic[@"objectId"],
+                    @"targetTitle" : dic[@"name"] == nil ? @"" : dic[@"type"],
+                };
+                [CZFreePushTool bannerPushToVC:param];
+                aDImage = nil;
+            } else {
+                // 如果是新版本
+                if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) { // 新版本
+                    CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{
+                        // 开启弹框
+                        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
+                    }];
+                    [self presentViewController:alertView animated:NO completion:nil];
+                } else { // 旧版本
+                    static dispatch_once_t onceToken;
+                    dispatch_once(&onceToken, ^{
+                        // 开启弹框
+                        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:NO];
+                    });
+                }
+            }
 
-    // 全局弹框在全局, 显示一个删除一个
-    if (alertList_.count > 0) {
-        [[UIApplication sharedApplication].keyWindow addSubview:alertList_[0]];
-    }
+            // 全局弹框在全局, 显示一个删除一个
+            if (alertList_.count > 0) {
+                [[UIApplication sharedApplication].keyWindow addSubview:alertList_[0]];
+            }
+        }
+    }];
 }
 
 #pragma mark - UI创建

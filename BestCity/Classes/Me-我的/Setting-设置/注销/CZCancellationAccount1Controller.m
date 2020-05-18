@@ -11,6 +11,7 @@
 #import "GXNetTool.h"
 // 工具
 #import <TCWebCodesSDK/TCWebCodesBridge.h> // 腾讯验证码
+#import "CZDestroyAlertController.h"
 
 @interface CZCancellationAccount1Controller () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -153,11 +154,8 @@
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"code"] isEqualToNumber:@(0)])
         {
-            [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
-            [CZProgressHUD hideAfterDelay:2];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            });
+            CZDestroyAlertController *vc = [[CZDestroyAlertController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         } else {
             [CZProgressHUD showProgressHUDWithText:result[@"msg"]];
             [CZProgressHUD hideAfterDelay:2];
@@ -166,5 +164,10 @@
     } failure:^(NSError *error) {}];
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+    
+}
 
 @end

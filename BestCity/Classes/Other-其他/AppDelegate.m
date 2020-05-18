@@ -34,6 +34,9 @@
 // 京东sdk
 #import "KeplerApiManager.h"
 
+// 一键登录
+#import "JVERIFICATIONService.h"
+
 
 @interface AppDelegate () <IMLSDKRestoreDelegate, WXApiDelegate>
 
@@ -89,6 +92,15 @@
 
     // 加载极光推送
     [[CZJPushHandler shareJPushManager] setupJPUSHServiceOptions:launchOptions];
+    
+    JVAuthConfig *config = [[JVAuthConfig alloc] init];
+    config.appKey = @"09099048e2130ae6ff8151bc";
+    config.timeout = 5000;
+    config.authBlock = ^(NSDictionary *result) {
+        NSLog(@"初始化结果 result:%@", result);
+    };
+    [JVERIFICATIONService setupWithConfig:config];
+    [JVERIFICATIONService setDebug:NO];
 
 //    [NSThread sleepForTimeInterval:6];
 
@@ -336,8 +348,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+   NSLog(@"--------进入后台------");
+    UIPasteboard *posteboard = [UIPasteboard generalPasteboard];
+    if (posteboard.string.length > 0) {    
+        [recordSearchTextArray addObject:posteboard.string];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
