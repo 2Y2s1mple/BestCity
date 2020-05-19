@@ -14,6 +14,10 @@
 @interface CZJVerificationHandler ()
 /** <#注释#> */
 @property (nonatomic, strong) void (^block)(void);
+/** <#注释#> */
+@property (nonatomic, strong) void (^wexinLogin)(void);
+/** <#注释#> */
+@property (nonatomic, strong) void (^otherMobileLogin)(void);
 @end
 
 @implementation CZJVerificationHandler
@@ -40,9 +44,9 @@ static id _instance;
     }];
 }
 
-- (void)JAuthorizationWithController:(UIViewController *)vc action:(void (^)(NSString *))action
+- (void)JAuthorizationWithController:(UIViewController *)vc action:(void (^)(NSString *))action WexinLogin:(void (^)(void))wexinLogin otherMobileLogin:(void (^)(void))otherMobileLogin
 {
-    [self customFullScreenUI1];
+    [self customFullScreenUI1WexinLogin:wexinLogin otherMobileLogin:otherMobileLogin];
     [JVERIFICATIONService getAuthorizationWithController:vc hide:YES animated:YES timeout:15*1000 completion:^(NSDictionary *result) {
         NSLog(@"一键登录 result:%@", result);
         if ([result[@"code"] isEqual: @(6000)]) {
@@ -59,9 +63,9 @@ static id _instance;
     }];
 }
 
-- (void)JAuthBindingWithController:(UIViewController *)vc action:(void (^)(NSString *))action
+- (void)JAuthBindingWithController:(UIViewController *)vc action:(void (^)(NSString *))action OtherMobileLogin:(void (^)(void))otherMobileLogin
 {
-    [self customFullScreenUI2];
+    [self customFullScreenUI2OtherMobileLogin:otherMobileLogin];
     [JVERIFICATIONService getAuthorizationWithController:vc hide:YES animated:YES timeout:15*1000 completion:^(NSDictionary *result) {
         NSLog(@"一键绑定 result:%@", result);
         if ([result[@"code"] isEqual: @(6000)]) {
@@ -77,7 +81,9 @@ static id _instance;
 }
 
 /*设置全屏样式UI1*/
-- (void)customFullScreenUI1{
+- (void)customFullScreenUI1WexinLogin:(void (^)(void))wexinLogin otherMobileLogin:(void (^)(void))otherMobileLogin {
+    self.wexinLogin = wexinLogin;
+    self.otherMobileLogin = otherMobileLogin;
     // 导航
     JVUIConfig *config = [[JVUIConfig alloc] init];
     config.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -104,10 +110,10 @@ static id _instance;
     config.numberConstraints = @[numberConstraintX,numberConstraintY, numberConstraintW, numberConstraintH];
     config.numberHorizontalConstraints = config.numberConstraints;
     
-    //slogan隐藏
-    config.sloganTextColor = [UIColor whiteColor];
+    // slogan隐藏
+    config.sloganTextColor = [UIColor clearColor];
     
-    //登录按钮
+    // 登录按钮
     config.logBtnText = @"一键登录";
     UIImage *login_nor_image = [UIImage imageNamed:@"me-矩形 4"];
     UIImage *login_dis_image = [UIImage imageNamed:@"me-矩形 4"];
@@ -226,6 +232,7 @@ static id _instance;
         btn.centerX = customAreaView.width / 2.0 - 88;
         btn.centerY = customAreaView.height - 150;
         [customAreaView addSubview:btn];
+        [btn addTarget:self action:@selector(wexinLogin:) forControlEvents:UIControlEventTouchUpInside];
         
         // 其他手机登陆
         CZSubButton *btn1 = [CZSubButton buttonWithType:UIButtonTypeCustom];
@@ -236,6 +243,7 @@ static id _instance;
         btn1.centerX = customAreaView.width / 2.0 + 88;
         btn1.centerY = customAreaView.height - 150;
         [customAreaView addSubview:btn1];
+        [btn1 addTarget:self action:@selector(otherMobileLogin:) forControlEvents:UIControlEventTouchUpInside];
         
         
         
@@ -258,7 +266,8 @@ static id _instance;
 }
 
 /*设置全屏样式UI2*/
-- (void)customFullScreenUI2{
+- (void)customFullScreenUI2OtherMobileLogin:(void (^)(void))otherMobileLogin {
+    self.otherMobileLogin = otherMobileLogin;
     // 导航
     JVUIConfig *config = [[JVUIConfig alloc] init];
     config.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -286,7 +295,7 @@ static id _instance;
     config.numberHorizontalConstraints = config.numberConstraints;
     
     //slogan隐藏
-    config.sloganTextColor = [UIColor whiteColor];
+    config.sloganTextColor = [UIColor clearColor];
     
     //登录按钮
     config.logBtnText = @"一键绑定账号";
@@ -397,18 +406,16 @@ static id _instance;
         label.center = point;
         [customAreaView addSubview:label];
         
-        
         // 其他手机登陆
         CZSubButton *btn1 = [CZSubButton buttonWithType:UIButtonTypeCustom];
         [btn1 setImage:[UIImage imageNamed:@"me-otheriPhone"] forState:UIControlStateNormal];
-        [btn1 setTitle:@"其他手机号登录" forState:UIControlStateNormal];
+        [btn1 setTitle:@"其他手机号绑定" forState:UIControlStateNormal];
         [btn1 setTitleColor:UIColorFromRGB(0x9D9D9D) forState:UIControlStateNormal];
         btn1.size = CGSizeMake(40, 40);
         btn1.centerX = customAreaView.width / 2.0;
         btn1.centerY = customAreaView.height - 150;
         [customAreaView addSubview:btn1];
-        
-        
+        [btn1 addTarget:self action:@selector(otherMobileLogin:) forControlEvents:UIControlEventTouchUpInside];
         
         // 绑定其他手机号
 //        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -423,8 +430,23 @@ static id _instance;
 //        btn.layer.borderWidth = 0.5;
 //        btn.layer.borderColor = UIColorFromRGB(0x989898).CGColor;
 //        [btn addTarget:self action:@selector(bindingMobile) forControlEvents:UIControlEventTouchUpInside];
-        
-        
     }];
+}
+
+
+- (void)wexinLogin:(UIButton *)sender
+{
+    [JVERIFICATIONService dismissLoginControllerAnimated:NO completion:^{
+        self.wexinLogin();
+    }];
+    NSLog(@"wexinLogin");
+}
+
+- (void)otherMobileLogin:(UIButton *)sender
+{
+    [JVERIFICATIONService dismissLoginControllerAnimated:NO completion:^{
+        self.otherMobileLogin();
+    }];
+    NSLog(@"otherMobileLogin");
 }
 @end

@@ -51,7 +51,7 @@
             [self push_tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
             break;
         case 13:
-            [self generalH5WithUrl:targetId title:targetTitle];
+            [self generalH5WithUrl:targetId title:targetTitle containView:nil];
             break;
         case 14:
             [self push_pointsShop];
@@ -123,7 +123,7 @@
              [self testDetailWithId:targetId];
              break;
          case 4:
-             [self generalH5WithUrl:targetId title:targetTitle];
+             [self generalH5WithUrl:targetId title:targetTitle containView:nil];
              break;
          case 5:
              [self push_pointsShop];
@@ -184,7 +184,7 @@
              [self push_tabbaokeDetailWithId:targetId title:targetTitle source:targetSource];
              break;
          case 4:
-             [self generalH5WithUrl:targetId title:targetTitle];
+             [self generalH5WithUrl:targetId title:targetTitle containView:nil];
              break;
          case 5:
              [self push_pointsShop];
@@ -242,12 +242,16 @@
 }
 
 #pragma mark - 通用的H5界面
-+ (void)generalH5WithUrl:(NSString *)url title:(NSString *)title
++ (void)generalH5WithUrl:(NSString *)url title:(NSString *)title containView:(UIViewController *)containView
 {
     TSLWebViewController *vc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:url]];
     vc.titleName = title;
-    CURRENTVC(currentVc)
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    if (containView) {
+        [containView presentViewController:vc animated:NO completion:nil];
+    } else {
+        CURRENTVC(currentVc)
+        [currentVc.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 

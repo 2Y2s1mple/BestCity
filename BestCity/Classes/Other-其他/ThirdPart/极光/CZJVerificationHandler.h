@@ -10,14 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface CZJVerificationHandler : NSObject
 + (instancetype)shareJVerificationHandler;
 
 // 一键登录
-- (void)JAuthorizationWithController:(UIViewController *)vc action:(void (^)(NSString *))action;
+- (void)JAuthorizationWithController:(UIViewController *)vc action:(void (^)(NSString *))action WexinLogin:(void (^)(void))wexinLogin otherMobileLogin:(void (^)(void))otherMobileLogin;
 
 // 绑定微信
-- (void)JAuthBindingWithController:(UIViewController *)vc action:(void (^)(NSString *))action;
+- (void)JAuthBindingWithController:(UIViewController *)vc action:(void (^)(NSString *))action OtherMobileLogin:(void (^)(void))otherMobileLogin;
 
 // 判断
 - (void)preLogin:(void (^)(BOOL success))isSuccess;

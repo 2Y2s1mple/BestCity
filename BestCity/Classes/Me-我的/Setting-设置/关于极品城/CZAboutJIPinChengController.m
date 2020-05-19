@@ -32,14 +32,14 @@
 
 - (IBAction)privacy
 {
-    [CZFreePushTool generalH5WithUrl:UserPrivacy_url title:@"隐私政策"];
+    [CZFreePushTool generalH5WithUrl:UserPrivacy_url title:@"隐私政策" containView:nil];
     NSLog(@"《隐私政策》---------------");
 }
 
 
 - (IBAction)agreement
 {
-    [CZFreePushTool generalH5WithUrl:UserAgreement_url title:@"用户服务协议"];
+    [CZFreePushTool generalH5WithUrl:UserAgreement_url title:@"用户服务协议" containView:nil];
     NSLog(@"《用户服务协议》---------------");
 }
 

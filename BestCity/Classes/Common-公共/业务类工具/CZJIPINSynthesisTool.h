@@ -96,7 +96,7 @@ typedef NS_ENUM(NSInteger, CZJIPINModuleType){
 + (BOOL)jipin_isNewUser;
 
 /** 判断界面是否该版本下的第一次加载 */
-+ (BOOL)jipin_isFirstIntoWithIdentifier:(Class)currentClass;
++ (void)jipin_isFirstIntoWithIdentifier:(Class)currentClass info:(void (^)(BOOL isFirstInto, NSInteger count))infoBlcok;
 
 @end
 

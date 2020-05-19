@@ -104,12 +104,14 @@
     [super viewWillAppear:animated];
     
     // 如果是新版本
-    if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) { // 新版本
-        // 开启弹框
-        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
-    } else {
-        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:NO];
-    }
+    [CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class] info:^(BOOL isFirstInto, NSInteger count) {
+        if (isFirstInto) { // 新版本
+            // 开启弹框
+            [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
+        } else {
+            [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:NO];
+        }
+    }];
 }
 
 // 上拉加载, 下拉刷新

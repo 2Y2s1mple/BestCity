@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZLoginController">
             <connections>
+                <outlet property="agreedPrivacyBtn" destination="ddC-pS-OE0" id="VCz-3K-jla"/>
                 <outlet property="view" destination="g6V-gZ-l1a" id="BuY-JK-vs4"/>
             </connections>
         </placeholder>
@@ -74,15 +75,19 @@
                         <action selector="userPrivacy" destination="-1" eventType="touchUpInside" id="4E2-8v-rld"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录代表同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qkp-30-Ixn">
-                    <rect key="frame" x="58" y="616" width="74" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即视为同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qkp-30-Ixn">
+                    <rect key="frame" x="46" y="616" width="86" height="15"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.69013446570000003" green="0.6902356744" blue="0.69011241199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-pS-OE0">
-                    <rect key="frame" x="38" y="612.5" width="15" height="22"/>
-                    <state key="normal" image="me-checkBox_selected"/>
+                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-pS-OE0">
+                    <rect key="frame" x="26" y="612.5" width="15" height="22"/>
+                    <state key="normal" image="me-checkBox_unSelected"/>
+                    <state key="selected" image="me-checkBox_selected"/>
+                    <connections>
+                        <action selector="agreedPrivacy:" destination="-1" eventType="touchUpInside" id="p13-fd-NHH"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVd-AA-fWv">
                     <rect key="frame" x="0.0" y="10" width="50" height="50"/>
@@ -125,6 +130,7 @@
     <resources>
         <image name="Me-login-1" width="227" height="227"/>
         <image name="me-checkBox_selected" width="15" height="15"/>
+        <image name="me-checkBox_unSelected" width="15" height="15"/>
         <image name="nav-back" width="9.5" height="16"/>
     </resources>
 </document>

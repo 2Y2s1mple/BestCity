@@ -61,16 +61,12 @@
 {
     NSLog(@"%@", URL.absoluteString);
     if ([[URL scheme] isEqualToString:@"yinsi"]) {
-        [self dismissViewControllerAnimated:NO completion:^{
-            [CZFreePushTool generalH5WithUrl:UserPrivacy_url title:@"隐私政策"];
-            NSLog(@"《隐私政策》---------------");
-        }];
+        [CZFreePushTool generalH5WithUrl:UserPrivacy_url title:@"隐私政策" containView:self];
+        NSLog(@"《隐私政策》---------------");
         return NO;
     } else if ([[URL scheme] isEqualToString:@"yonghu"]) {
-        [self dismissViewControllerAnimated:NO completion:^{
-            [CZFreePushTool generalH5WithUrl:UserAgreement_url title:@"用户服务协议"];
-            NSLog(@"《用户服务协议》---------------");
-        }];
+        [CZFreePushTool generalH5WithUrl:UserAgreement_url title:@"用户服务协议" containView:self];
+        NSLog(@"《用户服务协议》---------------");
         return NO;
     }
     return YES;

@@ -114,11 +114,20 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFn-ME-AbG">
+                    <rect key="frame" x="193" y="645.5" width="28" height="28"/>
+                    <state key="normal" backgroundImage="alert_01-2"/>
+                    <connections>
+                        <action selector="popAction:" destination="-1" eventType="touchUpInside" id="TU9-SJ-8Wd"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70073173415492962" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="sp7-3b-eaG" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="AWJ-4b-KQM"/>
+                <constraint firstItem="pFn-ME-AbG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eBu-7u-lXK"/>
                 <constraint firstItem="sp7-3b-eaG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sRO-Sy-nR5"/>
+                <constraint firstItem="pFn-ME-AbG" firstAttribute="top" secondItem="sp7-3b-eaG" secondAttribute="bottom" constant="30" id="zcZ-vO-4uH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>
@@ -126,5 +135,6 @@
     </objects>
     <resources>
         <image name="alert-image-6" width="280" height="335"/>
+        <image name="alert_01-2" width="28" height="28"/>
     </resources>
 </document>

@@ -134,14 +134,15 @@ static CGFloat const likeAndShareHeight = 49;
 
     // 加载收藏按钮
 //    [self.view addSubview:self.collectButton];
-
-    if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) {
-           // 第一次
-           CZTaobaoDetailNewAlertView *vc = [[CZTaobaoDetailNewAlertView alloc] init];
-           [self presentViewController:vc animated:NO completion:nil];
-       } else {
-
-       }
+    
+    [CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class] info:^(BOOL isFirstInto, NSInteger count) {
+        if (isFirstInto) {
+            // 第一次
+            CZTaobaoDetailNewAlertView *vc = [[CZTaobaoDetailNewAlertView alloc] init];
+            [self presentViewController:vc animated:NO completion:nil];
+        }
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -538,6 +539,11 @@ static CGFloat const likeAndShareHeight = 49;
     [showAll sizeToFit];
     showAll.centerX = subView.width / 2.0;
     [showAll addTarget:self action:@selector(showAllDeatilImages:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([self.detailModel[@"goodsType"] integerValue] == 1) {
+        [self showAllDeatilImages:showAll];
+    }
+    
 
     self.recordHeight += (22 + showAll.height);
     backView.height = CZGetY(showAll) + 12;

@@ -321,7 +321,7 @@
         [CZProgressHUD showProgressHUDWithText:@"未安装拼多多App"];
         [CZProgressHUD hideAfterDelay:1.5];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [CZFreePushTool  generalH5WithUrl:param[@"mobileUrl"] title:@"拼多多"];
+            [CZFreePushTool  generalH5WithUrl:param[@"mobileUrl"] title:@"拼多多" containView:nil];
         });
     }
 }
@@ -337,7 +337,7 @@
             [CZProgressHUD showProgressHUDWithText:@"未安装京东App"];
             [CZProgressHUD hideAfterDelay:1.5];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [CZFreePushTool  generalH5WithUrl:param[@"mobileUrl"] title:@"京东"];
+                [CZFreePushTool  generalH5WithUrl:param[@"mobileUrl"] title:@"京东" containView:nil];
             });
         }
     }];
@@ -722,9 +722,13 @@
 #pragma mark - /** 项目启动 */
 + (void)jipin_projectEngine:(UIWindow *)window
 {
+//    CZGuideController *vc = [[CZGuideController alloc] init];
+//    window.rootViewController = vc;
+//    return;
+    
     // 设置跟视图
     if ([CZJIPINSynthesisTool jipin_isNewVersion]) {
-        // 有新版本
+//         有新版本
         CZGuideController *vc = [[CZGuideController alloc] init];
         window.rootViewController = vc;
     } else {
@@ -763,10 +767,10 @@
             if ([curVersion isEqualToString:lastVersion]) {
                 block(YES); // 同意
             } else { // 不同意
-                block(NO);
                 CURRENTVC(currentVc);
                 CZAlertView5Controller *alert = [[CZAlertView5Controller alloc] initWithAgreementBlock:^{
                     [CZSaveTool setObject:curVersion forKey:@"getPrivateVersion"];
+                    block(YES); // 同意
                 }];
                 [currentVc presentViewController:alert animated:YES completion:nil];
             }
@@ -775,7 +779,7 @@
 }
 
 
-// 服务器获取最新版本
+#pragma mark - 服务器获取最新版本
 + (void)ShowUpdataViewWithNetworkService
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -839,20 +843,27 @@
 }
 
 #pragma mark -   /** 判断界面是否该版本下的第一次加载 */
-+ (BOOL)jipin_isFirstIntoWithIdentifier:(Class)currentClass info:(void (^)(BOOL isFirstInto, NSInteger count))infoBlcok
++ (void)jipin_isFirstIntoWithIdentifier:(Class)currentClass info:(void (^)(BOOL isFirstInto, NSInteger count))infoBlcok
 {
     NSString *identifier = NSStringFromClass(currentClass);
-    // 获取记录的key值列表
-    NSDictionary *localKeyDic = [CZSaveTool objectForKey:@"CZFirstIntoDic"];
+    NSString *countKey = [identifier stringByAppendingString:@"count"];
+    
+    // 取记录的key值列表
+    static NSString *CZFirstIntoDic = @"CZFirstIntoDic";
+    NSMutableDictionary *localKeyDic = [NSMutableDictionary dictionaryWithDictionary:[CZSaveTool objectForKey:CZFirstIntoDic]];
+    
+    NSInteger count = [localKeyDic[countKey] integerValue];
+    localKeyDic[countKey] = [NSString stringWithFormat:@"%ld", ++count];
+    [CZSaveTool setObject:localKeyDic forKey:CZFirstIntoDic];
+    
     if ([localKeyDic[identifier] isEqualToString:@"jipin_old_page"]) {
         // 第二次进
-        return NO;
+        infoBlcok(NO, [localKeyDic[countKey] integerValue]);
     } else {
         // 第一次进
-        NSMutableDictionary *keyDic = [NSMutableDictionary dictionaryWithDictionary:[CZSaveTool objectForKey:@"CZFirstIntoDic"]];
-        keyDic[identifier] = @"jipin_old_page";
-        [CZSaveTool setObject:keyDic forKey:@"CZFirstIntoDic"];
-        return YES;
+        localKeyDic[identifier] = @"jipin_old_page";
+        [CZSaveTool setObject:localKeyDic forKey:CZFirstIntoDic];
+        infoBlcok(YES, [localKeyDic[countKey] integerValue]);
     }
 }
 

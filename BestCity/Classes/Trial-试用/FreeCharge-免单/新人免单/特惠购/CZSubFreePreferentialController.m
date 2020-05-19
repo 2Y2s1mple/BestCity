@@ -90,13 +90,14 @@
         } failure:^(NSError *error) {}];
     }
 
-    if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) {
-        // 第一次
-        CZSubFreePreferentialAlertView *vc = [[CZSubFreePreferentialAlertView alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-    } else {
-
-    }
+    [CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class] info:^(BOOL isFirstInto, NSInteger count) {
+        if (isFirstInto) {
+            // 第一次
+            CZSubFreePreferentialAlertView *vc = [[CZSubFreePreferentialAlertView alloc] init];
+            [self presentViewController:vc animated:YES completion:nil];
+        }
+        
+    }];
 }
 
 - (void)setupRefresh

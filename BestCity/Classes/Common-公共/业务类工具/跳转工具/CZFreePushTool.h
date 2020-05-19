@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)push_freeMoney;
 
 // 通用的H5界面
-+ (void)generalH5WithUrl:(NSString *)url title:(NSString *)title;
++ (void)generalH5WithUrl:(NSString *)url title:(NSString *)title containView:(UIViewController *)containView;
 
 // 京东专题
 + (void)push_jingDongGeneralView:(NSInteger)type;

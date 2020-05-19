@@ -449,45 +449,47 @@
     self.tableView.scrollEnabled = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 第一次进入新人0元购
-           if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) {
-               // 上部d挡板
-               UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-               NSLog(@"%@", cell);
+        [CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class] info:^(BOOL isFirstInto, NSInteger count) {
+            if (isFirstInto) {
+                // 上部d挡板
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                NSLog(@"%@", cell);
 
-               UIView *topView = [[UIView alloc] init];
-               topView.width = SCR_WIDTH;
-               topView.height = cell.y + self.tableView.y;
-               topView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
-               [self.view addSubview:topView];
-               topView.tag = 100;
+                UIView *topView = [[UIView alloc] init];
+                topView.width = SCR_WIDTH;
+                topView.height = cell.y + self.tableView.y;
+                topView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+                [self.view addSubview:topView];
+                topView.tag = 100;
 
-               UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-13"]];
-               imageView.centerX = SCR_WIDTH / 2;
-               imageView.y = topView.height - 130;
-               [topView addSubview:imageView];
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-13"]];
+                imageView.centerX = SCR_WIDTH / 2;
+                imageView.y = topView.height - 130;
+                [topView addSubview:imageView];
 
-               // 下部挡板
-               UITableViewCell *bottomCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-               UIView *bottomView = [[UIView alloc] init];
-               bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
-               bottomView.y = bottomCell.y + self.tableView.y;
-               bottomView.width = SCR_WIDTH;
-               bottomView.height = SCR_HEIGHT - bottomCell.y - self.tableView.y;
-               [self.view addSubview:bottomView];
-               bottomView.tag = 200;
+                // 下部挡板
+                UITableViewCell *bottomCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+                UIView *bottomView = [[UIView alloc] init];
+                bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+                bottomView.y = bottomCell.y + self.tableView.y;
+                bottomView.width = SCR_WIDTH;
+                bottomView.height = SCR_HEIGHT - bottomCell.y - self.tableView.y;
+                [self.view addSubview:bottomView];
+                bottomView.tag = 200;
 
-               UIButton *btn1 = [[UIButton alloc] init];
-               [btn1 setBackgroundImage:[UIImage imageNamed:@"alert-12"] forState:UIControlStateNormal];
-               [btn1 sizeToFit];
-               btn1.centerX = SCR_WIDTH / 2;
-               btn1.y = 20;
-               btn1.tag = 100;
-               [bottomView addSubview:btn1];
-               [btn1 addTarget:self action:@selector(removeAlertView:) forControlEvents:UIControlEventTouchUpInside];
-           } else {
-               // 0.25秒激活, 因为一开始不让tableView动
-               self.tableView.scrollEnabled = YES;
-           }
+                UIButton *btn1 = [[UIButton alloc] init];
+                [btn1 setBackgroundImage:[UIImage imageNamed:@"alert-12"] forState:UIControlStateNormal];
+                [btn1 sizeToFit];
+                btn1.centerX = SCR_WIDTH / 2;
+                btn1.y = 20;
+                btn1.tag = 100;
+                [bottomView addSubview:btn1];
+                [btn1 addTarget:self action:@selector(removeAlertView:) forControlEvents:UIControlEventTouchUpInside];
+            } else {
+                // 0.25秒激活, 因为一开始不让tableView动
+                self.tableView.scrollEnabled = YES;
+            }
+        }];
     });
 }
 

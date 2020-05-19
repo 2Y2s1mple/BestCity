@@ -294,12 +294,15 @@ static NSString * const type = @"1";
     self.scrollerView.contentSize = CGSizeMake(0, self.commendVC.scrollerView.height + self.testVc.scrollerView.height + self.evaluate.scrollerView.height + self.recommen.view.height);
 
     // 如果是新版本
-    if ([CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class]]) {
-        CZGoodsDetailGuidanceView *guide = [CZGoodsDetailGuidanceView goodsDetailGuidanceView];
-        guide.frame = [UIScreen mainScreen].bounds;
-        guide.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
-        [[UIApplication sharedApplication].keyWindow addSubview:guide];
-    }
+    [CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class] info:^(BOOL isFirstInto, NSInteger count) {
+        if (isFirstInto) {
+            // 第一次
+            CZGoodsDetailGuidanceView *guide = [CZGoodsDetailGuidanceView goodsDetailGuidanceView];
+            guide.frame = [UIScreen mainScreen].bounds;
+            guide.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+            [[UIApplication sharedApplication].keyWindow addSubview:guide];
+        }
+    }];
 
 }
 

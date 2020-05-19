@@ -151,16 +151,12 @@
                         <action selector="userPrivacy" destination="-1" eventType="touchUpInside" id="Q2i-2v-Vjc"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录代表同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSp-8B-0TJ">
-                    <rect key="frame" x="77.5" y="811" width="74" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即视为同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSp-8B-0TJ">
+                    <rect key="frame" x="65.5" y="811" width="86" height="15"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.69013446570000003" green="0.6902356744" blue="0.69011241199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fd3-GV-jO6">
-                    <rect key="frame" x="57.5" y="807.5" width="15" height="22"/>
-                    <state key="normal" image="me-checkBox_selected"/>
-                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -169,7 +165,6 @@
                 <constraint firstItem="n3a-Rb-YfJ" firstAttribute="leading" secondItem="MSp-8B-0TJ" secondAttribute="trailing" id="15B-AI-mGx"/>
                 <constraint firstItem="ktp-gy-UiI" firstAttribute="leading" secondItem="n3a-Rb-YfJ" secondAttribute="trailing" id="1hX-3p-IPp"/>
                 <constraint firstItem="n3a-Rb-YfJ" firstAttribute="top" secondItem="dvZ-8A-Ke1" secondAttribute="bottom" constant="60" id="2ze-oH-Zzg"/>
-                <constraint firstItem="fd3-GV-jO6" firstAttribute="centerY" secondItem="MSp-8B-0TJ" secondAttribute="centerY" id="5pz-aD-IQU"/>
                 <constraint firstItem="gVV-iJ-jbM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="5v1-p5-Y5d"/>
                 <constraint firstItem="ktp-gy-UiI" firstAttribute="centerY" secondItem="n3a-Rb-YfJ" secondAttribute="centerY" id="6nM-TO-G2y"/>
                 <constraint firstItem="cVO-dt-KW9" firstAttribute="leading" secondItem="ktp-gy-UiI" secondAttribute="trailing" id="D42-Ns-8ot"/>
@@ -179,7 +174,6 @@
                 <constraint firstItem="dvZ-8A-Ke1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="JAe-97-lTA"/>
                 <constraint firstItem="gVV-iJ-jbM" firstAttribute="top" secondItem="tH1-wv-x67" secondAttribute="bottom" constant="43" id="WrG-oc-Fq4"/>
                 <constraint firstItem="q4R-j6-Uqc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="80" id="YFk-eB-asQ"/>
-                <constraint firstItem="MSp-8B-0TJ" firstAttribute="leading" secondItem="fd3-GV-jO6" secondAttribute="trailing" constant="5" id="a0L-x7-yO9"/>
                 <constraint firstItem="MSp-8B-0TJ" firstAttribute="centerY" secondItem="n3a-Rb-YfJ" secondAttribute="centerY" id="irv-HJ-Z3E"/>
                 <constraint firstItem="tH1-wv-x67" firstAttribute="top" secondItem="q4R-j6-Uqc" secondAttribute="bottom" id="nhv-48-HYr"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="n3a-Rb-YfJ" secondAttribute="bottom" constant="30" id="qXm-tu-AMc"/>
@@ -191,7 +185,6 @@
         </view>
     </objects>
     <resources>
-        <image name="me-checkBox_selected" width="15" height="15"/>
         <image name="wechat" width="40" height="40"/>
     </resources>
 </document>

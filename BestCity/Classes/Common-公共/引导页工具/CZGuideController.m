@@ -10,6 +10,8 @@
 #import "CZTabBarController.h"
 #import "GXAVPlayerTool.h"
 #import "GXButtons.h"
+#import "CZAlertView5Controller.h"
+#import "GXNetTool.h"
 
 @interface CZGuideController () <UIScrollViewDelegate>
 /** 播放器 */
@@ -37,7 +39,6 @@
     
     NSInteger count = 1;
     for (int i = 0; i < count; i++) {
-        
         UIImageView *imageView = [[UIImageView alloc] init];
         [scrollerView addSubview:imageView];
         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guide%d", i]];
@@ -48,9 +49,7 @@
     
     // 加载视频
     [scrollerView addSubview:[self createVideo]];
-    
     scrollerView.contentSize = CGSizeMake(SCR_WIDTH * (count + 1), 0);
-    
     
     UIButton *btn = [[UIButton alloc] init];
     [btn setBackgroundImage:[UIImage imageNamed:@"guide0-3"] forState:UIControlStateNormal];
@@ -67,7 +66,26 @@
     btn1.y = SCR_HEIGHT - 44 - 40 - (IsiPhoneX ? 34 : 0);
     [scrollerView addSubview:btn1];
     [btn1 addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (![[CZSaveTool objectForKey:@"CZGuideControllerGetPrivateVersion"] isEqual:@"1"]) {
+        CZAlertView5Controller *alert = [[CZAlertView5Controller alloc] initWithAgreementBlock:^{
+            [CZSaveTool setObject:@"1" forKey:@"CZGuideControllerGetPrivateVersion"];
+            NSMutableDictionary *param = [NSMutableDictionary dictionary];
+            [GXNetTool GetNetWithUrl:[JPSERVER_URL stringByAppendingPathComponent:@"api/v3/getPrivateVersion"] body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+                if ([result[@"msg"] isEqualToString:@"success"]) {
+                    //获取隐私政策版本号
+                    NSString *curVersion = result[@"data"];
+                     [CZSaveTool setObject:curVersion forKey:@"getPrivateVersion"];
+                }
+            } failure:^(NSError *error) {}];
+            
+        }];
+        [self presentViewController:alert animated:NO completion:nil];
+    }
 }
 
 - (void)clicked

@@ -25,6 +25,12 @@
 @interface CZLoginController ()<UITextFieldDelegate>
 /** <#注释#> */
 @property (nonatomic, strong) UILabel *userAgreementLabel;
+
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UIButton *agreedPrivacyBtn;
+/** 微信返回的ID */
+@property (nonatomic, strong) NSString *openid;
+
 @end
 
 static id instancet_;
@@ -71,6 +77,12 @@ static id instancet_;
 #pragma mark - 微信登录
 - (IBAction)logininWithWxin
 {
+    if (!self.agreedPrivacyBtn.isSelected) {
+        [CZProgressHUD showProgressHUDWithText:@"请点击同意协议"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    }
+    
     [[CZJVerificationHandler shareJVerificationHandler] preLogin:^(BOOL success) {
         if (success) {
             [self wxinAuth:YES];
@@ -93,12 +105,13 @@ static id instancet_;
         NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/thirdLogin"];
         [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {
             if ([result[@"code"] isEqualToNumber:@(700)]) {
+                self.openid = param[@"openid"];
                 if (isMobile) {
-                    [self bindingMobileWithWechatOpenid:param[@"openid"]];
+                    [self bindingMobileWithWechatOpenid:self.openid];
                 } else {
                     CZBindingController *vc = [[CZBindingController alloc] init];
                     vc.modalPresentationStyle = UIModalPresentationFullScreen;
-                    vc.openid = param[@"openid"];
+                    vc.openid = self.openid;
                     [self presentViewController:vc animated:NO completion:nil];
                 }
             } else if ([result[@"code"] isEqualToNumber:@(0)]) {
@@ -122,6 +135,7 @@ static id instancet_;
 - (void)bindingMobileWithWechatOpenid:(NSString *)openid
 {
     [[CZJVerificationHandler shareJVerificationHandler] JAuthBindingWithController:self action:^(NSString * _Nonnull loginToken) {
+        
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"channel"] = @(1); // 渠道(1微信，2微博)
         param[@"loginToken"] = loginToken;
@@ -146,12 +160,24 @@ static id instancet_;
                 
             }
         } failure:nil];
+    } OtherMobileLogin:^{
+        CZBindingController *vc = [[CZBindingController alloc] init];
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        vc.openid = self.openid;
+        [self presentViewController:vc animated:NO completion:nil];
     }];
+    
 }
 
 
 #pragma mark - 登录
 - (IBAction)loginAction:(id)sender {
+    if (!self.agreedPrivacyBtn.isSelected) {
+        [CZProgressHUD showProgressHUDWithText:@"请点击同意协议"];
+        [CZProgressHUD hideAfterDelay:1.5];
+        return;
+    }
+    
     [[CZJVerificationHandler shareJVerificationHandler] JAuthorizationWithController:self action:^(NSString * _Nonnull loginToken) {
         if (loginToken.length == 0) {
             CZMobileLoginController *vc = [[CZMobileLoginController alloc] init];
@@ -181,6 +207,11 @@ static id instancet_;
                 }
             } failure:nil];
         }
+    } WexinLogin:^{
+        [self logininWithWxin];
+    } otherMobileLogin:^{
+        CZMobileLoginController *vc = [[CZMobileLoginController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
     }];
 
 }
@@ -218,6 +249,10 @@ static id instancet_;
     TSLWebViewController *webVc = [[TSLWebViewController alloc] initWithURL:[NSURL URLWithString:UserPrivacy_url]];
     webVc.titleName = @"隐私政策";
     [self presentViewController:webVc animated:YES completion:nil];
+}
+
+- (IBAction)agreedPrivacy:(UIButton *)sender {
+    sender.selected = !sender.selected;
 }
 
 - (void)dealloc
