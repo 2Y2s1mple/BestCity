@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,17 +23,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert-17" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-3N-dwn">
-                    <rect key="frame" x="17" y="179" width="341" height="309"/>
+                    <rect key="frame" x="57.5" y="181" width="260" height="305"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ygv-w8-hdM">
-                    <rect key="frame" x="172" y="532" width="31" height="31"/>
+                    <rect key="frame" x="172" y="530" width="31" height="31"/>
                     <state key="normal" backgroundImage="hat-close"/>
                     <connections>
                         <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="IyG-46-LfY"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9c-JH-GpI">
-                    <rect key="frame" x="87.5" y="292" width="200" height="200"/>
+                    <rect key="frame" x="87.5" y="290" width="200" height="200"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="DxM-JG-eHf"/>
                         <constraint firstAttribute="width" constant="200" id="wdd-aW-ZG2"/>
@@ -53,11 +53,11 @@
                 <constraint firstItem="Ygv-w8-hdM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="w7c-ds-ifn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="128.80000000000001" y="31.934032983508249"/>
+            <point key="canvasLocation" x="-79" y="34"/>
         </view>
     </objects>
     <resources>
-        <image name="alert-17" width="340.5" height="309"/>
+        <image name="alert-17" width="260" height="305"/>
         <image name="hat-close" width="31" height="31"/>
     </resources>
 </document>

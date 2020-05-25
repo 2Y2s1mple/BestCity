@@ -442,7 +442,7 @@
                 <outlet property="title3" destination="qMq-SG-AUJ" id="axJ-BB-T5V"/>
                 <outlet property="title4" destination="gEA-DQ-cMD" id="Mya-FM-dDb"/>
             </connections>
-            <point key="canvasLocation" x="-698.55072463768124" y="-190.84821428571428"/>
+            <point key="canvasLocation" x="-645" y="-208"/>
         </collectionViewCell>
     </objects>
     <resources>

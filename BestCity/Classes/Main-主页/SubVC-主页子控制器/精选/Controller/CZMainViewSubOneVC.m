@@ -114,11 +114,11 @@
                 // 如果是新版本
                 [CZJIPINSynthesisTool jipin_isFirstIntoWithIdentifier:[self class] info:^(BOOL isFirstInto, NSInteger count) {
                     if (count == 2) { // 新版本
-                        CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{
-                            // 开启弹框
-//                            [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
-                        }];
+                        CZAlertMainViewController *alertView = [[CZAlertMainViewController alloc] initWithBlock:^{}];
                         [self presentViewController:alertView animated:NO completion:nil];
+                    } else if (isFirstInto) {
+                        // 开启弹框
+                        [CZJIPINSynthesisTool jipin_globalAlertWithNewVersion:YES];
                     } else { // 旧版本
                         static dispatch_once_t onceToken;
                         dispatch_once(&onceToken, ^{

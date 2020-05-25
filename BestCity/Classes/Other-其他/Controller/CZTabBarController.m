@@ -15,8 +15,8 @@
 #import "CZMainHotSaleController.h"
 #import "CZDiscoverController.h"
 #import "CZEvaluationController.h" // 评测
-#import "CZTrialMainController.h"
-#import "CZFreeChargeController.h"
+
+
 #import "CZMeController.h"
 #import "CZNavigationController.h"
 //#import "CZFestivalController.h" // 活动
