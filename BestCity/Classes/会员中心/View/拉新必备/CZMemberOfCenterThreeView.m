@@ -23,7 +23,7 @@
 /** 新人免单 */
 - (IBAction)aaa
 {
-    [CZFreePushTool push_newPeopleFree];
+    [CZFreePushTool push_newPeopleFree2];
 }
 
 @end

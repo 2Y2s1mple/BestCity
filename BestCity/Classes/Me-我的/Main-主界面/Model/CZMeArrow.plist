@@ -72,7 +72,7 @@
 					<key>icon</key>
 					<string>address-2</string>
 					<key>destinationVC</key>
-					<string>CZSubFreeChargeController</string>
+					<string>CZSub2FreeChargeController</string>
 				</dict>
 				<dict>
 					<key>title</key>

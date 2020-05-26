@@ -10,7 +10,6 @@
 #import "UIImageView+WebCache.h"
 
 // 跳转
-#import "CZSubFreeChargeController.h"
 #import "CZSubFreePreferentialController.h" // 特惠购
 
 #import "CZFreePushTool.h"
@@ -162,9 +161,7 @@
 - (void)pushPeopleNew
 {
     [CZJIPINStatisticsTool statisticsToolWithID:@"shouye_xinren"];
-    CURRENTVC(currentVc);
-    CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
-    [currentVc.navigationController pushViewController:vc animated:YES];
+    [CZFreePushTool push_newPeopleFree2];
 }
 
 // 跳特惠购

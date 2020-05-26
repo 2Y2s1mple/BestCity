@@ -7,7 +7,6 @@
 //
 
 #import "CZAlertView1Controller.h"
-#import "CZSubFreeChargeController.h"
 
 @interface CZAlertView1Controller ()
 /** <#注释#> */
@@ -44,10 +43,7 @@
 
 - (IBAction)caiBtnAction:(UIButton *)sender {
 //    if (sender.selected) {
-        CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
-        UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        UINavigationController *nav = tabbar.selectedViewController;
-        [nav pushViewController:vc animated:YES];
+        [CZFreePushTool push_newPeopleFree2];
         [self dismissViewControllerAnimated:YES completion:nil];
 //    } else {
 //        self.backImageView.image = [UIImage imageNamed:@"alert-9"];

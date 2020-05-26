@@ -20,8 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 // 邀请好友
 + (void)push_inviteFriend;
 
-// 新人免单主页
+// 新人0元购
 + (void)push_newPeopleFree;
+
+// 新人0元购, 第二版
++ (void)push_newPeopleFree2;
 
 // 会员中心
 + (void)push_memberOfCenter;

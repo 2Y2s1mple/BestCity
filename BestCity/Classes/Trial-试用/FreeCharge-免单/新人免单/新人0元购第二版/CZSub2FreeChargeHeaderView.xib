@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CZSub2FreeChargeHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="349" height="426"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqy-Lb-orf">
+                    <rect key="frame" x="0.0" y="0.0" width="349" height="38"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加官方账号微信获取更多福利" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARb-sC-hEG">
+                            <rect key="frame" x="10" y="11" width="186" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWL-CT-RTo">
+                            <rect key="frame" x="266" y="6" width="73" height="26"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="73" id="AfQ-PS-gVt"/>
+                                <constraint firstAttribute="height" constant="26" id="KdJ-Ep-XM8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-130" maxY="0.0"/>
+                            <state key="normal" title="复制微信">
+                                <color key="titleColor" red="0.85756868119999996" green="0.1257199645" blue="0.042563520370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="13"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="generalPaste:" destination="iN0-l3-epB" eventType="touchUpInside" id="zQT-Oe-Dfy"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.82769173380000005" green="0.23663944009999999" blue="0.046248264609999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="xWL-CT-RTo" secondAttribute="trailing" constant="10" id="CMZ-3o-ZUi"/>
+                        <constraint firstItem="xWL-CT-RTo" firstAttribute="centerY" secondItem="iqy-Lb-orf" secondAttribute="centerY" id="NI9-y0-QdT"/>
+                        <constraint firstAttribute="height" constant="38" id="Omq-tl-sGa"/>
+                        <constraint firstItem="ARb-sC-hEG" firstAttribute="centerY" secondItem="iqy-Lb-orf" secondAttribute="centerY" id="btQ-et-L3i"/>
+                        <constraint firstItem="ARb-sC-hEG" firstAttribute="leading" secondItem="iqy-Lb-orf" secondAttribute="leading" constant="10" id="cs8-cv-ntL"/>
+                    </constraints>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peopleNew-1" translatesAutoresizingMaskIntoConstraints="NO" id="Hvv-h0-qGz">
+                    <rect key="frame" x="0.0" y="38" width="349" height="343"/>
+                    <color key="backgroundColor" red="0.97655314209999999" green="0.42959323529999999" blue="0.30582743880000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                </imageView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:59:59后将失效" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2F-td-Ve8">
+                    <rect key="frame" x="89.5" y="158" width="170" height="28"/>
+                    <color key="backgroundColor" red="0.85756868119999996" green="0.1257199645" blue="0.042563520370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="oom-KS-hey"/>
+                        <constraint firstAttribute="width" constant="170" id="wew-WV-Lvb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="14"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的免单权益已经失效分享好友来抢吧!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwq-Fi-W35">
+                    <rect key="frame" x="33.5" y="162" width="282.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.98039215686274506" green="0.42745098039215684" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="iqy-Lb-orf" secondAttribute="trailing" id="4CZ-Ry-NVs"/>
+                <constraint firstItem="Hvv-h0-qGz" firstAttribute="top" secondItem="iqy-Lb-orf" secondAttribute="bottom" id="CHZ-Po-cgE"/>
+                <constraint firstItem="I2F-td-Ve8" firstAttribute="top" secondItem="iqy-Lb-orf" secondAttribute="bottom" constant="120" id="OM1-xO-HEE"/>
+                <constraint firstItem="fwq-Fi-W35" firstAttribute="top" secondItem="iqy-Lb-orf" secondAttribute="bottom" constant="124" id="Pop-Lj-OLA"/>
+                <constraint firstItem="I2F-td-Ve8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RSU-AS-hFv"/>
+                <constraint firstItem="fwq-Fi-W35" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ue2-7W-dJS"/>
+                <constraint firstItem="iqy-Lb-orf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Xyj-sS-JFB"/>
+                <constraint firstAttribute="trailing" secondItem="Hvv-h0-qGz" secondAttribute="trailing" id="g1B-q7-fH9"/>
+                <constraint firstItem="Hvv-h0-qGz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nqQ-uj-4MZ"/>
+                <constraint firstItem="iqy-Lb-orf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xSa-5c-ryC"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="timeLabel" destination="I2F-td-Ve8" id="U3m-ao-qyt"/>
+                <outlet property="timeLabel1" destination="fwq-Fi-W35" id="4rK-PP-fJg"/>
+            </connections>
+            <point key="canvasLocation" x="-0.7246376811594204" y="30.133928571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="peopleNew-1" width="375" height="343"/>
+    </resources>
+</document>

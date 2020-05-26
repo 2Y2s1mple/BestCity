@@ -15,7 +15,7 @@
 #import "WMPageController.h"
 #import "CZTrialDetailController.h" // 新品试用
 #import "CZFreeChargeDetailController.h"
-#import "CZSubFreeChargeController.h" // 新品免单
+
 
 
 
@@ -176,10 +176,7 @@
         }
         case 5:
         {
-            CZSubFreeChargeController *vc = [[CZSubFreeChargeController alloc] init];
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
+            [CZFreePushTool push_newPeopleFree2];
             break;
         }
         case 41:

@@ -28,6 +28,8 @@
 #import "CZSubFreePreferentialController.h" // 特惠购
 #import "CZMemberOfCenterTool.h"
 
+
+
 @interface CZMeController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

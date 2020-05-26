@@ -13,7 +13,8 @@
 #import "CZMyPointsController.h" // 极币商城
 #import "CZMainProjectGeneralView.h" // 专题页面
 #import "CZCoinCenterController.h" // 任务中心
-#import "CZSubFreeChargeController.h" // 新人免单页
+#import "CZSubFreeChargeController.h" // 新人0元购. 第一版免单页
+#import "CZSub2FreeChargeController.h" // 新人0元购. 第二版
 #import "CZSubFreePreferentialController.h" // 特惠购
 #import "CZMainHotSaleController.h" // 榜单
 #import "CZInvitationController.h" // 邀请好友
@@ -69,7 +70,7 @@
             [self FreePreferential];
             break;
         case 19:
-            [self push_newPeopleFree];
+            [self push_newPeopleFree2];
             break;
         case 20:
             [self push_inviteFriend];
@@ -144,7 +145,7 @@
              [self FreePreferential];
              break;
          case 11:
-             [self push_newPeopleFree];
+             [self push_newPeopleFree2];
              break;
          case 12:
              [self push_jingDongGeneralView:1];
@@ -290,6 +291,15 @@
     UINavigationController *nav = tabbar.selectedViewController;
     [nav pushViewController:vc animated:YES];
 
+}
+
+#pragma mark - 0元购, 第二版
++ (void)push_newPeopleFree2
+{
+    CZSub2FreeChargeController *vc = [[CZSub2FreeChargeController alloc] init];
+    UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *nav = tabbar.selectedViewController;
+    [nav pushViewController:vc animated:YES];
 }
 
 #pragma mark - 榜单主页

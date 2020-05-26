@@ -85,6 +85,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     self.currentCount = 6;
 
     self.view.backgroundColor = UIColorFromRGB(0xEA4F17);
