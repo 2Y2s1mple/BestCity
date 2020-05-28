@@ -165,14 +165,14 @@
     [self.view addSubview:self.remindLabel];
 
 
-//    UIButton *redPacketsBtn = [[UIButton alloc] init];
-//    redPacketsBtn.x = SCR_WIDTH - 110;
-//    redPacketsBtn.y = SCR_HEIGHT - 202 - 62;
-//    redPacketsBtn.size = CGSizeMake(110, 62);
-//    [redPacketsBtn setBackgroundImage:[UIImage imageNamed:@"redPackets-honn"] forState:UIControlStateNormal];
-//    [redPacketsBtn addTarget:self action:@selector(gotoRedPacketsBtn) forControlEvents:UIControlEventTouchUpInside];
-//    [[UIApplication sharedApplication].keyWindow addSubview:redPacketsBtn];
-//    self.redPacketsBtn = redPacketsBtn;
+    UIButton *redPacketsBtn = [[UIButton alloc] init];
+    redPacketsBtn.x = SCR_WIDTH - 84 - 15;
+    redPacketsBtn.y = SCR_HEIGHT - 150 - 84;
+    redPacketsBtn.size = CGSizeMake(84, 84);
+    [redPacketsBtn setBackgroundImage:[UIImage imageNamed:@"redPackets-20"] forState:UIControlStateNormal];
+    [redPacketsBtn addTarget:self action:@selector(gotoRedPacketsBtn) forControlEvents:UIControlEventTouchUpInside];
+    [[UIApplication sharedApplication].keyWindow addSubview:redPacketsBtn];
+    self.redPacketsBtn = redPacketsBtn;
 
 }
 
@@ -243,8 +243,8 @@
 // 跳转百万红包
 - (void)gotoRedPacketsBtn
 {
-    UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    tabbar.selectedIndex = 2;
+    ISPUSHLOGIN;
+    [CZFreePushTool push_RedPackets];
 }
 
 // 改变颜色

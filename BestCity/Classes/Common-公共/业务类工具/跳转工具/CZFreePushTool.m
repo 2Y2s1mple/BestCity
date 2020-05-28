@@ -24,6 +24,10 @@
 #import "CZTaobaoSearchMainController.h" // 所搜
 #import "CZIssueCreate1Moments.h"
 
+
+#import "CZRedPackets3Controller.h" // 红包
+#import "CZSub3FreeChargeAlertController.h" // 先弹窗在红包
+
 @implementation CZFreePushTool
 // 轮播图广告跳转
 + (void)bannerPushToVC:(NSDictionary *)param
@@ -253,6 +257,20 @@
         CURRENTVC(currentVc)
         [currentVc.navigationController pushViewController:vc animated:YES];
     }
+}
+
+#pragma mark - 红包
++ (void)push_RedPackets
+{
+    CURRENTVC(currentVc);
+    if (1) {
+        CZSub3FreeChargeAlertController *vc = [[CZSub3FreeChargeAlertController alloc] init];
+        [currentVc presentViewController:vc animated:NO completion:nil];
+    } else {
+        CZRedPackets3Controller *vc = [[CZRedPackets3Controller alloc] init];
+        [currentVc.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 

@@ -51,8 +51,6 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
     return self;
 }
 
-
-
 // <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -105,7 +103,6 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
 // 头视图
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-
     if (indexPath.section == 0) {
         CZFestivalCollectHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderId forIndexPath:indexPath];
         headerView.boxList = self.totalDataModel.boxList;
@@ -145,7 +142,6 @@ static NSString *threeId = @"CZFestivalCollectThreeCell";
         return CGSizeZero;
     }
 }
-
 
 // 头视图的高度
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {

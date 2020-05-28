@@ -12,6 +12,7 @@
 #import "CZSub2FreeChargeFooterView.h"
 #import "CZSub2FreeChargeCell.h"
 #import "GXNetTool.h"
+#import "CZSub2FreeChargeAlertController.h"
 #import "CZSub2FreeChargeDetailController.h"
 
 @interface CZSub2FreeChargeController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -23,7 +24,10 @@
 @property (nonatomic, strong) NSArray *list;
 /** <#注释#> */
 @property (nonatomic, strong) NSDictionary *resultDic;
-
+/** <#注释#> */
+@property (nonatomic, assign) NSInteger recordPopCount;
+/** 给弹框的数据 */
+@property (nonatomic, strong) NSDictionary *alertViewParam;
 @end
 
 @implementation CZSub2FreeChargeController
@@ -69,6 +73,12 @@
     share.y = SCR_HEIGHT - (IsiPhoneX ? 34 + 55 : 55);
     [share addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:share];
+    
+    UIButton *leaveBtn = [[UIButton alloc] init];
+    leaveBtn.size = CGSizeMake(100, 100);
+    leaveBtn.backgroundColor = [RANDOMCOLOR colorWithAlphaComponent:0.01];
+    [self.view addSubview:leaveBtn];
+    [leaveBtn addTarget:self action:@selector(pushALert2ViewController:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -138,12 +148,22 @@
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((SCR_WIDTH - 40) / 2, 300); // 每个块尺寸
+    return CGSizeMake((SCR_WIDTH - 30 - 5) / 2, 300); // 每个块尺寸
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10, 15, 10, 15); // 上左下右的间距
+    return UIEdgeInsetsMake(10, 15, 20, 15); // 上左下右的间距
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 10;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5;
 }
 
 
@@ -160,9 +180,8 @@
         if ([result[@"code"] isEqual:@(0)]) {
             self.list = result[@"data"];
             self.resultDic = result;
-            
-            
-
+            self.alertViewParam = result;
+        
             [self.collectionView reloadData];
             // 结束刷新
         }
@@ -259,6 +278,24 @@
 - (void)shareImageWithType:(UMSocialPlatformType)type thumImage:(NSString *)thumImage
 {
     [CZJIPINSynthesisTool JINPIN_UMShareImage:thumImage Type:type];
+}
+
+
+#pragma mark - 弹框退出0元购
+- (void)pushALert2ViewController:(UIButton *)sender
+{
+    self.recordPopCount++;
+    
+    if (self.recordPopCount == 1) {
+        CZSub2FreeChargeAlertController *vc = [[CZSub2FreeChargeAlertController alloc] init];
+        vc.param = self.alertViewParam;
+        [self presentViewController:vc animated:NO completion:^{
+        }];
+    } else {
+        self.recordPopCount = 0;
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 @end

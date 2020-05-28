@@ -15,7 +15,7 @@
 #import "CZAllOrderMainController.h" // 我的全部订单
 
 #import "CZMyWalletController.h"
-#import "CZMyTrialController.h" // 试用
+
 #import "CZMePublishController.h" // 发布
 #import "CZScollerImageTool.h"
 #import "CZFreePushTool.h"

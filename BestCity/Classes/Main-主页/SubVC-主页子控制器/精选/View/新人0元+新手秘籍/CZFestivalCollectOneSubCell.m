@@ -31,7 +31,7 @@
     self.bottomView.backgroundColor = [UIColor gx_colorWithHexString:self.model.ad2[@"color"]];
     
     // 根据返回的图片加载
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < model.activityList.count; i++) {
         NSDictionary *dic = model.activityList[i];
         int col = i % 2;
         int row = i / 2;

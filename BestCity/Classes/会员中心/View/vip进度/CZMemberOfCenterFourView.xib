@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -44,7 +44,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </progressView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/50人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-AL-lAK">
-                                    <rect key="frame" x="324" y="18" width="45" height="15"/>
+                                    <rect key="frame" x="334" y="18" width="45" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.79214972260000005" green="0.55821716789999998" blue="0.33487492800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                                 <constraint firstItem="d9k-LY-BjO" firstAttribute="top" secondItem="C8a-WD-xbg" secondAttribute="top" id="Xwm-7w-Hc2"/>
                                 <constraint firstItem="3pp-0w-N7x" firstAttribute="leading" secondItem="C8a-WD-xbg" secondAttribute="leading" constant="20" id="Ywc-ox-ThB"/>
                                 <constraint firstAttribute="height" constant="33" id="hXx-6S-N3m"/>
-                                <constraint firstAttribute="trailing" secondItem="ifa-AL-lAK" secondAttribute="trailing" constant="25" id="n7x-Ul-kjS"/>
+                                <constraint firstAttribute="trailing" secondItem="ifa-AL-lAK" secondAttribute="trailing" constant="15" id="n7x-Ul-kjS"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQs-Dx-f1t">
@@ -86,7 +86,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </progressView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/200元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CVP-NC-oO8">
-                                    <rect key="frame" x="322.5" y="18" width="46.5" height="15"/>
+                                    <rect key="frame" x="332.5" y="18" width="46.5" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.79214972260000005" green="0.55821716789999998" blue="0.33487492800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -98,7 +98,7 @@
                                 <constraint firstAttribute="bottom" secondItem="utj-Mj-FeZ" secondAttribute="bottom" id="Qqj-0o-Rx3"/>
                                 <constraint firstAttribute="bottom" secondItem="CVP-NC-oO8" secondAttribute="bottom" id="f5w-Co-Bwi"/>
                                 <constraint firstAttribute="height" constant="33" id="frn-Sa-NMg"/>
-                                <constraint firstAttribute="trailing" secondItem="CVP-NC-oO8" secondAttribute="trailing" constant="25" id="k2a-HW-Fg9"/>
+                                <constraint firstAttribute="trailing" secondItem="CVP-NC-oO8" secondAttribute="trailing" constant="15" id="k2a-HW-Fg9"/>
                                 <constraint firstItem="uuj-PF-wy2" firstAttribute="top" secondItem="PQs-Dx-f1t" secondAttribute="top" id="ubX-ZW-FOP"/>
                                 <constraint firstItem="utj-Mj-FeZ" firstAttribute="leading" secondItem="PQs-Dx-f1t" secondAttribute="leading" constant="20" id="yQj-g8-HXj"/>
                             </constraints>

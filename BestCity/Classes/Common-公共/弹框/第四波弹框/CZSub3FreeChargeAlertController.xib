@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZRedWithdrawalRecordController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CZSub3FreeChargeAlertController">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -18,22 +18,24 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqC-Pc-Dxr">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="lTz-hJ-AU9"/>
-                    </constraints>
-                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-uy-0kO">
+                    <rect key="frame" x="47" y="233" width="320" height="430"/>
+                    <state key="normal" backgroundImage="redPackets-19"/>
+                    <connections>
+                        <action selector="pushVC:" destination="-1" eventType="touchUpInside" id="lpH-gi-pcF"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69748569542253525" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="mqC-Pc-Dxr" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="1Os-OK-5h3"/>
-                <constraint firstItem="mqC-Pc-Dxr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U63-Zx-8qK"/>
-                <constraint firstItem="mqC-Pc-Dxr" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="i3m-bn-sDR"/>
+                <constraint firstItem="Y15-uy-0kO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="L4A-bf-Wwv"/>
+                <constraint firstItem="Y15-uy-0kO" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="fRE-oo-4Uj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="137.68115942028987" y="100.44642857142857"/>
+            <point key="canvasLocation" x="139" y="101"/>
         </view>
     </objects>
+    <resources>
+        <image name="redPackets-19" width="320" height="430"/>
+    </resources>
 </document>

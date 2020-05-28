@@ -13,7 +13,7 @@
 #import "CZRecommendDetailController.h" // 商品详情
 #import "CZDChoiceDetailController.h" // 测评文章
 #import "WMPageController.h"
-#import "CZTrialDetailController.h" // 新品试用
+
 #import "CZFreeChargeDetailController.h"
 
 
@@ -157,12 +157,7 @@
         }
         case 31:
         {
-            CZTrialDetailController *vc = [[CZTrialDetailController alloc] init];
-            vc.trialId = targetId;
-            UITabBarController *tabbar = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabbar.selectedIndex = 2;
-            UINavigationController *nav = tabbar.selectedViewController;
-            [nav pushViewController:vc animated:YES];
+            
             break;
         }
         case 4:

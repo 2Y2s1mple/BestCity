@@ -36,12 +36,17 @@
 
 - (void)setModel:(NSDictionary *)model {
     _model = [model changeAllNnmberValue];
-    if ([_model[@"source"] integerValue] == 1) { // (0全部,1京东,2淘宝，4拼多多)
-        self.statusLabel.text = @"京东";
-    } else if ([_model[@"source"] integerValue] == 2) {
-        self.statusLabel.text = @"淘宝";
-    } else if ([_model[@"source"] integerValue] == 4) {
-        self.statusLabel.text = @"拼多多";
+    
+    if ([_model[@"type"] integerValue] == 3) {
+        self.statusLabel.text = @"新用户首单全返";
+    } else {
+        if ([_model[@"source"] integerValue] == 1) { // (0全部,1京东,2淘宝，4拼多多)
+            self.statusLabel.text = @"京东";
+        } else if ([_model[@"source"] integerValue] == 2) {
+            self.statusLabel.text = @"淘宝";
+        } else if ([_model[@"source"] integerValue] == 4) {
+            self.statusLabel.text = @"拼多多";
+        }
     }
     
     if ([_model[@"status"] integerValue] == 1) { // 0全部 1即将到账，2已到账，3订单失效

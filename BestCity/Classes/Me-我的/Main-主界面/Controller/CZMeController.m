@@ -175,10 +175,6 @@
 
 #pragma mark - 跳我的资料
 - (IBAction)loginAction:(UIButton *)sender {
-    NSString *text = @"我的--点赞";
-    NSDictionary *context = @{@"mine" : text};
-    [MobClick event:@"ID5" attributes:context];
-
     CZMyProfileController *vc = [[CZMyProfileController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

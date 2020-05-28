@@ -13,7 +13,7 @@
 #import "CZRedPacketsController.h" // 百万红包
 #import "CZIssueMomentsController.h" // 发圈
 #import "CZMainHotSaleController.h"
-#import "CZDiscoverController.h"
+
 #import "CZEvaluationController.h" // 评测
 
 

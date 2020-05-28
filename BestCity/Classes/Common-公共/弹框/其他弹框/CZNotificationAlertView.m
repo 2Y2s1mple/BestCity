@@ -10,7 +10,6 @@
 #import <UserNotifications/UserNotifications.h>
 #import "GXNetTool.h"
 #import "CZUpdataView.h"
-#import "CZAlertView3Controller.h"
 
 @implementation CZNotificationAlertView
 /** 退出 */

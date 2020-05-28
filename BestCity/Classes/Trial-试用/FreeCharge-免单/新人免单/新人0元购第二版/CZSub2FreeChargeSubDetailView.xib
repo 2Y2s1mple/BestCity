@@ -88,6 +88,9 @@
                     <state key="normal" title="查看新人免单活动规则&gt;&gt;">
                         <color key="titleColor" red="0.88620406389999995" green="0.3453732431" blue="0.21861878039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="rule" destination="iN0-l3-epB" eventType="touchUpInside" id="cCm-VU-Pbh"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

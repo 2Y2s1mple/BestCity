@@ -11,7 +11,7 @@
 #import "CZRecommendDetailController.h" // 商品详情
 #import "CZDChoiceDetailController.h" // 测评文章
 #import "WMPageController.h"
-#import "CZTrialDetailController.h" // 新品试用
+
 #import "CZFreeChargeDetailController.h"
 #import "CZFreePushTool.h"
 

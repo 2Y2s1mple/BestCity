@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 会员中心
 + (void)push_memberOfCenter;
 
+// 红包
++ (void)push_RedPackets;
+
 // 任务中心
 + (void)push_taskCenter;
 

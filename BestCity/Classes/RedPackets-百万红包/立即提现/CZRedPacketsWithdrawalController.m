@@ -124,7 +124,8 @@ UIKIT_EXTERN NSString *moneyCount;
 #pragma mark - 同步数据
 - (void)getDataSource
 {
-    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/index"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/v2/hongbao/getWithdrawInfo"];
+//    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/hongbao/index"];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
         if ([result[@"msg"] isEqualToString:@"success"]) {

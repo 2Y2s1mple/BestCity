@@ -55,7 +55,7 @@
     
     self.downFeeLabel.text = [NSString stringWithFormat:@"您当前需要支付￥%.2f，返现￥%.2f将在确认收货后进行结算", [param[@"actualPrice"] floatValue], [param[@"fee"] floatValue]];
     
-    
+    [self layoutIfNeeded];
     self.height = CZGetY(self.ruleBtn) + 10;
 }
 
@@ -82,6 +82,13 @@
            }];
         }
     }];
+}
+
+/** 规则 */
+- (IBAction)rule
+{
+    [CZFreePushTool generalH5WithUrl:@"https://www.jipincheng.cn/new-free/mdRule" title:@"新人免单活动规则" containView:nil];
+    NSLog(@"《隐私政策》---------------");
 }
 
 @end

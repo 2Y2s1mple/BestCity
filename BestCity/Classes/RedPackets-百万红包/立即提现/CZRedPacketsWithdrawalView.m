@@ -18,6 +18,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *currentMoneyLabel;
 /** <#注释#> */
 @property (nonatomic, weak) IBOutlet UILabel *alipayNicknameLabel;
+/** <#注释#> */
+@property (nonatomic, weak) IBOutlet UITextField *textField;
 @end
 NSString *moneyCount = @"50";
 @implementation CZRedPacketsWithdrawalView
@@ -25,7 +27,8 @@ NSString *moneyCount = @"50";
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self WithdrawalAmount:self.btn1];
+    //代理方法监听时候都会慢一步
+    [self.textField addTarget:self action:@selector(textFieldAction:) forControlEvents:UIControlEventEditingChanged];
 }
 
 + (instancetype)redPacketsWithdrawalView
@@ -48,21 +51,13 @@ NSString *moneyCount = @"50";
 // 提现金额
 - (IBAction)WithdrawalAmount:(UIButton *)sender
 {
-    NSLog(@"%ld", sender.tag);
-    if (sender.tag == 0) {
-        moneyCount = @"50";
-    } else if (sender.tag == 1) {
-        moneyCount = @"100";
-    } else {
-        moneyCount = @"150";
-    }
+    self.textField.text = [NSString stringWithFormat:@"%@", _model[@"currentMoney"]];
+     moneyCount = self.textField.text;
+}
 
-    if (self.recoredBtn == sender) return;
-
-    sender.selected = YES;
-    self.recoredBtn.selected = NO;
-
-    self.recoredBtn = sender;
+- (void)textFieldAction:(UITextField *)textField
+{
+    moneyCount = textField.text;
 }
 
 - (void)setModel:(NSDictionary *)model
@@ -74,7 +69,6 @@ NSString *moneyCount = @"50";
         self.alipayNicknameLabel.text = _model[@"alipayNickname"];
     }
 }
-
 
 // 绑定提现
 - (IBAction)bingzhifubao
