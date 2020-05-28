@@ -257,7 +257,7 @@
 
 - (void)getPosterImage:(UMSocialPlatformType)type
 {
-    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/allowance/getIndexPosterImg"];
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/v3/free/getIndexPosterImg"];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     [CZProgressHUD showProgressHUDWithText:nil];
     [GXNetTool PostNetWithUrl:url body:param bodySytle:GXRequsetStyleBodyHTTP header:nil response:GXResponseStyleJSON success:^(id result) {

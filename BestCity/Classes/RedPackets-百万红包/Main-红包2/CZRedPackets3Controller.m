@@ -11,12 +11,16 @@
 #import <WebKit/WebKit.h>
 #import "GXNetTool.h"
 #import "CZRedPacketsWithdrawalController.h"
+#import "CZRedPackets2Controller.h"
+
 
 @interface CZRedPackets3Controller () <WKNavigationDelegate>
 /** <#注释#> */
 @property (nonatomic, strong) WKWebView *webView;
 /** <#注释#> */
 @property (nonatomic, strong) NSString *hongbao2Id;
+/** <#注释#> */
+@property (nonatomic, strong) NSString *shareType;
 
 @end
 
@@ -65,13 +69,13 @@
     //自己定义的协议头
     NSString *htmlHeadString = @"https://sharehb";
     NSString *htmlHeadString1 = @"https://txhb";
+    NSString *htmlHeadString2 = @"https://openhb";
     if([urlStr hasPrefix:htmlHeadString]){
         NSRange range = [urlStr rangeOfString:@"shareType"];
-        NSString *str = [urlStr substringWithRange:NSMakeRange((range.location + range.length + 1), 1)];
-        
+        self.shareType = [urlStr substringWithRange:NSMakeRange((range.location + range.length + 1), 1)];
         self.hongbao2Id = [[urlStr componentsSeparatedByString:@"="] lastObject];
         
-        if ([str isEqualToString:@"6"]) {
+        if ([self.shareType isEqualToString:@"6"]) {
             NSLog(@"提现页面");
             [self ImmediateWithdrawal];
         } else {
@@ -82,6 +86,11 @@
     } else if ([urlStr hasPrefix:htmlHeadString1]) {
         NSLog(@"提现页面");
         [self ImmediateWithdrawal];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else if ([urlStr hasPrefix:htmlHeadString2]) {
+        NSLog(@"开红包页面");
+        CZRedPackets2Controller *vc = [[CZRedPackets2Controller alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
         decisionHandler(WKNavigationActionPolicyCancel);
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -119,6 +128,7 @@
         switch (index) {
             case 0:
             {
+                [self statistics:index + 1];
                 [CZProgressHUD showProgressHUDWithText:nil];
                 [CZProgressHUD hideAfterDelay:2];
                 type = UMSocialPlatformType_WechatSession;//微信好友
@@ -127,6 +137,7 @@
             }
             case 1: // 朋友圈
             {
+                [self statistics:index + 1];
                 [CZProgressHUD showProgressHUDWithText:nil];
                 [CZProgressHUD hideAfterDelay:2];
                 type = UMSocialPlatformType_WechatTimeLine;//微信朋友圈
@@ -135,6 +146,7 @@
             }
             case 2:
             {
+                [self statistics:index + 1];
                 [CZProgressHUD showProgressHUDWithText:nil];
                 [CZProgressHUD hideAfterDelay:2];
                 type = UMSocialPlatformType_QQ;//QQ好友
@@ -143,6 +155,7 @@
             }
             case 3:
             {
+                [self statistics:index + 1];
                 [CZProgressHUD showProgressHUDWithText:nil];
                 [CZProgressHUD hideAfterDelay:2];
                 type = UMSocialPlatformType_Sina;//新浪微博
@@ -151,6 +164,7 @@
             }
             case 4:
             {
+                [self statistics:index + 1];
                 type = 4;
                 [self getPosterImage:type];
                 break;
@@ -202,6 +216,39 @@
     [CZJIPINSynthesisTool JINPIN_UMShareImage:thumImage Type:type];
 }
 
+- (void)dealloc
+{
+       if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+           NSSet *websiteDataTypes = [NSSet setWithArray:@[WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]];
+           NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+           [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+               // Done
+           }];
+       } else {
+           NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+           NSString *cookiesFolderPath = [libraryPath stringByAppendingString:@"/Cookies"];
+           NSError *errors;
+           [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
+       }
+}
+
+- (void)statistics:(NSInteger)type
+{
+    NSString *url = [JPSERVER_URL stringByAppendingPathComponent:@"api/v2/hongbao/share"];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"hongbao2Id"] = self.hongbao2Id;
+    param[@"shareType"] = self.shareType;
+    param[@"type"] = @(type);
+    
+    [GXNetTool GetNetWithUrl:url body:param header:nil response:GXResponseStyleJSON success:^(id result) {
+        if ([result[@"code"] isEqual:@(0)]) {
+            [CZProgressHUD showProgressHUDWithText:nil];
+            [CZProgressHUD hideAfterDelay:1.5];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 
 @end

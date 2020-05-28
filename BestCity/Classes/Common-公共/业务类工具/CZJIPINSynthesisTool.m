@@ -550,7 +550,7 @@
 {
     if (![[UMSocialManager defaultManager] isInstall:type]) {
         [CZProgressHUD showProgressHUDWithText:@"没有安装该平台!"];
-        [CZProgressHUD hideAfterDelay:2];
+        [CZProgressHUD hideAfterDelay:3];
         return;
     }
     UITabBarController *tabbar = (UITabBarController *)[[UIApplication sharedApplication].keyWindow rootViewController];

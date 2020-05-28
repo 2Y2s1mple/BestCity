@@ -3484,7 +3484,7 @@
 				97705C41210716A300485D64 /* HotSale-榜单 */,
 				97705C4D210716A300485D64 /* Discover-发现弃用 */,
 				97705C47210716A300485D64 /* Evaluation-测评 */,
-				97AA880222423B6C00BEF4AC /* Trial-试用 */,
+				970E618122B9DCAB00E68BE3 /* FreeCharge-免单 */,
 				97705C3B210716A300485D64 /* Me-我的 */,
 				97705C31210716A300485D64 /* Other-其他 */,
 			);
@@ -4374,14 +4374,6 @@
 				97A5B976230D491F00014E90 /* CZMePublishFourController.m */,
 			);
 			path = "未通过";
-			sourceTree = "<group>";
-		};
-		97AA880222423B6C00BEF4AC /* Trial-试用 */ = {
-			isa = PBXGroup;
-			children = (
-				970E618122B9DCAB00E68BE3 /* FreeCharge-免单 */,
-			);
-			path = "Trial-试用";
 			sourceTree = "<group>";
 		};
 		97AA935C240F95A7005E5178 /* 特惠购弹框 */ = {
